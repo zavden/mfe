@@ -1,0 +1,854 @@
+/* The player of the web documentation: the scene, the app's transport bar under it (its mint Play
+ * key, its icon buttons, its readouts in the mono font) and, when asked, a small version of the
+ * app's timeline (ui/transport/transport.css, ui/timeline/timeline.css, the owner's Mint style
+ * guide). The page's tokens (--doc-*, docs/web/AUTHORING.md §4) colour it when the site's
+ * stylesheet is there; without it, the app's own values stand in, dark or light as the page is (its
+ * data-theme, else the system's). The tokens the contract has no name for (the playhead's amber,
+ * the Play key's gradient, the colours of the blocks) are the app's, per theme. The scene keeps its
+ * own background. Injected once by the player (player.ts). */
+
+.mfe-player {
+  /* Fallbacks: the app's dark theme (ui/styles.css). */
+  --mpf-surface: #10212c;
+  --mpf-surface-2: #132832;
+  --mpf-border: #25444e;
+  --mpf-text: #edf9f9;
+  --mpf-text-dim: #acc3cb;
+  --mpf-accent: #43eeca;
+  --mpf-accent-bright: #7bf4e6;
+  --mpf-on-accent: #072c32;
+  --mpf-focus: #8cc8ff;
+  --mp-well: #0d1c26;
+  --mp-hover: #1c3741;
+  --mp-text-muted: #7895a0;
+  --mp-border-strong: #41838a;
+  --mp-input: #0b1a24;
+  --mp-time: #f4c867;
+  --mp-shadow-color: rgb(0 5 12 / 0.55);
+  --mp-edge-light: rgb(190 255 240 / 0.07);
+  --mp-sheen: linear-gradient(180deg, rgb(190 255 240 / 0.06), rgb(190 255 240 / 0) 85%);
+  --mp-panel-gradient: linear-gradient(155deg, #152d38 0%, #0d1d27 72%, #112d35 100%);
+  --mp-primary-edge: #65f7dd;
+  --mp-primary-glow: 0 0 0 1px rgb(109 255 226 / 0.25), 0 4px 18px rgb(32 227 178 / 0.2);
+  --mp-primary-glow-hover: 0 0 0 1px rgb(135 255 235 / 0.45), 0 6px 22px rgb(32 227 178 / 0.3);
+  --mp-block-appear: #5ad79a;
+  --mp-block-appear-text: #06241a;
+  --mp-block-disappear: #ff8a7a;
+  --mp-block-disappear-text: #330a06;
+  --mp-block-transform: #b79cff;
+  --mp-block-transform-text: #1c0c45;
+  --mp-block-morph: #6fb3ff;
+  --mp-block-morph-text: #04213f;
+  --mp-block-emphasis: #ffd166;
+  --mp-block-emphasis-text: #332500;
+  /* The same in both themes: the Play key and the shapes. */
+  --mp-primary-gradient: linear-gradient(160deg, #7bf4e6 0%, #43eeca 55%, #20e3b2 100%);
+  --mp-primary-gradient-hover: linear-gradient(160deg, #9afff0 0%, #5ef0da 58%, #2be8bc 100%);
+  --mp-primary-text: #072c32;
+  --mp-primary-light: #9afff0;
+  --mp-motion: 140ms;
+}
+
+:root[data-theme='light'] .mfe-player {
+  --mpf-surface: #ffffff;
+  --mpf-surface-2: #eef6f7;
+  --mpf-border: #c9dadd;
+  --mpf-text: #0e2a31;
+  --mpf-text-dim: #415c66;
+  --mpf-accent: #087568;
+  --mpf-accent-bright: #09806f;
+  --mpf-on-accent: #ffffff;
+  --mpf-focus: #2a5ba8;
+  --mp-well: #edf4f5;
+  --mp-hover: #dfecee;
+  --mp-text-muted: #526d77;
+  --mp-border-strong: #63858c;
+  --mp-input: #ffffff;
+  --mp-time: #8a5700;
+  --mp-shadow-color: rgb(14 42 49 / 0.22);
+  --mp-edge-light: rgb(255 255 255 / 0.85);
+  --mp-sheen: linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 85%);
+  --mp-panel-gradient: linear-gradient(155deg, #ffffff 0%, #f8fcfc 72%, #edf8f5 100%);
+  --mp-primary-edge: #0a8572;
+  --mp-primary-glow: 0 0 0 1px rgb(10 133 114 / 0.16), 0 4px 14px rgb(32 227 178 / 0.34);
+  --mp-primary-glow-hover: 0 0 0 1px rgb(10 133 114 / 0.3), 0 6px 18px rgb(32 227 178 / 0.45);
+  --mp-block-appear: #17794c;
+  --mp-block-appear-text: #ffffff;
+  --mp-block-disappear: #b53a2a;
+  --mp-block-disappear-text: #ffffff;
+  --mp-block-transform: #6a43c9;
+  --mp-block-transform-text: #ffffff;
+  --mp-block-morph: #1f63b8;
+  --mp-block-morph-text: #ffffff;
+  --mp-block-emphasis: #8f6300;
+  --mp-block-emphasis-text: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .mfe-player {
+    --mpf-surface: #ffffff;
+    --mpf-surface-2: #eef6f7;
+    --mpf-border: #c9dadd;
+    --mpf-text: #0e2a31;
+    --mpf-text-dim: #415c66;
+    --mpf-accent: #087568;
+    --mpf-accent-bright: #09806f;
+    --mpf-on-accent: #ffffff;
+    --mpf-focus: #2a5ba8;
+    --mp-well: #edf4f5;
+    --mp-hover: #dfecee;
+    --mp-text-muted: #526d77;
+    --mp-border-strong: #63858c;
+    --mp-input: #ffffff;
+    --mp-time: #8a5700;
+    --mp-shadow-color: rgb(14 42 49 / 0.22);
+    --mp-edge-light: rgb(255 255 255 / 0.85);
+    --mp-sheen: linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 85%);
+    --mp-panel-gradient: linear-gradient(155deg, #ffffff 0%, #f8fcfc 72%, #edf8f5 100%);
+    --mp-primary-edge: #0a8572;
+    --mp-primary-glow: 0 0 0 1px rgb(10 133 114 / 0.16), 0 4px 14px rgb(32 227 178 / 0.34);
+    --mp-primary-glow-hover: 0 0 0 1px rgb(10 133 114 / 0.3), 0 6px 18px rgb(32 227 178 / 0.45);
+    --mp-block-appear: #17794c;
+    --mp-block-appear-text: #ffffff;
+    --mp-block-disappear: #b53a2a;
+    --mp-block-disappear-text: #ffffff;
+    --mp-block-transform: #6a43c9;
+    --mp-block-transform-text: #ffffff;
+    --mp-block-morph: #1f63b8;
+    --mp-block-morph-text: #ffffff;
+    --mp-block-emphasis: #8f6300;
+    --mp-block-emphasis-text: #ffffff;
+  }
+}
+
+.mfe-player {
+  /* The page's tokens where the site's stylesheet gives them. */
+  --mp-surface: var(--doc-surface, var(--mpf-surface));
+  --mp-surface-2: var(--doc-surface-2, var(--mpf-surface-2));
+  --mp-border: var(--doc-border, var(--mpf-border));
+  --mp-text: var(--doc-text, var(--mpf-text));
+  --mp-text-dim: var(--doc-text-muted, var(--mpf-text-dim));
+  --mp-accent: var(--doc-accent, var(--mpf-accent));
+  --mp-accent-bright: var(--doc-accent-strong, var(--mpf-accent-bright));
+  --mp-on-accent: var(--doc-on-accent, var(--mpf-on-accent));
+  --mp-focus: var(--doc-focus, var(--mpf-focus));
+  --mp-font: var(--doc-font, Inter, 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif);
+  --mp-mono: var(
+    --doc-font-mono,
+    'JetBrains Mono',
+    ui-monospace,
+    'SF Mono',
+    Menlo,
+    Consolas,
+    monospace
+  );
+}
+
+/* The card: a panel of the app. Its outer box is easy to override (:where). */
+:where(.mfe-player) {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  padding: 10px;
+  background: var(--mp-panel-gradient);
+  background-color: var(--mp-surface);
+  border: 1px solid var(--mp-border);
+  border-radius: var(--doc-radius, 14px);
+  box-shadow: var(--doc-shadow, 0 14px 28px rgb(0 5 12 / 0.22));
+  color: var(--mp-text);
+  font-family: var(--mp-font);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.mfe-player *,
+.mfe-player *::before,
+.mfe-player *::after {
+  box-sizing: border-box;
+}
+
+.mfe-player:focus-visible,
+.mfe-player :focus-visible {
+  outline: 2px solid var(--mp-focus);
+  outline-offset: 2px;
+}
+
+/* ---- The scene ---- */
+
+.mfe-player-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--mp-border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.mfe-player-stage:focus-visible {
+  outline-offset: 3px;
+}
+
+.mfe-player-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* A notice instead of the scene (a missing example). */
+.mfe-player-notice {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--mp-border-strong);
+  border-radius: 10px;
+  background: var(--mp-well);
+  color: var(--mp-text-dim);
+  font-size: 13px;
+}
+
+.mfe-player-notice code {
+  font-family: var(--mp-mono);
+  font-size: 12px;
+  color: var(--mp-text);
+}
+
+/* ---- The transport bar (ui/transport/transport.css) ---- */
+
+.mfe-player-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  min-height: 38px;
+  margin-top: 8px;
+  padding: 2px 8px;
+  background: var(--mp-sheen), var(--mp-surface-2);
+  border: 1px solid var(--mp-border);
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 var(--mp-edge-light);
+}
+
+.mfe-player-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--mp-text-dim);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color var(--mp-motion),
+    border-color var(--mp-motion),
+    box-shadow var(--mp-motion),
+    color var(--mp-motion);
+}
+
+.mfe-player-button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.mfe-player-button:hover {
+  background: var(--mp-hover);
+  color: var(--mp-text);
+}
+
+.mfe-player-button[aria-pressed='true'] {
+  background: var(--mp-accent);
+  color: var(--mp-on-accent);
+}
+
+.mfe-player-button[aria-pressed='true']:hover {
+  background: var(--mp-accent-bright);
+  color: var(--mp-on-accent);
+}
+
+/* Play / Pause: the bar's one main action, a key of the primary gradient, its icon dark, a glow
+ * of its own colour; brighter while it plays. */
+.mfe-player-button.mfe-player-play,
+.mfe-player-button.mfe-player-play:hover {
+  width: 32px;
+  height: 32px;
+  margin: 0 3px;
+  background: var(--mp-primary-gradient);
+  border-color: var(--mp-primary-edge);
+  border-radius: 8px;
+  color: var(--mp-primary-text);
+  box-shadow:
+    inset 0 1px 0 var(--mp-primary-light),
+    var(--mp-primary-glow);
+}
+
+.mfe-player-button.mfe-player-play:hover,
+.mfe-player[data-playing='true'] .mfe-player-button.mfe-player-play {
+  background: var(--mp-primary-gradient-hover);
+  box-shadow:
+    inset 0 1px 0 var(--mp-primary-light),
+    var(--mp-primary-glow-hover);
+}
+
+.mfe-player-button.mfe-player-play:active {
+  transform: translateY(1px);
+}
+
+.mfe-player-play svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mfe-player-sep {
+  flex: none;
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: var(--mp-border);
+}
+
+/* The scrub bar: the groove of the app's slider, the played part in the accent, a thumb of the
+ * slider's own make. */
+.mfe-player-scrub {
+  position: relative;
+  flex: 1 1 120px;
+  min-width: 80px;
+  height: 30px;
+  margin: 0 8px;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.mfe-player-scrub::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 4px;
+  margin-top: -2px;
+  background: color-mix(in srgb, var(--mp-text-muted) 55%, transparent);
+  border-radius: 2px;
+  content: '';
+}
+
+.mfe-player-scrub-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  margin-top: -2px;
+  background: var(--mp-accent);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.mfe-player-scrub-thumb {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  width: 12px;
+  margin-left: -6px;
+  background: color-mix(in srgb, var(--mp-accent) 34%, var(--mp-surface));
+  border: 1px solid var(--mp-accent);
+  border-radius: 5px;
+  box-shadow:
+    inset 0 1px 0 var(--mp-edge-light),
+    0 1px 3px color-mix(in srgb, var(--mp-shadow-color) 60%, transparent);
+  pointer-events: none;
+  transition: background-color var(--mp-motion);
+}
+
+.mfe-player-scrub:hover .mfe-player-scrub-thumb,
+.mfe-player-scrub.is-dragging .mfe-player-scrub-thumb {
+  background: color-mix(in srgb, var(--mp-accent) 55%, var(--mp-surface));
+}
+
+.mfe-player-scrub:focus-visible {
+  outline-offset: 0;
+  border-radius: 6px;
+}
+
+/* The readouts: the playhead's time in its amber, the length dim, in the mono font. */
+.mfe-player-time {
+  flex: none;
+  margin: 0 6px 0 2px;
+  color: var(--mp-text-dim);
+  font-family: var(--mp-mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mfe-player-now {
+  color: var(--mp-time);
+  font-weight: 650;
+}
+
+/* The speeds: the app's segmented control, small. */
+.mfe-player-speed {
+  --pad: 2px;
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-left: 2px;
+  padding: var(--pad);
+  background: var(--mp-input);
+  border: 1px solid var(--mp-border-strong);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 2px var(--mp-shadow-color);
+}
+
+.mfe-player-speed-thumb {
+  position: absolute;
+  top: var(--pad);
+  bottom: var(--pad);
+  left: var(--pad);
+  width: calc((100% - 2 * var(--pad)) / 3);
+  background: linear-gradient(160deg, var(--mp-accent-bright), var(--mp-accent));
+  border-radius: 6px;
+  box-shadow:
+    0 1px 3px var(--mp-shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--mp-accent) 60%, transparent);
+  transform: translateX(calc(100% * var(--index, 1)));
+  transition: transform 220ms cubic-bezier(0.3, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.mfe-player-speed-option {
+  position: relative;
+  z-index: 1;
+  min-width: 34px;
+  margin: 0;
+  padding: 3px 6px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: var(--mp-text-dim);
+  font-family: var(--mp-font);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.mfe-player-speed-option:hover:not([aria-checked='true']) {
+  color: var(--mp-text);
+}
+
+.mfe-player-speed-option[aria-checked='true'] {
+  color: var(--mp-on-accent);
+}
+
+/* Minimal controls: Play, the scrub bar and the time. */
+.mfe-player[data-controls='minimal'] .mfe-player-bar {
+  flex-wrap: nowrap;
+}
+
+/* Where the bar breaks into two rows (a narrow page; shown there only). */
+.mfe-player-break {
+  display: none;
+}
+
+/* A narrow page: the scrub bar and the time on a row of their own, over the keys and the
+ * speeds. */
+@container mfe-player (max-width: 460px) {
+  .mfe-player[data-controls='full'] .mfe-player-scrub {
+    order: 1;
+    margin: 0 4px;
+  }
+
+  .mfe-player[data-controls='full'] .mfe-player-time {
+    order: 2;
+  }
+
+  .mfe-player[data-controls='full'] .mfe-player-break {
+    display: block;
+    flex-basis: 100%;
+    order: 3;
+    height: 0;
+  }
+
+  .mfe-player[data-controls='full'] .mfe-player-button {
+    order: 4;
+  }
+
+  .mfe-player[data-controls='full'] .mfe-player-sep {
+    display: none;
+  }
+
+  .mfe-player[data-controls='full'] .mfe-player-speed {
+    order: 5;
+    margin-left: auto;
+  }
+
+  .mfe-player-speed-option {
+    min-width: 30px;
+    padding: 3px 4px;
+  }
+}
+
+.mfe-player-body {
+  container: mfe-player / inline-size;
+}
+
+/* ---- The timeline strip (ui/timeline/timeline.css) ---- */
+
+/* As wide as the page and up to a few hundred pixels tall on a phone: a swipe up or down on it
+ * scrolls the page; a sideways one is the strip's (stripView.ts seeks with it). */
+.mfe-player-strip {
+  position: relative;
+  margin-top: 8px;
+  overflow: hidden;
+  background: var(--mp-well);
+  border: 1px solid var(--mp-border);
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: pan-y;
+  font-family: var(--mp-font);
+}
+
+.mfe-player-strip:focus-visible {
+  outline-offset: 2px;
+}
+
+.mfe-strip-ruler {
+  position: relative;
+  height: 20px;
+  background: var(--mp-sheen), var(--mp-surface-2);
+  border-bottom: 1px solid var(--mp-border);
+}
+
+.mfe-strip-corner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--mp-sheen), var(--mp-surface-2);
+  border-right: 1px solid var(--mp-border);
+}
+
+.mfe-strip-tick {
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  border-left: 1px solid color-mix(in srgb, var(--mp-text-dim) 55%, transparent);
+  pointer-events: none;
+}
+
+.mfe-strip-tick.is-major {
+  top: 0;
+  height: auto;
+  border-left-color: color-mix(in srgb, var(--mp-text-dim) 70%, transparent);
+}
+
+.mfe-strip-tick span {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  color: var(--mp-text-dim);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mfe-strip-row {
+  position: relative;
+  border-bottom: 1px solid var(--mp-border);
+}
+
+.mfe-strip-row:last-child {
+  border-bottom: 0;
+}
+
+.mfe-strip-name {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  overflow: hidden;
+  background: var(--mp-sheen), var(--mp-surface-2);
+  border-right: 1px solid var(--mp-border);
+  color: var(--mp-text);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mfe-strip-lanes {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* A clip: a light tint of its formula's tag colour, the tag a stripe on its left edge. */
+.mfe-strip-clip {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--clip-color) 55%, var(--mp-border-strong));
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--clip-color) 25%, var(--mp-surface)),
+    color-mix(in srgb, var(--clip-color) 17%, var(--mp-surface))
+  );
+  box-shadow:
+    inset 0 1px 0 var(--mp-edge-light),
+    0 1px 3px color-mix(in srgb, var(--mp-shadow-color) 50%, transparent);
+}
+
+.mfe-strip-clip::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 3px;
+  background: var(--clip-color);
+  content: '';
+}
+
+.mfe-strip-clip.is-cut-start {
+  border-left-style: dashed;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.mfe-strip-clip.is-cut-start::before {
+  display: none;
+}
+
+.mfe-strip-clip.is-cut-end {
+  border-right-style: dashed;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mfe-strip-clip-name {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  padding: 0 6px 0 9px;
+  color: var(--mp-text);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The intro and the outro: the clip's tint shaded with a hatch of the theme's shadow, a dashed
+ * line where they end, their animation's name. */
+.mfe-strip-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--mp-shadow-color) 42%, transparent) 0 4px,
+    color-mix(in srgb, var(--mp-shadow-color) 18%, transparent) 4px 8px
+  );
+}
+
+.mfe-strip-band.is-intro {
+  border-right: 1px dashed color-mix(in srgb, var(--mp-text) 45%, transparent);
+}
+
+.mfe-strip-band.is-outro {
+  border-left: 1px dashed color-mix(in srgb, var(--mp-text) 45%, transparent);
+}
+
+.mfe-strip-band span {
+  position: absolute;
+  bottom: 2px;
+  left: 6px;
+  color: var(--mp-text);
+  font-size: 9px;
+  line-height: 11px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.mfe-strip-band.is-outro span {
+  right: 3px;
+  left: auto;
+}
+
+.mfe-strip-band.is-intro + .mfe-strip-clip-name,
+.mfe-strip-clip.has-intro .mfe-strip-clip-name {
+  padding-left: calc(var(--intro-width, 0px) + 6px);
+}
+
+/* An animation block, in the upper lanes of its clip: coloured by its family. */
+.mfe-strip-block {
+  --block-bg: var(--mp-block-transform);
+  --block-fg: var(--mp-block-transform-text);
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  padding: 0 4px;
+  background: var(--block-bg);
+  border: 1px solid color-mix(in srgb, var(--block-bg) 72%, var(--block-fg));
+  border-radius: 3px;
+  color: var(--block-fg);
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--mp-shadow-color) 60%, transparent);
+}
+
+.mfe-strip-block.is-appear {
+  --block-bg: var(--mp-block-appear);
+  --block-fg: var(--mp-block-appear-text);
+}
+
+.mfe-strip-block.is-disappear {
+  --block-bg: var(--mp-block-disappear);
+  --block-fg: var(--mp-block-disappear-text);
+}
+
+.mfe-strip-block.is-morph {
+  --block-bg: var(--mp-block-morph);
+  --block-fg: var(--mp-block-morph-text);
+}
+
+.mfe-strip-block.is-emphasis {
+  --block-bg: var(--mp-block-emphasis);
+  --block-fg: var(--mp-block-emphasis-text);
+}
+
+/* A relation: its window on both clips, hatched in the accent, and the arrow between them. */
+.mfe-strip-window {
+  position: absolute;
+  z-index: 3;
+  border: 1px solid var(--mp-accent);
+  border-radius: 5px;
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--mp-accent) 35%, transparent) 0 4px,
+    color-mix(in srgb, var(--mp-accent) 12%, transparent) 4px 8px
+  );
+}
+
+.mfe-strip-arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mfe-strip-arrow {
+  fill: none;
+  stroke: var(--mp-accent);
+  stroke-width: 1.5px;
+}
+
+.mfe-strip-head {
+  fill: var(--mp-accent);
+}
+
+/* The playhead: its line in the amber of the time, with a faint glow; in the ruler a small mint
+ * head pointing at the tracks. */
+.mfe-strip-playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 6;
+  width: 13px;
+  margin-left: -6px;
+  pointer-events: none;
+}
+
+.mfe-strip-playhead::before {
+  position: absolute;
+  top: 20px;
+  bottom: 0;
+  left: 6px;
+  width: 0;
+  border-left: 1px solid var(--mp-time);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--mp-time) 45%, transparent);
+  content: '';
+}
+
+.mfe-strip-playhead::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 13px;
+  height: 20px;
+  background:
+    linear-gradient(var(--mp-time), var(--mp-time)) 50% 0 / 1px calc(100% - 9px) no-repeat,
+    var(--mp-accent);
+  clip-path: polygon(
+    6px 0,
+    7px 0,
+    7px calc(100% - 9px),
+    100% calc(100% - 9px),
+    50% 100%,
+    0 calc(100% - 9px),
+    6px calc(100% - 9px)
+  );
+  content: '';
+}
+
+/* The caption, when the player adds one. */
+.mfe-player-caption {
+  margin-top: 8px;
+  padding: 0 2px;
+  color: var(--mp-text-dim);
+  font-size: 13px;
+}
+
+/* For assistive technology only. */
+.mfe-player-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mfe-player-button,
+  .mfe-player-scrub-thumb,
+  .mfe-player-speed-thumb,
+  .mfe-player-speed-option {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .mfe-player-button.mfe-player-play {
+    border-width: 2px;
+  }
+
+  .mfe-strip-clip,
+  .mfe-strip-block,
+  .mfe-strip-window {
+    forced-color-adjust: none;
+  }
+}

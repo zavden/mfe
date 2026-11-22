@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transformation recipes · Manim Formula Editor</title>
+  <meta name="description" content="Eight common moves of algebra, each a small project to play and open: which pairs to link, which styles to choose and how long to take.">
+  <meta name="mfe:id" content="transforms/recipes">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Recipes">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/recipes-move-term.data.js" defer></script>
+  <script src="../examples/recipes-cancel-factor.data.js" defer></script>
+  <script src="../examples/recipes-expand-square.data.js" defer></script>
+  <script src="../examples/recipes-combine-terms.data.js" defer></script>
+  <script src="../examples/recipes-simplify-fraction.data.js" defer></script>
+  <script src="../examples/recipes-substitute.data.js" defer></script>
+  <script src="../examples/recipes-swap-sides.data.js" defer></script>
+  <script src="../examples/recipes-factor-out.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <script src="../widgets/style-compare.js" defer></script>
+  <style>
+    /* The files of a recipe, folded away until they are wanted. */
+    details.files {
+      margin: var(--doc-space-4) 0 var(--doc-space-8);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-radius);
+      background: var(--doc-panel-gradient), var(--doc-surface);
+    }
+    details.files > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      color: var(--doc-text);
+      font-size: 14px;
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+    details.files > summary::-webkit-details-marker {
+      display: none;
+    }
+    details.files > summary::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid var(--doc-text-faint);
+      border-bottom: 2px solid var(--doc-text-faint);
+      transform: rotate(-45deg);
+      transition: transform var(--doc-motion);
+    }
+    details.files[open] > summary::before {
+      transform: rotate(45deg);
+    }
+    details.files > .files-body {
+      padding: 0 14px 12px;
+    }
+    details.files .example-card,
+    details.files .mfe-code {
+      margin: var(--doc-space-3) 0;
+    }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Transformation recipes</h1>
+      <p class="lead">Eight common moves of algebra, each one a small project you can play, open and
+        change. A recipe says which pairs to link, which of them the app finds by itself, which you add
+        by hand, and what to choose for the style and the timing.</p>
+
+      <h2 id="reading">How to read a recipe</h2>
+      <p>Every recipe is a <a href="relations.html">relation</a> between two formulas on two tracks:
+        the first formula writes itself in during a second, holds for 1.2 s, then turns into the second
+        one during a window of 1.5 s, and the second holds for 1.6 s. Download a project, choose
+        <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick the file
+        (<a href="../start/projects.html#open">Projects</a> explains the dialog). Then select the first clip and press
+        <span class="ui">Edit…</span> on the relation in the <span class="ui">Relations</span> tab: the pairs are the
+        ones in the table.</p>
+      <p>The recipes follow the way you would make them in the <a href="relation-editor.html">relation
+        editor</a>. You press <span class="ui">Suggest links by label</span>, which links glyphs with the
+        same label, in reading order, then fix what it cannot know:</p>
+      <ul>
+        <li>glyphs that change their label, such as a <code>−</code> that becomes a <code>+</code>;</li>
+        <li>a label that appears twice, where the <em>first</em> match is not the one you mean;</li>
+        <li>glyphs that split in two or merge into one.</li>
+      </ul>
+      <p>The tables say which is which: <strong>Suggest</strong> for a link the app proposes, and
+        <strong>by hand</strong> for one you add or change. A glyph that no pair names leaves with the outro
+        of the first clip, or arrives with the intro of the second.</p>
+      <aside class="callout tip">
+        <p>You link glyphs by clicking them, so you rarely need their numbers. When a recipe says “the
+          first <code>x</code>”, it means the leftmost one.</p>
+      </aside>
+
+      <h2 id="overview">The recipes at a glance</h2>
+      <table>
+        <thead>
+          <tr><th>Recipe</th><th>What it shows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a href="#moving-a-term">Moving a term</a></td><td>A pair added by hand so that a sign changes on the way; a Path arc so that glyphs pass each other.</td></tr>
+          <tr><td><a href="#cancelling">Cancelling a factor</a></td><td>Unpaired glyphs, which leave with the outro of the first clip.</td></tr>
+          <tr><td><a href="#expanding">Expanding a square</a></td><td>One-to-many pairs: a glyph that splits in two.</td></tr>
+          <tr><td><a href="#combining">Combining like terms</a></td><td>Many-to-one pairs and their arrival modes.</td></tr>
+          <tr><td><a href="#simplifying">Simplifying a fraction</a></td><td>A style for one pair: Fade transform.</td></tr>
+          <tr><td><a href="#substituting">Substituting a value</a></td><td>The Copy style: the source stays on screen.</td></tr>
+          <tr><td><a href="#swapping-the-sides">Swapping the two sides</a></td><td>Every pair found by Suggest; the arc does the rest.</td></tr>
+          <tr><td><a href="#factoring">Factoring out a common factor</a></td><td>Splitting a glyph in two, a label that changes, and glyphs that enter with the intro.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="moving-a-term">Moving a term to the other side</h2>
+      <p><code>2x − 4 = 6</code> becomes <code>2x = 6 + 4</code>. The 4 crosses the equals sign and its
+        minus turns into a plus on the way.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-move-term" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The moving term is amber, so the eye follows it."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>2 → 2</code>, <code>x → x</code>, <code>= → =</code>, <code>6 → 6</code>, <code>4 → 4</code></td><td>Suggest: five one-to-one links.</td></tr>
+          <tr><td><code>− → +</code></td><td>By hand. The labels differ, so Suggest leaves both glyphs out. Linking them makes the sign travel with its 4 and change shape.</td></tr>
+        </tbody>
+      </table>
+      <p>Make these pairs yourself. Press <span class="ui">Suggest links by label</span> and
+        <span class="ui">Accept all</span>, then click the <code>−</code> of the top formula and the
+        <code>+</code> of the bottom one and press <span class="ui">Link</span>. <span class="ui">Preview</span>
+        plays the transformation with your pairs.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs"
+           data-options='{"example": "recipes-move-term", "start": "empty"}'></div>
+      <p><strong>Style and timing.</strong> Every pair has the relation's default style, <span class="ui">Transform</span>: the
+        glyphs move and the old ones are gone. The relation has a <span class="ui">Path arc</span> of −45°: the 4 and
+        its sign, which go right, swing over the top, while the <code>=</code> and the 6, which go left,
+        pass under them. With no arc the 4 would run through the 6.
+        <a href="custom-paths.html#path-arc">Custom paths</a> says which way each sign swings.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-move-term"></div>
+          <div class="mfe-code" data-mfe-python="recipes-move-term"></div>
+        </div>
+      </details>
+
+      <h2 id="cancelling">Cancelling a factor</h2>
+      <p><code>(x + 1)(x − 2)</code> over <code>x + 1</code> becomes <code>x − 2</code>. The factor that is on top and
+        underneath goes; what is left settles into the middle.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-cancel-factor" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The factor that cancels is red. It fades out while the rest moves to the middle."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>x → x</code>, <code>− → −</code>, <code>2 → 2</code>, from the factor that stays</td><td>Suggest finds the three labels, but it links the <em>first</em> <code>x</code> of the source, which is inside the factor that cancels. Delete that link and link the <code>x</code> of the second factor.</td></tr>
+          <tr><td>The cancelled factor, the brackets of the other one, the denominator and the bar</td><td>No pair. They leave with the outro of the first clip.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Style and timing.</strong> The survivors use <span class="ui">Transform</span>. What is not paired fades
+        with the outro of the first clip, a <span class="ui">FadeOut</span> as long as the window: in the relation
+        editor, the <span class="ui">Animation</span> tab lists those glyphs and lets you choose the animation and
+        its length (<span class="ui">Outro</span>). The cancelled glyphs are coloured red in the formula, a
+        colour that stays with each glyph, so the viewer sees what is leaving before it leaves.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-cancel-factor"></div>
+          <div class="mfe-code" data-mfe-python="recipes-cancel-factor"></div>
+        </div>
+      </details>
+
+      <h2 id="expanding">Expanding a square</h2>
+      <p><code>(a + b)²</code> becomes <code>a² + 2ab + b²</code>. Each letter splits in two, the exponent is shared between
+        the squares, and the brackets go.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-expand-square" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="Each coloured letter becomes two. The 2 of 2ab is new: it fades in."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>a → a, a</code> · <code>b → b, b</code> · <code>+ → +, +</code> · <code>2 → 2, 2</code></td><td>By hand: one-to-many pairs. Suggest proposes one-to-one links to the <em>first</em> match of each label. Select the source glyph and both targets, then press <span class="ui">Link</span>.</td></tr>
+          <tr><td>The two brackets</td><td>No pair: they leave with the outro of the first clip.</td></tr>
+          <tr><td>The <code>2</code> of <code>2ab</code></td><td>No pair: it arrives with the intro of the second clip, a <span class="ui">FadeIn</span> as long as the window.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Style and timing.</strong> With <span class="ui">Transform</span> a source glyph that has two targets
+        splits: Manim pads the smaller group with copies of its glyph, so one glyph becomes two. Choose
+        <span class="ui">Copy (source stays)</span> for the relation and the original <code>(a + b)²</code> stays on
+        screen while the terms grow from it. The letters are coloured so you can follow each one.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-expand-square"></div>
+          <div class="mfe-code" data-mfe-python="recipes-expand-square"></div>
+        </div>
+      </details>
+
+      <h2 id="combining">Combining like terms</h2>
+      <p><code>3x + 2x + 4</code> becomes <code>5x + 4</code>. The two numbers merge into one, and the two <code>x</code> land on a single
+        one.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-combine-terms" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The like terms are blue. The plus between them fades out."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>3, 2 → 5</code></td><td>By hand: many-to-one. Select both numbers above and the 5 below, then press <span class="ui">Link</span>.</td></tr>
+          <tr><td><code>x, x → x</code></td><td>Suggest links the first <code>x</code>; link the second one onto the same target to add it to the pair: two glyphs become one.</td></tr>
+          <tr><td>second <code>+ → +</code>, <code>4 → 4</code></td><td>Suggest links the <em>first</em> plus to the one below, but the plus between the like terms is the one that goes. Delete that link and link the second plus instead.</td></tr>
+          <tr><td>The first <code>+</code></td><td>No pair: it leaves with the outro of the first clip.</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/transforms/recipes/editor-combine.dark.webp" data-themed
+             alt="The relation editor of the combining recipe: 3x + 2x + 4 above and 5x + 4 below with links from the two numbers to the 5 and from the two x to the x, and the list of pairs with a Sources menu under each of those two pairs."
+             width="1068" height="756" loading="lazy">
+        <figcaption>The relation editor of this recipe. Under a pair of several sources and one target, the
+          <span class="ui">Sources</span> menu says how they arrive.</figcaption>
+      </figure>
+      <p><strong>Style and timing.</strong> A pair of several sources and one target has an <em>arrival mode</em>, chosen in the
+        <span class="ui">Sources</span> menu under it: <span class="ui">Separate</span> sends every source to the target,
+        <span class="ui">Merge (Manim)</span> lets the extra sources fade into it as Manim does, and
+        <span class="ui">Copies</span> lets one source transform while the others send copies and stay. The two
+        pairs here merge. <a href="relations.html">How relations work</a> compares the three.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-combine-terms"></div>
+          <div class="mfe-code" data-mfe-python="recipes-combine-terms"></div>
+        </div>
+      </details>
+
+      <h2 id="simplifying">Simplifying a fraction</h2>
+      <p><code>4x</code> over <code>6</code> becomes <code>2x</code> over <code>3</code>. The numbers are halved in place.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-simplify-fraction" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="Only the amber numbers change; the x and the bar do not move."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>x → x</code>, bar → bar</td><td>Suggest.</td></tr>
+          <tr><td><code>4 → 2</code>, <code>6 → 3</code></td><td>By hand: different labels. In the list of pairs, choose <span class="ui">Fade transform</span> in the style menu of each of the two rows.</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/transforms/recipes/editor-simplify.dark.webp" data-themed
+             alt="The relation editor of the fraction recipe: the two fractions drawn one over the other with four links, and the list of pairs on the right, two of them set to Fade transform."
+             width="1068" height="756" loading="lazy">
+        <figcaption>The relation editor of this recipe. The links of the two digits are set to <span class="ui">Fade transform</span>
+          in the list on the right; the x and the bar keep the relation's style.</figcaption>
+      </figure>
+      <p><strong>Style and timing.</strong> A pair can have a style of its own. <span class="ui">Transform</span> bends the
+        outline of the 4 into the outline of the 2, which looks like a blur halfway for two digits that
+        stand still. <span class="ui">Fade transform</span> fades one numeral into the other, which reads better. The
+        glyphs that do not change keep the relation's <span class="ui">Transform</span>.</p>
+      <div class="mfe-widget" data-mfe-widget="style-compare"
+           data-options='{"example": "recipes-simplify-fraction", "styles": ["transform", "fade"]}'></div>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-simplify-fraction"></div>
+          <div class="mfe-code" data-mfe-python="recipes-simplify-fraction"></div>
+        </div>
+      </details>
+
+      <h2 id="substituting">Substituting a value</h2>
+      <p><code>x² + 3x</code> with <code>x = 2</code> becomes <code>2² + 3 · 2</code>. The original stays; a copy of each <code>x</code> flies down and
+        turns into a 2.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-substitute" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The first expression stays on screen; the second grows out of copies of its glyphs."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>x → 2</code> (the base), <code>x → 2</code> (the last glyph)</td><td>By hand: the labels differ.</td></tr>
+          <tr><td>exponent <code>2 → 2</code></td><td>Suggest pairs the source's <code>2</code> with the <em>first</em> <code>2</code> of the target, which is the base. Delete that link and link the exponent to the exponent.</td></tr>
+          <tr><td><code>+ → +</code>, <code>3 → 3</code></td><td>Suggest.</td></tr>
+          <tr><td>The <code>·</code></td><td>No pair: it arrives with the intro of the second clip.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Style and timing.</strong> The relation's default style is <span class="ui">Copy (source stays)</span>: every pair sends a
+        copy and the original remains. So the first clip does not leave: it is placed above the second and
+        lasts as long as the scene, with no outro. Each <code>x</code> and the 2 it becomes are amber (a colour
+        belongs to a glyph of its formula), so the colour holds all the way.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-substitute"></div>
+          <div class="mfe-code" data-mfe-python="recipes-substitute"></div>
+        </div>
+      </details>
+
+      <h2 id="swapping-the-sides">Swapping the two sides</h2>
+      <p><code>y = x + 2</code> becomes <code>x + 2 = y</code>. The two sides trade places.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-swap-sides" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The y and the = go under; x + 2 goes over."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>all five: <code>y → y</code>, <code>= → =</code>, <code>x → x</code>, <code>+ → +</code>, <code>2 → 2</code></td><td>Suggest finds every one.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Style and timing.</strong> The pairs are the five that Suggest finds; the movement is the point. On straight paths the
+        <code>y</code> and the other side would run through each other. A <span class="ui">Path arc</span> of 60° makes every
+        glyph swing to the right of its own direction: the <code>y</code> and the <code>=</code>, which go right, pass
+        below, and <code>x + 2</code>, which goes left, passes above. If you want one glyph to take a different
+        route, <a href="custom-paths.html">draw its path</a>.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-swap-sides"></div>
+          <div class="mfe-code" data-mfe-python="recipes-swap-sides"></div>
+        </div>
+      </details>
+
+      <h2 id="factoring">Factoring out a common factor</h2>
+      <p><code>6x + 9</code> becomes <code>3(2x + 3)</code>. The 6 splits into a 3 and a 2, the 9 turns into a 3, and brackets appear.</p>
+      <figure class="mfe-player" data-mfe-player="recipes-factor-out" data-start="1.8" data-timeline data-autoplay data-loop
+              data-caption="The numbers are amber. The brackets are new: they fade in."></figure>
+      <table>
+        <thead>
+          <tr><th>Pair</th><th>Made by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>x → x</code>, <code>+ → +</code></td><td>Suggest.</td></tr>
+          <tr><td><code>6 → 3, 2</code></td><td>By hand: one-to-many. Select the 6 and the two targets, then press <span class="ui">Link</span>.</td></tr>
+          <tr><td><code>9 → 3</code></td><td>By hand: the labels differ.</td></tr>
+          <tr><td>The two brackets</td><td>No pair: they arrive with the intro of the second clip.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Style and timing.</strong> <span class="ui">Transform</span> again; the 6 splits like the letters of the
+        <a href="#expanding">square</a>. The intro of the second clip brings the brackets in at the same time as
+        the window, so they appear as the numbers land.</p>
+      <details class="files">
+        <summary>Project and Python</summary>
+        <div class="files-body">
+          <div class="mfe-example" data-mfe-example="recipes-factor-out"></div>
+          <div class="mfe-code" data-mfe-python="recipes-factor-out"></div>
+        </div>
+      </details>
+
+      <aside class="try">
+        <ol>
+          <li>Download the project of <a href="#substituting">Substituting a value</a> (its
+            <span class="ui">Project and Python</span> box has the download) and open it as
+            <a href="#reading">described above</a>. Press <kbd data-keys="Space">Space</kbd>: the first expression
+            stays and the second grows below it.</li>
+          <li>Click the relation's band on the timeline. In the Animations panel, in
+            <span class="ui">Timing and style</span>, change <span class="ui">Default style</span> to
+            <span class="ui">Transform</span>, and play again: now the glyphs themselves fly down, and the first
+            expression loses them.</li>
+          <li>Set <span class="ui">Path arc</span> to 40 and play: the <code>x</code> sweeps down along a curve.
+            Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> to undo each change.</li>
+        </ol>
+      </aside>
+
+      <h2 id="make-your-own">Making your own</h2>
+      <p>Start from the recipe that is closest to your equation. Open its project, change the LaTeX of its two
+        formulas in the Creator, then open the relation with <span class="ui">Edit…</span> and check its pairs: use
+        <span class="ui">Suggest links by label</span> for what stays the same, and fix the rest by hand as above.
+        Link the labels that differ, point a glyph that repeats at the right match, and let glyphs that split
+        or merge share a pair. When one formula should grow into several rows instead, use
+        <a href="morph.html">Morph blocks</a>.</p>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../animations/blocks.html">Animation blocks</a> covers every animation block a clip can hold, from Write to FocusOn.</li>
+        <li><a href="relation-editor.html">The relation editor</a> covers linking glyphs, the pair list and the styles of pairs.</li>
+        <li><a href="custom-paths.html">Custom paths</a> makes glyphs travel along an arc, or along a path you draw in the Preview.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

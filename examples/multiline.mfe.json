@@ -1,0 +1,320 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Multi-line derivation",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_q8n3w2rd",
+      "kind": "math",
+      "name": "rows",
+      "source": "A &= x_1 \\\\\n  &= x_2 \\\\\n  &= x_3",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-262wurpoci3",
+        "glyphs": [
+          {
+            "label": "A",
+            "center": [
+              -0.5712708249999996,
+              0.7880444500000001
+            ],
+            "size": [
+              0.341718600000001,
+              0.3566625000000001
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.054074074999999944,
+              0.7342462000000001
+            ],
+            "size": [
+              0.33125780000000127,
+              0.11656289999999991
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.4166863249999997,
+              0.7170606500000001
+            ],
+            "size": [
+              0.24806970000000028,
+              0.2256537999999999
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              0.6643717000000002,
+              0.6507600249999999
+            ],
+            "size": [
+              0.1269240499999995,
+              0.23153174999999981
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.054074074999999944,
+              -0.012951800000000235
+            ],
+            "size": [
+              0.33125780000000127,
+              0.11656290000000002
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.4166863249999997,
+              -0.030137350000000174
+            ],
+            "size": [
+              0.24806970000000028,
+              0.2256537999999999
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.661930850000001,
+              -0.09643797500000006
+            ],
+            "size": [
+              0.154122049999998,
+              0.23153175000000004
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.054074074999999944,
+              -0.7601498000000001
+            ],
+            "size": [
+              0.33125780000000127,
+              0.11656290000000014
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.4166863249999997,
+              -0.7773353500000002
+            ],
+            "size": [
+              0.24806970000000028,
+              0.22565380000000002
+            ]
+          },
+          {
+            "label": "3",
+            "center": [
+              0.6619308749999995,
+              -0.8471229000000001
+            ],
+            "size": [
+              0.16039849999999944,
+              0.2385056000000001
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_v5k9m1xa",
+      "kind": "visual",
+      "name": "Derivation",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_h2p7z4ue",
+      "formulaId": "f_q8n3w2rd",
+      "trackId": "t_v5k9m1xa",
+      "start": 0,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1.5,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_m6r1t8yb",
+          "kind": "morph",
+          "start": 2,
+          "duration": 1,
+          "easing": "smooth",
+          "style": "copy",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                1
+              ],
+              "to": [
+                4
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                2
+              ],
+              "to": [
+                5
+              ],
+              "style": null
+            }
+          ]
+        },
+        {
+          "id": "a_w3c5j0ks",
+          "kind": "appear",
+          "start": 3,
+          "duration": 0.6,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            6
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        },
+        {
+          "id": "a_e9x2n7qf",
+          "kind": "morph",
+          "start": 4,
+          "duration": 1,
+          "easing": "smooth",
+          "style": "copy",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                4
+              ],
+              "to": [
+                7
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                5
+              ],
+              "to": [
+                8
+              ],
+              "style": null
+            }
+          ]
+        },
+        {
+          "id": "a_u4b8d1lz",
+          "kind": "appear",
+          "start": 5,
+          "duration": 0.6,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        },
+        {
+          "id": "a_k7s2g5wo",
+          "kind": "transform",
+          "start": 6,
+          "duration": 0.8,
+          "easing": "smooth",
+          "glyphs": [
+            8,
+            9
+          ],
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1.2,
+          "rotation": 0,
+          "color": "#FFFF00",
+          "opacity": null
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

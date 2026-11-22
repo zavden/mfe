@@ -1,0 +1,81 @@
+{
+  "format": "manim-palette",
+  "version": 1,
+  "name": "Ink & paper",
+  "colors": {
+    "background": "#FCFAF5",
+    "formula": "#243047",
+    "variable": "#1A5DA6",
+    "constant": "#925114",
+    "operator": "#42445A",
+    "result": "#18704F",
+    "text": "#243047",
+    "muted": "#677080",
+    "rectangle": "#6550A4",
+    "circle": "#A83E65",
+    "arrow": "#18704F"
+  },
+  "groups": [
+    [
+      "formula"
+    ],
+    [
+      "variable"
+    ],
+    [
+      "constant"
+    ],
+    [
+      "operator"
+    ],
+    [
+      "result"
+    ],
+    [
+      "text"
+    ],
+    [
+      "muted"
+    ],
+    [
+      "rectangle"
+    ],
+    [
+      "circle"
+    ],
+    [
+      "arrow"
+    ]
+  ],
+  "backgroundMode": "manual",
+  "style": {
+    "fillOpacity": 0.12,
+    "strokeWidth": 3,
+    "fontScale": 1
+  },
+  "seeds": {
+    "master": "manim-colors",
+    "background": "",
+    "symbols": "",
+    "emphasis": ""
+  },
+  "mode": "light",
+  "locks": {
+    "background": false,
+    "formula": false,
+    "variable": false,
+    "constant": false,
+    "operator": false,
+    "result": false,
+    "text": false,
+    "muted": false,
+    "rectangle": false,
+    "circle": false,
+    "arrow": false
+  },
+  "generation": {
+    "method": "preset",
+    "chroma": 0.4,
+    "diversity": 0.65
+  }
+}

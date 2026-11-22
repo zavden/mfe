@@ -1,0 +1,98 @@
+# Camera — exported by Manim Formula Editor for ManimCE 0.22.
+# Render at 1920×1080, 30 fps:
+#     manim -r 1920,1080 --fps 30 Pinned.py Pinned
+# Every play and wait lasts a whole number of frames at 30 fps, so the video has
+# exactly 315 frames, like the editor's video export.
+from manim import *
+
+
+def _glyphs(tex, layout):
+    """The glyphs of `tex` in the editor's order. That order (MathJax's, or another
+    template's) can differ from Manim's, so the glyphs are matched by position: `layout`
+    holds each glyph's (x, y, width, height) relative to the formula centre, divided by the
+    formula height, and every real glyph is assigned to one entry with the least total
+    distance. Entries without a counterpart get an empty VMobject."""
+    from scipy.optimize import linear_sum_assignment
+
+    real = tex.family_members_with_points()
+    glyphs = [VMobject() for _ in layout]
+    if len(real) != len(layout):
+        print(f"Warning: Manim made {len(real)} glyphs of a formula the editor split into "
+              f"{len(layout)}; unmatched glyphs are not animated.")
+    if not real or not layout:
+        return glyphs  # nothing to match (a formula without ink, such as \quad)
+    centre, height = tex.get_center(), tex.get_height()
+    if height < 1e-6:
+        height = 1.0  # a flat mobject (a rule): the editor's layout is divided by 1 then too
+    have = np.array([
+        [*((g.get_center() - centre)[:2] / height), g.get_width() / height, g.get_height() / height]
+        for g in real
+    ])
+    want = np.array(layout, dtype=float)
+    cost = np.linalg.norm(want[:, None, :] - have[None, :, :], axis=2)
+    for i, j in zip(*linear_sum_assignment(cost)):
+        glyphs[i] = real[j]
+    return glyphs
+
+
+class Pinned(MovingCameraScene):
+    def construct(self):
+        self.camera.background_color = "#000000"
+
+        # The camera: the frame the scene is filmed through.
+        cam = self.camera.frame
+        cam.save_state()
+        # target camera: Result
+        result = Rectangle(width=8, height=4.5).move_to([10, -2, 0])
+        # target camera: Wide
+        wide = Rectangle(width=22.222222, height=12.5).move_to([3.5, -1.5, 0])
+
+        # theorem: a^2+b^2=c^2
+        theorem = MathTex(r"a^2+b^2=c^2", font_size=72)
+        theorem_g = _glyphs(theorem, [
+            (-2.4455, -0.1893, 0.4767, 0.4715), (-1.9684, 0.2581, 0.3221, 0.4838), (-1.0726, -0.1534, 0.6922, 0.6933), (-0.1957, -0.0581, 0.3831, 0.7338),
+            (0.2175, 0.2581, 0.3221, 0.4838), (1.1711, -0.1534, 0.6922, 0.2436), (2.1106, -0.1893, 0.4049, 0.4715), (2.5229, 0.2581, 0.3221, 0.4838),
+        ])
+        theorem.move_to([-2.5, 1, 0])
+
+        # root: c=\sqrt{a^2+b^2}
+        root = MathTex(r"c=\sqrt{a^2+b^2}", font_size=72, color="#58C4DD")
+        root_g = _glyphs(root, [
+            (-2.2555, -0.1722, 0.3242, 0.3775), (-1.5359, -0.1435, 0.5542, 0.195), (-0.5092, 0, 0.7583, 1), (1.1355, 0.4833, 2.5643, 0.0333),
+            (0.0775, -0.1722, 0.3817, 0.3775), (0.4594, 0.0826, 0.2578, 0.3873), (1.1766, -0.1435, 0.5542, 0.555), (1.8786, -0.0672, 0.3067, 0.5875),
+            (2.2094, 0.0826, 0.2578, 0.3873),
+        ])
+        root.move_to([10, -2, 0])
+        root.set_z_index(1)
+
+        # 0 s – 1 s: theorem write
+        self.play(Write(VGroup(*theorem_g[:])), run_time=1)
+        # 1 s – 1.5 s
+        self.wait(0.5)
+        # 1.5 s – 2.5 s: camera → (-0.85, 1), 267 %
+        self.play(
+            cam.animate.replace(Rectangle(width=5.333333, height=3).move_to([-0.85, 1, 0])),
+            run_time=1,
+        )
+        # 2.5 s – 2.8 s
+        self.wait(0.3)
+        # 2.8 s – 3.6 s: theorem indicate
+        self.play(Indicate(VGroup(theorem_g[6], theorem_g[7])), run_time=0.8)
+        # 3.6 s – 3.9 s
+        self.wait(0.3)
+        # 3.9 s – 5.1 s: camera → Result
+        self.play(cam.animate.replace(result), run_time=1.2)
+        # 5.1 s – 5.4 s
+        self.wait(0.3)
+        # 5.4 s – 6.4 s: root write
+        self.play(Write(VGroup(*root_g[:])), run_time=1)
+        # 6.4 s – 6.9 s
+        self.wait(0.5)
+        # 6.9 s – 8.1 s: camera → Wide
+        self.play(cam.animate.replace(wide), run_time=1.2)
+        # 8.1 s – 8.7 s
+        self.wait(0.6)
+        # 8.7 s – 9.9 s: camera → start
+        self.play(Restore(cam), run_time=1.2)
+        # 9.9 s – 10.5 s
+        self.wait(0.6)

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previewing a transformation · Manim Formula Editor</title>
+  <meta name="description" content="Watch a transformation before you export it: the Preview tab and Preview raw.">
+  <meta name="mfe:id" content="transforms/previewing">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Previewing">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/previewing-raw.data.js" defer></script>
+  <script src="../media/transforms/previewing/preview.tour.js" defer></script>
+  <script src="../media/transforms/previewing/live-edit.tour.js" defer></script>
+  <script src="../media/transforms/previewing/raw.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Previewing a transformation</h1>
+      <p class="lead">You do not have to save a relation to see what it does. The relation editor can play
+        the transformation as it is now, in two ways: <span class="ui">Preview</span> shows it as the
+        scene will, and <span class="ui">Preview raw</span> animates the drawing itself, so that you can
+        check the pairs.</p>
+
+      <h2 id="why">Why preview in the editor</h2>
+      <p>Without a preview you would save the relation, close the editor and play the timeline to see a
+        pair you got wrong, then open the editor again. The previews of the editor play the
+        <em>draft</em>: the pairs, the styles, the window and what the unpaired glyphs do, as they would be
+        saved now. Nothing is saved for them, and the side column stays beside them, so that a change shows
+        at once.</p>
+      <p>Both use the scene engine of the main Preview, and the export agrees with it. What loops in the
+        editor is what the scene will show.</p>
+
+      <h2 id="preview-tab">The Preview tab</h2>
+      <p>Over the drawing that links glyphs there is a switch, <span class="ui">Link | Preview</span>.
+        Press <span class="ui">Preview</span> and the transformation takes the place of the drawing.</p>
+      <div class="mfe-tour" data-mfe-tour="transforms/previewing/preview" data-title="The Preview tab of the relation editor"></div>
+      <p>The picture shows only the two formulas of the relation, as the scene draws them, in a loop. The loop
+        starts half a second before the window and ends half a second after it, so that you see the source
+        standing and the target settled. It does not reach before the first of the two clips starts, nor after
+        the last one ends.</p>
+      <ul>
+        <li>The <strong>play button</strong> pauses the loop and plays it again from where it stopped.</li>
+        <li>The <strong>bar</strong> chooses the instant. The band under it marks the window of the
+          transformation.</li>
+        <li>The <strong>time</strong> is in seconds of the scene, and the <strong>percentage</strong> says how
+          far through the transformation that instant is: 0% before the window, 100% after it.</li>
+      </ul>
+      <p>The camera frames the formulas for the whole loop, so a glyph that follows a wide arc stays in the
+        picture. A clip on a hidden track is drawn too: hiding a track is a choice of the preview, and the
+        export draws it.</p>
+      <p>Switch to <span class="ui">Link</span> to add a pair, and back to <span class="ui">Preview</span>:
+        the picture is at the instant you left it, and the new pair already moves.</p>
+
+      <h3 id="instant">Choosing the instant</h3>
+      <p>Press the bar, or drag its thumb, and the loop stops where you put it. The picture follows the
+        thumb in both directions, so you can go back and forth through the transformation as slowly as you
+        like. Press play to let the loop go on from there.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/previewing/scrub.dark.webm"
+               poster="../media/transforms/previewing/scrub.dark.webp" width="678" height="468"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The loop runs by itself. A press on the bar stops it, and dragging the thumb through the
+          band goes through the transformation, forwards and back.</figcaption>
+      </figure>
+
+      <h3 id="live">Changing things while you look</h3>
+      <p>The side column works while the preview plays. Change the style of a pair, the window, the easing,
+        the path arc or what the unpaired glyphs do, and the picture shows it at once. This is the quickest
+        way to choose a style: try each on the instant that matters.</p>
+      <div class="mfe-tour" data-mfe-tour="transforms/previewing/live-edit" data-title="Changing a style and the path arc while previewing"></div>
+
+      <h3 id="blocked">When there is nothing to show</h3>
+      <p>If the draft has an error, the editor does not draw it: the picture is replaced by
+        <em>Fix the problems listed to see the transformation.</em> Fix the problems under the side column
+        and the preview comes back. If a formula has no glyphs to show, the editor says why: it is empty,
+        it does not render (with the reason), it draws no glyphs, or its glyphs are still rendering.</p>
+
+      <h2 id="preview-raw">Preview raw</h2>
+      <p>The last key of the toolbar of the <span class="ui">Link</span> view is
+        <span class="ui">Preview raw</span>. It animates the drawing itself: the source and the target stay
+        where the drawing has them, one over the other or
+        <a href="relation-editor.html#drawing">side by side</a>, and the glyphs go from one to the other as
+        the pairs and their styles say. It is the quickest check that the right glyph goes to the right
+        place.</p>
+      <div class="mfe-tour" data-mfe-tour="transforms/previewing/raw" data-title="Preview raw"></div>
+      <p>Four things set it apart from <span class="ui">Preview</span>.</p>
+      <ul>
+        <li><strong>The glyphs go in straight lines.</strong> The path arc and the paths drawn by hand belong
+          to the scene, and show in <span class="ui">Preview</span>.</li>
+        <li><strong>The target is there all along, as a ghost</strong> at half its opacity: you see where
+          every glyph is going to land.</li>
+        <li><strong>A glyph that is not on screen while the transformation runs is outlined, dashed.</strong>
+          A glyph hidden at the start of its clip, or written by a block after the transformation, is not
+          there to move, and the dashed outline shows where it is.</li>
+        <li><strong>The two clips are bare.</strong> Each is at its formula’s own size, upright and attached
+          to nothing, and keeps only its Appear and Disappear blocks; the other relations of the two clips
+          are left out. So a source that starts empty, or that leaves glyphs out of its intro, is whole
+          here: in the scene, what fills it may be one of those relations.</li>
+      </ul>
+      <p>The pairs are the scene’s. A style, a copy, a fade and what the unpaired glyphs do are what the
+        scene would do, so a <span class="ui">Copy</span> pair leaves its source where it is, and the glyphs of
+        the source that belong to no pair leave with the outro of their clip.</p>
+      <p>The bar of the loop takes the place of the toolbar: play and pause, the bar with the window marked,
+        the time and the percentage, and <span class="ui">End preview</span>. The side column stays, and a
+        change there shows at once.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/previewing/raw-play.dark.webm"
+               poster="../media/transforms/previewing/raw-play.dark.webp" width="678" height="672"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Preview raw playing in a loop; <kbd data-keys="Escape">Esc</kbd> ends it, and the editor
+          stays open.</figcaption>
+      </figure>
+
+      <h3 id="ending">Ending the preview</h3>
+      <p><span class="ui">End preview</span> brings the drawing back. So does
+        <kbd data-keys="Escape">Esc</kbd>: the editor stays open, and the focus returns to
+        <span class="ui">Preview raw</span>. (A field of the side column with an edit to take back keeps its
+        first <kbd data-keys="Escape">Esc</kbd>, which takes the edit back.) The next
+        <kbd data-keys="Escape">Esc</kbd> clears the selected glyphs, if there are any; then
+        <kbd data-keys="Escape">Esc</kbd> closes the editor, or asks first when you have changed something.
+        Switching to <span class="ui">Preview</span> ends the raw preview as well.</p>
+      <p><span class="ui">Preview raw</span> is off while the draft has an error, with a note that says why,
+        and while a formula is not rendered.</p>
+
+      <h2 id="compare">Preview or Preview raw?</h2>
+      <p>They answer different questions. Here is one swap with a path arc of 90°, at the same instant: the
+        scene bends the paths, the raw preview does not.</p>
+      <figure>
+        <img src="../media/transforms/previewing/preview-arc.dark.webp" data-themed
+             alt="The Preview of the editor half way through a swap with an arc of 90 degrees: the two letters pass on opposite sides of the plus sign."
+             width="678" height="467" loading="lazy">
+        <figcaption>Preview: the letters follow the arc, one above the plus sign and one below.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/transforms/previewing/raw-straight.dark.webp" data-themed
+             alt="Preview raw of the same swap at the same instant: the two letters meet on top of each other half way, with the ghost of the target below."
+             width="678" height="672" loading="lazy">
+        <figcaption>Preview raw: the letters go straight, and meet in the middle.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th></th><th><span class="ui">Preview</span></th><th><span class="ui">Preview raw</span></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Shows</td>
+            <td>The transformation as the scene plays it, the formulas where they are in the scene.</td>
+            <td>The drawing that links glyphs, animated: the source and the target where the drawing has them.</td>
+          </tr>
+          <tr>
+            <td>Paths</td>
+            <td>The path arc, and the paths drawn by hand.</td>
+            <td>Always straight.</td>
+          </tr>
+          <tr>
+            <td>Glyphs that are not on screen</td>
+            <td>Not drawn.</td>
+            <td>Outlined, dashed.</td>
+          </tr>
+          <tr>
+            <td>Use it to</td>
+            <td>Judge the result: the look, the timing, the easing, the arc.</td>
+            <td>Check the pairs: which glyph goes where, what a copy or a fade does, what is left unpaired.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="after-saving">After you save</h2>
+      <p>The previews of the editor never change the project. When the transformation is right, press
+        <span class="ui">Save relation</span>: the relation is in the timeline, and the main Preview plays
+        it with everything else. This is the relation of the raw tour above, as the player plays it:
+        the glyphs follow the arc of −60°, and the minus sign and the <i>b</i> are written after the
+        transformation.</p>
+      <figure class="mfe-player" data-mfe-player="previewing-raw" data-start="2" data-timeline data-autoplay data-loop
+              data-caption="The relation of the tour, as the scene plays it. The raw preview showed the straight line, the ghost and the two dashed glyphs; the scene bends the path and writes the dashed glyphs afterwards."></figure>
+      <div class="mfe-example" data-mfe-example="previewing-raw"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="relation-editor.html">The relation editor</a>: linking glyphs, styles and timing.</li>
+        <li><a href="relations.html">How relations work</a>: pairs, styles, unpaired glyphs and the window.</li>
+        <li><a href="custom-paths.html">Custom paths</a>: shape the path of a pair in the main Preview.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

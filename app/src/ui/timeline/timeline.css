@@ -1,0 +1,2077 @@
+/* Timeline panel, in the theme's tokens (styles.css). The toolbar lies on the panel's glass; under
+ * it the tracks sit in a sunken well with round corners: the ruler is a bar of glass along its top,
+ * each track's header a small card in the column on its left, the lanes the well itself. The
+ * geometry is the one of layout.ts (header column, ruler, rows, clip inset): the rules below that
+ * use its custom properties, and the sizes that mirror it, stay as they are. */
+.panel-body.timeline-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tl {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  user-select: none;
+}
+
+/* ---- Toolbar: 32px controls in a bar 44px high --------------------------------------------- */
+/* The tools, then the slider in the room they leave. The bar is a size container: the slider's
+ * place is worked out from its width (`cqi`, below). */
+.tl-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: none;
+  min-height: 40px;
+  padding: 4px 10px;
+  container-type: inline-size;
+}
+
+.tl-tools {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+/* The slider is in the middle of the bar, not of the room after the tools: an empty box as wide
+ * as the tools and their gap — less what the side after the slider is wider than the one before
+ * it — follows its row (the bar's width less this cell's), and the row sits midway between the
+ * two. In a bar too narrow for all three the slider gives way first, down to 320px (its row
+ * shrinks a thousand times as readily as the box); then the box does, the slider leaving the
+ * middle; and with no box left the slider takes what room there is. */
+.tl-slider-cell {
+  /* The two sides of the slider's row (below): the zoom's keys before it; after it the key of
+   * the whole timeline (32px), the zoom's readout (4px + 64px) and dt between its keys (8px +
+   * 24px + 60px + 24px), 2px apart. */
+  --tl-slider-side: 104px;
+  --tl-slider-after: 220px;
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  min-width: 0;
+}
+
+.tl-slider-cell::after {
+  flex: 0 1 calc(100cqi - 100% - var(--tl-slider-after) + var(--tl-slider-side));
+  min-width: 0;
+  content: '';
+}
+
+/* The slider's row: the zoom around the slider — out and in before it; after it the key that
+ * puts the whole timeline in view and the zoom's readouts. Each side is a width of its own, which
+ * holds what is in it whatever the zoom; the box after the row makes up for the difference, so
+ * that the slider itself is in the middle of the toolbar. */
+.tl-slider-row {
+  display: grid;
+  grid-template-columns: var(--tl-slider-side) minmax(0, 1fr) var(--tl-slider-after);
+  flex: 0 1000 calc(540px + var(--tl-slider-side) + var(--tl-slider-after) + 12px);
+  align-items: center;
+  column-gap: 6px;
+  min-width: min(calc(320px + var(--tl-slider-side) + var(--tl-slider-after) + 12px), 100%);
+  margin: 0 auto;
+}
+
+.tl-slider-side {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tl-slider-side.is-before {
+  justify-content: flex-end;
+}
+
+.tl-tool:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.tl-tool:disabled:hover {
+  background: transparent;
+  color: var(--text-dim);
+}
+
+/* «+ Track» is a plain button with an edge (`.btn`): an icon before its label. */
+.tl-tool-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 13px;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+.tl-tool-add svg,
+.tl-tool svg {
+  flex: none;
+}
+
+/* The other tools have no edge until the pointer is on them. */
+.tl-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  color: var(--text);
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.tl-tool:hover {
+  background: var(--hover);
+}
+
+/* An icon button (zoom out, zoom in, the whole timeline): square, dim until the pointer is on
+ * it. */
+.tl-tool-icon {
+  width: 32px;
+  padding: 0;
+  border-radius: 6px;
+  color: var(--text-dim);
+}
+
+.tl-tool-icon:hover {
+  color: var(--text);
+}
+
+/* A toggle (Snap): plain when off; when on, mint like what is on everywhere, with a soft glow. */
+.tl-toggle {
+  color: var(--text-dim);
+}
+
+.tl-toggle:hover {
+  color: var(--text);
+}
+
+.tl-tool.is-on {
+  background: linear-gradient(160deg, var(--accent-bright), var(--accent));
+  border-color: var(--accent-bright);
+  color: var(--accent-text);
+  font-weight: 600;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 2px 12px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.tl-tool.is-on:hover {
+  background: var(--accent-bright);
+  color: var(--accent-text);
+}
+
+/* The Slides mode's toggle while a pause or a comment holds it on: it cannot be turned off now,
+ * and its tooltip says why (as the multicamera's in the Preview). */
+.tl-tool.is-held {
+  cursor: help;
+}
+
+.tl-tool-sep {
+  flex: none;
+  width: 1px;
+  height: 20px;
+  margin: 0 6px;
+  background: var(--border);
+}
+
+/* The zoom readout keeps its width, so the toolbar does not shift as the zoom changes. */
+.tl-zoom-readout {
+  min-width: 64px;
+  margin-left: 4px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Beside it, the time between two small ticks of the ruler ("dt 0.5 s") between − and +, which
+ * set a dt of one's own (D181): keys narrower than the zoom's, and a readout as wide as its longer
+ * texts, so that + stays where it is as the text changes. One's own is in the accent. */
+.tl-dt {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.tl-dt-key {
+  width: 24px;
+}
+
+.tl-dt-readout {
+  min-width: 60px;
+  margin-left: 0;
+  text-align: center;
+}
+
+.tl-dt-readout.is-own {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- The slider: the view's place along the timeline (TimelineSlider.tsx) ------------------ */
+/* A thin groove the width of its column, as high as the controls beside it so that it is easy to
+ * press, and on it a thumb whose length and place the component sets. */
+.tl-slider {
+  position: relative;
+  min-width: 0;
+  height: 32px;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  /* A finger drags the thumb: the page does not scroll with it. */
+  touch-action: none;
+}
+
+/* The groove: a line that stands out from the panel in both themes (themeContrast.test.ts holds
+ * its colour to 4.5:1 there) and is plainer than the thumb on it. */
+.tl-slider::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 4px;
+  margin-top: -2px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  content: '';
+}
+
+.tl-slider-thumb {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--accent) 34%, var(--panel));
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 var(--edge-light);
+  cursor: grab;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.tl-slider:hover .tl-slider-thumb {
+  background: color-mix(in srgb, var(--accent) 52%, var(--panel));
+}
+
+/* Held: mint like what is on everywhere, with a soft glow. */
+.tl-slider.is-dragging,
+.tl-slider.is-dragging .tl-slider-thumb {
+  cursor: grabbing;
+}
+
+.tl-slider.is-dragging .tl-slider-thumb {
+  background: linear-gradient(160deg, var(--accent-bright), var(--accent));
+  border-color: var(--accent-bright);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 2px 12px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* The whole timeline is in view: the thumb fills the bar and there is nothing to move. */
+.tl-slider.is-idle,
+.tl-slider.is-idle .tl-slider-thumb {
+  cursor: default;
+}
+
+.tl-slider.is-idle .tl-slider-thumb,
+.tl-slider.is-idle:hover .tl-slider-thumb {
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel));
+  border-color: var(--border-strong);
+}
+
+/* ---- The well: ruler, track headers and lanes ------------------------------------------- */
+/* Its edge and round corners are on a wrapper, which clips the scroller to them: the scroller
+ * itself has no border (useTimelineZoom measures from its box). */
+/* The place of the well. Horizontal, it is no box: the well is the timeline's own child. */
+.tl-well-place {
+  display: contents;
+}
+
+.tl-well {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  margin: 0 6px 6px;
+  overflow: hidden;
+  background: var(--well);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.tl-scroll {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  /* A wheel, a trackpad or a touch mouse scrolls it both ways at once. What is left of the
+   * gesture at an end stays here: on a trackpad a sideways swipe handed on to the page is the
+   * browser's "back". */
+  overscroll-behavior: contain;
+}
+
+/* A drag of the middle button moves the view (timelinePan.ts): one cursor over all of it. */
+.tl-scroll[data-panning],
+.tl-scroll[data-panning] * {
+  cursor: grabbing !important;
+}
+
+.tl-content {
+  position: relative;
+  min-width: 100%;
+}
+
+.tl-row {
+  display: flex;
+}
+
+/* The ruler: a bar of glass along the top of the well (it stays there as the tracks scroll), its
+ * labelled ticks the full height, the small ones (Timeline.tsx, a repeating gradient) along its
+ * foot. */
+.tl-ruler-row {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  /* The last label is the one of a tick at or past the timeline's end: it is cut there, and is
+   * not something more to scroll to. */
+  overflow-x: clip;
+  background: var(--sheen), var(--panel-header);
+  border-bottom: 1px solid var(--border);
+}
+
+.tl-corner {
+  position: sticky;
+  left: 0;
+  z-index: 6;
+  flex: none;
+  background: var(--sheen), var(--panel-header);
+  border-right: 1px solid var(--border);
+}
+
+/* The height of the tracks (RowZoomControls), in the corner: lower, the zoom, taller. */
+.tl-row-zoom {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+  padding: 0 9px 0 7px;
+}
+
+.tl-row-zoom-value {
+  min-width: 46px;
+  height: 18px;
+  padding: 0 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.tl-row-zoom-value:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+  color: var(--text);
+}
+
+.tl-row-zoom-value:disabled {
+  cursor: default;
+}
+
+.tl-ruler {
+  position: relative;
+  flex: none;
+  cursor: text;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  touch-action: none;
+}
+
+.tl-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid color-mix(in srgb, var(--text-dim) 70%, transparent);
+  pointer-events: none;
+}
+
+.tl-tick span {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 14px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tl-track-row {
+  border-bottom: 1px solid var(--border);
+}
+
+/* A track's header: a small card in the column on the left of its lane, the track's name on its
+ * first line and its buttons on the second. The column itself is opaque (the clips scroll under
+ * it); the card is drawn inside it, inset from the row's lines. */
+.tl-header {
+  position: sticky;
+  left: 0;
+  /* Above everything that scrolls under it — clips, animation blocks (z 4–5 inside clips, which
+   * form no stacking context), relation arrows, the block state icons (6) — and below the ruler. */
+  z-index: 7;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  width: var(--header-width);
+  padding: 2px 9px 2px 11px;
+  background: var(--well);
+  border-right: 1px solid var(--border);
+}
+
+.tl-header::before {
+  position: absolute;
+  inset: 2px 4px;
+  z-index: -1;
+  background: var(--sheen), var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+  content: '';
+  pointer-events: none;
+}
+
+/* The header's top and bottom edges resize its track (TrackHeader): a strip each, which shows a
+ * line of the accent under the pointer and while it is dragged. */
+.tl-header-size {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 5px;
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+.tl-header-size.is-top {
+  top: 0;
+}
+
+.tl-header-size.is-bottom {
+  bottom: 0;
+}
+
+.tl-header-size::after {
+  position: absolute;
+  right: 6px;
+  left: 6px;
+  height: 2px;
+  background: var(--accent-bright);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity var(--motion-fast);
+  content: '';
+}
+
+.tl-header-size.is-top::after {
+  top: 0;
+}
+
+.tl-header-size.is-bottom::after {
+  bottom: 0;
+}
+
+.tl-header-size:hover::after,
+.tl-header-size[data-dragging]::after {
+  opacity: 1;
+}
+
+/* Where two tracks meet, the bottom edge of one and the top edge of the next are a hair apart,
+ * and the line alone does not say which of the two it resizes: the track of the edge under the
+ * pointer, or being dragged, is lit as well — its header's card and a veil over its row. */
+.tl-header::before,
+.tl-track-row {
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+
+.tl-header:has(> .tl-header-size:hover)::before,
+.tl-header:has(> .tl-header-size[data-dragging])::before {
+  background-color: color-mix(in srgb, var(--accent-bright) 16%, var(--raised));
+  border-color: var(--accent-bright);
+}
+
+.tl-track-row:has(> .tl-header > .tl-header-size:hover),
+.tl-track-row:has(> .tl-header > .tl-header-size[data-dragging]) {
+  background-color: color-mix(in srgb, var(--accent-bright) 9%, transparent);
+}
+
+/* The header's first line: the track's name and, at its end, the two keys of its height. */
+.tl-header-top {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tl-header-top .tl-name {
+  flex: 1;
+}
+
+.tl-header-top .tl-name-input {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+
+.tl-header-keys {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  margin-right: -4px;
+}
+
+.tl-header.is-hidden .tl-name {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.tl-name {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  font: inherit;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--text);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  cursor: default;
+}
+
+.tl-name-input {
+  width: 100%;
+  height: 18px;
+  font: inherit;
+  line-height: 16px;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+/* The icons line up with the name: each button is wider than its icon. */
+.tl-header-buttons {
+  display: flex;
+  gap: 2px;
+  margin-left: -4px;
+}
+
+.tl-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast);
+}
+
+/* The card is lighter than --hover in the dark theme: a see-through veil of the text's colour
+ * shows under the pointer in both themes. */
+.tl-icon-button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--text) 11%, transparent);
+  color: var(--text);
+}
+
+/* Hidden, locked, muted: on, in the accent. */
+.tl-icon-button.is-on,
+.tl-icon-button.is-on:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.tl-icon-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.tl-lane {
+  position: relative;
+  flex: none;
+}
+
+.tl-lane.is-hidden {
+  opacity: 0.7;
+}
+
+/* A locked track's lane is hatched with a veil of the text's colour (light on dark, dark on
+ * light). */
+.tl-lane.is-locked {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 6px,
+    color-mix(in srgb, var(--text) 6%, transparent) 6px 12px
+  );
+}
+
+/* A clip: a light tint of its formula's tag colour, and the tag itself as a solid stripe on the
+ * left edge (D27), so that the selection outline, the blocks and the playhead stand out. A piece
+ * of glass like the cards: the tint a shade lighter at its top, a lit edge inside its border. */
+.tl-clip {
+  position: absolute;
+  top: var(--clip-inset);
+  bottom: var(--clip-inset);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--clip-color) 55%, var(--border-strong));
+  border-radius: 6px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--clip-color) 25%, var(--panel)),
+    color-mix(in srgb, var(--clip-color) 17%, var(--panel))
+  );
+  box-shadow:
+    inset 0 1px 0 var(--edge-light),
+    0 1px 3px color-mix(in srgb, var(--shadow) 50%, transparent);
+  cursor: grab;
+  touch-action: none;
+}
+
+.tl-clip::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 4px;
+  background: var(--clip-color);
+  content: '';
+  pointer-events: none;
+}
+
+/* Selected: an accent edge and the selection's glow. */
+.tl-clip.is-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  z-index: 2;
+  box-shadow:
+    inset 0 1px 0 var(--edge-light),
+    var(--selection-glow),
+    0 0 10px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.tl-clip.is-locked {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* A block of this clip is selected: the clip keeps a fainter outline than a selected clip. */
+.tl-clip.has-selected-block {
+  outline: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  z-index: 2;
+}
+
+/* The lower half of the clip, under the strip of animation blocks (the same height as a lane):
+ * the intro's icon and name, the clip's name, the outro's icon and name. The relation windows are
+ * drawn over it. */
+.tl-clip-foot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: calc(var(--lane-height) - 2px);
+  pointer-events: none;
+}
+
+.tl-clip-label {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0 6px;
+}
+
+.tl-seg-name {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 3px;
+  overflow: hidden;
+  padding: 0 3px;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* The intro's name starts clear of the tag stripe. */
+.tl-seg-name:first-child {
+  padding-left: 7px;
+}
+
+.tl-seg-name.is-outro {
+  justify-content: flex-end;
+}
+
+.tl-seg-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The icon of an animation (D189, `animations/AnimationIcon.tsx`), before its name on a block, an
+ * intro or an outro: what a block too short for its name still says. */
+.tl .animation-icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.tl-block .animation-icon {
+  margin-right: 4px;
+}
+
+/* Too short for its name (`blockShowsName`, `phaseShowsName`): the icon alone, and its name in
+ * the tooltip. The name stays in the page for what reads it. */
+.tl-block.is-icon-only {
+  justify-content: center;
+  padding: 0;
+}
+
+.tl-block.is-icon-only .animation-icon {
+  margin-right: 0;
+}
+
+.tl-block.is-icon-only .tl-block-label,
+.tl-seg-name.is-icon-only .tl-seg-text {
+  display: none;
+}
+
+.tl-clip-name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The intro and the outro: the clip's tint shaded with a hatch of the theme's shadow (dark on
+ * both themes, fainter on light), and a dashed line of the text's colour where they end. */
+.tl-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--shadow) 42%, transparent) 0 4px,
+    color-mix(in srgb, var(--shadow) 18%, transparent) 4px 8px
+  );
+  font-size: 11px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.tl-intro {
+  left: 0;
+  border-right: 1px dashed color-mix(in srgb, var(--text) 45%, transparent);
+}
+
+.tl-outro {
+  right: 0;
+  border-left: 1px dashed color-mix(in srgb, var(--text) 45%, transparent);
+}
+
+/* The grab zone on the inner edge of an intro or an outro (D119): astride its dashed line, in
+ * the lower part of the clip — the strip above is the animation blocks', which often start
+ * where the intro ends. A drag makes the animation longer or shorter (`phaseGestures.ts`). */
+.tl-phase-handle {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  width: 9px;
+  height: calc(var(--lane-height) - 2px);
+  cursor: ew-resize;
+}
+
+.tl-phase-handle.is-intro {
+  margin-left: -5px;
+}
+
+.tl-phase-handle.is-outro {
+  margin-right: -5px;
+}
+
+.tl-phase-handle:hover {
+  background: color-mix(in srgb, var(--accent-bright) 45%, transparent);
+}
+
+.tl-clip.is-locked .tl-phase-handle {
+  cursor: not-allowed;
+}
+
+/* Its readout stands on the lower part of the clip, beside the edge: to its right for an intro,
+ * to its left for an outro. */
+.tl-phase-readout {
+  transform: translate(4px, calc(-100% - 2px));
+}
+
+.tl-phase-readout.is-outro {
+  transform: translate(calc(-100% - 4px), calc(-100% - 2px));
+}
+
+/* --- Animation blocks (ActionBlock): the upper strip of a clip, one lane each -------------- */
+.tl-block {
+  --block-bg: var(--block-transform);
+  --block-fg: var(--block-transform-text);
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 5px;
+  /* An edge of the block's own colour, a step towards its label's (darker on the dark theme,
+   * lighter on the light one), and a shadow that lifts it off the clip. */
+  border: 1px solid color-mix(in srgb, var(--block-bg) 72%, var(--block-fg));
+  border-radius: 4px;
+  background: var(--block-bg);
+  color: var(--block-fg);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--shadow) 60%, transparent);
+  cursor: grab;
+  touch-action: none;
+}
+
+.tl-block.is-appear {
+  --block-bg: var(--block-appear);
+  --block-fg: var(--block-appear-text);
+}
+
+.tl-block.is-disappear {
+  --block-bg: var(--block-disappear);
+  --block-fg: var(--block-disappear-text);
+}
+
+.tl-block.is-morph {
+  --block-bg: var(--block-morph);
+  --block-fg: var(--block-morph-text);
+}
+
+.tl-block.is-emphasis {
+  --block-bg: var(--block-emphasis);
+  --block-fg: var(--block-emphasis-text);
+}
+
+/* A group folded into one block (GroupBlock.tsx): the colour of its members' family, or a plain
+ * one when they are of several; a double line along its foot says there are blocks under it. */
+.tl-block.is-mixed {
+  --block-bg: var(--text-dim);
+  --block-fg: var(--bg);
+}
+
+.tl-block.is-group {
+  border-bottom: 3px double color-mix(in srgb, var(--block-bg) 40%, var(--block-fg));
+}
+
+/* A member of a group that is unfolded: a dashed edge, as its fellows have. */
+.tl-block.is-grouped {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--block-bg) 40%, var(--block-fg));
+}
+
+/* The arrow that unfolds a group, pointing at the label; on the first member of an unfolded
+ * group it points down and folds it again. */
+.tl-block:has(> .tl-group-fold) {
+  padding-left: 2px;
+}
+
+.tl-group-fold {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 100%;
+  margin-right: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tl-group-fold:hover {
+  background: color-mix(in srgb, var(--block-fg) 24%, transparent);
+}
+
+.tl-group-fold svg {
+  width: 10px;
+  height: 10px;
+  transform: rotate(-90deg);
+}
+
+.tl-group-fold.is-unfolded svg {
+  transform: none;
+}
+
+/* Selected: a ring of the text's colour inside it (the accent would not show on every block), a
+ * line of the well around it and the selection's glow. */
+.tl-block.is-selected {
+  box-shadow:
+    inset 0 0 0 2px var(--text),
+    0 0 0 1px var(--well),
+    0 0 10px color-mix(in srgb, var(--accent) 40%, transparent);
+  z-index: 5;
+}
+
+/* Dragged and held back by the planner: a ring in the danger colour that flashes when it first
+ * stops (the drag readout says why). */
+.tl-block.is-stopped {
+  z-index: 5;
+  box-shadow:
+    inset 0 0 0 2px var(--danger),
+    0 0 0 1px var(--well);
+  animation: tl-block-stop 0.4s ease-out;
+}
+
+@keyframes tl-block-stop {
+  from {
+    box-shadow:
+      inset 0 0 0 2px var(--danger),
+      0 0 0 5px color-mix(in srgb, var(--danger) 55%, transparent);
+  }
+  to {
+    box-shadow:
+      inset 0 0 0 2px var(--danger),
+      0 0 0 1px var(--well);
+  }
+}
+
+/* The readout under a dragged block (BlockDragReadout): its time, the blocks it runs alongside and
+ * why it stops. In a layer of its own over the blocks (z 4–5) and under the track headers (z 7). */
+.tl-block-readouts {
+  position: absolute;
+  top: 0;
+  left: var(--header-width);
+  right: 0;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.tl-block-readout {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 3px 7px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--popup-bg);
+  color: var(--text);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  box-shadow:
+    0 4px 12px var(--shadow),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+  pointer-events: none;
+}
+
+.tl-block-readout.is-stopped {
+  border-color: var(--danger);
+}
+
+.tl-block-readout-parallel {
+  color: var(--text-dim);
+}
+
+.tl-block-readout-stop {
+  color: var(--danger);
+}
+
+.tl-block-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* The grab zones on a block's edges; on a narrow block each takes a third. */
+.tl-block-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(7px, 33%);
+  cursor: ew-resize;
+}
+
+.tl-block-handle-start {
+  left: 0;
+}
+
+.tl-block-handle-end {
+  right: 0;
+}
+
+.tl-block-handle:hover {
+  background: color-mix(in srgb, var(--block-fg) 28%, transparent);
+}
+
+.tl-clip.is-locked .tl-block,
+.tl-clip.is-locked .tl-block-handle {
+  cursor: not-allowed;
+}
+
+.tl-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  cursor: ew-resize;
+}
+
+.tl-handle-start {
+  left: 0;
+}
+
+.tl-handle-end {
+  right: 0;
+}
+
+.tl-handle:hover {
+  background: color-mix(in srgb, var(--accent-bright) 45%, transparent);
+}
+
+/* Alt held (useAltHeld): only the edges answer the pointer — those of the clips, which trim
+ * them, and the inner edge of their intro and of their outro, which makes the animation longer or
+ * shorter. A block, a relation window, a link port or a state icon that sits where its clip ends
+ * covers the clip's edge, and a relation window lies over where an outro starts or an intro ends:
+ * a press there is theirs. With Alt nothing in the lanes or over them takes the pointer but these
+ * handles, which show where they are. The track headers stay as they are. */
+.tl-tracks.is-trim-only .tl-lane,
+.tl-tracks.is-trim-only .tl-lane *,
+.tl-tracks.is-trim-only .tl-relations *,
+.tl-tracks.is-trim-only .tl-link-ports *,
+.tl-tracks.is-trim-only .tl-state-icons * {
+  pointer-events: none !important;
+}
+
+.tl-tracks.is-trim-only .tl-handle,
+.tl-tracks.is-trim-only .tl-phase-handle,
+.tl-tracks.is-trim-only .tl-audio-trim {
+  background: color-mix(in srgb, var(--accent-bright) 45%, transparent);
+  pointer-events: auto !important;
+}
+
+/* The inner edge of an intro or an outro, whose grab zone is the lower part of the clip while the
+ * blocks above it can be pressed: nothing else can now, so it is the whole of its dashed line. */
+.tl-tracks.is-trim-only .tl-phase-handle {
+  top: 0;
+  height: auto;
+}
+
+.tl-tracks.is-trim-only .tl-clip.is-locked .tl-handle,
+.tl-tracks.is-trim-only .tl-clip.is-locked .tl-phase-handle {
+  background: transparent;
+  cursor: not-allowed;
+}
+
+.tl-ghost {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border: 2px dashed var(--accent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  pointer-events: none;
+}
+
+/* The selection rectangle over the lanes (useTimelineGestures.startMarquee): over the clips and
+ * the link ports, under the track headers. */
+.tl-marquee {
+  position: absolute;
+  z-index: 4;
+  border: 1px dashed var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  pointer-events: none;
+}
+
+@media (forced-colors: active) {
+  .tl-marquee {
+    border-color: Highlight;
+    background: transparent;
+  }
+}
+
+/* The playhead: its line in its own colour (--time, amber: the accent means selection) with a
+ * faint glow, a point of interest; in the ruler the same line runs down to a small mint head
+ * pointing at the tracks. The head is one shape (the clip-path): the line's pixel column and the
+ * triangle at the ruler's foot; the line is a stripe of --time over the head's mint. */
+.tl-playhead-line {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 0;
+  border-left: 1px solid var(--time);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--time) 45%, transparent);
+  pointer-events: none;
+}
+
+.tl-playhead-cap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 13px;
+  margin-left: -6px;
+  background:
+    linear-gradient(var(--time), var(--time)) 50% 0 / 1px calc(100% - 9px) no-repeat,
+    var(--accent);
+  clip-path: polygon(
+    6px 0,
+    7px 0,
+    7px calc(100% - 9px),
+    100% calc(100% - 9px),
+    50% 100%,
+    0 calc(100% - 9px),
+    6px calc(100% - 9px)
+  );
+  pointer-events: none;
+}
+
+/* A symbol kept in time by align by symbol (SymbolHoldMark): the playhead's shape at the kept
+ * instant, hollow and with a dashed stem — where the playhead was, under where it is. */
+.tl-hold-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 13px;
+  margin-left: -6px;
+  color: var(--time);
+}
+
+.tl-hold-mark svg {
+  display: block;
+  width: 13px;
+  height: 100%;
+}
+
+.tl-hold-mark path {
+  fill: var(--panel);
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.tl-hold-mark .tl-hold-stem {
+  fill: none;
+  stroke-dasharray: 2 2;
+}
+
+/* The region (RegionMarks.tsx, D180): where what is created next goes. Its start is green and
+ * its end red, as in an audio editor; between them the ruler is tinted from the one to the
+ * other, and so are the tracks, fainter. Only the two marks take the pointer, and only by their
+ * upper part: the band leaves the ruler under it to the playhead, and so does the foot of a mark,
+ * where the playhead's head is when the two are at the same time. Under the playhead. */
+.tl {
+  --region-in: var(--ok);
+  --region-out: var(--danger);
+}
+
+.tl-region {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  min-width: 1px;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--region-in) 26%, transparent),
+    color-mix(in srgb, var(--region-out) 26%, transparent)
+  );
+  pointer-events: none;
+}
+
+.tl-region-edge {
+  position: absolute;
+  top: 0;
+  height: 15px;
+  width: 8px;
+  cursor: ew-resize;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.tl-region-edge.is-start {
+  left: 0;
+  color: var(--region-in);
+}
+
+.tl-region-edge.is-end {
+  right: 0;
+  color: var(--region-out);
+}
+
+.tl-region-edge svg {
+  display: block;
+  width: 8px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.tl-region-band {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  min-width: 2px;
+  border-left: 1px solid color-mix(in srgb, var(--region-in) 75%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--region-out) 75%, transparent);
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--region-in) 9%, transparent),
+    color-mix(in srgb, var(--region-out) 9%, transparent)
+  );
+  pointer-events: none;
+}
+
+/* No tracks: the hint is a small card at the start of the well, over the playhead's line. */
+.tl .tl-empty {
+  position: sticky;
+  left: 0;
+  z-index: 7;
+  width: fit-content;
+  margin: 8px;
+  padding: 6px 10px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.tl-tracks {
+  position: relative;
+}
+
+/* --- Linking clips with Shift (useClipLinking) ------------------------------------------- */
+/* The ports (TimelineLinkPorts) have a layer of their own over the clips and the relation windows
+ * (z 3) and under the track headers (z 7); each is centred on its point. */
+.tl-link-ports {
+  position: absolute;
+  top: 0;
+  left: var(--header-width);
+  right: 0;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.tl-link-port {
+  position: absolute;
+  width: calc(2 * var(--link-port-radius));
+  height: calc(2 * var(--link-port-radius));
+  margin: calc(-1 * var(--link-port-radius)) 0 0 calc(-1 * var(--link-port-radius));
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--accent-text) 0 2px, var(--accent) 2.5px);
+  box-shadow:
+    0 0 0 2px var(--well),
+    0 0 8px color-mix(in srgb, var(--accent) 80%, transparent);
+  cursor: crosshair;
+  pointer-events: auto;
+  animation: tl-link-port-in 140ms ease-out;
+}
+
+.tl-link-port:hover {
+  transform: scale(1.2);
+}
+
+@keyframes tl-link-port-in {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+.tl-tracks.is-linking,
+.tl-tracks.is-linking .tl-clip {
+  cursor: crosshair;
+}
+
+.tl-clip.is-link-source {
+  outline: 2px solid var(--accent);
+  z-index: 2;
+}
+
+.tl-clip.is-link-target {
+  outline: 2px dashed color-mix(in srgb, var(--accent) 75%, transparent);
+  outline-offset: 1px;
+}
+
+.tl-clip.is-link-target:hover {
+  outline-style: solid;
+  outline-color: var(--accent);
+  filter: brightness(1.15);
+}
+
+.tl-clip.is-link-invalid {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.tl-link-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.tl-link-layer svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.tl-link-band {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2px;
+  stroke-dasharray: 6 4;
+  animation: tl-link-dash 0.6s linear infinite;
+}
+
+.tl-link-band-start,
+.tl-link-band-end {
+  fill: var(--accent);
+}
+
+@keyframes tl-link-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.tl-link-hint {
+  position: absolute;
+  padding: 3px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--popup-bg);
+  color: var(--text-dim);
+  font-size: 11px;
+  white-space: nowrap;
+  box-shadow:
+    0 4px 12px var(--shadow),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-link-port,
+  .tl-link-band {
+    animation: none;
+  }
+}
+
+/* Start and end icons of the selected transform block (BlockStateIcons), centred on its top
+ * corners, above the clips. */
+.tl-state-icons {
+  position: absolute;
+  top: 0;
+  left: var(--header-width);
+  right: 0;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.tl-state-icon {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--text);
+  box-shadow:
+    0 1px 3px var(--shadow),
+    inset 0 1px 0 var(--edge-light);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.tl-state-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tl-state-icon .tl-state-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.tl-state-icon.is-end {
+  border-color: color-mix(in srgb, var(--accent) 65%, var(--accent-text));
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.tl-state-icon:hover {
+  filter: brightness(1.15);
+}
+
+.tl-state-icon.is-active {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tl-state-icon:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* A clip clips what sticks out: the focus of its controls (the padlock) stays inside, and so
+ * does its own ring and a block's (the keyboard model, useTimelineKeyboard). */
+.tl-clip :focus-visible,
+.tl-clip:focus-visible,
+.tl-block:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Padlock of a clip with transformations: locked (default) after its first transformation. */
+.tl-clip-lock {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-left: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  opacity: 0.75;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.tl-clip-lock svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+
+.tl-clip-lock.is-unlocked {
+  color: var(--warning);
+  opacity: 1;
+}
+
+.tl-clip-lock:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--text) 15%, transparent);
+}
+
+/* The mark of a clip locked in the preview (`Clip.previewLocked`), before its name: a pointer
+ * struck out, on the accent like a track's lock when it is on. A press unlocks the clip. */
+.tl-clip-lock.tl-clip-preview-lock {
+  margin: 0 2px 0 0;
+  background: var(--accent);
+  color: var(--accent-text);
+  opacity: 1;
+}
+
+.tl-clip-lock.tl-clip-preview-lock svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 1.6;
+}
+
+.tl-clip-lock.tl-clip-preview-lock:hover:not(:disabled) {
+  background: var(--accent-bright);
+}
+
+.tl-clip-lock.tl-clip-preview-lock:disabled {
+  cursor: not-allowed;
+}
+
+/* The tooltip of a clip the pointer rests on: the formula's thumbnail, name and times. A sheet of
+ * glass like the menus. */
+.tl-tip {
+  position: fixed;
+  z-index: 130;
+  width: 240px;
+  padding: 6px;
+  pointer-events: none;
+  background: var(--popup-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow:
+    var(--shadow-popup),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.tl-tip-caption {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  margin: 4px 2px 0;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.tl-tip-name {
+  overflow: hidden;
+  color: var(--text);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Forced colours (see styles.css) ---- */
+@media (forced-colors: active) {
+  .tl-clip.is-selected {
+    outline-color: Highlight;
+  }
+
+  .tl-clip.has-selected-block {
+    outline: 2px dashed Highlight;
+  }
+
+  /* Its ring was a shadow. */
+  .tl-block.is-selected {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .tl-block.is-stopped {
+    outline: 2px dashed CanvasText;
+    outline-offset: -2px;
+  }
+
+  .tl-tool.is-on,
+  .tl-dt-readout.is-own {
+    text-decoration: underline;
+  }
+
+  /* The slider's groove and thumb were backgrounds: the thumb is a solid bar in the text's
+   * colour, the selection's while it is held, and an empty frame when there is nothing to move. */
+  .tl-slider::before,
+  .tl-slider-thumb {
+    forced-color-adjust: none;
+    background: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .tl-slider.is-dragging .tl-slider-thumb {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .tl-slider.is-idle .tl-slider-thumb,
+  .tl-slider.is-idle:hover .tl-slider-thumb {
+    background: Canvas;
+    border-color: GrayText;
+  }
+
+  .tl-playhead-line {
+    border-left-color: Highlight;
+  }
+
+  .tl-playhead-cap {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  .tl-region,
+  .tl-region-band {
+    background: none;
+    border-color: CanvasText;
+  }
+
+  .tl-region-edge {
+    color: CanvasText;
+  }
+
+  .tl-state-icon.is-active {
+    outline-color: Highlight;
+  }
+}
+
+/* ==== The vertical timeline (Zen mode, D182) ================================================== */
+/* Time runs down the screen and the tracks stand side by side. It is the horizontal timeline,
+ * laid out as ever, and turned a quarter clockwise on the screen by one transform for the whole
+ * well (D193): what is at the top when it lies is on the right when it stands — the ruler, beside
+ * the Preview, where the pointer comes from (D188), then the Camera row, then the first track —,
+ * and the tracks go on to the left. Its place is a size container, so that the well can be as
+ * wide as the place is tall and as tall as it is wide. The gestures read the screen through
+ * `axis.ts`.
+ *
+ * What is read stays upright: turned back a quarter about a corner of its own. With `P` the top
+ * left corner of a label as it is laid out, which the well puts at its top RIGHT on the screen,
+ *   - `transform-origin: 0 0; transform: translateY(L) rotate(-90deg)` stands the label with its
+ *     top left corner `L` px to the left of P: `L` its own width, it ends at P;
+ *   - `transform-origin: 100% 0; transform: translateX(-100%) rotate(-90deg)` stands it with its
+ *     top right corner at P, whatever its width;
+ *   - a `translate(x, y)` written last moves it by that much on the screen. */
+.tl.is-vertical .tl-well-place {
+  position: relative;
+  display: block;
+  flex: 1;
+  min-height: 0;
+  margin: 0 6px 6px;
+  container-type: size;
+}
+
+/* The well leaves a strip down its left for the scrollbar of time (`--tl-bar`), and one under it
+ * for the scrollbar of the tracks while they do not all fit (TimelineScrollbars.tsx). Its width
+ * is the place's height and its height the place's width, less those strips. */
+.tl.is-vertical .tl-well-place {
+  --tl-bar: 12px;
+  --tl-tracks-bar: 0px;
+}
+
+.tl.is-vertical .tl-well-place.has-tracks-bar {
+  --tl-tracks-bar: 12px;
+}
+
+.tl.is-vertical .tl-well {
+  position: absolute;
+  top: 0;
+  left: var(--tl-bar);
+  width: calc(100cqh - var(--tl-tracks-bar));
+  height: calc(100cqw - var(--tl-bar));
+  margin: 0;
+  /* Turned about its corner it would stand to the left of it: it is moved back by its height. */
+  transform: translateX(calc(100cqw - var(--tl-bar))) rotate(90deg);
+  transform-origin: 0 0;
+}
+
+/* The well's own scrollbars would be where the layout puts them — the one of time on the left,
+ * the one of the tracks at the bottom — but turned with it: they are hidden, and drawn by hand
+ * outside what is turned (TimelineScrollbars.tsx): time down the left edge, the tracks along the
+ * bottom. */
+.tl.is-vertical .tl-scroll {
+  scrollbar-width: none;
+}
+
+.tl-bar {
+  position: absolute;
+  border-radius: 5px;
+  touch-action: none;
+}
+
+.tl-bar.is-time {
+  top: 0;
+  bottom: var(--tl-tracks-bar);
+  left: 0;
+  width: 8px;
+}
+
+.tl-bar.is-tracks {
+  right: 0;
+  bottom: 0;
+  left: var(--tl-bar);
+  height: 8px;
+}
+
+.tl-bar.is-tracks.is-idle {
+  display: none;
+}
+
+.tl-bar-thumb {
+  position: absolute;
+  border-radius: 5px;
+  background: var(--border-strong);
+  cursor: grab;
+}
+
+.tl-bar.is-time .tl-bar-thumb {
+  right: 0;
+  left: 0;
+}
+
+.tl-bar.is-tracks .tl-bar-thumb {
+  top: 0;
+  bottom: 0;
+}
+
+.tl-bar-thumb:hover,
+.tl-bar-thumb:active {
+  background: var(--accent);
+}
+
+/* The toolbar in a narrow column: its tools wrap, and the slider's row is three short rows — the
+ * zoom's keys and the key of the whole timeline, the slider, the zoom's readout and dt. */
+.tl.is-vertical .tl-toolbar {
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  padding: 4px 6px 6px;
+}
+
+.tl.is-vertical .tl-tools {
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+}
+
+.tl.is-vertical .tl-slider-cell {
+  flex: 1 1 100%;
+}
+
+.tl.is-vertical .tl-slider-cell::after {
+  display: none;
+}
+
+.tl.is-vertical .tl-slider-row {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tl.is-vertical .tl-slider-side {
+  flex: 0 0 auto;
+}
+
+/* The slider takes what the zoom's keys leave of their row. */
+.tl.is-vertical .tl-slider-row > :not(.tl-slider-side) {
+  flex: 1 1 60px;
+  min-width: 60px;
+}
+
+.tl.is-vertical .tl-slider-side.is-after {
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* The tools are a size smaller, so that the three of the first row fit side by side. */
+.tl.is-vertical .tl-tool-sep {
+  display: none;
+}
+
+.tl.is-vertical .tl-tool,
+.tl.is-vertical .tl-tool-add {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+/* The names of clips and tracks and the ruler's times stay upright (the three ways above). A name
+ * then runs across its track, as wide as the part of the track it is in, and is cut there («…»).
+ * `--lane-height` and `--row-height` are the row's (Timeline.tsx). */
+.tl.is-vertical .tl-clip-name {
+  transform: translateY(calc(var(--lane-height) - 4px)) rotate(-90deg);
+  transform-origin: 0 0;
+}
+
+.tl.is-vertical .tl-header-body {
+  transform: translateY(var(--row-height)) rotate(-90deg);
+  transform-origin: 0 0;
+}
+
+/* An icon turns back about its middle and stays in its place. The chevron of a group of blocks
+ * is left as the well turns it: folded it points along the time, unfolded to where the group's
+ * lanes open. */
+.tl.is-vertical .tl-well svg.icon,
+.tl.is-vertical .tl-clip-lock svg,
+.tl.is-vertical .tl-clip-icon {
+  transform: rotate(-90deg);
+}
+
+.tl.is-vertical .tl-header-body svg.icon,
+.tl.is-vertical .tl-group-fold svg.icon {
+  transform: none;
+}
+
+/* The header of a track is the top of its column: its body is as wide as the track and as tall
+ * as the band of the headers, with the name over the keys of its size and its buttons in rows. */
+.tl.is-vertical .tl-header {
+  display: block;
+  padding: 0;
+}
+
+.tl.is-vertical .tl-header-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+  width: var(--row-height);
+  height: var(--header-width);
+  padding: 6px 7px 4px;
+}
+
+.tl.is-vertical .tl-header-top {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tl.is-vertical .tl-header-keys,
+.tl.is-vertical .tl-header-buttons {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Moving a track towards the front moves it to the right, towards the ruler: the arrows point
+ * where the track goes, and the one that points left is the one on the left. */
+.tl.is-vertical .tl-header-body [data-testid^='track-up-'] svg.icon,
+.tl.is-vertical .tl-header-body [data-testid^='track-down-'] svg.icon {
+  transform: rotate(90deg);
+}
+
+.tl.is-vertical .tl-header-buttons [data-testid^='track-up-'] {
+  order: 1;
+}
+
+.tl.is-vertical .tl-header-buttons [data-testid^='track-delete-'] {
+  order: 2;
+}
+
+/* The edges that resize a track are its sides. */
+.tl.is-vertical .tl-header-size {
+  cursor: ew-resize;
+}
+
+/* The name of an animation — on a block, an intro, an outro — runs down what it names, under its
+ * icon, and reads downward (D189): a column is too narrow for it to lie across. Laid out it runs
+ * along the time as ever, and the well turns it a quarter clockwise with everything else. It is
+ * cut where its block ends («…»). */
+
+/* A column is wider than a lane is tall: the icon is a size bigger. */
+.tl.is-vertical .animation-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* The lower half of a clip is its left half: the intro's icon and name, the outro's, and between
+ * them the clip's name across that half. */
+.tl.is-vertical .tl-clip-foot,
+.tl.is-vertical .tl-clip-label {
+  align-items: flex-start;
+}
+
+.tl.is-vertical .tl-seg-name {
+  align-self: stretch;
+}
+
+.tl.is-vertical .tl-clip-name {
+  display: block;
+  flex: none;
+  box-sizing: border-box;
+  width: calc(var(--lane-height) - 4px);
+  height: 14px;
+  overflow: hidden;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A name takes its height along the time, not its width. */
+.tl.is-vertical .tl-clip-name {
+  margin-right: calc(20px - var(--lane-height));
+}
+
+/* The name ends where the clip's two halves meet, and starts 4 px inside the clip. */
+.tl.is-vertical .tl-clip-label {
+  padding: 0 0 0 2px;
+}
+
+/* The ruler runs down the right side: a label is under its tick, across the ruler, and ends at
+ * the ruler's outer edge. */
+.tl.is-vertical .tl-tick span {
+  top: 3px;
+  left: 3px;
+  transform: translateX(-100%) rotate(-90deg);
+  transform-origin: 100% 0;
+}
+
+/* The corner: the zoom of the tracks between its keys, down the ruler's top. */
+.tl.is-vertical .tl-row-zoom {
+  gap: 0;
+  padding: 0 2px;
+}
+
+.tl.is-vertical .tl-row-zoom-value {
+  flex: none;
+  width: 24px;
+  min-width: 0;
+  height: 24px;
+  padding: 0;
+  font-size: 9.5px;
+  line-height: 10px;
+  white-space: normal;
+  transform: rotate(-90deg);
+}
+
+/* The cursors of what is dragged along the time. */
+.tl.is-vertical .tl-handle,
+.tl.is-vertical .tl-block-handle,
+.tl.is-vertical .tl-phase-handle,
+.tl.is-vertical .tl-rel-edge {
+  cursor: ns-resize;
+}
+
+/* The readouts of a drag are read across the screen, and end where the tracks have room: on the
+ * left, away from the ruler. A block's is put under its lane, which is to its left here: it ends
+ * there. A relation's is put over its band, which is to its right: it is taken across the band
+ * (`--rel-readout-gap`, `--rel-lane`: TimelineRelations.tsx) and ends at its other side. An
+ * intro's or an outro's stands in the clip's left half, after the edge that is dragged or before
+ * it. */
+.tl.is-vertical .tl-block-readout {
+  transform: translateX(-100%) rotate(-90deg);
+  transform-origin: 100% 0;
+}
+
+.tl.is-vertical .tl-rel-readout {
+  transform: translateX(-100%) rotate(-90deg)
+    translate(calc(-4px - var(--rel-readout-gap, 20px) - var(--rel-lane, 0px)), 0);
+  transform-origin: 100% 0;
+}
+
+.tl.is-vertical .tl-phase-readout {
+  transform: translateX(-100%) rotate(-90deg) translate(-4px, 4px);
+}
+
+.tl.is-vertical .tl-phase-readout.is-outro {
+  transform: translateX(-100%) rotate(-90deg) translate(-4px, calc(-100% - 4px));
+}
+
+/* An audio clip: its caption — the name, then its buttons — lies across the clip's start, and
+ * the marks of the volume scale are read beside their lines. */
+.tl.is-vertical .tl-audio-caption {
+  flex-wrap: wrap;
+  gap: 4px;
+  width: calc(var(--row-height) - 2 * var(--clip-inset) - 6px);
+  max-width: none !important;
+  height: auto;
+  padding: 4px 6px;
+  transform: translateY(calc(var(--row-height) - 2 * var(--clip-inset) - 6px)) rotate(-90deg);
+  transform-origin: 0 0;
+  /* Over the start of the volume graph, which it lets the pointer through to. */
+  z-index: 3;
+  pointer-events: none;
+}
+
+.tl.is-vertical .tl-audio-caption button {
+  pointer-events: auto;
+}
+
+.tl.is-vertical .tl-audio-caption span {
+  flex: 1 1 100%;
+}
+
+.tl.is-vertical .tl-audio-caption svg.icon {
+  transform: none;
+}
+
+/* The scale starts after the caption, along the clip. */
+.tl.is-vertical .tl-audio-scale {
+  transform: translateX(52px);
+}
+
+.tl.is-vertical .tl-audio-scale text {
+  transform: translateX(-100%) rotate(-90deg);
+  transform-box: fill-box;
+  transform-origin: 100% 0;
+}
+
+.tl.is-vertical .tl-audio-trim {
+  cursor: ns-resize;
+}
+
+/* T held (useFlyKey.ts): the view follows the mouse along time. The pointer says so wherever it
+ * is, and the slider and the scrollbar of time are lit as while they are dragged. With Shift the
+ * playhead follows it instead: the pointer is the one of a line moved along the time, and the
+ * playhead is drawn stronger. */
+html[data-timeline-flying],
+html[data-timeline-flying] * {
+  cursor: all-scroll !important;
+}
+
+html[data-timeline-flying='playhead-across'],
+html[data-timeline-flying='playhead-across'] * {
+  cursor: col-resize !important;
+}
+
+html[data-timeline-flying='playhead-down'],
+html[data-timeline-flying='playhead-down'] * {
+  cursor: row-resize !important;
+}
+
+.tl[data-flying='view'] .tl-slider-thumb,
+.tl[data-flying='view'] .tl-bar.is-time .tl-bar-thumb {
+  background: var(--accent);
+}
+
+.tl[data-flying='playhead'] .tl-playhead-line {
+  border-left-width: 2px;
+  margin-left: -0.5px;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--time) 80%, transparent);
+}

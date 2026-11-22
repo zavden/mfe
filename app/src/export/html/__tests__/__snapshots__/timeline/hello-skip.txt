@@ -1,0 +1,30 @@
+/* Hello: one-to-one — a scene made with Manim Formula Editor, 5.00 s long.
+ *
+ * This file is the animation: the project as the editor keeps it. Edit it, reload the page,
+ * and the page says what it could not read; `node check.mjs` says it without a browser. What
+ * follows in this comment was written at the export, to find your way in the data below: it
+ * does not follow your edits. Positions are Manim’s: y up, the frame 8 units tall about the
+ * origin. Its times are the scene’s; in the data, a block’s `start` counts from its clip’s
+ * `start`, and a relation’s `offset` from its target clip’s.
+ *
+ * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   a1  clips[0]  0.00–3.00 s  formulas[0] math “mx+y=0”
+ *   f2  clips[1]  2.00–5.00 s  formulas[1] math “mx=-y”
+ *
+ * The glyphs of each formula, by the index that "glyphs": [3, 4] names:
+ *   a1:  0 m  1 x  2 +  3 y  4 =  5 0
+ *   f2:  0 m  1 x  2 =  3 −  4 y
+ *
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.00 s  a1  write  clips[0].intro
+ *   1.50 s       PAUSE 1 (skips its wait to 2.00 s) · “Ask the room”  slides.marks[0]
+ *   2.00 s       f2  appears  clips[1]
+ *   2.00–3.00 s  a1  fade_out  clips[0].outro
+ *   2.00–3.00 s  a1 → f2  (transform, 4 pairs)  relations[0]
+ *   3.20 s       PAUSE 2  slides.marks[1]
+ *   3.20–3.80 s  f2  tween (move)  clips[1].actions[0]
+ *   3.85 s       PAUSE 3 (skips its wait to 3.95 s)  slides.marks[2]
+ *   3.95 s       PAUSE 4  slides.marks[3]
+ *   4.00–5.00 s  f2  fade_out  clips[1].outro
+ *
+ * AGENTS.md tells what each part means. */

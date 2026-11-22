@@ -1,0 +1,33 @@
+/* Emphasis — a scene made with Manim Formula Editor, 15.00 s long.
+ *
+ * This file is the animation: the project as the editor keeps it. Edit it, reload the page,
+ * and the page says what it could not read; `node check.mjs` says it without a browser. What
+ * follows in this comment was written at the export, to find your way in the data below: it
+ * does not follow your edits. Positions are Manim’s: y up, the frame 8 units tall about the
+ * origin. Its times are the scene’s; in the data, a block’s `start` counts from its clip’s
+ * `start`, and a relation’s `offset` from its target clip’s.
+ *
+ * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   square  clips[1]  0.00–15.00 s  formulas[0] math “(a+b)^2=a^2+2ab+b^2”
+ *   title   clips[0]  1.00–15.00 s  formulas[1] tex “The square of a sum”
+ *
+ * The glyphs of each formula, by the index that "glyphs": [3, 4] names:
+ *   square:  0 (  1 a  2 +  3 b  4 )  5 2  6 =  7 a  8 2  9 +  10 2  11 a  12 b  13 +  14 b
+ *            15 2
+ *   title:  0 T  1 h  2 e  3 s  4 q  5 u  6 a  7 r  8 e  9 o  10 f  11 a  12 s  13 u  14 m
+ *
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.50 s    square  write  clips[1].intro
+ *   1.00–1.80 s    title  fade_in  clips[0].intro
+ *   2.00–3.00 s    square  emphasis indicate [0–5]  clips[1].actions[0]
+ *   3.50–4.50 s    square  emphasis circumscribe [10–12]  clips[1].actions[1]
+ *   5.00–6.00 s    square  emphasis flash [6]  clips[1].actions[2]
+ *   6.00–8.00 s    square  emphasis wiggle [14, 15]  clips[1].actions[3]
+ *   8.00–10.00 s   square  emphasis focus_on [7, 8]  clips[1].actions[4]
+ *   10.20–11.70 s  square  emphasis indicate all  clips[1].actions[5]
+ *   12.00–13.50 s  square  emphasis circumscribe all  clips[1].actions[6]
+ *   13.00–14.00 s  title  emphasis wiggle all  clips[0].actions[0]
+ *   14.20–15.00 s  title  fade_out  clips[0].outro
+ *   14.20–15.00 s  square  fade_out  clips[1].outro
+ *
+ * AGENTS.md tells what each part means. */

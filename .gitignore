@@ -1,0 +1,47 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+
+# Test artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+tests/parity/results/
+tests/export/results/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Companion caches
+companion/.cache/
+
+# --- macOS ---
+.DS_Store
+._*
+
+# --- Windows ---
+Thumbs.db
+Desktop.ini
+
+# --- Linux ---
+.directory
+.Trash-*
+
+# --- Editors ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.log
+
+# --- Claude Code (personal settings; the skills in .claude/skills are shared) ---
+.claude/settings.local.json
+
+# The owner's own test material: not part of the project
+examples/sugerencias/

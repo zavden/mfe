@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Appearing and disappearing · Manim Formula Editor</title>
+  <meta name="description" content="How a clip comes in and how it goes away: the kinds of intro and outro, how to give one and set its length, what happens when it runs into something, and the defaults.">
+  <meta name="mfe:id" content="basics/intro-outro">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Intro and outro">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/intro-outro-intros.data.js" defer></script>
+  <script src="../examples/intro-outro-outros.data.js" defer></script>
+  <script src="../examples/intro-outro-wait.data.js" defer></script>
+  <script src="../widgets/rate-functions.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Appearing and disappearing</h1>
+      <p class="lead">A clip comes in with an <strong>intro</strong> and goes away with an
+        <strong>outro</strong>. This page shows every kind, how to give a clip one and set its
+        length, what happens when one runs into something else on the clip, and what new clips
+        start with.</p>
+
+      <figure class="mfe-player" data-mfe-player="intro-outro-intros" data-autoplay data-loop
+              data-controls="minimal"
+              data-caption="The same formula brought in by each intro. Left to right, top to bottom: none, Write, FadeIn, GrowFromCenter, DrawBorderThenFill and Create."></figure>
+
+      <p>Without an intro, an object is simply <em>there</em> when its clip starts, and without an
+        outro it is simply <em>gone</em> when its clip ends. An intro and an outro are Manim
+        animations (<code>Write</code>, <code>FadeOut</code>…), named by their Manim names in the
+        app, and they take place <em>inside</em> the clip: the intro in its first seconds, the
+        outro in its last ones. On the timeline they are the hatched ends of a clip.</p>
+
+      <h2 id="intro">The intro</h2>
+      <p>The intro is the animation a clip starts with. It runs from the first instant of the clip
+        for as long as you set, and the clip is at least that long.</p>
+      <table>
+        <thead>
+          <tr><th>Intro</th><th>What it does</th><th>Lasts</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">None (appear)</span></td><td>Nothing: the object is on screen from the first instant.</td><td>—</td></tr>
+          <tr><td><span class="ui">Write</span></td><td>Draws the glyphs stroke by stroke, as if written by hand, each glyph starting a little after the one before.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">FadeIn</span></td><td>Fades the object in. It can start from a shifted place and a different scale.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">GrowFromCenter</span></td><td>Grows the object from a point at its centre to its size.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">DrawBorderThenFill</span></td><td>Draws the outline of each glyph, then fills it.</td><td>2 s</td></tr>
+          <tr><td><span class="ui">Create</span></td><td>Draws the outline progressively. It is the one that suits lines and shapes.</td><td>1 s</td></tr>
+        </tbody>
+      </table>
+      <p>The lengths are what a new intro starts with; you change them (below). An arrow has one
+        more, <span class="ui">GrowArrow</span>, which grows it from its start: see
+        <a href="../objects/lines-arrows.html#appearing">Lines and arrows</a>.</p>
+
+      <h2 id="outro">The outro</h2>
+      <p>The outro is the animation a clip ends with: it finishes at the last instant of the clip.
+        Each outro undoes an intro, more or less.</p>
+      <table>
+        <thead>
+          <tr><th>Outro</th><th>What it does</th><th>Lasts</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">None (disappear)</span></td><td>Nothing: the object is on screen until the clip ends, then gone.</td><td>—</td></tr>
+          <tr><td><span class="ui">Unwrite</span></td><td>Erases the glyphs stroke by stroke, the opposite of Write.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">FadeOut</span></td><td>Fades the object out, with the same shift and scale as FadeIn.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">ShrinkToCenter</span></td><td>Shrinks the object to a point at its centre.</td><td>1 s</td></tr>
+          <tr><td><span class="ui">Uncreate</span></td><td>Draws the outline backwards until nothing is left.</td><td>1 s</td></tr>
+        </tbody>
+      </table>
+      <figure class="mfe-player" data-mfe-player="intro-outro-outros" data-autoplay data-loop
+              data-controls="minimal"
+              data-caption="The same formula taken away by each outro. Left to right, top to bottom: none, Unwrite, FadeOut, ShrinkToCenter and Uncreate."></figure>
+
+      <h3 id="kinds">What each kind of object takes</h3>
+      <p>Not every object can do every animation. The app offers each one only what it can do:</p>
+      <table>
+        <thead>
+          <tr><th>Object</th><th>Intros</th><th>Outros</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Formula, text (LaTeX), text (font), brace, shape</td><td>none, Write, FadeIn, GrowFromCenter, DrawBorderThenFill, Create</td><td>none, Unwrite, FadeOut, ShrinkToCenter, Uncreate</td></tr>
+          <tr><td>Line, dashed line</td><td>none, Create, Write, FadeIn</td><td>none, Uncreate, Unwrite, FadeOut</td></tr>
+          <tr><td>Arrow, double arrow</td><td>those of a line, and GrowArrow</td><td>those of a line</td></tr>
+        </tbody>
+      </table>
+      <p>A line is drawn or faded; it has no centre to grow from or shrink to.</p>
+
+      <h2 id="giving">Giving a clip an intro or an outro</h2>
+      <p>There are three ways, and each works on its own.</p>
+
+      <h3 id="menu">From the clip's menu</h3>
+      <p>Right-click the clip, on the timeline or in the Preview, and open
+        <span class="ui">Intro</span> or <span class="ui">Outro</span>. The list holds what the object
+        takes; the current choice is ticked. <span class="ui">None (appear)</span>, in the
+        <span class="ui">Intro</span> list, and <span class="ui">None (disappear)</span>, in the
+        <span class="ui">Outro</span> list, take the animation off; any other choice gives the clip that
+        animation, with the length that kind starts with.</p>
+      <figure>
+        <img src="../media/basics/intro-outro/intro-menu.dark.webp" data-themed
+             alt="The menu of the clip step1 with its Intro submenu open: None (appear), Write (ticked), FadeIn, GrowFromCenter, DrawBorderThenFill and Create."
+             width="411" height="470" loading="lazy">
+        <figcaption>The menu of a clip, with <span class="ui">Intro</span> open and the current
+          intro ticked.</figcaption>
+      </figure>
+      <p><span class="ui">Remove animations</span>, in the same menu, takes off the intro, the outro
+        and every animation block of the clip but the Morph ones, in one step.</p>
+
+      <h3 id="panel">In the Animations panel</h3>
+      <p>Select the clip and open the <span class="ui">Timing</span> tab of the Animations panel. Its
+        <span class="ui">Intro</span> and <span class="ui">Outro</span> sections have the same list,
+        in <span class="ui">Animation</span>, and the numbers behind the animation:</p>
+      <figure>
+        <img src="../media/basics/intro-outro/intro-panel.dark.webp" data-themed
+             alt="The Intro section of the Animations panel for step2: the Starts empty box, unticked, with a line about it; then Animation FadeIn, Duration 1 s, Easing smooth, Lag ratio Default, and Shift X, Shift Y and Scale."
+             width="304" height="344" loading="lazy">
+        <figcaption>The <span class="ui">Intro</span> section of a clip that fades in.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Duration</span>: how long it lasts, in seconds. It cannot be longer than
+          what the clip leaves beside its other animation.</li>
+        <li><span class="ui">Easing</span>: the rate function, the way speed changes along the
+          animation (<code>smooth</code>, <code>linear</code>, <code>rush_into</code>…, Manim's
+          own names).</li>
+        <li><span class="ui">Lag ratio</span>: how much the animation of each glyph waits for the
+          one before it. <span class="ui">Default</span> is Manim's own value for that animation,
+          shown in brackets; <span class="ui">Custom</span> lets you type one: 0 animates every glyph
+          at once, 1 one after the other.</li>
+        <li><span class="ui">Shift X</span>, <span class="ui">Shift Y</span> and
+          <span class="ui">Scale</span>, for FadeIn and FadeOut only: where the object starts from
+          (or goes to) and how big it is there.</li>
+      </ul>
+      <p id="starts-empty">The Intro section of a formula or a text begins with a box,
+        <span class="ui">Starts empty</span>. Ticked, <strong>no glyph of the clip comes in with the
+        intro</strong>: each one appears only when a relation, a Morph block or an Appear block brings
+        it, and a glyph nothing brings never shows. It is for a clip that is the target of a
+        transformation and should show only what was transformed:
+        <a href="../transforms/relations.html#starts-empty">How relations work</a> has an example.
+        The intro keeps its animation and its time, with nothing to animate; the section says so, and
+        <span class="ui">None (appear)</span> frees that time. If an edit later takes away what
+        filled the clip (its relation, say), a notice tells you that the clip will not show. A brace,
+        a shape or a line is one piece, and has no such box.</p>
+      <p id="left-out">A clip can also leave only <strong>some</strong> of its glyphs out of its
+        intro: the first half of a <a href="timeline.html#split-left-out">split clip</a> leaves out
+        the glyphs that came on screen after the cut. Its Intro section says how many, under the
+        box: <em>2 glyphs stay out of the intro</em>. <span class="ui">Bring them back</span>
+        gives them to the intro again, as the other glyphs, in one undo step. While
+        <span class="ui">Starts empty</span> is ticked every glyph stays out, and the line waits
+        until the box is unticked.</p>
+      <p>The easings are Manim's rate functions. Each curve below shows how an animation advances
+        over its time, and a dot and a glyph move at that pace:</p>
+      <div class="mfe-widget" data-mfe-widget="rate-functions"
+           data-options='{"functions": ["smooth", "linear", "rush_into", "rush_from", "slow_into", "double_smooth", "there_and_back", "there_and_back_with_pause"]}'></div>
+      <p>The select applies the animation at once, and trims the clip's keyframes to make room for
+        it. The menu above is more careful: see <a href="#conflicts">When an animation runs into
+        something</a>.</p>
+
+      <h3 id="drag">By dragging its edge</h3>
+      <p>The inner edge of an intro or an outro, the dashed line where it ends, is a handle. Its grab
+        zone is the lower part of the clip, a few pixels either side of the line; the cursor turns
+        into a double arrow over it. Drag it to make the animation longer or shorter.</p>
+      <figure>
+        <img src="../media/basics/intro-outro/clip-ends.dark.webp" data-themed
+             alt="The clip step1 enlarged: its Write intro (1) on the left, with a pen icon before the word Write, its name step1 (2), its FadeOut outro (3) on the right, with an icon of fading dots, and the inner edge of the intro (4)."
+             width="695" height="88" loading="lazy">
+        <figcaption>A clip, closely: the intro (1) and the outro (3) are hatched and carry the icon
+          and the name of their animation, or the icon alone when they are too short for the name;
+          the name of the clip (2) is between them; the inner edge of the intro (4) is the
+          handle.</figcaption>
+      </figure>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/intro-outro/drag-intro.dark.webm"
+               poster="../media/basics/intro-outro/drag-intro.dark.webp" width="630" height="172"
+               aria-label="The inner edge of the Write intro of step1 is dragged to the right, then to the left; a readout says how long the intro lasts as it changes. Ctrl+Z puts it back."
+               muted loop playsinline preload="none"></video>
+        <figcaption>The edge of the intro of <code>step1</code> dragged to the right, then to the
+          left. A readout over the clip gives the animation, where it runs and how long it lasts.</figcaption>
+      </figure>
+      <ul>
+        <li>The edge <strong>snaps</strong> to the playhead, the ticks of the ruler, and the edges
+          of the clip's blocks and windows. Hold <kbd data-keys="Shift">Shift</kbd> to move it
+          freely.</li>
+        <li>It stops where the clip says it must. An animation lasts at least 0.05 s, an intro and an
+          outro together cannot be longer than the clip, and neither can run over a
+          <strong>Transform of the whole formula</strong> (a keyframe), which cannot share its time
+          with them.</li>
+        <li>The whole drag is <strong>one undo step</strong>, and <kbd data-keys="Escape">Esc</kbd> during
+          it cancels it.</li>
+        <li>A clip on a locked track is selected by the press and is not changed.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/intro-outro/drag-outro.dark.webm"
+               poster="../media/basics/intro-outro/drag-outro.dark.webp" width="384" height="172"
+               aria-label="The inner edge of the FadeOut outro of the title is dragged to the left, making the outro longer, then to the right with Shift held, making it shorter."
+               muted loop playsinline preload="none"></video>
+        <figcaption>The same for an outro: the edge of the title's outro dragged to the left, then
+          back to the right with <kbd data-keys="Shift">Shift</kbd> held.</figcaption>
+      </figure>
+
+      <h2 id="alt">When something lies over an edge</h2>
+      <p>A relation window lies over where an outro starts when a transformation takes glyphs out of
+        the clip at the same moment, and an animation block can lie over an edge too. Pressed there,
+        the window or the block answers, not the handle of the outro.</p>
+      <p><strong>Hold <kbd data-keys="Alt">Alt</kbd></strong>. While it is down, the edges of the clips
+        and the inner edges of their intros and outros light up, and nothing else in the lanes answers
+        the pointer: not the blocks, not the windows, not the body of a clip. The edge is the clip's
+        again.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/intro-outro/alt-edge.dark.webm"
+               poster="../media/basics/intro-outro/alt-edge.dark.webp" width="540" height="172"
+               aria-label="Pressing the start of the FadeOut outro of step1 moves the window of the relation instead; Escape cancels it. With Alt held, the edges light up and the same press makes the outro longer."
+               muted loop playsinline preload="none"></video>
+        <figcaption>The window of the relation from <code>step1</code> to <code>step2</code> lies over
+          the start of the outro of <code>step1</code>. Pressed without Alt, the window moves (Esc
+          puts it back); with <kbd data-keys="Alt">Alt</kbd> held, the same press lengthens the
+          outro.</figcaption>
+      </figure>
+      <p>Alt also frees the edges of the clips themselves, where a block or a window ends with the
+        clip. A dialog or a text field keeps the key for itself, and a locked track shows no lit
+        edges.</p>
+
+      <h2 id="conflicts">When an animation runs into something</h2>
+      <p>An intro or an outro animates the whole object, so it cannot share time with some things
+        on the clip. When you choose one from the clip's menu, the app checks first, and if the new
+        animation, at its own length, would run into any of these it asks:</p>
+      <ul>
+        <li>a <strong>Transform of the whole formula</strong> (a keyframe) that it would cut or
+          remove;</li>
+        <li>the <strong>window of a transformation</strong> that takes glyphs from the clip (for an
+          intro) or brings glyphs to it (for an outro);</li>
+        <li>a <strong>block</strong>, or an <strong>attached object</strong> such as a brace, that needs the
+          same glyphs while the animation runs.</li>
+      </ul>
+      <figure>
+        <img src="../media/basics/intro-outro/conflict.dark.webp" data-themed
+             alt="A dialog titled DrawBorderThenFill runs into what is already there: On step1, the DrawBorderThenFill intro (2.00 s) would run into: The Transform of the whole formula at 1.20 s would be cut from 1.00 s to 0.20 s. Buttons: Cancel, Add it anyway, Shorten it to 1.20 s."
+             width="496" height="204" loading="lazy">
+        <figcaption>A keyframe at 1.2 s, and a two-second DrawBorderThenFill chosen as the intro: the
+          dialog names what is in the way.</figcaption>
+      </figure>
+      <p>The dialog says what the animation would meet, and you decide:</p>
+      <ul>
+        <li><span class="ui">Add it anyway</span> gives it the whole length, and the clip is
+          adjusted as far as it can be (a keyframe is cut or removed).</li>
+        <li><span class="ui">Shorten it to…</span> is offered when a shorter length avoids everything:
+          the animation lasts only as long as fits.</li>
+        <li><span class="ui">Cancel</span> leaves the clip as it was.</li>
+      </ul>
+      <p>When there is no room at all (the clip is all outro, say), a notice says so and nothing
+        changes. If you add one anyway and something is wrong, the <span class="ui">Problems</span>
+        section of the Animations panel lists it.</p>
+
+      <h2 id="blocks">Appear and Disappear blocks</h2>
+      <p>An intro always starts with the clip and an outro always ends with it. To bring glyphs in
+        or take them out at <em>another</em> time, or only <em>some</em> of the glyphs, use an
+        <strong>Appear</strong> or a <strong>Disappear</strong> block. Put the playhead at the time you
+        want, right-click the clip or use <span class="ui">Add animation</span> in the Animations panel,
+        and choose from <span class="ui">Appear</span> or <span class="ui">Disappear</span>: the block
+        starts at the playhead.</p>
+      <figure>
+        <img src="../media/basics/intro-outro/appear-menu.dark.webp" data-themed
+             alt="The menu of the clip step1 with its Appear submenu open: Write, Create, FadeIn, GrowFromCenter and DrawBorderThenFill."
+             width="411" height="470" loading="lazy">
+        <figcaption><span class="ui">Add animation ▸ Appear</span> lists the same animations as an intro,
+          with Write first.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Appear</span>: Write, Create, FadeIn, GrowFromCenter and
+          DrawBorderThenFill (and GrowArrow for an arrow). It brings glyphs that are off screen onto
+          it.</li>
+        <li><span class="ui">Disappear</span>: FadeOut, Unwrite, Uncreate and ShrinkToCenter. It takes
+          glyphs that are on screen off it, and a glyph it took out comes back with a later Appear.</li>
+      </ul>
+      <p>A line offers only what it can do. A new block lasts as long as that animation does by
+        default, and you drag its edges to change it. It names the glyphs it animates, which you pick
+        in its dialog or in the Animations panel
+        (<a href="../animations/blocks.html">Animation blocks</a>); a block of an arrow takes all of
+        it (<a href="../objects/lines-arrows.html#arrow-whole">Lines and arrows</a>).</p>
+
+      <h3 id="appear-waits">An Appear block makes its glyphs wait</h3>
+      <p>An Appear block brings its glyphs in when it runs, wherever in the clip. Its rule keeps it from
+        fighting with the intro: <strong>the glyphs an Appear block names do not take part in the
+        intro. They wait for the block</strong>, unless a Disappear block takes them out earlier. The
+        intro animates what no block names, and each block brings in its own glyphs when it runs.</p>
+      <figure class="mfe-player" data-mfe-player="intro-outro-wait" data-autoplay data-loop
+              data-controls="minimal"
+              data-caption="Two copies of a + b = c with a Write intro. On the lower one an Appear block, FadeIn, names = c: the intro writes a + b, and = c waits for the block."></figure>
+      <p>The Python the app exports for that scene shows it. The intro writes the first three glyphs of
+        the lower formula, <code>a + b</code>, together with the whole upper one; the block fades in
+        the other two, <code>= c</code>:</p>
+<pre data-excerpt="examples/intro-outro-wait.ce.py"><code class="language-python"># 0.4 s – 1.4 s: alone write, waiting write
+self.play(Write(VGroup(*alone_g[:])), Write(VGroup(*waiting_g[:3])), run_time=1)
+# ...
+# 2 s – 2.8 s: waiting fade_in
+self.play(FadeIn(VGroup(waiting_g[3], waiting_g[4])), run_time=0.8)</code></pre>
+      <p>The same applies to glyphs hidden at the start, to every glyph of a clip that
+        <a href="#starts-empty">starts empty</a> and to glyphs that arrive through a
+        transformation: the intro leaves them out too. If a block names <em>every</em> glyph, the
+        intro has nothing left to animate, and the Animations panel says so, under
+        <span class="ui">Warnings</span>:
+        <em>The Write intro of "x" animates no glyph: its glyphs wait for Appear blocks.</em> The
+        scene still plays; the intro is just a leftover you can take off. Blocks are the subject of
+        <a href="../animations/blocks.html">Animation blocks</a>.</p>
+
+      <h2 id="defaults">What a new clip starts with</h2>
+      <p>By default a new clip has <strong>no intro and no outro</strong>: it is there from its first
+        instant to its last. Three settings decide what a new clip gets:</p>
+      <ol>
+        <li><strong>The formula's own intro.</strong> The field <span class="ui">Appears with</span>
+          in the formula editor holds the intro every new clip of that formula starts with, and
+          its length. An intro you give a clip from its menu becomes what the formula says from
+          then on. <span class="ui">Appears with</span> has its own section in
+          <a href="../animations/timing.html#appears-with">Timing tools</a>.</li>
+        <li><strong>The editor's preference.</strong> <span class="ui">Edit ▸ Always add intro</span> and
+          <span class="ui">Edit ▸ Always add outro</span>, both off when you start, give every new clip
+          an intro, an outro or both; the entries name the animation they will use, such as
+          <span class="ui">Always add intro (Write)</span>. The intro goes to the formulas whose
+          <span class="ui">Appears with</span> says <span class="ui">Default</span>; the outro goes to every
+          new clip.</li>
+        <li><strong>Which animations those are.</strong> <span class="ui">Edit ▸ Default intro &amp;
+          outro…</span> opens a dialog where you pick the intro and the outro, and set their
+          length, easing, lag ratio and, for fades, shift and scale.</li>
+      </ol>
+      <figure>
+        <img src="../media/basics/intro-outro/edit-menu.dark.webp" data-themed
+             alt="The Edit menu, with Always add intro (Write), Always add outro (FadeOut) and Default intro and outro marked."
+             width="231" height="460" loading="lazy">
+        <figcaption>The three entries in the <span class="ui">Edit</span> menu.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/basics/intro-outro/default-dialog.dark.webp" data-themed
+             alt="The Default intro and outro dialog: an Intro section (Write, 1 s, linear, Auto lag ratio) and an Outro section (FadeOut, 1 s, smooth, Auto lag ratio, shift and scale), and the buttons Restore defaults, Cancel and Save."
+             width="536" height="728" loading="lazy">
+        <figcaption><span class="ui">Default intro &amp; outro…</span>. It is used for clips you add
+          from now on; existing clips keep theirs.</figcaption>
+      </figure>
+      <p>These are preferences of the editor, kept in the browser. They are not part of the project
+        file, and they are not undoable.</p>
+
+      <h3 id="braces-shapes">Braces, shapes and lines</h3>
+      <p>A brace, a shape or a line you add from a clip's menu comes with <strong>no
+        animation</strong>: its clip starts, and it is there. Give it one from its own menu,
+        <span class="ui">Intro</span>, like any other clip: <span class="ui">Create</span> is the one Manim
+        uses for a box, <span class="ui">GrowFromCenter</span> or <span class="ui">FadeIn</span> suit a
+        brace.</p>
+      <figure>
+        <img src="../media/basics/intro-outro/shape-intro.dark.webp" data-themed
+             alt="The menu of the clip of a box with its Intro submenu open: None (appear) ticked, then Write, FadeIn, GrowFromCenter, DrawBorderThenFill and Create."
+             width="372" height="410" loading="lazy">
+        <figcaption>A box added around <code>step3</code> shows at once, and its clip has no hatched
+          ends. <span class="ui">Intro ▸ Create</span>, in the menu of its clip, gives it one.</figcaption>
+      </figure>
+      <p>Braces, shapes and lines are the subject of
+        <a href="../objects/braces.html">Braces</a>, <a href="../objects/shapes.html">Shapes</a> and
+        <a href="../objects/lines-arrows.html">Lines and arrows</a>.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <aside class="try">
+        <ol>
+          <li>Open <code>timeline-basics.mfe.json</code> (from
+            <a href="timeline.html">Working with the timeline</a>): choose
+            <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the
+            dialog and pick the file (<a href="../start/projects.html#open">Projects and files</a>).</li>
+          <li>Right-click the clip <code>title</code>, on the top track, and choose
+            <span class="ui">Intro ▸ DrawBorderThenFill</span>. Its hatched left end now says Border
+            and is longer.</li>
+          <li>Drag the dashed line where that intro ends, in the lower part of the clip, to the
+            right: the intro lasts longer, and a readout says how long. Press
+            <kbd data-keys="Mod+Z">Ctrl+Z</kbd> once to take the whole drag back.</li>
+          <li>Right-click it again and choose <span class="ui">Outro ▸ Unwrite</span>. Then hold
+            <kbd data-keys="Alt">Alt</kbd> over the timeline and look at which edges light up.</li>
+          <li>Open <span class="ui">Edit</span> and tick <span class="ui">Always add intro (Write)</span>.
+            Drag <code>check</code> from the Creator onto the timeline: its clip comes with a Write
+            intro. (A new clip of <code>title</code> would come with DrawBorderThenFill: step 2 made
+            that what the formula's <span class="ui">Appears with</span> says.)</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="intro-outro-intros"></div>
+      <div class="mfe-example" data-mfe-example="intro-outro-wait"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <p>For a formula that turns into another one, see
+        <a href="first-transform.html">Transforming one formula into another</a>. Animations that
+        happen <em>during</em> a clip are <a href="../animations/blocks.html">animation blocks</a>, and
+        <a href="../animations/timing.html">Timing tools</a> has the commands that copy a clip's
+        intro and outro lengths.</p>
+    </article>
+  </main>
+</body>
+</html>

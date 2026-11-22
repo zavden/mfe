@@ -1,0 +1,398 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Arrows that point at symbols",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_f",
+      "kind": "math",
+      "name": "equation",
+      "source": "x = 5",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#58C4DD",
+        "2": "#83C167"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-237si4herye",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -1.377528768,
+              -0.16010783999999997
+            ],
+            "size": [
+              0.73213632,
+              0.68102208
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.06614784000000007,
+              -0.10824192000000002
+            ],
+            "size": [
+              1.0012377600000002,
+              0.35178624
+            ]
+          },
+          {
+            "label": "5",
+            "center": [
+              1.4436766079999999,
+              0
+            ],
+            "size": [
+              0.59984064,
+              1.03431168
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_arrow1",
+      "kind": "line",
+      "name": "l1",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        2.461589683813245,
+        -1.9128030769408486
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-9udrqixned",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.1381846858653637,
+              0.10737780307070288
+            ],
+            "size": [
+              2.1852203120825178,
+              1.6980474707994428
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              1.0389212545059072,
+              -0.7799313924670394
+            ],
+            "size": [
+              0.38374717480143083,
+              0.3529402920067699
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_arrow2",
+      "kind": "line",
+      "name": "l2",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        -2.4389383992495124,
+        1.6076655870599388
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#83C167",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-l5apbqswvj",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              0.1461126354626705,
+              -0.0963125005290213
+            ],
+            "size": [
+              2.1467131283241714,
+              1.4150405860018962
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              -1.025200313897575,
+              0.6344639752696128
+            ],
+            "size": [
+              0.3885377714543624,
+              0.33873763652071315
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_a2",
+      "kind": "visual",
+      "name": "Arrow 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_a1",
+      "kind": "visual",
+      "name": "Arrow 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_f",
+      "kind": "visual",
+      "name": "Formula",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_f",
+      "formulaId": "f_f",
+      "trackId": "t_f",
+      "start": 0,
+      "end": 7.5,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.2,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_arrow1",
+      "formulaId": "f_arrow1",
+      "trackId": "t_a1",
+      "start": 2,
+      "end": 7.5,
+      "initial": {
+        "position": [
+          -3.1717984639999997,
+          1.2902016
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 0.9,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "point": [
+            -4.6,
+            2.4
+          ]
+        },
+        "end": {
+          "clipId": "c_f",
+          "glyphs": [
+            0
+          ],
+          "anchor": "ul"
+        },
+        "buff": 0.25
+      }
+    },
+    {
+      "id": "c_arrow2",
+      "formulaId": "f_arrow2",
+      "trackId": "t_a2",
+      "start": 3.2,
+      "end": 7.5,
+      "initial": {
+        "position": [
+          3.171798464,
+          -1.45857792
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 0.9,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "point": [
+            4.6,
+            -2.4
+          ]
+        },
+        "end": {
+          "clipId": "c_f",
+          "glyphs": [
+            2
+          ],
+          "anchor": "dr"
+        },
+        "buff": 0.25
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

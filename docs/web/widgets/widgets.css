@@ -1,0 +1,919 @@
+/* The interactive widgets of the documentation (widgets/<name>.js): their own look, in the app's
+ * Mint style (the owner's guide, guia_estilos/, as app/src/ui/styles.css applies it), with the
+ * site's tokens (--doc-*), dark and light. The card, the transport bar and the timeline strip are
+ * the player's (assets/player.js injects its stylesheet; a widget's card is a `.mfe-player`); the
+ * buttons and the segmented switch are the site's (.btn, .segmented). A widget's scene keeps its
+ * own background in both themes, as the app's Preview does: what is drawn over it takes the colours
+ * of that background (`data-scene` on the stage: dark or light), not the page's. */
+
+/* ---- The card ---- */
+
+.mfe-w {
+  margin: 0;
+  container: mfe-w / inline-size;
+}
+
+.mfe-w-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.mfe-w-title {
+  margin: 0;
+  color: var(--doc-text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.mfe-w-summary {
+  margin: 0;
+  color: var(--doc-text-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mfe-w-segmented.is-small .segmented-option {
+  padding: 3px 9px;
+  font-size: 11.5px;
+}
+
+/* While a widget loads what the page's head lacks (the player, an example's data). */
+.mfe-w-loading {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--doc-border-strong);
+  border-radius: 10px;
+  background: var(--doc-well);
+  color: var(--doc-text-muted);
+  font-size: 13px;
+}
+
+/* ---- The stage: a scene, or a drawing over the scene's background ---- */
+
+.mfe-w-stage {
+  --w-accent: #43eeca;
+  --w-ink: #edf9f9;
+  --w-ink-dim: #acc3cb;
+  --w-plate: rgb(16 33 44 / 0.92);
+  --w-plate-border: #41838a;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--mp-border, var(--doc-border));
+  border-radius: 10px;
+  background: var(--doc-canvas);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mfe-w-stage[data-scene='light'] {
+  --w-accent: #087568;
+  --w-ink: #0e2a31;
+  --w-ink-dim: #415c66;
+  --w-plate: rgb(255 255 255 / 0.94);
+  --w-plate-border: #63858c;
+}
+
+.mfe-w-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mfe-w-preview {
+  position: absolute;
+  inset: 0;
+}
+
+.mfe-w-preview[hidden] {
+  display: none;
+}
+
+/* ---- The transport bar: the player's, a little apart from what it plays ---- */
+
+.mfe-w-bar[hidden] {
+  display: none;
+}
+
+/* The part of the time a widget marks on the time bar (a relation's window), hatched in the
+ * accent as the timeline marks a window. */
+.mfe-w-band {
+  position: absolute;
+  top: 50%;
+  height: 12px;
+  margin-top: -6px;
+  border: 1px solid var(--doc-accent);
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--doc-accent) 35%, transparent) 0 4px,
+    color-mix(in srgb, var(--doc-accent) 12%, transparent) 4px 8px
+  );
+  pointer-events: none;
+}
+
+/* ---- Messages ---- */
+
+.mfe-w-message {
+  min-height: 1.4em;
+  margin: 6px 4px 0;
+  color: var(--doc-text-muted);
+  font-size: 12.5px;
+}
+
+.mfe-w-message.is-error {
+  color: var(--doc-danger);
+}
+
+.mfe-w-note {
+  margin: 8px 4px 0;
+  color: var(--doc-text-muted);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.mfe-w-problems {
+  margin: 8px 0 0;
+  padding: 10px 14px;
+  border: 1px dashed var(--doc-warning);
+  border-radius: 10px;
+  background: var(--doc-well);
+  color: var(--doc-text);
+  font-size: 12.5px;
+}
+
+.mfe-w-problems[hidden] {
+  display: none;
+}
+
+.mfe-w-problems p,
+.mfe-w-problems ul {
+  margin: 0;
+}
+
+.mfe-w-problems ul {
+  padding-left: 18px;
+  color: var(--doc-text-muted);
+}
+
+/* ---- link-glyphs: the relation editor's drawing (app/src/ui/relations/relations.css) ---- */
+
+.mfe-w-link-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rg-glyph {
+  cursor: pointer;
+  outline: none;
+}
+
+.rg-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1px;
+}
+
+.rg-glyph:hover .rg-hit {
+  fill: color-mix(in srgb, var(--w-accent) 18%, transparent);
+}
+
+.rg-glyph.is-linked .rg-hit {
+  fill-opacity: 0.22;
+  stroke-opacity: 0.8;
+}
+
+.rg-glyph.is-focus .rg-hit {
+  fill-opacity: 0.45;
+  stroke-width: 2px;
+}
+
+.rg-glyph.is-selected .rg-hit {
+  fill: color-mix(in srgb, var(--w-accent) 35%, transparent) !important;
+  stroke: var(--w-accent) !important;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.rg-glyph.is-suggested .rg-hit {
+  stroke: var(--w-ink-dim);
+  stroke-dasharray: 4 3;
+  stroke-opacity: 1;
+}
+
+.rg-glyph:focus-visible .rg-hit {
+  stroke: var(--doc-focus) !important;
+  stroke-width: 2.5px;
+  stroke-opacity: 1;
+  stroke-dasharray: none;
+}
+
+.rg-index {
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.rg-index rect {
+  fill: var(--w-plate);
+  stroke: var(--w-accent);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.rg-index text {
+  fill: var(--w-ink);
+  font-family: var(--doc-font-mono);
+  font-weight: 600;
+}
+
+.rg-link {
+  pointer-events: none;
+}
+
+.rg-link path {
+  stroke-width: 1.6px;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.rg-link.is-focus path {
+  stroke-width: 3px;
+  opacity: 1;
+}
+
+.rg-link.is-dim {
+  opacity: 0.3;
+}
+
+/* The tools under the drawing: a bar of glass, what is selected at its left. */
+.mfe-w-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  min-height: 42px;
+  margin-top: 8px;
+  padding: 5px 6px 5px 12px;
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  background: var(--doc-sheen), var(--doc-surface-2);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+}
+
+.mfe-w-selection {
+  flex: 1 1 150px;
+  min-width: 0;
+  color: var(--doc-text);
+  font-size: 12.5px;
+}
+
+.mfe-w-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mfe-w-suggestion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-top: 6px;
+  padding: 6px 6px 6px 12px;
+  border: 1px dashed var(--doc-border-strong);
+  border-radius: 10px;
+  color: var(--doc-text);
+  font-size: 12.5px;
+}
+
+.mfe-w-suggestion[hidden] {
+  display: none;
+}
+
+.mfe-w-suggestion span {
+  flex: 1 1 200px;
+}
+
+.mfe-w-pairs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mfe-w-pairs:empty {
+  display: none;
+}
+
+.mfe-w-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid var(--doc-border);
+  border-radius: 6px;
+  background: var(--doc-surface-2);
+  color: var(--doc-text);
+  font-family: var(--doc-font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition:
+    border-color var(--doc-motion),
+    background-color var(--doc-motion);
+}
+
+.mfe-w-chip:hover {
+  border-color: var(--chip, var(--doc-accent));
+  background: var(--doc-hover);
+}
+
+.mfe-w-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--chip, var(--doc-accent));
+}
+
+/* ---- relation-window: the two clips, the room, the window and its handles ---- */
+
+.mfe-w-strip {
+  margin-top: 8px;
+}
+
+.mfe-w-strip-rows {
+  position: relative;
+}
+
+.mfe-w-strip-row .mfe-strip-name[hidden] {
+  display: none;
+}
+
+/* A clip's name at its top: the window takes its foot. */
+.mfe-w-strip-row .mfe-strip-clip-name {
+  top: 3px;
+  bottom: auto;
+}
+
+/* Where the window may lie: a dashed outline over the target's row. */
+.mfe-w-room {
+  position: absolute;
+  z-index: 1;
+  border: 1px dashed color-mix(in srgb, var(--doc-accent) 75%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--doc-accent) 7%, transparent);
+  pointer-events: none;
+}
+
+.mfe-w-window {
+  z-index: 3;
+}
+
+.mfe-w-link-line {
+  position: absolute;
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mfe-w-link-line path {
+  fill: none;
+  stroke: var(--doc-accent);
+  stroke-width: 1.5px;
+  stroke-dasharray: 3 3;
+}
+
+.mfe-w-handle {
+  position: absolute;
+  z-index: 4;
+  touch-action: none;
+  outline: none;
+}
+
+.mfe-w-handle.is-move {
+  inset: 0;
+  cursor: grab;
+}
+
+.mfe-w.is-dragging .mfe-w-handle.is-move {
+  cursor: grabbing;
+}
+
+.mfe-w-handle.is-start,
+.mfe-w-handle.is-end {
+  top: -6px;
+  bottom: -6px;
+  width: 20px;
+  margin-left: -10px;
+  cursor: ew-resize;
+}
+
+.mfe-w-handle.is-start {
+  left: 0;
+}
+
+.mfe-w-handle.is-end {
+  left: 100%;
+}
+
+/* The grip of an edge: a key of the accent, a line of light on it. */
+.mfe-w-handle.is-start::after,
+.mfe-w-handle.is-end::after {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 50%;
+  width: 6px;
+  margin-left: -3px;
+  border: 1px solid var(--doc-primary-edge);
+  border-radius: 3px;
+  background: var(--doc-primary-gradient);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.5),
+    0 1px 3px rgb(0 5 12 / 0.4);
+  content: '';
+}
+
+.mfe-w-handle:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--doc-focus);
+}
+
+.mfe-w-handle.is-move:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--doc-focus);
+}
+
+/* ---- rate-functions: a card per function ---- */
+
+.mfe-w-rates {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 8px;
+}
+
+.mfe-w-rate {
+  margin: 0;
+  padding: 8px 10px 8px;
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  background: var(--doc-well);
+}
+
+.mfe-w-rate-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  max-width: none;
+  margin: 0 0 4px;
+  font-size: 12px;
+}
+
+.mfe-w-rate-head code {
+  color: var(--doc-text);
+  font-family: var(--doc-font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.mfe-w-rate-value {
+  margin-left: auto;
+  color: var(--doc-time);
+  font-family: var(--doc-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.mfe-w-tag {
+  padding: 0 6px;
+  border: 1px solid var(--doc-border-strong);
+  border-radius: 5px;
+  color: var(--doc-text-muted);
+  font-size: 10.5px;
+  line-height: 16px;
+}
+
+/* The curve, as the app's block dialog draws it (app/src/ui/animations/animations.css). */
+.mfe-w-curve {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.mfe-w-curve-box {
+  fill: var(--doc-input-bg);
+  stroke: var(--doc-border);
+  rx: 6px;
+}
+
+.mfe-w-curve-diagonal {
+  stroke: var(--doc-border-strong);
+  stroke-dasharray: 3 3;
+  opacity: 0.7;
+}
+
+.mfe-w-curve-line {
+  fill: none;
+  stroke: var(--doc-time);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mfe-w-curve-cursor {
+  stroke: var(--doc-text-faint);
+  stroke-dasharray: 2 2;
+}
+
+.mfe-w-curve-dot {
+  fill: var(--doc-accent);
+  stroke: var(--doc-input-bg);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--doc-accent) 60%, transparent));
+}
+
+/* The lane the glyph crosses: a strip of the Preview's dark canvas. */
+.mfe-w-lane {
+  display: block;
+  width: 100%;
+  height: 34px;
+  margin-top: 6px;
+  border: 1px solid var(--doc-border);
+  border-radius: 6px;
+  background: var(--doc-canvas);
+}
+
+.mfe-w-lane-track {
+  stroke: rgb(237 249 249 / 0.2);
+  stroke-width: 0.04;
+  stroke-dasharray: 0.12 0.12;
+}
+
+.mfe-w-mover {
+  fill: #edf9f9;
+}
+
+.mfe-w-mover-ghost {
+  fill: rgb(237 249 249 / 0.14);
+}
+
+/* ---- line-anchors: the dots over the scene, the compasses under it ---- */
+
+.mfe-w-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mfe-w-anchor {
+  fill: var(--w-plate);
+  stroke: var(--w-accent);
+  stroke-width: 1.5px;
+  pointer-events: none;
+}
+
+.mfe-w-anchor.is-current {
+  fill: var(--w-accent);
+  stroke: var(--w-ink);
+  stroke-width: 2px;
+}
+
+.mfe-w-anchor-hit {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.mfe-w-anchor-hit:hover {
+  fill: color-mix(in srgb, var(--w-accent) 22%, transparent);
+}
+
+.mfe-w-auto-mark {
+  fill: #f4c867;
+  stroke: #07121a;
+  stroke-width: 1.5px;
+  pointer-events: none;
+}
+
+.mfe-w-tip {
+  position: absolute;
+  z-index: 5;
+  padding: 3px 8px;
+  border: 1px solid var(--w-plate-border);
+  border-radius: 6px;
+  background: var(--w-plate);
+  color: var(--w-ink);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.mfe-w-tip[hidden] {
+  display: none;
+}
+
+.mfe-w-compasses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mfe-w-compass-box {
+  flex: 1 1 170px;
+  padding: 8px 10px 10px;
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  background: var(--doc-sheen), var(--doc-surface-2);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+}
+
+.mfe-w-compass-title {
+  margin: 0 0 6px;
+  color: var(--doc-text-muted);
+  font-size: 12px;
+}
+
+/* The Preview's compass (app/src/ui/preview: .symbol-compass). */
+.mfe-w-compass {
+  display: grid;
+  grid-template-columns: repeat(3, 34px);
+  gap: 4px;
+}
+
+.mfe-w-compass-cell,
+.mfe-w-compass-auto {
+  border: 1px solid var(--doc-border);
+  border-radius: 6px;
+  background: var(--doc-surface);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+  color: var(--doc-text);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--doc-motion),
+    border-color var(--doc-motion);
+}
+
+.mfe-w-compass-cell {
+  width: 34px;
+  height: 30px;
+  padding: 0;
+}
+
+.mfe-w-compass-auto {
+  grid-column: 1 / -1;
+  height: 28px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.mfe-w-compass-cell:hover,
+.mfe-w-compass-auto:hover {
+  border-color: var(--doc-accent);
+  background: var(--doc-accent);
+  color: var(--doc-on-accent);
+}
+
+.mfe-w-compass-cell[aria-pressed='true'],
+.mfe-w-compass-auto[aria-pressed='true'] {
+  border-color: var(--doc-accent);
+  box-shadow: inset 0 0 0 1px var(--doc-accent);
+  background: var(--doc-selection-gradient);
+}
+
+@media (pointer: coarse) {
+  .mfe-w-compass {
+    grid-template-columns: repeat(3, 44px);
+  }
+
+  .mfe-w-compass-cell {
+    width: 44px;
+    height: 40px;
+  }
+
+  .mfe-w-compass-auto {
+    height: 40px;
+  }
+}
+
+/* ---- style-compare: panels side by side ---- */
+
+.mfe-w-compare {
+  display: grid;
+  grid-template-columns: repeat(var(--panels, 3), minmax(0, 1fr));
+  gap: 8px;
+}
+
+@container mfe-w (max-width: 520px) {
+  .mfe-w-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* One under the other: wider panels, so that the three fit a phone's screen. */
+  .mfe-w-compare .mfe-w-stage {
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+
+.mfe-w-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+}
+
+.mfe-w-panel-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: none;
+  margin: 0;
+  padding: 0 2px;
+}
+
+.mfe-w-panel-title {
+  color: var(--doc-text);
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+.mfe-w-panel-note {
+  color: var(--doc-text-muted);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+code.mfe-w-panel-note {
+  font-family: var(--doc-font-mono);
+}
+
+.mfe-w-panel-problem {
+  margin: 0;
+  padding: 12px;
+  color: var(--w-ink);
+  font-size: 12px;
+}
+
+/* ---- palette-roles: the palettes, the scene, the legend ---- */
+
+.mfe-w-palettes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.mfe-w-palette {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 7px 9px 8px;
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  background: var(--doc-surface-2);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+  color: var(--doc-text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--doc-motion),
+    background-color var(--doc-motion);
+}
+
+.mfe-w-palette:hover {
+  border-color: var(--doc-accent-strong);
+}
+
+.mfe-w-palette[aria-checked='true'] {
+  border-color: var(--doc-border-strong);
+  background: var(--doc-selection-gradient);
+  box-shadow:
+    var(--doc-selection-glow),
+    inset 0 1px 0 var(--doc-edge-light);
+}
+
+.mfe-w-palette-name {
+  font-size: 12.5px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.mfe-w-palette-strip {
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid rgb(127 127 127 / 0.35);
+  border-radius: 3px;
+}
+
+.mfe-w-palette-strip span {
+  flex: 1;
+}
+
+.mfe-w-palette-origin {
+  color: var(--doc-text-faint);
+  font-size: 11px;
+}
+
+.mfe-w-pick {
+  position: absolute;
+  z-index: 4;
+  border: 2px solid var(--w-accent);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--w-plate);
+  pointer-events: none;
+}
+
+.mfe-w-pick[hidden] {
+  display: none;
+}
+
+.mfe-w-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2px 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mfe-w-role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--doc-text);
+  font-size: 12px;
+  outline: none;
+}
+
+.mfe-w-role:hover,
+.mfe-w-role.is-lit {
+  background: var(--doc-hover);
+}
+
+.mfe-w-role:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--doc-focus);
+}
+
+.mfe-w-swatch {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(127 127 127 / 0.5);
+  border-radius: 4px;
+}
+
+.mfe-w-hex {
+  margin-left: auto;
+  color: var(--doc-text-faint);
+  font-family: var(--doc-font-mono);
+  font-size: 11px;
+}
+
+/* A narrow card: the roles two by two, without their hex (the tooltips and the swatches say it). */
+@container mfe-w (max-width: 420px) {
+  .mfe-w-legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mfe-w-hex {
+    display: none;
+  }
+}
+
+/* ---- Reduced motion, forced colours ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mfe-w *,
+  .mfe-w *::before,
+  .mfe-w *::after {
+    transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .mfe-w-stage {
+    forced-color-adjust: none;
+  }
+}

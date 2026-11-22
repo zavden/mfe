@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finding and organizing · Manim Formula Editor</title>
+  <meta name="description" content="Search your formulas, select them by region or by kind, group them in the Creator, edit several together, set a standard scale, and unlink a clip from its formula.">
+  <meta name="mfe:id" content="objects/organizing">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Organizing">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/organizing-set.data.js" defer></script>
+  <script src="../examples/organizing-unlinked.data.js" defer></script>
+  <script src="../media/objects/organizing/unlink.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+
+      <h1>Finding and organizing</h1>
+      <p class="lead">A project grows: nine formulas, then ninety. This page is about finding one, picking several at
+      once, keeping them in order with groups, changing many together, and giving a clip a formula of its own.</p>
+      <p>The examples use a small project, <em>Circles and triangles</em>, with nine formulas and two LaTeX texts. Its
+      card is at the end of the page; to follow along, choose <span class="ui">File ▸ Open…</span> and press
+      <span class="ui">Other file…</span> in the dialog that opens
+      (<a href="../start/projects.html#open">Projects and files</a> explains it).</p>
+
+      <h2 id="toolbar">The Creator's toolbar</h2>
+      <figure>
+        <img src="../media/objects/organizing/toolbar.dark.webp" data-themed
+             alt="The toolbar of the Creator on one line. Numbered: 1 the magnifier, 2 the key of the view, 3 the key with a sigma and a small arrow, whose menu selects a kind, 4 the plus-minus key of the size of the previews, 5 the + New button." width="299" height="76" loading="lazy">
+        <figcaption>The toolbar: the search (1), the view (2), the menu of the kinds (3), the size of the previews (4) and <span class="ui">+ New</span> (5).</figcaption>
+      </figure>
+      <p>Everything below starts here. The magnifier opens the <a href="#search">search</a>, the key beside
+      it switches between the list and the block view, showing the icon of the other (see
+      <a href="../basics/formulas.html#list-blocks">Writing formulas</a>), the ∑ key opens a menu to
+      <a href="#by-kind">select a kind of object</a>, <strong>+/−</strong> makes the
+      <a href="../basics/formulas.html#preview-size">previews</a> larger with a click and smaller with a right-click,
+      and <span class="ui">+ New</span> makes one. In a Creator too narrow for all of it on one line, as it starts in
+      a window of 1280 pixels (in one of 1440 or 1920 it is all on one line), the ∑ key and the key of the previews
+      take a line of their own, under the magnifier.</p>
+
+      <h2 id="search">Search</h2>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/organizing/search-open.dark.webm"
+               poster="../media/objects/organizing/search-open.dark.webp" width="818" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The search covers the Preview. Typing <em>pi</em> narrows the three tabs at once; the key <kbd>Esc</kbd> gives the Preview back.</figcaption>
+      </figure>
+      <p>Press the magnifier, or <kbd data-keys="Mod+F">Ctrl+F</kbd> from anywhere (but over a dialog, where the browser's
+      own find takes the key), and a panel comes up in the place of the
+      Preview. The Preview is still there underneath, as you left it, and the rest of the app stays in use beside
+      the search: the Creator, the Animations panel and the timeline all work while it is open.</p>
+      <figure>
+        <img src="../media/objects/organizing/search-panel.dark.webp" data-themed
+             alt="The search panel with the word pi typed: the field (1), three tabs Formulas 3, Texts (LaTeX) 1 and Fonts 0 (2), the result cards (3) and a close button (4)." width="830" height="319" loading="lazy">
+        <figcaption>The search panel: the field (1), the tabs with their counts (2), the results (3) and the close button (4).</figcaption>
+      </figure>
+      <ul>
+        <li>What you type is looked for in the <strong>names</strong>, in the <strong>sources</strong> of the
+        objects (their LaTeX, or the text of a font text) and in the names of their <strong>groups</strong>, in
+        the three tabs at once.</li>
+        <li>The three tabs, <span class="ui">Formulas</span>, <span class="ui">Texts (LaTeX)</span> and <span class="ui">Fonts</span>, each say how many they found.
+        With nothing typed, each lists every object of its kind.</li>
+        <li>A result is a card: the drawing, the name, a line of the source, how many clips use it and the group it
+        is in.</li>
+      </ul>
+      <figure>
+        <img src="../media/objects/organizing/result-card.dark.webp" data-themed
+             alt="One search result: the drawing of A equals pi r squared, the tag and the name circle_area, a line with its LaTeX, and the group Circles." width="305" height="188" loading="lazy">
+        <figcaption>A result: its name and clips (1), a line of its LaTeX (2) and its group (3).</figcaption>
+      </figure>
+      <p>The panel is not a dialog, and a result is a card of the list in what it does:</p>
+      <ul>
+        <li>A <strong>click</strong> selects it; <kbd data-keys="Mod">Ctrl</kbd>+click and <kbd>Shift</kbd>+click select
+        several, as <a href="#select-in-list">in the list</a>.</li>
+        <li>A <strong>double-click</strong>, or <kbd>Enter</kbd>, opens its editor.</li>
+        <li>A <strong>right-click</strong> opens the menu of the selected formulas: <span class="ui">Edit together…</span>,
+        <span class="ui">Add to the timeline</span>, <span class="ui">Group</span>, <span class="ui">Apply match colors</span>, <span class="ui">Duplicate</span> and
+        <span class="ui">Delete N formulas…</span>, under a line that says how many are selected.</li>
+        <li><strong>Drag</strong> it onto the timeline. The search stays open, so several can go one after
+        another.</li>
+      </ul>
+      <p><span class="ui">Close</span> it with its close button, the magnifier or <kbd>Esc</kbd>. The tab and the text are there the next
+      time, selected so that typing replaces them. While the search covers the Preview, the keys that act on the scene
+      (align, the grid, the circle selector, align by symbol, colours in order) wait. The search is for the project in front of you: open
+      another, and it closes and forgets its text.</p>
+      <aside class="callout note"><p>The list in the Creator is not filtered by the search, and its groups are not
+      folders in it: the formulas of a group are results like any other.</p></aside>
+
+      <h3 id="region">Selecting by region</h3>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/organizing/region-select.dark.webm"
+               poster="../media/objects/organizing/region-select.dark.webp" width="824" height="458"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A rectangle dragged from the empty space between the cards selects the ones it touches; a second one, with <kbd data-keys="Mod">Ctrl</kbd> held, takes a card out.</figcaption>
+      </figure>
+      <p>Drag from the empty space of the results (the gaps between the cards, or the margin around them) and a
+      rectangle selects every card it touches:</p>
+      <ul>
+        <li>with <strong>no key</strong>, the cards become the selection;</li>
+        <li>with <kbd>Shift</kbd>, they are <strong>added</strong> to it;</li>
+        <li>with <kbd data-keys="Mod">Ctrl</kbd>, they are <strong>taken out</strong> of it.</li>
+      </ul>
+      <p>The list may scroll under a held rectangle, with the wheel, and the rectangle stays on the cards it was
+      drawn over. <kbd>Esc</kbd> gives the selection back as it was. A press on a card is still the card's: its click,
+      and its drag onto the timeline.</p>
+      <aside class="callout tip"><p>With no key a region replaces the selection, and a formula that the tab or the
+      text hides leaves it, as it does on a plain click on a card. Hold <kbd>Shift</kbd> to keep it.</p></aside>
+
+      <h2 id="select-in-list">Selecting in the list</h2>
+      <p>The tools of this page act on what is selected, so here is how the cards of the Creator are selected, in the
+      list and in the block view alike. The results of the search take the same clicks and keys.</p>
+      <ul>
+        <li>A <strong>click</strong> selects that card alone.</li>
+        <li><kbd data-keys="Mod">Ctrl</kbd>+click adds a card to the selection, or takes it out when it is in.</li>
+        <li><kbd>Shift</kbd>+click selects the range from the card you clicked last to this one; with
+        <kbd data-keys="Mod">Ctrl</kbd> too, the range is added to what is selected. A group's row counts as one card
+        in a range, and brings all its formulas.</li>
+      </ul>
+      <p>The keyboard does the same on the card that has the focus: click a card, or press <kbd>Tab</kbd> to reach
+      the list.</p>
+      <table>
+        <thead><tr><th>Keys</th><th>What they do</th></tr></thead>
+        <tbody>
+          <tr><td><kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd>, <kbd>Home</kbd>, <kbd>End</kbd></td>
+          <td>Move to the previous or next card, or to the first or the last, and select it.</td></tr>
+          <tr><td><kbd data-keys="Shift">Shift</kbd> with those keys</td>
+          <td>Select the range from the card you last clicked or selected by key.</td></tr>
+          <tr><td><kbd data-keys="Mod">Ctrl</kbd> with those keys</td>
+          <td>Move the focus and leave the selection as it is.</td></tr>
+          <tr><td><kbd>Space</kbd></td><td>Select the card that has the focus.</td></tr>
+          <tr><td><kbd data-keys="Mod+Space" data-keys-mac="Mod+Enter">Ctrl+Space</kbd></td>
+          <td>Add the card to the selection, or take it out.</td></tr>
+          <tr><td><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd></td>
+          <td>In the block view and in the results of the search, move to the previous or next block or card;
+          <kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd> then move a whole row of them.</td></tr>
+        </tbody>
+      </table>
+      <p>On a group's row, <kbd>Enter</kbd> opens and closes the group; see <a href="#groups">Groups in the
+      Creator</a>.</p>
+
+      <h3 id="region-in-list">By region, in the list</h3>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/organizing/creator-region.dark.webm"
+               poster="../media/objects/organizing/creator-region.dark.webp" width="542" height="380"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A rectangle from the free space under the blocks selects the ones it touches; the next one, with <kbd data-keys="Alt">Alt</kbd> held, starts on a block.</figcaption>
+      </figure>
+      <p>The list takes the rectangle of the <a href="#region">search</a> too, in the list view and in the block
+      view alike. Drag from its empty space (its margins, the gaps between the cards, the room under the last one)
+      and every card it touches is selected, with the same keys: none to replace the selection,
+      <kbd>Shift</kbd> to add, <kbd data-keys="Mod">Ctrl</kbd> to take out. <kbd>Esc</kbd> gives the selection
+      back, and the rectangle stays on its cards while the list scrolls.</p>
+      <p>In the list view the cards fill the width, so there is little empty space: hold <kbd data-keys="Alt">Alt</kbd>
+      and the rectangle may start on a card too. That card is then not dragged onto the timeline, and a click with
+      <kbd data-keys="Alt">Alt</kbd> that does not move is still a click. A group's row is not selected by a
+      rectangle, nor are the formulas of a closed group, which are not drawn: open the group first.</p>
+
+      <h2 id="by-kind">Select by kind</h2>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/organizing/kind-keys.dark.webm"
+               poster="../media/objects/organizing/kind-keys.dark.webp" width="542" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The pointer on the ∑ key drops its menu. The rows add up: the formulas, then the LaTeX texts, then the font text; the first row again takes the formulas out. Off the key and the menu, it closes. (Without the companion a font text is drawn as boxes; it keeps its kind.)</figcaption>
+      </figure>
+      <p>One key of the toolbar, left of <span class="ui">+ New</span>, wears <strong>∑</strong> and a small arrow. Point
+      at it and a menu drops under it with a row per kind: <span class="ui">∑ Formulas</span>,
+      <span class="ui">T LaTeX texts</span> and <span class="ui">P Font texts</span>. A row adds <em>every object of its
+      kind</em> in the project to the selection, those in a closed group too, and whatever the search shows.</p>
+      <ul>
+        <li>The menu stays open after a choice: two rows chosen one after the other select both kinds.</li>
+        <li>A row is ticked while <em>all</em> of its kind is selected, and the ∑ key is lit; chosen then, the row
+          takes that kind out and leaves the rest.</li>
+        <li>A row is off while the project has none of its kind, and says so in its tooltip.</li>
+        <li>The menu closes once the pointer has left it and the key, on <kbd data-keys="Escape">Esc</kbd>, and on a
+          click elsewhere.</li>
+        <li>Without hovering: click the key, tap it, or reach it with <kbd data-keys="Tab">Tab</kbd> and press
+          <kbd data-keys="Enter">Enter</kbd>; <kbd data-keys="ArrowUp">↑</kbd> and
+          <kbd data-keys="ArrowDown">↓</kbd> walk the rows, <kbd data-keys="Enter">Enter</kbd> or
+          <kbd data-keys="Space">Space</kbd> chooses.</li>
+        <li>Braces, shapes and lines are of none of the three; they live with their clips.</li>
+      </ul>
+      <p>With a kind selected, the right-click menu of the Creator acts on all of it: <em>Group</em>,
+      <em>Edit together…</em>, <em>Add to the timeline</em> or <em>Delete N formulas…</em>.</p>
+
+      <h2 id="groups">Groups in the Creator</h2>
+      <p>A <strong>group</strong> is one row of the Creator that holds several formulas. It keeps the list in order and
+      changes nothing else: the scene, the timeline and the exported Python are the same with or without groups.
+      Groups are saved with the project.</p>
+      <figure>
+        <img src="../media/objects/organizing/group-row.dark.webp" data-themed
+             alt="The row of a group called Circles, closed: its name, how many formulas it has, and the drawings of its first three formulas." width="540" height="101" loading="lazy">
+        <figcaption>A closed group: its name, how many formulas it holds, and the drawings of its first three.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Group</span>, in the menu of two or more selected formulas, makes one row of them where the first was.
+        It is called <code>grp1</code> until you rename it, with the drawings of its first three formulas and how
+        many it has.</li>
+        <li>Its arrow opens it onto its formulas and closes it again. So do a double-click on the row,
+        <kbd>Enter</kbd> and, in the list view, the arrow keys <kbd>→</kbd> and <kbd>←</kbd>.</li>
+        <li>Rename it with <kbd>F2</kbd>, a double-click on its name, or <span class="ui">Rename group</span> in its menu.</li>
+        <li>A group is selected as its formulas: click it, and the menu acts on all of them
+        (<span class="ui">Add to the timeline</span> puts a clip of each at the playhead, <span class="ui">Edit together…</span>,
+        <span class="ui">Apply match colors</span>, <span class="ui">Duplicate</span>, <span class="ui">Delete N formulas…</span>).</li>
+      </ul>
+      <figure>
+        <img src="../media/objects/organizing/group-menu.dark.webp" data-themed
+             alt="The Creator with the group Circles open onto three formulas, and the menu of its row open over it: Edit together, Add to the timeline, Rename group, Ungroup, Apply match colors, Duplicate and Delete 3 formulas." width="542" height="527" loading="lazy">
+        <figcaption>The menu of the row of a group: its formulas' menu, with <span class="ui">Rename group</span> and <span class="ui">Ungroup</span>.</figcaption>
+      </figure>
+      <p>To change what is in a group, without undoing it:</p>
+      <ul>
+        <li><span class="ui">Add to group</span>, a submenu in the menu of selected formulas, lists the groups there are and puts them in
+        the one you choose, while one of them is in none. Dropping a formula from the list on the row of a group does the same.</li>
+        <li><span class="ui">Remove from group</span> sets them free.</li>
+        <li><span class="ui">Ungroup</span>, on the row of a group, leaves all its formulas on their own again. None is deleted.</li>
+      </ul>
+      <p>A formula is in one group at most. The copy of a formula in a group stays in it, deleting a formula takes it out
+      of its group, and a group left with no formulas goes. A group is not dragged onto the timeline: use
+      <span class="ui">Add to the timeline</span>. In the block view a group is a block, and its formulas' blocks come after it while it is
+      open.</p>
+
+      <h2 id="edit-together">Edit together</h2>
+      <p>Select several formulas or texts, right-click one and choose <span class="ui">Edit together…</span>. One dialog shows the glyphs of
+      all of them, to colour or hide glyphs of every formula at once. You can also open it from the timeline, on the
+      clips of several formulas.</p>
+      <figure>
+        <img src="../media/objects/organizing/edit-together.dark.webp" data-themed
+             alt="The Edit 3 formulas together dialog: a bar with a row of colour swatches and a hex field, the buttons Clear colour, Hide at the start, Show at the start, Select all and Clear selection, a Scale field that says mixed and a Match colors button, and the three formulas as cards of glyphs, the exponents of the first two drawn in blue." width="980" height="688" loading="lazy">
+        <figcaption>The dialog: the glyph tools, then <span class="ui">Scale</span> and <span class="ui">Match colors</span> for the whole formulas, then a card for each. Here the exponents of two formulas were picked with <kbd data-keys="Mod">Ctrl</kbd>+click and given one colour.</figcaption>
+      </figure>
+      <ul>
+        <li>Select glyphs as in the formula editor: click, <kbd>Shift</kbd>+click for a range,
+        <kbd data-keys="Mod">Ctrl</kbd>+click to toggle, or drag a box over the glyphs of every formula it touches
+        (<kbd data-keys="Mod">Ctrl</kbd> adds). The bar says how many are selected, in how many formulas.</li>
+        <li>Choose a colour for all of them, or <span class="ui">Clear colour</span>, or <span class="ui">Hide at the start</span> and
+        <span class="ui">Show at the start</span>. Each action is one undo step, and <kbd data-keys="Mod+Z">Ctrl+Z</kbd> works while the dialog
+        is open.</li>
+        <li><span class="ui">Grid</span> and <span class="ui">Cards</span> change the layout: all the formulas at once, or one big card each that the
+        wheel moves through.</li>
+      </ul>
+      <p>Two tools act on the <em>whole formulas</em>, whatever glyphs are selected, each as one undo step:</p>
+      <ul>
+        <li><strong>Scale</strong> gives all of them one scale, as the formula editor's <span class="ui">Size</span> does. It is empty,
+        saying <em>mixed</em>, while theirs differ. Opened from the timeline on braces, shapes or lines too, the
+        dialog leaves those out and says how many.</li>
+        <li><strong>Match colors</strong> lists the project's match lists, each with its colours, and applies the one you
+        choose to every formula. It is off when one of them takes no match colours (a font text, a brace); with no list
+        yet, <span class="ui">Create match colors…</span> closes the dialog and opens the lists. See
+        <a href="../color/match-colors.html">Match colors</a>.</li>
+      </ul>
+
+      <h2 id="standard-scale">Standard scale</h2>
+      <p>New formulas and new LaTeX texts are born with a size: 1 is Manim's font size 48. The <em>standard scale</em> is
+      the size they start with, one for formulas and one for LaTeX texts. Open
+      <span class="ui">Preferences ▸ Standard scale…</span>.</p>
+      <figure>
+        <img src="../media/objects/organizing/standard-scale.dark.webp" data-themed
+             alt="The Standard scale dialog with two fields, Formulas and Texts, the first holding 3/2 followed by = 1.5 and font_size 72, each with an Apply to all button, and Cancel and Save buttons." width="596" height="314" loading="lazy">
+        <figcaption>The standard scale: a field for the formulas and one for the texts, each with its own <span class="ui">Apply to all</span>.</figcaption>
+      </figure>
+      <ul>
+        <li>Type a number or a fraction: <code>1.5</code> or <code>3/2</code>, from 0.1 to 10. The dialog shows the value
+        and the font size it means.</li>
+        <li><span class="ui">Save</span> keeps it for the objects you create from now on. The ones that exist stay as they are.</li>
+        <li><span class="ui">Apply to all formulas</span> (or <span class="ui">Apply to all texts</span>) gives that scale to every formula, or every LaTeX
+        text, the project has now, whatever its own. First it asks, and the question says how many change, how many
+        have that scale already, and lists each with the scale it has now.</li>
+      </ul>
+      <p>It is one undo step, whether you then save the dialog or cancel it. The clips keep their own scale and their
+      animations. A font text has no standard scale and is left out. To change one formula's size, use its
+      <span class="ui">Size</span> in the <a href="../basics/formulas.html#size">formula editor</a>.</p>
+
+      <h2 id="duplicate-unlink">Duplicate, and unlink a clip from its formula</h2>
+      <p><span class="ui">Duplicate</span>, in the menu of selected formulas and on the button of a card, makes a copy of each
+      <em>formula</em> right after it in the Creator, and in its group, under the next free name. It copies the
+      formula and not its clips.</p>
+      <p>A <em>clip</em> is another matter. A formula on the timeline more than once is <strong>one object</strong> that all
+      its clips show: edit it, and every clip changes. That is usually what you want. When it is not,
+      <strong>Unlink formula (make a copy)</strong>, in the menu of a clip, gives that clip a copy of the formula
+      of its own.</p>
+      <div class="mfe-tour" data-mfe-tour="objects/organizing/unlink" data-title="Unlink formula"></div>
+      <ul>
+        <li>The entry is in the menu of a clip on the timeline and in the Preview, and in the menu of selected clips. It
+        reads <span class="ui">Unlink formula (make a copy)</span>, or <span class="ui">Unlink formulas (make N copies)</span> when the clips belong to
+        several formulas.</li>
+        <li>Several selected clips of one formula share <strong>one</strong> copy, and its clips outside the selection keep the
+        original.</li>
+        <li>The copy is named as Duplicate names it, comes after the original in the Creator, and has its glyphs: the
+        clip keeps its relations, its animation blocks, its glyph colours and the objects attached to it, exactly as
+        they were.</li>
+        <li>The entry is off, with a tooltip that says why, when the clip is the formula's only one, or all of its clips
+        are selected, or its track is locked. Braces, shapes and lines have no such entry.</li>
+        <li>One undo step, <kbd data-keys="Mod+Z">Ctrl+Z</kbd>, takes it back: the clip returns to the original and the copy goes.</li>
+      </ul>
+      <figure class="mfe-player" data-mfe-player="organizing-unlinked" data-start="2.5" data-loop data-timeline>
+        <figcaption>The same scene after unlinking: the first clip of the right triangle holds its copy, <code>pythagoras2</code>, edited to <em>x² + y² = r²</em>; the last clip still holds <code>pythagoras</code>.</figcaption>
+      </figure>
+      <div class="mfe-example" data-mfe-example="organizing-unlinked"></div>
+      <p>The project that the examples of this page use, with nine formulas and two LaTeX texts, is here to
+      download:</p>
+      <div class="mfe-example" data-mfe-example="organizing-set"></div>
+      <aside class="try">
+        <ol>
+          <li>Download <em>Circles and triangles</em> from the card above, then choose <span class="ui">File ▸ Open…</span>,
+          press <span class="ui">Other file…</span> and pick the file.</li>
+          <li>Press <kbd data-keys="Mod+F">Ctrl+F</kbd>, type <code>pi</code>, and look at the three counts. Press <kbd>Esc</kbd>.</li>
+          <li>Open the search again, clear the text, and drag a rectangle over four cards from the space between them.
+          Hold <kbd>Shift</kbd> and drag over one more.</li>
+          <li>Right-click a selected card and choose <span class="ui">Group</span>. Rename the group.</li>
+          <li>Press the <strong>∑</strong> key, then <strong>T</strong>: both kinds are selected. Choose <span class="ui">Edit together…</span> and
+          colour a glyph in two formulas.</li>
+          <li>On the timeline, right-click the first clip of <em>pythagoras</em> and choose
+          <span class="ui">Unlink formula (make a copy)</span>. Open the copy and change its LaTeX: the last clip stays as it was.</li>
+        </ol>
+      </aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../basics/formulas.html">Writing formulas</a>, for the editor of one formula.</li>
+        <li><a href="templates.html">The template library</a>, for formulas that start from a template.</li>
+        <li><a href="../color/match-colors.html">Match colors</a>, for colouring glyphs by pattern across formulas.</li>
+        <li><a href="../animations/timing.html">Timing tools</a>, for the other menus of a clip.</li>
+      </ul>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deriving the quadratic formula · Manim Formula Editor</title>
+  <meta name="description" content="Complete the square and derive the quadratic formula, one step after another.">
+  <meta name="mfe:id" content="tutorials/quadratic-formula">
+  <meta name="mfe:level" content="tutorial">
+  <meta name="mfe:difficulty" content="intermediate">
+  <meta name="mfe:short" content="The quadratic formula">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/quadratic-formula.data.js" defer></script>
+  <script src="../examples/quadratic-formula-start.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Deriving the quadratic formula</h1>
+      <p class="lead">Seven formulas, six relations: the classic derivation of the quadratic formula by
+        completing the square, glyph by glyph. You write the formulas, put them on the timeline, relate
+        each one to the next, colour the terms, and export the Python and the video.</p>
+
+      <h2 id="what-you-make">What you will make</h2>
+      <p>A twenty-second animation in which each formula turns into the next: the <i>a</i> splits to divide
+        everything, a term hops over the equals sign, new terms are written in, a block of glyphs is
+        simplified, and two denominators become one.</p>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-timeline
+              data-caption="The finished animation, in the editor’s own player. The strip shows the seven clips on two tracks and the six relations between them."></figure>
+      <p>This is the same scene as ManimCE renders it from the Python the editor exports:</p>
+      <video class="mfe-manim" src="../examples/quadratic-formula.mp4" controls preload="metadata" playsinline></video>
+      <div class="mfe-example" data-mfe-example="quadratic-formula"></div>
+      <p>Along the way you practise what the pages on relations explain:</p>
+      <ul>
+        <li>one glyph that goes to two places, and a <em>block</em> of six glyphs linked in one go;</li>
+        <li>a term that crosses the equals sign along an arc, with its sign flipping by a fade;</li>
+        <li>glyphs that no pair brings, which arrive with the intro of the next formula, and glyphs that no
+          pair takes, which leave with the outro;</li>
+        <li>two glyphs that merge into one;</li>
+        <li>colours that follow the terms, set once for all the formulas with Match colors.</li>
+      </ul>
+
+      <h2 id="before">Before you start</h2>
+      <p>You need the editor open in a browser, with a new project (<span class="ui">File ▸ New</span>). Name it:
+        click <em>Untitled</em> in the menu bar, type <code>Deriving the quadratic formula</code> and press
+        <kbd data-keys="Enter">Enter</kbd>. The scene of the export will take that name. To follow the tutorial
+        you do not need Manim; you need ManimCE only if you want to render the video yourself at the end.</p>
+      <p>The tutorial assumes you can write a formula and place a clip on the timeline;
+        <a href="../basics/formulas.html">Writing formulas</a> and
+        <a href="../basics/timeline.html">Working with the timeline</a> explain both, and
+        <a href="../transforms/relations.html">How relations work</a> and
+        <a href="../transforms/relation-editor.html">The relation editor</a> are the pages this one puts to
+        work. If you prefer to read first, download the finished project above and open it with
+        <span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span> in the dialog that opens
+        (<a href="../start/projects.html#open">Projects</a> explains it): you can compare your own steps with it
+        at any time.</p>
+      <aside class="callout note">
+        <p>The glyph numbers in this tutorial are the ones of the editor’s own renderer (MathJax). With the
+          companion running, the editor draws exact LaTeX glyphs and may number them differently; the pairs
+          you make by clicking are the same, and only the numbers quoted here would change. Hold the pointer
+          over a glyph in the relation editor to read its number.</p>
+      </aside>
+
+      <h2 id="plan">The plan</h2>
+      <p>Each formula is written once, and each relation turns one formula into the next while the clips
+        overlap on the timeline.</p>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Name</th><th>LaTeX</th><th>Track</th><th>Start</th><th>End</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><code>standard_form</code></td><td><code>ax^2+bx+c=0</code></td><td>Track 2</td><td>0</td><td>4.1</td></tr>
+          <tr><td>2</td><td><code>divide_by_a</code></td><td><code>x^2+\frac{b}{a}x+\frac{c}{a}=0</code></td><td>Track 1</td><td>2.7</td><td>6.9</td></tr>
+          <tr><td>3</td><td><code>move_constant</code></td><td><code>x^2+\frac{b}{a}x=-\frac{c}{a}</code></td><td>Track 2</td><td>5.3</td><td>9.3</td></tr>
+          <tr><td>4</td><td><code>add_to_both_sides</code></td><td><code>x^2+\frac{b}{a}x+\frac{b^2}{4a^2}=-\frac{c}{a}+\frac{b^2}{4a^2}</code></td><td>Track 1</td><td>8.1</td><td>12.5</td></tr>
+          <tr><td>5</td><td><code>complete_the_square</code></td><td><code>\left(x+\frac{b}{2a}\right)^2=\frac{b^2-4ac}{4a^2}</code></td><td>Track 2</td><td>10.5</td><td>15.3</td></tr>
+          <tr><td>6</td><td><code>square_root</code></td><td><code>x+\frac{b}{2a}=\pm\frac{\sqrt{b^2-4ac}}{2a}</code></td><td>Track 1</td><td>13.7</td><td>18.1</td></tr>
+          <tr><td>7</td><td><code>solution</code></td><td><code>x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}</code></td><td>Track 2</td><td>16.5</td><td>20.6</td></tr>
+        </tbody>
+      </table>
+      <p>The times follow one rule: a clip starts when the relation that brings it begins, and ends when the
+        relation that takes it away ends. Consecutive clips are on different tracks, so they can overlap,
+        and a relation can only link clips that overlap.</p>
+
+      <h2 id="steps">Step by step</h2>
+
+      <h3 id="step-formulas">1. Write the seven formulas</h3>
+      <p>Press <span class="ui">+ New</span> in the Creator. The formula editor opens on a new formula. Give
+        it its name (1), type its LaTeX in the <span class="ui">Raw LaTeX</span> field (3), and press
+        <span class="ui">Apply</span> (4). Do it for each row of the table. The name is what the clip shows
+        on the timeline, and the name of the formula in the exported Python.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/new-formula.dark.webp" data-themed
+             alt="The formula editor with the first formula: its name, its size, the LaTeX typed in the Raw LaTeX field, the rendered glyphs and the Apply button."
+             width="556" height="590" loading="lazy">
+        <figcaption>The first formula in the editor. The size (2) multiplies Manim’s 48: 1.5 gives a font
+          size of 72, which fits the longest formula in the frame.</figcaption>
+      </figure>
+      <p>When all seven are in the Creator, make them the same size in one go: point at the <span class="ui">∑</span>
+        key of the toolbar and choose <span class="ui">Formulas</span> in its menu to select every formula,
+        right-click one, choose
+        <span class="ui">Edit together…</span> and type <code>1.5</code> in <span class="ui">Scale</span> (1).
+        The same row has <span class="ui">Match colors</span> (2), which step 9 uses.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/edit-together.dark.webp" data-themed
+             alt="The row of the Edit together dialog that holds the Scale field, marked 1, and the Match colors button, marked 2."
+             width="1166" height="48" loading="lazy">
+        <figcaption>The tools for all the formulas at once: <span class="ui">Scale</span> (1) and
+          <span class="ui">Match colors</span> (2).</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/creator.dark.webp" data-themed
+             alt="The Creator panel listing the seven formulas with their names and their rendering, all in white."
+             width="282" height="723" loading="lazy">
+        <figcaption>The Creator with the seven formulas.</figcaption>
+      </figure>
+
+      <h3 id="step-timeline">2. Put them on the timeline</h3>
+      <p>Drag each formula from the Creator onto the timeline: the odd ones onto <span class="ui">Track 2</span>,
+        the even ones onto <span class="ui">Track 1</span>. A clip made by a drop lasts three seconds. Select
+        each clip and set its <span class="ui">Start</span> and <span class="ui">End</span> in the
+        <span class="ui">Timing</span> tab of the Animations panel, as in the table. Give the first clip an
+        intro too, in the same tab: <span class="ui">Write</span>, 1.5 seconds. The other intros and outros
+        come from the relation editor, below.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/timeline.dark.webp" data-themed
+             alt="The timeline of the finished project: seven clips on two tracks, each overlapping the next, with an arrow and a window band for every relation."
+             width="1424" height="132" loading="lazy">
+        <figcaption>The finished timeline. Each clip overlaps the next, and an arrow joins them: that is the
+          relation.</figcaption>
+      </figure>
+      <p>To skip these two steps, download the project as it is at this point, with the seven formulas on the
+        timeline and no relation yet, and open it the same way:</p>
+      <div class="mfe-example" data-mfe-example="quadratic-formula-start"></div>
+
+      <h3 id="step-1">3. Divide by <i>a</i></h3>
+      <p>The first relation takes <code>ax²+bx+c=0</code> to <code>x²+(b/a)x+(c/a)=0</code>. Hold
+        <kbd data-keys="Shift">Shift</kbd>, click the port of <i>standard_form</i> and then
+        <i>divide_by_a</i>: the relation editor opens on a new relation.</p>
+      <p>Link the <i>a</i> first. Click it in the source (glyph 0), add the two <i>a</i> of the denominators
+        with <kbd data-keys="Shift">Shift</kbd> (glyphs 4 and 9), and press <span class="ui">Link</span>: one
+        glyph goes to two places, and the <i>a</i> splits. Then press
+        <span class="ui">Suggest links by label</span> and <span class="ui">Accept all</span>: the other nine
+        pairs are glyphs that keep their label. Linking the <i>a</i> first matters: left to itself, Suggest
+        would have sent it to the first denominator only.</p>
+      <p>The two fraction bars belong to no pair, so they arrive with the intro of
+        <i>divide_by_a</i>. In the <span class="ui">Animation</span> tab choose <span class="ui">Write</span>
+        for the intro, tick <span class="ui">Run it up to the end of the relation window (starts with the target clip)</span>, and set
+        the <span class="ui">Duration</span> of the window to <code>1.4</code>. Press
+        <span class="ui">Save relation</span>.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/relation-1-pairs.dark.webp" data-themed
+             alt="The relation editor with the ten pairs of the first relation; the a of the top formula has two links, one to each denominator below."
+             width="678" height="629" loading="lazy">
+        <figcaption>The first relation as it should look: ten pairs, and the two bars unlinked.</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="1.8" data-to="5.2" data-autoplay data-loop
+              data-caption="The first relation: the a splits into the two denominators, and the bars are written in."></figure>
+
+      <h3 id="step-2">4. Move the constant term across the equals sign</h3>
+      <p>Select <i>divide_by_a</i> and use the <span class="ui">Relations</span> tab: choose
+        <i>move_constant</i> in <span class="ui">Relate with</span> and press
+        <span class="ui">Create relation…</span>. Press <span class="ui">Suggest links by label</span> and
+        <span class="ui">Accept all</span>: eleven of the twelve pairs come out right. The twelfth is the sign:
+        link the second plus (glyph 7) to the minus (glyph 8), and set that pair’s style to
+        <span class="ui">Fade transform</span> in the pair list, so that the plus fades into the minus instead
+        of morphing.</p>
+      <p>In the <span class="ui">Animation</span> tab give the window a <span class="ui">Path arc</span> of
+        <code>-60</code>, so that the fraction hops over the equals sign, and a
+        <span class="ui">Duration</span> of <code>1.6</code>. The <i>0</i> of the source belongs to no pair:
+        choose <span class="ui">FadeOut</span> for the outro and tick
+        <span class="ui">Run it during the relation window (ends with the source clip)</span>. Save.</p>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="4.4" data-to="7.8" data-autoplay data-loop
+              data-caption="The second relation: c over a crosses the equals sign along an arc, and the plus fades into a minus."></figure>
+
+      <h3 id="step-3">5. Add the same term to both sides</h3>
+      <p>The new formula adds <code>b²/4a²</code> on each side. Make the relation as before. This time the
+        <i>c</i> over <i>a</i> on the right must stay put, and Suggest would send its <i>a</i> and its bar to
+        the new term on the left, which has the same labels and comes first. So link those two yourself
+        before you suggest: the <i>a</i> under the <i>c</i> (glyph 10) to the <i>a</i> under the <i>c</i> of
+        the target (glyph 17), and its bar (glyph 11) to the bar of the target (glyph 18). Then
+        <span class="ui">Suggest links by label</span> and <span class="ui">Accept all</span>.</p>
+      <p>The two new terms, fourteen glyphs, belong to no pair: <span class="ui">Write</span> for the intro,
+        the checkbox ticked, and a <span class="ui">Duration</span> of <code>1.2</code>.</p>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="7" data-to="10.4" data-autoplay data-loop
+              data-caption="The third relation: the same term is written on both sides."></figure>
+
+      <h3 id="step-4">6. Factor the left side, simplify the right</h3>
+      <p>This is the biggest relation: 13 pairs. The term <code>b²/4a²</code> on the right of the source
+        becomes the <i>b²</i> of the new numerator and the <code>4a²</code> of the new denominator, six
+        glyphs on each side, in the same order. Link them as <em>one pair</em>.</p>
+      <p>In the target, press the key before the eye in the toolbar to show the glyph lists, and
+        <kbd data-keys="Shift">Shift</kbd>+click in the list of the target the six glyphs: <i>b</i> and its
+        exponent (10 and 11), the <i>4</i>, the <i>a</i> and the exponent of the denominator (16, 17 and 18)
+        and the fraction bar (19): the lists give each glyph the number quoted here. In the source, where
+        the six glyphs stand apart, a box does it: drag one over the six glyphs on the right.
+        Press <span class="ui">Link</span>.</p>
+      <p>A pair of six glyphs and six glyphs links the first to the first, the second to the second, and
+        so on, as Manim does when two groups have the same size; it works here because both groups are in the
+        same order.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/tutorials/quadratic-formula/relation-4.dark.webm"
+               poster="../media/tutorials/quadratic-formula/relation-4.dark.webp" width="678" height="650"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The six glyphs of the target are picked from the lists already; a box over the six
+          glyphs of the source, and <span class="ui">Link</span>.</figcaption>
+      </figure>
+      <p>Link the exponent of <i>x²</i> (glyph 1) to the exponent of the square (glyph 8). Then Suggest and
+        Accept all. Eight glyphs of the source belong to no pair and leave: choose
+        <span class="ui">FadeOut</span> for the outro and tick the checkbox. The two parentheses arrive:
+        <span class="ui">Write</span> for the intro, the checkbox ticked. Give the window
+        <code>2</code> seconds.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/relation-4-pairs.dark.webp" data-themed
+             alt="The relation editor with the thirteen pairs of the fourth relation; the block on the right of the source goes to the b squared and the 4 a squared of the target."
+             width="678" height="532" loading="lazy">
+        <figcaption>The fourth relation: thirteen pairs. The six glyphs of the block are a single
+          pair (colours in the drawing are only to tell the pairs apart).</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="9.6" data-to="13.4" data-autoplay data-loop
+              data-caption="The fourth relation: the square is completed on the left, the right side is simplified, and the parentheses are written."></figure>
+
+      <h3 id="step-5">7. Take the square root</h3>
+      <p>The square root turns <code>(x+b/2a)²</code> into <code>x+b/2a</code>, and the right side moves under a
+        root. Three glyphs would be paired wrongly by label, so link them first: the exponent of the
+        <i>b²</i> in the numerator (glyph 11) to the exponent of the <i>b²</i> under the root (glyph 9);
+        the 4 of <code>4ac</code> (glyph 13) to the 4 under the root (glyph 11); and the 4 of the
+        denominator (glyph 16) to the 2 of the new denominator (glyph 16), with the style
+        <span class="ui">Fade transform</span>, because a 4 turns into a 2 and morphing would look odd.
+        Then Suggest and Accept all.</p>
+      <p>Four glyphs leave (the two parentheses and two exponents): <span class="ui">FadeOut</span> for the
+        outro, ticked. Three arrive (the ± and the root with its line): <span class="ui">Write</span> for the
+        intro, ticked. The window lasts <code>1.6</code> seconds.</p>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="12.8" data-to="16.4" data-autoplay data-loop
+              data-caption="The fifth relation: the parentheses and the exponents leave, and the ± and the root are written."></figure>
+
+      <h3 id="step-6">8. Isolate <i>x</i></h3>
+      <p>The last relation has no glyph that arrives or leaves. Two <code>2a</code> become one, glyph by glyph:
+        click the <i>2</i> of <code>b/2a</code> (glyph 3), add the <i>2</i> of the denominator under the root
+        (glyph 16) with <kbd data-keys="Shift">Shift</kbd>, and click the <i>2</i> of the target (glyph 13):
+        selected sources and one click on the target link them at once, many-to-one. Do the same with the
+        two <i>a</i> (glyphs 4 and 17, to 14) and the two fraction bars (glyphs 5 and 18, to 15).</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/tutorials/quadratic-formula/relation-6.dark.webm"
+               poster="../media/tutorials/quadratic-formula/relation-6.dark.webp" width="678" height="620"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Two glyphs selected with Shift, one click on the target: the first of the three
+          merges.</figcaption>
+      </figure>
+      <p>Link the plus (glyph 1) to the minus of the numerator (glyph 2) with a
+        <span class="ui">Fade transform</span>, as in step 4, then Suggest and Accept all. Give the window
+        <code>1.6</code> seconds and save.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/relation-6-pairs.dark.webp" data-themed
+             alt="The relation editor with the sixteen pairs of the last relation; three of them join two glyphs of the source into one of the target."
+             width="678" height="619" loading="lazy">
+        <figcaption>The last relation: sixteen pairs; three of them join two glyphs into one.</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="quadratic-formula" data-from="15.6" data-to="20.6" data-autoplay data-loop
+              data-caption="The last relation: the two denominators become one, and the plus fades into a minus."></figure>
+
+      <h3 id="step-colour">9. Colour the terms</h3>
+      <p>Colouring the <i>a</i>, <i>b</i> and <i>c</i> of seven formulas by hand would be slow. A list of
+        <span class="ui">Match colors</span> does it in one go. Choose
+        <span class="ui">Edit ▸ Match colors ▸ Create match colors…</span>, the dialog opens on a
+        new list: name it <code>Terms</code>, and press <span class="ui">+ Add pattern</span> three times: the
+        patterns <code>a</code>, <code>b</code> and <code>c</code>, with the colours <code>#F4C867</code> (gold),
+        <code>#58C4DD</code> (blue) and <code>#FC6255</code> (red). A colour is typed as hex, or picked
+        from the chip beside it.</p>
+      <figure>
+        <img src="../media/tutorials/quadratic-formula/match-colors.dark.webp" data-themed
+             alt="The Match colors dialog with the Terms list: three patterns, a, b and c, each with its colour, and a preview of a formula."
+             width="780" height="684" loading="lazy">
+        <figcaption>The <i>Terms</i> list.</figcaption>
+      </figure>
+      <p>Select the seven formulas with <span class="ui">Formulas</span> in the menu of the <span class="ui">∑</span>
+        key, right-click one and choose
+        <span class="ui">Apply match colors ▸ Terms</span>. Every <i>a</i>, <i>b</i> and <i>c</i> takes its
+        colour, and it is one undo step. The colours travel with the glyphs: each glyph changes its colour
+        along its way from the source to the target.</p>
+
+      <h3 id="step-last">10. Look at it as a whole</h3>
+      <p>Select the last clip and press <span class="ui">All related…</span> in its Relations tab: the whole
+        derivation appears as one chain, with every relation as an arrow. Click an arrow to select its
+        relation, and play the scene from the start in the Preview to see the six steps in a row.</p>
+      <p>The six relations at a glance:</p>
+      <table>
+        <thead>
+          <tr><th>Relation</th><th>Pairs</th><th>Window</th><th>Path arc</th><th>Leave (outro)</th><th>Arrive (intro)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 → 2</td><td>10</td><td>2.7–4.1 s</td><td>0°</td><td>none</td><td>2 bars</td></tr>
+          <tr><td>2 → 3</td><td>12</td><td>5.3–6.9 s</td><td>−60°</td><td>the 0</td><td>none</td></tr>
+          <tr><td>3 → 4</td><td>12</td><td>8.1–9.3 s</td><td>0°</td><td>none</td><td>14 glyphs</td></tr>
+          <tr><td>4 → 5</td><td>13</td><td>10.5–12.5 s</td><td>0°</td><td>8 glyphs</td><td>2 parentheses</td></tr>
+          <tr><td>5 → 6</td><td>16</td><td>13.7–15.3 s</td><td>0°</td><td>4 glyphs</td><td>3 glyphs</td></tr>
+          <tr><td>6 → 7</td><td>16</td><td>16.5–18.1 s</td><td>0°</td><td>none</td><td>none</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="step-export">11. Export</h3>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span> for the scene as a Python file, or
+        <span class="ui">Export ▸ Video…</span> to render a video in the browser. The first lines of the file tell
+        you how to render it:</p>
+      <pre data-excerpt="examples/quadratic-formula.ce.py"><code class="language-bash">manim -r 1920,1080 --fps 60 DerivingTheQuadraticFormula.py DerivingTheQuadraticFormula</code></pre>
+
+      <h2 id="result">The result</h2>
+      <p>This is the Python the editor exports for the finished project, for ManimCE and for ManimGL. Each
+        relation is one <code>self.play(…)</code> with an animation for every pair, and the glyphs that belong
+        to no pair leave and arrive in the same call.</p>
+      <div class="mfe-code" data-mfe-python="quadratic-formula"></div>
+      <p>The page <a href="../manim/python.html">The generated Python</a> explains how to run it and what
+        its parts do.</p>
+
+      <h2 id="variations">Try changing it</h2>
+      <ul>
+        <li>Give relation 4 a <span class="ui">Path arc</span> of 30° and watch the right side swing.</li>
+        <li>Give the pair of the exponent the style <span class="ui">Copy (source stays)</span>: the exponent of
+          <i>x²</i> stays, and a copy goes to the square.</li>
+        <li>Lengthen the window of relation 3 and choose <span class="ui">Unwrite</span> and
+          <span class="ui">Write</span> for the unpaired glyphs.</li>
+        <li>Change the colours in the <i>Terms</i> list and apply it again.</li>
+      </ul>
+      <p>When you want to go further, <a href="../transforms/recipes.html">Transformation recipes</a> has more
+        moves of algebra, and <a href="../transforms/custom-paths.html">Custom paths</a> shows how to draw the
+        path of a glyph by hand.</p>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Every menu · Manim Formula Editor</title>
+  <meta name="description" content="Every menu of the menu bar and every right-click menu of the editor, entry by entry: its keys, what it does and the page that teaches it.">
+  <meta name="mfe:id" content="reference/menus">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Menus">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc wide-tables">
+      <h1>Every menu</h1>
+      <p class="lead">Every menu of the menu bar and every right-click menu of the editor, entry by entry:
+        its keys, what it does, and the page that teaches it.</p>
+
+      <p>The menu bar runs along the top of the window. Click a menu to open it, or focus its button and
+        press <kbd data-keys="ArrowDown">↓</kbd> to open it on its first entry and <kbd data-keys="ArrowUp">↑</kbd>
+        on its last; <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> move along the bar, a
+        letter goes to the next entry that starts with it, and <kbd data-keys="Escape">Esc</kbd> closes one
+        level. An arrow at the end of an entry opens a submenu. A tick marks the choice in use, or a
+        switch that is on. An entry is dimmed while nothing can use it yet: <span class="ui">Undo</span> before
+        the first change, the entries of <span class="ui">Align</span> before something is selected.
+        While a menu is open, of the bar or of a right-click, the keys you press are its own: no shortcut
+        acts on what is under it until it closes, so an arrow does not move the playhead and
+        <kbd data-keys="Delete">Delete</kbd> deletes nothing.</p>
+      <p>The tables below were read out of the app as it opens, with nothing selected, so the entries that
+        act on a selection are dimmed there; a description says what an entry needs where it matters. Where an entry is
+        a switch or a choice, the table says what it is by default. The keys are written for your system
+        (<a href="shortcuts.html">Keyboard and mouse shortcuts</a> has them all, by what you are doing).
+        A few entries show only in a state the tables were not read in (a group in the Creator, glyphs
+        picked in the Preview, glyphs selected on both sides of the relation editor): each is listed
+        after the table of its menu.</p>
+
+      <h2 id="menu-bar">The menu bar</h2>
+      <p>Five menus, then the <span class="ui">Export…</span> button, then the name of the project, the
+        <span class="ui">Renderer</span> badge and the theme button. The name and the badge are described in
+        <a href="../start/interface.html#menu-bar">A tour of the interface</a>.</p>
+
+      <h3 id="file">File</h3>
+      <figure>
+        <img src="../media/reference/menus/menu-file.dark.webp" data-themed
+             alt="The File menu open: New, Open…, Sync folder…, Recover autosave, Save, Save As… and Project settings…, with their keys."
+             width="247" height="275" loading="lazy">
+        <figcaption>The <span class="ui">File</span> menu: projects, saving, and the settings that belong to the project.</figcaption>
+      </figure>
+<!-- reference-table:menu:file begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The File menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">New</span></td><td><kbd data-keys="Mod+Alt+N">Ctrl+Alt+N</kbd></td><td>Starts an empty project. When the project has unsaved changes it asks first: Save, Don't save or Cancel.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Open…</span></td><td><kbd data-keys="Mod+O">Ctrl+O</kbd></td><td>Opens the Projects dialog: the projects of your synced folder as cards, with a search box and favourites. <span class="ui">Other file…</span> in that dialog is the browser’s own file picker, for a file that is not in the folder.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Sync folder…</span></td><td><kbd data-keys="Mod+Shift+S" data-keys-mac="Mod+Alt+S">Ctrl+Shift+S</kbd></td><td>Picks the folder that holds your projects, once. Chrome and Edge keep it and list it again each time; other browsers keep a snapshot of it until you sync again.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Recover autosave</span></td><td></td><td>Lists the autosaved work of other tabs that were closed, kept for a week, the five most recent, so you can bring it back.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td class="is-sub"><span class="ui">No autosave of another tab</span></td><td></td><td>What the submenu says when there is nothing to recover.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Save</span></td><td><kbd data-keys="Mod+S">Ctrl+S</kbd></td><td>Saves the project to its file, and asks where when it has none. A browser without file access downloads a new file each time.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Save As…</span></td><td><kbd data-keys="Mod+Alt+S" data-keys-mac="Mod+Shift+S">Ctrl+Alt+S</kbd></td><td>Saves the project under a new name or in a new place; the picker starts in the synced folder when there is one.</td><td><a href="../start/projects.html">Projects and files</a></td></tr>
+<tr><td><span class="ui">Project settings…</span></td><td></td><td>Opens <span class="ui">Project settings</span>: name, target (ManimCE or ManimGL), resolution, frame rate, background, LaTeX preamble and duration. They belong to the project and are saved in its file.</td><td><a href="../reference/preferences.html">Preferences</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:file end -->
+
+      <h3 id="edit">Edit</h3>
+      <figure>
+        <img src="../media/reference/menus/menu-edit.dark.webp" data-themed
+             alt="The Edit menu open with its Align submenu: Left, Centre, Right, Top, Middle, Bottom, By symbol… and By symbol of a locked formula…."
+             width="598" height="498" loading="lazy">
+        <figcaption>The <span class="ui">Edit</span> menu with three clips selected in the Preview, so that <span class="ui">Align</span> and <span class="ui">Distribute</span> can act.</figcaption>
+      </figure>
+      <p>The first group undoes and deletes, the next copies and pastes the properties of clips, then come
+        aligning, colours, and last the editor preferences for new clips and Morph blocks. Those last four
+        entries are kept in the browser, not in the project; see
+        <a href="preferences.html#where-kept">Preferences</a>.</p>
+<!-- reference-table:menu:edit begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The Edit menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Undo</span></td><td><kbd data-keys="Mod+Z">Ctrl+Z</kbd></td><td>Takes back the last change. During a drag it cancels the drag first.</td><td><a href="../start/interface.html">The interface</a></td></tr>
+<tr><td><span class="ui">Redo</span></td><td><kbd data-keys="Mod+Shift+Z">Ctrl+Shift+Z</kbd></td><td>Brings back what Undo took back.</td><td><a href="../start/interface.html">The interface</a></td></tr>
+<tr><td><span class="ui">Delete formula</span></td><td><kbd data-keys="Delete">Delete</kbd></td><td>Deletes the formula selected in the Creator, with its clips and their relations, as one undo step. It asks first, and the confirm button is held down.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Copy properties</span></td><td></td><td>Takes the state of the one clip selected in the Preview as it is at the playhead: position, scale, rotation, flips, opacity, colour and glyph colours.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Paste properties</span></td><td></td><td>Gives the copied properties to the selected clips, all of them but the position or one group. Each entry shows what it would paste; a paste is one undo step.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">All but position</span></td><td></td><td>Everything but the position.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Transformation</span></td><td></td><td>Scale, rotation and flips.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Appearance</span></td><td></td><td>Opacity and colour.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Glyph colours</span></td><td></td><td>The colours of the glyphs, onto clips of the same formula only, since they go by glyph.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Position</span></td><td></td><td>The position; several clips end up stacked on one point.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Align</span></td><td></td><td>Lines up the clips selected in the Preview. A lone clip, or Shift held while you choose, aligns to the frame.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Left</span></td><td><kbd data-keys="Alt+A">Alt+A</kbd></td><td>Aligns on the outermost left edge of the selection.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Centre</span></td><td><kbd data-keys="Alt+H">Alt+H</kbd></td><td>Aligns on the middle, horizontally.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Right</span></td><td><kbd data-keys="Alt+D">Alt+D</kbd></td><td>Aligns on the outermost right edge.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Top</span></td><td><kbd data-keys="Alt+W">Alt+W</kbd></td><td>Aligns on the outermost top edge.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Middle</span></td><td><kbd data-keys="Alt+V">Alt+V</kbd></td><td>Aligns on the middle, vertically.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Bottom</span></td><td><kbd data-keys="Alt+S">Alt+S</kbd></td><td>Aligns on the outermost bottom edge.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">By symbol…</span></td><td><kbd data-keys="Alt+G">Alt+G</kbd></td><td>A two-click mode: click the symbol to move, then the reference symbol; a compass asks on which side or corner it lands.</td><td><a href="../layout/align-symbol.html">Align by symbol</a></td></tr>
+<tr><td class="is-sub"><span class="ui">By symbol of a locked formula…</span></td><td><kbd data-keys="Shift+Alt+G">Shift+Alt+G</kbd></td><td>The same, with the reference symbol on a formula locked in the Preview: it stays where it is and the other formula moves to it.</td><td><a href="../layout/align-symbol.html">Align by symbol</a></td></tr>
+<tr><td><span class="ui">Distribute</span></td><td></td><td>Spaces three or more selected clips evenly.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Horizontally</span></td><td><kbd data-keys="Mod+Alt+H" data-keys-mac="Ctrl+Alt+H">Ctrl+Alt+H</kbd></td><td>Evens out the gaps between the clips, left to right.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Vertically</span></td><td><kbd data-keys="Mod+Alt+V" data-keys-mac="Ctrl+Alt+V">Ctrl+Alt+V</kbd></td><td>Evens out the gaps between the clips, top to bottom.</td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td><span class="ui">Apply palette…</span></td><td></td><td>Previews what the active palette would change in the formulas and objects that exist, and applies it as one undo step. Off while no palette is active.</td><td><a href="../color/palettes.html">Palettes</a></td></tr>
+<tr><td><span class="ui">Match colors</span></td><td></td><td>The project’s lists of LaTeX patterns and the colours they give. Each list of the project is also an entry here, below the two commands.</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Create match colors…</span></td><td></td><td>Opens the <span class="ui">Match colors</span> dialog on a new, empty list.</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td class="is-sub"><span class="ui">New from active palette…</span></td><td></td><td>Makes a list with four rows (variable, constant, operator and result), coloured from the active palette, for you to fill with patterns.</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td><span class="ui">Colours in order</span></td><td></td><td>Copies colours from glyphs in the Preview, one by one, and pastes them in the same order onto other glyphs.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Copy…</span></td><td><kbd data-keys="Shift+C">Shift+C</kbd></td><td>Starts the copy: click the glyphs whose colours to copy, in order; Enter then pastes them on the glyphs you click next.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste</span></td><td><kbd data-keys="Shift+V">Shift+V</kbd></td><td>Pastes the colours last copied once more, from the first one. Off until something was copied.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Always add intro (Write)</span></td><td></td><td>New clips get the intro chosen in <span class="ui">Default intro &amp; outro…</span> (the animation in brackets) instead of appearing at once. Off by default.</td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Always add outro (FadeOut)</span></td><td></td><td>New clips get the outro chosen in <span class="ui">Default intro &amp; outro…</span> (the animation in brackets) instead of disappearing at once. Off by default.</td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Default intro &amp; outro…</span></td><td></td><td>Chooses the animation, duration, easing and lag ratio of the intro and the outro that the two entries above give.</td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Suggest morph pairs</span></td><td></td><td>A new Morph block starts with the pairs Suggest finds, instead of none. Off by default.</td><td><a href="../transforms/morph.html">Morph blocks</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:edit end -->
+
+      <h3 id="view">View</h3>
+      <figure>
+        <img src="../media/reference/menus/menu-view.dark.webp" data-themed
+             alt="The View menu open with its Theme submenu: System, Dark and Light, the last two with the dark one ticked."
+             width="521" height="490" loading="lazy">
+        <figcaption>The <span class="ui">View</span> menu with <span class="ui">Theme</span> open; <span class="ui">Dark</span> is ticked until you choose another.</figcaption>
+      </figure>
+<!-- reference-table:menu:view begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The View menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Toggle theme</span></td><td></td><td>Flips between the dark and the light theme, as the round, half-filled button at the end of the menu bar does.</td><td><a href="../start/interface.html">The interface</a></td></tr>
+<tr><td><span class="ui">Theme</span></td><td></td><td>System follows your operating system as it changes; Dark and Light fix one. Default: <span class="ui">Dark</span>. <span class="choices">Choices: <span class="ui">System</span>, <span class="ui">Dark</span>, <span class="ui">Light</span>.</span></td><td><a href="../start/interface.html">The interface</a></td></tr>
+<tr><td><span class="ui">Panels</span></td><td></td><td>Shows or folds the Creator, the Animations panel and the Timeline to their title bars: a tick means the panel is shown. The layout remembers it. Off in the stacked layout of a narrow window, where nothing folds. All three are shown by default. Outside a text field, the key C does it for the Creator and A for the Animations panel.</td><td><a href="../start/interface.html">The interface</a></td></tr>
+<tr><td><span class="ui">Multicamera</span></td><td><kbd data-keys="Alt+M">Alt+M</kbd></td><td>Gives the scene a camera, or takes it away: with it the timeline has a Camera row for its moves, and the Preview shows the world around the frame, with the camera drawn as a rectangle. It stays on while the camera has target cameras or moves: delete them first, and a notice says so. Off by default.</td><td><a href="../animations/camera.html">The camera</a></td></tr>
+<tr><td><span class="ui">Camera view</span></td><td><kbd data-keys="V">V</kbd></td><td>With the multicamera on, looks through the camera at the playhead, as the video does, or goes back to the world with the camera’s rectangles. Greyed out without a camera. Off by default.</td><td><a href="../animations/camera.html#view">The camera</a></td></tr>
+<tr><td><span class="ui">Slides</span></td><td></td><td>Turns the Slides mode on or off: pauses and comments on the scene’s time, where it rests, for the exported web page and the Python. It stays on while the project has a pause or a comment: delete them first, and a notice says so. Off by default.</td><td><a href="../basics/slides.html#on">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Add pause at the playhead</span></td><td><kbd data-keys="P">P</kbd></td><td>Adds a pause at the playhead, where the scene rests; where something animates, a notice says what runs there. Greyed out while the Slides mode is off.</td><td><a href="../basics/slides.html#add">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Add comment at the playhead…</span></td><td><kbd data-keys="Shift+P">Shift+P</kbd></td><td>Adds a comment at the playhead, its words asked for first. Greyed out while the Slides mode is off.</td><td><a href="../basics/slides.html#add">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Add a pause after every animation</span></td><td></td><td>Adds a pause where each animation ends and another follows, but in a rest that holds one already, as one undo step: then delete the ones you do not want. Greyed out while the Slides mode is off.</td><td><a href="../basics/slides.html#all-pauses">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Skip the wait at every pause</span></td><td></td><td>Makes every pause that has a wait to skip skip it: going on from it, the exported page and the rehearsal jump to where the next animation starts. The others stay as they are, and the notice counts them. One undo step; greyed out while the project has no pause.</td><td><a href="../basics/slides.html#skip-all">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Keep the wait at every pause</span></td><td></td><td>Makes every pause keep its wait again, as one undo step. Greyed out while the project has no pause.</td><td><a href="../basics/slides.html#skip-all">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Delete every pause…</span></td><td></td><td>Deletes every pause, with its note; the comments stay. It asks first, saying how many go, and its button is held down; one undo step brings them back. Greyed out while the project has no pause.</td><td><a href="../basics/slides.html#delete-pauses">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Glyph source: Automatic</span></td><td></td><td>Formulas use the companion’s exact LaTeX glyphs when it is running, and MathJax otherwise. The default.</td><td><a href="../manim/companion.html">The companion</a></td></tr>
+<tr><td><span class="ui">Glyph source: MathJax</span></td><td></td><td>Forces MathJax, the browser’s own renderer, even when the companion is running.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Glyph source: LaTeX (companion)</span></td><td></td><td>Forces the companion’s exact LaTeX glyphs. Without the companion running, a formula shows an error that says so.</td><td><a href="../manim/companion.html">The companion</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:view end -->
+
+      <h3 id="preferences-menu">Preferences</h3>
+      <figure>
+        <img src="../media/reference/menus/menu-preferences.dark.webp" data-themed
+             alt="The Preferences menu open with its Guide colour submenu: Yellow ticked, then Orange, Magenta, Cyan, Green and White, each with a colour square."
+             width="468" height="600" loading="lazy">
+        <figcaption>The <span class="ui">Preferences</span> menu with <span class="ui">Guide colour</span> open: each choice has its colour square.</figcaption>
+      </figure>
+      <p><a href="preferences.html">Preferences</a> says more about each one, and lists the preferences
+        that are set elsewhere.</p>
+<!-- reference-table:menu:preferences begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The Preferences menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Snap to objects</span></td><td></td><td>A dragged formula sticks to the edges and centres of the others and of the frame. Hold Ctrl/⌘ after pressing to drag freely. On by default.</td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Guide colour</span></td><td></td><td>The colour of the guide lines a snapped drag shows in the Preview. Default: <span class="ui">Yellow</span>. <span class="choices">Choices: <span class="ui">Yellow</span>, <span class="ui">Orange</span>, <span class="ui">Magenta</span>, <span class="ui">Cyan</span>, <span class="ui">Green</span>, <span class="ui">White</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Guide width</span></td><td></td><td>How thick those guide lines are. Default: <span class="ui">Thin</span>. <span class="choices">Choices: <span class="ui">Thin</span>, <span class="ui">Regular</span>, <span class="ui">Thick</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Glyph selection colour</span></td><td></td><td>The colour of the glyphs picked with Alt in the Preview, and of the rectangle that picks them. Default: <span class="ui">Yellow</span>. <span class="choices">Choices: <span class="ui">Yellow</span>, <span class="ui">Orange</span>, <span class="ui">Magenta</span>, <span class="ui">Cyan</span>, <span class="ui">Green</span>, <span class="ui">White</span>.</span></td><td><a href="../layout/glyph-picking.html">Picking glyphs</a></td></tr>
+<tr><td><span class="ui">Keep the transform handles shown</span></td><td></td><td>Keeps the transform handles on the selected clips without Shift held. Off by default.</td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Scale step</span></td><td></td><td>The step a corner drag’s scale snaps to. <span class="ui">Custom…</span> takes a number or a fraction, such as 1/3. Default: <span class="ui">0.05</span>. <span class="choices">Choices: <span class="ui">0.05</span>, <span class="ui">0.1</span>, <span class="ui">0.15</span>, <span class="ui">0.2</span>, <span class="ui">Custom…</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Locked formulas</span></td><td></td><td>How opaque the Preview draws a formula locked in it. The Preview only: nothing exported is faded. Default: <span class="ui">40 %</span>. <span class="choices">Choices: <span class="ui">20 %</span>, <span class="ui">30 %</span>, <span class="ui">40 %</span>, <span class="ui">50 %</span>, <span class="ui">60 %</span>, <span class="ui">80 %</span>, <span class="ui">100 % (not faded)</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Show grid</span></td><td></td><td>Draws a grid in the Preview, under the formulas, and makes a dragged formula snap to it (Ctrl/⌘ frees it). Never part of an export. Off by default.</td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Grid spacing</span></td><td></td><td>The spacing of the grid, in Manim units. Default: <span class="ui">1 unit</span>. <span class="choices">Choices: <span class="ui">2 units</span>, <span class="ui">1 unit</span>, <span class="ui">0.5 units</span>, <span class="ui">0.25 units</span>, <span class="ui">0.1 units</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Grid snaps</span></td><td></td><td>What the grid holds while you drag: the formula’s centre, or whichever of its edges is nearer to a line. Default: <span class="ui">The formula's centre</span>. <span class="choices">Choices: <span class="ui">The formula's centre</span>, <span class="ui">Its nearest edges</span>.</span></td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Show the camera’s route</span></td><td></td><td>In the world view of a scene with a camera, draws the line with arrowheads that joins the camera’s frames in the order its moves run. On by default.</td><td><a href="../animations/camera.html#on">The camera</a></td></tr>
+<tr><td><span class="ui">Dim what the camera leaves out</span></td><td></td><td>In the world view of a scene with a camera, dims what the camera leaves out at the playhead. On by default.</td><td><a href="../animations/camera.html#on">The camera</a></td></tr>
+<tr><td><span class="ui">Standard scale…</span></td><td></td><td>The size new formulas and new LaTeX texts are born with (1 is Manim’s font size 48). In its dialog, <span class="ui">Apply to all formulas</span> and <span class="ui">Apply to all texts</span> give it to the ones that exist.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Split suffix (_s)…</span></td><td></td><td>The suffix that names the copy a split makes: a clip cut at the playhead (S) gives its second half a copy of its formula, named after it with this suffix. The brackets show the suffix in use; its dialog takes letters, digits and “_”, at most 16.</td><td><a href="../basics/timeline.html#splitting">The timeline</a></td></tr>
+<tr><td><span class="ui">Zen mode</span></td><td></td><td>For small windows: the timeline becomes a column on the left, drawn vertical, and the Preview takes the rest; the Creator and the Animations panel open over it, side by side, from two buttons of a strip. It only rearranges the window. Off by default.</td><td><a href="../start/interface.html#zen">The interface</a></td></tr>
+<tr><td><span class="ui">Chroma Lab…</span></td><td></td><td>Opens Chroma Lab, the colour studio that comes inside the editor, to make a palette and send it to the editor.</td><td><a href="../color/palettes.html">Palettes</a></td></tr>
+<tr><td><span class="ui">Editor palettes…</span></td><td></td><td>Opens the palette library: import, make, edit, activate and delete palettes of named colour roles.</td><td><a href="../color/palettes.html">Palettes</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:preferences end -->
+
+      <h3 id="export">Export and the Export… button</h3>
+      <p>The <span class="ui">Export…</span> button beside the menus exports Python for the target of the
+        last Python export you opened (ManimCE at first). Its arrow lists the six exports; there is no
+        Export menu in the bar, and this documentation writes an entry as <span class="ui">Export ▸ Video…</span>.</p>
+      <figure>
+        <img src="../media/reference/menus/export-button.dark.webp" data-themed
+             alt="The arrow of the Export… button open: Python — ManimCE…, Python — ManimGL…, Video…, Image…, Audio… and HTML…."
+             width="211" height="227" loading="lazy">
+        <figcaption>The arrow of the <span class="ui">Export…</span> button lists every export.</figcaption>
+      </figure>
+<!-- reference-table:menu:export-button begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The Export… button’s menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Python — ManimCE…</span></td><td></td><td>Exports the scene as a Python file for ManimCE.</td><td><a href="../basics/export.html">Exporting</a></td></tr>
+<tr><td><span class="ui">Python — ManimGL…</span></td><td></td><td>Exports the scene as a Python file for ManimGL.</td><td><a href="../basics/export.html">Exporting</a></td></tr>
+<tr><td><span class="ui">Video…</span></td><td></td><td>Renders the scene to a video file: in the browser, with the companion’s ffmpeg, or by Manim itself.</td><td><a href="../sound/video.html">Video</a></td></tr>
+<tr><td><span class="ui">Image…</span></td><td></td><td>Writes the frame at the playhead as a PNG picture, the one a video shows there: at the project’s size or twice it, over the scene’s background or transparent.</td><td><a href="../basics/export.html#image">Exporting</a></td></tr>
+<tr><td><span class="ui">Audio…</span></td><td></td><td>Exports the sound of the project as one audio file: WAV or WebM with Opus, and M4A where the browser can encode AAC.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">HTML…</span></td><td></td><td>Writes the scene as a web page that plays it live and stops at each pause of the Slides mode: a folder to work on and embed, its zip, or one file.</td><td><a href="../basics/slides.html#export-html">Slides and HTML</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:export-button end -->
+
+      <h3 id="help">Help</h3>
+      <figure>
+        <img src="../media/reference/menus/menu-help.dark.webp" data-themed
+             alt="The Help menu open: Keyboard shortcuts…, Examples, Engine inspector…, Third-party licenses… and About, with the Examples submenu beside it: Completing the square, Hello: one-to-one, Camera and Braces."
+             width="421" height="201" loading="lazy">
+        <figcaption>The <span class="ui">Help</span> menu, with <span class="ui">Examples</span> open.</figcaption>
+      </figure>
+<!-- reference-table:menu:help begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The Help menu</caption>
+<thead><tr><th>Entry</th><th>Keys</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Keyboard shortcuts…</span></td><td><kbd data-keys="?">?</kbd></td><td>Shows the table of keyboard shortcuts and click gestures.</td><td><a href="../reference/shortcuts.html">Shortcuts</a></td></tr>
+<tr><td><span class="ui">Examples</span></td><td></td><td>Opens one of the example projects the app carries, as a file opens: it asks first about unsaved work, and the example becomes a project of yours without a file, so Save asks where it goes.</td><td><a href="../start/projects.html#examples">Projects and files</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Completing the square</span></td><td></td><td>The quadratic formula derived step by step. <span class="ui">Try an example</span>, in the Creator of a project with no formula, opens it too.</td><td><a href="../start/projects.html#examples">Projects and files</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Hello: one-to-one</span></td><td></td><td>Two formulas and the relation between them.</td><td><a href="../start/projects.html#examples">Projects and files</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Camera</span></td><td></td><td>The scene’s camera and its moves.</td><td><a href="../start/projects.html#examples">Projects and files</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Braces</span></td><td></td><td>Braces over parts of a sum, each with its label.</td><td><a href="../start/projects.html#examples">Projects and files</a></td></tr>
+<tr><td><span class="ui">Engine inspector…</span></td><td></td><td>Shows how a formula splits into glyphs with each renderer, MathJax and the companion’s LaTeX.</td><td><a href="../manim/companion.html#exact-glyphs">The companion</a></td></tr>
+<tr><td><span class="ui">Third-party licenses…</span></td><td></td><td>Lists the open-source components the app contains and opens their notices.</td><td></td></tr>
+<tr><td><span class="ui">About</span></td><td></td><td>Shows the version of the app, the project file format version, the MathJax and companion versions and the licence.</td><td><a href="../reference/files.html">Files and format</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:menu:help end -->
+
+      <h2 id="context-menus">Context menus</h2>
+      <p>Right-click what you want to act on. The menu is for what is under the pointer; a menu of a
+        selection acts on the whole selection. On the timeline, <kbd data-keys="Shift+F10">Shift+F10</kbd> or the
+        <kbd>Menu</kbd> key opens the menu of the clip or block that has the keyboard focus. <kbd data-keys="Escape">Esc</kbd>
+        closes it, and <kbd data-keys="ArrowRight">→</kbd> and <kbd data-keys="ArrowLeft">←</kbd> open and close a submenu.
+        The tables read like the ones above; where one menu differs with what you click, a <span class="ui">For</span>
+        column says when you see an entry.</p>
+
+      <h3 id="timeline-clip">A clip on the timeline</h3>
+      <p>Right-click a clip. The menu starts with <span class="ui">Add animation</span>: its header names the clip
+        and where a block you add starts: at the playhead when the playhead is on the clip, else at the time
+        under the pointer, and then the header says <span class="ui">the playhead is outside this clip</span>.
+        Then come the objects you can put
+        on the clip, and last the clip’s own entries. On a locked track the menu opens with what would change
+        the clip greyed out; its timing can still be copied.</p>
+      <figure>
+        <img src="../media/reference/menus/clip-menu.dark.webp" data-themed
+             alt="The right-click menu of a formula clip: Appear, Disappear, Transform, Morph within the formula, Emphasis, Add brace, Add shape with its submenu open, Add line, Intro, Outro, Timing, Remove animations, Remove relations, Unlink formula, Split at playhead (greyed out: the playhead is outside the clip) and Lock in the preview."
+             width="466" height="491" loading="lazy">
+        <figcaption>The menu of a formula clip, with <span class="ui">Add shape</span> open beside it.</figcaption>
+      </figure>
+<!-- reference-table:context:timeline-clip begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: formulas, LaTeX texts, font texts, braces, shapes, lines, arrows</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Appear</span></td><td>all</td><td>Adds a block that brings the glyphs in at the playhead, or at the time you right-clicked when the playhead is not on the clip. <span class="ui">GrowArrow</span> is for arrows. <span class="choices">Choices: <span class="ui">Write</span>, <span class="ui">Create</span>, <span class="ui">FadeIn</span>, <span class="ui">GrowArrow</span>, <span class="ui">GrowFromCenter</span>, <span class="ui">DrawBorderThenFill</span>.</span></td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Disappear</span></td><td>all</td><td>Adds a block that takes the glyphs out at that time. <span class="choices">Choices: <span class="ui">FadeOut</span>, <span class="ui">Unwrite</span>, <span class="ui">Uncreate</span>, <span class="ui">ShrinkToCenter</span>.</span></td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Transform</span></td><td>braces, lines and arrows</td><td>Adds the Transform of a brace, a shape, a line or an arrow: its place, size, colour and, for a line, its ends and stroke change over the block.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Transform</span></td><td>formulas and texts, shapes</td><td>Adds a Transform block: the whole object moves, turns or rescales, or (a shape) goes to surround something else.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Whole formula (keyframe)</span></td><td>formulas and texts</td><td>Adds a keyframe for the whole formula or text: position, scale, rotation, opacity and colour change over the block.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Part of the formula</span></td><td>formulas and texts</td><td>Adds a block that moves, turns or recolours some of the glyphs of the formula while the rest stays.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Transform</span></td><td>shapes</td><td>Adds the Transform of a brace, a shape, a line or an arrow: its place, size, colour and, for a line, its ends and stroke change over the block.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td class="is-sub"><span class="ui">To another formula or glyphs…</span></td><td>shapes</td><td>Carries the shape to surround another formula or other glyphs: pick the new target in the Preview, then confirm.</td><td><a href="../objects/shapes.html">Shapes</a></td></tr>
+<tr><td><span class="ui">Morph within the formula</span></td><td>formulas and texts</td><td>Adds a Morph block: a transformation between the glyphs of this same formula, for a derivation on one clip.</td><td><a href="../transforms/morph.html">Morph blocks</a></td></tr>
+<tr><td><span class="ui">Emphasis</span></td><td>all</td><td>Adds a block that draws attention at that time. A line or an arrow offers only <span class="ui">Circumscribe</span>, <span class="ui">Flash</span> and <span class="ui">FocusOn</span>. <span class="choices">Choices: <span class="ui">Indicate</span>, <span class="ui">Wiggle</span>, <span class="ui">Circumscribe</span>, <span class="ui">Flash</span>, <span class="ui">FocusOn</span>.</span></td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Add label</span></td><td>braces</td><td>Puts a label at the tip of the brace: a formula or a LaTeX text. <span class="choices">Choices: <span class="ui">Formula</span>, <span class="ui">Text (LaTeX)</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Colour</span></td><td>braces, shapes</td><td>The colour of the brace or shape: the twelve Manim colours, the roles of the active palette, or any #RRGGBB typed in the field and applied.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Direction</span></td><td>braces</td><td>Moves the brace to another side of what it spans. <span class="choices">Choices: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span>, <span class="ui">Right</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Add brace</span></td><td>formulas and texts, shapes, lines and arrows</td><td>Puts a brace on the clip, on the side you choose. On a formula or a text, <span class="ui">On some glyphs…</span> opens a dialog to pick which glyphs it spans. <span class="choices">Choices: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span>, <span class="ui">Right</span>, <span class="ui">On some glyphs…</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Add shape</span></td><td>formulas and texts, lines and arrows</td><td>Puts a shape around the clip. <span class="ui">On some glyphs…</span> picks which glyphs it surrounds. <span class="choices">Choices: <span class="ui">Box</span>, <span class="ui">Circle</span>, <span class="ui">Underline</span>, <span class="ui">Cross</span>, <span class="ui">Cross line</span>, <span class="ui">Highlight</span>, <span class="ui">On some glyphs…</span>.</span></td><td><a href="../objects/shapes.html">Shapes</a></td></tr>
+<tr><td><span class="ui">Add line</span></td><td>formulas and texts, lines and arrows</td><td>Draws a line or an arrow that starts on this clip: a compass asks where on it, then one click puts the other end. <span class="choices">Choices: <span class="ui">Line</span>, <span class="ui">Dashed line</span>, <span class="ui">Arrow</span>, <span class="ui">Double arrow</span>.</span></td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Intro</span></td><td>all</td><td>The animation the clip starts with, the current one ticked. <span class="ui">None</span> makes the formula appear at the clip’s start. Lines and arrows offer fewer; <span class="ui">GrowArrow</span> is for arrows. <span class="choices">Choices: <span class="ui">None (appear)</span>, <span class="ui">Write</span>, <span class="ui">FadeIn</span>, <span class="ui">GrowFromCenter</span>, <span class="ui">DrawBorderThenFill</span>, <span class="ui">Create</span>, <span class="ui">GrowArrow</span>.</span></td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Outro</span></td><td>all</td><td>The animation the clip ends with, the current one ticked. <span class="ui">None</span> makes it disappear at the clip’s end. <span class="choices">Choices: <span class="ui">None (disappear)</span>, <span class="ui">Unwrite</span>, <span class="ui">FadeOut</span>, <span class="ui">ShrinkToCenter</span>, <span class="ui">Uncreate</span>.</span></td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Timing</span></td><td>all</td><td>Copy when this clip starts and ends and how long its intro and outro are, or paste one of those onto this clip.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Copy timing</span></td><td>all</td><td>Copies the clip’s start, end, duration and intro and outro times.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste start</span></td><td>all</td><td>Moves the clip to start when the copied clip does.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste end</span></td><td>all</td><td>Moves the clip to end when the copied clip does.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste duration</span></td><td>all</td><td>Makes the clip last as long as the copied one, from where it starts.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste intro time</span></td><td>all</td><td>Gives its intro the length of the copied clip’s intro.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste outro time</span></td><td>all</td><td>Gives its outro the length of the copied clip’s outro.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Remove animations</span></td><td>all</td><td>Takes off the clip’s intro, its outro and its blocks, but the Morph ones.</td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Remove relations</span></td><td>formulas and texts</td><td>Takes off the clip’s transformations of glyphs: its relations with other clips and its Morph blocks.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Unlink formula (make a copy)</span></td><td>formulas and texts</td><td>Gives this clip a copy of its formula of its own, so editing one no longer changes the other. Off, its tooltip saying why, for a formula’s only clip.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Split at playhead (S)</span></td><td>all</td><td>Cuts the clip in two at the playhead: the second half becomes a clip of a copy of its formula, that starts as the object is then. Off, its tooltip saying why, while the playhead is outside the clip or the track is locked; when something keeps the clip whole, a notice says what.</td><td><a href="../basics/timeline.html#splitting">The timeline</a></td></tr>
+<tr><td><span class="ui">Become</span></td><td>lines and arrows</td><td>Turns the line into another kind of line: it keeps its ends, its curve and its tips. <span class="choices">Choices: <span class="ui">Line</span>, <span class="ui">Dashed line</span>, <span class="ui">Arrow</span>, <span class="ui">Double arrow</span>.</span></td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Reverse points</span> <span class="hint">start ⇄ end</span></td><td>lines and arrows</td><td>Swaps the start and the end of the line.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Curve</span></td><td>lines and arrows</td><td>Bends the line into an arc or a spline, or shapes the spline it has; copies the shape of its path, or gives it the copied one.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Arc</span></td><td>lines and arrows</td><td>Bends the line into an arc of a circle (Manim’s path_arc).</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Spline</span> <span class="hint">points and handles</span></td><td>lines and arrows</td><td>Turns it into a spline with points and handles you can edit in the Preview. Once the line is a spline the entry reads <span class="ui">Edit curve</span>.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Copy path shape</span></td><td>lines and arrows</td><td>Copies the shape of the line’s path.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste path shape</span></td><td>lines and arrows</td><td>Gives the line the shape last copied. Off until something was copied.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Detach</span></td><td>lines and arrows</td><td>Frees one end of the line or both from the glyphs they are on; off when both are free already.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Detach</span></td><td>braces, shapes</td><td>Frees the brace or shape from what it hangs on: it stays where it is and no longer follows that clip.</td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Lock in the preview</span></td><td>all</td><td>The Preview then draws the clip and leaves it alone: a press goes through it to what is under it, and nothing done in the Preview moves it.</td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-clip end -->
+
+      <h3 id="timeline-clips">Several clips</h3>
+      <p>With two or more clips selected, right-click one of them. The menu offers what the Creator offers
+        their formulas, one brace over them all, one shape around them all, and the clips’ own Duplicate and
+        Delete. Its first entry is <span class="ui">Edit…</span> when the clips are all of one formula and
+        <span class="ui">Edit together…</span> when they are of several, and <span class="ui">Paste path shape</span>
+        is there when a line is among them.</p>
+<!-- reference-table:context:timeline-clips begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: clips of several formulas, clips of one formula, a line among them</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Edit together…</span></td><td>clips of several formulas, a line among them</td><td>Opens the formulas of the selected clips in one editor, to set their scale or glyph colours together.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Edit…</span></td><td>clips of one formula</td><td>Opens the formula of these clips in its editor.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Add brace</span></td><td>all</td><td>Puts one brace over all the selected clips. Not offered when a brace is among them; off, its tooltip saying why, when the clips are never on screen together. <span class="choices">Choices: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span>, <span class="ui">Right</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Add shape</span></td><td>all</td><td>Puts one shape around all the selected clips. Not offered when a brace or a shape is among them; off, its tooltip saying why, when the clips are never on screen together. <span class="choices">Choices: <span class="ui">Box</span>, <span class="ui">Circle</span>, <span class="ui">Underline</span>, <span class="ui">Cross</span>, <span class="ui">Cross line</span>, <span class="ui">Highlight</span>.</span></td><td><a href="../objects/shapes.html">Shapes</a></td></tr>
+<tr><td><span class="ui">Apply match colors</span></td><td>all</td><td>Colours the glyphs of the selected clips’ formulas with one of the project’s match colour lists.</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Create match colors…</span></td><td>all</td><td>Opens the <span class="ui">Match colors</span> dialog on a new list (what the submenu offers while the project has none).</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td><span class="ui">Paste path shape</span></td><td>a line among them</td><td>Gives each line among the selected clips the shape of the path last copied. Off until something was copied that fits one of them.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Timing</span></td><td>all</td><td>Pastes a part of the copied timing onto every selected clip. <span class="choices">Choices: <span class="ui">Paste start</span>, <span class="ui">Paste end</span>, <span class="ui">Paste duration</span>, <span class="ui">Paste intro time</span>, <span class="ui">Paste outro time</span>.</span></td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Unlink formula (make a copy)</span></td><td>all</td><td>Gives each formula of the selection a copy of its own, shared by its selected clips.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Split at playhead (S)</span></td><td>all</td><td>Cuts in two at the playhead the selected clips it is inside, the sounds among them too, as one undo step. Off while it is inside none of them, or only inside clips on locked tracks.</td><td><a href="../basics/timeline.html#splitting">The timeline</a></td></tr>
+<tr><td><span class="ui">Lock in the preview</span></td><td>all</td><td>Locks them all in the Preview, or unlocks them when they all are.</td><td><a href="../basics/preview.html">The Preview</a></td></tr>
+<tr><td><span class="ui">Duplicate</span></td><td>all</td><td>Duplicates the selected clips on the timeline.</td><td><a href="../basics/timeline.html">The timeline</a></td></tr>
+<tr><td><span class="ui">Delete N clips</span></td><td>all</td><td>Deletes the selected clips as one undo step; the formulas stay in the Creator. When braces, shapes or lines attached to them would go too, it asks first.</td><td><a href="../basics/timeline.html">The timeline</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-clips end -->
+
+      <h3 id="timeline-block">An animation block</h3>
+      <p>Right-click a block in the top half of a clip. What it offers depends on its kind: an Appear or a
+        Disappear block changes its animation, an Emphasis block its effect, a Morph block opens its pairs.
+        A block of an unfolded group has the group’s entries too. A block that starts with other blocks of its
+        clip and lasts as long as they do also offers <span class="ui">Group with the N blocks that run with it</span>,
+        which makes one group of them all.</p>
+<!-- reference-table:context:timeline-block begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: Appear and Disappear blocks, Emphasis blocks, Morph blocks, Transform blocks, blocks of an unfolded group, a block that runs with others</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Change animation</span></td><td>Appear and Disappear blocks, a block that runs with others</td><td>Changes the animation of an Appear or Disappear block to another of the nine, the current one ticked. A block of a line lists only what a line takes. <span class="choices">Choices: <span class="ui">Appear · Write</span>, <span class="ui">Appear · Create</span>, <span class="ui">Appear · FadeIn</span>, <span class="ui">Appear · GrowFromCenter</span>, <span class="ui">Appear · DrawBorderThenFill</span>, <span class="ui">Disappear · FadeOut</span>, <span class="ui">Disappear · Unwrite</span>, <span class="ui">Disappear · Uncreate</span>, <span class="ui">Disappear · ShrinkToCenter</span>.</span></td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Change effect</span></td><td>Emphasis blocks</td><td>Changes the effect of an Emphasis block to another of the five, the current one ticked. A block of a line lists Circumscribe, Flash and FocusOn. <span class="choices">Choices: <span class="ui">Indicate</span>, <span class="ui">Wiggle</span>, <span class="ui">Circumscribe</span>, <span class="ui">Flash</span>, <span class="ui">FocusOn</span>.</span></td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Edit pairs…</span></td><td>Morph blocks</td><td>Opens the pair editor of the Morph block.</td><td><a href="../transforms/morph.html">Morph blocks</a></td></tr>
+<tr><td><span class="ui">Fold the group</span></td><td>blocks of an unfolded group</td><td>Draws the group of this block as one block again.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Take out of the group</span></td><td>blocks of an unfolded group</td><td>Takes this block out of its group.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Ungroup</span></td><td>blocks of an unfolded group</td><td>Undoes the group; its blocks stay.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Group with the N blocks that run with it</span></td><td>blocks of an unfolded group, a block that runs with others</td><td>Makes one group of this block and the blocks of its clip that start with it and last as long; N is how many. In a block of an unfolded group the entry ends “with its group”. Shown when there are some.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Duplicate</span></td><td>all</td><td>Makes a copy of the block next to it. A Morph block’s copy has no pairs.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Duplicate for the other glyphs</span></td><td>Appear and Disappear blocks, Emphasis blocks, Transform blocks, blocks of an unfolded group, a block that runs with others</td><td>Makes a copy that animates the other glyphs of the formula, so every glyph is covered once. Not on a block of an arrow, which takes all of it.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Split into runs</span></td><td>Appear and Disappear blocks, Emphasis blocks, Transform blocks, blocks of an unfolded group, a block that runs with others</td><td>Splits a block that names glyphs into one block per run of consecutive glyphs. Not on a block of an arrow, which takes all of it.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Split…</span></td><td>Appear and Disappear blocks, Emphasis blocks, Transform blocks, blocks of an unfolded group, a block that runs with others</td><td>Opens the Split dialog to divide a block that names glyphs as you choose. Not on a block of an arrow, which takes all of it.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Delete…</span></td><td>all</td><td>Deletes the block, after a question whose confirm button is held down.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-block end -->
+
+      <h3 id="timeline-group">A group of blocks</h3>
+      <p>A group of blocks is drawn as one block until you unfold it. Right-click it for its own menu. It offers
+        <span class="ui">Group with the N blocks that run with it</span> too, when other blocks of the clip start with
+        the group and last as long.</p>
+<!-- reference-table:context:timeline-group begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a folded group</caption>
+<thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Unfold</span></td><td>Shows the group’s blocks on lanes of their own.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Ungroup</span></td><td>Undoes the group; its blocks stay.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Group with the N blocks that run with it</span></td><td>Takes into the group the blocks of its clip that start with it and last as long; N is how many. Shown when there are some.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Duplicate</span></td><td>Copies the whole group.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+<tr><td><span class="ui">Delete…</span></td><td>Deletes the whole group, after a question whose confirm button is held down.</td><td><a href="../animations/groups.html">Block groups</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-group end -->
+
+      <h3 id="timeline-relation">A relation</h3>
+      <p>Related clips are joined by an arrow, and the part of the target clip where the transformation
+        happens is a band. Right-click the band.</p>
+<!-- reference-table:context:timeline-relation begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a relation</caption>
+<thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Edit pairs…</span></td><td>Opens the relation editor on this relation.</td><td><a href="../transforms/relation-editor.html">Relation editor</a></td></tr>
+<tr><td><span class="ui">Choose a pair…</span></td><td>Edits the path of one pair in the Preview. A relation of up to five pairs lists them under the heading <span class="ui">Edit path</span> instead; from six on this entry opens a dialog with the relation’s diagram and a picture of each pair’s path.</td><td><a href="../transforms/custom-paths.html">Custom paths</a></td></tr>
+<tr><td><span class="ui">Delete relation</span></td><td>Deletes the relation.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-relation end -->
+
+      <h3 id="timeline-audio">An audio clip</h3>
+      <p>Right-click a clip on an audio track. The menu is short, because a sound has no intro, outro, blocks or
+        relations.</p>
+<!-- reference-table:context:timeline-audio begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: an audio clip</caption>
+<thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Edit volume and trim…</span></td><td>Opens the editor of the clip: its trim and its volume curve.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">Split at playhead (S)</span></td><td>Cuts the clip in two at the playhead.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">Fade In</span></td><td>Makes the volume rise from silence over the first half second of the clip, or its first half when the clip is shorter than a second.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">Fade Out</span></td><td>Makes the volume fall to silence over the last half second of the clip, or its second half when the clip is shorter than a second.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">Timing</span></td><td>Copy or paste when the clip starts and ends. A sound has no intro or outro.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Copy timing</span></td><td>Copies the clip’s start, end and duration.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste start</span></td><td>Moves the clip to start when the copied clip does.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste end</span></td><td>Moves the clip to end when the copied clip does.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Paste duration</span></td><td>Makes the clip last as long as the copied one.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Duplicate</span></td><td>Duplicates the clip, or the clips that are selected.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+<tr><td><span class="ui">Delete</span></td><td>Deletes the clip, or the clips that are selected.</td><td><a href="../sound/audio.html">Audio</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-audio end -->
+
+      <h3 id="preview-clip">A clip in the Preview</h3>
+      <p>Right-click a formula, text or object in the Preview. <span class="ui">Copy properties</span> takes the
+        clip under the pointer, and each section of the menu opens as a submenu beside its entry. If you
+        picked glyphs of the clip with <kbd data-keys="Alt">Alt</kbd>, <span class="ui">Add brace</span> and
+        <span class="ui">Add shape</span> work on those glyphs. The clip’s own entries are the same as on the
+        timeline, but the Preview’s menu has no <span class="ui">Timing</span> and no
+        <span class="ui">Lock in the preview</span>. On a brace it offers <span class="ui">Add label</span> instead of
+        the brace, shape and line entries; on a shape, <span class="ui">Transform to another formula or glyphs…</span>
+        and no <span class="ui">Add shape</span>.</p>
+<!-- reference-table:context:preview-clip begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a formula or text, a brace, a shape</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Copy properties</span></td><td>all</td><td>Copies the properties of the clip under the pointer.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Paste properties</span></td><td>all</td><td>Pastes the copied properties onto the selected clips, all but the position or one group. <span class="choices">Choices: <span class="ui">All but position</span>, <span class="ui">Transformation</span>, <span class="ui">Appearance</span>, <span class="ui">Glyph colours</span>, <span class="ui">Position</span>.</span></td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Align</span></td><td>all</td><td>Lines up the selected clips; <span class="ui">Align by symbol…</span> starts the two-click mode. <span class="choices">Choices: <span class="ui">Align left</span>, <span class="ui">Align centre</span>, <span class="ui">Align right</span>, <span class="ui">Align top</span>, <span class="ui">Align middle</span>, <span class="ui">Align bottom</span>, <span class="ui">Align by symbol…</span>.</span></td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td><span class="ui">Distribute</span></td><td>all</td><td>Spaces three or more selected clips evenly. <span class="choices">Choices: <span class="ui">Distribute horizontally</span>, <span class="ui">Distribute vertically</span>.</span></td><td><a href="../layout/align.html">Align and distribute</a></td></tr>
+<tr><td><span class="ui">Add label</span></td><td>a brace</td><td>Puts a label at the tip of the brace under the pointer: a formula or a LaTeX text. <span class="choices">Choices: <span class="ui">Formula</span>, <span class="ui">Text (LaTeX)</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Colour</span></td><td>a brace, a shape</td><td>The colour of the brace or shape: the twelve Manim colours, the roles of the active palette, or any #RRGGBB typed in the field and applied.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Direction</span></td><td>a brace</td><td>Moves the brace to another side of what it spans. <span class="choices">Choices: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span>, <span class="ui">Right</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Add brace</span></td><td>a formula or text, a shape</td><td>Puts a brace on the clip under the pointer, or on the glyphs picked on it with Alt, or over all the selected clips. <span class="choices">Choices: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span>, <span class="ui">Right</span>, <span class="ui">On some glyphs…</span>.</span></td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Transform to another formula or glyphs…</span></td><td>a shape</td><td>Carries the shape to surround another formula or other glyphs: pick the new target in the Preview, then confirm.</td><td><a href="../objects/shapes.html">Shapes</a></td></tr>
+<tr><td><span class="ui">Add shape</span></td><td>a formula or text</td><td>Puts a shape around the clip under the pointer, or around the glyphs picked on it, or around all the selected clips. <span class="choices">Choices: <span class="ui">Box</span>, <span class="ui">Circle</span>, <span class="ui">Underline</span>, <span class="ui">Cross</span>, <span class="ui">Cross line</span>, <span class="ui">Highlight</span>, <span class="ui">On some glyphs…</span>.</span></td><td><a href="../objects/shapes.html">Shapes</a></td></tr>
+<tr><td><span class="ui">Add line</span></td><td>a formula or text, a shape</td><td>Draws a line or an arrow that starts on this clip: a compass asks where on it, then one click puts the other end. <span class="choices">Choices: <span class="ui">Line</span>, <span class="ui">Dashed line</span>, <span class="ui">Arrow</span>, <span class="ui">Double arrow</span>.</span></td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Intro</span></td><td>all</td><td>The animation the clip starts with, the current one ticked. <span class="choices">Choices: <span class="ui">None (appear)</span>, <span class="ui">Write</span>, <span class="ui">FadeIn</span>, <span class="ui">GrowFromCenter</span>, <span class="ui">DrawBorderThenFill</span>, <span class="ui">Create</span>.</span></td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Outro</span></td><td>all</td><td>The animation the clip ends with, the current one ticked. <span class="choices">Choices: <span class="ui">None (disappear)</span>, <span class="ui">Unwrite</span>, <span class="ui">FadeOut</span>, <span class="ui">ShrinkToCenter</span>, <span class="ui">Uncreate</span>.</span></td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Remove animations</span></td><td>all</td><td>Takes off the clip’s intro, outro and blocks, but the Morph ones.</td><td><a href="../basics/intro-outro.html">Intro and outro</a></td></tr>
+<tr><td><span class="ui">Remove relations</span></td><td>a formula or text</td><td>Takes off the clip’s relations and Morph blocks.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Unlink formula (make a copy)</span></td><td>a formula or text</td><td>Gives this clip a copy of its formula of its own.</td><td><a href="../animations/timing.html">Timing tools</a></td></tr>
+<tr><td><span class="ui">Split at playhead (S)</span></td><td>all</td><td>Cuts the clip in two at the playhead: the second half becomes a clip of a copy of its formula.</td><td><a href="../basics/timeline.html#splitting">The timeline</a></td></tr>
+<tr><td><span class="ui">Detach</span></td><td>a brace, a shape</td><td>Frees the brace or shape from what it hangs on: it stays where it is and no longer follows that clip.</td><td><a href="../objects/braces.html">Braces</a></td></tr>
+<tr><td><span class="ui">Apply match colors</span></td><td>all</td><td>Colours the glyphs of the selected clips’ formulas with a match colour list. <span class="choices">Choices: <span class="ui">Create match colors…</span>.</span></td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td><span class="ui">Copy colours in order…</span></td><td>all</td><td>Starts <span class="ui">Colours in order</span>: click glyphs whose colours to copy, in order.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Paste colours in order</span></td><td>all</td><td>Pastes the colours last copied, in order, from the first one. Off until something was copied.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:preview-clip end -->
+
+      <h3 id="preview-glyphs">Glyphs picked in the Preview</h3>
+      <p>Right-click the ink of a glyph you picked with <kbd data-keys="Alt">Alt</kbd>. The menu acts on the
+        picked glyphs. <span class="ui">Colour</span> holds the swatches, the <span class="ui">Hex</span> field and
+        <span class="ui">Clear colour</span> of the <a href="#glyphs">glyph view’s menu</a>, and
+        <span class="ui">Add brace</span> and <span class="ui">Add shape</span> put one on the picked glyphs. For
+        glyphs of one formula the menu also has <span class="ui">Hide at the start</span>,
+        <span class="ui">Show at the start</span>, <span class="ui">On some glyphs…</span> under
+        <span class="ui">Add brace</span> and <span class="ui">Add shape</span>, and these:</p>
+      <table>
+        <caption class="sr-only">The right-click menu of glyphs picked with Alt: the entries of their colours</caption>
+        <thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ui">Copy colour to clipboard</span></td><td>With one glyph picked: puts the colour it is seen in on the system clipboard, as #RRGGBB. The entry shows that colour.</td><td><a href="../color/coloring.html#any-colour">Colouring</a></td></tr>
+          <tr><td><span class="ui">Copy colour sequence</span></td><td>Takes the own colours of the picked glyphs, in order.</td><td><a href="../color/coloring.html#sequence">Colouring</a></td></tr>
+          <tr><td><span class="ui">Paste colour sequence</span></td><td>Gives the colours copied to the picked glyphs, when they are the same symbols. The line under it says what would be pasted, or why it cannot be.</td><td><a href="../color/coloring.html#sequence">Colouring</a></td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="preview-space">Empty space in the Preview</h3>
+      <p>Right-click where there is nothing. <span class="ui">Add line</span>: choose a kind and click where
+        the line starts and where it ends. With the multicamera on, the menu also adds to the
+        <a href="../animations/camera.html">camera</a>.</p>
+<!-- reference-table:context:preview-space begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: without a camera, with the multicamera on</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Line</span></td><td>all</td><td>Draws a line: click where it starts, then where it ends.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Dashed line</span></td><td>all</td><td>Draws a dashed line the same way.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Arrow</span></td><td>all</td><td>Draws an arrow, with its tip at the end.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Double arrow</span></td><td>all</td><td>Draws a double arrow, with a tip at each end.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Add target camera here</span></td><td>with the multicamera on</td><td>Adds a target camera centred where you clicked, as large as the camera is at the playhead, and selects it.</td><td><a href="../animations/camera.html#targets">The camera</a></td></tr>
+<tr><td><span class="ui">Add camera move</span></td><td>with the multicamera on</td><td>Adds a camera move at the playhead, a second long, where the scene is free; the playhead goes to its end, where the camera is then put.</td><td><a href="../animations/camera.html#move">The camera</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:preview-space end -->
+
+      <h3 id="preview-camera">The camera in the Preview</h3>
+      <p>With the multicamera on, right-click a rectangle of the camera by its edge or its name: a target
+        camera, the camera itself, the frame of 0 s or the frame a move goes to on its own.</p>
+<!-- reference-table:context:preview-camera begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a target camera, the camera</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Move camera here</span></td><td>a target camera</td><td>Adds a camera move to this target camera, at the playhead.</td><td><a href="../animations/camera.html#targets">The camera</a></td></tr>
+<tr><td><span class="ui">Rename…</span></td><td>a target camera</td><td>Asks for the target camera’s new name.</td><td><a href="../animations/camera.html#targets">The camera</a></td></tr>
+<tr><td><span class="ui">Delete (Del)</span></td><td>a target camera</td><td>Deletes the target camera, after a question when moves go to it: those moves stay, each going to a frame of its own where the target camera was.</td><td><a href="../animations/camera.html#targets">The camera</a></td></tr>
+<tr><td><span class="ui">Add target camera here</span></td><td>the camera</td><td>Adds a target camera in the frame of this rectangle.</td><td><a href="../animations/camera.html#targets">The camera</a></td></tr>
+<tr><td><span class="ui">Add camera move</span></td><td>the camera</td><td>Adds a camera move at the playhead, a second long, where the scene is free.</td><td><a href="../animations/camera.html#move">The camera</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:preview-camera end -->
+
+      <h3 id="timeline-camera">The Camera row of the timeline</h3>
+      <p>Right-click a move of the Camera row, or the row where it has none.</p>
+<!-- reference-table:context:timeline-camera begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a camera move, the Camera row</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Isolate in the Preview</span></td><td>a camera move</td><td>Leaves the rectangle of the frame this move goes to as the only one that answers the pointer in the Preview, for frames that lie one over another. <span class="ui">Stop isolating</span> ends it.</td><td><a href="../animations/camera.html#isolate">The camera</a></td></tr>
+<tr><td><span class="ui">Duplicate (Ctrl+D)</span></td><td>a camera move</td><td>Copies the move into the first place after it with room for its whole length.</td><td><a href="../animations/camera.html#block">The camera</a></td></tr>
+<tr><td><span class="ui">Delete (Del)</span></td><td>a camera move</td><td>Deletes the move.</td><td><a href="../animations/camera.html#block">The camera</a></td></tr>
+<tr><td><span class="ui">Add camera move here</span></td><td>the Camera row</td><td>Adds a camera move at the time you clicked, a second long, where the scene is free.</td><td><a href="../animations/camera.html#move">The camera</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:timeline-camera end -->
+
+      <h3 id="slides-ruler">The ruler in the Slides mode</h3>
+      <p>With the Slides mode on, right-click the ruler (<a href="../basics/slides.html#add">Slides and the HTML page</a>).
+        Off, the ruler has no menu.</p>
+<!-- reference-table:context:slides-ruler begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: where the scene rests, where something animates</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Add pause here (time)</span></td><td>all</td><td>Adds a pause at the time clicked, on a frame; with Snap on, pulled onto the playhead or the edge of the zone when they are near. Greyed out where something animates, and a line says what runs there.</td><td><a href="../basics/slides.html#add">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Add comment here…</span></td><td>all</td><td>Adds a comment there, its words asked for first. Greyed out where something animates.</td><td><a href="../basics/slides.html#add">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Add a pause after every animation</span></td><td>all</td><td>Adds a pause where each animation ends and another follows, but in a rest that holds one already, as one undo step. On the menu wherever it is opened.</td><td><a href="../basics/slides.html#all-pauses">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Skip the wait at every pause</span></td><td>all</td><td>Makes every pause that has a wait to skip skip it, as one undo step; the others stay as they are. On the menu wherever it is opened; greyed out while the project has no pause.</td><td><a href="../basics/slides.html#skip-all">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Keep the wait at every pause</span></td><td>all</td><td>Makes every pause keep its wait again, as one undo step. On the menu wherever it is opened; greyed out while the project has no pause.</td><td><a href="../basics/slides.html#skip-all">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Delete every pause…</span></td><td>all</td><td>Deletes every pause, with its note; the comments stay. It asks first, saying how many go, and its button is held down; one undo step brings them back. On the menu wherever it is opened; greyed out while the project has no pause.</td><td><a href="../basics/slides.html#delete-pauses">Slides and HTML</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:slides-ruler end -->
+
+      <h3 id="slides-mark">A pause or a comment</h3>
+      <p>Right-click a pause or a comment on the ruler, or press <kbd data-keys="Shift+F10">Shift+F10</kbd> while
+        it has the keyboard focus. The menu’s header says what the mark is and when.</p>
+<!-- reference-table:context:slides-mark begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a pause, a comment</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Edit note…</span></td><td>a pause</td><td>Writes the note of the pause, for whoever presents; emptied, the note goes. A pause without one reads <span class="ui">Add a note…</span>.</td><td><a href="../basics/slides.html#marks">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Skip the wait after it</span></td><td>a pause</td><td>A pause’s box: going on from it, the exported page and the rehearsal jump over the rest that follows, to where the next animation starts. Greyed out, with a line that says why, where there is nothing to skip. One undo step.</td><td><a href="../basics/slides.html#skip-wait">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Edit comment…</span></td><td>a comment</td><td>Writes the words of the comment; a comment is not kept without them.</td><td><a href="../basics/slides.html#marks">Slides and HTML</a></td></tr>
+<tr><td><span class="ui">Delete (Del)</span></td><td>all</td><td>Deletes the mark, as one undo step.</td><td><a href="../basics/slides.html#marks">Slides and HTML</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:slides-mark end -->
+
+      <h3 id="line-end">The end of a line</h3>
+      <p>Select a line or an arrow and right-click the handle at one of its ends.</p>
+<!-- reference-table:context:line-end begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: an end of a line</caption>
+<thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Detach</span></td><td>Frees this end from the glyphs it is on. Off when it is free already.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+<tr><td><span class="ui">Change its point…</span></td><td>Opens the compass to choose another point of what the end is on.</td><td><a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:line-end end -->
+
+      <h3 id="creator">In the Creator</h3>
+      <p>Right-click a card of the list or the blocks. The menu acts on the selected formulas: a right-click
+        on a card outside the selection selects that card first. Its entries depend on what is selected
+        (<span class="ui">Edit…</span> for one formula, <span class="ui">Edit together…</span> for several, the group
+        entries) and on whether the formulas can take match colours.</p>
+<!-- reference-table:context:creator begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: several formulas, one formula, a group</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Edit together…</span></td><td>several formulas, a group</td><td>Opens the selected formulas in one editor: one scale and glyph colours for all.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Edit…</span></td><td>one formula</td><td>Opens the formula in its editor.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Add to the timeline</span></td><td>all</td><td>Puts a clip of each selected formula on the timeline at the playhead, or in the region when one is marked on the ruler.</td><td><a href="../basics/timeline.html">The timeline</a></td></tr>
+<tr><td><span class="ui">Rename group</span></td><td>a group</td><td>Renames the group.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Ungroup</span></td><td>a group</td><td>Undoes the group; its formulas stay.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Group</span></td><td>several formulas</td><td>Makes a group of the selected formulas, in the Creator’s list.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Apply match colors</span></td><td>all</td><td>Colours the glyphs of the selected formulas with one of the project’s match colour lists.</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td class="is-sub"><span class="ui">Create match colors…</span></td><td>all</td><td>Opens the <span class="ui">Match colors</span> dialog on a new list (what the submenu offers while the project has none).</td><td><a href="../color/match-colors.html">Match colors</a></td></tr>
+<tr><td><span class="ui">Duplicate</span></td><td>all</td><td>Makes a copy of each selected formula, under the next free name, right after the original.</td><td><a href="../objects/organizing.html">Organizing</a></td></tr>
+<tr><td><span class="ui">Delete…</span></td><td>all</td><td>Deletes the selected formulas with their clips and relations, as one undo step, after a question whose confirm button is held down. With several selected it says how many: Delete N formulas….</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:creator end -->
+      <p>With groups in the project, the menu of selected formulas that is not opened on the row of a group
+        can have two more entries:</p>
+      <table>
+        <caption class="sr-only">The right-click menu of the Creator: the entries that change what is in a group</caption>
+        <thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ui">Add to group</span></td><td>A submenu of the groups there are: puts the selected formulas in the one you choose. Shown while one of them is in no group.</td><td><a href="../objects/organizing.html#groups">Organizing</a></td></tr>
+          <tr><td><span class="ui">Remove from group</span></td><td>Takes the selected formulas out of their groups; a group left without formulas goes. Shown while one of them is in a group.</td><td><a href="../objects/organizing.html#groups">Organizing</a></td></tr>
+        </tbody>
+      </table>
+      <p>The arrow of <span class="ui">+ New</span> beside the button is a menu of its own:</p>
+<!-- reference-table:context:creator-new begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: the arrow of + New</caption>
+<thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Formula</span></td><td>A new formula, written in LaTeX math.</td><td><a href="../basics/formulas.html">Formulas</a></td></tr>
+<tr><td><span class="ui">Text (LaTeX)</span></td><td>A new LaTeX text: prose with formulas between dollar signs.</td><td><a href="../objects/texts.html">Texts</a></td></tr>
+<tr><td><span class="ui">Text (font)</span></td><td>A new font text: plain text in any font, shaped by the companion.</td><td><a href="../objects/texts.html">Texts</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:creator-new end -->
+
+      <h3 id="glyphs">On glyphs and pairs</h3>
+      <p>In the formula editor’s glyph view, right-click a glyph for what acts on the selected glyphs. In the
+        relation editor, right-click a glyph for the menu of the pairs it is in.</p>
+<!-- reference-table:context:glyphs begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The right-click menu: a glyph in the formula editor, a pair in the relation editor</caption>
+<thead><tr><th>Entry</th><th>For</th><th>What it does</th><th>See</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Colour swatches</span></td><td>a glyph in the formula editor</td><td>The twelve Manim colours, then the roles of the active palette: one click colours what the menu acts on.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Apply</span></td><td>a glyph in the formula editor</td><td>Colours the selected glyphs with the #RRGGBB typed in the field above it.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Clear colour</span></td><td>a glyph in the formula editor</td><td>Gives the selected glyphs back the colour of the whole formula.</td><td><a href="../color/coloring.html">Colouring</a></td></tr>
+<tr><td><span class="ui">Hide at the start</span></td><td>a glyph in the formula editor</td><td>Hides the selected glyphs at the start of the clip, so that an Appear block can bring them in later.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Show at the start</span></td><td>a glyph in the formula editor</td><td>Shows glyphs that were hidden at the start.</td><td><a href="../animations/blocks.html">Animation blocks</a></td></tr>
+<tr><td><span class="ui">Inherit: Transform</span></td><td>a pair in the relation editor</td><td>The pair takes the style of the relation.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Transform</span></td><td>a pair in the relation editor</td><td>The glyph moves from the source to the target.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Copy (source stays)</span></td><td>a pair in the relation editor</td><td>A copy of the source glyph moves to the target; the source stays.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Fade transform</span></td><td>a pair in the relation editor</td><td>The source glyph fades out as the target glyph fades in (Manim’s FadeTransform).</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Fade copy (source stays)</span></td><td>a pair in the relation editor</td><td>A copy of the source glyph fades out as the target glyph fades in; the source stays.</td><td><a href="../transforms/relations.html">Relations</a></td></tr>
+<tr><td><span class="ui">Edit path…</span></td><td>a pair in the relation editor</td><td>Shapes the path of this pair in the Preview.</td><td><a href="../transforms/custom-paths.html">Custom paths</a></td></tr>
+<tr><td><span class="ui">Delete link…</span></td><td>a pair in the relation editor</td><td>Deletes the link of the selected glyphs, after a question.</td><td><a href="../transforms/relation-editor.html">Relation editor</a></td></tr>
+</tbody>
+</table>
+<!-- reference-table:context:glyphs end -->
+      <p>The menu of the relation editor has more entries in two cases: with glyphs selected on both sides
+        the link comes first, and a pair of several sources onto one target, or one whose target other
+        pairs bring too, can be taken apart or joined. The pair editor of a Morph block has the same
+        menu.</p>
+      <table>
+        <caption class="sr-only">The right-click menu of the relation editor: the link, and pairs that bring one target</caption>
+        <thead><tr><th>Entry</th><th>What it does</th><th>See</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ui">Link as Transform</span>, <span class="ui">Link as Copy</span>, <span class="ui">Link as Fade transform</span>, <span class="ui">Link as Fade copy</span></td><td>Links the selected glyphs as a pair of that style. A style they cannot take is greyed out, with the reason under it. Onto targets that a pair brings already, the menu offers <span class="ui">Join pair <i>N</i></span> instead, and <span class="ui">Separate pair as …</span> for a pair of its own onto them.</td><td><a href="../transforms/relation-editor.html#link-as">Relation editor</a></td></tr>
+          <tr><td><span class="ui">Split into separate pairs</span></td><td>Takes a pair of several sources onto one target apart: one pair for each source, each with the style it played and the path it followed.</td><td><a href="../transforms/relation-editor.html#separate-pairs">Relation editor</a></td></tr>
+          <tr><td><span class="ui">Join into one pair</span></td><td>Puts back into one the pairs that bring the same target. Greyed out, with the reason under it, when one pair could not play what they play.</td><td><a href="../transforms/relation-editor.html#separate-pairs">Relation editor</a></td></tr>
+        </tbody>
+      </table>
+
+      <aside class="callout note">
+        <p>Several panels have a button that opens a menu of its own beside its label, such as
+          <span class="ui">Paste properties</span> and <span class="ui">Match colors</span> in the bar that appears in the
+          Preview when two or more clips are selected. Those menus offer the same commands as the ones
+          above.</p>
+      </aside>
+    </article>
+  </main>
+</body>
+</html>

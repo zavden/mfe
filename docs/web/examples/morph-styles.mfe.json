@@ -1,0 +1,740 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Four styles of Morph",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_copy",
+      "kind": "math",
+      "name": "copy",
+      "source": "a + b \\\\\n  b + a",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ublx23exe7",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.8355674879999999,
+              0.5607532799999999
+            ],
+            "size": [
+              0.47405951999999985,
+              0.45201024
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.037082879999999985,
+              0.5958316799999999
+            ],
+            "size": [
+              0.66749184,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.881169408,
+              0.68703552
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065791999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.874153728,
+              -0.61587648
+            ],
+            "size": [
+              0.38285568000000003,
+              0.7065792
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.06314111999999994,
+              -0.70708032
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              0.819531648,
+              -0.7421587199999999
+            ],
+            "size": [
+              0.4740595200000002,
+              0.4520102399999999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_transform",
+      "kind": "math",
+      "name": "transform",
+      "source": "a + b \\\\\n  b + a",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#83C167",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ublx23exe7",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.8355674879999999,
+              0.5607532799999999
+            ],
+            "size": [
+              0.47405951999999985,
+              0.45201024
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.037082879999999985,
+              0.5958316799999999
+            ],
+            "size": [
+              0.66749184,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.881169408,
+              0.68703552
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065791999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.874153728,
+              -0.61587648
+            ],
+            "size": [
+              0.38285568000000003,
+              0.7065792
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.06314111999999994,
+              -0.70708032
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              0.819531648,
+              -0.7421587199999999
+            ],
+            "size": [
+              0.4740595200000002,
+              0.4520102399999999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_fade",
+      "kind": "math",
+      "name": "fade transform",
+      "source": "a + b \\\\\n  b + a",
+      "packages": [],
+      "tag": {
+        "color": "#F4C867",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#F4C867",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ublx23exe7",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.8355674879999999,
+              0.5607532799999999
+            ],
+            "size": [
+              0.47405951999999985,
+              0.45201024
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.037082879999999985,
+              0.5958316799999999
+            ],
+            "size": [
+              0.66749184,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.881169408,
+              0.68703552
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065791999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.874153728,
+              -0.61587648
+            ],
+            "size": [
+              0.38285568000000003,
+              0.7065792
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.06314111999999994,
+              -0.70708032
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              0.819531648,
+              -0.7421587199999999
+            ],
+            "size": [
+              0.4740595200000002,
+              0.4520102399999999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_fade_copy",
+      "kind": "math",
+      "name": "fade copy",
+      "source": "a + b \\\\\n  b + a",
+      "packages": [],
+      "tag": {
+        "color": "#9A72AC",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#9A72AC",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ublx23exe7",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.8355674879999999,
+              0.5607532799999999
+            ],
+            "size": [
+              0.47405951999999985,
+              0.45201024
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.037082879999999985,
+              0.5958316799999999
+            ],
+            "size": [
+              0.66749184,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.881169408,
+              0.68703552
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065791999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.874153728,
+              -0.61587648
+            ],
+            "size": [
+              0.38285568000000003,
+              0.7065792
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.06314111999999994,
+              -0.70708032
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              0.819531648,
+              -0.7421587199999999
+            ],
+            "size": [
+              0.4740595200000002,
+              0.4520102399999999
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_copy",
+      "kind": "visual",
+      "name": "Copy",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_transform",
+      "kind": "visual",
+      "name": "Transform",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_fade",
+      "kind": "visual",
+      "name": "Fade transform",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_fade_copy",
+      "kind": "visual",
+      "name": "Fade copy",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_copy",
+      "formulaId": "f_copy",
+      "trackId": "t_copy",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          -5.1,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_copy",
+          "kind": "morph",
+          "start": 1.6,
+          "duration": 1.6,
+          "easing": "smooth",
+          "style": "copy",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                0
+              ],
+              "to": [
+                5
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                1
+              ],
+              "to": [
+                4
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                2
+              ],
+              "to": [
+                3
+              ],
+              "style": null
+            }
+          ]
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_transform",
+      "formulaId": "f_transform",
+      "trackId": "t_transform",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          -1.7,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_transform",
+          "kind": "morph",
+          "start": 1.6,
+          "duration": 1.6,
+          "easing": "smooth",
+          "style": "transform",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                0
+              ],
+              "to": [
+                5
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                1
+              ],
+              "to": [
+                4
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                2
+              ],
+              "to": [
+                3
+              ],
+              "style": null
+            }
+          ]
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_fade",
+      "formulaId": "f_fade",
+      "trackId": "t_fade",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          1.7,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_fade",
+          "kind": "morph",
+          "start": 1.6,
+          "duration": 1.6,
+          "easing": "smooth",
+          "style": "fade",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                0
+              ],
+              "to": [
+                5
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                1
+              ],
+              "to": [
+                4
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                2
+              ],
+              "to": [
+                3
+              ],
+              "style": null
+            }
+          ]
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_fade_copy",
+      "formulaId": "f_fade_copy",
+      "trackId": "t_fade_copy",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          5.1,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_fade_copy",
+          "kind": "morph",
+          "start": 1.6,
+          "duration": 1.6,
+          "easing": "smooth",
+          "style": "fade_copy",
+          "pathArc": 0,
+          "pairs": [
+            {
+              "from": [
+                0
+              ],
+              "to": [
+                5
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                1
+              ],
+              "to": [
+                4
+              ],
+              "style": null
+            },
+            {
+              "from": [
+                2
+              ],
+              "to": [
+                3
+              ],
+              "style": null
+            }
+          ]
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

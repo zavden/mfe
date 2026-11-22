@@ -1,0 +1,453 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Starts empty",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_source",
+      "kind": "math",
+      "name": "source",
+      "source": "a=b",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "2": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1x22aszeku5",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.3369380480000002,
+              -0.18942335999999999
+            ],
+            "size": [
+              0.71108928,
+              0.67801536
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.05562431999999995,
+              -0.13755744
+            ],
+            "size": [
+              1.00123776,
+              0.35178624
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              1.4053409279999998,
+              0
+            ],
+            "size": [
+              0.5742835199999998,
+              1.0598688
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_target",
+      "kind": "math",
+      "name": "target",
+      "source": "a^2=b^2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "3": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-2fyfs5zc6yt",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.9337291222399997,
+              -0.33213882816
+            ],
+            "size": [
+              0.7110892799999999,
+              0.67801536
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -1.2288088799999994,
+              0.31871232
+            ],
+            "size": [
+              0.42408733247999986,
+              0.7078750963199999
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.1150498857600003,
+              -0.28027290816
+            ],
+            "size": [
+              1.0012377599999998,
+              0.35178624000000003
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              1.4647664937600005,
+              -0.14271546816000003
+            ],
+            "size": [
+              0.5742835199999998,
+              1.0598688
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              2.077230096,
+              0.31871232
+            ],
+            "size": [
+              0.4240873324800001,
+              0.7078750963199999
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "tk_top",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "tk_bottom",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_source_1",
+      "formulaId": "f_source",
+      "trackId": "tk_top",
+      "start": 0,
+      "end": 3,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_target_1",
+      "formulaId": "f_target",
+      "trackId": "tk_bottom",
+      "start": 1.5,
+      "end": 5,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_source_2",
+      "formulaId": "f_source",
+      "trackId": "tk_top",
+      "start": 6,
+      "end": 9,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_target_2",
+      "formulaId": "f_target",
+      "trackId": "tk_bottom",
+      "start": 7.5,
+      "end": 12.5,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_powers",
+          "kind": "appear",
+          "start": 2,
+          "duration": 1,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            1,
+            4
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null,
+      "startsEmpty": true
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_plain",
+      "fromClipId": "c_source_1",
+      "toClipId": "c_target_1",
+      "offset": 0,
+      "duration": 1.5,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        }
+      ]
+    },
+    {
+      "id": "r_empty",
+      "fromClipId": "c_source_2",
+      "toClipId": "c_target_2",
+      "offset": 0,
+      "duration": 1.5,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

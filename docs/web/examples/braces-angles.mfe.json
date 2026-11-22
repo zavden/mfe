@@ -1,0 +1,517 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Braces at any angle",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_letter",
+      "kind": "math",
+      "name": "letter",
+      "source": "x",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 192,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-mc8zu5bwez",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -5.551115123125783e-17,
+              -2.7755575615628914e-17
+            ],
+            "size": [
+              0.9761817599999999,
+              0.90802944
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_d1",
+      "kind": "brace",
+      "name": "b_d1",
+      "source": "",
+      "sharpness": 2,
+      "width": 1.192017758033114,
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2c6h6yp8ojm",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.192017758033114,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_d2",
+      "kind": "brace",
+      "name": "b_d2",
+      "source": "",
+      "sharpness": 2,
+      "width": 0.973741022317181,
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#83C167",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1xedg8yq8td",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              0.9737410223171812,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_d3",
+      "kind": "brace",
+      "name": "b_d3",
+      "source": "",
+      "sharpness": 2,
+      "width": 1.192017758033114,
+      "tag": {
+        "color": "#FC6255",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFF00",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2c6h6yp8ojm",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.192017758033114,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_d4",
+      "kind": "brace",
+      "name": "b_d4",
+      "source": "",
+      "sharpness": 2,
+      "width": 0.973741022317181,
+      "tag": {
+        "color": "#9A72AC",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FC6255",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1xedg8yq8td",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              0.9737410223171812,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_d4",
+      "kind": "visual",
+      "name": "d4",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_d3",
+      "kind": "visual",
+      "name": "d3",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_d2",
+      "kind": "visual",
+      "name": "d2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_d1",
+      "kind": "visual",
+      "name": "d1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_letter",
+      "kind": "visual",
+      "name": "letter",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_letter",
+      "formulaId": "f_letter",
+      "trackId": "t_letter",
+      "start": 0,
+      "end": 9,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_d1",
+      "formulaId": "f_d1",
+      "trackId": "t_d1",
+      "start": 1.6,
+      "end": 9,
+      "initial": {
+        "position": [
+          0.6529162328313117,
+          -0.6539184728313118
+        ],
+        "scale": 1,
+        "rotation": 45,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 0.7,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_letter",
+        "glyphs": "all",
+        "rule": "brace",
+        "direction": 45,
+        "buff": 0.3
+      }
+    },
+    {
+      "id": "c_d2",
+      "formulaId": "f_d2",
+      "trackId": "t_d2",
+      "start": 3,
+      "end": 9,
+      "initial": {
+        "position": [
+          0.7300887128313116,
+          0.7290864728313117
+        ],
+        "scale": 1,
+        "rotation": 135,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 0.7,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_letter",
+        "glyphs": "all",
+        "rule": "brace",
+        "direction": 135,
+        "buff": 0.3
+      }
+    },
+    {
+      "id": "c_d3",
+      "formulaId": "f_d3",
+      "trackId": "t_d3",
+      "start": 4.4,
+      "end": 9,
+      "initial": {
+        "position": [
+          -0.6529162328313118,
+          0.6519139928313117
+        ],
+        "scale": 1,
+        "rotation": -135,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 0.7,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_letter",
+        "glyphs": "all",
+        "rule": "brace",
+        "direction": -135,
+        "buff": 0.3
+      }
+    },
+    {
+      "id": "c_d4",
+      "formulaId": "f_d4",
+      "trackId": "t_d4",
+      "start": 5.8,
+      "end": 9,
+      "initial": {
+        "position": [
+          -0.7300887128313117,
+          -0.7310909528313119
+        ],
+        "scale": 1,
+        "rotation": -45,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 0.7,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_letter",
+        "glyphs": "all",
+        "rule": "brace",
+        "direction": -45,
+        "buff": 0.3
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

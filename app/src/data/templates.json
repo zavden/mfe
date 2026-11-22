@@ -1,0 +1,3607 @@
+[
+  {
+    "id": "algebra-square-of-a-sum",
+    "category": "Algebra",
+    "name": "Square of a sum",
+    "description": "Expansion of a binomial squared.",
+    "level": "high-school",
+    "latex": "(#1+#2)^2=#1^2+2#1#2+#2^2",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-square-of-a-difference",
+    "category": "Algebra",
+    "name": "Square of a difference",
+    "description": "Expansion of a difference squared.",
+    "level": "high-school",
+    "latex": "(#1-#2)^2=#1^2-2#1#2+#2^2",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-difference-of-squares",
+    "category": "Algebra",
+    "name": "Difference of squares",
+    "description": "Factoring a difference of two squares.",
+    "level": "high-school",
+    "latex": "#1^2-#2^2=(#1+#2)(#1-#2)",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-cube-of-a-sum",
+    "category": "Algebra",
+    "name": "Cube of a sum",
+    "description": "Expansion of a binomial cubed.",
+    "level": "high-school",
+    "latex": "(#1+#2)^3=#1^3+3#1^2#2+3#1#2^2+#2^3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-sum-of-cubes",
+    "category": "Algebra",
+    "name": "Sum of cubes",
+    "description": "Factoring a sum of two cubes.",
+    "level": "high-school",
+    "latex": "#1^3+#2^3=(#1+#2)(#1^2-#1#2+#2^2)",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-difference-of-cubes",
+    "category": "Algebra",
+    "name": "Difference of cubes",
+    "description": "Factoring a difference of two cubes.",
+    "level": "high-school",
+    "latex": "#1^3-#2^3=(#1-#2)(#1^2+#1#2+#2^2)",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first term" },
+      { "n": 2, "value": "b", "label": "second term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-quadratic-formula",
+    "category": "Algebra",
+    "name": "Quadratic formula",
+    "description": "Roots of a quadratic equation.",
+    "level": "high-school",
+    "latex": "#1=\\frac{-#2\\pm\\sqrt{#2^{2}-4#3#4}}{2#3}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "unknown" },
+      { "n": 2, "value": "b", "label": "linear coefficient" },
+      { "n": 3, "value": "a", "label": "leading coefficient" },
+      { "n": 4, "value": "c", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-completing-the-square",
+    "category": "Algebra",
+    "name": "Completing the square",
+    "description": "Vertex form of a quadratic.",
+    "level": "high-school",
+    "latex": "#1#2^2+#3#2+#4=#1\\left(#2+\\frac{#3}{2#1}\\right)^2-\\frac{#3^2-4#1#4}{4#1}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "leading coefficient" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "b", "label": "linear coefficient" },
+      { "n": 4, "value": "c", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-discriminant",
+    "category": "Algebra",
+    "name": "Discriminant",
+    "description": "The discriminant of a quadratic.",
+    "level": "high-school",
+    "latex": "#1=#2^{2}-4#3#4",
+    "placeholders": [
+      { "n": 1, "value": "\\Delta", "label": "discriminant" },
+      { "n": 2, "value": "b", "label": "linear coefficient" },
+      { "n": 3, "value": "a", "label": "leading coefficient" },
+      { "n": 4, "value": "c", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-vietas-formulas",
+    "category": "Algebra",
+    "name": "Vieta's formulas",
+    "description": "Sum and product of the roots of a quadratic.",
+    "level": "high-school",
+    "latex": "#1_1+#1_2=-\\frac{#2}{#3},\\qquad #1_1#1_2=\\frac{#4}{#3}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "root" },
+      { "n": 2, "value": "b", "label": "linear coefficient" },
+      { "n": 3, "value": "a", "label": "leading coefficient" },
+      { "n": 4, "value": "c", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-binomial-theorem",
+    "category": "Algebra",
+    "name": "Binomial theorem",
+    "description": "Expansion of (x+y) to the n.",
+    "level": "university",
+    "latex": "(#1+#2)^{#3}=\\sum_{#4=0}^{#3}\\binom{#3}{#4}#1^{#3-#4}#2^{#4}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "first term" },
+      { "n": 2, "value": "y", "label": "second term" },
+      { "n": 3, "value": "n", "label": "exponent" },
+      { "n": 4, "value": "k", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-binomial-coefficient",
+    "category": "Algebra",
+    "name": "Binomial coefficient",
+    "description": "Definition of n choose k.",
+    "level": "high-school",
+    "latex": "\\binom{#1}{#2}=\\frac{#1!}{#2!\\,(#1-#2)!}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "number of items" },
+      { "n": 2, "value": "k", "label": "number chosen" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-product-of-powers",
+    "category": "Algebra",
+    "name": "Product of powers",
+    "description": "Exponent rule for multiplying powers.",
+    "level": "high-school",
+    "latex": "#1^{#2}\\cdot #1^{#3}=#1^{#2+#3}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "base" },
+      { "n": 2, "value": "m", "label": "first exponent" },
+      { "n": 3, "value": "n", "label": "second exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-power-of-a-power",
+    "category": "Algebra",
+    "name": "Power of a power",
+    "description": "Exponent rule for a power raised to a power.",
+    "level": "high-school",
+    "latex": "\\left(#1^{#2}\\right)^{#3}=#1^{#2#3}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "base" },
+      { "n": 2, "value": "m", "label": "inner exponent" },
+      { "n": 3, "value": "n", "label": "outer exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-negative-exponent",
+    "category": "Algebra",
+    "name": "Negative exponent",
+    "description": "Meaning of a negative exponent.",
+    "level": "high-school",
+    "latex": "#1^{-#2}=\\frac{1}{#1^{#2}}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "base" },
+      { "n": 2, "value": "n", "label": "exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-rational-exponent",
+    "category": "Algebra",
+    "name": "Rational exponent",
+    "description": "Roots as fractional exponents.",
+    "level": "high-school",
+    "latex": "#1^{#2/#3}=\\sqrt[#3]{#1^{#2}}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "base" },
+      { "n": 2, "value": "m", "label": "power" },
+      { "n": 3, "value": "n", "label": "root index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-logarithm-of-a-product",
+    "category": "Algebra",
+    "name": "Logarithm of a product",
+    "description": "Product rule for logarithms.",
+    "level": "high-school",
+    "latex": "\\log_{#1}(#2#3)=\\log_{#1} #2+\\log_{#1} #3",
+    "placeholders": [
+      { "n": 1, "value": "b", "label": "base" },
+      { "n": 2, "value": "x", "label": "first factor" },
+      { "n": 3, "value": "y", "label": "second factor" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-logarithm-of-a-power",
+    "category": "Algebra",
+    "name": "Logarithm of a power",
+    "description": "Power rule for logarithms.",
+    "level": "high-school",
+    "latex": "\\log_{#1}\\left(#2^{#3}\\right)=#3\\log_{#1} #2",
+    "placeholders": [
+      { "n": 1, "value": "b", "label": "base" },
+      { "n": 2, "value": "x", "label": "argument" },
+      { "n": 3, "value": "n", "label": "exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-change-of-base",
+    "category": "Algebra",
+    "name": "Change of base",
+    "description": "Change of base for logarithms.",
+    "level": "high-school",
+    "latex": "\\log_{#1} #2=\\frac{\\ln #2}{\\ln #1}",
+    "placeholders": [
+      { "n": 1, "value": "b", "label": "base" },
+      { "n": 2, "value": "x", "label": "argument" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "algebra-absolute-value",
+    "category": "Algebra",
+    "name": "Absolute value",
+    "description": "Piecewise definition of the absolute value.",
+    "level": "high-school",
+    "latex": "|#1|=\\begin{cases}#1 & #1\\ge 0\\\\-#1 & #1<0\\end{cases}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-slope-of-a-secant-line",
+    "category": "Functions",
+    "name": "Slope of a secant line",
+    "description": "Average rate of change of f.",
+    "level": "high-school",
+    "latex": "#1=\\frac{#2(#3)-#2(#4)}{#3-#4}",
+    "placeholders": [
+      { "n": 1, "value": "m", "label": "slope" },
+      { "n": 2, "value": "f", "label": "function" },
+      { "n": 3, "value": "b", "label": "right endpoint" },
+      { "n": 4, "value": "a", "label": "left endpoint" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-function-composition",
+    "category": "Functions",
+    "name": "Function composition",
+    "description": "Definition of composition.",
+    "level": "high-school",
+    "latex": "(#1\\circ #2)(#3)=#1\\bigl(#2(#3)\\bigr)",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "outer function" },
+      { "n": 2, "value": "g", "label": "inner function" },
+      { "n": 3, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-inverse-function",
+    "category": "Functions",
+    "name": "Inverse function",
+    "description": "Defining property of the inverse.",
+    "level": "high-school",
+    "latex": "#1^{-1}\\bigl(#1(#2)\\bigr)=#2",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-even-function",
+    "category": "Functions",
+    "name": "Even function",
+    "description": "Symmetry of an even function.",
+    "level": "high-school",
+    "latex": "#1(-#2)=#1(#2)",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-odd-function",
+    "category": "Functions",
+    "name": "Odd function",
+    "description": "Symmetry of an odd function.",
+    "level": "high-school",
+    "latex": "#1(-#2)=-#1(#2)",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-linear-function",
+    "category": "Functions",
+    "name": "Linear function",
+    "description": "Slope-intercept form.",
+    "level": "high-school",
+    "latex": "#1(#2)=#3#2+#4",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "m", "label": "slope" },
+      { "n": 4, "value": "b", "label": "intercept" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-quadratic-vertex-form",
+    "category": "Functions",
+    "name": "Quadratic vertex form",
+    "description": "Vertex form of a parabola.",
+    "level": "high-school",
+    "latex": "#1(#2)=#3(#2-#4)^2+#5",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "a", "label": "leading coefficient" },
+      { "n": 4, "value": "h", "label": "vertex x-coordinate" },
+      { "n": 5, "value": "k", "label": "vertex y-coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-exponential-growth",
+    "category": "Functions",
+    "name": "Exponential growth",
+    "description": "Continuous exponential growth.",
+    "level": "high-school",
+    "latex": "#1(#2)=#1_0\\,e^{#3#2}",
+    "placeholders": [
+      { "n": 1, "value": "P", "label": "amount" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "r", "label": "growth rate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-compound-interest",
+    "category": "Functions",
+    "name": "Compound interest",
+    "description": "Value of an investment compounded n times per year.",
+    "level": "high-school",
+    "latex": "#1=#2\\left(1+\\frac{#3}{#4}\\right)^{#4#5}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "final amount" },
+      { "n": 2, "value": "P", "label": "principal" },
+      { "n": 3, "value": "r", "label": "annual rate" },
+      { "n": 4, "value": "n", "label": "periods per year" },
+      { "n": 5, "value": "t", "label": "years" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-logistic-function",
+    "category": "Functions",
+    "name": "Logistic function",
+    "description": "S-shaped growth curve.",
+    "level": "university",
+    "latex": "#1(#2)=\\frac{#3}{1+e^{-#4(#2-#2_0)}}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "L", "label": "maximum value" },
+      { "n": 4, "value": "k", "label": "steepness" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-hyperbolic-sine-and-cosine",
+    "category": "Functions",
+    "name": "Hyperbolic sine and cosine",
+    "description": "Definitions in terms of the exponential.",
+    "level": "university",
+    "latex": "\\sinh #1=\\frac{e^{#1}-e^{-#1}}{2},\\qquad \\cosh #1=\\frac{e^{#1}+e^{-#1}}{2}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-gaussian-function",
+    "category": "Functions",
+    "name": "Gaussian function",
+    "description": "Bell curve.",
+    "level": "university",
+    "latex": "#1(#2)=#3\\,e^{-\\frac{(#2-#4)^2}{2#5^2}}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "a", "label": "peak height" },
+      { "n": 4, "value": "b", "label": "center" },
+      { "n": 5, "value": "c", "label": "width" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "functions-piecewise-function",
+    "category": "Functions",
+    "name": "Piecewise function",
+    "description": "A function defined by cases.",
+    "level": "high-school",
+    "latex": "#1(#2)=\\begin{cases}#2^2 & #2<0\\\\ 2#2+1 & #2\\ge 0\\end{cases}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-pythagorean-identity",
+    "category": "Trigonometry",
+    "name": "Pythagorean identity",
+    "description": "Fundamental trigonometric identity.",
+    "level": "high-school",
+    "latex": "\\sin^{2}#1+\\cos^{2}#1=1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-tangent-identity",
+    "category": "Trigonometry",
+    "name": "Tangent identity",
+    "description": "Tangent as sine over cosine.",
+    "level": "high-school",
+    "latex": "\\tan#1=\\frac{\\sin#1}{\\cos#1}",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-secant-identity",
+    "category": "Trigonometry",
+    "name": "Secant identity",
+    "description": "One plus tangent squared.",
+    "level": "high-school",
+    "latex": "1+\\tan^{2}#1=\\sec^{2}#1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-sine-of-a-sum",
+    "category": "Trigonometry",
+    "name": "Sine of a sum",
+    "description": "Angle addition for sine.",
+    "level": "high-school",
+    "latex": "\\sin(#1+#2)=\\sin#1\\cos#2+\\cos#1\\sin#2",
+    "placeholders": [
+      { "n": 1, "value": "\\alpha", "label": "first angle" },
+      { "n": 2, "value": "\\beta", "label": "second angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-cosine-of-a-sum",
+    "category": "Trigonometry",
+    "name": "Cosine of a sum",
+    "description": "Angle addition for cosine.",
+    "level": "high-school",
+    "latex": "\\cos(#1+#2)=\\cos#1\\cos#2-\\sin#1\\sin#2",
+    "placeholders": [
+      { "n": 1, "value": "\\alpha", "label": "first angle" },
+      { "n": 2, "value": "\\beta", "label": "second angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-tangent-of-a-sum",
+    "category": "Trigonometry",
+    "name": "Tangent of a sum",
+    "description": "Angle addition for tangent.",
+    "level": "high-school",
+    "latex": "\\tan(#1+#2)=\\frac{\\tan#1+\\tan#2}{1-\\tan#1\\tan#2}",
+    "placeholders": [
+      { "n": 1, "value": "\\alpha", "label": "first angle" },
+      { "n": 2, "value": "\\beta", "label": "second angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-double-angle-sine",
+    "category": "Trigonometry",
+    "name": "Double angle, sine",
+    "description": "Sine of twice an angle.",
+    "level": "high-school",
+    "latex": "\\sin 2#1=2\\sin#1\\cos#1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-double-angle-cosine",
+    "category": "Trigonometry",
+    "name": "Double angle, cosine",
+    "description": "Cosine of twice an angle.",
+    "level": "high-school",
+    "latex": "\\cos 2#1=\\cos^{2}#1-\\sin^{2}#1=1-2\\sin^{2}#1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-half-angle-sine",
+    "category": "Trigonometry",
+    "name": "Half-angle, sine",
+    "description": "Sine of a half angle.",
+    "level": "high-school",
+    "latex": "\\sin^{2}\\frac{#1}{2}=\\frac{1-\\cos#1}{2}",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-product-to-sum",
+    "category": "Trigonometry",
+    "name": "Product to sum",
+    "description": "Product of sine and cosine as a sum.",
+    "level": "university",
+    "latex": "\\sin#1\\cos#2=\\tfrac{1}{2}\\bigl[\\sin(#1+#2)+\\sin(#1-#2)\\bigr]",
+    "placeholders": [
+      { "n": 1, "value": "\\alpha", "label": "first angle" },
+      { "n": 2, "value": "\\beta", "label": "second angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-law-of-sines",
+    "category": "Trigonometry",
+    "name": "Law of sines",
+    "description": "Sides proportional to sines of opposite angles.",
+    "level": "high-school",
+    "latex": "\\frac{#1}{\\sin #2}=\\frac{#3}{\\sin #4}=\\frac{#5}{\\sin #6}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first side" },
+      { "n": 2, "value": "A", "label": "first opposite angle" },
+      { "n": 3, "value": "b", "label": "second side" },
+      { "n": 4, "value": "B", "label": "second opposite angle" },
+      { "n": 5, "value": "c", "label": "third side" },
+      { "n": 6, "value": "C", "label": "third opposite angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-law-of-cosines",
+    "category": "Trigonometry",
+    "name": "Law of cosines",
+    "description": "Generalised Pythagorean theorem.",
+    "level": "high-school",
+    "latex": "#1^{2}=#2^{2}+#3^{2}-2#2#3\\cos #4",
+    "placeholders": [
+      { "n": 1, "value": "c", "label": "opposite side" },
+      { "n": 2, "value": "a", "label": "first side" },
+      { "n": 3, "value": "b", "label": "second side" },
+      { "n": 4, "value": "C", "label": "included angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-pythagorean-theorem",
+    "category": "Trigonometry",
+    "name": "Pythagorean theorem",
+    "description": "Relation among the sides of a right triangle.",
+    "level": "high-school",
+    "latex": "#1^{2}+#2^{2}=#3^{2}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first leg" },
+      { "n": 2, "value": "b", "label": "second leg" },
+      { "n": 3, "value": "c", "label": "hypotenuse" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-radians-and-degrees",
+    "category": "Trigonometry",
+    "name": "Radians and degrees",
+    "description": "Converting degrees to radians.",
+    "level": "high-school",
+    "latex": "#1_{\\text{rad}}=#1_{\\text{deg}}\\cdot\\frac{\\pi}{180}",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-arc-length",
+    "category": "Trigonometry",
+    "name": "Arc length",
+    "description": "Length of a circular arc.",
+    "level": "high-school",
+    "latex": "#1=#2#3",
+    "placeholders": [
+      { "n": 1, "value": "s", "label": "arc length" },
+      { "n": 2, "value": "r", "label": "radius" },
+      { "n": 3, "value": "\\theta", "label": "central angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "trigonometry-area-of-a-triangle",
+    "category": "Trigonometry",
+    "name": "Area of a triangle",
+    "description": "Area from two sides and the included angle.",
+    "level": "high-school",
+    "latex": "#1=\\tfrac{1}{2}#2#3\\sin #4",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "area" },
+      { "n": 2, "value": "a", "label": "first side" },
+      { "n": 3, "value": "b", "label": "second side" },
+      { "n": 4, "value": "C", "label": "included angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-distance-formula",
+    "category": "Analytic geometry",
+    "name": "Distance formula",
+    "description": "Distance between two points.",
+    "level": "high-school",
+    "latex": "#1=\\sqrt{(#2_2-#2_1)^2+(#3_2-#3_1)^2}",
+    "placeholders": [
+      { "n": 1, "value": "d", "label": "distance" },
+      { "n": 2, "value": "x", "label": "horizontal coordinate" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-midpoint-formula",
+    "category": "Analytic geometry",
+    "name": "Midpoint formula",
+    "description": "Midpoint of a segment.",
+    "level": "high-school",
+    "latex": "#1=\\left(\\frac{#2_1+#2_2}{2},\\frac{#3_1+#3_2}{2}\\right)",
+    "placeholders": [
+      { "n": 1, "value": "M", "label": "midpoint" },
+      { "n": 2, "value": "x", "label": "horizontal coordinate" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-slope-of-a-line",
+    "category": "Analytic geometry",
+    "name": "Slope of a line",
+    "description": "Slope through two points.",
+    "level": "high-school",
+    "latex": "#1=\\frac{#2_2-#2_1}{#3_2-#3_1}",
+    "placeholders": [
+      { "n": 1, "value": "m", "label": "slope" },
+      { "n": 2, "value": "y", "label": "vertical coordinate" },
+      { "n": 3, "value": "x", "label": "horizontal coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-point-slope-form",
+    "category": "Analytic geometry",
+    "name": "Point-slope form",
+    "description": "Line through a point with given slope.",
+    "level": "high-school",
+    "latex": "#1-#1_1=#2(#3-#3_1)",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "vertical coordinate" },
+      { "n": 2, "value": "m", "label": "slope" },
+      { "n": 3, "value": "x", "label": "horizontal coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-general-line-equation",
+    "category": "Analytic geometry",
+    "name": "General line equation",
+    "description": "General form of a line.",
+    "level": "high-school",
+    "latex": "#1#2+#3#4+#5=0",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first coefficient" },
+      { "n": 2, "value": "x", "label": "horizontal coordinate" },
+      { "n": 3, "value": "B", "label": "second coefficient" },
+      { "n": 4, "value": "y", "label": "vertical coordinate" },
+      { "n": 5, "value": "C", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-distance-from-point-to-line",
+    "category": "Analytic geometry",
+    "name": "Distance from point to line",
+    "description": "Distance from a point to a line.",
+    "level": "high-school",
+    "latex": "#1=\\frac{|#2#3_0+#4#5_0+#6|}{\\sqrt{#2^2+#4^2}}",
+    "placeholders": [
+      { "n": 1, "value": "d", "label": "distance" },
+      { "n": 2, "value": "A", "label": "first coefficient" },
+      { "n": 3, "value": "x", "label": "horizontal coordinate" },
+      { "n": 4, "value": "B", "label": "second coefficient" },
+      { "n": 5, "value": "y", "label": "vertical coordinate" },
+      { "n": 6, "value": "C", "label": "constant term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-circle-equation",
+    "category": "Analytic geometry",
+    "name": "Circle equation",
+    "description": "Circle with center (h,k).",
+    "level": "high-school",
+    "latex": "(#1-#2)^2+(#3-#4)^2=#5^2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "h", "label": "center x-coordinate" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" },
+      { "n": 4, "value": "k", "label": "center y-coordinate" },
+      { "n": 5, "value": "r", "label": "radius" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-parabola",
+    "category": "Analytic geometry",
+    "name": "Parabola",
+    "description": "Parabola with vertical axis and focus distance p.",
+    "level": "high-school",
+    "latex": "(#1-#2)^2=4#3\\,(#4-#5)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "h", "label": "vertex x-coordinate" },
+      { "n": 3, "value": "p", "label": "focal distance" },
+      { "n": 4, "value": "y", "label": "vertical coordinate" },
+      { "n": 5, "value": "k", "label": "vertex y-coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-ellipse",
+    "category": "Analytic geometry",
+    "name": "Ellipse",
+    "description": "Standard ellipse centered at the origin.",
+    "level": "high-school",
+    "latex": "\\frac{#1^2}{#2^2}+\\frac{#3^2}{#4^2}=1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "a", "label": "horizontal semi-axis" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" },
+      { "n": 4, "value": "b", "label": "vertical semi-axis" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-hyperbola",
+    "category": "Analytic geometry",
+    "name": "Hyperbola",
+    "description": "Standard hyperbola centered at the origin.",
+    "level": "high-school",
+    "latex": "\\frac{#1^2}{#2^2}-\\frac{#3^2}{#4^2}=1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "a", "label": "transverse semi-axis" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" },
+      { "n": 4, "value": "b", "label": "conjugate semi-axis" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-eccentricity-of-an-ellipse",
+    "category": "Analytic geometry",
+    "name": "Eccentricity of an ellipse",
+    "description": "Eccentricity from semi-axes.",
+    "level": "university",
+    "latex": "#1=\\sqrt{1-\\frac{#2^2}{#3^2}}",
+    "placeholders": [
+      { "n": 1, "value": "e", "label": "eccentricity" },
+      { "n": 2, "value": "b", "label": "semi-minor axis" },
+      { "n": 3, "value": "a", "label": "semi-major axis" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-area-of-an-ellipse",
+    "category": "Analytic geometry",
+    "name": "Area of an ellipse",
+    "description": "Area from the semi-axes.",
+    "level": "high-school",
+    "latex": "#1=\\pi #2#3",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "area" },
+      { "n": 2, "value": "a", "label": "first semi-axis" },
+      { "n": 3, "value": "b", "label": "second semi-axis" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-parametric-circle",
+    "category": "Analytic geometry",
+    "name": "Parametric circle",
+    "description": "Circle in parametric form.",
+    "level": "university",
+    "latex": "#1=#2\\cos #3,\\qquad #4=#2\\sin #3",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "r", "label": "radius" },
+      { "n": 3, "value": "t", "label": "parameter" },
+      { "n": 4, "value": "y", "label": "vertical coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-polar-to-cartesian",
+    "category": "Analytic geometry",
+    "name": "Polar to Cartesian",
+    "description": "Converting polar coordinates.",
+    "level": "high-school",
+    "latex": "#1=#2\\cos#3,\\qquad #4=#2\\sin#3",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "horizontal coordinate" },
+      { "n": 2, "value": "r", "label": "radial distance" },
+      { "n": 3, "value": "\\theta", "label": "polar angle" },
+      { "n": 4, "value": "y", "label": "vertical coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "analytic-geometry-area-of-a-triangle-from-coordinates",
+    "category": "Analytic geometry",
+    "name": "Area of a triangle from coordinates",
+    "description": "Area via a determinant.",
+    "level": "high-school",
+    "latex": "#1=\\frac{1}{2}\\left|#2_1(#3_2-#3_3)+#2_2(#3_3-#3_1)+#2_3(#3_1-#3_2)\\right|",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "area" },
+      { "n": 2, "value": "x", "label": "horizontal coordinate" },
+      { "n": 3, "value": "y", "label": "vertical coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-arithmetic-sequence",
+    "category": "Sequences and series",
+    "name": "Arithmetic sequence",
+    "description": "General term of an arithmetic sequence.",
+    "level": "high-school",
+    "latex": "#1_{#2}=#1_1+(#2-1)#3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "term" },
+      { "n": 2, "value": "n", "label": "index" },
+      { "n": 3, "value": "d", "label": "common difference" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-arithmetic-series",
+    "category": "Sequences and series",
+    "name": "Arithmetic series",
+    "description": "Sum of the first n terms of an arithmetic sequence.",
+    "level": "high-school",
+    "latex": "#1_{#2}=\\frac{#2}{2}\\left(#3_1+#3_{#2}\\right)",
+    "placeholders": [
+      { "n": 1, "value": "S", "label": "partial sum" },
+      { "n": 2, "value": "n", "label": "number of terms" },
+      { "n": 3, "value": "a", "label": "term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-geometric-sequence",
+    "category": "Sequences and series",
+    "name": "Geometric sequence",
+    "description": "General term of a geometric sequence.",
+    "level": "high-school",
+    "latex": "#1_{#2}=#1_1\\,#3^{\\,#2-1}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "term" },
+      { "n": 2, "value": "n", "label": "index" },
+      { "n": 3, "value": "r", "label": "common ratio" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-geometric-series",
+    "category": "Sequences and series",
+    "name": "Geometric series",
+    "description": "Finite geometric sum.",
+    "level": "high-school",
+    "latex": "#1_{#2}=#3_1\\,\\frac{1-#4^{#2}}{1-#4}",
+    "placeholders": [
+      { "n": 1, "value": "S", "label": "partial sum" },
+      { "n": 2, "value": "n", "label": "number of terms" },
+      { "n": 3, "value": "a", "label": "term" },
+      { "n": 4, "value": "r", "label": "common ratio" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-infinite-geometric-series",
+    "category": "Sequences and series",
+    "name": "Infinite geometric series",
+    "description": "Sum when the ratio satisfies |r|<1.",
+    "level": "high-school",
+    "latex": "\\sum_{#1=0}^{\\infty}#2#3^{#1}=\\frac{#2}{1-#3},\\quad |#3|<1",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "index" },
+      { "n": 2, "value": "a", "label": "first term" },
+      { "n": 3, "value": "r", "label": "common ratio" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-sum-of-the-first-n-integers",
+    "category": "Sequences and series",
+    "name": "Sum of the first n integers",
+    "description": "Gauss's formula.",
+    "level": "high-school",
+    "latex": "\\sum_{#1=1}^{#2}#1=\\frac{#2(#2+1)}{2}",
+    "placeholders": [
+      { "n": 1, "value": "k", "label": "index" },
+      { "n": 2, "value": "n", "label": "upper limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-sum-of-squares",
+    "category": "Sequences and series",
+    "name": "Sum of squares",
+    "description": "Sum of the first n squares.",
+    "level": "high-school",
+    "latex": "\\sum_{#1=1}^{#2}#1^{2}=\\frac{#2(#2+1)(2#2+1)}{6}",
+    "placeholders": [
+      { "n": 1, "value": "k", "label": "index" },
+      { "n": 2, "value": "n", "label": "upper limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-sum-of-cubes",
+    "category": "Sequences and series",
+    "name": "Sum of cubes",
+    "description": "Sum of the first n cubes.",
+    "level": "high-school",
+    "latex": "\\sum_{#1=1}^{#2}#1^{3}=\\left(\\frac{#2(#2+1)}{2}\\right)^{2}",
+    "placeholders": [
+      { "n": 1, "value": "k", "label": "index" },
+      { "n": 2, "value": "n", "label": "upper limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-fibonacci-recurrence",
+    "category": "Sequences and series",
+    "name": "Fibonacci recurrence",
+    "description": "Recurrence defining the Fibonacci numbers.",
+    "level": "high-school",
+    "latex": "#1_{#2}=#1_{#2-1}+#1_{#2-2}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "term" },
+      { "n": 2, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-basel-problem",
+    "category": "Sequences and series",
+    "name": "Basel problem",
+    "description": "Euler's sum of reciprocal squares.",
+    "level": "university",
+    "latex": "\\sum_{#1=1}^{\\infty}\\frac{1}{#1^{2}}=\\frac{\\pi^{2}}{6}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-harmonic-series",
+    "category": "Sequences and series",
+    "name": "Harmonic series",
+    "description": "The harmonic series diverges.",
+    "level": "university",
+    "latex": "\\sum_{#1=1}^{\\infty}\\frac{1}{#1}=\\infty",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-alternating-harmonic-series",
+    "category": "Sequences and series",
+    "name": "Alternating harmonic series",
+    "description": "Sum equals the natural log of 2.",
+    "level": "university",
+    "latex": "\\sum_{#1=1}^{\\infty}\\frac{(-1)^{#1+1}}{#1}=\\ln 2",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-leibniz-series-for-pi",
+    "category": "Sequences and series",
+    "name": "Leibniz series for pi",
+    "description": "Series for pi over four.",
+    "level": "university",
+    "latex": "\\frac{\\pi}{4}=\\sum_{#1=0}^{\\infty}\\frac{(-1)^{#1}}{2#1+1}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-ratio-test",
+    "category": "Sequences and series",
+    "name": "Ratio test",
+    "description": "Convergence test using the ratio of terms.",
+    "level": "university",
+    "latex": "#1=\\lim_{#2\\to\\infty}\\left|\\frac{#3_{#2+1}}{#3_{#2}}\\right|",
+    "placeholders": [
+      { "n": 1, "value": "L", "label": "limit" },
+      { "n": 2, "value": "n", "label": "index" },
+      { "n": 3, "value": "a", "label": "term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-taylor-series",
+    "category": "Sequences and series",
+    "name": "Taylor series",
+    "description": "Taylor expansion about a.",
+    "level": "university",
+    "latex": "#1(#2)=\\sum_{#3=0}^{\\infty}\\frac{#1^{(#3)}(#4)}{#3!}(#2-#4)^{#3}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "n", "label": "index" },
+      { "n": 4, "value": "a", "label": "center" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-exponential-series",
+    "category": "Sequences and series",
+    "name": "Exponential series",
+    "description": "Maclaurin series of e to the x.",
+    "level": "university",
+    "latex": "e^{#1}=\\sum_{#2=0}^{\\infty}\\frac{#1^{#2}}{#2!}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-sine-series",
+    "category": "Sequences and series",
+    "name": "Sine series",
+    "description": "Maclaurin series of sine.",
+    "level": "university",
+    "latex": "\\sin #1=\\sum_{#2=0}^{\\infty}\\frac{(-1)^{#2}#1^{2#2+1}}{(2#2+1)!}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-cosine-series",
+    "category": "Sequences and series",
+    "name": "Cosine series",
+    "description": "Maclaurin series of cosine.",
+    "level": "university",
+    "latex": "\\cos #1=\\sum_{#2=0}^{\\infty}\\frac{(-1)^{#2}#1^{2#2}}{(2#2)!}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sequences-and-series-geometric-power-series",
+    "category": "Sequences and series",
+    "name": "Geometric power series",
+    "description": "Power series of 1 over 1 minus x.",
+    "level": "university",
+    "latex": "\\frac{1}{1-#1}=\\sum_{#2=0}^{\\infty}#1^{#2},\\quad |#1|<1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-limit-definition",
+    "category": "Limits",
+    "name": "Limit definition",
+    "description": "Epsilon-delta definition of a limit.",
+    "level": "university",
+    "latex": "\\forall#1>0\\;\\exists#2>0:\\;0<|#3-#4|<#2\\Rightarrow|#5(#3)-#6|<#1",
+    "placeholders": [
+      { "n": 1, "value": "\\varepsilon", "label": "output tolerance" },
+      { "n": 2, "value": "\\delta", "label": "input tolerance" },
+      { "n": 3, "value": "x", "label": "variable" },
+      { "n": 4, "value": "a", "label": "limit point" },
+      { "n": 5, "value": "f", "label": "function" },
+      { "n": 6, "value": "L", "label": "limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-limit-of-a-sum",
+    "category": "Limits",
+    "name": "Limit of a sum",
+    "description": "The limit of a sum is the sum of limits.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to #2}\\bigl[#3(#1)+#4(#1)\\bigr]=\\lim_{#1\\to #2}#3(#1)+\\lim_{#1\\to #2}#4(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "limit point" },
+      { "n": 3, "value": "f", "label": "first function" },
+      { "n": 4, "value": "g", "label": "second function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-limit-of-a-product",
+    "category": "Limits",
+    "name": "Limit of a product",
+    "description": "The limit of a product is the product of limits.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to #2}\\bigl[#3(#1)\\,#4(#1)\\bigr]=\\lim_{#1\\to #2}#3(#1)\\cdot\\lim_{#1\\to #2}#4(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "limit point" },
+      { "n": 3, "value": "f", "label": "first function" },
+      { "n": 4, "value": "g", "label": "second function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-limit-of-a-quotient",
+    "category": "Limits",
+    "name": "Limit of a quotient",
+    "description": "Quotient rule for limits.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to #2}\\frac{#3(#1)}{#4(#1)}=\\frac{\\lim_{#1\\to #2}#3(#1)}{\\lim_{#1\\to #2}#4(#1)}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "limit point" },
+      { "n": 3, "value": "f", "label": "numerator function" },
+      { "n": 4, "value": "g", "label": "denominator function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-fundamental-trigonometric-limit",
+    "category": "Limits",
+    "name": "Fundamental trigonometric limit",
+    "description": "Sine of x over x tends to one.",
+    "level": "high-school",
+    "latex": "\\lim_{#1\\to 0}\\frac{\\sin #1}{#1}=1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-cosine-limit",
+    "category": "Limits",
+    "name": "Cosine limit",
+    "description": "A companion of the sine limit.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to 0}\\frac{1-\\cos #1}{#1^{2}}=\\frac{1}{2}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-definition-of-e",
+    "category": "Limits",
+    "name": "Definition of e",
+    "description": "Euler's number as a limit.",
+    "level": "high-school",
+    "latex": "e=\\lim_{#1\\to\\infty}\\left(1+\\frac{1}{#1}\\right)^{#1}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-exponential-limit",
+    "category": "Limits",
+    "name": "Exponential limit",
+    "description": "Another classical limit.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to 0}\\frac{e^{#1}-1}{#1}=1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-logarithm-limit",
+    "category": "Limits",
+    "name": "Logarithm limit",
+    "description": "Limit of ln(1+x) over x.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to 0}\\frac{\\ln(1+#1)}{#1}=1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-l-hopitals-rule",
+    "category": "Limits",
+    "name": "L'Hopital's rule",
+    "description": "Limit of a quotient via derivatives.",
+    "level": "university",
+    "latex": "\\lim_{#1\\to #2}\\frac{#3(#1)}{#4(#1)}=\\lim_{#1\\to #2}\\frac{#3'(#1)}{#4'(#1)}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "limit point" },
+      { "n": 3, "value": "f", "label": "numerator function" },
+      { "n": 4, "value": "g", "label": "denominator function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-limit-at-infinity",
+    "category": "Limits",
+    "name": "Limit at infinity",
+    "description": "A rational limit at infinity.",
+    "level": "high-school",
+    "latex": "\\lim_{#1\\to\\infty}\\frac{3#1^{2}+1}{#1^{2}-5}=3",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-squeeze-theorem",
+    "category": "Limits",
+    "name": "Squeeze theorem",
+    "description": "If g is squeezed, so is its limit.",
+    "level": "university",
+    "latex": "#1(#2)\\le #3(#2)\\le #4(#2),\\quad \\lim_{#2\\to #5}#1=\\lim_{#2\\to #5}#4=#6\\;\\Rightarrow\\;\\lim_{#2\\to #5}#3=#6",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "lower function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "g", "label": "middle function" },
+      { "n": 4, "value": "h", "label": "upper function" },
+      { "n": 5, "value": "a", "label": "limit point" },
+      { "n": 6, "value": "L", "label": "limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-continuity-at-a-point",
+    "category": "Limits",
+    "name": "Continuity at a point",
+    "description": "Definition of continuity.",
+    "level": "high-school",
+    "latex": "\\lim_{#1\\to #2}#3(#1)=#3(#2)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "point" },
+      { "n": 3, "value": "f", "label": "function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "limits-one-sided-limits",
+    "category": "Limits",
+    "name": "One-sided limits",
+    "description": "Limit exists iff both one-sided limits agree.",
+    "level": "high-school",
+    "latex": "\\lim_{#1\\to #2^{-}}#3(#1)=\\lim_{#1\\to #2^{+}}#3(#1)=#4",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "limit point" },
+      { "n": 3, "value": "f", "label": "function" },
+      { "n": 4, "value": "L", "label": "limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-definition-of-the-derivative",
+    "category": "Derivatives",
+    "name": "Definition of the derivative",
+    "description": "Limit of the difference quotient.",
+    "level": "high-school",
+    "latex": "#1'(#2)=\\lim_{#3\\to 0}\\frac{#1(#2+#3)-#1(#2)}{#3}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "h", "label": "increment" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-power-rule",
+    "category": "Derivatives",
+    "name": "Power rule",
+    "description": "Derivative of x to the n.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}#1^{#2}=#2\\,#1^{#2-1}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-constant-multiple-rule",
+    "category": "Derivatives",
+    "name": "Constant multiple rule",
+    "description": "Constants factor out of derivatives.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\bigl[#2\\,#3(#1)\\bigr]=#2\\,#3'(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "c", "label": "constant" },
+      { "n": 3, "value": "f", "label": "function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-sum-rule",
+    "category": "Derivatives",
+    "name": "Sum rule",
+    "description": "Derivative of a sum.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\bigl[#2(#1)+#3(#1)\\bigr]=#2'(#1)+#3'(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "f", "label": "first function" },
+      { "n": 3, "value": "g", "label": "second function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-product-rule",
+    "category": "Derivatives",
+    "name": "Product rule",
+    "description": "Derivative of a product.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\bigl[#2(#1)\\,#3(#1)\\bigr]=#2'(#1)\\,#3(#1)+#2(#1)\\,#3'(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "f", "label": "first function" },
+      { "n": 3, "value": "g", "label": "second function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-quotient-rule",
+    "category": "Derivatives",
+    "name": "Quotient rule",
+    "description": "Derivative of a quotient.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\left[\\frac{#2(#1)}{#3(#1)}\\right]=\\frac{#2'(#1)\\,#3(#1)-#2(#1)\\,#3'(#1)}{#3(#1)^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "f", "label": "numerator function" },
+      { "n": 3, "value": "g", "label": "denominator function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-chain-rule",
+    "category": "Derivatives",
+    "name": "Chain rule",
+    "description": "Derivative of a composition.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}#2\\bigl(#3(#1)\\bigr)=#2'\\bigl(#3(#1)\\bigr)\\,#3'(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "f", "label": "outer function" },
+      { "n": 3, "value": "g", "label": "inner function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-chain-rule-in-leibniz-notation",
+    "category": "Derivatives",
+    "name": "Chain rule in Leibniz notation",
+    "description": "Chain rule written with differentials.",
+    "level": "high-school",
+    "latex": "\\frac{d#1}{d#2}=\\frac{d#1}{d#3}\\cdot\\frac{d#3}{d#2}",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "dependent variable" },
+      { "n": 2, "value": "x", "label": "independent variable" },
+      { "n": 3, "value": "u", "label": "intermediate variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-sine",
+    "category": "Derivatives",
+    "name": "Derivative of sine",
+    "description": "Derivative of sin x.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\sin #1=\\cos #1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-cosine",
+    "category": "Derivatives",
+    "name": "Derivative of cosine",
+    "description": "Derivative of cos x.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\cos #1=-\\sin #1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-tangent",
+    "category": "Derivatives",
+    "name": "Derivative of tangent",
+    "description": "Derivative of tan x.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\tan #1=\\sec^{2}#1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-the-exponential",
+    "category": "Derivatives",
+    "name": "Derivative of the exponential",
+    "description": "e to the x is its own derivative.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}e^{#1}=e^{#1}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-a-general-exponential",
+    "category": "Derivatives",
+    "name": "Derivative of a general exponential",
+    "description": "Derivative of a to the x.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}#2^{#1}=#2^{#1}\\ln #2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "base" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-the-natural-logarithm",
+    "category": "Derivatives",
+    "name": "Derivative of the natural logarithm",
+    "description": "Derivative of ln x.",
+    "level": "high-school",
+    "latex": "\\frac{d}{d#1}\\ln #1=\\frac{1}{#1}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-arcsine",
+    "category": "Derivatives",
+    "name": "Derivative of arcsine",
+    "description": "Derivative of arcsin x.",
+    "level": "university",
+    "latex": "\\frac{d}{d#1}\\arcsin #1=\\frac{1}{\\sqrt{1-#1^{2}}}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-derivative-of-arctangent",
+    "category": "Derivatives",
+    "name": "Derivative of arctangent",
+    "description": "Derivative of arctan x.",
+    "level": "university",
+    "latex": "\\frac{d}{d#1}\\arctan #1=\\frac{1}{1+#1^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-inverse-function-derivative",
+    "category": "Derivatives",
+    "name": "Inverse function derivative",
+    "description": "Derivative of an inverse function.",
+    "level": "university",
+    "latex": "\\left(#1^{-1}\\right)'(#2)=\\frac{1}{#1'\\bigl(#1^{-1}(#2)\\bigr)}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "y", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-mean-value-theorem",
+    "category": "Derivatives",
+    "name": "Mean value theorem",
+    "description": "There is a point with the average slope.",
+    "level": "university",
+    "latex": "#1'(#2)=\\frac{#1(#3)-#1(#4)}{#3-#4}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "c", "label": "intermediate point" },
+      { "n": 3, "value": "b", "label": "right endpoint" },
+      { "n": 4, "value": "a", "label": "left endpoint" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-tangent-line",
+    "category": "Derivatives",
+    "name": "Tangent line",
+    "description": "Equation of the tangent line at a.",
+    "level": "high-school",
+    "latex": "#1=#2(#3)+#2'(#3)(#4-#3)",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "output" },
+      { "n": 2, "value": "f", "label": "function" },
+      { "n": 3, "value": "a", "label": "point of tangency" },
+      { "n": 4, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "derivatives-second-derivative-notation",
+    "category": "Derivatives",
+    "name": "Second derivative notation",
+    "description": "Equivalent notations for the second derivative.",
+    "level": "high-school",
+    "latex": "#1''(#2)=\\frac{d^{2}#1}{d#2^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-power-rule-for-integrals",
+    "category": "Integrals",
+    "name": "Power rule for integrals",
+    "description": "Antiderivative of x to the n.",
+    "level": "high-school",
+    "latex": "\\int #1^{#2}\\,d#1=\\frac{#1^{#2+1}}{#2+1}+#3,\\quad #2\\ne -1",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "n", "label": "exponent" },
+      { "n": 3, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-of-one-over-x",
+    "category": "Integrals",
+    "name": "Integral of one over x",
+    "description": "Antiderivative of 1/x.",
+    "level": "high-school",
+    "latex": "\\int\\frac{1}{#1}\\,d#1=\\ln|#1|+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-of-the-exponential",
+    "category": "Integrals",
+    "name": "Integral of the exponential",
+    "description": "Antiderivative of e to the x.",
+    "level": "high-school",
+    "latex": "\\int e^{#1}\\,d#1=e^{#1}+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-of-sine",
+    "category": "Integrals",
+    "name": "Integral of sine",
+    "description": "Antiderivative of sin x.",
+    "level": "high-school",
+    "latex": "\\int\\sin #1\\,d#1=-\\cos #1+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-of-cosine",
+    "category": "Integrals",
+    "name": "Integral of cosine",
+    "description": "Antiderivative of cos x.",
+    "level": "high-school",
+    "latex": "\\int\\cos #1\\,d#1=\\sin #1+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-of-secant-squared",
+    "category": "Integrals",
+    "name": "Integral of secant squared",
+    "description": "Antiderivative of sec^2 x.",
+    "level": "high-school",
+    "latex": "\\int\\sec^{2}#1\\,d#1=\\tan #1+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-giving-arctangent",
+    "category": "Integrals",
+    "name": "Integral giving arctangent",
+    "description": "Antiderivative of 1/(1+x^2).",
+    "level": "university",
+    "latex": "\\int\\frac{d#1}{1+#1^{2}}=\\arctan #1+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integral-giving-arcsine",
+    "category": "Integrals",
+    "name": "Integral giving arcsine",
+    "description": "Antiderivative of 1/sqrt(1-x^2).",
+    "level": "university",
+    "latex": "\\int\\frac{d#1}{\\sqrt{1-#1^{2}}}=\\arcsin #1+#2",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "C", "label": "integration constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-linearity-of-the-integral",
+    "category": "Integrals",
+    "name": "Linearity of the integral",
+    "description": "Integral of a linear combination.",
+    "level": "high-school",
+    "latex": "\\int\\bigl[#1 #2(#3)+#4 #5(#3)\\bigr]d#3=#1\\int #2(#3)\\,d#3+#4\\int #5(#3)\\,d#3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first coefficient" },
+      { "n": 2, "value": "f", "label": "first function" },
+      { "n": 3, "value": "x", "label": "variable" },
+      { "n": 4, "value": "b", "label": "second coefficient" },
+      { "n": 5, "value": "g", "label": "second function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-integration-by-parts",
+    "category": "Integrals",
+    "name": "Integration by parts",
+    "description": "Trade a derivative from one factor to the other.",
+    "level": "university",
+    "latex": "\\int #1\\,d#2=#1#2-\\int #2\\,d#1",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "first factor" },
+      { "n": 2, "value": "v", "label": "second factor" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-substitution-rule",
+    "category": "Integrals",
+    "name": "Substitution rule",
+    "description": "Change of variables in an integral.",
+    "level": "university",
+    "latex": "\\int_{#1}^{#2}#3\\bigl(#4(#5)\\bigr)#4'(#5)\\,d#5=\\int_{#4(#1)}^{#4(#2)}#3(#6)\\,d#6",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "lower limit" },
+      { "n": 2, "value": "b", "label": "upper limit" },
+      { "n": 3, "value": "f", "label": "outer function" },
+      { "n": 4, "value": "g", "label": "inner function" },
+      { "n": 5, "value": "x", "label": "variable" },
+      { "n": 6, "value": "u", "label": "new variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-fundamental-theorem-of-calculus-part-1",
+    "category": "Integrals",
+    "name": "Fundamental theorem of calculus, part 1",
+    "description": "The derivative of an accumulation function.",
+    "level": "university",
+    "latex": "\\frac{d}{d#1}\\int_{#2}^{#1}#3(#4)\\,d#4=#3(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "a", "label": "lower limit" },
+      { "n": 3, "value": "f", "label": "function" },
+      { "n": 4, "value": "t", "label": "integration variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-fundamental-theorem-of-calculus-part-2",
+    "category": "Integrals",
+    "name": "Fundamental theorem of calculus, part 2",
+    "description": "Evaluating a definite integral with an antiderivative.",
+    "level": "university",
+    "latex": "\\int_{#1}^{#2}#3(#4)\\,d#4=#5(#2)-#5(#1)",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "lower limit" },
+      { "n": 2, "value": "b", "label": "upper limit" },
+      { "n": 3, "value": "f", "label": "function" },
+      { "n": 4, "value": "x", "label": "variable" },
+      { "n": 5, "value": "F", "label": "antiderivative" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-riemann-sum",
+    "category": "Integrals",
+    "name": "Riemann sum",
+    "description": "Definite integral as a limit of sums.",
+    "level": "university",
+    "latex": "\\int_{#1}^{#2}#3(#4)\\,d#4=\\lim_{#5\\to\\infty}\\sum_{#6=1}^{#5}#3(#4_{#6})\\,\\Delta #4",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "lower limit" },
+      { "n": 2, "value": "b", "label": "upper limit" },
+      { "n": 3, "value": "f", "label": "function" },
+      { "n": 4, "value": "x", "label": "variable" },
+      { "n": 5, "value": "n", "label": "number of subintervals" },
+      { "n": 6, "value": "i", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-average-value-of-a-function",
+    "category": "Integrals",
+    "name": "Average value of a function",
+    "description": "Mean value of f on an interval.",
+    "level": "university",
+    "latex": "#1_{\\text{avg}}=\\frac{1}{#2-#3}\\int_{#3}^{#2}#1(#4)\\,d#4",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "b", "label": "upper limit" },
+      { "n": 3, "value": "a", "label": "lower limit" },
+      { "n": 4, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-gaussian-integral",
+    "category": "Integrals",
+    "name": "Gaussian integral",
+    "description": "Famous integral of the bell curve.",
+    "level": "university",
+    "latex": "\\int_{-\\infty}^{\\infty}e^{-#1^{2}}\\,d#1=\\sqrt{\\pi}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-area-between-curves",
+    "category": "Integrals",
+    "name": "Area between curves",
+    "description": "Area between two graphs.",
+    "level": "high-school",
+    "latex": "#1=\\int_{#2}^{#3}\\bigl[#4(#5)-#6(#5)\\bigr]d#5",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "area" },
+      { "n": 2, "value": "a", "label": "lower limit" },
+      { "n": 3, "value": "b", "label": "upper limit" },
+      { "n": 4, "value": "f", "label": "upper function" },
+      { "n": 5, "value": "x", "label": "variable" },
+      { "n": 6, "value": "g", "label": "lower function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-volume-of-revolution-disks",
+    "category": "Integrals",
+    "name": "Volume of revolution (disks)",
+    "description": "Volume by the disk method.",
+    "level": "university",
+    "latex": "#1=\\pi\\int_{#2}^{#3}\\bigl[#4(#5)\\bigr]^{2}d#5",
+    "placeholders": [
+      { "n": 1, "value": "V", "label": "volume" },
+      { "n": 2, "value": "a", "label": "lower limit" },
+      { "n": 3, "value": "b", "label": "upper limit" },
+      { "n": 4, "value": "f", "label": "radius function" },
+      { "n": 5, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-arc-length",
+    "category": "Integrals",
+    "name": "Arc length",
+    "description": "Length of a curve.",
+    "level": "university",
+    "latex": "#1=\\int_{#2}^{#3}\\sqrt{1+\\bigl[#4'(#5)\\bigr]^{2}}\\,d#5",
+    "placeholders": [
+      { "n": 1, "value": "L", "label": "arc length" },
+      { "n": 2, "value": "a", "label": "lower limit" },
+      { "n": 3, "value": "b", "label": "upper limit" },
+      { "n": 4, "value": "f", "label": "function" },
+      { "n": 5, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "integrals-dirichlet-integral",
+    "category": "Integrals",
+    "name": "Dirichlet integral",
+    "description": "Integral of sinc over the half line.",
+    "level": "university",
+    "latex": "\\int_{0}^{\\infty}\\frac{\\sin #1}{#1}\\,d#1=\\frac{\\pi}{2}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-partial-derivative",
+    "category": "Multivariable calculus",
+    "name": "Partial derivative",
+    "description": "Definition of a partial derivative.",
+    "level": "university",
+    "latex": "\\frac{\\partial #1}{\\partial #2}=\\lim_{#3\\to 0}\\frac{#1(#2+#3,#4)-#1(#2,#4)}{#3}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "h", "label": "increment" },
+      { "n": 4, "value": "y", "label": "second variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-gradient",
+    "category": "Multivariable calculus",
+    "name": "Gradient",
+    "description": "Vector of partial derivatives.",
+    "level": "university",
+    "latex": "\\nabla #1=\\left(\\frac{\\partial #1}{\\partial #2},\\frac{\\partial #1}{\\partial #3},\\frac{\\partial #1}{\\partial #4}\\right)",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" },
+      { "n": 4, "value": "z", "label": "third variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-total-differential",
+    "category": "Multivariable calculus",
+    "name": "Total differential",
+    "description": "Linear change of a function of two variables.",
+    "level": "university",
+    "latex": "d#1=\\frac{\\partial #1}{\\partial #2}\\,d#2+\\frac{\\partial #1}{\\partial #3}\\,d#3",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-multivariable-chain-rule",
+    "category": "Multivariable calculus",
+    "name": "Multivariable chain rule",
+    "description": "Chain rule along a curve.",
+    "level": "university",
+    "latex": "\\frac{d#1}{d#2}=\\frac{\\partial #1}{\\partial #3}\\frac{d#3}{d#2}+\\frac{\\partial #1}{\\partial #4}\\frac{d#4}{d#2}",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "function" },
+      { "n": 2, "value": "t", "label": "parameter" },
+      { "n": 3, "value": "x", "label": "first variable" },
+      { "n": 4, "value": "y", "label": "second variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-equality-of-mixed-partials",
+    "category": "Multivariable calculus",
+    "name": "Equality of mixed partials",
+    "description": "Clairaut's theorem.",
+    "level": "university",
+    "latex": "\\frac{\\partial^{2}#1}{\\partial #2\\,\\partial #3}=\\frac{\\partial^{2}#1}{\\partial #3\\,\\partial #2}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-directional-derivative",
+    "category": "Multivariable calculus",
+    "name": "Directional derivative",
+    "description": "Rate of change in direction u.",
+    "level": "university",
+    "latex": "D_{\\mathbf{#1}}#2=\\nabla #2\\cdot\\mathbf{#1}",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "direction" },
+      { "n": 2, "value": "f", "label": "function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-laplacian",
+    "category": "Multivariable calculus",
+    "name": "Laplacian",
+    "description": "Sum of second partial derivatives.",
+    "level": "university",
+    "latex": "\\nabla^{2}#1=\\frac{\\partial^{2}#1}{\\partial #2^{2}}+\\frac{\\partial^{2}#1}{\\partial #3^{2}}+\\frac{\\partial^{2}#1}{\\partial #4^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" },
+      { "n": 4, "value": "z", "label": "third variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-double-integral",
+    "category": "Multivariable calculus",
+    "name": "Double integral",
+    "description": "Iterated integral over a rectangle.",
+    "level": "university",
+    "latex": "\\iint_{#1}#2(#3,#4)\\,dA=\\int_{#5}^{#6}\\int_{#7}^{#8}#2(#3,#4)\\,d#4\\,d#3",
+    "placeholders": [
+      { "n": 1, "value": "R", "label": "region" },
+      { "n": 2, "value": "f", "label": "function" },
+      { "n": 3, "value": "x", "label": "outer variable" },
+      { "n": 4, "value": "y", "label": "inner variable" },
+      { "n": 5, "value": "a", "label": "outer lower limit" },
+      { "n": 6, "value": "b", "label": "outer upper limit" },
+      { "n": 7, "value": "c", "label": "inner lower limit" },
+      { "n": 8, "value": "d", "label": "inner upper limit" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-double-integral-in-polar-coordinates",
+    "category": "Multivariable calculus",
+    "name": "Double integral in polar coordinates",
+    "description": "Area element in polar coordinates.",
+    "level": "university",
+    "latex": "\\iint_{#1}#2\\,dA=\\int_{#3}^{#4}\\int_{#5_1}^{#5_2}#2(#5\\cos#6,#5\\sin#6)\\,#5\\,d#5\\,d#6",
+    "placeholders": [
+      { "n": 1, "value": "R", "label": "region" },
+      { "n": 2, "value": "f", "label": "function" },
+      { "n": 3, "value": "\\alpha", "label": "lower angle" },
+      { "n": 4, "value": "\\beta", "label": "upper angle" },
+      { "n": 5, "value": "r", "label": "radius" },
+      { "n": 6, "value": "\\theta", "label": "polar angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-triple-integral",
+    "category": "Multivariable calculus",
+    "name": "Triple integral",
+    "description": "Iterated integral over a box.",
+    "level": "university",
+    "latex": "\\iiint_{#1}#2\\,dV=\\int_{#3}^{#4}\\int_{#5}^{#6}\\int_{#7}^{#8}#2\\,d#9\\,d#10\\,d#11",
+    "placeholders": [
+      { "n": 1, "value": "E", "label": "region" },
+      { "n": 2, "value": "f", "label": "function" },
+      { "n": 3, "value": "a", "label": "outer lower limit" },
+      { "n": 4, "value": "b", "label": "outer upper limit" },
+      { "n": 5, "value": "c", "label": "middle lower limit" },
+      { "n": 6, "value": "d", "label": "middle upper limit" },
+      { "n": 7, "value": "e", "label": "inner lower limit" },
+      { "n": 8, "value": "g", "label": "inner upper limit" },
+      { "n": 9, "value": "z", "label": "inner variable" },
+      { "n": 10, "value": "y", "label": "middle variable" },
+      { "n": 11, "value": "x", "label": "outer variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-divergence",
+    "category": "Multivariable calculus",
+    "name": "Divergence",
+    "description": "Divergence of a vector field.",
+    "level": "university",
+    "latex": "\\nabla\\cdot\\mathbf{#1}=\\frac{\\partial #1_{#2}}{\\partial #2}+\\frac{\\partial #1_{#3}}{\\partial #3}+\\frac{\\partial #1_{#4}}{\\partial #4}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "vector field" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" },
+      { "n": 4, "value": "z", "label": "third variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-curl",
+    "category": "Multivariable calculus",
+    "name": "Curl",
+    "description": "Curl as a determinant.",
+    "level": "university",
+    "latex": "\\nabla\\times\\mathbf{#1}=\\begin{vmatrix}\\mathbf{i}&\\mathbf{j}&\\mathbf{k}\\\\ \\partial_{#2}&\\partial_{#3}&\\partial_{#4}\\\\ #1_{#2}&#1_{#3}&#1_{#4}\\end{vmatrix}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "vector field" },
+      { "n": 2, "value": "x", "label": "first variable" },
+      { "n": 3, "value": "y", "label": "second variable" },
+      { "n": 4, "value": "z", "label": "third variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-line-integral-of-a-scalar-field",
+    "category": "Multivariable calculus",
+    "name": "Line integral of a scalar field",
+    "description": "Integral along a curve.",
+    "level": "university",
+    "latex": "\\int_{#1}#2\\,ds=\\int_{#3}^{#4}#2\\bigl(\\mathbf{#5}(#6)\\bigr)\\,|\\mathbf{#5}'(#6)|\\,d#6",
+    "placeholders": [
+      { "n": 1, "value": "C", "label": "curve" },
+      { "n": 2, "value": "f", "label": "scalar field" },
+      { "n": 3, "value": "a", "label": "lower limit" },
+      { "n": 4, "value": "b", "label": "upper limit" },
+      { "n": 5, "value": "r", "label": "parametrization" },
+      { "n": 6, "value": "t", "label": "parameter" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-greens-theorem",
+    "category": "Multivariable calculus",
+    "name": "Green's theorem",
+    "description": "Line integral to double integral.",
+    "level": "university",
+    "latex": "\\oint_{#1}#2\\,d#3+#4\\,d#5=\\iint_{#6}\\left(\\frac{\\partial #4}{\\partial #3}-\\frac{\\partial #2}{\\partial #5}\\right)dA",
+    "placeholders": [
+      { "n": 1, "value": "C", "label": "boundary curve" },
+      { "n": 2, "value": "P", "label": "first component" },
+      { "n": 3, "value": "x", "label": "first variable" },
+      { "n": 4, "value": "Q", "label": "second component" },
+      { "n": 5, "value": "y", "label": "second variable" },
+      { "n": 6, "value": "D", "label": "region" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-divergence-theorem",
+    "category": "Multivariable calculus",
+    "name": "Divergence theorem",
+    "description": "Flux through a closed surface.",
+    "level": "university",
+    "latex": "\\iint_{#1}\\mathbf{#2}\\cdot d\\mathbf{#1}=\\iiint_{#3}\\nabla\\cdot\\mathbf{#2}\\,dV",
+    "placeholders": [
+      { "n": 1, "value": "S", "label": "closed surface" },
+      { "n": 2, "value": "F", "label": "vector field" },
+      { "n": 3, "value": "E", "label": "solid region" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "multivariable-calculus-stokes-theorem",
+    "category": "Multivariable calculus",
+    "name": "Stokes' theorem",
+    "description": "Circulation equals flux of the curl.",
+    "level": "university",
+    "latex": "\\oint_{#1}\\mathbf{#2}\\cdot d\\mathbf{#3}=\\iint_{#4}(\\nabla\\times\\mathbf{#2})\\cdot d\\mathbf{#4}",
+    "placeholders": [
+      { "n": 1, "value": "C", "label": "boundary curve" },
+      { "n": 2, "value": "F", "label": "vector field" },
+      { "n": 3, "value": "r", "label": "position" },
+      { "n": 4, "value": "S", "label": "surface" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-dot-product",
+    "category": "Linear algebra",
+    "name": "Dot product",
+    "description": "Algebraic and geometric dot product.",
+    "level": "high-school",
+    "latex": "\\mathbf{#1}\\cdot\\mathbf{#2}=#1_1#2_1+#1_2#2_2+#1_3#2_3=|\\mathbf{#1}||\\mathbf{#2}|\\cos#3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first vector" },
+      { "n": 2, "value": "b", "label": "second vector" },
+      { "n": 3, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-vector-norm",
+    "category": "Linear algebra",
+    "name": "Vector norm",
+    "description": "Length of a vector.",
+    "level": "high-school",
+    "latex": "|\\mathbf{#1}|=\\sqrt{#1_1^{2}+#1_2^{2}+#1_3^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "v", "label": "vector" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-cross-product",
+    "category": "Linear algebra",
+    "name": "Cross product",
+    "description": "Cross product as a determinant.",
+    "level": "university",
+    "latex": "\\mathbf{#1}\\times\\mathbf{#2}=\\begin{vmatrix}\\mathbf{i}&\\mathbf{j}&\\mathbf{k}\\\\ #1_1&#1_2&#1_3\\\\ #2_1&#2_2&#2_3\\end{vmatrix}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first vector" },
+      { "n": 2, "value": "b", "label": "second vector" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-magnitude-of-the-cross-product",
+    "category": "Linear algebra",
+    "name": "Magnitude of the cross product",
+    "description": "Area of the parallelogram spanned.",
+    "level": "high-school",
+    "latex": "|\\mathbf{#1}\\times\\mathbf{#2}|=|\\mathbf{#1}||\\mathbf{#2}|\\sin#3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first vector" },
+      { "n": 2, "value": "b", "label": "second vector" },
+      { "n": 3, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-vector-projection",
+    "category": "Linear algebra",
+    "name": "Vector projection",
+    "description": "Projection of a onto b.",
+    "level": "university",
+    "latex": "\\operatorname{proj}_{\\mathbf{#1}}\\mathbf{#2}=\\frac{\\mathbf{#2}\\cdot\\mathbf{#1}}{\\mathbf{#1}\\cdot\\mathbf{#1}}\\,\\mathbf{#1}",
+    "placeholders": [
+      { "n": 1, "value": "b", "label": "direction vector" },
+      { "n": 2, "value": "a", "label": "projected vector" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-cauchy-schwarz-inequality",
+    "category": "Linear algebra",
+    "name": "Cauchy-Schwarz inequality",
+    "description": "Bound on the dot product.",
+    "level": "university",
+    "latex": "|\\mathbf{#1}\\cdot\\mathbf{#2}|\\le|\\mathbf{#1}||\\mathbf{#2}|",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "first vector" },
+      { "n": 2, "value": "v", "label": "second vector" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-matrix-product",
+    "category": "Linear algebra",
+    "name": "Matrix product",
+    "description": "Entry of a product of matrices.",
+    "level": "university",
+    "latex": "(#1#2)_{#3#4}=\\sum_{#5=1}^{#6}#7_{#3#5}#8_{#5#4}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first matrix" },
+      { "n": 2, "value": "B", "label": "second matrix" },
+      { "n": 3, "value": "i", "label": "row index" },
+      { "n": 4, "value": "j", "label": "column index" },
+      { "n": 5, "value": "k", "label": "summation index" },
+      { "n": 6, "value": "n", "label": "inner dimension" },
+      { "n": 7, "value": "a", "label": "first matrix entries" },
+      { "n": 8, "value": "b", "label": "second matrix entries" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-determinant-2-by-2",
+    "category": "Linear algebra",
+    "name": "Determinant 2 by 2",
+    "description": "Determinant of a 2 by 2 matrix.",
+    "level": "high-school",
+    "latex": "\\begin{vmatrix}#1&#2\\\\#3&#4\\end{vmatrix}=#1#4-#2#3",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "top-left entry" },
+      { "n": 2, "value": "b", "label": "top-right entry" },
+      { "n": 3, "value": "c", "label": "bottom-left entry" },
+      { "n": 4, "value": "d", "label": "bottom-right entry" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-inverse-of-a-2-by-2-matrix",
+    "category": "Linear algebra",
+    "name": "Inverse of a 2 by 2 matrix",
+    "description": "Closed form for the 2 by 2 inverse.",
+    "level": "high-school",
+    "latex": "\\begin{pmatrix}#1&#2\\\\#3&#4\\end{pmatrix}^{-1}=\\frac{1}{#1#4-#2#3}\\begin{pmatrix}#4&-#2\\\\-#3&#1\\end{pmatrix}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "top-left entry" },
+      { "n": 2, "value": "b", "label": "top-right entry" },
+      { "n": 3, "value": "c", "label": "bottom-left entry" },
+      { "n": 4, "value": "d", "label": "bottom-right entry" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-determinant-3-by-3",
+    "category": "Linear algebra",
+    "name": "Determinant 3 by 3",
+    "description": "Cofactor expansion along the first row.",
+    "level": "university",
+    "latex": "\\begin{vmatrix}#1&#2&#3\\\\#4&#5&#6\\\\#7&#8&#9\\end{vmatrix}=#1(#5#9-#6#8)-#2(#4#9-#6#7)+#3(#4#8-#5#7)",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "entry (1,1)" },
+      { "n": 2, "value": "b", "label": "entry (1,2)" },
+      { "n": 3, "value": "c", "label": "entry (1,3)" },
+      { "n": 4, "value": "d", "label": "entry (2,1)" },
+      { "n": 5, "value": "e", "label": "entry (2,2)" },
+      { "n": 6, "value": "f", "label": "entry (2,3)" },
+      { "n": 7, "value": "g", "label": "entry (3,1)" },
+      { "n": 8, "value": "h", "label": "entry (3,2)" },
+      { "n": 9, "value": "i", "label": "entry (3,3)" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-linear-system-in-matrix-form",
+    "category": "Linear algebra",
+    "name": "Linear system in matrix form",
+    "description": "A system of equations as a matrix equation.",
+    "level": "high-school",
+    "latex": "\\begin{pmatrix}#1&#2\\\\#3&#4\\end{pmatrix}\\begin{pmatrix}#5\\\\#6\\end{pmatrix}=\\begin{pmatrix}#7\\\\#8\\end{pmatrix}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "top-left entry" },
+      { "n": 2, "value": "b", "label": "top-right entry" },
+      { "n": 3, "value": "c", "label": "bottom-left entry" },
+      { "n": 4, "value": "d", "label": "bottom-right entry" },
+      { "n": 5, "value": "x", "label": "first unknown" },
+      { "n": 6, "value": "y", "label": "second unknown" },
+      { "n": 7, "value": "e", "label": "first constant" },
+      { "n": 8, "value": "f", "label": "second constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-cramers-rule",
+    "category": "Linear algebra",
+    "name": "Cramer's rule",
+    "description": "Solving for x in a 2 by 2 system with determinants.",
+    "level": "university",
+    "latex": "#1=\\frac{\\begin{vmatrix}#2&#3\\\\#4&#5\\end{vmatrix}}{\\begin{vmatrix}#6&#3\\\\#7&#5\\end{vmatrix}}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "unknown" },
+      { "n": 2, "value": "e", "label": "first constant" },
+      { "n": 3, "value": "b", "label": "top-right entry" },
+      { "n": 4, "value": "f", "label": "second constant" },
+      { "n": 5, "value": "d", "label": "bottom-right entry" },
+      { "n": 6, "value": "a", "label": "top-left entry" },
+      { "n": 7, "value": "c", "label": "bottom-left entry" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-eigenvalue-equation",
+    "category": "Linear algebra",
+    "name": "Eigenvalue equation",
+    "description": "Definition of eigenvalue and eigenvector.",
+    "level": "university",
+    "latex": "#1\\mathbf{#2}=#3\\mathbf{#2}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "matrix" },
+      { "n": 2, "value": "v", "label": "eigenvector" },
+      { "n": 3, "value": "\\lambda", "label": "eigenvalue" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-characteristic-equation",
+    "category": "Linear algebra",
+    "name": "Characteristic equation",
+    "description": "Eigenvalues as roots of the characteristic polynomial.",
+    "level": "university",
+    "latex": "\\det(#1-#2 I)=0",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "matrix" },
+      { "n": 2, "value": "\\lambda", "label": "eigenvalue" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-trace-and-determinant",
+    "category": "Linear algebra",
+    "name": "Trace and determinant",
+    "description": "Trace and determinant from eigenvalues.",
+    "level": "university",
+    "latex": "\\operatorname{tr}#1=\\sum_{#2}#3_{#2},\\qquad \\det #1=\\prod_{#2}#3_{#2}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "matrix" },
+      { "n": 2, "value": "i", "label": "index" },
+      { "n": 3, "value": "\\lambda", "label": "eigenvalue" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-transpose-of-a-product",
+    "category": "Linear algebra",
+    "name": "Transpose of a product",
+    "description": "Order reverses under transpose.",
+    "level": "university",
+    "latex": "(#1#2)^{T}=#2^{T}#1^{T}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first matrix" },
+      { "n": 2, "value": "B", "label": "second matrix" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-rotation-matrix",
+    "category": "Linear algebra",
+    "name": "Rotation matrix",
+    "description": "Rotation of the plane by an angle.",
+    "level": "high-school",
+    "latex": "#1(#2)=\\begin{pmatrix}\\cos#2&-\\sin#2\\\\ \\sin#2&\\cos#2\\end{pmatrix}",
+    "placeholders": [
+      { "n": 1, "value": "R", "label": "rotation matrix" },
+      { "n": 2, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "linear-algebra-rank-nullity-theorem",
+    "category": "Linear algebra",
+    "name": "Rank-nullity theorem",
+    "description": "Dimension count for a linear map.",
+    "level": "university",
+    "latex": "\\dim #1=\\operatorname{rank}(#2)+\\operatorname{nullity}(#2)",
+    "placeholders": [
+      { "n": 1, "value": "V", "label": "domain" },
+      { "n": 2, "value": "T", "label": "linear map" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-separable-equation",
+    "category": "Differential equations",
+    "name": "Separable equation",
+    "description": "Separate variables and integrate.",
+    "level": "university",
+    "latex": "\\frac{d#1}{d#2}=#3(#2)#4(#1)\\;\\Longrightarrow\\;\\int\\frac{d#1}{#4(#1)}=\\int #3(#2)\\,d#2",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "dependent variable" },
+      { "n": 2, "value": "x", "label": "independent variable" },
+      { "n": 3, "value": "g", "label": "first factor" },
+      { "n": 4, "value": "h", "label": "second factor" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-exponential-growth-equation",
+    "category": "Differential equations",
+    "name": "Exponential growth equation",
+    "description": "Rate proportional to the quantity.",
+    "level": "high-school",
+    "latex": "\\frac{d#1}{d#2}=#3#1\\;\\Longrightarrow\\;#1=#1_0e^{#3#2}",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "quantity" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "k", "label": "growth rate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-newtons-law-of-cooling",
+    "category": "Differential equations",
+    "name": "Newton's law of cooling",
+    "description": "Temperature relaxes toward the ambient value.",
+    "level": "university",
+    "latex": "\\frac{d#1}{d#2}=-#3\\,(#1-#1_{\\text{env}})",
+    "placeholders": [
+      { "n": 1, "value": "T", "label": "temperature" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "k", "label": "cooling constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-logistic-equation",
+    "category": "Differential equations",
+    "name": "Logistic equation",
+    "description": "Growth with a carrying capacity.",
+    "level": "university",
+    "latex": "\\frac{d#1}{d#2}=#3#1\\left(1-\\frac{#1}{#4}\\right)",
+    "placeholders": [
+      { "n": 1, "value": "P", "label": "population" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "r", "label": "growth rate" },
+      { "n": 4, "value": "K", "label": "carrying capacity" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-first-order-linear-equation",
+    "category": "Differential equations",
+    "name": "First-order linear equation",
+    "description": "Standard form of a linear first-order ODE.",
+    "level": "university",
+    "latex": "#1'+#2(#3)\\,#1=#4(#3)",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "unknown function" },
+      { "n": 2, "value": "p", "label": "coefficient function" },
+      { "n": 3, "value": "x", "label": "variable" },
+      { "n": 4, "value": "q", "label": "source term" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-integrating-factor",
+    "category": "Differential equations",
+    "name": "Integrating factor",
+    "description": "Integrating factor for a linear ODE.",
+    "level": "university",
+    "latex": "#1(#2)=e^{\\int #3(#2)\\,d#2}",
+    "placeholders": [
+      { "n": 1, "value": "\\mu", "label": "integrating factor" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "p", "label": "coefficient function" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-second-order-constant-coefficients",
+    "category": "Differential equations",
+    "name": "Second-order constant coefficients",
+    "description": "Homogeneous linear ODE.",
+    "level": "university",
+    "latex": "#1#2''+#3#2'+#4#2=0",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first coefficient" },
+      { "n": 2, "value": "y", "label": "unknown function" },
+      { "n": 3, "value": "b", "label": "second coefficient" },
+      { "n": 4, "value": "c", "label": "third coefficient" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-characteristic-equation-of-an-ode",
+    "category": "Differential equations",
+    "name": "Characteristic equation of an ODE",
+    "description": "Algebraic equation for exponential solutions.",
+    "level": "university",
+    "latex": "#1#2^{2}+#3#2+#4=0",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "first coefficient" },
+      { "n": 2, "value": "r", "label": "characteristic root" },
+      { "n": 3, "value": "b", "label": "second coefficient" },
+      { "n": 4, "value": "c", "label": "third coefficient" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-harmonic-oscillator-equation",
+    "category": "Differential equations",
+    "name": "Harmonic oscillator equation",
+    "description": "Simple harmonic motion and its solution.",
+    "level": "university",
+    "latex": "#1''+#2^{2}#1=0\\;\\Longrightarrow\\;#1(#3)=#4\\cos(#2 #3+#5)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "displacement" },
+      { "n": 2, "value": "\\omega", "label": "angular frequency" },
+      { "n": 3, "value": "t", "label": "time" },
+      { "n": 4, "value": "A", "label": "amplitude" },
+      { "n": 5, "value": "\\varphi", "label": "phase" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-damped-oscillator",
+    "category": "Differential equations",
+    "name": "Damped oscillator",
+    "description": "Mass-spring system with damping.",
+    "level": "university",
+    "latex": "#1\\ddot{#2}+#3\\dot{#2}+#4#2=0",
+    "placeholders": [
+      { "n": 1, "value": "m", "label": "mass" },
+      { "n": 2, "value": "x", "label": "displacement" },
+      { "n": 3, "value": "c", "label": "damping coefficient" },
+      { "n": 4, "value": "k", "label": "spring constant" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-heat-equation",
+    "category": "Differential equations",
+    "name": "Heat equation",
+    "description": "Diffusion of temperature.",
+    "level": "university",
+    "latex": "\\frac{\\partial #1}{\\partial #2}=#3\\,\\frac{\\partial^{2}#1}{\\partial #4^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "temperature" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "\\alpha", "label": "diffusivity" },
+      { "n": 4, "value": "x", "label": "position" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-wave-equation",
+    "category": "Differential equations",
+    "name": "Wave equation",
+    "description": "Waves in one dimension.",
+    "level": "university",
+    "latex": "\\frac{\\partial^{2}#1}{\\partial #2^{2}}=#3^{2}\\,\\frac{\\partial^{2}#1}{\\partial #4^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "displacement" },
+      { "n": 2, "value": "t", "label": "time" },
+      { "n": 3, "value": "c", "label": "wave speed" },
+      { "n": 4, "value": "x", "label": "position" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-laplace-transform",
+    "category": "Differential equations",
+    "name": "Laplace transform",
+    "description": "Definition of the Laplace transform.",
+    "level": "university",
+    "latex": "#1(#2)=\\int_{0}^{\\infty}#3(#4)\\,e^{-#2#4}\\,d#4",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "transform" },
+      { "n": 2, "value": "s", "label": "complex frequency" },
+      { "n": 3, "value": "f", "label": "function" },
+      { "n": 4, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "differential-equations-eulers-method",
+    "category": "Differential equations",
+    "name": "Euler's method",
+    "description": "Numerical step for an ODE.",
+    "level": "university",
+    "latex": "#1_{#2+1}=#1_{#2}+#3\\,#4(#5_{#2},#1_{#2})",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "solution" },
+      { "n": 2, "value": "n", "label": "step index" },
+      { "n": 3, "value": "h", "label": "step size" },
+      { "n": 4, "value": "f", "label": "slope function" },
+      { "n": 5, "value": "x", "label": "independent variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-imaginary-unit",
+    "category": "Complex numbers",
+    "name": "Imaginary unit",
+    "description": "Definition of i.",
+    "level": "high-school",
+    "latex": "i^{2}=-1",
+    "placeholders": [],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-rectangular-form",
+    "category": "Complex numbers",
+    "name": "Rectangular form",
+    "description": "Real and imaginary parts.",
+    "level": "high-school",
+    "latex": "#1=#2+#3i",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "complex number" },
+      { "n": 2, "value": "a", "label": "real part" },
+      { "n": 3, "value": "b", "label": "imaginary part" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-modulus",
+    "category": "Complex numbers",
+    "name": "Modulus",
+    "description": "Magnitude of a complex number.",
+    "level": "high-school",
+    "latex": "|#1|=\\sqrt{#2^{2}+#3^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "complex number" },
+      { "n": 2, "value": "a", "label": "real part" },
+      { "n": 3, "value": "b", "label": "imaginary part" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-complex-conjugate",
+    "category": "Complex numbers",
+    "name": "Complex conjugate",
+    "description": "Conjugate and its product with z.",
+    "level": "high-school",
+    "latex": "\\bar{#1}=#2-#3i,\\qquad #1\\bar{#1}=|#1|^{2}",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "complex number" },
+      { "n": 2, "value": "a", "label": "real part" },
+      { "n": 3, "value": "b", "label": "imaginary part" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-complex-division",
+    "category": "Complex numbers",
+    "name": "Complex division",
+    "description": "Dividing by multiplying with the conjugate.",
+    "level": "high-school",
+    "latex": "\\frac{#1+#2i}{#3+#4i}=\\frac{(#1+#2i)(#3-#4i)}{#3^{2}+#4^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "numerator real part" },
+      { "n": 2, "value": "b", "label": "numerator imaginary part" },
+      { "n": 3, "value": "c", "label": "denominator real part" },
+      { "n": 4, "value": "d", "label": "denominator imaginary part" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-polar-form",
+    "category": "Complex numbers",
+    "name": "Polar form",
+    "description": "Modulus and argument form.",
+    "level": "high-school",
+    "latex": "#1=#2(\\cos#3+i\\sin#3)",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "complex number" },
+      { "n": 2, "value": "r", "label": "modulus" },
+      { "n": 3, "value": "\\theta", "label": "argument" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-eulers-formula",
+    "category": "Complex numbers",
+    "name": "Euler's formula",
+    "description": "Link between exponential and trigonometry.",
+    "level": "university",
+    "latex": "e^{i#1}=\\cos#1+i\\sin#1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-eulers-identity",
+    "category": "Complex numbers",
+    "name": "Euler's identity",
+    "description": "The most beautiful equation.",
+    "level": "high-school",
+    "latex": "e^{i\\pi}+1=0",
+    "placeholders": [],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-de-moivres-theorem",
+    "category": "Complex numbers",
+    "name": "De Moivre's theorem",
+    "description": "Powers of complex numbers in polar form.",
+    "level": "university",
+    "latex": "\\left(\\cos#1+i\\sin#1\\right)^{#2}=\\cos #2#1+i\\sin #2#1",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" },
+      { "n": 2, "value": "n", "label": "exponent" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-roots-of-unity",
+    "category": "Complex numbers",
+    "name": "Roots of unity",
+    "description": "The n-th roots of one.",
+    "level": "university",
+    "latex": "#1_{#2}=e^{2\\pi i#2/#3},\\quad #2=0,1,\\dots,#3-1",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "root" },
+      { "n": 2, "value": "k", "label": "index" },
+      { "n": 3, "value": "n", "label": "number of roots" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-product-in-polar-form",
+    "category": "Complex numbers",
+    "name": "Product in polar form",
+    "description": "Moduli multiply and arguments add.",
+    "level": "university",
+    "latex": "#1_1#1_2=#2_1#2_2\\,e^{i(#3_1+#3_2)}",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "complex number" },
+      { "n": 2, "value": "r", "label": "modulus" },
+      { "n": 3, "value": "\\theta", "label": "argument" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-complex-exponential",
+    "category": "Complex numbers",
+    "name": "Complex exponential",
+    "description": "Real and imaginary parts of e to the z.",
+    "level": "university",
+    "latex": "e^{#1+i#2}=e^{#1}\\left(\\cos #2+i\\sin #2\\right)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "real part" },
+      { "n": 2, "value": "y", "label": "imaginary part" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-cosine-from-exponentials",
+    "category": "Complex numbers",
+    "name": "Cosine from exponentials",
+    "description": "Cosine as a complex exponential.",
+    "level": "university",
+    "latex": "\\cos#1=\\frac{e^{i#1}+e^{-i#1}}{2}",
+    "placeholders": [
+      { "n": 1, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-cauchy-riemann-equations",
+    "category": "Complex numbers",
+    "name": "Cauchy-Riemann equations",
+    "description": "Condition for complex differentiability.",
+    "level": "university",
+    "latex": "\\frac{\\partial #1}{\\partial #2}=\\frac{\\partial #3}{\\partial #4},\\qquad \\frac{\\partial #1}{\\partial #4}=-\\frac{\\partial #3}{\\partial #2}",
+    "placeholders": [
+      { "n": 1, "value": "u", "label": "real part" },
+      { "n": 2, "value": "x", "label": "real coordinate" },
+      { "n": 3, "value": "v", "label": "imaginary part" },
+      { "n": 4, "value": "y", "label": "imaginary coordinate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "complex-numbers-cauchy-integral-formula",
+    "category": "Complex numbers",
+    "name": "Cauchy integral formula",
+    "description": "Value of a holomorphic function from a contour.",
+    "level": "university",
+    "latex": "#1(#2)=\\frac{1}{2\\pi i}\\oint_{#3}\\frac{#1(#4)}{#4-#2}\\,d#4",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "function" },
+      { "n": 2, "value": "a", "label": "point" },
+      { "n": 3, "value": "C", "label": "contour" },
+      { "n": 4, "value": "z", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-classical-probability",
+    "category": "Probability and statistics",
+    "name": "Classical probability",
+    "description": "Favourable over possible outcomes.",
+    "level": "high-school",
+    "latex": "P(#1)=\\frac{\\text{favourable outcomes}}{\\text{possible outcomes}}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "event" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-complement-rule",
+    "category": "Probability and statistics",
+    "name": "Complement rule",
+    "description": "Probability of the complement.",
+    "level": "high-school",
+    "latex": "P(#1^{c})=1-P(#1)",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "event" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-addition-rule",
+    "category": "Probability and statistics",
+    "name": "Addition rule",
+    "description": "Probability of a union.",
+    "level": "high-school",
+    "latex": "P(#1\\cup #2)=P(#1)+P(#2)-P(#1\\cap #2)",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first event" },
+      { "n": 2, "value": "B", "label": "second event" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-conditional-probability",
+    "category": "Probability and statistics",
+    "name": "Conditional probability",
+    "description": "Probability of A given B.",
+    "level": "high-school",
+    "latex": "P(#1\\mid #2)=\\frac{P(#1\\cap #2)}{P(#2)}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "event" },
+      { "n": 2, "value": "B", "label": "given event" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-bayes-theorem",
+    "category": "Probability and statistics",
+    "name": "Bayes' theorem",
+    "description": "Reversing a conditional probability.",
+    "level": "university",
+    "latex": "P(#1\\mid #2)=\\frac{P(#2\\mid #1)\\,P(#1)}{P(#2)}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "event" },
+      { "n": 2, "value": "B", "label": "given event" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-permutations",
+    "category": "Probability and statistics",
+    "name": "Permutations",
+    "description": "Ordered selections of k from n.",
+    "level": "high-school",
+    "latex": "P(#1,#2)=\\frac{#1!}{(#1-#2)!}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "number of items" },
+      { "n": 2, "value": "k", "label": "number chosen" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-combinations",
+    "category": "Probability and statistics",
+    "name": "Combinations",
+    "description": "Unordered selections of k from n.",
+    "level": "high-school",
+    "latex": "C(#1,#2)=\\binom{#1}{#2}=\\frac{#1!}{#2!\\,(#1-#2)!}",
+    "placeholders": [
+      { "n": 1, "value": "n", "label": "number of items" },
+      { "n": 2, "value": "k", "label": "number chosen" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-mean",
+    "category": "Probability and statistics",
+    "name": "Mean",
+    "description": "Arithmetic mean.",
+    "level": "high-school",
+    "latex": "\\bar{#1}=\\frac{1}{#2}\\sum_{#3=1}^{#2}#1_{#3}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "data values" },
+      { "n": 2, "value": "n", "label": "sample size" },
+      { "n": 3, "value": "i", "label": "index" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-variance",
+    "category": "Probability and statistics",
+    "name": "Variance",
+    "description": "Population variance.",
+    "level": "high-school",
+    "latex": "#1^{2}=\\frac{1}{#2}\\sum_{#3=1}^{#2}\\left(#4_{#3}-#5\\right)^{2}",
+    "placeholders": [
+      { "n": 1, "value": "\\sigma", "label": "standard deviation" },
+      { "n": 2, "value": "n", "label": "population size" },
+      { "n": 3, "value": "i", "label": "index" },
+      { "n": 4, "value": "x", "label": "data values" },
+      { "n": 5, "value": "\\mu", "label": "mean" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-standard-deviation",
+    "category": "Probability and statistics",
+    "name": "Standard deviation",
+    "description": "Square root of the variance.",
+    "level": "high-school",
+    "latex": "#1=\\sqrt{\\frac{1}{#2}\\sum_{#3=1}^{#2}\\left(#4_{#3}-#5\\right)^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "\\sigma", "label": "standard deviation" },
+      { "n": 2, "value": "n", "label": "population size" },
+      { "n": 3, "value": "i", "label": "index" },
+      { "n": 4, "value": "x", "label": "data values" },
+      { "n": 5, "value": "\\mu", "label": "mean" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-expected-value",
+    "category": "Probability and statistics",
+    "name": "Expected value",
+    "description": "Expectation of a discrete random variable.",
+    "level": "university",
+    "latex": "E[#1]=\\sum_{#2}#3_{#2}\\,#4_{#2}",
+    "placeholders": [
+      { "n": 1, "value": "X", "label": "random variable" },
+      { "n": 2, "value": "i", "label": "index" },
+      { "n": 3, "value": "x", "label": "values" },
+      { "n": 4, "value": "p", "label": "probabilities" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-variance-via-expectations",
+    "category": "Probability and statistics",
+    "name": "Variance via expectations",
+    "description": "Variance as a difference of moments.",
+    "level": "university",
+    "latex": "\\operatorname{Var}(#1)=E[#1^{2}]-\\bigl(E[#1]\\bigr)^{2}",
+    "placeholders": [
+      { "n": 1, "value": "X", "label": "random variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-binomial-distribution",
+    "category": "Probability and statistics",
+    "name": "Binomial distribution",
+    "description": "Probability of k successes in n trials.",
+    "level": "university",
+    "latex": "P(#1=#2)=\\binom{#3}{#2}#4^{#2}(1-#4)^{#3-#2}",
+    "placeholders": [
+      { "n": 1, "value": "X", "label": "random variable" },
+      { "n": 2, "value": "k", "label": "number of successes" },
+      { "n": 3, "value": "n", "label": "number of trials" },
+      { "n": 4, "value": "p", "label": "success probability" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-poisson-distribution",
+    "category": "Probability and statistics",
+    "name": "Poisson distribution",
+    "description": "Probability of k events at rate lambda.",
+    "level": "university",
+    "latex": "P(#1=#2)=\\frac{#3^{#2}e^{-#3}}{#2!}",
+    "placeholders": [
+      { "n": 1, "value": "X", "label": "random variable" },
+      { "n": 2, "value": "k", "label": "number of events" },
+      { "n": 3, "value": "\\lambda", "label": "rate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-normal-distribution",
+    "category": "Probability and statistics",
+    "name": "Normal distribution",
+    "description": "Density of the Gaussian distribution.",
+    "level": "university",
+    "latex": "#1(#2)=\\frac{1}{#3\\sqrt{2\\pi}}\\,e^{-\\frac{(#2-#4)^{2}}{2#3^{2}}}",
+    "placeholders": [
+      { "n": 1, "value": "f", "label": "density" },
+      { "n": 2, "value": "x", "label": "variable" },
+      { "n": 3, "value": "\\sigma", "label": "standard deviation" },
+      { "n": 4, "value": "\\mu", "label": "mean" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-z-score",
+    "category": "Probability and statistics",
+    "name": "Z-score",
+    "description": "Standardising a value.",
+    "level": "high-school",
+    "latex": "#1=\\frac{#2-#3}{#4}",
+    "placeholders": [
+      { "n": 1, "value": "z", "label": "standard score" },
+      { "n": 2, "value": "x", "label": "value" },
+      { "n": 3, "value": "\\mu", "label": "mean" },
+      { "n": 4, "value": "\\sigma", "label": "standard deviation" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "probability-and-statistics-correlation-coefficient",
+    "category": "Probability and statistics",
+    "name": "Correlation coefficient",
+    "description": "Pearson correlation.",
+    "level": "university",
+    "latex": "#1=\\frac{\\operatorname{Cov}(#2,#3)}{#4_{#2}\\,#4_{#3}}",
+    "placeholders": [
+      { "n": 1, "value": "r", "label": "correlation" },
+      { "n": 2, "value": "X", "label": "first variable" },
+      { "n": 3, "value": "Y", "label": "second variable" },
+      { "n": 4, "value": "\\sigma", "label": "standard deviation" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-union",
+    "category": "Sets and logic",
+    "name": "Union",
+    "description": "Elements in A or B.",
+    "level": "high-school",
+    "latex": "#1\\cup #2=\\{#3:#3\\in #1\\ \\text{or}\\ #3\\in #2\\}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" },
+      { "n": 3, "value": "x", "label": "element" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-intersection",
+    "category": "Sets and logic",
+    "name": "Intersection",
+    "description": "Elements in both A and B.",
+    "level": "high-school",
+    "latex": "#1\\cap #2=\\{#3:#3\\in #1\\ \\text{and}\\ #3\\in #2\\}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" },
+      { "n": 3, "value": "x", "label": "element" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-set-difference",
+    "category": "Sets and logic",
+    "name": "Set difference",
+    "description": "Elements in A but not in B.",
+    "level": "high-school",
+    "latex": "#1\\setminus #2=\\{#3:#3\\in #1,\\ #3\\notin #2\\}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" },
+      { "n": 3, "value": "x", "label": "element" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-de-morgans-law-for-union",
+    "category": "Sets and logic",
+    "name": "De Morgan's law for union",
+    "description": "Complement of a union.",
+    "level": "university",
+    "latex": "(#1\\cup #2)^{c}=#1^{c}\\cap #2^{c}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-de-morgans-law-for-intersection",
+    "category": "Sets and logic",
+    "name": "De Morgan's law for intersection",
+    "description": "Complement of an intersection.",
+    "level": "university",
+    "latex": "(#1\\cap #2)^{c}=#1^{c}\\cup #2^{c}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-distributive-law-of-sets",
+    "category": "Sets and logic",
+    "name": "Distributive law of sets",
+    "description": "Intersection distributes over union.",
+    "level": "university",
+    "latex": "#1\\cap(#2\\cup #3)=(#1\\cap #2)\\cup(#1\\cap #3)",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" },
+      { "n": 3, "value": "C", "label": "third set" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-inclusion-exclusion",
+    "category": "Sets and logic",
+    "name": "Inclusion-exclusion",
+    "description": "Cardinality of a union of two sets.",
+    "level": "university",
+    "latex": "|#1\\cup #2|=|#1|+|#2|-|#1\\cap #2|",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "first set" },
+      { "n": 2, "value": "B", "label": "second set" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-power-set-size",
+    "category": "Sets and logic",
+    "name": "Power set size",
+    "description": "Number of subsets.",
+    "level": "university",
+    "latex": "|\\mathcal{P}(#1)|=2^{|#1|}",
+    "placeholders": [
+      { "n": 1, "value": "A", "label": "set" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-number-sets-chain",
+    "category": "Sets and logic",
+    "name": "Number sets chain",
+    "description": "Chain of standard number sets.",
+    "level": "high-school",
+    "latex": "\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{Q}\\subset\\mathbb{R}\\subset\\mathbb{C}",
+    "placeholders": [],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-implication-and-contrapositive",
+    "category": "Sets and logic",
+    "name": "Implication and contrapositive",
+    "description": "A statement and its contrapositive are equivalent.",
+    "level": "university",
+    "latex": "(#1\\Rightarrow #2)\\iff(\\neg #2\\Rightarrow\\neg #1)",
+    "placeholders": [
+      { "n": 1, "value": "p", "label": "hypothesis" },
+      { "n": 2, "value": "q", "label": "conclusion" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-de-morgans-law-in-logic",
+    "category": "Sets and logic",
+    "name": "De Morgan's law in logic",
+    "description": "Negation of a conjunction.",
+    "level": "university",
+    "latex": "\\neg(#1\\land #2)\\equiv\\neg #1\\lor\\neg #2",
+    "placeholders": [
+      { "n": 1, "value": "p", "label": "first proposition" },
+      { "n": 2, "value": "q", "label": "second proposition" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-negating-quantifiers",
+    "category": "Sets and logic",
+    "name": "Negating quantifiers",
+    "description": "Negation swaps the quantifiers.",
+    "level": "university",
+    "latex": "\\neg\\,\\forall #1\\,#2(#1)\\equiv\\exists #1\\,\\neg #2(#1)",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "variable" },
+      { "n": 2, "value": "P", "label": "predicate" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-mathematical-induction",
+    "category": "Sets and logic",
+    "name": "Mathematical induction",
+    "description": "The induction principle.",
+    "level": "university",
+    "latex": "\\bigl[#1(1)\\land\\forall #2\\,(#1(#2)\\Rightarrow #1(#2+1))\\bigr]\\Rightarrow\\forall #3\\,#1(#3)",
+    "placeholders": [
+      { "n": 1, "value": "P", "label": "predicate" },
+      { "n": 2, "value": "k", "label": "step variable" },
+      { "n": 3, "value": "n", "label": "variable" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "sets-and-logic-interval-notation",
+    "category": "Sets and logic",
+    "name": "Interval notation",
+    "description": "Closed interval as a set.",
+    "level": "high-school",
+    "latex": "[#1,#2]=\\{#3\\in\\mathbb{R}:#1\\le #3\\le #2\\}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "left endpoint" },
+      { "n": 2, "value": "b", "label": "right endpoint" },
+      { "n": 3, "value": "x", "label": "element" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-constant-velocity",
+    "category": "Physics",
+    "name": "Constant velocity",
+    "description": "Position under constant velocity.",
+    "level": "high-school",
+    "latex": "#1=#1_0+#2#3",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "position" },
+      { "n": 2, "value": "v", "label": "velocity" },
+      { "n": 3, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-uniform-acceleration-velocity",
+    "category": "Physics",
+    "name": "Uniform acceleration, velocity",
+    "description": "Velocity under constant acceleration.",
+    "level": "high-school",
+    "latex": "#1=#1_0+#2#3",
+    "placeholders": [
+      { "n": 1, "value": "v", "label": "velocity" },
+      { "n": 2, "value": "a", "label": "acceleration" },
+      { "n": 3, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-uniform-acceleration-position",
+    "category": "Physics",
+    "name": "Uniform acceleration, position",
+    "description": "Position under constant acceleration.",
+    "level": "high-school",
+    "latex": "#1=#1_0+#2_0#3+\\tfrac{1}{2}#4#3^{2}",
+    "placeholders": [
+      { "n": 1, "value": "x", "label": "position" },
+      { "n": 2, "value": "v", "label": "velocity" },
+      { "n": 3, "value": "t", "label": "time" },
+      { "n": 4, "value": "a", "label": "acceleration" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-kinematics-without-time",
+    "category": "Physics",
+    "name": "Kinematics without time",
+    "description": "Velocity from displacement.",
+    "level": "high-school",
+    "latex": "#1^{2}=#1_0^{2}+2#2\\,\\Delta #3",
+    "placeholders": [
+      { "n": 1, "value": "v", "label": "velocity" },
+      { "n": 2, "value": "a", "label": "acceleration" },
+      { "n": 3, "value": "x", "label": "position" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-newtons-second-law",
+    "category": "Physics",
+    "name": "Newton's second law",
+    "description": "Force equals mass times acceleration.",
+    "level": "high-school",
+    "latex": "\\vec{#1}=#2\\vec{#3}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "m", "label": "mass" },
+      { "n": 3, "value": "a", "label": "acceleration" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-newtons-second-law-with-momentum",
+    "category": "Physics",
+    "name": "Newton's second law with momentum",
+    "description": "Force as rate of change of momentum.",
+    "level": "university",
+    "latex": "\\vec{#1}=\\frac{d\\vec{#2}}{d#3}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "p", "label": "momentum" },
+      { "n": 3, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-universal-gravitation",
+    "category": "Physics",
+    "name": "Universal gravitation",
+    "description": "Gravitational force between two masses.",
+    "level": "high-school",
+    "latex": "#1=G\\,\\frac{#2_1#2_2}{#3^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "m", "label": "mass" },
+      { "n": 3, "value": "r", "label": "distance" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-hookes-law",
+    "category": "Physics",
+    "name": "Hooke's law",
+    "description": "Spring force.",
+    "level": "high-school",
+    "latex": "#1=-#2#3",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "k", "label": "spring constant" },
+      { "n": 3, "value": "x", "label": "displacement" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-work",
+    "category": "Physics",
+    "name": "Work",
+    "description": "Work done by a force over a displacement.",
+    "level": "high-school",
+    "latex": "#1=\\vec{#2}\\cdot\\vec{#3}=#2#3\\cos#4",
+    "placeholders": [
+      { "n": 1, "value": "W", "label": "work" },
+      { "n": 2, "value": "F", "label": "force" },
+      { "n": 3, "value": "d", "label": "displacement" },
+      { "n": 4, "value": "\\theta", "label": "angle" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-kinetic-energy",
+    "category": "Physics",
+    "name": "Kinetic energy",
+    "description": "Energy of motion.",
+    "level": "high-school",
+    "latex": "#1=\\tfrac{1}{2}#2#3^{2}",
+    "placeholders": [
+      { "n": 1, "value": "K", "label": "kinetic energy" },
+      { "n": 2, "value": "m", "label": "mass" },
+      { "n": 3, "value": "v", "label": "speed" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-gravitational-potential-energy",
+    "category": "Physics",
+    "name": "Gravitational potential energy",
+    "description": "Energy near the surface of the Earth.",
+    "level": "high-school",
+    "latex": "#1=#2g#3",
+    "placeholders": [
+      { "n": 1, "value": "U", "label": "potential energy" },
+      { "n": 2, "value": "m", "label": "mass" },
+      { "n": 3, "value": "h", "label": "height" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-work-energy-theorem",
+    "category": "Physics",
+    "name": "Work-energy theorem",
+    "description": "Net work changes the kinetic energy.",
+    "level": "high-school",
+    "latex": "#1_{\\text{net}}=\\Delta #2=\\tfrac{1}{2}#3#4_f^{2}-\\tfrac{1}{2}#3#4_i^{2}",
+    "placeholders": [
+      { "n": 1, "value": "W", "label": "work" },
+      { "n": 2, "value": "K", "label": "kinetic energy" },
+      { "n": 3, "value": "m", "label": "mass" },
+      { "n": 4, "value": "v", "label": "speed" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-centripetal-acceleration",
+    "category": "Physics",
+    "name": "Centripetal acceleration",
+    "description": "Acceleration in circular motion.",
+    "level": "high-school",
+    "latex": "#1_c=\\frac{#2^{2}}{#3}",
+    "placeholders": [
+      { "n": 1, "value": "a", "label": "acceleration" },
+      { "n": 2, "value": "v", "label": "speed" },
+      { "n": 3, "value": "r", "label": "radius" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-wave-speed",
+    "category": "Physics",
+    "name": "Wave speed",
+    "description": "Speed from frequency and wavelength.",
+    "level": "high-school",
+    "latex": "#1=#2#3",
+    "placeholders": [
+      { "n": 1, "value": "v", "label": "wave speed" },
+      { "n": 2, "value": "f", "label": "frequency" },
+      { "n": 3, "value": "\\lambda", "label": "wavelength" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-pendulum-period",
+    "category": "Physics",
+    "name": "Pendulum period",
+    "description": "Period of a simple pendulum.",
+    "level": "high-school",
+    "latex": "#1=2\\pi\\sqrt{\\frac{#2}{g}}",
+    "placeholders": [
+      { "n": 1, "value": "T", "label": "period" },
+      { "n": 2, "value": "L", "label": "length" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-traveling-wave",
+    "category": "Physics",
+    "name": "Traveling wave",
+    "description": "Sinusoidal wave moving in x.",
+    "level": "university",
+    "latex": "#1(#2,#3)=#4\\sin(#5#2-#6 #3)",
+    "placeholders": [
+      { "n": 1, "value": "y", "label": "displacement" },
+      { "n": 2, "value": "x", "label": "position" },
+      { "n": 3, "value": "t", "label": "time" },
+      { "n": 4, "value": "A", "label": "amplitude" },
+      { "n": 5, "value": "k", "label": "wave number" },
+      { "n": 6, "value": "\\omega", "label": "angular frequency" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-ohms-law",
+    "category": "Physics",
+    "name": "Ohm's law",
+    "description": "Voltage, current, and resistance.",
+    "level": "high-school",
+    "latex": "#1=#2#3",
+    "placeholders": [
+      { "n": 1, "value": "V", "label": "voltage" },
+      { "n": 2, "value": "I", "label": "current" },
+      { "n": 3, "value": "R", "label": "resistance" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-coulombs-law",
+    "category": "Physics",
+    "name": "Coulomb's law",
+    "description": "Electric force between two charges.",
+    "level": "high-school",
+    "latex": "#1=\\frac{1}{4\\pi\\varepsilon_0}\\,\\frac{#2_1#2_2}{#3^{2}}",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "q", "label": "charge" },
+      { "n": 3, "value": "r", "label": "distance" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-mass-energy-equivalence",
+    "category": "Physics",
+    "name": "Mass-energy equivalence",
+    "description": "Einstein's famous equation.",
+    "level": "high-school",
+    "latex": "#1=#2c^{2}",
+    "placeholders": [
+      { "n": 1, "value": "E", "label": "energy" },
+      { "n": 2, "value": "m", "label": "mass" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-ideal-gas-law",
+    "category": "Physics",
+    "name": "Ideal gas law",
+    "description": "Equation of state of an ideal gas.",
+    "level": "high-school",
+    "latex": "#1#2=#3R#4",
+    "placeholders": [
+      { "n": 1, "value": "P", "label": "pressure" },
+      { "n": 2, "value": "V", "label": "volume" },
+      { "n": 3, "value": "n", "label": "amount of substance" },
+      { "n": 4, "value": "T", "label": "temperature" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-maxwell-gausss-law",
+    "category": "Physics",
+    "name": "Maxwell, Gauss's law",
+    "description": "Electric flux and charge.",
+    "level": "university",
+    "latex": "\\nabla\\cdot\\vec{#1}=\\frac{#2}{\\varepsilon_0}",
+    "placeholders": [
+      { "n": 1, "value": "E", "label": "electric field" },
+      { "n": 2, "value": "\\rho", "label": "charge density" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-maxwell-no-magnetic-monopoles",
+    "category": "Physics",
+    "name": "Maxwell, no magnetic monopoles",
+    "description": "Divergence of B vanishes.",
+    "level": "university",
+    "latex": "\\nabla\\cdot\\vec{#1}=0",
+    "placeholders": [
+      { "n": 1, "value": "B", "label": "magnetic field" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-maxwell-faradays-law",
+    "category": "Physics",
+    "name": "Maxwell, Faraday's law",
+    "description": "Changing magnetic field induces an electric field.",
+    "level": "university",
+    "latex": "\\nabla\\times\\vec{#1}=-\\frac{\\partial\\vec{#2}}{\\partial #3}",
+    "placeholders": [
+      { "n": 1, "value": "E", "label": "electric field" },
+      { "n": 2, "value": "B", "label": "magnetic field" },
+      { "n": 3, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-maxwell-amperes-law",
+    "category": "Physics",
+    "name": "Maxwell, Ampere's law",
+    "description": "Currents and changing E fields create B.",
+    "level": "university",
+    "latex": "\\nabla\\times\\vec{#1}=\\mu_0\\vec{#2}+\\mu_0\\varepsilon_0\\frac{\\partial\\vec{#3}}{\\partial #4}",
+    "placeholders": [
+      { "n": 1, "value": "B", "label": "magnetic field" },
+      { "n": 2, "value": "J", "label": "current density" },
+      { "n": 3, "value": "E", "label": "electric field" },
+      { "n": 4, "value": "t", "label": "time" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-schrodinger-equation",
+    "category": "Physics",
+    "name": "Schrodinger equation",
+    "description": "Time-dependent Schrodinger equation.",
+    "level": "university",
+    "latex": "i\\hbar\\frac{\\partial}{\\partial #1}#2=\\hat{#3}#2",
+    "placeholders": [
+      { "n": 1, "value": "t", "label": "time" },
+      { "n": 2, "value": "\\Psi", "label": "wave function" },
+      { "n": 3, "value": "H", "label": "hamiltonian" }
+    ],
+    "packages": []
+  },
+  {
+    "id": "physics-lorentz-force",
+    "category": "Physics",
+    "name": "Lorentz force",
+    "description": "Force on a charge in electromagnetic fields.",
+    "level": "university",
+    "latex": "\\vec{#1}=#2\\left(\\vec{#3}+\\vec{#4}\\times\\vec{#5}\\right)",
+    "placeholders": [
+      { "n": 1, "value": "F", "label": "force" },
+      { "n": 2, "value": "q", "label": "charge" },
+      { "n": 3, "value": "E", "label": "electric field" },
+      { "n": 4, "value": "v", "label": "velocity" },
+      { "n": 5, "value": "B", "label": "magnetic field" }
+    ],
+    "packages": []
+  }
+]

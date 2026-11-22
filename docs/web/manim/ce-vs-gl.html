@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ManimCE and ManimGL · Manim Formula Editor</title>
+  <meta name="description" content="The two Manims the editor exports to: what differs in the code it writes and in what you see, which one to use, and how to install each.">
+  <meta name="mfe:id" content="manim/ce-vs-gl">
+  <meta name="mfe:level" content="advanced">
+  <meta name="mfe:short" content="CE and GL">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/ce-gl-shapes.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>ManimCE and ManimGL</h1>
+      <p class="lead">The editor exports for two versions of Manim. They share one idea and differ
+        in many details: what the code looks like, how some animations move, how a video is
+        timed. This page says where, helps you choose, and links to the installation of each.</p>
+
+      <h2 id="two">Two Manims</h2>
+      <ul>
+        <li><strong>ManimCE</strong> is Manim Community Edition: the version maintained by a
+          community of contributors, with documentation of its own. You install it with
+          <code>pip install manim</code> and write <code data-excerpt="examples/python-scene.ce.py">from manim import *</code>. The editor
+          writes for <strong>ManimCE 0.22</strong>.</li>
+        <li><strong>ManimGL</strong> is the version 3Blue1Brown writes his videos with. It draws
+          with OpenGL and can play a scene in an interactive window. You install it with
+          <code>pip install manimgl</code> and write <code data-excerpt="examples/python-scene.gl.py">from manimlib import *</code>. The editor
+          writes for <strong>ManimGL 1.7</strong>.</li>
+      </ul>
+      <p>The editor’s Preview mirrors each of them: its easing curves, its lags and its sizes follow
+        the library of the project. You set that in <span class="ui">File ▸ Project settings…</span>,
+        under <span class="ui">Manim target</span>: <span class="ui">ManimCE (Community
+        Edition)</span>, the default, or <span class="ui">ManimGL (3b1b)</span>. The
+        arrow of the <span class="ui">Export…</span> button offers both libraries whatever the project’s is, and the
+        editor converts what differs.</p>
+      <figure class="mfe-player" data-mfe-player="ce-gl-shapes" data-loop data-start="7.8"
+              data-caption="One scene, exported for both libraries below: a sum, a rounded box and a brace."></figure>
+      <div class="mfe-code" data-mfe-python="ce-gl-shapes"></div>
+      <p>Switch the tabs above to compare the two files. The rest of the page is a guide to what
+        you see.</p>
+
+      <h2 id="choosing">Which one to use</h2>
+      <table>
+        <thead>
+          <tr><th>If…</th><th>Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>You already work with one of them</td><td>That one. Export for it, and the scene runs in the project you have.</td></tr>
+          <tr><td>You have neither and want to start</td><td>ManimCE: a new project is made for it, so it is the library the Preview mirrors by default.</td></tr>
+          <tr><td>You follow 3Blue1Brown’s code, or want an interactive window to play with the scene</td><td>ManimGL.</td></tr>
+          <tr><td>You are not sure</td><td>Export both. The two files come from one project, and the dialogs say what each will do.</td></tr>
+          <tr><td>You have decided</td><td>Set the <span class="ui">Manim target</span> of the project to that library: the Preview then moves as it will, and the export needs no conversion.</td></tr>
+        </tbody>
+      </table>
+      <p>For the formulas and the transformations the two give the same picture. The differences
+        below are in details of the code and in a few effects.</p>
+
+      <h2 id="differences">What differs in the code</h2>
+      <p>The table shows the same scenes exported twice. The first six rows come from the scene of
+        <a href="python.html">The generated Python</a>, the next four from the scene above.</p>
+      <table>
+        <thead>
+          <tr><th>What</th><th>ManimCE</th><th>ManimGL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The import</td><td><code data-excerpt="examples/python-scene.ce.py">from manim import *</code></td><td><code data-excerpt="examples/python-scene.gl.py">from manimlib import *</code></td></tr>
+          <tr><td>The command in the header</td><td><code data-excerpt="examples/python-scene.ce.py">manim -r 1920,1080 --fps 60 SceneToRead.py SceneToRead</code></td><td><code data-excerpt="examples/python-scene.gl.py">manimgl SceneToRead.py SceneToRead -w -r 1920x1080 --fps 60</code></td></tr>
+          <tr><td>The background</td><td><code data-excerpt="examples/python-scene.ce.py">self.camera.background_color = "#000000"</code>, in <code>construct</code></td><td><code data-excerpt="examples/python-scene.gl.py">default_camera_config = dict(background_color="#000000")</code>, in the class</td></tr>
+          <tr><td>A formula</td><td><code data-excerpt="examples/python-scene.ce.py">MathTex(r"2x + 1 = 7", font_size=96)</code></td><td><code data-excerpt="examples/python-scene.gl.py">Tex(r"2x + 1 = 7", font_size=98.9888)</code></td></tr>
+          <tr><td>The intro <em>Write</em></td><td><code data-excerpt="examples/python-scene.ce.py">Write(VGroup(*step1_g[:]))</code></td><td><code data-excerpt="examples/python-scene.gl.py">Write(VGroup(*step1_g[:]), stroke_color="#FFFFFF")</code></td></tr>
+          <tr><td>One glyph leaving</td><td><code data-excerpt="examples/python-scene.ce.py">FadeOut(step2_g[0])</code></td><td><code data-excerpt="examples/python-scene.gl.py">FadeOut(VGroup(step2_g[0]))</code></td></tr>
+          <tr><td>The intro <em>Create</em></td><td><code data-excerpt="examples/ce-gl-shapes.ce.py">Create(frame)</code></td><td><code data-excerpt="examples/ce-gl-shapes.gl.py">ShowCreation(VGroup(frame_g[0]))</code></td></tr>
+          <tr><td>A rounded box</td><td><code data-excerpt="examples/ce-gl-shapes.ce.py">SurroundingRectangle(sum[0][:5], buff=0.15, color="#FFFF00", corner_radius=0.12)</code></td><td><code data-excerpt="examples/ce-gl-shapes.gl.py">SurroundingRectangle(VGroup(*sum_g[:5]), buff=0.15, color="#FFFF00").round_corners(0.12)</code></td></tr>
+          <tr><td>A brace and its colour</td><td><code data-excerpt="examples/ce-gl-shapes.ce.py">Brace(frame, DOWN, buff=0.2, color="#58C4DD")</code></td><td><code data-excerpt="examples/ce-gl-shapes.gl.py">Brace(frame, DOWN, buff=0.2)</code>, then <code data-excerpt="examples/ce-gl-shapes.gl.py">under.set_color("#58C4DD")</code></td></tr>
+          <tr><td>A size</td><td><code data-excerpt="examples/ce-gl-shapes.ce.py">font_size=60</code></td><td><code data-excerpt="examples/ce-gl-shapes.gl.py">font_size=61.868</code></td></tr>
+        </tbody>
+      </table>
+      <p>And a few more that the examples above do not show:</p>
+      <table>
+        <thead>
+          <tr><th>What</th><th>ManimCE</th><th>ManimGL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A glyph by its exact index</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/attach-next-to.latex.ce.py">poly[0][3:5].set_color("#FFFF00")</code></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/attach-next-to.latex.gl.py">poly[3:5].set_color("#FFFF00")</code></td></tr>
+          <tr><td>A <em>Copy</em> pair</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-one-to-many.positional.ce.py">ReplacementTransform(f1_g[0].copy(), f2_g[0])</code></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-one-to-many.auto.gl.py">TransformFromCopy(f1_g[0], f2_g[0])</code></td></tr>
+          <tr><td>A LaTeX text</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/braces.latex.ce.py">Tex(r"A brace on text", font_size=40, color="#83C167")</code></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/braces.latex.gl.py">TexText(r"A brace on text", font_size=40)</code>, then <code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/braces.latex.gl.py">title.set_color("#83C167")</code></td></tr>
+          <tr><td>The size of a font text</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-text-pango.auto.ce.py">font_size=56</code></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-text-pango.auto.gl.py">font_size=82.1968</code>, which is 56 × 1.4678</td></tr>
+          <tr><td>The alignment of a font text</td><td>None written.</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-text-pango.auto.gl.py">alignment='LEFT'</code></td></tr>
+          <tr><td>The outro <em>Unwrite</em></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/arrows.latex.ce.py">Unwrite(…)</code>, Manim’s own</td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/arrows.latex.gl.py">_Unwrite(…)</code>, a small class in the file that plays a <code>Write</code> backwards: ManimGL has no <code>Unwrite</code></td></tr>
+          <tr><td>A scene with a <a href="../animations/camera.html">camera</a></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-camera.auto.ce.py">class Pinned(MovingCameraScene):</code></td><td><code data-excerpt="/app/src/export/codegen/__tests__/__snapshots__/python/example-camera.auto.gl.py">class Pinned(Scene):</code>, whose frame can move already</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>The size.</strong> At the same <code>font_size</code> a ManimGL formula comes out
+          slightly smaller than a ManimCE one, by a factor of about 1.031. When you export a project
+          for the other library the editor multiplies the size by that factor (96 becomes
+          98.9888), so the formula keeps the size you see in the Preview.</li>
+        <li><strong>Glyph references.</strong> A formula that the editor drew exactly (with the
+          <a href="companion.html">companion</a>) is named by index in the library it was drawn for:
+          <code data-excerpt="examples/ce-gl-shapes.ce.py">sum[0][:5]</code> in the ManimCE file above. A formula drawn for the other library,
+          or by MathJax, goes
+          through the positional helper, which both libraries use the same way
+          (<a href="python.html#glyphs">How the scene finds the glyphs</a>). In the scene above the
+          ManimCE file is exact and the ManimGL file has the helper, for that reason.</li>
+        <li><strong>Groups.</strong> ManimGL counts a group as one more slot in the stagger of an
+          animation, so the exported code wraps even a single glyph in <code data-excerpt="examples/python-scene.gl.py">VGroup(…)</code> to keep
+          the animation as the Preview draws it. ManimCE takes the glyph as it is.</li>
+        <li><strong>Packages and preamble.</strong> The LaTeX packages of a formula and the
+          project’s <span class="ui">LaTeX preamble</span> (in <span class="ui">File ▸ Project
+          settings…</span>) go through a <code>TexTemplate</code> in ManimCE and through
+          <code>additional_preamble</code> in ManimGL.</li>
+      </ul>
+
+      <h2 id="result">What differs in what you see</h2>
+      <p>The Preview draws the behaviour of the project’s <span class="ui">Manim target</span>, and the editor’s tests compare
+        scenes exported for each library with the frames Manim makes. A scene exported for the other
+        library keeps your timeline but takes that library’s own easing curves and default lags, so
+        its motion differs slightly from the Preview. These are the differences you can notice:</p>
+      <table>
+        <thead>
+          <tr><th>Where</th><th>ManimCE</th><th>ManimGL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The <em>smooth</em> easing</td><td>A sigmoid curve.</td><td>A quintic polynomial. The same name, a slightly different ease.</td></tr>
+          <tr><td>The stagger of a <em>Write</em> over <em>n</em> glyphs</td><td>Lag ratio <code>min(4/max(1, n), 0.2)</code>.</td><td>Lag ratio <code>min(4/(n + 1), 0.2)</code>, and the group itself takes one more slot of the stagger.</td></tr>
+          <tr><td>The outline of a <em>Write</em></td><td>Each glyph is traced in its own colour.</td><td>Every glyph is traced in one colour, which the exported call names (<code>stroke_color</code>).</td></tr>
+          <tr><td><em>Fade in</em> with a scale</td><td>Starts at the scale you set.</td><td>Starts at its inverse.</td></tr>
+          <tr><td>The frames of a video</td><td>Each play is drawn at the start of every frame interval, as the editor’s video is.</td><td>Each play is drawn at the end of every frame interval: every instant shows one frame later, and the video ends on the final state.</td></tr>
+          <tr><td>A brace</td><td>Honours the sharpness you set.</td><td>Draws the brace from a font and ignores the sharpness; the dialog says so.</td></tr>
+          <tr><td>A font text</td><td>Comes out about 1.47 times as large at the same size. Its lines are 0.975 em apart whatever the font, and a tab is four spaces.</td><td>Spaces its lines by the font’s own line height and has tab stops of its own.</td></tr>
+        </tbody>
+      </table>
+      <p>The editor converts what it can: the size of a font text is converted from the library that
+        shaped it, and the sizes of formulas as above. What it cannot convert is listed in the
+        notes of the export dialog.</p>
+
+      <h2 id="converting">Exporting for the other library</h2>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span> or
+        <span class="ui">Export ▸ Python — ManimGL…</span>: both are always on offer, whatever the
+        <span class="ui">Manim target</span> of the project is. The two dialogs of the same
+        project, made for ManimCE:</p>
+      <figure>
+        <img src="../media/manim/ce-vs-gl/dialog-ce.dark.webp" data-themed
+             alt="The top of the Export Python dialog for ManimCE of the scene with a box and a brace: the scene name, the two options and a note that says that the scene reproduces the preview, with exact glyph indices and whole frames."
+             width="840" height="248" loading="lazy">
+        <figcaption>The scene for the library it was drawn for: the notes (1) say that it
+          reproduces the Preview.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/manim/ce-vs-gl/dialog-gl.dark.webp" data-themed
+             alt="The top of the Export Python dialog for ManimGL of the same scene: warnings say that the project targets ManimCE, that font sizes are converted and that the glyphs are matched by position, and that the motion differs slightly from the preview."
+             width="840" height="340" loading="lazy">
+        <figcaption>The same scene for the other library: the notes (1) say that the font sizes
+          are converted, that the glyphs are matched by position, and that the motion differs
+          slightly from the Preview.</figcaption>
+      </figure>
+      <p>The first note of the second dialog says it plainly: <em>The project targets ManimCE;
+        exporting to ManimGL converts the font sizes of formulas and LaTeX texts (× 1.0311) and
+        matches their glyphs by position. Easing curves and default lag ratios follow ManimGL, so
+        the motion differs slightly from the preview.</em> Read the notes of every export: they are
+        the list of what a converted scene does not promise.</p>
+
+      <div class="mfe-example" data-mfe-example="ce-gl-shapes"></div>
+      <aside class="try">
+        <ol>
+          <li>Download the project above and open it: choose <span class="ui">File ▸ Open…</span>,
+            press <span class="ui">Other file…</span> and pick the file.</li>
+          <li>Choose <span class="ui">Export ▸ Python — ManimGL…</span> and read its notes. Close
+            the dialog.</li>
+          <li>Choose <span class="ui">File ▸ Project settings…</span>, set
+            <span class="ui">Manim target</span> to <span class="ui">ManimGL (3b1b)</span> and press
+            <span class="ui">Apply</span>.</li>
+          <li>Export for ManimGL again: the note that says the project targets ManimCE is gone. Export
+            for ManimCE instead, and the same kind of note comes up the other way round.</li>
+        </ol>
+      </aside>
+
+      <h2 id="installing">Installing each</h2>
+      <p>Follow the official instructions for your system: they cover the libraries Manim needs
+        beyond Python. Both need a LaTeX installation with <code>dvisvgm</code>, because Manim
+        typesets formulas with LaTeX. ManimGL also needs ffmpeg to write a video file; ManimCE
+        brings its own, through the <code>av</code> package it installs.</p>
+      <table>
+        <thead>
+          <tr><th></th><th>ManimCE 0.22</th><th>ManimGL 1.7</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Python</td><td>3.11 or newer</td><td>3.10 or newer</td></tr>
+          <tr><td>Install</td><td><code>python -m pip install manim</code></td><td><code>python -m pip install manimgl</code></td></tr>
+          <tr><td>Official guide</td><td><a href="https://docs.manim.community/en/stable/installation.html">docs.manim.community</a></td><td><a href="https://3b1b.github.io/manim/getting_started/installation.html">3b1b.github.io/manim</a></td></tr>
+          <tr><td>Also needs</td><td>LaTeX; on some systems Cairo and Pango</td><td>LaTeX and ffmpeg; a graphics setup that supports OpenGL</td></tr>
+        </tbody>
+      </table>
+      <aside class="callout tip">
+        <p>Put each in a virtual environment of its own. The editor’s companion takes the path of
+          the Python of each environment (<code>--ce-python</code> and <code>--gl-python</code>) to
+          render videos with them; see <a href="companion.html#rendering">The companion</a>.</p>
+      </aside>
+
+      <h2 id="running">Running the same scene in both</h2>
+<pre><code class="language-bash"># ManimCE: writes media/videos/SceneToRead/1080p60/SceneToRead.mp4
+manim -r 1920,1080 --fps 60 SceneToRead.py SceneToRead
+
+# ManimGL: writes the video into a videos folder (without -w it plays in a window)
+manimgl SceneToRead.py SceneToRead -w -r 1920x1080 --fps 60</code></pre>
+      <p>Each command is in the header of the file exported for its library, already filled in
+        with the size and the frame rate of the project. For a quick preview, take
+        <code>-r …</code> and <code>--fps …</code> out and add the low-quality flag (ManimCE:
+        <code>-pql</code>, which also opens the video; ManimGL: <code>-l</code>), or lower those
+        two numbers: a quality flag added to the commands above changes nothing, because both
+        libraries apply <code>-r</code> and <code>--fps</code> after it. ManimGL also plays the
+        scene in its window when you leave out <code>-w</code>.</p>
+    </article>
+  </main>
+</body>
+</html>

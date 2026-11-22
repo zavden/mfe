@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>An identity with braces and arrows · Manim Formula Editor</title>
+  <meta name="description" content="Explain the identity a² − b² = (a − b)(a + b) with a labelled brace under each side and an arrow that arcs over the equals sign, then play it and export it.">
+  <meta name="mfe:id" content="tutorials/annotated-identity">
+  <meta name="mfe:level" content="tutorial">
+  <meta name="mfe:difficulty" content="advanced">
+  <meta name="mfe:short" content="Annotated identity">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/annotated-identity.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>An identity with braces and arrows</h1>
+      <p class="lead">An identity is easier to follow when the picture says what its parts are. You will take <em>a</em>² − <em>b</em>² = (<em>a</em> − <em>b</em>)(<em>a</em> + <em>b</em>) and put a labelled brace under each side and an arrow that arcs from one side to the other, then play it and export it.</p>
+
+      <h2 id="what-you-make">What you will make</h2>
+      <p>An eleven-second scene. The identity writes itself in; a blue brace grows under the left side and its label fades in; a green brace and its label follow under the right side; last, an arrow is drawn over the equals sign from the left side to the right one.</p>
+
+      <figure class="mfe-player" data-mfe-player="annotated-identity" data-timeline data-loop
+              data-caption="The finished scene in the player, with its timeline."></figure>
+
+      <p>This is the same scene as ManimCE renders it from the Python the editor exports:</p>
+      <video class="mfe-manim" src="../examples/annotated-identity.mp4" controls preload="metadata" playsinline></video>
+
+      <div class="mfe-example" data-mfe-example="annotated-identity"></div>
+
+      <p>Along the way you meet the <kbd data-keys="Alt">Alt</kbd> pick of glyphs, the brace of the glyph bar, a label typed in the editor, the compass of an arrow, an arc and <span class="ui">GrowArrow</span>.</p>
+
+      <h2 id="before">Before you start</h2>
+      <p>You need the basics of the <a href="../basics/preview.html">Preview</a> and of the <a href="../basics/timeline.html">timeline</a>, and to have added a formula to a project once (<a href="../start/first-animation.html">Your first animation</a>). <a href="../examples/annotated-identity-start.mfe.json" download>Download the starting project</a> and open it: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the Projects dialog and pick the downloaded file (<a href="../start/projects.html#open">Opening a project</a>). It holds the identity on the timeline, written in over 1.8 seconds, and nothing else.</p>
+
+      <p>The identity has sixteen glyphs. The left side is the first five (<em>a</em>, 2, −, <em>b</em>, 2), then comes the equals sign, and the right side is the last ten, from the first parenthesis to the last.</p>
+
+      <aside class="callout tip">
+        <p>To start from an empty project instead, make the formula as in <a href="../start/first-animation.html#formula">Your first animation</a>: its LaTeX is <code>a^2 - b^2 = (a - b)(a + b)</code>, its size 96, on the timeline from 0 s to 11 s, with the intro <span class="ui">Write</span> of 1.8 seconds, and its position a little above the middle of the frame. A clip dropped on the timeline is three seconds long: drag its right edge, or type 11 in the <span class="ui">End</span> field of the Animations panel.</p>
+      </aside>
+
+      <aside class="callout note">
+        <p>Your tracks may be numbered differently from the ones in the pictures, and your clips may sit on other tracks. Nothing below depends on it.</p>
+      </aside>
+
+      <h2 id="steps">Step by step</h2>
+
+      <h3 id="step-brace">1. A brace under the left side</h3>
+      <p>Click the ruler of the timeline to put the playhead at about 2.6 s (the time is read beside the transport buttons): the brace will start where the playhead is. In the Preview, <kbd data-keys="Alt">Alt</kbd>+click the first glyph of the left side, then <kbd data-keys="Alt+Shift">Alt+Shift</kbd>+click its last: the five glyphs are picked. The bar at the corner of the Preview says so. Open <span class="ui">Brace ▾</span> and choose <span class="ui">Below</span>.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/brace-left.dark.webp" data-themed
+             alt="The identity with the five glyphs of its left side picked in yellow, the bar of the Preview that says so, and the menu Brace listing Below, Above, Left, Right and On some glyphs."
+             width="818" height="700" loading="lazy">
+        <figcaption>Five glyphs picked; <span class="ui">Brace ▾</span> offers the four sides.</figcaption>
+      </figure>
+
+      <p>The brace has its own clip on a track above the identity's, from 2.6 s to the end. <a href="../objects/braces.html">Braces</a> has all the ways to add one.</p>
+
+      <h3 id="step-colour">2. Colour it</h3>
+      <p>Right-click the brace. <span class="ui">Colour ▸</span> offers the Manim colours as swatches: choose the blue one (its tooltip says BLUE).</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/brace-colour.dark.webp" data-themed
+             alt="The menu of the brace with its Colour submenu open: the Manim colours as swatches, then a field for any other colour."
+             width="390" height="422" loading="lazy">
+        <figcaption>The menu of the brace, with <span class="ui">Colour ▸</span> open.</figcaption>
+      </figure>
+
+      <h3 id="step-label">3. Give it a label</h3>
+      <p>Right-click the brace again and choose <span class="ui">Add label ▸ Formula</span>. An empty formula hangs at the brace's tip and its editor opens. Click the <span class="ui">Raw LaTeX</span> box, type <code>\text{difference of squares}</code>, press <span class="ui">Apply</span> and close the editor.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/label-left.dark.webp" data-themed
+             alt="The editor of the label, a dialog named Formula f2: the raw LaTeX text of difference of squares typed, and the glyphs of the label shown on its right."
+             width="1056" height="710" loading="lazy">
+        <figcaption>The label is typed as raw LaTeX in the editor, then applied.</figcaption>
+      </figure>
+
+      <h3 id="step-intro">4. Make it grow</h3>
+      <p>Right-click the brace once more. <span class="ui">Intro ▸</span> gives it the animation its clip starts with: choose <span class="ui">GrowFromCenter</span>. The label fades in with the brace.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/brace-intro.dark.webp" data-themed
+             alt="The menu of the brace with its Intro submenu open: None, Write, FadeIn, GrowFromCenter, DrawBorderThenFill and Create."
+             width="344" height="422" loading="lazy">
+        <figcaption>The menu of the brace, with <span class="ui">Intro ▸</span> open.</figcaption>
+      </figure>
+
+      <aside class="callout tip">
+        <p>With an intro, the brace is not drawn yet at the first instant of its clip, and a label that fades in is not either: at 2.6 s the Preview shows neither. Move the playhead a second later to see them, and right-click the brace's clip on the timeline when you need its menu again.</p>
+      </aside>
+
+      <h3 id="step-right">5. The same on the right</h3>
+      <p>Move the playhead to 4.4 s. <kbd data-keys="Alt">Alt</kbd>+click the first parenthesis of the right side and <kbd data-keys="Alt+Shift">Alt+Shift</kbd>+click the last. Choose <span class="ui">Brace ▾ ▸ Below</span>, then in its menu <span class="ui">Colour ▸</span> the green swatch, a label <code>\text{a product}</code> and <span class="ui">Intro ▸ GrowFromCenter</span>.</p>
+
+      <h3 id="step-arrow">6. An arrow over the equals sign</h3>
+      <p>Move the playhead to 6.4 s. Pick the whole left side again, as in step 1. Right-click the equals sign, which is not picked: the menu of the clip opens. Choose <span class="ui">Add line ▸ Arrow</span>. The arrow starts on the glyphs you picked, and a compass asks where on them: choose the top edge, the arrow pointing up.</p>
+      <p>Now say where it ends. Hold <kbd data-keys="Alt">Alt</kbd> and drag a rectangle over the ten glyphs of the right side: the end goes on all of them. The compass asks again: choose the top edge.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/arrow-start.dark.webp" data-themed
+             alt="The identity with its left side picked in yellow and the menu of the equals sign open: the entry Add line with its submenu Line, Dashed line, Arrow and Double arrow."
+             width="818" height="725" loading="lazy">
+        <figcaption>With the left side picked, right-click the equals sign: <span class="ui">Add line ▸ Arrow</span>.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/arrow-end.dark.webp" data-themed
+             alt="The identity with the ten glyphs of its right side picked in yellow, and the compass that asks where on them the end of the arrow goes."
+             width="818" height="700" loading="lazy">
+        <figcaption>The <kbd data-keys="Alt">Alt</kbd> drag has picked the right side: the compass asks where on it the arrow ends.</figcaption>
+      </figure>
+
+      <p>The compass and the other ways to move an end are in <a href="../objects/lines-arrows.html#anchors">Lines and arrows</a>.</p>
+
+      <h3 id="step-arc">7. Bend it</h3>
+      <p>Right-click the arrow and choose <span class="ui">Curve ▸ Arc</span>. In the <span class="ui">Line</span> section of the Animations panel (the <span class="ui">Timing</span> tab) set <span class="ui">Arc</span> to <code>−55</code>. A negative number bulges an arrow that points right upwards.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/arrow-arc.dark.webp" data-themed
+             alt="The Preview with the identity and an arrow arcing over it, and the Line section of the Animations panel with Curve set to arc and the Arc field at −55."
+             width="1135" height="459" loading="lazy">
+        <figcaption>The arrow arcs over the equals sign; its <span class="ui">Arc</span> field (1) says −55.</figcaption>
+      </figure>
+
+      <h3 id="step-grow">8. Draw it in</h3>
+      <p>In the <span class="ui">Intro</span> section choose the animation <span class="ui">GrowArrow</span> and make it 1.4 seconds long. An arrow that is bent is drawn along its curve, with its tip on the end of what is drawn.</p>
+
+      <figure>
+        <img src="../media/tutorials/annotated-identity/arrow-grow.dark.webp" data-themed
+             alt="The Intro section of the Animations panel for the arrow: the animation GrowArrow (1) and its duration of 1.4 seconds (2)."
+             width="310" height="583" loading="lazy">
+        <figcaption>The animation (1) and its length (2).</figcaption>
+      </figure>
+
+      <h3 id="step-play">9. Play it</h3>
+      <p>Press <kbd data-keys="Space">Space</kbd>, or go to the start with <kbd data-keys="Home">Home</kbd> and play. The braces grow at 2.6 and 4.4 seconds and the arrow is drawn at 6.4. Everything stays to the end at 11 seconds. If a label starts at the wrong time, drag its clip on the timeline, or type its <span class="ui">Start</span> in the panel.</p>
+
+      <h3 id="step-export">10. Export it</h3>
+      <p><span class="ui">Export ▸ Python — ManimCE…</span> gives the scene as a <code>.py</code> file, and <span class="ui">Export ▸ Video…</span> renders a video (<a href="../basics/export.html">Exporting</a>). The player above and the video were made from the finished project that you can download in the card.</p>
+
+      <h2 id="result">The result</h2>
+      <p>The Python of the finished scene, for ManimCE and ManimGL:</p>
+      <div class="mfe-code" data-mfe-python="annotated-identity"></div>
+
+      <p>A few lines tell the story. The two braces are built on the glyphs they hang on and their labels are put at their tips; the arrow is built between the top of the left side and the top of the right side, bent by <code data-excerpt="examples/annotated-identity.ce.py">path_arc</code>, and drawn in with the editor's own trace animation because it is bent.</p>
+
+      <h3 id="make-it-yours">Make it your own</h3>
+      <ul>
+        <li>Give the arrow a <span class="ui">Transform</span> that moves its end onto the two factors one after the other (<a href="../objects/lines-arrows.html#ends-transform">Moving the ends with a Transform</a>).</li>
+        <li>Put a <a href="../objects/shapes.html">box</a> round the right side and carry it to the left one with <span class="ui">Transform to another formula or glyphs…</span>.</li>
+        <li>Colour the glyphs the labels talk about (<a href="../color/coloring.html">Colouring glyphs and objects</a>).</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

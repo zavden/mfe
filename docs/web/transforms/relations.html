@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How relations work · Manim Formula Editor</title>
+  <meta name="description" content="Pairs of glyphs, their styles, one-to-many and many-to-one, the glyphs left unpaired, and timing.">
+  <meta name="mfe:id" content="transforms/relations">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Relations">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/relations-swap.data.js" defer></script>
+  <script src="../examples/relations-distribute.data.js" defer></script>
+  <script src="../examples/relations-extras.data.js" defer></script>
+  <script src="../examples/relations-styles.data.js" defer></script>
+  <script src="../examples/relations-unpaired.data.js" defer></script>
+  <script src="../examples/relations-starts-empty.data.js" defer></script>
+  <script src="../examples/relations-twice.data.js" defer></script>
+  <script src="../examples/relations-timing.data.js" defer></script>
+  <script src="../examples/relations-arcs.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <script src="../widgets/style-compare.js" defer></script>
+  <script src="../widgets/relation-window.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>How relations work</h1>
+      <p class="lead">A relation turns one formula into the next. It links two clips and says, glyph
+        by glyph, where each glyph goes, how it travels and when. Every animation on this page plays
+        in your browser, and four small tools let you try the ideas yourself.</p>
+
+      <h2 id="idea">The idea</h2>
+      <p>On the timeline a formula is a clip. A <strong>relation</strong> links two clips: the
+        <strong>source</strong>, which is on screen first, and the <strong>target</strong>, which
+        takes over. While the relation runs, the glyphs of the source move to their places in the
+        target.</p>
+      <figure class="mfe-player" data-mfe-player="relations-swap" data-timeline data-loop
+              data-caption="a + b becomes b + a. The two letters travel to each other’s place; the plus sign hardly moves. The strip under the scene is the timeline of the example: two clips, and the relation between them."></figure>
+      <p>A relation is made of three things.</p>
+      <ul>
+        <li><strong>Pairs.</strong> Each pair says which glyphs of the source become which glyphs of
+          the target. The swap above has three, one for each glyph.</li>
+        <li><strong>A style</strong> for each pair: how its glyphs get there. They move, they move
+          as copies, they fade into each other, or a copy of them fades.</li>
+        <li><strong>A window.</strong> The stretch of the timeline during which the transformation
+          runs.</li>
+      </ul>
+      <p>The two clips must be on different tracks, and they must overlap in time: the source has to
+        be on screen (after its intro) while the target is already there (before its outro). The
+        window lies inside that overlap.</p>
+      <p>A clip can be in several relations. The target of one and the source of the next make a chain, the
+        way a derivation goes from line to line (<a href="../tutorials/quadratic-formula.html">the
+        quadratic formula tutorial</a> chains six). A clip can also be the source of several relations, to
+        feed several formulas.</p>
+
+      <h2 id="pairs">Pairs</h2>
+      <p>A pair names some glyphs of the source and some glyphs of the target, and says that the
+        first become the second. The editor numbers the glyphs of every formula (0, 1, 2… in the
+        order the renderer gives them) and keeps the pairs by those numbers. You make pairs in
+        <a href="relation-editor.html#linking">the relation editor</a>, by clicking glyphs. Here you only
+        look at what they mean.</p>
+
+      <h3 id="one-to-one">One-to-one</h3>
+      <p>The simplest pair joins one glyph to one glyph. The glyph goes to its place, and its shape
+        and its colour change into those of its partner. The swap above has three of them.</p>
+      <figure>
+        <img src="../media/transforms/relations/link-one-to-one.dark.webp" data-themed
+             alt="The relation editor's drawing of the swap: a + b on top, b + a below, and three coloured links that cross, each with a badge; the three sources are outlined in red dashes."
+             width="660" height="559" loading="lazy">
+        <figcaption>The swap in the relation editor. The source is on top, the target below. Each
+          pair is a link with a colour of its own and a badge: its number, and its style (<code>I:T</code>
+          means Transform, inherited from the relation). The red dashes round the sources say that
+          their pairs consume them (<a href="#pair-rules">below</a>).</figcaption>
+      </figure>
+
+      <h3 id="one-to-many">One-to-many</h3>
+      <p>A glyph of the source can go to several glyphs of the target in one pair. It splits.</p>
+      <figure class="mfe-player" data-mfe-player="relations-distribute" data-start="2" data-autoplay data-loop
+              data-caption="a(b + c) becomes ab + ac. The a splits in two, one for each place it has in the result. The two parentheses belong to no pair, so they fade out."></figure>
+      <figure>
+        <img src="../media/transforms/relations/link-one-to-many.dark.webp" data-themed
+             alt="The relation editor's drawing of a(b+c) and ab+ac: the a has two links, one to each a below; the parentheses have none; every linked source is outlined in red dashes."
+             width="660" height="559" loading="lazy">
+        <figcaption>The same relation in the editor. The a of the source has two links, one to each
+          a of the target; the parentheses have none.</figcaption>
+      </figure>
+      <p>Manim makes it work by padding the shorter side with invisible copies of its glyphs until
+        both sides have the same number. The second a is such a copy: it starts invisible, on top of
+        the first, and shows as it moves away. The exported Python shows the pair as one animation of
+        two groups:</p>
+      <pre data-excerpt="examples/relations-distribute.ce.py"><code class="language-python">ReplacementTransform(VGroup(before_g[0]), VGroup(after_g[0], after_g[3])),</code></pre>
+
+      <h3 id="many-to-one">Many-to-one</h3>
+      <p>Several glyphs of the source can go to one glyph of the target. They merge.</p>
+      <figure>
+        <img src="../media/transforms/relations/link-many-to-one.dark.webp" data-themed
+             alt="The relation editor's drawing of xx over x squared: the two x of the source, outlined in red dashes, link to the x of the target through one badge; the 2 has no link."
+             width="660" height="559" loading="lazy">
+        <figcaption>The two x of <code>xx</code> link to the x of <code>x²</code>, through one
+          badge. The 2 belongs to no pair.</figcaption>
+      </figure>
+      <p>A glyph of the target arrives through one pair only, so the sources of this pair share it.
+        How they reach it is a choice, and the next section shows it.</p>
+
+      <h3 id="extras">Several sources, one target: how they arrive</h3>
+      <p>A pair with several sources and one target has an extra choice in the pair list,
+        <span class="ui">Sources</span>. It decides how the sources beyond the first reach the
+        target. The three players below run the same relation, <code>xx</code> into <code>x²</code>,
+        with each choice.</p>
+      <figure class="mfe-player" data-mfe-player="relations-extras" data-from="0" data-to="4.8" data-start="1.2" data-autoplay data-loop
+              data-caption="Separate (the default). Both x travel to the x of the target and arrive: they coincide at the end."></figure>
+      <figure class="mfe-player" data-mfe-player="relations-extras" data-from="5.6" data-to="10.4" data-start="6.8" data-autoplay data-loop
+              data-caption="Merge (Manim). The second x fades as it travels: Manim’s own alignment of the two groups."></figure>
+      <figure class="mfe-player" data-mfe-player="relations-extras" data-from="11.2" data-to="16" data-start="12.4" data-autoplay data-loop
+              data-caption="Copies. The first x transforms; the second sends a copy and stays where it is until the outro of its clip."></figure>
+      <p>Play the three together, on the same pair, and compare how the second <i>x</i> reaches the target:</p>
+      <div class="mfe-widget" data-mfe-widget="style-compare"
+           data-options='{"example": "relations-extras", "relation": "r_separate", "pair": 1, "extras": ["separate", "merge", "copies"]}'></div>
+      <table>
+        <thead>
+          <tr><th>Choice</th><th>What happens</th><th>In the exported Python</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ui">Separate</span></td>
+            <td>Each source makes its own transform onto the target. All of them arrive.</td>
+            <td><code data-excerpt="examples/relations-extras.ce.py">ReplacementTransform(source_g[0], target_g[0]),
+              Transform(source_g[1], target_g[0], remover=True),</code></td>
+          </tr>
+          <tr>
+            <td><span class="ui">Merge (Manim)</span></td>
+            <td>Manim aligns the group of sources with the group of targets: the first source becomes
+              the target, and the others fade into it.</td>
+            <td><code data-excerpt="examples/relations-extras.ce.py">ReplacementTransform(VGroup(source_2_g[0], source_2_g[1]), VGroup(target_2_g[0])),</code></td>
+          </tr>
+          <tr>
+            <td><span class="ui">Copies</span></td>
+            <td>The first source, the <em>principal</em>, transforms. Each other source sends a copy
+              and stays.</td>
+            <td><code data-excerpt="examples/relations-extras.ce.py">ReplacementTransform(source_3_g[0], target_3_g[0]),
+              Transform(source_3_g[1].copy(), target_3_g[0], remover=True),</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The editor shows which source is the principal (<code>Principal: x (0)</code>), and keeps
+        it when the glyphs are renumbered. In a Transform or Fade pair, <span class="ui">Separate</span>
+        and <span class="ui">Merge (Manim)</span> consume every source; <span class="ui">Copies</span>
+        consumes only the principal. With <span class="ui">Copies</span> the principal plays the
+        style of the pair, and the other sources send a plain copy, whatever that style.</p>
+
+      <h3 id="pair-rules">What a pair cannot do</h3>
+      <ul>
+        <li>A glyph of the target arrives through <strong>one pair</strong> only.</li>
+        <li>A glyph of the source is <strong>consumed</strong> by one pair only: once it has turned
+          into other glyphs it is gone, and another pair can only copy it. The relation editor outlines
+          such a source in red dashes. To send one glyph to two places, put both places in the same
+          pair (a split), or make its pairs <span class="ui">Copy</span> or
+          <span class="ui">Fade copy</span>: a copied glyph stays, and can be copied again.</li>
+        <li>A glyph that was consumed cannot come back as the target of a later relation, and a source
+          has to have arrived: a glyph that another relation is still bringing in cannot be a source
+          yet.</li>
+      </ul>
+      <p>These rules count over the whole project, not inside one relation: two relations into the
+        same clip cannot bring the same glyph, whichever clips they come from. The relation editor
+        refuses the links it can tell are wrong, dims the glyphs another relation has taken, and lists
+        the other problems before you save. <a href="relation-editor.html#problems">The relation
+        editor</a> shows them.</p>
+
+      <h3 id="try-linking">Try it: link the glyphs yourself</h3>
+      <p>This is a light version of the editor, built on the example of the one-to-many section.
+        Click a glyph of the source and a glyph of the target to link them, then press Play to see
+        what your pairs do.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs"
+           data-options='{"example": "relations-distribute", "relation": "r_distribute", "start": "empty"}'></div>
+      <aside class="try">
+        <ol>
+          <li>Link the <i>a</i> of the source to the first <i>a</i> of the target, and play: only one
+            <i>a</i> travels, and the other one shows up when its clip begins, because it has no
+            partner.</li>
+          <li>Link the <i>a</i> to both <i>a</i> of the target, and play again: it splits.</li>
+          <li>Leave the parentheses unlinked, as the example does, and watch them fade out.</li>
+        </ol>
+      </aside>
+
+      <h2 id="styles">Styles</h2>
+      <p>The <strong>style</strong> of a pair says how its glyphs get from the source to the target.
+        The relation has a <span class="ui">Default style</span>, and each pair either follows it
+        (<span class="ui">Inherit</span>) or has a style of its own.</p>
+      <table>
+        <thead>
+          <tr><th>Style</th><th>What the glyphs do</th><th>The source glyphs</th><th>In Manim</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ui">Transform</span></td>
+            <td>Move and change shape into the target glyphs.</td>
+            <td>Consumed: gone afterwards.</td>
+            <td><code data-excerpt="examples/relations-styles.ce.py">ReplacementTransform(source_g[0], target_g[0])</code></td>
+          </tr>
+          <tr>
+            <td><span class="ui">Copy (source stays)</span></td>
+            <td>A copy of each glyph moves and changes shape into the target glyph.</td>
+            <td>Stay where they are, until the outro of the source clip.</td>
+            <td>ManimCE: <code data-excerpt="examples/relations-styles.ce.py">ReplacementTransform(source_2_g[0].copy(), target_2_g[0])</code><br>
+              ManimGL: <code data-excerpt="examples/relations-styles.gl.py">TransformFromCopy(source_2_g[0], target_2_g[0])</code></td>
+          </tr>
+          <tr>
+            <td><span class="ui">Fade transform</span></td>
+            <td>The source fades out while it stretches onto the box of the target, and the target
+              fades in from the box of the source. The shapes are not morphed into each other.</td>
+            <td>Consumed.</td>
+            <td><code data-excerpt="examples/relations-styles.ce.py">FadeTransform(source_3_g[0], target_3_g[0])</code></td>
+          </tr>
+          <tr>
+            <td><span class="ui">Fade copy (source stays)</span></td>
+            <td>A copy of each glyph fades out while it stretches onto the box of the target, and the
+              target fades in.</td>
+            <td>Stay where they are, until the outro of the source clip.</td>
+            <td><code data-excerpt="examples/relations-styles.ce.py">FadeTransform(source_4_g[0].copy(), target_4_g[0])</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Here is the same pair of formulas, <code>a + b</code> above and <code>α + β</code> below,
+        with each style in turn, and then with three of them in a single relation.</p>
+      <figure class="mfe-player" data-mfe-player="relations-styles" data-start="1.4" data-timeline data-autoplay data-loop
+              data-caption="Transform, Copy, Fade transform, Fade copy, and then a relation whose three pairs have three styles: the a transforms, the plus sign is copied and the b fades."></figure>
+      <figure>
+        <img src="../media/transforms/relations/link-styles.dark.webp" data-themed
+             alt="The relation editor's drawing of a+b and alpha+beta with three links whose badges read 1 I:T, 2 C and 3 F; the a and the b are outlined in red dashes."
+             width="660" height="559" loading="lazy">
+        <figcaption>The last relation in the editor. The badges give the number and the style of each
+          pair: <code>I:T</code> is Transform inherited from the relation, <code>C</code> is Copy and
+          <code>F</code> is Fade transform; a Fade copy reads <code>FC</code>. The <i>a</i> and the
+          <i>b</i>, which their pairs consume, are outlined in red dashes; the plus sign, copied, is
+          not.</figcaption>
+      </figure>
+      <p>Use <span class="ui">Copy</span> to repeat a glyph or a term somewhere else without losing the
+        original. Use <span class="ui">Fade transform</span> when two glyphs have nothing in common: a
+        morph between unrelated shapes looks strange, a fade does not. Use
+        <span class="ui">Fade copy</span> when the source must stay and the two glyphs have nothing in
+        common to morph. Try the four on a relation of your own:</p>
+      <div class="mfe-widget" data-mfe-widget="style-compare"
+           data-options='{"example": "relations-styles", "relation": "r_transform", "styles": ["transform", "copy", "fade", "fade_copy"]}'></div>
+
+      <h2 id="unpaired">Glyphs that belong to no pair</h2>
+      <p>Not every glyph has a partner. The glyphs of the source that no pair consumes
+        <strong>leave</strong>, and the glyphs of the target that no pair brings
+        <strong>arrive</strong>. They do it with the animations of their clips:</p>
+      <ul>
+        <li>the glyphs of the source that no pair takes leave with the <strong>outro</strong> of the
+          source clip;</li>
+        <li>the glyphs of the target that no pair brings arrive with the <strong>intro</strong> of
+          the target clip.</li>
+      </ul>
+      <p>A glyph that a block of its clip takes care of is the block's: one that a Disappear or a
+        Morph block of the source takes away before the outro, or one that an Appear or a Morph block
+        of the target brings in. The outro and the intro leave it alone, and the relation editor does
+        not count it with them.</p>
+      <p>In the example below, <code>a + b = c</code> becomes <code>a = c − b</code>. The plus sign
+        belongs to no pair and fades out; the minus sign belongs to none and fades in. The relation
+        editor counts them in the line over the drawing, for example
+        <code>4 linked pairs · 1 glyph leaves · 1 glyph arrives</code>.</p>
+      <figure class="mfe-player" data-mfe-player="relations-unpaired" data-from="7" data-to="12.4" data-start="8.4" data-autoplay data-loop data-timeline
+              data-caption="The plus sign leaves with the outro of the source clip, and the minus sign arrives with the intro of the target clip. Both run during the window."></figure>
+      <figure>
+        <img src="../media/transforms/relations/unpaired-settings.dark.webp" data-themed
+             alt="The Animation tab of the relation editor: the timing fields, then the Unpaired glyphs with an Outro list, a checkbox that runs it during the relation window, the Starts empty box and an Intro list."
+             width="479" height="539" loading="lazy">
+        <figcaption>The settings in the relation editor. (1) The outro of the source clip: what the
+          unpaired glyphs of the source do. (2) Whether it runs during the relation window.
+          (3) Whether the target <a href="#starts-empty">starts empty</a>. (4) The intro of the
+          target clip.</figcaption>
+      </figure>
+      <p>Choose another animation in the lists (<span class="ui">Unwrite</span>,
+        <span class="ui">ShrinkToCenter</span>, <span class="ui">Write</span>,
+        <span class="ui">GrowFromCenter</span>…), or <span class="ui">None (disappear)</span> and
+        <span class="ui">None (appear)</span> so that the glyphs vanish or show up at once. The outro
+        and the intro belong to the clips: changing them here changes those clips.</p>
+      <p>The outro of a clip sits at its <em>end</em>. If the source clip goes on after the window, its
+        unpaired glyphs stay until the outro begins. Below, the clip goes on for almost three seconds after
+        the window: the plus sign hangs over the equals sign until it fades.</p>
+      <figure class="mfe-player" data-mfe-player="relations-unpaired" data-from="0" data-to="6" data-start="4" data-autoplay data-loop data-timeline
+              data-caption="The plus sign stays on screen after the window, until the outro at the end of the source clip."></figure>
+      <p>Two things fix it. Shorten the source clip so that it ends with the window, or tick
+        <span class="ui">Run it during the relation window (ends with the source clip)</span>: the outro then
+        starts with the window and ends with the clip.
+        <span class="ui">Run it up to the end of the relation window (starts with the target clip)</span> does
+        the same for the intro of the target.</p>
+
+      <h3 id="starts-empty">Only what the pairs bring: a target that starts empty</h3>
+      <p>Sometimes the glyphs of the target that no pair brings should not arrive at all, or not yet.
+        Below, <code>a = b</code> becomes <code>a² = b²</code>, and no pair brings the two exponents.
+        With an intro of <span class="ui">None (appear)</span> they show up at once, when the target
+        clip starts, before anything has moved:</p>
+      <figure class="mfe-player" data-mfe-player="relations-starts-empty" data-from="0" data-to="5" data-start="1.6" data-autoplay data-loop data-timeline
+              data-caption="The two exponents belong to no pair. They appear at once when the target clip starts."></figure>
+      <p>Tick <span class="ui">Starts empty</span> for the target, and <strong>no glyph of that clip
+        comes in with its intro</strong>. Each glyph appears only when something brings it: a pair of
+        a relation, a <a href="morph.html">Morph block</a> of the clip, or an
+        <a href="../animations/blocks.html">Appear block</a>. A glyph nothing brings never shows. This
+        is what a Morph block does inside one formula, between two clips.</p>
+      <figure class="mfe-player" data-mfe-player="relations-starts-empty" data-from="6" data-to="12.5" data-start="9.2" data-autoplay data-loop data-timeline
+              data-caption="The same relation into a target that starts empty: only the paired glyphs arrive. An Appear block, Write, brings the two exponents a moment later."></figure>
+      <p>The box is in two places, and both set the same thing on the target clip:</p>
+      <ul>
+        <li>in the relation editor, on the <span class="ui">Animation</span> tab, under
+          <span class="ui">Unpaired glyphs</span>, for the target of the relation;</li>
+        <li>in the Animations panel, on the <span class="ui">Timing</span> tab of the clip, at the top
+          of its <span class="ui">Intro</span> section.</li>
+      </ul>
+      <p>With the box ticked, the line over the drawing counts those glyphs as staying out, for
+        example <code>3 linked pairs · 0 glyphs leave · 2 glyphs stay out</code>. The intro of the
+        clip keeps its animation and its time but has nothing to animate, so its fields in the editor
+        wait. To bring a glyph in later, add an Appear block to the target clip and choose the glyph:
+        <span class="ui">Hidden at start</span>, in the block’s glyph picker, picks every glyph of a
+        clip that starts empty.</p>
+      <aside class="callout note">
+        <p><span class="ui">Starts empty</span> belongs to the clip, not to one relation: every
+          relation into that clip finds it empty. A clip that starts empty and that nothing ever fills
+          never shows: its panel says so, under <span class="ui">Warnings</span>, and a notice tells
+          you when an edit leaves it
+          that way (its relation removed, for one). Only a formula or a text can start empty: a
+          brace, a shape or a line is one piece.</p>
+      </aside>
+
+      <h2 id="timing">Timing</h2>
+      <p>The <strong>window</strong> of a relation is the stretch of time in which its glyphs move. It
+        is counted from the start of the <em>target</em> clip: the <span class="ui">Offset</span> is how
+        long after the target starts the window opens, and the <span class="ui">Duration</span> is how
+        long it lasts.</p>
+      <figure class="mfe-player" data-mfe-player="relations-timing" data-start="3.2" data-timeline data-autoplay data-loop
+              data-caption="The two clips overlap for five seconds. The relation uses a window of a second and a half, one and a half seconds after the target clip starts."></figure>
+      <p>The window has to lie inside the overlap of the clips: after the intro of the source, and
+        before the end of the source; after the start of the target, and before its outro. The Animation
+        tab of the editor says it in words, for example
+        <code>Window 3.50 → 5.00 s (allowed 2.00 → 7.00 s)</code>.</p>
+      <p id="timing-playhead">A new relation is made <strong>where the playhead is</strong>. When you ask
+        for one, its window starts at the yellow line of the timeline, one second long or as long as
+        the clips leave after it. When no window fits there, because the playhead is outside the
+        overlap or too close to its end, the window starts as soon as both clips allow, and the
+        Animation tab says so under the window: <code>No window fits at the playhead (0.00 s): the
+        two clips allow one within 2.00–7.00 s. It starts at 2.00 s instead.</code></p>
+      <p id="timing-region">With <a href="../basics/timeline.html#region">a region</a> marked on the
+        timeline’s ruler, the window of a new relation is the region instead, wherever the playhead is.
+        When the two clips do not allow a window all along the region, no relation is made, and the
+        editor says why.</p>
+      <p>Drag the handles below to move the window. The scene plays with the timing you choose.</p>
+      <div class="mfe-widget" data-mfe-widget="relation-window"
+           data-options='{"example": "relations-timing", "relation": "r_window"}'></div>
+
+      <h3 id="timing-timeline">On the timeline</h3>
+      <p>A relation is drawn over the two clips: a band on the source clip and a band on the target
+        clip mark the window, and an arrow joins the two clips. The relations of the selected clips
+        are drawn in full; the others are faint. Click an arrow or a band to select the relation.
+        A relation with an error is drawn in red, the edges of its bands and its arrow, and one with
+        only warnings in amber; select it to read them at the end of the Animations panel, under
+        <span class="ui">Problems</span> or <span class="ui">Warnings</span>.</p>
+      <figure>
+        <img src="../media/transforms/relations/timeline-relation.dark.webp" data-themed
+             alt="A timeline with two tracks: a long clip called source above a clip called target, joined by an arrow, with a dashed band on the source and a hatched band on the target."
+             width="900" height="132" loading="lazy">
+        <figcaption>The selected relation on the timeline. (1) The window on the source clip.
+          (2) The arrow that leaves the source. (3) The window on the target clip.</figcaption>
+      </figure>
+      <p>Drag the band to move the window, and its edges to change its length. A readout above the band
+        gives the start, the end and the length while you drag. With <span class="ui">Snap</span> on, the
+        window sticks to the ticks of the ruler, to the playhead, and to the edges of the blocks, the intros,
+        the outros and the relation windows of the two clips; hold <kbd data-keys="Shift">Shift</kbd> to move freely. The window stops where it
+        would leave the overlap, and where it would clash with an animation block or another relation
+        on the same glyphs.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/relations/window-drag.dark.webm"
+               poster="../media/transforms/relations/window-drag.dark.webp" width="900" height="132"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The whole window moves, then its right edge shortens it. Each drag is one undo
+          step, and the clip undoes both.</figcaption>
+      </figure>
+      <p>The window follows the clips. The offset counts from the start of the target, so the window
+        moves with the target clip when you move it. When you move or trim a clip so that the overlap
+        shrinks, the window is shifted and then shortened to stay inside it. A relation with a clip
+        on a locked track is the exception: it is not changed, so its window stays where it plays, and
+        a move or a trim of its other clip stops where the window would no longer fit
+        (<a href="../basics/timeline.html#relations-on-timeline">The timeline</a>).</p>
+      <p>The same numbers are in two panels. Select the relation and the Animations panel shows them,
+        with the pairs; the <span class="ui">Animation</span> tab of the relation editor has them too.
+        <span class="ui">Easing</span> is the rate function of the transformation: how its speed changes
+        between the start and the end of the window. It is <code>smooth</code> unless you change it.</p>
+      <figure>
+        <img src="../media/transforms/relations/relation-panel.dark.webp" data-themed
+             alt="The Animations panel for a relation: a diagram of the two formulas with their links, the list of pairs with their style and path, and the Timing and style section with Offset, Duration, Easing, Default style and Path arc."
+             width="310" height="653" loading="lazy">
+        <figcaption>The Animations panel for the selected relation: its pairs, then its timing and
+          style.</figcaption>
+      </figure>
+
+      <h2 id="twice">More than once between the same two clips</h2>
+      <p>A formula does not have to turn into another all at once. <strong>Two clips can have several
+        relations</strong>: the same source and the same target, each relation with its own pairs, its
+        own window and its own style. Below, a first relation takes the <code>c</code> and the equals
+        sign; a moment later a second one, between the same two clips, takes the rest. The target
+        <a href="#starts-empty">starts empty</a>, so it is made of what the two relations bring.</p>
+      <figure class="mfe-player" data-mfe-player="relations-twice" data-start="3.8" data-timeline data-autoplay data-loop
+              data-caption="Two relations from the upper clip to the lower one: two bands on each clip, one per relation."></figure>
+      <p>The <a href="#pair-rules">rules of the pairs</a> are what keeps such relations apart. Each
+        glyph of the target arrives through one pair, and each glyph of the source is consumed by one,
+        whichever relation the pair belongs to. So their windows can follow each other, as above, or
+        even <strong>overlap</strong>, as long as they move different glyphs.</p>
+      <p>The <span class="ui">Default style</span> of a relation decides what its pairs without a style
+        of their own consume, so changing it can break those rules: a pair that copied a source, made
+        a <span class="ui">Transform</span>, would consume a glyph another relation consumes already. A
+        default style that would give the project such an error is not set, and the notice
+        <span class="ui">Default style not changed</span> says why. Give the pairs that clash a style of
+        their own in <span class="ui">Edit pairs…</span>, or keep the default style.</p>
+      <p>To make the second one, ask for a relation between the two clips again, from the
+        <span class="ui">Relations</span> tab or with a link port. Because they are related already, a
+        menu asks what you mean: <span class="ui">Edit relation 1…</span>, or
+        <span class="ui">Add another relation…</span>. Its window starts
+        <a href="#timing-playhead">at the playhead</a>, or where the last one of theirs ends when no
+        window fits there.
+        <a href="relation-editor.html#second-relation">The relation editor</a> shows it. The relations
+        of two clips are numbered by when they play, the first on the timeline being 1, and the
+        number tells them apart where the names of the formulas cannot: <code>Relation 2 of 2: source → target</code> in the title
+        of the editor, <code>2 of 2</code> in the list of the Relations tab.</p>
+      <aside class="callout note">
+        <p>Each relation has its own band and its own arrow on the timeline. Bands of a clip whose
+          windows overlap share its lane in stripes, one under the other, so that two relations with
+          the same window can both be seen, dragged and opened.</p>
+      </aside>
+
+      <h2 id="path-arc">Path arc</h2>
+      <p>Glyphs move in straight lines unless the relation says otherwise. <span class="ui">Path arc</span>
+        bends the lines into arcs. It is a number of degrees, Manim’s <code>path_arc</code>: 0 is a
+        straight line, and the bigger the number, the rounder the arc, up to a full turn, 360°, either
+        way.</p>
+      <p>The sign decides the side. A glyph that moves to the right dips below its straight line with a
+        positive arc, and goes over the top with a negative one. Below, the same swap three times: with an arc
+        of 0°, of 90° and of −90°.</p>
+      <figure class="mfe-player" data-mfe-player="relations-arcs" data-start="7.8" data-timeline data-autoplay data-loop
+              data-caption="The same swap in straight lines, along an arc of 90° and along an arc of −90°. With 0° the two letters pass through each other."></figure>
+      <p>The arc belongs to the relation, so every pair follows it. To shape the path of one pair, draw it
+        by hand: <a href="custom-paths.html">custom paths</a> explains how.</p>
+
+      <h2 id="managing">Finding, editing and removing relations</h2>
+      <p>The <span class="ui">Relations</span> tab of the Animations panel lists the relations of the
+        selected clip, with a diagram of the two formulas and their links. <span class="ui">Edit…</span>
+        opens the relation editor, <span class="ui">Edit path…</span> goes to the path of a pair, and
+        <span class="ui">×</span> deletes the relation. <span class="ui">All related…</span> shows every
+        relation connected to the clip, as one chain. The form under the list makes a new relation,
+        or, between two clips that are related already, asks whether to edit one of theirs or add
+        another: <a href="relation-editor.html#opening">the relation editor</a> tells how. A relation is between
+        formulas and texts: a brace, a shape or a line is one piece, and its clip has no Relations tab
+        and no link port.</p>
+      <p>A project made with an earlier version may still hold a relation with a brace, a shape or a
+        line on one side. It plays and exports as it is, but it cannot be edited: its band is drawn in
+        amber, its warning says what the object is, <span class="ui">Edit pairs…</span> and
+        <span class="ui">Edit path…</span> are greyed out with the reason in their tooltip, and a drag of
+        its band leaves it where it is. <span class="ui">Delete relation</span>, in the menu of its band,
+        removes it.</p>
+      <figure>
+        <img src="../media/transforms/relations/clip-relations.dark.webp" data-themed
+             alt="The Relations tab of the Animations panel for the clip called source: a diagram, one relation with Edit, Edit path and a cross, and the form with Relate with, Direction and Create relation."
+             width="310" height="653" loading="lazy">
+        <figcaption>The Relations tab of a clip.</figcaption>
+      </figure>
+      <p>Right-click the band of a relation on the timeline for its menu: <span class="ui">Edit pairs…</span>;
+        under <span class="ui">Edit path</span>, each of its pairs (with more than five, one entry,
+        <span class="ui">Choose a pair…</span>, opens a list of them); and
+        <span class="ui">Delete relation</span>.</p>
+      <figure>
+        <img src="../media/transforms/relations/band-menu.dark.webp" data-themed
+             alt="The menu of a relation: its header, Edit pairs, a list of the pairs with their paths, and Delete relation."
+             width="186" height="261" loading="lazy">
+        <figcaption>The menu of a relation’s band.</figcaption>
+      </figure>
+      <p>You can remove a relation in four ways:</p>
+      <ul>
+        <li>select it and press <kbd data-keys="Delete">Delete</kbd>;</li>
+        <li>press <span class="ui">Delete</span> in its panel, or <span class="ui">×</span> in the list of the
+          clip;</li>
+        <li>choose <span class="ui">Delete relation</span> in the menu of its band;</li>
+        <li>right-click a clip and choose <span class="ui">Remove relations</span>: it takes off every
+          relation of the clip, as source or as target, and its Morph blocks.</li>
+      </ul>
+      <figure>
+        <img src="../media/transforms/relations/clip-menu.dark.webp" data-themed
+             alt="The menu of a clip, with Remove relations marked."
+             width="258" height="474" loading="lazy">
+        <figcaption>Remove relations (1) in the menu of a clip.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p>Removing a relation never touches the two formulas. The glyphs of the target arrive with its
+          intro again, and the glyphs of the source leave with its outro. A relation on a locked track
+          can be selected but not changed: unlock the track first.</p>
+      </aside>
+
+      <h2 id="python">In the exported Python</h2>
+      <p>The exported scene plays a relation with a <code>self.play(…)</code> over its window, one animation for
+        each pair. The glyphs that belong to no pair leave or arrive in that call when their outro or intro
+        runs during the window, as in the scene below; anything that starts or ends inside the window cuts the
+        play into slices (<code>_Part</code>). This is the scene of the one-to-many example, as the editor
+        exports it:</p>
+      <div class="mfe-code" data-mfe-python="relations-distribute"></div>
+      <p>The preview and the export agree: what you see in the player is what Manim renders. The page
+        <a href="../manim/python.html">The generated Python</a> explains the rest of the scene.</p>
+
+      <h2 id="examples">The examples of this page</h2>
+      <p>Download a project and open it with <span class="ui">File ▸ Open…</span>, then
+        <span class="ui">Other file…</span> in the dialog that opens (<a href="../start/projects.html#open">Projects</a>
+        explains it), to take it apart: select a relation, open its editor, and change a pair.</p>
+      <div class="mfe-example" data-mfe-example="relations-swap"></div>
+      <div class="mfe-example" data-mfe-example="relations-distribute"></div>
+      <div class="mfe-example" data-mfe-example="relations-extras"></div>
+      <div class="mfe-example" data-mfe-example="relations-styles"></div>
+      <div class="mfe-example" data-mfe-example="relations-unpaired"></div>
+      <div class="mfe-example" data-mfe-example="relations-starts-empty"></div>
+      <div class="mfe-example" data-mfe-example="relations-timing"></div>
+      <div class="mfe-example" data-mfe-example="relations-twice"></div>
+      <div class="mfe-example" data-mfe-example="relations-arcs"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="relation-editor.html">The relation editor</a>: how to link glyphs, set the styles and
+          the timing, and save.</li>
+        <li><a href="previewing.html">Previewing a transformation</a>: watch it before you save it.</li>
+        <li><a href="custom-paths.html">Custom paths</a>: the path of one pair, drawn by hand.</li>
+        <li><a href="recipes.html">Transformation recipes</a>: common moves of algebra, ready to copy.</li>
+        <li><a href="../basics/first-transform.html">Transforming one formula into another</a>: your
+          first relation, step by step.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

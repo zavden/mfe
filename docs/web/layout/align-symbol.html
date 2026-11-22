@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Align by symbol · Manim Formula Editor</title>
+  <meta name="description" content="Align formulas by a symbol they share, also across time.">
+  <meta name="mfe:id" content="layout/align-symbol">
+  <meta name="mfe:level" content="advanced">
+  <meta name="mfe:short" content="Align by symbol">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/layout-align-symbol-start.data.js" defer></script>
+  <script src="../examples/layout-align-symbol.data.js" defer></script>
+  <script src="../examples/layout-align-symbol-time-start.data.js" defer></script>
+  <script src="../examples/layout-align-symbol-time.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Align by symbol</h1>
+      <p class="lead">Align treats a formula as a box. Align by symbol treats it as a handle: pick
+        one glyph of a formula, pick one glyph of another, and the first formula moves so that the
+        two glyphs meet. It works for formulas on screen together, and for formulas that never
+        are.</p>
+
+      <h2 id="idea">What it is for</h2>
+      <p>A derivation written line by line looks right when the equals signs are in a column. The
+        lines have different lengths, so centring them, or aligning their left edges, does not do
+        it. Aligning by the <code>=</code> does: each line moves until its <code>=</code> is under
+        the one above.</p>
+      <figure class="mfe-player" data-mfe-player="layout-align-symbol-start" data-start="end"
+              data-controls="none"
+              data-caption="Before: four lines, each centred on its own (a click plays the scene)."></figure>
+      <figure class="mfe-player" data-mfe-player="layout-align-symbol" data-start="end"
+              data-controls="none"
+              data-caption="After: the equals signs of the last three lines are under the first one's (a click plays the scene)."></figure>
+
+      <h2 id="by-symbol">Aligning by a symbol</h2>
+      <p>It is a mode of the Preview with two clicks. Start it with <kbd data-keys="Alt+G">Alt+G</kbd>,
+        with the first button of the view toolbar (<span class="ui">Align by symbol</span>), with
+        <span class="ui">Edit ▸ Align ▸ By symbol…</span> or with <span class="ui">Align ▸ Align by
+        symbol…</span> in the right-click menu of a formula. A hint at the bottom of the Preview says
+        what to click.</p>
+      <ol>
+        <li>Click the <strong>symbol to move</strong>, a glyph of the formula that will move.</li>
+        <li>Click the <strong>reference symbol</strong>, a glyph of another formula. That formula
+          stays where it is.</li>
+        <li>A <strong>compass</strong> opens on the reference. Choose where on the reference symbol
+          the first symbol lands.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/layout/align-symbol/by-pointer.dark.webm"
+               poster="../media/layout/align-symbol/by-pointer.dark.webp" width="800" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption><kbd data-keys="Alt+G">Alt+G</kbd>; the <code>=</code> of the second line; the
+          <code>=</code> of the first; <span class="ui">Left edge</span> on the compass. The whole
+          second line moves so that its <code>=</code> is under the first's.</figcaption>
+      </figure>
+      <p>The alignment is one undo step: <kbd data-keys="Mod+Z">Ctrl+Z</kbd> puts the line back.</p>
+      <p>The compass has nine places, the nine directions of Manim: the four edges, the four
+        corners and the centre of the reference symbol.</p>
+      <figure>
+        <img src="../media/layout/align-symbol/compass.dark.webp" data-themed
+             alt="The Preview in the second step of Align by symbol: a compass of nine arrow keys beside the equals sign of the first line."
+             width="801" height="453" loading="lazy">
+        <figcaption>The compass opens beside the reference symbol. The title says what is being
+          done: “Put “=” on the … of “=””.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Compass</th><th>The first symbol lands…</th><th>What moves</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>↖ Upper left corner, ↗ Upper right corner, ↙ Lower left corner, ↘ Lower right corner</td><td>with that corner of its box on the same corner of the reference's</td><td>the formula, both ways</td></tr>
+          <tr><td>• Centre</td><td>with its middle on the middle of the reference</td><td>both ways</td></tr>
+          <tr><td>← Left edge, → Right edge</td><td>with its left (right) edge on the left (right) edge of the reference</td><td>sideways only</td></tr>
+          <tr><td>↑ Top edge, ↓ Bottom edge</td><td>with its top (bottom) edge on the top (bottom) edge of the reference</td><td>up or down only</td></tr>
+        </tbody>
+      </table>
+      <p><kbd data-keys="Escape">Esc</kbd>, or a click outside the compass, cancels the alignment.</p>
+      <p>To put the equals signs of two lines in one column, the edge is the right choice: <span class="ui">Left
+        edge</span> moves the second line sideways and leaves its height alone. <span class="ui">Centre</span>
+        would move it onto the first line.</p>
+      <aside class="callout tip">
+        <p>The whole formula of the first symbol moves, not the symbol alone: the other glyphs
+          keep their places in the formula. What is written is the clip's position, the same
+          keyframe a drag writes, in one undo step.</p>
+      </aside>
+
+      <h3 id="halo">The halo</h3>
+      <p>While the mode is on, the pointer carries a <strong>halo</strong>, a circle. The symbol
+        nearest to the pointer within the circle is outlined, and a click takes that one, so thin
+        symbols — a minus, a dot, the bars of an equals sign — can be hit without aiming exactly.
+        <kbd data-keys="Shift">Shift</kbd> and the wheel make the circle larger or smaller (from 6
+        to 60 pixels; 14 at the start). The reach is kept, and it is the same one the
+        <a href="glyph-picking.html#thin">circle selector</a> uses.</p>
+      <figure>
+        <img src="../media/layout/align-symbol/halo.dark.webp" data-themed
+             alt="The pointer, a circle, a little above an equals sign; the equals sign is outlined."
+             width="801" height="453" loading="lazy">
+        <figcaption>The pointer is above the <code>=</code>, not on it; the halo reaches it and the
+          outline says it is the one a click would take.</figcaption>
+      </figure>
+
+      <h3 id="keys">From the keyboard</h3>
+      <p>Every click has a key. While the mode is on, the arrow keys walk the glyphs on screen: the
+        formulas are rows, from the top of the scene down, each with its glyphs in order;
+        <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> walk a row,
+        <kbd data-keys="ArrowUp">↑</kbd> and <kbd data-keys="ArrowDown">↓</kbd> change row, keeping
+        the column. The glyph under the cursor is outlined, and <kbd data-keys="Enter">Enter</kbd>
+        takes it, as a click would. The compass takes the arrows and <kbd data-keys="Enter">Enter</kbd> too.
+        <kbd data-keys="Escape">Esc</kbd> leaves the mode.</p>
+      <p>The alignment above, with the keyboard alone: the first arrow puts the cursor on the first
+        glyph; the arrows take it to the <code>=</code> of the second line and
+        <kbd data-keys="Enter">Enter</kbd> takes it; the arrows again to the <code>=</code> of the
+        first line and <kbd data-keys="Enter">Enter</kbd>; in the compass, <kbd data-keys="ArrowLeft">←</kbd>
+        and <kbd data-keys="Enter">Enter</kbd>.</p>
+
+      <h2 id="across-time">Across time</h2>
+      <p>The lines of a derivation are often not on screen together: one comes in as the one
+        before it leaves. The two symbols are measured at the playhead, so there is no moment to
+        click both. <kbd data-keys="G">G</kbd> solves it.</p>
+      <ol>
+        <li>With the playhead where the formula to move is on screen, start the mode and click its
+          symbol.</li>
+        <li>Press <kbd data-keys="G">G</kbd>. The symbol is <strong>kept</strong> as it is at this
+          instant, and the hint says so.</li>
+        <li>Move the playhead to where the reference is on screen. The formula you keep stays in
+          view, faint, where it is at the kept instant, so that you can see what the reference is
+          for, and the ruler of the timeline marks the instant.</li>
+        <li>Click the reference symbol and choose a side of the compass.</li>
+      </ol>
+      <p>In the derivation of the example at the end of the page, the second line is on screen
+        alone at 4 s and the first alone at 1.6 s. At 4 s: <kbd data-keys="Alt+G">Alt+G</kbd>, click
+        the <code>=</code> of the second line, <kbd data-keys="G">G</kbd>. Go to 1.6 s: the first
+        line shows, and the second appears faint where it is at 4 s. Click the <code>=</code> of
+        the first line and choose <span class="ui">Left edge</span>. Back at 4 s the second line
+        has moved: its <code>=</code> is where the first line's is.
+        <kbd data-keys="Mod+Z">Ctrl+Z</kbd> puts it back.</p>
+      <figure>
+        <img src="../media/layout/align-symbol/kept.dark.webp" data-themed
+             alt="The Preview at 1.6 s: the first line, and the second line faint under it."
+             width="801" height="453" loading="lazy">
+        <figcaption>At 1.6 s: the first line, and the second one, faint, as it is at the kept
+          instant.</figcaption>
+      </figure>
+      <p>Only the keyframe in effect at the kept instant changes, and nothing else of the
+        timeline: the playhead stays where you left it. A notice says what was done, and, when
+        something moves beyond it, what.</p>
+      <figure>
+        <img src="../media/layout/align-symbol/ruler-mark.dark.webp" data-themed
+             alt="The ruler of the timeline: a mark, a hollow triangle with a dashed stem, at 4 s, and the playhead at 1.6 s."
+             width="520" height="36" loading="lazy">
+        <figcaption>The ruler marks the kept instant (4 s). A click on the mark takes the playhead
+          back there.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/layout/align-symbol/notice.dark.webp" data-themed
+             alt="A notice: the second line moved; the left edge of its equals sign as at 4 s is on that of the equals sign of the first line as at 1.6 s."
+             width="432" height="82" loading="lazy">
+        <figcaption>The notice names both instants.</figcaption>
+      </figure>
+      <ul>
+        <li><kbd data-keys="G">G</kbd> again lets the symbol go. <kbd data-keys="Escape">Esc</kbd> or
+          <kbd data-keys="Alt+G">Alt+G</kbd> leave the mode and remove the mark and the faint
+          formula.</li>
+        <li>The faint formula does not answer the pointer: it cannot be the reference.</li>
+        <li>Without <kbd data-keys="G">G</kbd>, a symbol whose formula is not on screen at the
+          playhead cannot be measured: a notice reminds you to press <kbd data-keys="G">G</kbd>
+          after clicking it, before moving the playhead.</li>
+      </ul>
+
+      <h3 id="refusals">When G keeps nothing</h3>
+      <p>An alignment has to hold, so <kbd data-keys="G">G</kbd> refuses, with a notice that says
+        why, when the formula</p>
+      <ul>
+        <li>is not on screen at the playhead;</li>
+        <li>hangs on glyphs of another formula (a brace, a label: use <span class="ui">Detach</span>
+          in the Animations panel first);</li>
+        <li>is on a locked track, or locked in the preview;</li>
+        <li>has the end state of one of its parts under edit (finish that edit first with
+          <kbd data-keys="Escape">Esc</kbd>);</li>
+        <li>is locked after its transformations and one has started by that instant: align it at a
+          time before its first transformation, or at the end state of one (select its block and
+          click its end icon), or unlock the clip with the padlock on the timeline;</li>
+        <li>is moving at that instant: a transformation, a transformation of that part or an
+          emphasis is running, so a shift written there would not hold. Pick a time when it is at
+          rest.</li>
+      </ul>
+      <p>When the alignment is made but something moves beyond it, the closing notice lists that
+        too: only the end of a transformation moved; a later transformation takes the formula to a
+        position of its own, which did not move; the symbol was moved by a transformation of its
+        part; the reference itself moves between the two instants.</p>
+
+      <h2 id="locked">With a locked formula as the reference</h2>
+      <p>A formula locked in the preview is out of the pointer's reach. To align to a symbol of
+        one, use <kbd data-keys="Shift+Alt+G">Shift+Alt+G</kbd> (or <span class="ui">Edit ▸ Align ▸
+        By symbol of a locked formula…</span>): the first click is on a formula that is not locked,
+        the one that moves; the second is on a locked formula, whose symbols can now be clicked,
+        however many formulas lie over it. The locked formula stays, and the other one moves to
+        it.</p>
+      <figure>
+        <img src="../media/layout/align-symbol/locked.dark.webp" data-themed
+             alt="Four lines of a solution, the first one faint; the compass is open on the equals sign of the first line, beside the pointer."
+             width="801" height="453" loading="lazy">
+        <figcaption>The first line is locked in the preview, so it is faint. After
+          <kbd data-keys="Shift+Alt+G">Shift+Alt+G</kbd> and a click on the <code>=</code> of the
+          third line, a click on the <code>=</code> of the first one opens the compass on it: the
+          third line will move there.</figcaption>
+      </figure>
+      <p>With no formula locked, the shortcut says so in a notice and does not start the mode.</p>
+
+      <h2 id="good-to-know">Good to know</h2>
+      <ul>
+        <li>The modes of the Preview (align by symbol, Edit path, Edit curve, drawing a line with
+          <span class="ui">Add line</span>, colours in order, a shape's target) are on one at a time:
+          starting one ends the one that was on.</li>
+        <li>A formula edited while the mode is on keeps its symbol: the mode follows the glyph into
+          the new render, and ends, with a notice, when the glyph is no longer there.</li>
+        <li>The reference cannot be on the formula that moves.</li>
+        <li>A formula that cannot be edited now (a locked track, locked in the preview, locked after
+          its transformations) stays where it is, and a notice says so.</li>
+      </ul>
+
+      <h2 id="try-it">Try it</h2>
+      <p>Open the start file: four lines of a solution, each centred. Line them up by their equals
+        signs.</p>
+      <div class="mfe-example" data-mfe-example="layout-align-symbol-start"></div>
+      <aside class="try">
+        <ol>
+          <li>Open the file: choose <span class="ui">File ▸ Open…</span>, press
+            <span class="ui">Other file…</span> in the dialog and pick it (see
+            <a href="../start/projects.html#open">Open</a>). Put the playhead at 6 s, where the four
+            lines are on screen.</li>
+          <li>Press <kbd data-keys="Alt+G">Alt+G</kbd>. Click the <code>=</code> of the second line,
+            then the <code>=</code> of the first, then the <span class="ui">Left edge</span> of the
+            compass.</li>
+          <li>Do the same for the third line, and then for the fourth: each time, click the
+            <code>=</code> of the first line as the reference.</li>
+          <li>Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> three times and do it again with the arrow
+            keys and <kbd data-keys="Enter">Enter</kbd> instead of the mouse.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="layout-align-symbol"></div>
+
+      <h3 id="try-time">Try it across time</h3>
+      <p>The second file is a derivation, <code>x + 3 = 5</code> into <code>x = 5 − 3</code> into
+        <code>x = 2</code>, each line under the one before and centred on its own, so the
+        <code>=</code> jumps sideways from line to line. Line them up by the <code>=</code> with
+        <kbd data-keys="G">G</kbd>.</p>
+      <figure class="mfe-player" data-mfe-player="layout-align-symbol-time-start" data-start="1.6"
+              data-timeline
+              data-caption="Before: each line is centred, and the equals sign jumps sideways from line to line."></figure>
+      <div class="mfe-example" data-mfe-example="layout-align-symbol-time-start"></div>
+      <aside class="try">
+        <ol>
+          <li>Open the file and put the playhead at 4 s: only the second line is on screen.</li>
+          <li>Press <kbd data-keys="Alt+G">Alt+G</kbd>, click the <code>=</code> of the line, then
+            press <kbd data-keys="G">G</kbd>.</li>
+          <li>Put the playhead at 1.6 s, click the <code>=</code> of the first line and choose
+            <span class="ui">Left edge</span>.</li>
+          <li>Do the same for the third line (kept at 6 s, reference on the second line at 4 s), and
+            play the scene.</li>
+        </ol>
+      </aside>
+      <figure class="mfe-player" data-mfe-player="layout-align-symbol-time" data-start="1.6"
+              data-timeline
+              data-caption="Each line turns into the next one under it, and the equals signs stay in one column."></figure>
+      <div class="mfe-example" data-mfe-example="layout-align-symbol-time"></div>
+      <h2 id="keys-list">Keys of this page</h2>
+      <table>
+        <thead>
+          <tr><th>Keys</th><th>What they do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><kbd data-keys="Alt+G">Alt+G</kbd></td><td>Start Align by symbol, or leave it</td></tr>
+          <tr><td><kbd data-keys="Shift+Alt+G">Shift+Alt+G</kbd></td><td>The same, with the reference symbol on a formula locked in the preview</td></tr>
+          <tr><td><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd> <kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd>, <kbd data-keys="Enter">Enter</kbd></td><td>Walk the glyphs on screen and take one; in the compass, choose a place</td></tr>
+          <tr><td><kbd data-keys="G">G</kbd></td><td>After the first symbol: keep it as it is at the playhead, for a reference at another time; again, let it go</td></tr>
+          <tr><td><kbd data-keys="Shift">Shift</kbd> + wheel</td><td>Make the halo larger or smaller</td></tr>
+          <tr><td><kbd data-keys="Escape">Esc</kbd></td><td>Leave the mode, or close the compass</td></tr>
+          <tr><td><kbd data-keys="Mod+Z">Ctrl+Z</kbd></td><td>Undo the alignment, one step</td></tr>
+        </tbody>
+      </table>
+      <p>See also <a href="align.html">Align and distribute</a> to line up edges and centres,
+        and <a href="glyph-picking.html">Picking glyphs with Alt</a> for choosing glyphs for a
+        colour, a brace or a shape.</p>
+    </article>
+  </main>
+</body>
+</html>

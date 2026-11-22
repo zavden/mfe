@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shapes · Manim Formula Editor</title>
+  <meta name="description" content="Frame, underline or cross out glyphs with a box, a circle, an underline, a cross, a cross line or a highlight; repaint a shape and carry it to other glyphs.">
+  <meta name="mfe:id" content="objects/shapes">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Shapes">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/shapes-kinds.data.js" defer></script>
+  <script src="../examples/shapes-around-clips.data.js" defer></script>
+  <script src="../examples/shapes-paint.data.js" defer></script>
+  <script src="../examples/shapes-follow.data.js" defer></script>
+  <script src="../examples/shapes-cancel.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Shapes</h1>
+      <p class="lead">A shape draws attention to glyphs: a box round a term, a circle, an underline, a cross over it or a single line through it, a highlight behind it. A shape is fitted to the glyphs it hangs on, comes with no animation until you give it one, and a Transform can repaint it or carry it to other glyphs.</p>
+
+      <figure class="mfe-player" data-mfe-player="shapes-kinds" data-loop
+              data-caption="The six shapes in turn on a + b = c: box, circle, underline, cross, cross line and highlight."></figure>
+
+      <p>Shapes work like <a href="braces.html">braces</a>: you add them from the menu of a clip, they have a clip of their own, and the exported scene fits them to the glyphs when the clip starts.</p>
+
+      <h2 id="adding">Adding a shape</h2>
+      <p>Right-click a formula or a text, in the Preview or on its clip in the timeline, and choose <span class="ui">Add shape ▸</span> one of <span class="ui">Box</span>, <span class="ui">Circle</span>, <span class="ui">Underline</span>, <span class="ui">Cross</span>, <span class="ui">Cross line</span> and <span class="ui">Highlight</span>.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/add-shape.dark.webp" data-themed
+             alt="The Preview with the sum 1+2+3+4+5+6 and its menu open: the entry Add shape with its submenu Box, Circle, Underline, Cross, Cross line, Highlight and On some glyphs."
+             width="818" height="716" loading="lazy">
+        <figcaption>The menu of a formula: <span class="ui">Add shape ▸</span> lists the six shapes, and the dialog for some glyphs.</figcaption>
+      </figure>
+
+      <p>The shape is an object of its own, named <code>s1</code>, <code>s2</code>…, with a clip of its own. The Creator does not list it: it lives with its clip. The clip runs from the playhead to the end of the clip the shape hangs on (from the end of that clip's intro when the playhead is inside the intro or outside the clip). It goes on the nearest free track in front of the glyphs' track, or behind it for a highlight, and a new track opens right beside the target's when that side has no room.</p>
+
+      <p>A new shape has <strong>no animation</strong>: it is there when its clip starts. Like a brace, it is fitted to the glyphs as they are when it appears and stays put afterwards.</p>
+
+      <h2 id="kinds">The six shapes</h2>
+      <table>
+        <thead>
+          <tr><th>Shape</th><th>What it draws</th><th>In Manim</th><th>Gap</th><th>Starts as</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Box</span></td><td>a rectangle round the glyphs</td><td><code>SurroundingRectangle</code></td><td>0.1</td><td>yellow, stroke 4</td></tr>
+          <tr><td><span class="ui">Circle</span></td><td>a circle through the corners of the glyphs' box</td><td>a circle, built by a helper of the file</td><td>0.1</td><td>red, stroke 4</td></tr>
+          <tr><td><span class="ui">Underline</span></td><td>a line under the glyphs, as wide as they are</td><td><code>Underline</code></td><td>0.1</td><td>white, stroke 4</td></tr>
+          <tr><td><span class="ui">Cross</span></td><td>two lines over the box of the glyphs</td><td><code>Cross</code></td><td>none</td><td>red, stroke 6</td></tr>
+          <tr><td><span class="ui">Cross line</span></td><td>one line of that cross, over a diagonal</td><td>one line of a <code>Cross</code>, built by a helper</td><td>none</td><td>red, stroke 6</td></tr>
+          <tr><td><span class="ui">Highlight</span></td><td>a box filled and with no stroke, behind the glyphs</td><td><code>SurroundingRectangle</code>, filled</td><td>none</td><td>yellow, fill 0.3</td></tr>
+        </tbody>
+      </table>
+      <p>The gap is Manim's <code>buff</code>, in scene units. The colours and strokes are Manim's own when no palette is active; <a href="../color/palettes.html">Palettes and Chroma Lab</a> says how a palette changes what new objects get. A highlight is translucent so that the glyphs read through it.</p>
+
+      <h2 id="glyphs">Over some glyphs, or several clips</h2>
+      <p>A shape does not have to cover the whole formula. The ways to choose the glyphs are the ones of <a href="braces.html#glyphs">a brace</a>: pick them with <kbd data-keys="Alt">Alt</kbd> in the Preview and open <span class="ui">Shape ▾</span> in the bar, or choose <span class="ui">Add shape ▸ On some glyphs…</span> to pick them in a dialog.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/shape-menu.dark.webp" data-themed
+             alt="The Preview with the first five glyphs of the sum picked and the Shape menu of the glyph bar open: Box, Circle, Underline, Cross, Cross line, Highlight and On some glyphs."
+             width="818" height="583" loading="lazy">
+        <figcaption>With <code>1+2+3</code> picked, <span class="ui">Shape ▾</span> lists the six shapes and the dialog.</figcaption>
+      </figure>
+
+      <p>Select <strong>several clips</strong> — formulas and texts — and right-click one of them: <span class="ui">Add shape</span> now draws one shape round all of them, as Manim fits one to a <code>VGroup</code>. In the Preview's menu the entry reads <span class="ui">Add shape · on the 2 selected clips</span>. It is greyed out, with the reason in its tooltip, when the clips are never on screen together, and it is not offered when a brace or a shape is among them.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/around-clips.dark.webp" data-themed
+             alt="The Preview with two equations, both selected, and the menu of one of them open: the entry Add shape with its submenu of six shapes. The entry reads Add shape, on the 2 selected clips."
+             width="818" height="700" loading="lazy">
+        <figcaption>Click one equation, <kbd data-keys="Shift">Shift</kbd>+click the other, right-click: <span class="ui">Add shape</span> draws one shape round both.</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="shapes-around-clips"
+              data-caption="One box round two equations that are two clips of the timeline."></figure>
+
+      <h2 id="panel">The Shape section</h2>
+      <p>Select the shape's clip and open the <span class="ui">Timing</span> tab of the Animations panel. Its <span class="ui">Shape</span> section holds everything about how the shape looks.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/shape-section.dark.webp" data-themed
+             alt="The Shape section of the Animations panel for a box: Shape, Colour and Size; Gap, Corners, Stroke, Opacity and Fill; the Fill colour tick; and Detach. Four numbered rings mark these groups."
+             width="310" height="583" loading="lazy">
+        <figcaption>The Shape section of a box.</figcaption>
+      </figure>
+
+      <ol>
+        <li><span class="ui">Shape</span> changes which shape it is, <span class="ui">Colour</span> the colour of its stroke. <span class="ui">Size</span> is the width and the height the shape was fitted to: it is read from the glyphs while the shape is attached, and you do not set it.</li>
+        <li><span class="ui">Gap</span> is the space between the glyphs and the shape (a cross and a cross line have none). <span class="ui">Corners</span> is a box's corner radius; 0 is square. <span class="ui">Stroke</span> is the width of the line in Manim's units, <span class="ui">Opacity</span> the stroke's opacity and <span class="ui">Fill</span> the opacity of the inside of a box or a circle. A highlight is a box with Fill 0.3 and no stroke.</li>
+        <li>Tick <span class="ui">Fill colour</span> to give the fill a colour of its own. Unticked, the fill has the stroke's colour, as in Manim.</li>
+        <li><span class="ui">Detach</span> frees the shape where it is, to move like any clip. Until then it does not drag in the Preview.</li>
+      </ol>
+
+      <p>A negative <span class="ui">Gap</span> is valid: the shape is drawn inside the box of the glyphs. When the fit would leave the shape without a size, it keeps its last valid size and place and the panel lists a problem, until you repair the gap or the target.</p>
+
+      <p>A cross line also has a <span class="ui">Diagonal</span>: <span class="ui">DL-UR</span>, from the lower left corner to the upper right one, which is the default, or <span class="ui">UL-DR</span>. It is drawn from its first corner to its second.</p>
+
+      <h2 id="animation">Animating a shape</h2>
+      <p>Because a shape comes with no animation, give it one from its own menu: right-click the shape in the Preview, or its clip on the timeline.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/shape-own-menu.dark.webp" data-themed
+             alt="The menu of a box with its Intro submenu open: None, Write, FadeIn, GrowFromCenter, DrawBorderThenFill and Create, Create ticked. The menu also has Add brace, Transform to another formula or glyphs, Colour, Outro, Remove animations, Split at playhead and Detach."
+             width="445" height="464" loading="lazy">
+        <figcaption>The menu of a box, with <span class="ui">Intro ▸</span> open: <span class="ui">Create</span> is Manim's for a box.</figcaption>
+      </figure>
+
+      <ul>
+        <li><span class="ui">Add brace ▸</span> a brace under (or over, or beside) the shape. A shape takes a brace on the whole of it.</li>
+        <li><span class="ui">Transform to another formula or glyphs…</span> carries the shape elsewhere: <a href="#retarget">the section below</a>.</li>
+        <li><span class="ui">Colour ▸</span>, <span class="ui">Intro ▸</span> and <span class="ui">Outro ▸</span>, <span class="ui">Remove animations</span> and <span class="ui">Detach</span> are the same as for a brace (<a href="braces.html#menu">The brace's own menu</a>); a shape has no direction.</li>
+      </ul>
+
+      <p>Like a brace, a shape is one piece. Its Transform block moves and repaints the whole object, and there is no Morph, no relation and no part to transform.</p>
+
+      <h2 id="paint">Fill and animated paint</h2>
+      <p>A Transform can repaint a shape as well as move it. Four fields, each behind its own tick, go to what the block says: <span class="ui">Stroke width</span>, <span class="ui">Stroke opacity</span>, <span class="ui">Fill opacity</span> and <span class="ui">Fill colour</span> (the last two for a box or a circle). They change little by little during the block, as Manim interpolates a style. A field you leave unticked stays as it was, and the next Transform starts from what the one before left.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/paint-fields.dark.webp" data-themed
+             alt="A Transform block of a box in the Animations panel with the paint fields: Stroke width ticked at 8, Stroke opacity, Fill opacity ticked at 0.35 and Fill colour."
+             width="310" height="583" loading="lazy">
+        <figcaption>The paint fields of a Transform block of a box.</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="shapes-paint" data-timeline data-loop
+              data-caption="A box fills in, gets a red fill colour of its own, then goes back to a plain green outline."></figure>
+
+      <h2 id="retarget">Carrying a shape to other glyphs</h2>
+      <p>The Transform of a shape can also move it to surround something else, as Manim's <code>Transform(shape, SurroundingRectangle(other))</code> does. The shape goes, point by point, from where it is to the new fit.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/retarget.dark.webp" data-themed
+             alt="The Preview while a shape is carried: the glyphs 4+5+6 picked in yellow, the box still round 1+2+3 and the hint at the foot of the Preview that says how to choose the target."
+             width="818" height="583" loading="lazy">
+        <figcaption>The playhead at 4 s. <span class="ui">Transform to another formula or glyphs…</span>, then <kbd data-keys="Alt">Alt</kbd>+drag over <code>4+5+6</code> and <kbd data-keys="Enter">Enter</kbd>: the box goes there.</figcaption>
+      </figure>
+
+      <ol>
+        <li>Move the playhead to where the shape should start moving.</li>
+        <li>Right-click the shape in the Preview and choose <span class="ui">Transform to another formula or glyphs…</span>. On the clip, in the <span class="ui">Add animation</span> menu or the panel's button, the entry is <span class="ui">Transform ▸ To another formula or glyphs…</span>.</li>
+        <li>Choose the target in the Preview as you select anything there: a click takes a formula, <kbd data-keys="Mod">Ctrl</kbd>+click adds more, and <kbd data-keys="Alt">Alt</kbd> picks symbols of one formula or several.</li>
+        <li>Press <kbd data-keys="Enter">Enter</kbd>, or <span class="ui">Transform here</span>, to make the block at the playhead. <kbd data-keys="Escape">Esc</kbd> leaves the mode without making anything.</li>
+      </ol>
+
+      <p>The block reads <span class="ui">Transform → series</span> on the timeline. Its panel says what the shape goes to and has <span class="ui">Pick again…</span> for another target, and the Preview outlines the target. The target is measured when the block starts and the shape is fitted to it at its own gap. From then on the shape <em>is</em> that fit: a later Transform can move it on, so one after another they chain, and nothing follows the shape there. A brace or a label that hangs on the shape stays where it was fitted.</p>
+
+      <figure>
+        <img src="../media/objects/shapes/retarget-panel.dark.webp" data-themed
+             alt="The Animations panel for the clip of a box, with a Transform block open: its start, duration and easing, then the line Goes to with the name of the target, and the button Pick again…. Two numbered rings mark the target and the button."
+             width="310" height="583" loading="lazy">
+        <figcaption>A block that carries a shape: where it goes (1) and <span class="ui">Pick again…</span> (2).</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="shapes-follow" data-timeline data-loop
+              data-caption="A box that goes from 1+2+3 to 4+5+6, then round the whole sum."></figure>
+
+      <aside class="callout note">
+        <p>After such a block the shape is placed by it, so dragging the shape in the Preview does nothing and a notice says why. Delete the block, or the clip of its target, to take it away; the shape and its other blocks stay.</p>
+      </aside>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/shapes-start-box.mfe.json" download>starting project</a>: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the Projects dialog and pick the downloaded file (<a href="../start/projects.html#open">Opening a project</a>). It holds the sum 1+2+3+4+5+6 with a box round 1+2+3.</li>
+          <li>Move the playhead to 3.6 s, right-click the box and choose <span class="ui">Transform to another formula or glyphs…</span>.</li>
+          <li><kbd data-keys="Alt">Alt</kbd>+drag a rectangle over <code>4+5+6</code>, press <kbd data-keys="Enter">Enter</kbd> and play: the box goes there.</li>
+        </ol>
+      </aside>
+
+      <h2 id="cross-line">Crossing out a term</h2>
+      <p>A <span class="ui">Cross line</span> is one line of a cross, which makes it a pen stroke through a term. Over the same glyph, <span class="ui">Cross</span> draws both lines. A cross line with the intro <span class="ui">Create</span> is drawn from its first corner to its second.</p>
+
+      <figure class="mfe-player" data-mfe-player="shapes-cancel" data-timeline data-loop
+              data-caption="Two cross lines strike out the common factor, then the fraction turns into its lowest terms."></figure>
+
+      <h2 id="python">In the Python</h2>
+      <p>A shape is built on the glyphs it hangs on when its clip starts. A box is a <code>SurroundingRectangle</code>, and the Transform to other glyphs builds the new one and plays <code>Transform</code>:</p>
+      <pre data-excerpt="examples/shapes-follow.ce.py"><code class="language-python">s1 = SurroundingRectangle(VGroup(*series_g[:5]), buff=0.15, color="#FFFF00", corner_radius=0.12)
+# ...
+self.play(Create(s1), run_time=0.8)
+# ...
+s1_to = SurroundingRectangle(VGroup(*series_g[6:]), buff=0.15, color="#FFFF00", corner_radius=0.12)
+# 3.6 s – 4.6 s: s1 tween
+self.play(Transform(s1, s1_to), run_time=1)</code></pre>
+      <p>A circle and a cross line are made by two small helpers at the top of the file, <code data-excerpt="examples/shapes-kinds.ce.py">_circle_around</code> and <code data-excerpt="examples/shapes-kinds.ce.py">_cross_line</code>, because Manim has no class for either. A repainted shape uses <code>set_stroke</code> and <code>set_fill</code> in <code>box.animate</code>.</p>
+
+      <div class="mfe-code" data-mfe-python="shapes-paint"></div>
+
+      <div class="mfe-example" data-mfe-example="shapes-follow"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="braces.html">Braces</a> are the other object that is fitted to glyphs, and a shape can take one.</li>
+        <li><a href="lines-arrows.html">Lines and arrows</a> run between formulas, or point at one.</li>
+        <li><a href="../transforms/recipes.html">Transformation recipes</a> use a cross line to cancel a factor.</li>
+        <li><a href="../basics/intro-outro.html">Appearing and disappearing</a> covers the intros a shape can have.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

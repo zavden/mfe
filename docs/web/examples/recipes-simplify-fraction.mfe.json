@@ -1,0 +1,315 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Recipe: simplify a fraction",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_from",
+      "kind": "math",
+      "name": "before",
+      "source": "\\frac{4x}{6}",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "2": "#F4C867"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-2a5t45tt6va",
+        "glyphs": [
+          {
+            "label": "4",
+            "center": [
+              -0.28714175999999997,
+              0.69355008
+            ],
+            "size": [
+              0.4439923199999999,
+              0.6785164800000001
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.24304320000000007,
+              0.57027456
+            ],
+            "size": [
+              0.48809088,
+              0.45401472
+            ]
+          },
+          {
+            "label": "6",
+            "center": [
+              -0.0013363199999999464,
+              -0.68803776
+            ],
+            "size": [
+              0.4155955199999999,
+              0.68954112
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              -5.551115123125783e-17,
+              -0.07266240000000002
+            ],
+            "size": [
+              1.2748492799999998,
+              0.06013439999999998
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_to",
+      "kind": "math",
+      "name": "after",
+      "source": "\\frac{2x}{3}",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "2": "#F4C867"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1ag74wfkrbi",
+        "glyphs": [
+          {
+            "label": "2",
+            "center": [
+              -0.28714175999999997,
+              0.6935500799999998
+            ],
+            "size": [
+              0.39989376,
+              0.6674918399999998
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.24304320000000007,
+              0.57578688
+            ],
+            "size": [
+              0.48809088,
+              0.45401472
+            ]
+          },
+          {
+            "label": "3",
+            "center": [
+              -0.000501119999999966,
+              -0.6830265600000001
+            ],
+            "size": [
+              0.4159296,
+              0.68853888
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              -5.551115123125783e-17,
+              -0.06715008000000001
+            ],
+            "size": [
+              1.2748492799999998,
+              0.060134400000000005
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_top",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_bottom",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_from",
+      "formulaId": "f_from",
+      "trackId": "t_top",
+      "start": 0,
+      "end": 3.7,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_to",
+      "formulaId": "f_to",
+      "trackId": "t_bottom",
+      "start": 2.2,
+      "end": 5.300000000000001,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_1",
+      "fromClipId": "c_from",
+      "toClipId": "c_to",
+      "offset": 0,
+      "duration": 1.5,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            0
+          ],
+          "style": "fade"
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            2
+          ],
+          "style": "fade"
+        },
+        {
+          "from": [
+            3
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

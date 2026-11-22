@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Braces · Manim Formula Editor</title>
+  <meta name="description" content="Add braces over a formula, over some of its glyphs or over several clips, label them, change their side and animate them.">
+  <meta name="mfe:id" content="objects/braces">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Braces">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/braces-labelled.data.js" defer></script>
+  <script src="../examples/braces-sides.data.js" defer></script>
+  <script src="../examples/braces-angles.data.js" defer></script>
+  <script src="../examples/braces-over-clips.data.js" defer></script>
+  <script src="../examples/braces-stays-put.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Braces</h1>
+      <p class="lead">A brace marks a part of a formula and names it. You add one to a clip, over the whole formula, over some of its glyphs or over several clips, hang a label at its tip, and animate it like any other object of the timeline.</p>
+
+      <figure class="mfe-player" data-mfe-player="braces-labelled" data-loop
+              data-caption="A sum with a brace under each half and one over the whole, each with its label."></figure>
+
+      <p>A brace is Manim's <code>Brace</code>. The editor fits it to the glyphs it hangs on, and the exported scene builds it the same way (<a href="#python">In the Python</a>). This page shows every way to add one, what its panel and its menu offer, and how to make it come and go.</p>
+
+      <h2 id="adding">Adding a brace</h2>
+      <p>Right-click a formula or a text, in the Preview or on its clip in the timeline. Choose <span class="ui">Add brace ▸ Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span> or <span class="ui">Right</span>.</p>
+
+      <figure>
+        <img src="../media/objects/braces/add-brace.dark.webp" data-themed
+             alt="The Preview with the sum 1+2+3+4+5+6 selected and its menu open: the entry Add brace with its submenu Below, Above, Left, Right and On some glyphs."
+             width="818" height="716" loading="lazy">
+        <figcaption>Right-click the sum at 2 s: <span class="ui">Add brace ▸</span> lists the four sides and the dialog for some glyphs. <span class="ui">Below</span> puts the brace under the whole formula, at once.</figcaption>
+      </figure>
+
+      <p>A brace is an object of its own, named <code>b1</code>, <code>b2</code>… with a clip of its own. The Creator does not list it: it lives with its clip, and goes with it or with the clip it hangs on.</p>
+
+      <p>The new clip runs from the playhead to the end of the clip it hangs on. When the playhead is inside that clip's intro, or outside the clip, it starts where the intro ends instead. It goes on the nearest free track in front of the formula's, and a new track opens right above it when none has room.</p>
+
+      <figure>
+        <img src="../media/objects/braces/brace-on-timeline.dark.webp" data-themed
+             alt="The timeline after Add brace: a clip b1 on Track 2, from the playhead at 2 seconds to the right end, above the clip series on Track 1, which has a Write intro."
+             width="1010" height="250" loading="lazy">
+        <figcaption>The clip <code>b1</code> (1) on the track above the sum's. It has no intro and no outro: a brace is there when its clip starts.</figcaption>
+      </figure>
+
+      <aside class="callout note">
+        <p>The brace is fitted to the glyphs <strong>as they are when its clip starts</strong>. Move, scale or turn the formula before then and the brace follows; after that it stays where it was fitted, as it does in the Python. <a href="#follow">A brace does not follow its formula</a> shows how to move both.</p>
+      </aside>
+
+      <h2 id="sides">Choosing a side</h2>
+      <p><span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span> and <span class="ui">Right</span> are Manim's <code>DOWN</code>, <code>UP</code>, <code>LEFT</code> and <code>RIGHT</code>. Behind them a brace points in a direction in degrees, counter-clockwise from below: 0 is below the glyphs, 180 above, −90 on their left and 90 on their right. Any other number tilts the brace to that angle.</p>
+
+      <figure class="mfe-player" data-mfe-player="braces-sides"
+              data-caption="One brace on each side of a system of equations: below, above, left and right."></figure>
+
+      <p>The <span class="ui">Direction</span> field of the Brace section takes any number, not only those four. Here the same letter has braces at 45, 135, −135 and −45 degrees.</p>
+
+      <figure class="mfe-player" data-mfe-player="braces-angles"
+              data-caption="A brace points where its direction says: 45, 135, −135 and −45 degrees round one letter."></figure>
+
+      <p>Change the side later in the Brace section (<a href="#panel">The Brace section</a>) or in the brace's menu (<a href="#menu">The brace's own menu</a>).</p>
+
+      <h2 id="glyphs">Over some glyphs</h2>
+      <p>A brace does not have to cover the whole formula. Pick the glyphs it hangs on:</p>
+      <ol>
+        <li>Hold <kbd data-keys="Alt">Alt</kbd> and click a glyph in the Preview to pick it. Click it again to take it out. <kbd data-keys="Alt+Shift">Alt+Shift</kbd>+click picks a range, and <kbd data-keys="Alt">Alt</kbd>+drag draws a rectangle that picks every glyph it touches. <kbd data-keys="Escape">Esc</kbd> clears the pick.</li>
+        <li>A bar appears in the corner of the Preview and says what is picked. Open <span class="ui">Brace ▾</span> and choose a side.</li>
+      </ol>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/braces/pick-glyphs.dark.webm"
+               poster="../media/objects/braces/pick-glyphs.dark.webp" width="818" height="700"
+               muted loop playsinline preload="none"></video>
+        <figcaption>An <kbd data-keys="Alt">Alt</kbd> drag over <code>1+2+3</code> picks five glyphs; <span class="ui">Brace ▾ ▸ Below</span> puts the brace under them.</figcaption>
+      </figure>
+
+      <p>The picked glyphs are drawn in the colour of the picks, yellow to begin with (<span class="ui">Preferences ▸ Glyph selection colour</span> changes it). <a href="../layout/glyph-picking.html">Picking glyphs</a> has the rest of the gestures.</p>
+
+      <p>Two other ways lead to the same brace:</p>
+      <ul>
+        <li>Right-click the formula in the Preview while some glyphs are picked: the entry now reads <span class="ui">Add brace · on the selected glyphs</span>. A right-click on a picked glyph has <span class="ui">Add brace ›</span> as well. On the timeline, the menu of the formula's clip braces the whole formula, and its <span class="ui">On some glyphs…</span> opens the dialog with the picked glyphs chosen.</li>
+        <li><span class="ui">Add brace ▸ On some glyphs…</span> opens a dialog with the glyphs of the clip. Click a glyph, <kbd data-keys="Shift">Shift</kbd>+click for a range, <kbd data-keys="Mod">Ctrl</kbd>+click to toggle one or drag a box; choose the side, then press <span class="ui">Add brace</span>.</li>
+      </ul>
+
+      <figure>
+        <img src="../media/objects/braces/glyphs-dialog.dark.webp" data-themed
+             alt="The dialog Add brace on glyphs of series: the eleven glyphs of 1+2+3+4+5+6, the first five selected, the side Below chosen, and the buttons Cancel and Add brace."
+             width="580" height="462" loading="lazy">
+        <figcaption>The dialog with the first five glyphs of the sum chosen. Its hint says where the brace will run.</figcaption>
+      </figure>
+
+      <h2 id="several">Over several clips</h2>
+      <p>A brace can also span clips: the two lines of a system of equations, a formula and a text, a shape and a formula. Select the clips, then right-click one of them, in the Preview or on the timeline. <span class="ui">Add brace</span> now puts <strong>one</strong> brace over all of them, as Manim's <code>Brace(VGroup(…))</code> does. In the Preview's menu the entry reads <span class="ui">Add brace · on the 2 selected clips</span>.</p>
+
+      <figure>
+        <img src="../media/objects/braces/several-clips.dark.webp" data-themed
+             alt="The Preview with two equations, both selected, and the menu of one of them open: the entry Add brace with its submenu Below, Above, Left and Right. The entry reads Add brace, on the 2 selected clips."
+             width="818" height="700" loading="lazy">
+        <figcaption>Click one equation, <kbd data-keys="Shift">Shift</kbd>+click the other, right-click: <span class="ui">Add brace</span> puts one brace over both.</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="braces-over-clips"
+              data-caption="One brace over two equations that are two clips, with the solution as its label."></figure>
+
+      <ul>
+        <li>The entry is greyed out, with the reason in its tooltip, when the clips are never on screen together.</li>
+        <li>A brace is never braced: with a brace among the selected clips there is no <span class="ui">Add brace</span>. A shape takes a brace, on the whole of it.</li>
+        <li>Glyphs picked in <em>several formulas</em> with <kbd data-keys="Alt">Alt</kbd> work the same way: <span class="ui">Brace ▾</span> puts one brace over all of them.</li>
+        <li>Delete one of the clips and the brace stays where it was, detached from all of them. A brace that hangs on one clip only goes with it.</li>
+      </ul>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/braces-start-clips.mfe.json" download>starting project</a>: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the Projects dialog and pick the downloaded file (<a href="../start/projects.html#open">Opening a project</a>). It holds two equations, one above the other.</li>
+          <li>Click one, <kbd data-keys="Shift">Shift</kbd>+click the other and right-click one of them: <span class="ui">Add brace ▸ Right</span> puts one brace to the right of both.</li>
+        </ol>
+      </aside>
+
+      <h2 id="labels">Labels</h2>
+      <p>A brace can carry a label: a formula or a LaTeX text at its tip. Right-click the brace in the Preview, or its clip on the timeline, and choose <span class="ui">Add label ▸ Formula</span> or <span class="ui">Text (LaTeX)</span>. The <span class="ui">Add label</span> button of the Brace section does the same.</p>
+
+      <figure>
+        <img src="../media/objects/braces/add-label.dark.webp" data-themed
+             alt="The editor of the label, a dialog named Formula f2: the LaTeX 21 typed in the Raw LaTeX box, and the glyphs 2 and 1 shown on its right."
+             width="1056" height="710" loading="lazy">
+        <figcaption>The editor of a new label. Type <code>21</code>, press <span class="ui">Apply</span> and close the editor: the label is in the scene.</figcaption>
+      </figure>
+
+      <p>The label comes in with the brace, fading in, and sits where Manim's <code>brace.put_at_tip(label)</code> puts it. It follows the brace when you point it or space it. Its own section, <span class="ui">Label</span>, sets the gap to the tip, or <span class="ui">Manim's gap</span>, the one <code>Brace.get_tex</code> leaves: 0.25 in ManimCE, 0.1 in ManimGL.</p>
+
+      <p>Apart from that, a label is a formula like any other. It has its intros, its colours, its relations and its Morph blocks, and it goes with its brace. A new label takes the size that <span class="ui">Preferences ▸ Standard scale…</span> gives to its kind. An existing label keeps its size until <span class="ui">Apply to all formulas</span> or <span class="ui">Apply to all texts</span> in that dialog gives every object its scale (<a href="organizing.html">Finding and organizing</a>).</p>
+
+      <aside class="callout tip">
+        <p>A new label starts with a fade-in. With the playhead on its first instant you see nothing yet: play a little, or move the playhead a second later.</p>
+      </aside>
+
+      <h2 id="panel">The Brace section</h2>
+      <p>Select the brace's clip and open the <span class="ui">Timing</span> tab of the Animations panel: its <span class="ui">Brace</span> section has what the brace is made of.</p>
+
+      <figure>
+        <img src="../media/objects/braces/brace-section.dark.webp" data-themed
+             alt="The Brace section of the Animations panel: Direction 0° and Gap 0.2 with the buttons Below, Above, Left and Right; Sharpness 2, a Colour swatch and the Width 9.005; the list of Labels with an Add label button; and Detach. Four numbered rings mark these four groups."
+             width="310" height="583" loading="lazy">
+        <figcaption>The Brace section of a brace under the whole sum.</figcaption>
+      </figure>
+
+      <ol>
+        <li><span class="ui">Direction</span> in degrees and <span class="ui">Gap</span>, with the four buttons for the sides. The gap is Manim's <code>buff</code>, 0.2 by default.</li>
+        <li><span class="ui">Sharpness</span>, <span class="ui">Colour</span> and <span class="ui">Width</span>. Sharpness is ManimCE's: how long the straight runs of the brace are for its width (2 is Manim's). ManimGL draws its brace from a font and ignores it. The width is read from the glyphs: you do not set it.</li>
+        <li><span class="ui">Labels</span> lists the labels of the brace (none yet); <span class="ui">Add label</span> adds one.</li>
+        <li><span class="ui">Detach</span> frees the brace where it is: it keeps its shape and moves like any other clip from then on. Until then it does not drag in the Preview, because its place follows its glyphs.</li>
+      </ol>
+
+      <p>A brace has no size to set: its width comes from what it hangs on.</p>
+
+      <h2 id="menu">The brace's own menu</h2>
+      <p>Right-click the brace in the Preview, or its clip on the timeline, for the quick changes.</p>
+
+      <figure>
+        <img src="../media/objects/braces/brace-menu.dark.webp" data-themed
+             alt="The menu of a brace with its Direction submenu open: Below is ticked, then Above, Left and Right. The entries of the menu are Add label, Colour, Direction, Intro, Outro, Remove animations, Split at playhead and Detach, among the entries every clip has."
+             width="344" height="422" loading="lazy">
+        <figcaption>The menu of a brace, with <span class="ui">Direction ▸</span> open.</figcaption>
+      </figure>
+
+      <ul>
+        <li><span class="ui">Add label ▸</span> a formula or a LaTeX text at the tip.</li>
+        <li><span class="ui">Colour ▸</span> the Manim colours as swatches, and a field for any other colour in hexadecimal.</li>
+        <li><span class="ui">Direction ▸</span> <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span> or <span class="ui">Right</span>; the current side is ticked.</li>
+        <li><span class="ui">Intro ▸</span> and <span class="ui">Outro ▸</span> the animation its clip starts and ends with. The current one is ticked; <span class="ui">None (appear)</span> and <span class="ui">None (disappear)</span> take it away.</li>
+        <li><span class="ui">Remove animations</span> takes off the intro, the outro and every block at once, as one undo step.</li>
+        <li><span class="ui">Detach</span> as in the panel.</li>
+      </ul>
+
+      <h2 id="animating">Animating a brace</h2>
+      <p>A new brace has no animation. Give it one in <span class="ui">Intro ▸</span> and <span class="ui">Outro ▸</span>. <span class="ui">GrowFromCenter</span> is Manim's for a brace, and <span class="ui">FadeIn</span>, <span class="ui">Write</span>, <span class="ui">Create</span> and <span class="ui">DrawBorderThenFill</span> work too; the outros are <span class="ui">ShrinkToCenter</span>, <span class="ui">FadeOut</span>, <span class="ui">Unwrite</span> and <span class="ui">Uncreate</span>. Drag the inner edge of the intro or the outro on the timeline to make it longer or shorter (<a href="../basics/intro-outro.html">Appearing and disappearing</a>).</p>
+
+      <aside class="callout tip">
+        <p>With an intro, a brace is not drawn yet at the first instant of its clip. Move the playhead a little later to see it, and right-click its clip on the timeline when you need its menu there.</p>
+      </aside>
+
+      <p>A brace is one piece, so its Transform block moves the whole object: its position, scale, rotation, flips, opacity and colour. There is no part to transform, no Morph and no relation. The Emphasis blocks (<span class="ui">Indicate</span>, <span class="ui">Wiggle</span>, <span class="ui">Circumscribe</span>, <span class="ui">Flash</span>, <span class="ui">FocusOn</span>) work on it as on any object (<a href="../animations/blocks.html">Animation blocks</a>).</p>
+
+      <h3 id="follow">A brace does not follow its formula</h3>
+      <p>The formula below moves at 3.6 s with a Transform of the whole formula. The brace was fitted at 2 s, so it stays where it was. At 6 s a Transform of its own, with the same move, brings it along.</p>
+
+      <figure class="mfe-player" data-mfe-player="braces-stays-put" data-timeline data-loop
+              data-caption="The brace stays where it was fitted until its own Transform moves it."></figure>
+
+      <p>To move a formula and its brace together, give both the same Transform. To make a brace that never follows the formula at all, <span class="ui">Detach</span> it and move it by hand.</p>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/braces-start.mfe.json" download>starting project</a> as above (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span>): the sum 1+2+3+4+5+6 on its own.</li>
+          <li>Move the playhead to 2 s. <kbd data-keys="Alt">Alt</kbd>+drag a rectangle over <code>1+2+3</code>, open <span class="ui">Brace ▾</span> in the bar and choose <span class="ui">Below</span>.</li>
+          <li>Right-click the brace and choose <span class="ui">Add label ▸ Formula</span>. Type <code>6</code>, press <span class="ui">Apply</span> and close the editor.</li>
+          <li>Do the same under <code>4+5+6</code> with the label <code>15</code>, then give both braces <span class="ui">Intro ▸ GrowFromCenter</span> and press play.</li>
+        </ol>
+      </aside>
+
+      <h2 id="python">In the Python</h2>
+      <p>The exported scene builds a brace on the glyphs it hangs on, when its clip starts, and puts its label at its tip. This is the first brace of the example above in ManimCE:</p>
+      <pre data-excerpt="examples/braces-labelled.ce.py"><code class="language-python">b1 = Brace(VGroup(*series_g[:5]), DOWN, buff=0.2, color="#58C4DD")
+b1.set_z_index(5)
+b1.put_at_tip(f2, buff=0.25)
+# 2 s – 3 s: b1 grow_from_center, f2 fade_in
+self.play(GrowFromCenter(b1), FadeIn(f2), run_time=1)</code></pre>
+      <p><code>b1</code> is the brace and <code>f2</code> its label, the names the editor gives them. <code>series_g</code> holds the glyphs of the formula in the editor's order, which is what makes <code>[:5]</code> the first five. A brace over several clips is built on a <code>VGroup</code> of them, and a brace on a shape on the shape itself. In ManimGL the same line is <code data-excerpt="examples/braces-labelled.gl.py">Brace(VGroup(*series_g[:5]), DOWN, buff=0.2)</code> followed by <code>set_color</code>, and the label's gap is its own 0.1.</p>
+
+      <div class="mfe-code" data-mfe-python="braces-labelled"></div>
+
+      <div class="mfe-example" data-mfe-example="braces-labelled"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="shapes.html">Shapes</a> frame glyphs with a box, a circle, an underline, a cross or a highlight, the way braces do.</li>
+        <li><a href="lines-arrows.html">Lines and arrows</a> point at a formula or run between two of them.</li>
+        <li><a href="../layout/glyph-picking.html">Picking glyphs</a> explains the <kbd data-keys="Alt">Alt</kbd> pick that chose the glyphs here.</li>
+        <li><a href="../basics/intro-outro.html">Appearing and disappearing</a> and <a href="../animations/blocks.html">Animation blocks</a> cover what a brace's clip can be given.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

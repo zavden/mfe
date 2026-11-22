@@ -1,0 +1,94 @@
+.modal[data-testid='chroma-lab-dialog'] {
+  height: min(940px, calc(100vh - 40px));
+}
+
+.modal[data-testid='chroma-lab-dialog'] > .modal-body {
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+}
+
+.chroma-lab-host {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* The information button of the title bar, at its right end, and the panel it opens: under the
+ * bar, over the top of the frame, against the dialog's right side. */
+.modal[data-testid='chroma-lab-dialog'] > .modal-header {
+  position: relative;
+}
+
+.chroma-lab-info {
+  display: flex;
+  margin-left: auto;
+}
+
+/* The panel is a sheet of glass floating under the title bar, like a menu. */
+.chroma-lab-info-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 12px;
+  z-index: 2;
+  width: min(420px, calc(100vw - 48px));
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--popup-bg);
+  box-shadow:
+    var(--shadow-popup),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.chroma-lab-info-panel p {
+  margin: 0 0 10px;
+  color: var(--text-dim);
+}
+
+.chroma-lab-info-panel strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.chroma-lab-info-panel a {
+  color: var(--accent);
+}
+
+/* A theme file that could not be imported: a line over the frame, while it holds. */
+.chroma-lab-error {
+  flex: none;
+  margin: 0;
+  padding: 8px 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--danger) 45%, var(--border));
+  background: color-mix(in srgb, var(--danger) 10%, var(--panel-header));
+  box-shadow: inset 3px 0 0 var(--danger);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--danger);
+}
+
+.chroma-lab-frame {
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  background: var(--bg);
+}
+
+.chroma-lab-reminder {
+  flex: 1;
+  align-self: center;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-dim);
+}

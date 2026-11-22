@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The companion · Manim Formula Editor</title>
+  <meta name="description" content="The optional local helper: exact LaTeX glyphs, font text, ffmpeg video and rendering with your Manim. How to start it, check it and use it safely.">
+  <meta name="mfe:id" content="manim/companion">
+  <meta name="mfe:level" content="advanced">
+  <meta name="mfe:short" content="The companion">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>The companion</h1>
+      <p class="lead">The editor works on its own. The companion is a small program that you start
+        on your machine to give it more: exact LaTeX glyphs, font text, cleaner video, and
+        rendering with your own Manim.</p>
+
+      <h2 id="what">What it adds</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Without the companion</th><th>With it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Formulas</td><td>Drawn by MathJax in the browser: close to LaTeX, but its glyphs can come in another order than Manim’s.</td><td>Compiled by LaTeX itself, the way Manim does it: Manim’s glyphs, in Manim’s order.</td></tr>
+          <tr><td>Exported Python</td><td>The scene finds the glyphs by position when it runs.</td><td>The scene names the glyphs by index, with no helper (<a href="python.html#glyphs">The generated Python</a>).</td></tr>
+          <tr><td>Font text</td><td>Drawn as placeholder boxes in the Preview and in videos.</td><td>Shaped by the Pango of your own Manim: its real glyphs. Linux for now.</td></tr>
+          <tr><td>Video</td><td>Encoded by the browser.</td><td>Also by ffmpeg: MP4, WebM, ProRes and GIF, with sound.</td></tr>
+          <tr><td>Manim</td><td>Nothing: you run the exported Python yourself.</td><td><span class="ui">Render with Manim</span> runs it for you, with your own ManimCE or ManimGL.</td></tr>
+        </tbody>
+      </table>
+      <p>Writing, animating and exporting Python never needs it. Each row is an extra, and each one
+        is on only when the companion has what it needs: <code>health</code>, below, tells what.
+        <a href="without-companion.html">Without the companion</a> says what the editor does with none,
+        and the one place where that shows in the result: formulas that Manim splits into other glyphs
+        than MathJax.</p>
+
+      <figure>
+        <svg viewBox="0 0 660 232" role="img" aria-labelledby="fit-title fit-desc"
+             style="display: block; box-sizing: border-box; width: 100%; max-width: 660px; height: auto; padding: 12px; font-family: var(--doc-font); font-size: 14px; background: var(--doc-surface); border: 1px solid var(--doc-border); border-radius: var(--doc-radius); box-shadow: var(--doc-shadow);">
+          <title id="fit-title">How the companion fits in</title>
+          <desc id="fit-desc">The editor in the browser talks over HTTP to the companion on the same machine. The companion runs latex and dvisvgm for exact glyphs, ffmpeg for video and sound, and your Manim for font text and rendering.</desc>
+          <defs>
+            <marker id="fit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" style="fill: var(--doc-text-muted);"/>
+            </marker>
+          </defs>
+          <g style="fill: var(--doc-surface-2); stroke: var(--doc-border-strong); stroke-width: 1.5;">
+            <rect x="8" y="78" width="150" height="76" rx="10"/>
+            <rect x="258" y="78" width="150" height="76" rx="10"/>
+            <rect x="486" y="8" width="166" height="62" rx="10"/>
+            <rect x="486" y="85" width="166" height="62" rx="10"/>
+            <rect x="486" y="162" width="166" height="62" rx="10"/>
+          </g>
+          <g style="stroke: var(--doc-text-muted); stroke-width: 1.6; fill: none;" marker-end="url(#fit-arrow)">
+            <path d="M160 116 H256" marker-start="url(#fit-arrow)"/>
+            <path d="M410 108 C448 108 448 39 484 39"/>
+            <path d="M410 116 H484"/>
+            <path d="M410 124 C448 124 448 193 484 193"/>
+          </g>
+          <g style="fill: var(--doc-text); font-weight: 600; text-anchor: middle;">
+            <text x="83" y="112">The editor</text>
+            <text x="333" y="112">The companion</text>
+            <text x="569" y="36">latex, dvisvgm</text>
+            <text x="569" y="113">ffmpeg</text>
+            <text x="569" y="190">your Manim</text>
+          </g>
+          <g style="fill: var(--doc-text-muted); text-anchor: middle; font-size: 12.5px;">
+            <text x="83" y="134">in your browser</text>
+            <text x="333" y="134">mfe_companion.py</text>
+            <text x="569" y="54">exact glyphs</text>
+            <text x="569" y="131">video and sound</text>
+            <text x="569" y="208">font text, rendering</text>
+            <text x="208" y="106">127.0.0.1:7799</text>
+          </g>
+        </svg>
+        <figcaption>The editor and the companion talk over HTTP, on your machine only. The companion
+          runs the other programs.</figcaption>
+      </figure>
+
+      <h2 id="start">Starting it</h2>
+      <p>The companion is one Python file, <code>companion/mfe_companion.py</code> in the
+        repository. It uses only Python’s standard library and needs Python 3.10 or newer. For exact
+        glyphs it also needs <code>latex</code> and <code>dvisvgm</code> on the <code>PATH</code>
+        (TeX Live, MacTeX or MiKTeX); ffmpeg is optional.</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py serve</code></pre>
+      <p>It prints one line, for example <code>mfe-companion 1.7.0 listening on
+        http://127.0.0.1:7799 (LaTeX sandbox: bubblewrap)</code>, and keeps running. Leave it so, and
+        stop it with <kbd>Ctrl</kbd>+<kbd>C</kbd> in its terminal; on Linux and macOS, closing the
+        terminal stops it in order too, and clears its temporary files.</p>
+      <p>You do not tell the editor where it is. The editor looks at
+        <code>http://127.0.0.1:7799</code> every five seconds until it finds it, every fifteen once
+        it has, and each time its window gets the focus. How you opened the editor decides whether
+        it may talk to the companion:</p>
+      <table>
+        <thead>
+          <tr><th>The editor is opened…</th><th>Start the companion with</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>With <code>npm run dev</code> (an address on <code>localhost</code>)</td><td><code>serve</code></td></tr>
+          <tr><td>From the built <code>app/dist/index.html</code>, as a file</td><td><code>serve --allow-file-origin</code></td></tr>
+          <tr><td>By the companion itself</td><td><code>serve --app app/dist</code>, then open <code>http://127.0.0.1:7799/app/</code></td></tr>
+        </tbody>
+      </table>
+      <p>The last one is the simplest: the companion serves the built app, and the app talks to it
+        on its own address, whatever the port. The second option has a catch, explained under
+        <a href="#security">Security</a>.</p>
+      <p>To use your Manim, give the companion the Python of each environment that has it:</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py serve --app app/dist \
+  --ce-python ../manim_ce/venv/bin/python \
+  --gl-python ../manim_gl/venv/bin/python \
+  --allow-manim-render</code></pre>
+      <p>Font text needs the path of the library the project is made for (both, to check an export
+        for the other one). Render with Manim needs the path of the library it renders with, and
+        <code>--allow-manim-render</code>.</p>
+
+      <h2 id="badge">Is it working?</h2>
+      <p>The right end of the menu bar says which renderer the formulas really use.</p>
+      <figure>
+        <img src="../media/manim/companion/renderer-badge.dark.webp" data-themed
+             alt="The right end of the menu bar: the badge Renderer: MathJax, and the theme switch."
+             width="189" height="74" loading="lazy">
+        <figcaption>The badge (1) with no companion running.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Renderer: LaTeX</span>: every formula is drawn from an exact LaTeX
+          render.</li>
+        <li><span class="ui">Renderer: MathJax</span>: the formulas are drawn by MathJax. This is
+          also what a new formula gets while no companion is there.</li>
+        <li><span class="ui">Renderer: Pango</span>: the only texts are font texts, shaped.</li>
+        <li><span class="ui">Renderer: mixed</span>: some formulas are exact and some are not yet,
+          or a font text is still a row of boxes beside formulas.</li>
+      </ul>
+      <p>Hover the badge for the details: how many formulas are exact, how many use MathJax, and
+        the state of the companion. With none running it says <em>No companion at
+        http://127.0.0.1:7799. Start it for exact LaTeX rendering: python3
+        companion/mfe_companion.py serve</em>, with the command that fits how you opened the editor.
+        With one running it gives its version, the tools it found (<em>latex, dvisvgm, ffmpeg</em>)
+        and the Manims it can reach. <span class="ui">Help ▸ About</span> gives the version too.</p>
+      <figure>
+        <img src="../media/manim/companion/glyph-source.dark.webp" data-themed
+             alt="The View menu: Toggle theme, Theme, Panels, and the three choices of glyph source, with Automatic checked."
+             width="334" height="460" loading="lazy">
+        <figcaption>The three <span class="ui">Glyph source</span> items of the
+          <span class="ui">View</span> menu (1): where the glyphs of formulas come from.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Glyph source: Automatic</span> uses the companion’s LaTeX whenever it is
+          online, and MathJax otherwise.</li>
+        <li><span class="ui">Glyph source: MathJax</span> always uses MathJax, even with a companion.</li>
+        <li><span class="ui">Glyph source: LaTeX (companion)</span> asks for LaTeX only.</li>
+      </ul>
+      <p>When the companion comes up, the editor draws every formula again with LaTeX: the badge
+        passes from <span class="ui">Renderer: MathJax</span> through
+        <span class="ui">mixed</span> to <span class="ui">Renderer: LaTeX</span> within moments.</p>
+
+      <h2 id="health">Checking what you have: <code>health</code></h2>
+      <p>When something of the companion does not work, start here. It does not listen on any port
+        and changes nothing:</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py health
+python3 companion/mfe_companion.py health --ce-python ../manim_ce/venv/bin/python</code></pre>
+      <p>The report has a section for each thing the companion does. A line starts with
+        <code>[ok]</code> when the piece is there, <code>[--]</code> when it is missing and
+        <code>[!!]</code> when it is there and cannot be used. Under each line that is not
+        <code>[ok]</code> come what it costs and the command that gets it for your system. Here are
+        two examples, with made-up versions and paths: the whole report of a Linux machine that has
+        everything but ManimGL, and the part that matters in the report of a Mac without
+        ffmpeg.</p>
+<pre><code>Manim Formula Editor companion 1.7.0
+Python 3.12.3 at /usr/bin/python3 (linux)
+
+LaTeX: the exact glyphs of formulas and LaTeX texts
+  [ok] latex: pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2024) (/usr/bin/latex)
+  [ok] dvisvgm: dvisvgm 3.2.2 (/usr/bin/dvisvgm)
+  [ok] sandbox: bubblewrap (LaTeX reads nothing of yours but its own files)
+
+ffmpeg: Export &gt; Video &gt; Companion (ffmpeg), and the sound of Render with Manim
+  [ok] ffmpeg: 6.1.1 (/usr/bin/ffmpeg)
+  [ok] MP4 (H.264): libx264, sound aac
+  [ok] WebM (VP9): libvpx-vp9, sound libopus
+  [ok] MOV (ProRes): prores_ks, sound aac
+  [ok] GIF: gif
+  note: a video is written in /tmp (15.5 GiB free) while it is encoded, 4 GiB at most;
+        `serve --max-video-gib N` gives another limit (1 to 64), and TMPDIR another folder.
+
+Manim: Render with Manim, and the shapes of font text
+  [ok] ManimCE 0.22.1: /home/you/manim-ce/venv/bin/python
+  [  ] ManimGL: not checked. Add --gl-python PATH (or set MFE_GL_PYTHON) to check it too.
+  note: Render with Manim is off unless `serve` gets --allow-manim-render; it would run inside the bubblewrap sandbox.
+
+Font text: Text (font), shaped with the Pango of each Manim
+  [ok] with ManimCE: 312 font families
+
+Everything that was checked is ready here.
+The same as the app reads it, in JSON: health --json</code></pre>
+<pre><code>ffmpeg: Export &gt; Video &gt; Companion (ffmpeg), and the sound of Render with Manim
+  [--] ffmpeg: not found on PATH
+       Without it the companion encodes no video; the app still exports with the browser's encoder.
+       To get it: brew install ffmpeg
+       Then open a new terminal, so that it is on PATH, and run this command again.
+
+1 thing marked [--] or [!!] above: each says what it costs and how to get it.</code></pre>
+      <p><code>health --json</code> prints what the editor itself reads from the companion. With no
+        <code>--ce-python</code> or <code>--gl-python</code> the report checks LaTeX and ffmpeg and
+        says how to ask for the rest.</p>
+
+      <aside class="try">
+        <ol>
+          <li>Run <code>python3 companion/mfe_companion.py health</code> in a terminal, from the
+            folder of the repository.</li>
+          <li>Read the sections. Fix the lines that start with <code>[--]</code> or
+            <code>[!!]</code> with the commands under them, and run it again.</li>
+          <li>Then run <code>serve</code>, open the editor, and watch the badge in the menu bar change
+            from <span class="ui">Renderer: MathJax</span> to <span class="ui">Renderer: LaTeX</span>.</li>
+        </ol>
+      </aside>
+
+      <h2 id="options">The options of <code>serve</code></h2>
+      <table>
+        <thead>
+          <tr><th>Option</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--app DIR</code></td><td>Also serves the built app in <code>DIR</code> (<code>app/dist</code>) at <code>http://127.0.0.1:&lt;port&gt;/app/</code>. The app then reaches the companion on its own address.</td></tr>
+          <tr><td><code>--allow-file-origin</code></td><td>Also accepts the app opened from a file. Any web page can then reach the companion: see <a href="#security">Security</a>. Environment: <code>MFE_ALLOW_FILE_ORIGIN=1</code>.</td></tr>
+          <tr><td><code>--ce-python PATH</code>, <code>--gl-python PATH</code></td><td>The Python of an environment with ManimCE, and with ManimGL. For font text and Render with Manim. Environment: <code>MFE_CE_PYTHON</code>, <code>MFE_GL_PYTHON</code>.</td></tr>
+          <tr><td><code>--allow-manim-render</code></td><td>Turns on Render with Manim, which <strong>runs the Python code it receives</strong>. In a sandbox where one is available. Environment: <code>MFE_ALLOW_MANIM_RENDER=1</code>.</td></tr>
+          <tr><td><code>--manim-timeout SECONDS</code></td><td>The time limit of one render (600 by default).</td></tr>
+          <tr><td><code>--max-video-gib N</code></td><td>The largest video one export through ffmpeg may write, in GiB: a whole number from 1 to 64 (4 by default). A larger video fails and says so: see <a href="#video-limit">How large a video can be</a>.</td></tr>
+          <tr><td><code>--sandbox-gpu</code></td><td>Lets the sandboxed Manim use the graphics card. Without it Mesa draws in software. Environment: <code>MFE_SANDBOX_GPU=1</code>.</td></tr>
+          <tr><td><code>--no-sandbox</code></td><td>Turns bubblewrap off: LaTeX, Render with Manim, the pass of ffmpeg that adds the sound to its video, and the font-text worker then run with all your permissions. Environment: <code>MFE_NO_SANDBOX=1</code>.</td></tr>
+          <tr><td><code>--no-disk-cache</code></td><td>Keeps the cache in memory only. Formulas are otherwise cached on disk, so each is compiled once.</td></tr>
+          <tr><td><code>--port PORT</code></td><td>The port (7799 by default). The editor looks at 7799, so change it only together with <code>--app</code>.</td></tr>
+          <tr><td><code>-v</code>, <code>--verbose</code></td><td>Logs every request.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="exact-glyphs">Exact glyphs</h2>
+      <p>For each formula the companion writes the same TeX document that Manim writes (a
+        <code>MathTex</code> for ManimCE, a <code>Tex</code> for ManimGL), compiles it with
+        <code>latex</code>, converts it with <code>dvisvgm</code>, and sends the drawing back with
+        one label per glyph. The editor draws that. So the glyphs are Manim’s own: their order,
+        their shapes, their places. A LaTeX text (a <em>Text (LaTeX)</em> object) is compiled the
+        same way, in text mode.</p>
+      <ul>
+        <li>A formula takes a moment the first time. The result is cached, so it does not again.</li>
+        <li>A LaTeX error comes back with its message and its line, and the Creator shows it.</li>
+        <li>The packages of a formula and the project’s <span class="ui">LaTeX preamble</span>
+          (<span class="ui">File ▸ Project settings…</span>) are part of the document.</li>
+      </ul>
+      <p><span class="ui">Help ▸ Engine inspector…</span> shows the glyphs a formula gets from each
+        renderer, side by side, so you can see how MathJax and LaTeX differ for it.</p>
+
+      <h2 id="font-text">Font text</h2>
+      <p>A font text is set by Manim’s own text engine, Pango. The companion asks it, through the
+        Python you gave it, for the shape of every glyph, so that the editor draws the text as Manim
+        will. It needs <code>--ce-python</code> or <code>--gl-python</code>, and a system that
+        has Pango 1.50 or newer, Cairo, Fontconfig and ManimPango: that is Linux for now. It starts
+        the first time a text needs it, never before.</p>
+      <p>Without it a font text is a row of placeholder boxes. It still exports to Python, and
+        Render with Manim draws the real glyphs. <code>health</code> has a <em>Font text</em> section
+        that says whether it works.</p>
+
+      <h2 id="ffmpeg">ffmpeg</h2>
+      <p>With ffmpeg on the <code>PATH</code> of the machine that runs the companion,
+        <span class="ui">Export ▸ Video…</span> offers <span class="ui">Companion · ffmpeg</span>: MP4
+        with x264, WebM with VP9, MOV with ProRes, and GIF, with the sound of the project in all of
+        them but the GIF. <code>health</code> lists each format with the encoder it needs
+        (<code>libx264</code>, <code>libvpx-vp9</code>, <code>prores_ks</code>, <code>gif</code>; for
+        sound <code>aac</code> and <code>libopus</code>). All of this is in
+        <a href="../sound/video.html#companion">Exporting video</a>.</p>
+
+      <h3 id="video-limit">How large a video can be</h3>
+      <p>While it is encoded, a video is written in the temporary folder of the machine that runs
+        the companion. What a long video needs is room on that disk, not memory. Two limits keep
+        an export from filling it:</p>
+      <ul>
+        <li><strong>One video is at most 4 GiB.</strong> A larger one is never delivered cut short:
+          the export fails, and the dialog says the limit and what you can do. To give the
+          companion another limit, start it with <code>--max-video-gib N</code>, a whole number of
+          GiB from 1 to 64, for example <code>serve --max-video-gib 16</code>. The
+          <span class="ui">Export video</span> dialog shows the limit of the companion it
+          found.</li>
+        <li><strong>1 GiB of that disk stays free.</strong> An export is not begun, and one that is
+          running is stopped, when less is left. This covers Render with Manim too, whose video has
+          no size limit of its own. The message names the folder.</li>
+      </ul>
+      <p>To write the videos on another disk, start the companion with the environment variable
+        <code>TMPDIR</code> naming a folder there:</p>
+<pre><code class="language-bash">TMPDIR=/data/tmp python3 companion/mfe_companion.py serve --max-video-gib 16</code></pre>
+      <p>Started with a limit that the disk of the folder cannot hold, the companion says so at
+        once. <code>health</code> shows the folder, the room it has and the limit.</p>
+      <aside class="callout note">
+        <p>On some Linux systems, Fedora among them, <code>/tmp</code> is kept in memory (a tmpfs,
+          usually half the RAM). There a large video does take memory, and <code>TMPDIR</code> on a
+          real disk is the way to export one.</p>
+      </aside>
+      <aside class="callout platform" data-platform="windows">
+        <p>In Git Bash the line above works as it is, with a path such as
+          <code>TMPDIR=D:/tmp</code>. In the Command Prompt, give the variable first:
+          <code>set TMPDIR=D:\tmp</code>, then the command.</p>
+      </aside>
+
+      <h2 id="rendering">Rendering with Manim</h2>
+      <p>The editor sends the scene it would export as Python, and the companion has your Manim
+        render it. It is off until you start the companion with <code>--allow-manim-render</code>
+        and give it at least one of <code>--ce-python</code> and <code>--gl-python</code>.</p>
+      <ul>
+        <li>The code runs in a folder of its own, with a minimal environment, and the companion
+          stops it after <code>--manim-timeout</code> seconds.</li>
+        <li>On Linux with bubblewrap it runs in a sandbox: the file system read-only, your home folder
+          empty, no network. Elsewhere it runs with all your permissions, and the dialog says so.</li>
+        <li>The result is an MP4. With sound in the project, ffmpeg adds the mix to it as AAC, in a
+          sandbox of the same kind whenever Manim ran in one.</li>
+      </ul>
+
+      <h2 id="security">Security</h2>
+      <p>The companion runs programs on text that a web page sends, so it is locked down. What to
+        know:</p>
+      <ul>
+        <li>It listens on <code>127.0.0.1</code> only, and refuses requests whose address is not
+          <code>127.0.0.1</code> or <code>localhost</code>, and pages whose origin is not a local
+          one. Only pages served from your own machine can use it.</li>
+        <li><strong><code>--allow-file-origin</code> widens that.</strong> A page opened from a file
+          has no origin, and neither does a frame sandboxed inside any website, so with the option
+          on any web page can send requests to the companion. Serve the app with <code>--app</code>
+          instead, and leave the option off.</li>
+        <li>LaTeX runs without shell escape, in a temporary folder, for at most fifteen seconds.
+          From TeX Live 2026 on, LaTeX can no longer be forbidden from reading files, so on Linux
+          with bubblewrap the companion runs LaTeX in a sandbox that hides your home folder and has
+          no network. <strong>Without bubblewrap</strong> — macOS, Windows, or Linux without it — LaTeX
+          can read what you can, and the only protection is the origin rules above. <code>serve</code>
+          says which case you are in when it starts.</li>
+        <li><strong>Render with Manim runs code.</strong> It is the reason for
+          <code>--allow-manim-render</code>. Use it only with pages you trust.</li>
+        <li><code>--app</code> serves regular files under its folder, nothing else: no listing, no
+          hidden files, no way out of the folder. It is a convenience for your own machine, not a web
+          server.</li>
+      </ul>
+
+      <h2 id="platforms">Linux, macOS and Windows</h2>
+      <p><code>health</code> gives the install command for your system. These are the ones it
+        gives, and what differs.</p>
+      <aside class="callout platform" data-platform="linux">
+        <p>Install LaTeX and ffmpeg with your package manager, for example
+          <code>sudo apt install texlive texlive-latex-extra dvisvgm ffmpeg</code>. Install
+          <code>bubblewrap</code> to confine LaTeX and Render with Manim. Font text works here.</p>
+      </aside>
+      <aside class="callout platform" data-platform="mac">
+        <p>Install MacTeX with <code>brew install --cask mactex-no-gui</code> and ffmpeg with
+          <code>brew install ffmpeg</code>. There is no sandbox: use the companion with pages you
+          trust. Version 1.0 shapes font text on Linux only: here it stays a row of boxes.</p>
+      </aside>
+      <aside class="callout platform" data-platform="windows">
+        <p>The command is <code>python companion/mfe_companion.py serve</code>. Where no Python is
+          installed, Windows answers <code>python</code> with the Microsoft Store’s alias, which runs
+          nothing: use the launcher (<code>py companion/mfe_companion.py serve</code>) or the full
+          name of an interpreter. Install MiKTeX for LaTeX and <code>winget install
+          Gyan.FFmpeg</code> for ffmpeg. Write a path in Git Bash with <code>/</code>
+          (<code>--ce-python C:/manim/ce/venv/Scripts/python.exe</code>). There is no sandbox, and
+          version 1.0 shapes font text on Linux only. Stop the companion with <kbd>Ctrl</kbd>+<kbd>C</kbd>;
+          closing its console window ends it at once and leaves its temporary folder
+          (<code>mfe-jobs-…</code> in <code>%TEMP%</code>).</p>
+      </aside>
+
+      <h2 id="problems">When the editor does not see it</h2>
+      <ul>
+        <li><strong>The badge still says MathJax, and the tooltip says no companion.</strong> Is it
+          running? Is the page opened the way the table above says? A built app opened as a file needs
+          <code>--allow-file-origin</code> or <code>--app</code>.</li>
+        <li><strong><code>Cannot listen on 127.0.0.1:7799</code>.</strong> Another program, or another
+          companion, has the port. Stop it.</li>
+        <li><strong>It runs, but the formulas are still MathJax.</strong> Run <code>health</code>: a
+          <code>[--]</code> on <code>latex</code> or <code>dvisvgm</code> means LaTeX is not on the
+          path of the terminal that started it. Open a new terminal after installing it. Also look
+          at the <span class="ui">View</span> menu: <span class="ui">Glyph source: MathJax</span>
+          keeps MathJax even with a companion.</li>
+        <li><strong>A Manim is not found.</strong> <code>health --ce-python PATH</code> says why,
+          and gives the command that shows the error.</li>
+        <li><strong>The video dialog greys out ffmpeg or Manim.</strong> It says why. Then
+          <code>health</code> says how to put it right.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

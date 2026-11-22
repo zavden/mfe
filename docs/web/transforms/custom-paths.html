@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Custom paths · Manim Formula Editor</title>
+  <meta name="description" content="Make glyphs travel along an arc, or along a path you draw yourself in the Preview.">
+  <meta name="mfe:id" content="transforms/custom-paths">
+  <meta name="mfe:level" content="advanced">
+  <meta name="mfe:short" content="Custom paths">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/custom-paths-compare.data.js" defer></script>
+  <script src="../examples/custom-paths-start.data.js" defer></script>
+  <script src="../examples/custom-paths-swap.data.js" defer></script>
+  <script src="../examples/custom-paths-seven.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Custom paths</h1>
+      <p class="lead">A glyph travels from where it is to where it is going in a straight line,
+        unless you say otherwise. Bend every line of a relation with one number, or draw the route
+        of a single pair in the Preview, as you would a curve in a vector editor.</p>
+
+      <figure class="mfe-player" data-mfe-player="custom-paths-compare" data-start="1.2" data-autoplay data-loop
+              data-caption="The same x crosses the frame three times: along a straight path (top), along an arc of −45° (middle) and along a path drawn by hand (bottom)."></figure>
+
+      <h2 id="how-a-glyph-travels">How a glyph travels</h2>
+      <p>A <a href="relations.html">relation</a> moves the glyphs of its pairs during its window.
+        Each glyph starts where its source formula has it when the window opens and ends where its
+        target formula has it when the window closes. Between the two it follows a <strong>path</strong>.
+        There are three kinds:</p>
+      <ul>
+        <li><strong>Straight</strong>, the default: the shortest way.</li>
+        <li><strong>The relation's Path arc</strong>: one angle that bends the way of every pair that has no
+          path of its own.</li>
+        <li><strong>A custom path</strong>: a curve of your own for one pair, with anchors and handles.</li>
+      </ul>
+      <p>A pair with a custom path ignores the Path arc. The same two tools exist on
+        <a href="morph.html">Morph blocks</a>, which move glyphs inside one formula.</p>
+      <table>
+        <thead>
+          <tr><th>You want</th><th>Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A direct move, the least to look at</td><td>Straight: leave the Path arc at 0°.</td></tr>
+          <tr><td>Glyphs that pass each other, or a gentle swing for everything that moves</td><td>The relation's <a href="#path-arc">Path arc</a>.</td></tr>
+          <tr><td>One glyph to hop, loop or weave, or two glyphs to take different routes</td><td>A <a href="#by-hand">custom path</a> for each of those pairs.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="path-arc">The path arc</h2>
+      <p>Select a relation: click its band on the timeline, or its row in the
+        <span class="ui">Relations</span> list of one of its clips. In the Animations panel, the section
+        <span class="ui">Timing and style</span> has the field <span class="ui">Path arc</span>, in
+        degrees (the <span class="ui">Animation</span> tab of the relation editor has it too).
+        <code>0°</code> keeps the glyphs on straight lines; any value from −360° to 360° bends them.</p>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/path-arc-field.dark.webp" data-themed
+             alt="The Timing and style section of a relation: Offset, Duration, Easing, Default style and Path arc, with a ring round the Path arc field."
+             width="308" height="163" loading="lazy">
+        <figcaption>The Path arc (1) sits with the relation's timing and its default style.</figcaption>
+      </figure>
+
+      <p>The sign says which way the glyph swings. A <strong>positive</strong> arc swings to the
+        <em>right</em> of the glyph's own direction, a <strong>negative</strong> one to the left. A glyph that
+        travels to the right has its right-hand side below it, so it passes <em>under</em> the straight
+        line; one that travels to the left passes <em>over</em> it. Because every glyph bends to the same
+        side of <em>its own</em> way, glyphs that go different ways swing past each other instead of
+        through each other: the <a href="recipes.html#swapping-the-sides">swap of the two sides</a> of an
+        equation is the classic case.</p>
+      <aside class="callout note">
+        <p>The arc is one angle for the whole relation. A pair whose path you drew keeps its own
+          curve and does not follow it.</p>
+      </aside>
+
+      <h2 id="by-hand">Paths edited by hand</h2>
+      <p>When one glyph must hop over another, or weave round a third, a single angle is not enough.
+        Give that pair a path of its own. Here two letters trade places. Along straight paths they
+        run through each other; with a path for each, the <em>a</em> hops over and the <em>b</em>
+        slides under.</p>
+
+      <div class="side-by-side">
+        <figure class="mfe-player" data-mfe-player="custom-paths-start" data-start="1.2" data-autoplay data-loop data-controls="minimal"
+                data-caption="Straight paths: the letters collide."></figure>
+        <figure class="mfe-player" data-mfe-player="custom-paths-swap" data-start="1.2" data-autoplay data-loop data-controls="minimal"
+                data-caption="A path for each letter: they pass each other."></figure>
+      </div>
+
+      <h3 id="open-the-mode">Opening the mode</h3>
+      <p>The curve is edited in the Preview, on the real positions, in a mode of its own called
+        <span class="ui">Edit path</span>. There are several ways in; all of them open it on one pair.</p>
+
+      <table>
+        <thead>
+          <tr><th>Where</th><th>What <span class="ui">Edit path…</span> does there</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A clip's <span class="ui">Relations</span> list, on the row of the relation</td>
+            <td>Opens the mode on its only pair, or the <a href="#picker">path picker</a> when the relation has several.</td>
+          </tr>
+          <tr>
+            <td>The panel of a selected relation, in the list of <span class="ui">Pairs</span></td>
+            <td>Opens the mode on that pair.</td>
+          </tr>
+          <tr>
+            <td>A right-click on the relation's band on the timeline</td>
+            <td>Lists the pairs under <span class="ui">Edit path</span>, or offers <span class="ui">Choose a pair…</span>.</td>
+          </tr>
+          <tr>
+            <td>The relation editor: the list of pairs, or the menu of a pair</td>
+            <td>Saves the relation, closes the editor and opens the mode on that pair.</td>
+          </tr>
+          <tr>
+            <td>A Morph block: its panel, its dialog, its pair editor</td>
+            <td>Opens the mode on that pair (the dialog and the editor close first).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/relation-row.dark.webp" data-themed
+             alt="The row of a relation in the Relations list: its name, 4 paths edited, its window, and the buttons Edit…, Edit path… and the delete key."
+             width="285" height="88" loading="lazy">
+        <figcaption>The row of a relation in a clip's <span class="ui">Relations</span> list: the
+          dot and “4 paths edited” count the pairs with a path of their own, and
+          <span class="ui">Edit path…</span> sits between <span class="ui">Edit…</span> and the
+          delete key.</figcaption>
+      </figure>
+
+      <h3 id="in-the-mode">In the mode</h3>
+      <p>The playhead jumps to the middle of the pair's window, so the glyph is on screen halfway
+        along its way. The curve is drawn over the Preview from where the glyph starts to where it
+        ends; those two places are marked by a faint copy of the glyph, and a dashed line joins them
+        (the straight chord). A pair that has no path of its own starts from the arc it follows,
+        turned into anchors and handles: the plain chord at 0°.</p>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/mode.dark.webp" data-themed
+             alt="The Preview in the Edit path mode: a curve with a smooth anchor at its top, handles on both sides of it, faint copies of the glyph at both ends, the hint line along the top and the Done button."
+             width="818" height="583" loading="lazy">
+        <figcaption>The mode: an anchor (1) with its handles (2), the hint line (3) and
+          <span class="ui">Done</span> (4). The glyph is drawn at the middle of the way, where the
+          curve puts it.</figcaption>
+      </figure>
+
+      <p>Four words are enough to read the curve:</p>
+      <dl>
+        <dt>Chord</dt>
+        <dd>the straight line from where the glyph starts to where it ends (dashed);</dd>
+        <dt>Anchor</dt>
+        <dd>a point the curve passes through; the first and the last sit on the chord's ends;</dd>
+        <dt>Handle</dt>
+        <dd>the control point that sets how the curve leaves or reaches an anchor: the farther it is,
+          the longer the curve keeps its direction;</dd>
+        <dt>Smooth or corner</dt>
+        <dd>on a smooth anchor the two handles stay in a line, so the curve has no kink there; on a
+          corner they point anywhere.</dd>
+      </dl>
+      <p>Every gesture is one step of the undo history, and the glyph follows the curve as you
+        change it.</p>
+
+      <table>
+        <thead>
+          <tr><th>Do this</th><th>What happens</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Press on the curve and drag</td><td>Adds an anchor there and moves it with the pointer.</td></tr>
+          <tr><td>Drag an anchor</td><td>Moves it with its handles. The first and the last anchor sit on the glyph's two places and stay put.</td></tr>
+          <tr><td>Drag a handle</td><td>Reshapes the curve beside its anchor. On a smooth anchor the other handle mirrors it: it turns to stay opposite and takes the same length.</td></tr>
+          <tr><td>Drag a handle with <kbd data-keys="Shift">Shift</kbd> held</td><td>On a smooth anchor the other handle turns to stay opposite, but keeps its own length.</td></tr>
+          <tr><td>Drag a handle with <kbd data-keys="Mod">Ctrl</kbd> held</td><td>Moves only that handle: the anchor becomes a corner.</td></tr>
+          <tr><td>Double-click an anchor</td><td>Makes a corner smooth, or a smooth anchor a corner.</td></tr>
+          <tr><td><kbd data-keys="Delete">Delete</kbd></td><td>Removes the selected anchor, or takes the selected handle back onto its anchor.</td></tr>
+          <tr><td><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd> <kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd></td><td>Nudge the selected anchor or handle by one pixel of the Preview; with <kbd data-keys="Shift">Shift</kbd>, by ten. A nudged handle mirrors the other one, as a drag does.</td></tr>
+          <tr><td><kbd data-keys="Enter">Enter</kbd>, <kbd data-keys="Escape">Esc</kbd> or <span class="ui">Done</span></td><td>Leaves the mode. <kbd data-keys="Escape">Esc</kbd> first cancels a drag in progress. An entry chosen in the Preview's right-click menu leaves the mode too, keeping the path; closing that menu with <kbd data-keys="Escape">Esc</kbd> does not. On a button of the mode's bar (<span class="ui">Path per glyph</span>, the arrows of the routes…), <kbd data-keys="Enter">Enter</kbd> presses that button instead.</td></tr>
+        </tbody>
+      </table>
+      <aside class="callout tip">
+        <p>The keys count at every move of a drag: press <kbd data-keys="Shift">Shift</kbd> or
+          <kbd data-keys="Mod">Ctrl</kbd>, or let go of it, in the middle of a drag, and the handle
+          follows the keys you hold from then on.</p>
+      </aside>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/custom-paths/edit-path.dark.webm"
+               poster="../media/transforms/custom-paths/edit-path.dark.webp" width="818" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Shaping a path with the mode open: press on the curve and drag up, double-click
+          the new anchor to make it smooth, draw one of its handles out (the other mirrors it), and
+          press <kbd data-keys="Enter">Enter</kbd> to leave.</figcaption>
+      </figure>
+
+      <h3 id="what-is-kept">What is kept</h3>
+      <ul>
+        <li>The curve is stored in the frame of the pair's own chord, as fractions of its length, so it
+          follows the formulas when you move or scale them.</li>
+        <li>The glyph travels the curve at a steady pace; the relation's <span class="ui">Easing</span>
+          still decides how that pace speeds up and slows down.</li>
+        <li>A pair of several glyphs applies the curve to each glyph along <em>its own</em> chord.</li>
+        <li>A path that you leave as the plain chord, or as the arc it started from, is dropped: the
+          pair goes back to following the relation's Path arc.</li>
+      </ul>
+
+      <h3 id="routes">A path for one glyph of a pair</h3>
+      <p>A pair of several glyphs has several <strong>routes</strong>: each is one source glyph on its
+        way to one target glyph. Two glyphs that become one have two routes, one glyph that becomes two
+        has two, and two glyphs that become three have three, as Manim pairs them up. The path of the
+        pair is common to all its routes, each on its own chord. A route can also have a path of its
+        own.</p>
+      <p>In the mode, such a pair is edited as one path to begin with. The curve is drawn once, along
+        the first route, and a bar at the top left says that it is the path of all the glyphs: each
+        glyph takes the same shape on its own way.</p>
+      <figure>
+        <img src="../media/transforms/custom-paths/per-glyph-off.dark.webp" data-themed
+             alt="The Preview in the Edit-path mode on a pair of two x that become one: a bar with the button Path per glyph, off, and the words One path for all the glyphs. One curve, drawn out to the left with an anchor and its handles, runs from the first x to the target; the second x, halfway, bends the same way."
+             width="818" height="583" loading="lazy">
+        <figcaption>A pair of two x that become one, as the mode opens on it:
+          <span class="ui">Path per glyph</span> is off (1), and the curve is the path of all the
+          glyphs (2). It is drawn along the first x; the second x, halfway along its own way, bends
+          the same way.</figcaption>
+      </figure>
+      <p>To shape one route alone, press <span class="ui">Path per glyph</span>. Every route is drawn
+        now, dimmed: dashed while it follows the common path, solid with a dot once it has its own.
+        The bar says what you are editing, and starts on <span class="ui">All together</span>, the
+        common path. Click a route's curve, or the faint glyph at its start or at its end, or step
+        through the routes with the arrows of the bar: the curve with the anchors is then that
+        route's, on its own chord, and the first change gives the route a path of its own. When a
+        route of the pair has a path of its own already, the mode opens with
+        <span class="ui">Path per glyph</span> on.</p>
+      <figure>
+        <img src="../media/transforms/custom-paths/routes.dark.webp" data-themed
+             alt="The same pair with Path per glyph on: a bar with Path per glyph, a padlock, Route 1 of 2, x to x, and the buttons All together and Remove own path. The first x travels a curve drawn out to the left, with an anchor and its handles; the other route is a dashed straight line."
+             width="818" height="583" loading="lazy">
+        <figcaption>The first of the two routes of a pair, with a path of its own. The padlock (1)
+          locks the other routes, the bar names the route (2), and
+          <span class="ui">Remove own path</span> (3) gives it back to the common path, which the
+          other route, dashed, still follows.</figcaption>
+      </figure>
+      <ul>
+        <li>Editing the common path moves every route that has no path of its own.</li>
+        <li>The padlock beside <span class="ui">Path per glyph</span> locks the other routes: they
+          stay drawn, but a click on them or on their glyphs chooses nothing, so a curve can be
+          shaped right next to them. The arrows of the bar still choose the route.</li>
+        <li><span class="ui">Remove own path</span> takes the path of the chosen route away;
+          <span class="ui">All together</span> goes back to the common path.</li>
+        <li>Turning <span class="ui">Path per glyph</span> off goes back to the common path and
+          deletes nothing: the routes keep their own paths and play them, and the bar says how many
+          have one (“1 route with its own path”).</li>
+        <li>A path of a route that you leave as what the route would follow anyway is dropped, as a
+          plain path of the pair is.</li>
+        <li>A <span class="ui">Fade transform</span> or a <span class="ui">Fade copy</span> of a
+          group has no routes: the group cross-fades whole, so that pair has its one path. Several
+          sources onto one target have a route each when they arrive <span class="ui">Separate</span>
+          or as <span class="ui">Copies</span> (<a href="relation-editor.html#pair-list">the pair
+          list</a>).</li>
+        <li>To give each source its own <em>style</em> too, take the pair apart:
+          <a href="relation-editor.html#separate-pairs">separate pairs onto one target</a>.</li>
+      </ul>
+
+      <h2 id="picker">The path picker</h2>
+      <p>With several pairs, <span class="ui">Edit path…</span> on a relation's row opens the picker
+        instead of choosing for you. It shows the relation as a diagram, with one row for each pair:
+        a small picture of the curve that pair follows, what it goes from and to, its style, and
+        whether it follows a custom path, the arc or a straight line. Point at a row and its link
+        lights up in the diagram, and the other way round; a click on either opens the mode on that
+        pair.</p>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/picker.dark.webp" data-themed
+             alt="The Edit path dialog of a relation of seven pairs: its diagram on the left and a row for each pair, each with a small picture of its curve."
+             width="992" height="630" loading="lazy">
+        <figcaption>The picker of a relation of seven pairs. Four rows wear the dot of an edited
+          path; the others follow the relation's arc of 30°.</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="custom-paths-seven" data-start="1.2" data-autoplay data-loop
+              data-caption="The relation of the picker: four pairs follow a path drawn by hand, the other three the arc."></figure>
+
+      <p>The relation's band on the timeline has a menu of its own (right-click it). With up to
+        five pairs it lists them under <span class="ui">Edit path</span>; with more it offers
+        <span class="ui">Choose a pair…</span>, which opens the picker.</p>
+
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/transforms/custom-paths/band-menu.dark.webp" data-themed
+               alt="The menu of a relation's band: Edit pairs…, then Edit path with one entry for each pair, then Delete relation."
+               width="278" height="192" loading="lazy">
+          <figcaption>Up to five pairs are in the menu.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/transforms/custom-paths/band-menu-many.dark.webp" data-themed
+               alt="The same menu for a relation of seven pairs: Edit path offers Choose a pair… (7)."
+               width="278" height="167" loading="lazy">
+          <figcaption>With more, <span class="ui">Choose a pair…</span>.</figcaption>
+        </figure>
+      </div>
+
+      <h2 id="marks">The marks of an edited path</h2>
+      <p>A pair whose path you drew wears a small dot wherever pairs are listed beside an
+        <span class="ui">Edit path…</span>; point at it and it says <em>Edited path</em>. A relation's
+        row in the <span class="ui">Relations</span> list counts them (“4 paths edited”). The lists of
+        pairs in the panel of a relation and of a Morph block also say what each pair follows:
+        <code>custom path</code>, <code>arc 30°</code> or <code>straight</code>. A pair whose only
+        edited paths are those of its <a href="#routes">routes</a> wears the dot too, and reads
+        <code>custom path on a route</code>.</p>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/pair-list.dark.webp" data-themed
+             alt="The list of pairs of a relation of seven pairs: each row names its glyphs, its style and what it follows, with an Edit path… button; four rows wear the dot."
+             width="285" height="305" loading="lazy">
+        <figcaption>The pairs of a relation: a dot on the four with a path of their own, and what
+          each one follows.</figcaption>
+      </figure>
+
+      <h2 id="removing">Taking a path away</h2>
+      <p>To give a pair the relation's arc back, open the relation editor, right-click one of its
+        glyphs (or select it and click the badge of its link), and choose <span class="ui">Straight path</span>, which
+        takes the paths of its routes away as well. With
+        several edited links selected the entry says how many (<span class="ui">Straight paths (3)</span>).
+        <kbd data-keys="Mod+Z">Ctrl+Z</kbd> undoes any change of a path, one gesture at a time.</p>
+
+      <figure>
+        <img src="../media/transforms/custom-paths/pair-menu.dark.webp" data-themed
+             alt="The relation editor with the menu of a pair open: the styles Inherit, Transform, Copy, Fade transform and Fade copy, then Edit path… and Straight path, then Delete link…."
+             width="684" height="560" loading="lazy">
+        <figcaption>The menu of a pair in the relation editor: the style of the pair,
+          <span class="ui">Edit path…</span> and <span class="ui">Straight path</span>.</figcaption>
+      </figure>
+
+      <h2 id="export">How paths export</h2>
+      <p>The Path arc becomes Manim's own <code>path_arc</code>, in degrees, on each transform of the
+        relation. A custom path is played through a small helper, <code>_spline_path</code>, which the
+        export writes at the top of the file. It takes the curve as a list of anchors and handles,
+        in the frame of the chord, and moves each glyph along it at a steady pace. The helper is
+        the same in ManimCE and in ManimGL, and it does the same arithmetic as the Preview, so the
+        video shows what you drew. When the glyphs of one transform follow different paths (a pair
+        whose <a href="#routes">routes</a> have paths of their own), a second helper,
+        <code>_route_paths</code>, wraps that transform and gives each glyph the path of its
+        route, also when two glyphs are drawn on the same spot.</p>
+      <p>In the project of the three rows at the top of this page, the transform of the second row carries
+        the arc and the transform of the third row carries its own path:</p>
+<pre data-excerpt="examples/custom-paths-compare.ce.py"><code class="language-python">ReplacementTransform(arc_g[0], arc_end_g[0], path_arc=-45 * DEGREES),
+ReplacementTransform(edited_g[0], edited_end_g[0], path_func=_spline_path([…])),</code></pre>
+      <p>The swap of the two letters exports the same way, one <code data-excerpt="examples/custom-paths-swap.ce.py">path_func=_spline_path([…])</code> for each
+        of its two pairs:</p>
+      <div class="mfe-code" data-mfe-python="custom-paths-swap"></div>
+
+      <h2 id="limits">Good to know</h2>
+      <ul>
+        <li>A glyph that does not move (its start and its end are the same place) has no chord, so
+          it has no path: the hint says so and the glyph plays straight.</li>
+        <li>On a locked track <span class="ui">Edit path…</span> is greyed out, and says why.</li>
+        <li>In the relation editor, <span class="ui">Preview raw</span> shows every glyph on a straight
+          line. Use <span class="ui">Preview</span> (or the main Preview) to see arcs and custom paths.</li>
+      </ul>
+
+      <aside class="try">
+        <ol>
+          <li>Download the project below, choose <span class="ui">File ▸ Open…</span>, press
+            <span class="ui">Other file…</span> and pick the file
+            (<a href="../start/projects.html#open">Projects</a> explains the dialog). Press
+            <kbd data-keys="Space">Space</kbd>: the two letters run through each other.</li>
+          <li>Click the clip <em>ab</em> on the timeline. In the <span class="ui">Relations</span> tab
+            press <span class="ui">Edit path…</span>, and choose <em>a → a</em> in the picker.</li>
+          <li>Press on the middle of the curve and drag it up: an anchor appears. Double-click it to make
+            it smooth, then draw one of its handles out.</li>
+          <li>Press <kbd data-keys="Enter">Enter</kbd>. The panel now shows the relation and its pairs:
+            press <span class="ui">Edit path…</span> on the row <em>b → b</em> and do the same, but drag the
+            curve <em>down</em>: this letter slides under the <em>a</em>.</li>
+          <li>Play it. Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> to take the changes back one by one.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="custom-paths-start"></div>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="morph.html">Morph blocks</a> make a derivation inside one formula, each row grown out of the one above it.</li>
+        <li><a href="relations.html">How relations work</a> covers pairs of glyphs, their styles and their timing.</li>
+        <li><a href="recipes.html">Transformation recipes</a> gives eight common moves of algebra, each a small project to play and open.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

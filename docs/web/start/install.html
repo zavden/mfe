@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting the app running · Manim Formula Editor</title>
+  <meta name="description" content="Download the editor ready-built or build it, and open it from disk; the dev server, the browsers it works in, Chroma Lab inside, the optional companion, and Manim.">
+  <meta name="mfe:id" content="start/install">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Install and run">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Getting the app running</h1>
+      <p class="lead">The editor is a web app. Download it ready-built or build it once, then open its <code>index.html</code> from your disk: no server to run, no account to make. Everything else on this page is optional.</p>
+
+      <h2 id="ready-built">The ready-built app</h2>
+      <p>The editor is published ready-built on the <a href="https://github.com/zavden/mfe/releases/latest">releases page</a> of its repository: a ZIP of about 2.5 MB, <code>manim-formula-editor-1.0.0.zip</code> for this version. Unzip it anywhere and open the <code>index.html</code> of its folder in your browser. It is the editor a build makes (<a href="#built-app">below</a>), so you need neither Git nor Node.js for it.</p>
+      <p>The ZIP holds the editor alone, with Chroma Lab inside and the licences of what it contains. The <a href="#companion">companion</a> is a file of the repository, <code>companion/mfe_companion.py</code>: take it from there when you want it.</p>
+
+      <h2 id="requirements">What you need</h2>
+      <p>To build the editor yourself and run it:</p>
+      <ul>
+        <li><strong>Git</strong>, to copy the repository (or download its ZIP from the GitHub page).</li>
+        <li><strong>Node.js</strong> with npm: 22.22.2 or later in the 22 line, 24.15.0 or later in the 24 line, or any version from 26 on (the <code>engines</code> field of <code>app/package.json</code>).</li>
+        <li><strong>A browser.</strong> A recent Chrome or Edge gives the whole editor; see <a href="#browsers">Browsers</a> for what Firefox and Safari do differently.</li>
+      </ul>
+      <p>You need no Manim to write, preview and play an animation, nor to export a video from the browser. Manim is for running the Python the editor exports (<a href="#manim">below</a>).</p>
+
+      <h2 id="built-app">The built app, from disk</h2>
+      <p>Get the code, install what it depends on, and build it:</p>
+<pre><code class="language-bash">git clone https://github.com/zavden/mfe.git
+cd mfe/app
+npm install
+npm run build</code></pre>
+      <p><code>npm run build</code> type-checks the app and writes the finished editor into <code>app/dist/</code>. Open <code>app/dist/index.html</code> in your browser: double-click it, drag it onto a browser window, or ask the system to open it:</p>
+<pre><code class="language-bash">xdg-open dist/index.html     # Linux
+open dist/index.html         # macOS
+start dist\index.html        # Windows</code></pre>
+      <p><code>dist/</code> is the whole editor: one script, its stylesheet, its fonts, and Chroma Lab in <code>dist/chroma-lab/</code>. Its addresses are relative and it needs nothing from the internet, which is why it opens from disk. You can copy the folder wherever you like.</p>
+      <p>The first time, the editor shows an empty project: no formulas, two empty tracks, and in the Creator two buttons, <span class="ui">Try an example</span>, which opens a finished project to play and change (<a href="projects.html#examples">The examples</a>), and <span class="ui">Sync folder…</span>, for the folder of your own projects.</p>
+      <figure>
+        <img src="../media/start/install/first-start.dark.webp" data-themed alt="The editor at its first start: an empty project called Untitled, with 'No formulas yet' and the buttons Try an example and Sync folder… in the Creator, an empty Preview, and two empty tracks in the Timeline." width="1440" height="900" loading="lazy">
+        <figcaption>The editor at its first start. The bar says <em>Untitled · Not saved yet</em> and <em>Renderer: MathJax</em>.</figcaption>
+      </figure>
+      <aside class="callout tip">
+        <p>To update, pull the repository and build again: <code>git pull</code>, <code>npm install</code>, <code>npm run build</code>. Your projects are your own files, so a new build does not touch them.</p>
+      </aside>
+
+      <h2 id="dev-server">The dev server</h2>
+      <p>If you would rather not build, or you want to see changes to the app at once, run the development server from <code>app/</code>:</p>
+<pre><code class="language-bash">cd mfe/app
+npm install      # the first time
+npm run dev</code></pre>
+      <p>Vite prints the address to open, <code>http://localhost:5173/</code> unless that port is busy. It is the same editor. The difference that matters to you: a page served from <code>localhost</code> is one the <a href="#companion">companion</a> accepts without any option, which a page opened from disk is not.</p>
+
+      <h2 id="ways">Three ways to open it</h2>
+      <p>The editor is the same whichever way you open it. What changes is the address the page has, and that decides whether the <a href="#companion">companion</a> accepts it.</p>
+      <table>
+        <thead>
+          <tr><th>Way</th><th>You run</th><th>You open</th><th>The companion</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The built app, from disk</td><td><code>npm run build</code>, once</td><td><code>app/dist/index.html</code></td><td>Needs <code>--allow-file-origin</code></td></tr>
+          <tr><td>The dev server</td><td><code>npm run dev</code></td><td><code>http://localhost:5173/</code></td><td>Accepts it as it is</td></tr>
+          <tr><td>Served by the companion</td><td><code>mfe_companion.py serve --app app/dist</code></td><td><code>http://127.0.0.1:7799/app/</code></td><td>Is the page's own origin: nothing to allow</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="check">Check that it works</h2>
+      <p>Open <span class="ui">Help ▸ About</span>. It names the editor's own version first (<em>Version 1.0.0</em>), then the version of the project format, the version of MathJax that draws the formulas, and whether a companion is running. Its <span class="ui">Third-party licenses…</span> button, which <span class="ui">Help ▸ Third-party licenses…</span> also opens, lists the open-source components the editor contains, with their versions and licences.</p>
+      <figure>
+        <img src="../media/start/install/about-dialog.dark.webp" data-themed alt="The About dialog: the name of the editor, its version 1.0.0, the project format number, the MathJax version, the companion line 'Not running (optional: exact LaTeX, ffmpeg, Manim)', and the licence." width="528" height="462" loading="lazy">
+        <figcaption>The About dialog of an editor with no companion running.</figcaption>
+      </figure>
+      <aside class="try">
+        <ol>
+          <li>Open the editor and press <span class="ui">+ New</span> in the Creator.</li>
+          <li>In the <em>Raw LaTeX</em> field, type <code>x + 3 = 5</code>.</li>
+          <li>Press <span class="ui">Apply</span>. The line beside the button reads <em>5 glyphs · MathJax</em>: the editor has drawn your formula.</li>
+        </ol>
+      </aside>
+      <figure>
+        <img src="../media/start/install/formula-editor.dark.webp" data-themed alt="The formula editor, titled Formula · f1, after Apply. The Raw LaTeX field (1) holds x + 3 = 5; the Apply button (2) is at the bottom left, and the line beside it (3) reads '5 glyphs · MathJax'. At the right, the five glyphs of the formula, each in a box." width="1056" height="646" loading="lazy">
+        <figcaption>The formula editor at the end of the steps: the <em>Raw LaTeX</em> field (1), <span class="ui">Apply</span> (2), and the line that counts the glyphs and names what drew them (3).</figcaption>
+      </figure>
+      <aside class="callout platform" data-platform="mac">
+        <p>On a Mac the editor uses ⌘ where the other systems use Ctrl and ⌥ where they use Alt, and writes its keys as a Mac's menus do: ⌘S saves, and ⇧⌘Z redoes. A few shortcuts have keys of their own there, because the system keeps the usual ones for itself: Save As is ⇧⌘S and Sync folder ⌥⌘S, Distribute is ⌃⌥H and ⌃⌥V, and ⌘↩ adds the formula that has the focus in the list to the selection. On a trackpad, a pinch zooms the Preview and the timeline, and a scroll with two fingers moves the Preview's view. These pages show the keys for the system you read them on.</p>
+      </aside>
+
+      <h2 id="browsers">Browsers</h2>
+      <p>The editor runs in the browser and draws its formulas there, so it needs nothing but the page. One thing differs between browsers: whether the page may open and write the files and folders of your disk. Chrome and Edge give it the File System Access API. Firefox and Safari do not.</p>
+      <table>
+        <thead>
+          <tr><th>What you do</th><th>Chrome, Edge</th><th>Firefox, Safari</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span></td><td>Reads the file and remembers where it is.</td><td>Reads a copy of the file you choose.</td></tr>
+          <tr><td><span class="ui">File ▸ Save</span></td><td>Writes the same file. The first time, a picker asks where.</td><td>Downloads a new file each time; the file you opened is not written.</td></tr>
+          <tr><td><span class="ui">File ▸ Sync folder…</span></td><td>Keeps the folder and lists it again whenever the Projects dialog opens. A project opened from it saves in place, and Save As starts there.</td><td>Takes the folder as it is at that moment. It is not read again until you sync it again, and nothing is written into it.</td></tr>
+          <tr><td>Your templates</td><td>Kept in the browser, and also in the synced folder.</td><td>Kept in the browser only; Export takes them elsewhere.</td></tr>
+          <tr><td><span class="ui">Export ▸ Video…</span></td><td>The dialog asks where to save the file first, then writes it as it encodes.</td><td>The video is put together in memory and downloaded at the end.</td></tr>
+        </tbody>
+      </table>
+      <p>The editor decides by what the browser can do, not by its name. When the browser cannot write files or folders, the editor tells you once per session, as it opens, in a notice that stays until you close it:</p>
+      <figure>
+        <img src="../media/start/install/file-access-notice.dark.webp" data-themed alt="A notice titled 'This browser works on copies of your files', saying the browser gives the editor no way to write a file or a folder of your disk, and listing what that means for Open, Save, Sync folder and templates." width="432" height="214" loading="lazy">
+        <figcaption>The notice a browser without file access shows.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p>Whatever the browser, the editor also keeps your work in the browser as you go, so a reload brings it back. That is a safety net, not a file: <a href="projects.html#autosave">Projects and files</a> says what it does and what it cannot do.</p>
+      </aside>
+
+      <h2 id="chroma-lab">Chroma Lab, inside the app</h2>
+      <p><strong>Chroma Lab</strong> is a colour studio for designing the palette of a scene: harmonies, roles for the parts of a formula, and contrast against the scene's background. It comes inside every build, as a copy kept in <code>dist/chroma-lab/</code>, and works offline. There is nothing to install.</p>
+      <p>Open it with <span class="ui">Preferences ▸ Chroma Lab…</span>. <span class="ui">Editor palettes…</span>, the entry after it, is where the palettes you keep are listed and edited.</p>
+      <figure>
+        <img src="../media/start/install/preferences-menu.dark.webp" data-themed alt="The Preferences menu, open. Numbered rings mark its last two entries: Chroma Lab… (1) and Editor palettes… (2)." width="289" height="602" loading="lazy">
+        <figcaption>Chroma Lab (1) and Editor palettes… (2) in the Preferences menu.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/start/install/chroma-lab.dark.webp" data-themed alt="Chroma Lab open in a dialog over the editor: its pages in a column on the left, a base colour, a harmony, and a row of colours with their roles." width="1436" height="888" loading="lazy">
+        <figcaption>Chroma Lab, open over the editor. A theme goes to the editor's palettes with one button.</figcaption>
+      </figure>
+      <p><a href="../color/palettes.html">Palettes and Chroma Lab</a> shows how to design a palette and send it to the editor.</p>
+
+      <h2 id="companion">The optional companion</h2>
+      <p>The <strong>companion</strong> is one Python file that you start yourself. The editor works without it: <a href="../manim/without-companion.html">Without the companion</a> says what you have then, and the one place where it shows in what you export. With it, the editor can get:</p>
+      <ul>
+        <li>exact glyphs: formulas compiled by real LaTeX, as Manim compiles them, so glyph order and shapes match Manim's;</li>
+        <li>font text, shaped by Pango;</li>
+        <li>fast video encoding with ffmpeg;</li>
+        <li>rendering of the exported scene with your own Manim.</li>
+      </ul>
+      <p>It needs Python 3.10 or later (and nothing to install for the file itself), and, for exact glyphs, <code>latex</code> and <code>dvisvgm</code> on your PATH. Start it from the repository's root:</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py serve</code></pre>
+      <p>That gives exact glyphs, and encoding with ffmpeg where ffmpeg is installed. Font text also needs the Python of your Manim (<code>--ce-python</code> or <code>--gl-python</code> names it), and rendering with Manim needs <code>--allow-manim-render</code> as well.</p>
+      <p>The editor finds it by itself. Once formulas use it, the bar says <em>Renderer: LaTeX</em> (or <em>mixed</em> while some still use MathJax). If something is missing, ask the companion what this machine lacks and how to get it:</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py health</code></pre>
+      <p>When you open the built editor from disk, the companion refuses the page unless you start it with <code>--allow-file-origin</code>. Or let the companion serve the editor itself, and open <code>http://127.0.0.1:7799/app/</code>:</p>
+<pre><code class="language-bash">python3 companion/mfe_companion.py serve --allow-file-origin
+python3 companion/mfe_companion.py serve --app app/dist</code></pre>
+      <aside class="callout platform" data-platform="windows">
+        <p>On Windows the command is <code>python companion/mfe_companion.py serve</code>. Where no Python is on the PATH, Windows answers that name with the Microsoft Store's alias, which runs nothing: use the launcher (<code>py companion/mfe_companion.py serve</code>) or the full name of an interpreter. MiKTeX brings <code>latex</code> and <code>dvisvgm</code>. There is no sandbox there, so use the companion with pages you trust.</p>
+      </aside>
+      <aside class="callout platform" data-platform="linux">
+        <p>Font text works on Linux, with Pango 1.50 or later, Cairo, Fontconfig and ManimPango in the Python you give the companion. Elsewhere a font text is drawn as placeholder boxes: it can still be placed, coloured and animated, and it exports.</p>
+      </aside>
+      <p>Which options turn on which features, and what each costs, is in <a href="../manim/companion.html#options">The companion</a>.</p>
+
+      <h2 id="manim">Manim, to run the Python</h2>
+      <p>The editor exports a Python scene for <strong>ManimCE</strong> (the community edition, 0.22) or <strong>ManimGL</strong> (3Blue1Brown's, 1.7). To render that file you need the matching Manim, installed the way its own documentation says:</p>
+      <ul>
+        <li><a href="https://docs.manim.community/en/stable/installation.html">Installing ManimCE</a></li>
+        <li><a href="https://3b1b.github.io/manim/getting_started/installation.html">Installing ManimGL</a></li>
+      </ul>
+      <p>The first lines of every exported file give the command that renders it at the project's size and frame rate, for example <code>manim -r 1920,1080 --fps 60 FirstTransform.py FirstTransform</code>. <a href="../manim/python.html">The generated Python</a> and <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a> tell the rest.</p>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="first-animation.html">Your first animation</a> takes you, step by step, from two formulas and a transformation between them to the export for Manim.</li>
+        <li><a href="interface.html">A tour of the interface</a> shows the menu bar and the four panels of the editor.</li>
+        <li><a href="../manim/companion.html">The companion</a> says how to start the optional helper, check it and use it safely.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Troubleshooting and questions · Manim Formula Editor</title>
+  <meta name="description" content="When something does not work as you expect: LaTeX errors, glyph order, glyphs missing in a Manim video, the companion, font text, files, video, locked clips, recovering work, and common questions.">
+  <meta name="mfe:id" content="reference/troubleshooting">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Troubleshooting">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Troubleshooting and questions</h1>
+      <p class="lead">What to do when the editor does not do what you expect. Each problem says what you see, why
+        it happens and what to do, with the app’s own words in quotation marks so you can find the message you
+        have.</p>
+
+      <h2 id="problems">Problems</h2>
+
+      <h3 id="latex-error">A formula shows an error</h3>
+      <p><strong>You see.</strong> A red message on the formula’s card in the Creator, and in its editor, and
+        the badge of the card says <em>error</em>.</p>
+      <figure>
+        <img src="../media/reference/troubleshooting/formula-error.dark.webp" data-themed
+             alt="The card of a formula in the Creator: its drawing, a red badge that says error and, under the drawing, a red message: Undefined control sequence \qty. It comes from the physics package: add it under Packages."
+             width="276" height="166" loading="lazy">
+        <figcaption>The card of a formula that uses <code>\qty</code> without the <code>physics</code> package. The drawing is the last
+          one that rendered; the badge and the message say that the new source did not.</figcaption>
+      </figure>
+      <p><strong>Why.</strong> The renderer could not typeset the source. The editor puts the renderer’s message in
+        plain words. The ones you will meet:</p>
+      <ul>
+        <li><em>“Undefined control sequence \qty.”</em> The command is not known. When it belongs to a package the
+          formula does not load, the message goes on: <em>“It comes from the "physics" package: add it under
+          Packages.”</em></li>
+        <li><em>“\begin{…} is never closed: add \end{…}.”</em> and <em>“\end{…} has no matching \begin{…}.”</em></li>
+        <li><em>“^ at the end needs an argument, as in x^{2}.”</em>, <em>“Missing close brace.”</em> and <em>“\left needs a
+          matching \right (\right. closes it without a delimiter).”</em></li>
+        <li><em>“Something is not closed: a ^ or _ without its argument, a { without its }, or a \left without its
+          \right.”</em> when the renderer only noticed at the end. Both renderers typeset your source inside an
+          <code>align*</code>, as Manim does, which is why their own messages can name it.</li>
+        <li>In a formula of several lines, the message ends with <em>(line N)</em>.</li>
+      </ul>
+      <p><strong>What to do.</strong> Fix the source in the formula editor and apply it with
+        <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd>; the card updates when the render finishes. To add a package,
+        use the <span class="ui">Packages</span> section of the editor. A package that MathJax cannot load is marked in
+        that list, <em>“MathJax cannot load "…": the preview ignores it. Exact mode (companion) compiles it with
+        LaTeX.”</em> The browser’s preview then ignores the package, and only the companion’s LaTeX shows the real
+        result. See <a href="../basics/formulas.html">Writing formulas</a>.</p>
+
+      <h3 id="glyph-order">Pairs and colours moved when the renderer changed</h3>
+      <p><strong>You see.</strong> After you start the companion, or change the glyph source in the <span class="ui">View</span> menu, or edit a
+        formula’s source, a card of the Creator shows <em>“⚠ Check glyph colours, pairs and blocks”</em>, and a colour
+        or a pair seems to be on another glyph.</p>
+      <p><strong>Why.</strong> MathJax and LaTeX draw the same formula as the same shapes in a different order: MathJax
+        gives <code>\frac{a}{b}</code> as the <em>a</em>, the <em>b</em>, then the bar, and <code>\sqrt{c}</code> as the
+        <em>c</em>, then the root. A project names glyphs by number, by their <a href="glossary.html#canonical-index">canonical
+        index</a>, so when a different render arrives the editor carries every reference over by matching glyphs. When it is not sure, or something no longer has a glyph to stand on, it
+        says so with that warning; its tooltip lists what was dropped (colours, hidden glyphs, pairs, glyphs of blocks).</p>
+      <p><strong>What to do.</strong> Point at the warning to read what changed, then look at the pairs in the
+        <a href="../transforms/relation-editor.html">relation editor</a> and the colours in the formula’s editor, and
+        <kbd data-keys="Mod+Z">Ctrl+Z</kbd> an edit that went wrong: undoing a source edit gives back its glyph list.
+        If you will export Python with exact glyph numbers, decide on the renderer first and build your pairs
+        with the companion running; without it the exported scene finds the glyphs of a MathJax formula by
+        position, with a helper at its top, which works but is not exact
+        (<a href="../manim/python.html">The generated Python</a>).</p>
+
+      <h3 id="missing-glyphs">Dots missing, or left behind, in the Manim video</h3>
+      <p><strong>You see.</strong> In the video Manim renders from the exported Python, a formula has one dot of three where it
+        has <code>\cdots</code>, or pieces of a formula stay where it was when its glyphs move to the next one. The scene printed
+        <em>“Warning: Manim made N glyphs of a formula the editor split into M; unmatched glyphs are not animated.”</em> when it
+        ran.</p>
+      <p><strong>Why.</strong> The formula was drawn by MathJax, with no companion running, and MathJax split it into another
+        number of glyphs than LaTeX does: <code>\cdots</code> and the other dots, tall bars, <code>\neq</code> and a few more. The
+        scene finds Manim’s glyphs by position, and the ones it cannot reach are left out of every animation of glyphs.</p>
+      <p><strong>What to do.</strong> Start the companion, let the formulas render with LaTeX (the badge says
+        <span class="ui">Renderer: LaTeX</span>), and export again. <a href="../manim/without-companion.html#python">Without the
+        companion</a> has the whole list and what the video shows.</p>
+
+      <h3 id="companion-offline">The badge says MathJax and the companion is running</h3>
+      <p><strong>You see.</strong> <span class="ui">Renderer: MathJax</span> in the menu bar. Its tooltip says <em>“No companion at
+        http://127.0.0.1:7799. Start it for exact LaTeX rendering: python3 companion/mfe_companion.py serve”</em>.</p>
+      <p><strong>Why, and what to do.</strong> The editor looks for the companion at that address every five seconds while it
+        is missing, and again whenever the window gets the focus. Check, in this order:</p>
+      <ol>
+        <li><strong>Is it running?</strong> The command is the one in the tooltip. Run
+          <code>python3 companion/mfe_companion.py health</code> too: it says what the machine gives the companion and
+          how to get the rest.</li>
+        <li><strong>Did you open the app from disk?</strong> A page opened as a file is refused unless the companion starts with
+          <code>--allow-file-origin</code>; the tooltip then shows the command with it. Or let the companion serve
+          the built app, <code>serve --app app/dist</code>, and open <code>http://127.0.0.1:7799/app/</code>.</li>
+        <li><strong>Is the page on <code>localhost</code> or <code>127.0.0.1</code>?</strong> The companion accepts no other origin.</li>
+        <li><strong>On Windows,</strong> the command is <code>python</code>. Where no Python is installed, Windows answers that name
+          with the alias of the Microsoft Store, which runs nothing: use <code>py</code> or the full path of an interpreter.</li>
+      </ol>
+      <p>Then click the window once to make the editor look again. <a href="../manim/companion.html">The companion</a> has
+        the options.</p>
+
+      <h3 id="latex-missing">The companion runs but formulas still use MathJax</h3>
+      <p><strong>You see.</strong> The tooltip of the badge says <em>“LaTeX is not installed where the companion runs: formulas use
+        MathJax.”</em> With <span class="ui">View ▸ Glyph source: LaTeX (companion)</span> a formula shows the error <em>“The companion
+        cannot run LaTeX: latex or dvisvgm is not installed where it runs.”</em></p>
+      <p><strong>What to do.</strong> The companion needs <code>latex</code> and <code>dvisvgm</code> on its PATH: TeX Live, or
+        MiKTeX on Windows. <code>health</code> prints the install command for your system.</p>
+
+      <h3 id="font-text">A font text is drawn as boxes</h3>
+      <p><strong>You see.</strong> Boxes where a font text should be, and a badge <em>needs the companion</em> on its card. The
+        tooltip of <span class="ui">Renderer</span> counts them: <em>“1 font text as placeholder boxes (needs the companion)”</em>.</p>
+      <figure>
+        <img src="../media/reference/troubleshooting/font-text.dark.webp" data-themed
+             alt="The Creator listing two font texts drawn as outlined boxes, each with a badge that says needs the companion, and a formula below them that draws as usual."
+             width="292" height="432" loading="lazy">
+        <figcaption>Two font texts that nothing has shaped: boxes, and the badge <em>needs the companion</em>. The formula below them
+          draws as usual.</figcaption>
+      </figure>
+      <p><strong>Why.</strong> A font text is shaped by Pango through the companion, and only on Linux; the companion must also
+        know a Manim interpreter for the project’s target (<code>--ce-python</code>, <code>--gl-python</code>). It starts
+        its text worker the first time a text needs it, which takes a few seconds. A text whose shape is saved in the
+        project file draws from that shape with no companion at all, which is how an example text opens.</p>
+      <p><strong>What to do.</strong> On Linux, start the companion with the interpreter of your Manim, for example
+        <code>--ce-python path/to/venv/bin/python</code>. On Windows and macOS font text stays as placeholder boxes, and
+        the Python you export still works: a font text is written as <code>Text(…)</code> with its font, from its
+        saved shape, or from its boxes when nothing has shaped it. See
+        <a href="../objects/texts.html#font-text">LaTeX texts and font texts</a>.</p>
+
+      <h3 id="file-access">Open and Save work on copies</h3>
+      <p><strong>You see.</strong> When the editor starts, a notice that stays until you close it: <em>“This browser works on copies
+        of your files.”</em></p>
+      <figure>
+        <img src="../media/reference/troubleshooting/file-access.dark.webp" data-themed
+             alt="The notice: This browser works on copies of your files. It gives the editor no way to write a file or a folder of your disk (Chrome and Edge do). Open reads a copy of the file you choose, and Save downloads a new file each time: the file you opened is not written. Sync folder takes the folder as it is at that moment. Your templates are kept in this browser only: Export takes them elsewhere."
+             width="436" height="218" loading="lazy">
+        <figcaption>The notice of a browser with no file access, as the app words it.</figcaption>
+      </figure>
+      <p><strong>Why.</strong> Only Chrome and Edge let a page write a file or a folder on your disk. Firefox and Safari do not, so
+        the editor works on copies there: the menus look the same, and nothing else tells that Save does not write the
+        file you opened.</p>
+      <p><strong>What to do.</strong> For full file access use Chrome or Edge. Elsewhere, <span class="ui">Save</span> downloads a file
+        each time, and your browser may number it (<code>scene (1).mfe.json</code>): keep the last one and open it again
+        with <span class="ui">File ▸ Open…</span> and its <span class="ui">Other file…</span> button. <span class="ui">Sync folder</span> reads the folder once, and nothing is written into
+        it. Your templates stay in the browser; <span class="ui">Export all</span> in the template library takes them out.
+        See <a href="../start/projects.html#no-file-access">Projects and files</a>.</p>
+
+      <h3 id="video">The video will not export</h3>
+      <p><strong>You see.</strong> In <span class="ui">Export ▸ Video…</span> an encoder is dimmed, with the reason under it:</p>
+      <ul>
+        <li><em>“This browser cannot encode video (WebCodecs is missing). Use Chrome or Edge, or the companion.”</em> The
+          <span class="ui">Browser</span> encoder needs WebCodecs. A format can also be dimmed with
+          <em>“(not supported by this browser at this size)”</em>, and then <em>“This browser cannot encode any format at this size.
+          Try a smaller size, or use the companion.”</em></li>
+        <li><em>“The companion is not running. Start it: …”</em> and <em>“ffmpeg is not installed on the companion’s machine (or not on
+          PATH).”</em> for <span class="ui">Companion · ffmpeg</span>.</li>
+        <li><em>“Rendering with Manim is off. Restart the companion with --allow-manim-render (it runs the Python code the app
+          sends).”</em> and <em>“No Manim interpreter is configured. Start the companion with --ce-python and/or --gl-python.”</em>
+          for <span class="ui">Render with Manim</span>.</li>
+      </ul>
+      <p><strong>The export stops and names a size or a disk.</strong> With <span class="ui">Companion · ffmpeg</span>, a video over the
+        companion’s limit (4 GiB unless it was started with another) fails with <em>“The video is larger than 4 GiB, the most this
+        companion writes for one video, so it was stopped…”</em>, and nothing is saved: a video is never delivered cut short. The
+        companion also stops an export, of ffmpeg or of Manim, when less than 1 GiB is left free on the disk of its temporary folder:
+        <em>“The disk of the companion’s temporary folder (…) is nearly full…”</em>.
+        <a href="../manim/companion.html#video-limit">How large a video can be</a> tells how to raise the limit and how to write the
+        videos on another disk.</p>
+      <p><strong>The sound of an MP4 does not play.</strong> Chrome on Linux has no AAC encoder, so an MP4 encoded in the browser carries
+        Opus sound, and the dialog says so before you export. VLC and many players play it; some players and video editors do not. With a
+        companion whose ffmpeg encodes AAC, a button under that warning switches to <span class="ui">Companion · ffmpeg</span> with MP4 in
+        one click, which writes AAC.</p>
+      <p><strong>Specks behind moving objects.</strong> Chrome’s own H.264 encoder can leave a few pixels of a moving object behind it
+        for up to two seconds, until the next keyframe. For an MP4 without them choose <span class="ui">Companion · ffmpeg</span>,
+        which encodes H.264 with x264; without a companion, <span class="ui">WebM · VP9</span> leaves far fewer.
+        <a href="../sound/video.html">Exporting video</a> has the rest.</p>
+
+      <h3 id="hidden-track">A hidden track is still in the export</h3>
+      <p><strong>You see.</strong> A track you hid with the eye appears in the exported Python or video.</p>
+      <p><strong>Why.</strong> Hiding a track only takes it out of the Preview. The export dialog warns: <em>“Track "Notes" is hidden in the preview
+        but is exported like the others.”</em> To keep something out of the scene, delete its clips. Or give the project a <span class="ui">Fixed</span> duration in
+        <span class="ui">File ▸ Project settings…</span> and move them to start after its end: with the default
+        duration, <span class="ui">Until the last clip ends</span>, the scene simply grows to take them in.
+        See <a href="../basics/timeline.html#track-buttons">The timeline</a>.</p>
+
+      <h3 id="locked">A clip will not move or be selected</h3>
+      <p><strong>Why.</strong> There are three locks, and each leaves a mark:</p>
+      <ul>
+        <li><strong>The track is locked.</strong> The padlock on its header is on. A clip on a locked track cannot be edited: its menu
+          has what would change it greyed out; when you try to relate it, the Animations panel says <em>“Track “Title” is locked: unlock it on the
+          timeline to create, edit or delete relations of its clips.”</em></li>
+        <li><strong>The clip is locked in the Preview.</strong> A small mark, a pointer struck out, shows on the clip. The Preview draws
+          it faded and a click goes through it to what is under it, but the timeline and the panels still edit it.
+          Press the mark, or choose <span class="ui">Unlock in the preview</span> in its menu.</li>
+        <li><strong>The clip is locked after its first transformation.</strong> A padlock shows next to its name. In the Preview the
+          clip’s end state does not change by accident: you edit a transformation through the end icon of its block.
+          Unlocking, with a warning, brings back editing at the playhead.</li>
+      </ul>
+      <p>See <a href="../basics/preview.html#stays">Placing things in the Preview</a>.</p>
+
+      <h3 id="dimmed">A menu entry is dimmed</h3>
+      <p><strong>You see.</strong> An entry in grey that does nothing when you choose it.</p>
+      <p><strong>Why.</strong> Nothing can use it yet. <span class="ui">Undo</span> and <span class="ui">Redo</span> wait for something to take back or
+        bring back. <span class="ui">Copy properties</span> needs exactly one clip selected, and <span class="ui">Paste properties</span> a copy
+        and a clip to paste it on. The entries of <span class="ui">Align</span> need clips selected in the Preview (all but <span class="ui">By symbol…</span>), and those of <span class="ui">Distribute</span> three or
+        more. <span class="ui">Apply palette…</span> needs an active palette, and <span class="ui">Delete formula</span> a formula selected in the Creator.
+        In the right-click menus, rest the pointer on a dimmed entry: its tooltip says why, for example that a formula with only one
+        clip has nothing to unlink from.</p>
+      <p><strong>What to do.</strong> Select what the entry acts on, then open the menu again.
+        <a href="menus.html">Every menu</a> says what each entry needs.</p>
+
+      <h3 id="recover">Recovering your work</h3>
+      <p>The editor keeps a safety copy, an <a href="glossary.html#autosave">autosave</a>, of the project of each browser tab as it changes.
+        It is not your file: <span class="ui">File ▸ Save</span> still writes that.</p>
+      <ul>
+        <li><strong>You reloaded the tab, or it crashed.</strong> The tab brings its work back when it opens again, and the menu bar says
+          <em>“Recovered, not saved”</em>: the work is in the autosave and in no file yet, so save it.</li>
+        <li><strong>You closed a tab by mistake.</strong> A tab you open next takes over the work of a tab that is gone (a crashed one
+          after a minute). The work of other closed tabs stays listed under <span class="ui">File ▸ Recover autosave</span> for a
+          week, up to five of them.</li>
+        <li><strong>The browser restarted after closing unexpectedly.</strong> Each tab gets its work back within a minute. A tab you have
+          not used yet gets it by itself, with the notice <em>“Restored from the autosave”</em>; a tab you have started to use gets the
+          notice <em>“Work from this tab's last session is available”</em>, with a <span class="ui">Recover</span> button.</li>
+        <li><strong>“Could not restore the autosaved project”.</strong> The notice has a <span class="ui">Download it</span> button that
+          keeps a copy of the autosave as a file. The browser keeps a copy too, set apart so that new work never writes over it:
+          one for each autosave that could not be read, the five most recent.</li>
+        <li><strong>“No autosave in this browser”.</strong> The browser does not let the app keep one: its storage is blocked or
+          full. Save to a file to keep your work.</li>
+      </ul>
+
+      <h3 id="one-tab">Use one tab at a time</h3>
+      <p>The editor is made for one browser tab at a time. A second tab starts a project of its own, so if you open one by mistake
+        and see an empty project, your work is still in the first. Each tab keeps its own autosave, and two tabs never overwrite
+        each other’s. What the browser shares between tabs is its storage of palettes, templates and favourites, so a change in
+        one tab shows in the other, and a palette removed in one is gone in the other. A file saved from two tabs holds what
+        the last save wrote: close the tab you do not work in.</p>
+
+      <h3 id="open-fails">A file will not open</h3>
+      <p><strong>You see.</strong> A notice, <em>“Could not open scene.mfe.json”</em>, with one of these messages:</p>
+      <ul>
+        <li><em>“The file is not valid JSON.”</em> It is not JSON at all, or it was cut short.</li>
+        <li><em>“This is not a Manim Formula Editor project.”</em> It is a JSON file of something else.</li>
+        <li><em>“The project was saved by a newer version of the app (format N; this app reads up to M).”</em> Open it with a newer
+          build of the editor.</li>
+        <li><em>“The project file is malformed.”</em> followed by the first paths that failed. Something in the file is out of range or
+          of the wrong type.</li>
+      </ul>
+      <p>A package (<code>.mfe</code>) whose project does not open, one saved by a newer editor say, gives that project’s reason
+        under its own name, <em>“Could not open lecture.mfe”</em>. A package is called damaged only when the package itself is.</p>
+      <p>A file that opens can still say <em>“Opened with N issues”</em>: a project with warnings or errors, such as a glyph that no
+        longer exists. The notice lists the first eight. It is red, and stays until you close it, when one of them is an error: the preview and the export may then not represent the project faithfully. With warnings alone it is amber. A file of an
+        older format opens, and the editor says <em>“Upgraded from format N”</em>; <a href="files.html#older">Project files</a> shows
+        both notices.</p>
+
+      <h3 id="slow">Things take a moment</h3>
+      <ul>
+        <li><strong>A new formula takes a moment to appear</strong> with the companion: real LaTeX compiles it (up to 20 seconds
+          before the editor gives up). The result is cached, in memory and on disk, so the same formula comes back at once next
+          time. MathJax is in the browser and draws at once.</li>
+        <li><strong>The first font text takes a few seconds.</strong> The companion starts its text worker the first time a font
+          text needs it, and the text looks like boxes until the worker is ready.</li>
+        <li><strong>A video takes long.</strong> It is one image for every frame of the scene. A smaller size or a lower frame rate in the
+          dialog makes it faster; the dialog says about how large the file will be before you start.</li>
+      </ul>
+
+      <h2 id="questions">Questions</h2>
+
+      <h3 id="online">Does the editor need the internet?</h3>
+      <p>No. The built editor is a page that runs in your browser from files and needs no server. It makes no request to the network
+        but one: to the optional companion on your own computer, at <code>127.0.0.1</code>. Chroma Lab, the colour studio, comes inside it and
+        works offline too.</p>
+
+      <h3 id="which-browser">Which browser should I use?</h3>
+      <p>Chrome or Edge. They can write your files and folders in place, and they encode video in the page. Firefox and Safari work, on
+        copies of your files (<a href="#file-access">above</a>), and may not encode every video format.</p>
+
+      <h3 id="need-manim">Do I need Manim installed?</h3>
+      <p>Only to run the Python the editor exports, or to have the companion render with it. Writing, animating, previewing and
+        exporting Python need nothing but the browser. The Python you export runs with ManimCE or ManimGL; see
+        <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a>.</p>
+
+      <h3 id="scipy">Why does my exported Python import SciPy?</h3>
+      <p>Because a MathJax formula’s glyphs are found by position when the scene runs, and a small helper at the top of the file does
+        that with SciPy, which both Manim installs have. Formulas drawn by the companion’s LaTeX use exact glyph numbers and need no
+        helper. <a href="../manim/python.html">The generated Python</a> explains it.</p>
+
+      <h3 id="narrow">Can I use a narrow window?</h3>
+      <p>Yes. Below about 760 px wide the four panels stack, each as tall as most of the window, and they scroll down
+        under the menu bar, which stays at the top, never sideways. Under forced colours (Windows high contrast) every state keeps a ring, a border or an underline.
+        <a href="../start/interface.html">A tour of the interface</a> shows both.</p>
+
+      <h3 id="report">How do I report a problem?</h3>
+      <p>Write to the project on <a href="https://github.com/zavden/mfe">GitHub</a>. Say what you did,
+        what you saw, and what <span class="ui">Help ▸ About</span> says: it gives the version of the editor, of the project format,
+        of MathJax and of the companion.</p>
+    </article>
+  </main>
+</body>
+</html>

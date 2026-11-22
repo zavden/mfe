@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The camera · Manim Formula Editor</title>
+  <meta name="description" content="Move and zoom the frame over the scene as the video plays: the multicamera, camera moves and target cameras.">
+  <meta name="mfe:id" content="animations/camera">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="The camera">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/camera-moves.data.js" defer></script>
+  <script src="../media/animations/camera/world.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>The camera</h1>
+      <p class="lead">A scene is filmed through a frame. With the <strong>multicamera</strong> on, that frame is a camera you can move and zoom while the video plays: it closes in on a term, travels to a formula written far away, pulls back to show everything.</p>
+
+      <figure class="mfe-player" data-mfe-player="camera-moves" data-autoplay data-loop data-timeline data-start="1.2">
+        <figcaption>The camera closes in on c², which is indicated; travels to the square root, written outside the first frame; pulls back to show both; and returns to where it started.</figcaption>
+      </figure>
+
+      <h2 id="on">Turning the multicamera on</h2>
+      <p>Choose <span class="ui">View ▸ Multicamera</span>, press <kbd data-keys="Alt+M">Alt+M</kbd>, or press the camera button of the Preview’s toolbar. The scene gets a camera, in Manim’s own frame to begin with. It is part of the project: it is saved with it, and turning it on is one undo step.</p>
+      <p>Two things change on screen:</p>
+      <ul>
+        <li>the timeline gets a <strong>Camera</strong> row under the ruler, which holds the camera’s <strong>moves</strong> as blocks;</li>
+        <li>the Preview shows the <strong>world</strong>: its canvas takes the whole panel, nothing is cut at the frame, and the camera is drawn over the scene as a rectangle.</li>
+      </ul>
+      <div class="mfe-tour" data-mfe-tour="animations/camera/world" data-title="The world in the Preview"></div>
+      <p>In the world view:</p>
+      <ul>
+        <li>the <strong>camera</strong> at the playhead is the sky-blue rectangle with the corners of a viewfinder, a cross at its centre and its name. What it leaves out is dimmed;</li>
+        <li>a <strong>target camera</strong> is a pink rectangle with a name: a frame set aside for moves to go to;</li>
+        <li>a pink dashed rectangle with a number is the frame a move goes to <strong>on its own</strong>; the number is the place of that move in the order they run;</li>
+        <li><span class="ui">Start</span>, dashed, is the frame of 0 s, shown while the camera is somewhere else;</li>
+        <li>the dotted line is Manim’s own frame, where the picture is without a camera;</li>
+        <li>a line with arrowheads joins the frames in the order the moves run.</li>
+      </ul>
+      <p><span class="ui">Fit</span> shows everything of the camera at once. <span class="ui">Preferences ▸ Show the camera’s route</span> and <span class="ui">Preferences ▸ Dim what the camera leaves out</span> hide the line and the dimming.</p>
+
+      <h2 id="move">A camera move</h2>
+      <p>A move takes the camera from the frame it is in to another, over a time. To make one:</p>
+      <ol>
+        <li>Put the playhead where the move should start.</li>
+        <li>Press <span class="ui">+</span> in the header of the Camera row (<span class="ui">Add camera move</span>). A block of one second appears, and the playhead jumps to its end.</li>
+        <li>In the Preview, drag the camera to where the move should arrive. Take it by its edge, its name or the cross of its centre; drag a corner to zoom.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/animations/camera/add-move.dark.webm"
+               poster="../media/animations/camera/add-move.dark.webp" width="1424" height="840"
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">Add camera move</span> at 1.5 s; then the camera is dragged to the right and made smaller by a corner: the move now ends there.</figcaption>
+      </figure>
+      <p>In the world view the pointer takes the camera’s rectangles only. The formulas are drawn and left alone: pointing at one outlines nothing, and a click or a drag on one neither selects nor moves it, so a press meant for the camera never takes the formula under it. A line under the scene says so. To select and move the formulas, hold <kbd data-keys="F">F</kbd> (<a href="#formulas">below</a>), look through the camera (<a href="#view">below</a>) or select their clips on the timeline. A click beside the rectangles clears the selection, and the view is panned and zoomed as in any Preview.</p>
+      <p>While you drag, the rectangle sticks to the formulas, to the other rectangles and to Manim’s frame, and to the grid when it is shown; hold <kbd data-keys="Mod">Ctrl</kbd> to suspend that, and <kbd data-keys="Shift">Shift</kbd> to move along one axis only. The arrow keys nudge the selected rectangle by 0.01 (with <kbd data-keys="Shift">Shift</kbd>, 0.1).</p>
+      <aside class="callout note">
+        <p>What you drag is the frame the camera <strong>rests in</strong> at the playhead: the frame of 0 s before the first move, the destination of the last move after it. With the playhead inside a move the camera is on its way and cannot be dragged: go to the end of the move.</p>
+      </aside>
+
+      <h3 id="formulas">Moving a formula in the world view</h3>
+      <p>Sometimes a formula has to be put where the camera will be, and the camera’s rectangles are only drawn in the world view. Hold <kbd data-keys="F">F</kbd>: while the key is down the pointer takes the formulas there, as it does in any Preview. A click selects one, a drag moves it, <kbd data-keys="Shift">Shift</kbd> shows its handles, <kbd data-keys="Alt">Alt</kbd> picks its glyphs and a right-click opens its menu. The camera’s rectangles are the ones left alone meanwhile. Let the key go and the pointer is the camera’s again; a drag you had started goes on until you release the button.</p>
+      <p>The key does nothing while the scene plays, in a text field or with a menu or a dialog open.</p>
+
+      <h3 id="isolate">Frames one over another</h3>
+      <p>When the camera goes to the same place more than once, each move to a frame of its own, the rectangles of those frames lie one over another, and a press takes the one on top. To move one that is underneath:</p>
+      <ol>
+        <li>Right-click its move on the Camera row and choose <span class="ui">Isolate in the Preview</span>. Only the rectangle of the frame that move goes to answers the pointer now. It is drawn over the others, which are faint, and the block of the move wears a dashed ring.</li>
+        <li>Drag the rectangle, scale it by a corner or nudge it with the arrow keys.</li>
+        <li>Press <span class="ui">Stop isolating</span>, in the corner of the Preview, or <kbd data-keys="Escape">Esc</kbd>. Every rectangle answers again. The same entry ends the Preview’s right-click menus and the menu of the move.</li>
+      </ol>
+      <figure>
+        <img src="../media/animations/camera/isolated.dark.webp" data-themed
+             alt="The Preview in the world view with one pink dashed rectangle drawn strong, with a handle at each corner, over a faint camera and faint rectangles; the button Stop isolating in the corner; on the Camera row, the first move with a dashed ring."
+             width="1424" height="840" loading="lazy">
+        <figcaption>The first move isolated: (1) the rectangle of its frame, the only one that answers; (2) the camera and the other rectangles, faint; (3) <span class="ui">Stop isolating</span>; (4) the block of the isolated move.</figcaption>
+      </figure>
+      <p>A move that goes to a target camera isolates that target camera’s rectangle, and one that goes to the start, the frame of 0 s. Isolating is a way of looking: it changes nothing of the project, and it ends when its move is deleted.</p>
+      <aside class="callout tip">
+        <p>Moves that should arrive at the very same frame can share a <a href="#targets">target camera</a>: one rectangle, which you edit once for all of them.</p>
+      </aside>
+
+      <h3 id="block">The block of a move</h3>
+      <p>On the Camera row a move is a block, and it behaves like an animation block: drag it along the time, stretch it by its edges, right-click it to <span class="ui">Isolate</span> it <span class="ui">in the Preview</span> (<a href="#isolate">above</a>), to <span class="ui">Duplicate</span> it or to <span class="ui">Delete</span> it. Right-click the row to add a move where you clicked. Its label says where it goes:</p>
+      <table>
+        <thead>
+          <tr><th>Label</th><th>The move goes to</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">→ 200 %</span></td><td>a frame of its own, named by its zoom (100 % is Manim’s frame)</td></tr>
+          <tr><td><span class="ui">→ Result</span></td><td>the target camera with that name</td></tr>
+          <tr><td><span class="ui">→ Start</span></td><td>the frame of 0 s</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/animations/camera/row.dark.webp" data-themed
+             alt="The timeline with the Camera row under the ruler: four blocks of moves, and a hatched band under each across the tracks."
+             width="1424" height="250" loading="lazy">
+        <figcaption>The Camera row: (1) its name, its padlock and <span class="ui">+</span>; (2) a move; (3) the locked region under a move.</figcaption>
+      </figure>
+      <p>With a move selected, the <span class="ui">Animations</span> panel shows its <span class="ui">Start</span>, <span class="ui">Duration</span> and <span class="ui">Easing</span>, and where it <span class="ui">Goes to</span>: <span class="ui">A frame of its own</span>, with its <span class="ui">X</span>, <span class="ui">Y</span> and <span class="ui">Zoom</span>; a target camera; or <span class="ui">Start (the frame at 0 s)</span>.</p>
+
+      <h2 id="locked">Nothing else animates while the camera moves</h2>
+      <p>A camera move has its time to itself. Under each move a hatched band crosses every track: the <strong>locked region</strong>.</p>
+      <ul>
+        <li>A move asked for where an animation runs starts after it, and one with less room than a second is as long as the room. A notice says so.</li>
+        <li>A move dragged or stretched stops against the animation before it and after it; the readout under it says which.</li>
+        <li>An animation block, the window of a relation and the edge of an intro or an outro dragged towards a move stop at its edge.</li>
+        <li>What still ends up under a move, such as a whole clip dragged there, is an error of the project: the band turns red, and the Python is not exported until one of the two is moved.</li>
+      </ul>
+      <p>An object may appear or disappear <em>without</em> an animation during a move: that is no animation.</p>
+
+      <h2 id="targets">Target cameras</h2>
+      <p>A target camera is a frame with a name that moves can go to. Several moves can share one, and moving it changes them all.</p>
+      <ul>
+        <li>Right-click the empty scene and choose <span class="ui">Add target camera here</span>: it is centred where you clicked, as large as the camera is then.</li>
+        <li>Right-click a target camera for <span class="ui">Move camera here</span> (a move to it, at the playhead), <span class="ui">Rename…</span> and <span class="ui">Delete</span>.</li>
+        <li>Right-click the camera itself, or a move’s own frame, and <span class="ui">Add target camera here</span> makes a target camera of that frame.</li>
+      </ul>
+      <figure>
+        <img src="../media/animations/camera/target-menu.dark.webp" data-themed
+             alt="The right-click menu of a target camera in the Preview: Move camera here, Rename…, Delete."
+             width="818" height="583" loading="lazy">
+        <figcaption>The menu of the target camera <span class="ui">Result</span>.</figcaption>
+      </figure>
+      <p>Deleting a target camera that moves go to asks first. Those moves stay: each keeps going where the target camera was, to a frame of its own.</p>
+      <p>A click on the name of the Camera row shows the camera in the <span class="ui">Animations</span> panel: the frame it rests in at the playhead, and the list of target cameras.</p>
+
+      <h2 id="view">The camera view</h2>
+      <p>The world view shows the camera from outside. Press <kbd data-keys="V">V</kbd>, or the viewfinder button beside the camera’s, or choose <span class="ui">View ▸ Camera view</span>, to look <em>through</em> it: the Preview shows what the video will show at the playhead, and playing shows the moves. The rectangles are left out, and the pointer is the formulas’ again: select them, move them and edit them as ever. <kbd data-keys="V">V</kbd> again goes back to the world.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/animations/camera/camera-view.dark.webm"
+               poster="../media/animations/camera/camera-view.dark.webp" width="818" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption><kbd data-keys="V">V</kbd> looks through the camera; the scene plays as the video will; <kbd data-keys="V">V</kbd> returns to the world.</figcaption>
+      </figure>
+      <p>Each view keeps a zoom and a pan of its own.</p>
+      <aside class="callout note">
+        <p>With the multicamera on, <strong>the frame is the camera’s at the playhead</strong>, in both views: <span class="ui">Align</span> to the frame and the guides of a dragged formula refer to what is seen then (<a href="../layout/align.html#frame">Aligning to the frame</a>). The grid stays the world’s.</p>
+      </aside>
+
+      <h2 id="keys">From the keyboard</h2>
+      <table>
+        <thead>
+          <tr><th>Keys</th><th>What they do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><kbd data-keys="Alt+M">Alt+M</kbd></td><td>Multicamera on or off</td></tr>
+          <tr><td><kbd data-keys="V">V</kbd></td><td>Camera view on or off</td></tr>
+          <tr><td><kbd data-keys="F">F</kbd>, held</td><td>In the world view, the pointer takes the formulas instead of the camera’s rectangles</td></tr>
+          <tr><td><kbd data-keys="Escape">Esc</kbd></td><td>Stop isolating a move</td></tr>
+          <tr><td><kbd data-keys="Delete">Delete</kbd></td><td>Delete the selected move, or the selected target camera</td></tr>
+          <tr><td><kbd data-keys="Mod+D">Ctrl+D</kbd></td><td>Duplicate the selected move into the first place it fits after it</td></tr>
+          <tr><td><kbd data-keys="Alt+ArrowLeft">Alt+←</kbd>, <kbd data-keys="Alt+ArrowRight">Alt+→</kbd></td><td>Nudge the selected move a frame (with <kbd data-keys="Shift">Shift</kbd>, five)</td></tr>
+          <tr><td>Arrow keys, in the Preview</td><td>Nudge the selected rectangle 0.01 (with <kbd data-keys="Shift">Shift</kbd>, 0.1)</td></tr>
+        </tbody>
+      </table>
+      <p>On the Camera row, <kbd data-keys="Tab">Tab</kbd> reaches the moves after the row’s buttons, the arrow keys go from move to move, and <kbd data-keys="Enter">Enter</kbd> opens the menu of the focused one.</p>
+
+      <h2 id="off">Turning it off</h2>
+      <p>The multicamera stays on while the camera has target cameras or moves: delete them first, and a notice says so if you try. The padlock of the Camera row locks the camera instead: its moves and rectangles can be selected, not changed.</p>
+
+      <h2 id="python">In the exported Python and the video</h2>
+      <p>The video is filmed through the camera, and so is the exported scene. A ManimCE scene becomes a <code>MovingCameraScene</code>. In both libraries each move is a <code>self.play(…)</code> of its own on the camera’s frame (<code>cam = self.camera.frame</code>), and a move back to the start is <code>Restore(cam)</code>. A ManimGL scene whose camera zooms starts with a few lines that make strokes scale with the zoom as ManimCE draws them (ManimGL 1.7.2 or later). See <a href="../manim/python.html">The generated Python</a>.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <div class="mfe-example" data-mfe-example="camera-moves"></div>
+      <aside class="try">
+        <ol>
+          <li>Open the file: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the dialog and pick it.</li>
+          <li>Click the block <span class="ui">→ Result</span> on the Camera row, then drag the pink rectangle <span class="ui">Result</span> in the Preview: the move arrives where you put it.</li>
+          <li>Press <kbd data-keys="V">V</kbd> and play the scene from the start.</li>
+        </ol>
+      </aside>
+    </article>
+  </main>
+</body>
+</html>

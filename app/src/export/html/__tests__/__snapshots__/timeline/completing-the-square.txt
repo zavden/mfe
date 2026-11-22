@@ -1,0 +1,77 @@
+/* Completing the square — a scene made with Manim Formula Editor, 37.50 s long.
+ *
+ * This file is the animation: the project as the editor keeps it. Edit it, reload the page,
+ * and the page says what it could not read; `node check.mjs` says it without a browser. What
+ * follows in this comment was written at the export, to find your way in the data below: it
+ * does not follow your edits. Positions are Manim’s: y up, the frame 8 units tall about the
+ * origin. Its times are the scene’s; in the data, a block’s `start` counts from its clip’s
+ * `start`, and a relation’s `offset` from its target clip’s.
+ *
+ * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   title              clips[0]  0.00–37.50 s   formulas[0] math “\text{Completing the square}”
+ *   equation           clips[1]  0.50–4.60 s    formulas[1] math “ax^2+bx+c=0”
+ *   steps              clips[3]  3.40–22.60 s   formulas[3] math “ax^2+bx+c &= 0 \\…”
+ *   divide_by_a        clips[2]  4.80–7.60 s    formulas[2] math “\div a”
+ *   half_b_squared     clips[4]  11.00–16.60 s  formulas[4] math “\left(\frac{b}{2a}\right)^2=\f…”
+ *   square_root        clips[5]  21.40–25.50 s  formulas[5] math “x+\frac{b}{2a}=\pm\frac{\sqrt{…”
+ *   quadratic_formula  clips[6]  24.00–36.50 s  formulas[6] math “x=\frac{-b\pm\sqrt{b^2-4ac}}{2…”
+ *   discriminant       clips[7]  29.80–35.80 s  formulas[7] math “\Delta=b^2-4ac”
+ *
+ * The glyphs of each formula, by the index that "glyphs": [3, 4] names:
+ *   title:  0 C  1 o  2 m  3 p  4 l  5 e  6 t  7 i  8 n  9 g  10 t  11 h  12 e  13 s  14 q  15 u
+ *           16 a  17 r  18 e
+ *   equation:  0 a  1 x  2 2  3 +  4 b  5 x  6 +  7 c  8 =  9 0
+ *   divide_by_a:  0 ÷  1 a
+ *   steps:  0 a  1 x  2 2  3 +  4 b  5 x  6 +  7 c  8 =  9 0  10 x  11 2  12 +  13 b  14 —  15 a
+ *           16 x  17 +  18 c  19 —  20 a  21 =  22 0  23 x  24 2  25 +  26 b  27 —  28 a  29 x
+ *           30 =  31 −  32 c  33 —  34 a  35 x  36 2  37 +  38 b  39 —  40 a  41 x  42 +  43 b
+ *           44 2  45 —  46 4  47 a  48 2  49 =  50 b  51 2  52 —  53 4  54 a  55 2  56 −  57 c
+ *           58 —  59 a  60 (  61 x  62 +  63 b  64 —  65 2  66 a  67 )  68 2  69 =  70 b  71 2
+ *           72 −  73 4  74 a  75 c  76 —  77 4  78 a  79 2
+ *   half_b_squared:  0 (  1 b  2 —  3 2  4 a  5 )  6 2  7 =  8 b  9 2  10 —  11 4  12 a  13 2
+ *   square_root:  0 x  1 +  2 b  3 —  4 2  5 a  6 =  7 ±  8 √  9 —  10 b  11 2  12 −  13 4  14 a
+ *                 15 c  16 —  17 2  18 a
+ *   quadratic_formula:  0 x  1 =  2 −  3 b  4 ±  5 √  6 —  7 b  8 2  9 −  10 4  11 a  12 c  13 —
+ *                 14 2  15 a
+ *   discriminant:  0 Δ  1 =  2 b  3 2  4 −  5 4  6 a  7 c
+ *
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.50 s    title  write  clips[0].intro
+ *   0.50–2.00 s    equation  write  clips[1].intro
+ *   2.30–3.10 s    equation  transform [0]  clips[1].actions[0]
+ *   3.40 s         steps  appears  clips[3]
+ *   3.40–4.60 s    equation → steps  (transform, 10 pairs)  relations[0]
+ *   4.60 s         equation  goes  clips[1]
+ *   4.80–5.30 s    divide_by_a  grow_from_center  clips[2].intro
+ *   5.60–7.00 s    steps  morph (copy, 10 pairs)  clips[3].actions[0]
+ *   6.00–6.80 s    steps  appear create [14, 19]  clips[3].actions[1]
+ *   7.10–7.60 s    divide_by_a  shrink_to_center  clips[2].outro
+ *   8.00–9.00 s    steps  morph (copy, 8 pairs)  clips[3].actions[2]
+ *   9.20–10.60 s   steps  morph (copy, 4 pairs)  clips[3].actions[3]
+ *   11.00–11.80 s  half_b_squared  fade_in  clips[4].intro
+ *   12.00–13.00 s  half_b_squared  appear write [7–13]  clips[4].actions[0]
+ *   13.20–14.20 s  steps  morph (copy, 12 pairs)  clips[3].actions[4]
+ *   14.40–15.20 s  steps  appear write [42]  clips[3].actions[5]
+ *   14.40–15.80 s  half_b_squared → steps  (copy, 12 pairs)  relations[1]
+ *   16.00–16.60 s  steps  transform [0–34]  clips[3].actions[6]
+ *   16.00–16.60 s  half_b_squared  uncreate  clips[4].outro
+ *   17.00–18.60 s  steps  morph (copy, 18 pairs)  clips[3].actions[7]
+ *   17.60–18.40 s  steps  appear grow_from_center [60, 67]  clips[3].actions[8]
+ *   19.00–19.80 s  steps  disappear fade_out [0–59]  clips[3].actions[9]
+ *   20.00–21.00 s  steps  transform [60–79]  clips[3].actions[10]
+ *   21.40–22.40 s  square_root  draw_border_then_fill  clips[5].intro
+ *   21.40–22.60 s  steps  fade_out  clips[3].outro
+ *   21.40–22.60 s  steps → square_root  (transform, 17 pairs)  relations[2]
+ *   24.00 s        quadratic_formula  appears  clips[6]
+ *   24.00–25.50 s  square_root → quadratic_formula  (transform, 16 pairs)  relations[3]
+ *   25.50 s        square_root  goes  clips[5]
+ *   26.00–27.20 s  quadratic_formula  tween (move, scale)  clips[6].actions[0]
+ *   27.60–28.40 s  quadratic_formula  transform [7–12]  clips[6].actions[1]
+ *   28.60–29.40 s  quadratic_formula  transform [4]  clips[6].actions[2]
+ *   29.80–31.00 s  discriminant  draw_border_then_fill  clips[7].intro
+ *   29.80–31.00 s  quadratic_formula → discriminant  (copy, 6 pairs)  relations[4]
+ *   35.00–35.80 s  discriminant  uncreate  clips[7].outro
+ *   35.50–36.50 s  quadratic_formula  fade_out  clips[6].outro
+ *   36.50–37.50 s  title  unwrite  clips[0].outro
+ *
+ * AGENTS.md tells what each part means. */

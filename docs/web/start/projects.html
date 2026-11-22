@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects and files · Manim Formula Editor</title>
+  <meta name="description" content="New, open and save; the examples the editor carries; the file name and the unsaved mark; autosave and recovery; the project library and its Sync folder; .mfe packages.">
+  <meta name="mfe:id" content="start/projects">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Projects and files">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+  <style>
+    /* The four marks of the bar, one under the other, close together. */
+    .states { margin: var(--doc-space-6) 0; }
+    .states figure { margin: 0 0 var(--doc-space-4); }
+    .states figure > img { width: 100%; max-width: 740px; height: auto; }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Projects and files</h1>
+      <p class="lead">A project is everything you have made in the editor: the formulas, the timeline, the relations between glyphs, the recordings and the settings. It lives in the browser while you work, and in a file when you save it. This page is about the file, and about the copies the editor keeps so you do not lose work.</p>
+
+      <h2 id="files">What a project is saved as</h2>
+      <p>A project is one file. There are two kinds, and the editor picks the one a project needs.</p>
+      <table>
+        <thead>
+          <tr><th>File</th><th>What it is</th><th>When you get it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>name.mfe.json</code></td><td>The project as text (JSON). It also carries the shapes of any font texts, so they draw without a companion.</td><td>Almost always.</td></tr>
+          <tr><td><code>name.mfe</code></td><td>A <a href="#packages">package</a>: the project together with the original of every recording.</td><td>When the project has recordings, or more font-text shapes than a <code>.mfe.json</code> can carry.</td></tr>
+        </tbody>
+      </table>
+      <p>Both open with <span class="ui">File ▸ Open…</span>: from a card of the Projects dialog, or with its <span class="ui">Other file…</span> button (<a href="#open">Open</a>, below). A file saved by an older version of the editor opens too: the editor upgrades it in memory and says so, <em>Upgraded from format 27</em> for example, and the next Save writes the current format. <a href="../reference/files.html">Project files and their format</a> describes what is inside.</p>
+
+      <h2 id="file-menu">The File menu</h2>
+      <figure>
+        <img src="../media/start/projects/file-menu.dark.webp" data-themed alt="The File menu open: New, Open…, Sync folder…, Recover autosave with a submenu arrow, Save, Save As… and Project settings…, with their keys." width="255" height="277" loading="lazy">
+        <figcaption>The File menu.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>Keys</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">New</span></td><td class="keys"><kbd data-keys="Mod+Alt+N">Ctrl+Alt+N</kbd></td><td>Starts an empty project.</td></tr>
+          <tr><td><span class="ui">Open…</span></td><td class="keys"><kbd data-keys="Mod+O">Ctrl+O</kbd></td><td>Opens the Projects dialog, which lists the projects of your folder.</td></tr>
+          <tr><td><span class="ui">Sync folder…</span></td><td class="keys"><kbd data-keys="Mod+Shift+S" data-keys-mac="Mod+Alt+S">Ctrl+Shift+S</kbd></td><td>Chooses the folder whose projects the dialog lists.</td></tr>
+          <tr><td><span class="ui">Recover autosave</span></td><td class="keys"></td><td>Lists the work of tabs that were closed.</td></tr>
+          <tr><td><span class="ui">Save</span></td><td class="keys"><kbd data-keys="Mod+S">Ctrl+S</kbd></td><td>Writes the project to its file.</td></tr>
+          <tr><td><span class="ui">Save As…</span></td><td class="keys"><kbd data-keys="Mod+Alt+S" data-keys-mac="Mod+Shift+S">Ctrl+Alt+S</kbd></td><td>Writes the project to a file you choose.</td></tr>
+          <tr><td><span class="ui">Project settings…</span></td><td class="keys"></td><td>Name, Manim target, size, frame rate, background, duration and LaTeX preamble.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="new-open-save">New, open and save</h2>
+
+      <h3 id="new">New</h3>
+      <p><span class="ui">File ▸ New</span> replaces the project with an empty one. If the project you have open has changes that were not saved to a file, the editor asks first:</p>
+      <figure>
+        <img src="../media/start/projects/unsaved-dialog.dark.webp" data-themed alt="A dialog titled 'Unsaved changes' that says 'The current project has changes that were not saved to a file.' with three buttons: Cancel, Don't save and Save." width="508" height="184" loading="lazy">
+        <figcaption>The question before a project is replaced.</figcaption>
+      </figure>
+      <p><span class="ui">Cancel</span> keeps working. <span class="ui">Don't save</span> drops the changes. <span class="ui">Save</span> saves, and goes on only if the save went through: when you cancel the picker, the project stays. Open, and Recover autosave, ask the same question.</p>
+
+      <h3 id="open">Open</h3>
+      <p><span class="ui">File ▸ Open…</span> does not open a file picker. It opens the <strong>Projects</strong> dialog, which lists the projects of a folder you chose once. <a href="#library">The project library</a>, below, says how it works. A click on a project opens it.</p>
+      <p>To open a file that is not in that folder, press <span class="ui">Other file…</span> in the dialog: the browser's own file picker opens, and offers <code>.mfe.json</code> and <code>.mfe</code> files. The picker is a window of your operating system, so no picture of it is shown here.</p>
+      <p>The editor reads and checks a file before it replaces anything. A file it cannot read is reported in a notice (<em>Could not open …</em>, with the reason), and the project you were working on stays as it was. A file that opens with errors or warnings says how many (<em>Opened with 2 issues</em>) and lists them.</p>
+
+      <h3 id="examples">The examples</h3>
+      <p>The editor carries four example projects, to play, take apart and change. While a project has no formula, the Creator offers <span class="ui">Try an example</span> beside the way to your own projects: it opens <em>Completing the square</em>, the quadratic formula derived step by step. <span class="ui">Help ▸ Examples</span> has it too, with three short scenes, each for one thing: <em>Hello: one-to-one</em> (two formulas and the relation between them), <em>Camera</em> (the scene's camera and its moves) and <em>Braces</em>.</p>
+      <p>An example opens as a file does: when the project you have open has unsaved changes, the editor asks first, as above. The example then becomes a project of yours that has no file yet: the bar says <em>Not saved yet</em>, and <span class="ui">Save</span> asks where it goes. The examples are part of the editor, so they open with no synced folder, no server and no companion.</p>
+
+      <h3 id="save">Save and Save As</h3>
+      <p><span class="ui">File ▸ Save</span> writes the project to its file. The first time, or for a project that has no file yet, a picker asks where, and suggests a name made from the project's name: <em>First transform</em> becomes <code>first-transform.mfe.json</code>. After that, Save writes the same file without asking.</p>
+      <p><span class="ui">File ▸ Save As…</span> always asks, and starts in your synced folder when you have one. The new file becomes the project's file.</p>
+      <p>A save writes the project as it was the moment you pressed it. If you go on working while it finishes, what you change meanwhile is not in the file, and the bar says <em>Unsaved changes</em> afterwards.</p>
+      <aside class="callout note">
+        <p>That is what Chrome and Edge do. Firefox and Safari cannot write to a file you opened: Save downloads a new file each time. The <a href="install.html#browsers">Browsers</a> table in the installation page says what else differs.</p>
+      </aside>
+
+      <h3 id="settings">Project settings</h3>
+      <p><span class="ui">File ▸ Project settings…</span> holds what describes the scene as a whole.</p>
+      <figure>
+        <img src="../media/start/projects/settings-dialog.dark.webp" data-themed alt="The Project settings dialog: fields for the name, the Manim target, the resolution, the frame rate, the background colour, the duration and the LaTeX preamble, with Cancel and Apply buttons." width="588" height="564" loading="lazy">
+        <figcaption>The Project settings dialog.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>What it sets</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Name</span></td><td>The project's name. The exported scene is named after it.</td></tr>
+          <tr><td><span class="ui">Manim target</span></td><td><em>ManimCE (Community Edition)</em> or <em>ManimGL (3b1b)</em>: the Manim the scene is made for. <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a> says how they differ.</td></tr>
+          <tr><td><span class="ui">Resolution</span></td><td>1920 × 1080, 1280 × 720 or 3840 × 2160, or <em>Custom…</em> from 16 × 16 to 7680 × 4320 pixels.</td></tr>
+          <tr><td><span class="ui">Frame rate</span></td><td>24, 25, 30 or 60 frames a second, or <em>Custom…</em> from 1 to 240.</td></tr>
+          <tr><td><span class="ui">Background</span></td><td>The colour behind the scene. A new project takes the background of your active palette, when you have one; otherwise black.</td></tr>
+          <tr><td><span class="ui">Duration</span></td><td><em>Until the last clip ends</em>, or <em>Fixed</em>: a number of seconds.</td></tr>
+          <tr><td><span class="ui">LaTeX preamble</span></td><td>LaTeX added after the packages of every formula, such as <code>\newcommand{\R}{\mathbb{R}}</code>. MathJax understands <code>\newcommand</code> and <code>\DeclareMathOperator</code>; the companion compiles the whole preamble.</td></tr>
+        </tbody>
+      </table>
+      <p><span class="ui">Apply</span> makes all the changes one undo step.</p>
+
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/first-transform.mfe.json" download>first-transform.mfe.json</a>, the project of the card below.</li>
+          <li>Choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick the file.</li>
+          <li>Click the project's name in the menu bar, type <code>Class notes</code> and press <kbd data-keys="Enter">Enter</kbd>.</li>
+          <li>Press <kbd data-keys="Mod+S">Ctrl+S</kbd>. In Chrome or Edge the file you opened is written (the browser may ask first whether the editor may change it); in Firefox or Safari a new file is downloaded.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="first-transform"></div>
+
+      <h2 id="status">The file name and the unsaved mark</h2>
+      <p>The right half of the menu bar always says where the project stands: its name, its file, and a mark.</p>
+      <div class="states">
+        <figure>
+          <img src="../media/start/projects/status-not-saved.dark.webp" data-themed alt="The bar reads: Untitled, Not saved yet." width="740" height="44" loading="lazy">
+          <figcaption><strong>Not saved yet.</strong> A new project that has never been saved. It has no file name.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/start/projects/status-saved.dark.webp" data-themed alt="The bar reads: Class notes, first-transform.mfe.json, Saved." width="740" height="44" loading="lazy">
+          <figcaption><strong>Saved.</strong> The project is in its file and has not changed since.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/start/projects/status-unsaved.dark.webp" data-themed alt="The bar reads: Class notes, first-transform.mfe.json, Unsaved changes, with the last two words in amber." width="740" height="44" loading="lazy">
+          <figcaption><strong>Unsaved changes.</strong> The project changed after it was saved. The mark is amber, and the title of the browser tab starts with a bullet, <code>•</code>, so you can see it from another tab.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/start/projects/status-recovered.dark.webp" data-themed alt="The bar reads: Class notes, first-transform.mfe.json, Recovered, not saved, with the last words in amber." width="740" height="44" loading="lazy">
+          <figcaption><strong>Recovered, not saved.</strong> Unsaved work that came back from the autosave. Save it to keep it.</figcaption>
+        </figure>
+      </div>
+      <p>Undoing back to the saved state brings <em>Saved</em> back: the mark follows the project, not the number of edits. A name too long for the bar is cut short; point at it for the whole name and the file.</p>
+      <p>Click the name to rename the project. Type, and press <kbd data-keys="Enter">Enter</kbd> to keep the new name or <kbd data-keys="Escape">Esc</kbd> to leave it; either key leaves the focus on the name, so the keyboard goes on from there. Renaming is one undo step, like any other change, and the name is also a field of <span class="ui">Project settings…</span>.</p>
+      <figure>
+        <img src="../media/start/projects/status-renaming.dark.webp" data-themed alt="The bar while the name is being typed: the name is a text field with a coloured outline holding 'Class notes', followed by the file name first-transform.mfe.json and the mark Saved." width="740" height="44" loading="lazy">
+        <figcaption>While you type, the name is a field, and the mark still says <em>Saved</em>. Press <kbd data-keys="Enter">Enter</kbd> and it turns to <em>Unsaved changes</em>; press <kbd data-keys="Mod+S">Ctrl+S</kbd> and it goes back to <em>Saved</em>.</figcaption>
+      </figure>
+
+      <h2 id="autosave">Autosave and recovery</h2>
+      <p>While you work, the editor keeps a copy of the project in the browser, a moment after each change. If you reload the tab, or the tab crashes, the work comes back. It is a safety net, not a file: save to a file to keep a project, because clearing the browser's data for the editor removes the copy.</p>
+      <p>Each tab has an autosave of its own, so two tabs never overwrite each other's work. When a tab is closed, its work is not lost. Open the editor in a new tab and it takes up the newest work of the tabs that were closed; the older work waits in the menu described next. If a tab crashed instead of being closed, the editor cannot tell that it is gone for a minute. A tab you open after that takes its work up; one opened sooner does not, and the work waits in the menu described next.</p>
+      <p>The work of the other tabs that were closed stays available for a week, up to five of them, under <span class="ui">File ▸ Recover autosave</span>:</p>
+      <figure>
+        <img src="../media/start/projects/recover-menu.dark.webp" data-themed alt="The File menu open with its Recover autosave submenu showing two entries: 'first-transform.mfe.json (unsaved changes) · 26 min ago' and 'Lesson 3, the derivation (unsaved changes) · yesterday'." width="645" height="277" loading="lazy">
+        <figcaption><span class="ui">File ▸ Recover autosave</span> with the work of two closed tabs.</figcaption>
+      </figure>
+      <p>Each entry gives the file name, or the project's name when it has no file; <em>(unsaved changes)</em> when it had changes not yet saved; and how long ago it was kept. Choose one to bring it back into this tab, after the usual question about the project you have open. The bar then says <em>Recovered, not saved</em> when the entry had unsaved changes. An entry without that mark was saved: it comes back as <em>Saved</em>, with its file name, or as <em>Not saved yet</em> when it had none.</p>
+      <p>When the browser itself closed unexpectedly and restores its tabs, each tab gets its work back within a minute: by itself if you have not used the tab yet, and otherwise through a notice, <em>Work from this tab's last session is available</em>, with a <span class="ui">Recover</span> button.</p>
+      <aside class="callout warning">
+        <p>If the browser does not let the editor keep a copy, because its storage is blocked or full, a notice says so once: <em>No autosave in this browser</em>. Nothing is then kept for you, so save to a file as you go.</p>
+      </aside>
+
+      <h2 id="library">The project library and the Sync folder</h2>
+      <p>The <strong>Projects</strong> dialog is the editor's way to open a project. It lists the projects of one folder, with a drawing of the first formulas of each. You choose the folder once with <span class="ui">File ▸ Sync folder…</span> (also a button of the dialog, and of the Creator while a project is empty). The browser's own folder picker opens; like the file picker, it is a window of your operating system.</p>
+      <figure>
+        <img src="../media/start/projects/projects-empty.dark.webp" data-themed alt="The Projects dialog before any folder is synced: a line saying 'No folder synced. Sync a folder once: its projects are listed here and a click opens one.', a Sync folder… button, and Other file… and Close buttons." width="1068" height="310" loading="lazy">
+        <figcaption>The Projects dialog before a folder is synced.</figcaption>
+      </figure>
+      <p>Once a folder is synced, its projects are cards, newest first:</p>
+      <figure>
+        <img src="../media/start/projects/projects-dialog.dark.webp" data-themed alt="The Projects dialog with six projects as cards in two columns, each with the drawings of its first formulas, its name, its file name and its date. Rings numbered 1 to 5 mark the folder line, the search field, the All and Favorites switch, one card, and the Other file… button." width="1068" height="482" loading="lazy">
+        <figcaption>The Projects dialog over a folder of six projects. The card of the project that is open is tinted.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li>The <strong>folder</strong>, and <span class="ui">Sync folder…</span> to choose another.</li>
+        <li>The <strong>search</strong>. It keeps the projects whose name or file name has every word you type, ignoring capitals and accents. The field has the focus when the dialog opens. <kbd data-keys="Escape">Esc</kbd> empties it; a second <kbd data-keys="Escape">Esc</kbd> closes the dialog.</li>
+        <li><strong>All</strong> and <strong>Favorites</strong>, each with its count.</li>
+        <li>A <strong>card</strong>: the first three formulas, the project's name, its file name (<code>.mfe.json</code> is shown as <code>.json</code>), how many formulas it has, and when it was last changed. The star marks it as a favourite.</li>
+        <li><span class="ui">Other file…</span>, for a file that is not in the folder.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/projects/projects-search.dark.webm" poster="../media/start/projects/projects-search.dark.webp" width="1056" height="330" muted loop playsinline preload="none"></video>
+        <figcaption>Typing <em>sq</em> keeps one project; Esc brings them all back. A star marks a favourite, and <span class="ui">Favorites</span> lists the starred ones.</figcaption>
+      </figure>
+      <p>The dialog fits as many columns of cards as it has room for. Drag its bottom-right corner to resize it, or press the square in its title bar to make it fill the window; a double-click on the corner gives it back its first size. It opens at the size you left it until you reload the page.</p>
+      <p>The folder is read one level deep: projects in its sub-folders are not listed, and a <code>.json</code> file that is not a project is counted at the foot of the dialog (<em>One other .json file in the folder is not a project</em>) and left alone. A file of the folder that is a project and does not open, one saved by a newer version of the editor, one with a field out of place, a <code>.mfe</code> that is damaged, a <code>.mfe.json</code> whose text was cut short, is not counted there: it is named under the cards (<em>One project of the folder does not open:</em>) with its reason, the one opening that file gives.</p>
+      <h3 id="favorites">Favorites</h3>
+      <p>The star of a card keeps that project in <span class="ui">Favorites</span>. The stars are kept in this browser, by the names of the folder and of the file; nothing is written in your folder. A file you rename loses its star, and another browser does not see yours.</p>
+      <h3 id="folder-browsers">The folder in each browser</h3>
+      <p>What the dialog can do with the folder depends on the browser.</p>
+      <ul>
+        <li><strong>Chrome and Edge</strong> keep the folder and read it again every time the dialog opens, after the browser's permission question once per session. When the browser has forgotten its permission, the dialog says <em>The browser did not allow reading</em> the folder and offers <span class="ui">Allow</span>; when the folder was moved or deleted, it says so. A project opened from the folder carries its file, so <span class="ui">Save</span> writes it in place, and <span class="ui">Save As…</span> starts in that folder.</li>
+        <li><strong>Firefox and Safari</strong> keep a snapshot of the folder as it was when you synced it, and the dialog says when (<em>Manim projects, as of Nov 12, 2026, 6:32 PM. Sync the folder again to refresh.</em>). Nothing is written into the folder: Save downloads a file.</li>
+      </ul>
+      <p>In Chrome and Edge the folder also holds your own <a href="../objects/templates.html">templates</a>, in <code>templates/templates.json</code>, once you let the editor write there.</p>
+      <aside class="try">
+        <ol>
+          <li>Make a new folder and copy three or four files of the repository's <code>examples/</code> folder into it. Work in the copies: Save writes the files of a synced folder.</li>
+          <li>Choose <span class="ui">File ▸ Sync folder…</span> and pick the new folder.</li>
+          <li>Choose <span class="ui">File ▸ Open…</span>. The projects of the folder are listed, each with a drawing of its first formulas.</li>
+          <li>Type a word of a project's name in the search field, then press <kbd data-keys="Escape">Esc</kbd> to empty it.</li>
+          <li>Star a project, press <span class="ui">Favorites</span>, then click the project to open it.</li>
+        </ol>
+      </aside>
+
+      <h2 id="packages">Packages (.mfe)</h2>
+      <p>A project that has recordings cannot be one text file: the sound has to travel with it. The editor saves such a project as a <strong>package</strong>, a <code>.mfe</code> file that holds the project and the original of every recording, including the ones you muted or never used. The editor chooses by itself: Save suggests a <code>.mfe</code> name when the project has recordings, and a <code>.mfe.json</code> name when it has none.</p>
+      <p>Opening a package checks every recording and copies it into the browser's storage. With a large package a dialog shows how far it is, and <span class="ui">Cancel</span> leaves the project you have open as it was. The package is also the portable backup of a project with sound: the browser's own storage can be cleared or evicted, and the file cannot.</p>
+      <p>If the browser no longer holds the original of a recording, perhaps because you cleared its data, Save first looks for it in the file it is about to replace. If it is not there either, Save tells you which recordings it cannot include and asks before it writes a file without them. <a href="../sound/audio.html">Audio</a> has the rest.</p>
+
+      <h2 id="not-in-the-file">What the file does not hold</h2>
+      <p>The file holds the project, and nothing about how you like to work. These do not travel with it:</p>
+      <ul>
+        <li>your preferences: snapping and its guides, the grid, the transform handles, the scale step, and the default intros and outros of new clips;</li>
+        <li>your palettes (<a href="../color/palettes.html">Palettes and Chroma Lab</a>): a project keeps the colours it uses as plain colours, so it looks the same on a computer that has none of your palettes;</li>
+        <li>your templates, which Chrome and Edge also keep in the synced folder;</li>
+        <li>the theme, the sizes of the panels and which of them are folded;</li>
+        <li>the zoom of the timeline and the height of its tracks, which are a view of the timeline and last as long as the tab.</li>
+      </ul>
+      <p>Open a project on another computer and it plays the same; the editor around it is that computer's.</p>
+
+      <h2 id="no-file-access">Browsers without file access</h2>
+      <p>A browser without the File System Access API works on copies. Opening a file (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span>) reads a copy of it; <span class="ui">Save</span> downloads a file named from the project each time, and the bar says <em>Saved</em> once the download has started even though the editor cannot write that file again; <span class="ui">Sync folder…</span> takes a snapshot. The editor tells you once per session, as it opens:</p>
+      <figure>
+        <img src="../media/start/install/file-access-notice.dark.webp" data-themed alt="A notice titled 'This browser works on copies of your files', with a line for each of Open, Save, Sync folder and templates." width="432" height="214" loading="lazy">
+        <figcaption>The notice of a browser that cannot write your files.</figcaption>
+      </figure>
+      <p>To carry on from a file you downloaded, open it again with <span class="ui">File ▸ Open…</span> and <span class="ui">Other file…</span>. <a href="install.html#browsers">Browsers</a> compares the two kinds of browser side by side.</p>
+
+      <h2 id="one-tab">One tab at a time</h2>
+      <p>Use one tab of the editor at a time. Every tab keeps an autosave of its own and never overwrites another's, but two open tabs do not see each other's changes, and nothing merges them. A window opened or duplicated from another tab keeps an autosave of its own too. If you need the same project in two places, save it to a file and open the file.</p>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../basics/formulas.html">Writing formulas</a> begins the basics: the formula editor, its LaTeX fields and the Creator list.</li>
+        <li><a href="../reference/files.html">Project files and their format</a> says what a project stores, and how older files open.</li>
+        <li><a href="../objects/templates.html">The template library</a> starts a formula from one of 257 ready-made ones.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,427 @@
+/* The composition workspace of a text: its form on the left (the source, then a raised card per
+ * group of fields), the stage on the right (what is drawn, its tools, the canvas, the position
+ * fields and the messages). */
+.text-composition-layout {
+  display: grid;
+  grid-template-columns: minmax(230px, 290px) minmax(0, 1fr);
+  gap: 20px;
+  min-height: 0;
+}
+/* A LaTeX text has more fields beside its source: a wider form. */
+.text-composition-layout[data-kind='tex'] {
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+}
+.text-composition-source {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.text-composition-source > label {
+  font-size: 13px;
+  font-weight: 650;
+}
+.text-composition-source textarea {
+  width: 100%;
+  min-height: 190px;
+  flex: 1;
+  resize: vertical;
+  font: 14px/1.5 var(--font-mono);
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  background: var(--input-bg);
+  color: var(--text);
+}
+.text-composition-source > .field-hint {
+  margin: 0;
+  line-height: 1.45;
+}
+.text-composition-source code {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: var(--well);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+/* A group of fields: a raised card with its title inside, at its top. */
+.text-typography {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin: 2px 0;
+  padding: 8px 12px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--raised);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+/* Floated, the legend is an ordinary item of the card: inside it, not cut into its edge. */
+.text-typography legend {
+  float: left;
+  width: 100%;
+  margin: 0 0 2px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 650;
+}
+.text-typography > label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text-dim);
+}
+.text-typography input[list] {
+  width: 170px;
+  min-width: 0;
+}
+.text-typography input[type='number'] {
+  width: 90px;
+}
+.text-font-style {
+  display: flex;
+  gap: 18px;
+}
+.text-font-style > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+/* The form of a LaTeX text is long: its source gives way first, and grows where there is room. */
+.text-composition-layout[data-kind='tex'] .text-composition-source textarea {
+  min-height: 96px;
+}
+.text-composition-layout[data-kind='tex'] .text-typography {
+  gap: 6px;
+  margin: 0;
+}
+/* One field of the form: its name, then its controls at the far end. */
+.text-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 32px;
+}
+.text-field-row > span:first-child,
+.text-field-row > label:first-child,
+.text-field-row .an-label {
+  color: var(--text-dim);
+}
+.text-field-row .inline-fields {
+  flex-wrap: nowrap;
+}
+.text-typography > .field-hint {
+  margin: 0;
+  line-height: 1.45;
+}
+/* A segmented choice on the row of its name, as the other fields are. */
+.text-field-row .an-field {
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.text-field-row .an-label {
+  font-size: inherit;
+}
+.text-field-row .segmented {
+  flex: 0 0 200px;
+}
+.text-field-row .tag-field {
+  justify-content: flex-end;
+}
+.text-composition-preview {
+  min-width: 0;
+}
+/* One line of a fixed height: what it says may change, the stage under it never moves. */
+.text-render-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.text-render-text {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.text-render-status .badge {
+  display: inline-block;
+  margin-left: 8px;
+}
+/* What the render is doing, as a colour: grey nothing to draw, amber being rendered, green
+ * current, red refused. A lit dot carries a soft halo of its own colour. */
+.text-render-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--text-dim);
+}
+.text-render-status[data-state='ok'] .text-render-dot {
+  background: var(--ok);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent);
+}
+.text-render-status[data-state='error'] .text-render-dot {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 22%, transparent);
+}
+.text-render-status[data-state='busy'] .text-render-dot {
+  background: var(--warning);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--warning) 22%, transparent);
+  animation: text-render-pulse 0.9s ease-in-out infinite alternate;
+}
+@keyframes text-render-pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-render-status[data-state='busy'] .text-render-dot {
+    animation: none;
+  }
+}
+/* What the workspace says of the draft, under the stage: a strip of a fixed height, scrolled
+ * when it is long, so that nothing it shows or drops moves the stage. */
+.text-messages {
+  height: 84px;
+  margin-top: 8px;
+  overflow: auto;
+  font-size: 12px;
+}
+.text-messages > * {
+  margin: 0 0 6px;
+}
+.text-messages .render-error pre {
+  max-height: none;
+}
+.text-worker-retry {
+  margin-left: 2px;
+}
+.text-stage {
+  min-width: 0;
+}
+/* What is drawn, and the switch between placement and glyphs, on one row over the stage. */
+.text-preview-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.text-preview-head .text-render-status {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.text-view-switch {
+  display: flex;
+  flex: none;
+}
+.text-view-switch .an-field {
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.text-view-switch .an-label {
+  color: var(--text-dim);
+}
+.text-view-switch .segmented {
+  width: 220px;
+}
+.text-glyphs {
+  min-width: 0;
+}
+.text-glyphs > .field-hint {
+  margin: 0 0 8px;
+}
+/* The view's tools over the canvas: Fit frame, the zoom, then the grid and snapping. Small
+ * controls, the first of them level with the canvas's left edge. */
+.text-stage-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.text-stage-tools > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-dim);
+}
+.text-stage-tools > label:first-of-type {
+  margin-left: 2px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+}
+.text-stage-tools select {
+  height: 26px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+/* The zoom: − and + as icon buttons around the readout, in one rounded control. */
+.text-zoom-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 26px;
+  padding: 0 2px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+.text-zoom-group button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast);
+}
+.text-zoom-group button:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+.text-zoom-group [data-testid='text-zoom'] {
+  min-width: 42px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+/* The canvas keeps the frame's aspect; in a dialog of its own height it is as wide as the stage,
+ * up to about half the window's height. The scene's own colours are drawn inside it; only its
+ * rounded edge is the theme's. */
+.text-stage-canvas {
+  display: block;
+  width: min(100%, calc(52vh * var(--stage-aspect, 1.7778)));
+  margin-inline: auto;
+  border-radius: var(--radius-control);
+  box-shadow:
+    0 0 0 1px var(--border-strong),
+    0 6px 18px color-mix(in srgb, var(--shadow) 45%, transparent);
+  touch-action: none;
+}
+.text-position-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.text-position-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+.text-position-controls input[type='text'] {
+  width: 78px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+/* What the placement is of, beside its fields where there is room, under them otherwise. */
+.text-position-controls > .field-hint {
+  flex: 1 1 260px;
+  margin: 0;
+  line-height: 1.4;
+}
+[data-testid='text-composition'].is-sized .modal-body {
+  overflow: auto;
+}
+/* A dialog the author sized or maximized has room to give: the workspace fills it. The form
+ * widens a little and its text field takes the height left; the stage takes all that the status
+ * line, its tools and the messages leave, the canvas fitted whole inside it. Side by side only:
+ * stacked, each part keeps its own height. */
+@media (min-width: 761px) {
+  .modal.is-sized .text-composition-layout {
+    height: 100%;
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: clamp(230px, 22%, 360px) minmax(0, 1fr);
+  }
+  .modal.is-sized .text-composition-layout[data-kind='tex'] {
+    grid-template-columns: clamp(280px, 24%, 420px) minmax(0, 1fr);
+  }
+  .modal.is-sized .text-composition-source {
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .modal.is-sized .text-composition-preview {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .modal.is-sized .text-composition-preview > * {
+    flex: none;
+  }
+  .modal.is-sized .text-composition-preview > .text-stage,
+  .modal.is-sized .text-composition-preview > .text-stage-slot:not([hidden]),
+  .modal.is-sized .text-stage-slot > .text-stage {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .modal.is-sized .text-stage > * {
+    flex: none;
+  }
+  /* The canvas hangs from the same left edge as its tools and its fields. */
+  .modal.is-sized .text-stage > .text-stage-frame {
+    display: flex;
+    flex: 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 120px;
+    container-type: size;
+  }
+  .modal.is-sized .text-stage-canvas {
+    width: min(100cqw, calc(100cqh * var(--stage-aspect, 1.7778)));
+    margin: 0;
+  }
+  .modal.is-sized .text-composition-preview > .text-glyphs {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+}
+@media (max-width: 760px) {
+  .text-composition-layout,
+  .text-composition-layout[data-kind='tex'] {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .text-composition-source textarea {
+    min-height: 100px;
+  }
+  .text-typography {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audio · Manim Formula Editor</title>
+  <meta name="description" content="Import a recording, place it on an audio track, trim and split it, shape its volume, and export the sound or a video with it.">
+  <meta name="mfe:id" content="sound/audio">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Audio">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../examples/hero.data.js" defer></script>
+  <script src="../media/sound/audio/workflow.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Audio</h1>
+      <p class="lead">Put a voice-over or a music bed under your animation. Import a recording,
+        place it on an audio track, cut it, shape its volume, and hear it with the scene.</p>
+
+      <figure>
+        <img src="../media/sound/audio/window.dark.webp" data-themed
+             alt="The editor with an eleven-second recording on an audio track under the two tracks of formulas; the Creator's Audio tab lists the recording and the Animations panel shows the selected audio clip."
+             width="1440" height="1100" loading="lazy">
+        <figcaption>The example <em>The square of a sum</em> with its narration: the recording in
+          the Creator’s <span class="ui">Audio</span> tab, its clip on an audio track under the
+          formulas, and the clip’s properties on the right.</figcaption>
+      </figure>
+
+      <h2 id="parts">The parts of sound</h2>
+      <p>Sound has three parts. A <strong>recording</strong> is a sound file that you import once;
+        it lives in the Creator’s <span class="ui">Audio</span> tab. A <strong>clip</strong> is a
+        piece of a recording placed on the timeline, with its own trim and its own volume. An
+        <strong>audio track</strong> is a row of the timeline that holds clips.</p>
+      <p>Nothing you do to a clip changes the recording. Trimming and splitting choose which part
+        plays; the volume line says how loud. The sound plays with the scene in the Preview, goes
+        into a video when you ask for it, and can be exported alone.</p>
+      <p>The figures on this page use the example below and an eleven-second recording made for
+        it: a synthetic hum in three phrases, with a pause after each, that stands in for a voice.
+        Download both to follow along.</p>
+      <p><a href="../examples/audio-narration.mp3">audio-narration.mp3</a> (66 KB) is the recording.
+        The project is the card below: download it, choose <span class="ui">File ▸ Open…</span>,
+        press <span class="ui">Other file…</span> and pick the file
+        (<a href="../start/projects.html">Projects and files</a> explains the dialog).</p>
+      <div class="mfe-example" data-mfe-example="hero"></div>
+
+      <h2 id="recordings">Importing a recording</h2>
+      <p>Open the <span class="ui">Audio</span> tab of the Creator. Press
+        <span class="ui">Import audio…</span> and choose one file or several, or drag audio files
+        from your desktop onto the tab: while they are over it, the tab says
+        <span class="ui">Drop audio to import it</span>.</p>
+      <figure>
+        <img src="../media/sound/audio/creator-empty.dark.webp" data-themed
+             alt="The Audio tab of the Creator with no recordings: a search field, the Import audio button and a line that says what to do."
+             width="282" height="340" loading="lazy">
+        <figcaption>The empty tab: <span class="ui">Import audio…</span> (1) and the search field
+          (2). The line under them repeats what to do.</figcaption>
+      </figure>
+      <p>MP3 and WAV are the formats to count on. The file picker also lists M4A, AAC, FLAC, OGG,
+        Opus and WebM, and any other file comes in if your browser can decode its sound. When it
+        cannot, a notice says <em>Could not import</em> and the file’s name, with the reason: for
+        example <em>This browser cannot decode the audio in this file.</em> or <em>This file does
+        not contain an audio track.</em></p>
+      <p>While a file is read, the tab says <em>Preparing audio-narration.mp3…</em> and then
+        <em>Importing audio-narration.mp3 · 42%</em>, with a <span class="ui">Cancel</span> button.
+        Files that you give while one is being read wait for their turn.</p>
+
+      <h3 id="recording-row">The recording’s row</h3>
+      <figure>
+        <img src="../media/sound/audio/asset-row.dark.webp" data-themed
+             alt="A recording's row in the Audio tab: its name, a delete button, its length and sample rate, the two fields From and To, and the Add to timeline button."
+             width="282" height="391" loading="lazy">
+        <figcaption>A recording’s row: its name (1), delete (2), its length, sample rate and how
+          many clips use it (3), the part of it to place (4) and the button that places it
+          (5).</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Name.</strong> A recording is named after its file. Click the name to change it;
+          <kbd>Enter</kbd> or leaving the field keeps it and <kbd>Esc</kbd> takes the edit back. A
+          name cannot be empty. Each rename is one undo step.</li>
+        <li><strong>Importing the same file twice</strong> does not add it twice: a notice says
+          which recording it already is.</li>
+        <li><strong>A different file whose name is in use</strong> asks for a name of its own first
+          (<span class="ui">Name already in use</span>, with the first free name proposed).
+          <span class="ui">Don’t import</span> leaves the file out.</li>
+        <li><strong>Delete.</strong> The × deletes the recording and every clip made from it. When
+          clips use it, a dialog counts them and you confirm by holding its button; Undo brings the
+          recording and its clips back. While one of its clips is on a locked track, the × waits
+          for you to unlock the track.</li>
+        <li><strong>Search.</strong> The field above the list filters it by name.</li>
+      </ul>
+
+      <h2 id="place">Putting it on the timeline</h2>
+      <p>A recording does nothing until a piece of it is on the timeline. Choose the piece with
+        <span class="ui">From (s)</span> and <span class="ui">To (s)</span> — the whole recording
+        by default — and press <span class="ui">Add to timeline</span>.</p>
+      <div class="mfe-tour" data-mfe-tour="sound/audio/workflow" data-title="From import to a clip on the timeline"></div>
+      <ul>
+        <li>The clip starts at the playhead, on the first unlocked audio track that has room there.
+          When none has, the timeline adds a track, named <span class="ui">Audio 1</span>,
+          <span class="ui">Audio 2</span> and so on: the first number no track has. The new clip is selected and scrolled into
+          view.</li>
+        <li>You can also drag the button onto an audio track: the clip lands where you drop it. A
+          locked track takes no drop.</li>
+        <li>A drop on a track that has no room there, or a placement that would end after 60
+          minutes of project time, is refused with the notice
+          <span class="ui">Audio does not fit here</span>: the sound is never shortened to fit.
+          <span class="ui">Add to timeline</span> never runs out of room, because it adds a
+          track.</li>
+        <li>Place the same recording as many times as you like. Each clip has its own part, trim
+          and volume, and the row counts them (<em>2 uses</em>).</li>
+      </ul>
+      <p>The <span class="ui">Audio</span> button of the timeline’s toolbar adds an empty audio
+        track at the bottom of the list, named in the same way. Audio tracks mix: sounds on different tracks play
+        together, and clips on one track cannot overlap.</p>
+      <aside class="try">
+        <ol>
+          <li>Download the project of the card at the top of this page and open it
+            (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span>).</li>
+          <li>In the Creator, open the <span class="ui">Audio</span> tab and press
+            <span class="ui">Import audio…</span>. Choose <code>audio-narration.mp3</code>.</li>
+          <li>With the playhead at 0, press <span class="ui">Add to timeline</span>.</li>
+          <li>Press <kbd>Space</kbd>. The scene plays with the narration.</li>
+        </ol>
+      </aside>
+
+      <h2 id="clip">Anatomy of a clip</h2>
+      <figure>
+        <img src="../media/sound/audio/clip-anatomy.dark.webp" data-themed
+             alt="An audio clip on its track: its name with a note, the Volume button, the volume-line button, the handle at its start and the waveform with the volume line over it."
+             width="692" height="147" loading="lazy">
+        <figcaption>An audio clip on its track.</figcaption>
+      </figure>
+      <ol>
+        <li>The name, with a ♪. Drag it to move the clip.</li>
+        <li><span class="ui">Volume…</span> opens the volume editor (later in this page).</li>
+        <li>The volume-line button turns on the editing of the volume line on the clip itself.</li>
+        <li>The strips at the top corners are the handles that trim the clip.</li>
+        <li>The graph is the waveform of the recording, with the volume line over it.</li>
+      </ol>
+      <p>A clip on a muted track is dimmed. A clip whose recording is missing is hatched (see
+        <a href="#save">Saving</a>).</p>
+
+      <h2 id="trimming">Moving, trimming and splitting</h2>
+      <h3 id="move">Move</h3>
+      <p>Drag a clip by its name — or from anywhere on it, until you turn the volume line on — to
+        move it along its track or to another audio track. <span class="ui">Snap</span> pulls its
+        edges to the playhead, to the edges of other clips and to the ruler’s small ticks; to place
+        it freely, hold <kbd>Shift</kbd> while you drag (press the clip first: <kbd>Shift</kbd> at
+        the press adds the clip to the selection, or takes it out when it was selected). Clips can
+        only go to audio tracks. A selection of sounds and formulas together moves together in
+        time.</p>
+
+      <aside class="callout tip">
+        <p>To start a sound exactly when a formula appears, right-click the formula’s clip and
+          choose <span class="ui">Timing › Copy timing</span>; then right-click the sound and choose
+          <span class="ui">Timing › Paste start</span>. A sound has no intro or outro, so the menu
+          offers only <span class="ui">Paste start</span>, <span class="ui">Paste end</span> and
+          <span class="ui">Paste duration</span>.</p>
+      </aside>
+
+      <h3 id="trim">Trim</h3>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/sound/audio/trim.dark.webm"
+               poster="../media/sound/audio/trim.dark.webp" width="714" height="238"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The end of the clip dragged left cuts the last phrase off. Dragged back, the
+          phrase returns: the recording was never cut.</figcaption>
+      </figure>
+      <p>Drag the handle at the start or at the end of a clip to trim it. Trimming never cuts the
+        recording: drag the edge back and the sound comes back. Trimming the start leaves what
+        remains where it was in time. An edge stops at the next clip of the track and at the ends
+        of the recording.</p>
+      <p>The edges snap like any other. The volume editor has two fields,
+        <span class="ui">Source start (s)</span> and <span class="ui">Source end (s)</span>, for a
+        trim by the second.</p>
+
+      <h3 id="split">Split</h3>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/sound/audio/split.dark.webm"
+               poster="../media/sound/audio/split.dark.webp" width="714" height="238"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The playhead in the pause after the first phrase, <kbd>S</kbd>, a click on the
+          second part to select it, and a drag that moves it later.</figcaption>
+      </figure>
+      <p>Put the playhead where the cut goes, select the clip and press <kbd>S</kbd>. The clip’s
+        menu has <span class="ui">Split at playhead (S)</span> too, and so does the Animations
+        panel, with its button <span class="ui">Split selected audio at playhead</span> (the panel
+        is titled <span class="ui">Audio</span> while only sounds are selected). Both parts keep the
+        volume curve of the original, so the sound is the same with the cut as without it, even in
+        the middle of a fade. Both are
+        selected afterwards: a drag moves both, and a click on one part selects just that part.</p>
+      <p>When the playhead is not inside a selected clip of an unlocked track, the menu entry and
+        the button of the panel say so in a notice and change nothing. <kbd>S</kbd> does the same
+        while a clip of an unlocked track is selected.</p>
+      <aside class="callout note">
+        <p>With an audio clip of an unlocked track selected, <kbd>S</kbd> splits it. It also
+          splits the selected clips of the scene that the playhead is inside, unless the keyboard
+          is in the Preview, together with the sounds selected with them, in one step
+          (<a href="../basics/timeline.html#splitting">Splitting a clip</a>). Otherwise
+          <kbd>S</kbd> switches the Preview’s circle selector on and off.</p>
+      </aside>
+
+      <h3 id="copy">Duplicate, delete and the clip’s menu</h3>
+      <figure>
+        <img src="../media/sound/audio/clip-menu.dark.webp" data-themed
+             alt="The menu of an audio clip: Edit volume and trim, Split at playhead, Fade In, Fade Out, Timing, Duplicate and Delete."
+             width="194" height="205" loading="lazy">
+        <figcaption>Right-click a clip for its menu.</figcaption>
+      </figure>
+      <p><kbd data-keys="Mod+D">Ctrl+D</kbd> copies the selected clips, each into the free time
+        after it on its own track, and selects the copies. <kbd>Delete</kbd> removes the selected
+        clips; Undo brings them back. Deleting a clip from the middle of a track leaves a gap: the
+        clips after it do not move. The <span class="ui">Timing ›</span> entry copies when a clip
+        starts and ends and pastes it onto another (see
+        <a href="../animations/timing.html#timing">Timing tools</a>).</p>
+      <aside class="try">
+        <ol>
+          <li>Click the ruler in the pause after the first phrase, at about 3.7 s.</li>
+          <li>Select the clip and press <kbd>S</kbd>.</li>
+          <li>Click the second part to select it alone, then drag it about a second to the
+            right.</li>
+          <li>Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> twice to go back.</li>
+        </ol>
+      </aside>
+
+      <h2 id="volume">Volume</h2>
+      <p>The line over the waveform is the clip’s volume. <strong>100%</strong> is the loudness of
+        the recording and sits at mid-height of the graph; <strong>0%</strong> is silence, at the
+        bottom; <strong>400%</strong> is the loudest the editor allows, at the top. Fades and
+        reductions have the lower half of the graph, amplification the upper half.</p>
+      <p>Until you turn it on, the line is a drawing: a drag anywhere on the clip moves the clip,
+        so that a drag meant for the clip never changes its volume. The button beside
+        <span class="ui">Volume…</span> turns the editing on, for that clip only. A scale
+        (<em>400%</em>, <em>100%</em>, <em>0%</em>) appears, the line and its points become
+        handles, and the clip then moves by its name alone.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/sound/audio/volume-line.dark.webm"
+               poster="../media/sound/audio/volume-line.dark.webp" width="876" height="122"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The line turned on, two points added with a double-click, and the last one
+          dragged down: a fade out drawn by hand.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Gesture</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Drag the flat line up or down</td><td>Changes the level of the whole clip.</td></tr>
+          <tr><td>Double-click the line</td><td>Adds a point at the level the line has there: the sound does not change.</td></tr>
+          <tr><td>Drag a point</td><td>Moves it in time and in level. It stops at its neighbours.</td></tr>
+          <tr><td>Drag a segment between two points, up or down</td><td>Moves both of its points by the same amount, so its slope stays.</td></tr>
+          <tr><td>Arrow keys on a focused point</td><td><kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd> change its level by 1% (<kbd data-keys="Shift">Shift</kbd>: 10%); <kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd> move it by 0.01 s (<kbd data-keys="Shift">Shift</kbd>: 0.1 s).</td></tr>
+          <tr><td><kbd>Delete</kbd> on a focused point</td><td>Removes it.</td></tr>
+          <tr><td><kbd>Enter</kbd> on a focused point</td><td>Opens the volume editor.</td></tr>
+          <tr><td><kbd data-keys="Escape">Esc</kbd> during a drag</td><td>Takes the drag back.</td></tr>
+        </tbody>
+      </table>
+      <p>Each drag is one undo step. The line before its first point and after its last point stays
+        at the level of that point.</p>
+
+      <h3 id="editor">The volume editor</h3>
+      <figure>
+        <img src="../media/sound/audio/volume-dialog.dark.webp" data-themed
+             alt="The Audio dialog of the narration clip: source start and end, constant volume, fade duration, the Fade In, Fade Out and Reset volume buttons, a field to add a point, and the table of the volume points."
+             width="580" height="672" loading="lazy">
+        <figcaption>The volume editor after <span class="ui">Fade In</span> and
+          <span class="ui">Fade Out</span> of one second each.</figcaption>
+      </figure>
+      <p>Open it with <span class="ui">Volume…</span> on the clip, with a double-click on the clip,
+        with <span class="ui">Edit volume and trim…</span> in its menu, or with
+        <span class="ui">Volume, fades and trim…</span> in the Animations panel. It is the numeric
+        side of everything above, and what you change applies at once and can be undone.</p>
+      <ul>
+        <li><span class="ui">Source start (s)</span> and <span class="ui">Source end (s)</span>:
+          the part of the recording the clip plays (the trim).</li>
+        <li><span class="ui">Constant volume (%)</span>: one level for the whole clip, from 0 to
+          400. It replaces any curve; with a curve the field is empty and says
+          <em>Automated</em>.</li>
+        <li><span class="ui">New point source time (s)</span> and <span class="ui">Add point</span>:
+          a point of the line at that second of the recording, at the level the line has there.
+          <kbd>Enter</kbd> in the field adds it, so a point can be made without the mouse.</li>
+        <li>The table lists every point with its time and its level, each editable, and a ×
+          that removes it.</li>
+      </ul>
+
+      <h3 id="fades">Fades</h3>
+      <p><span class="ui">Fade In</span> and <span class="ui">Fade Out</span> put ordinary points
+        of the line at the clip’s trimmed edges: a ramp from silence at the start, or to silence at
+        the end. <span class="ui">Fade duration (s)</span> says how long. Until you type one, the
+        fade is half the clip, up to 0.5 s, and follows the clip when you trim it; a duration you
+        type stays. Applying a fade again replaces the points of its stretch, and points outside
+        it stay for when you restore a trim. <span class="ui">Reset volume</span> goes back to a
+        constant 100%. The clip’s menu has both fades too, at the default length.</p>
+
+      <h3 id="loudness">When the mix is too loud</h3>
+      <p>Two sounds at 100% together, or a clip above 100%, can be louder than the output allows.
+        While the scene plays, the playback bar shows the peak of the mix as <em>♪ 85%</em>; over
+        100% it adds <em>Clip</em> and turns to the warning colour. Lower a clip or a track, or
+        reshape the line, until it stays under.</p>
+
+      <h2 id="tracks">Audio tracks</h2>
+      <figure>
+        <img src="../media/sound/audio/audio-tracks.dark.webp" data-themed
+             alt="Two audio tracks: each header has a name, keys for its height, and the mute, lock, move up, move down and delete buttons. The second track is muted."
+             width="468" height="233" loading="lazy">
+        <figcaption>Two audio tracks, the second one muted: the row of keys of its header, from
+          mute to delete (1), and the two small keys that make a track lower or taller (2).</figcaption>
+      </figure>
+      <p>An audio track’s header has the keys of a visual track’s, except that the eye is a
+        speaker.</p>
+      <ul>
+        <li><strong>Name.</strong> Double-click it, or press <kbd>Enter</kbd> or
+          <kbd>F2</kbd> on it, to rename the track.</li>
+        <li><strong>Mute</strong> keeps the track out of playback and out of every export. Its
+          clips stay, dimmed.</li>
+        <li><strong>Lock</strong> keeps its clips from being edited. A locked track still
+          plays.</li>
+        <li><strong>Move up</strong> and <strong>Move down</strong> change the track’s place in
+          the list. They do not change how the formulas are layered.</li>
+        <li><strong>Delete</strong> removes the track and its clips after a question you confirm by
+          holding the button; Undo brings it back.</li>
+        <li>The two small keys beside the name make that track one step lower or taller. That
+          changes the view only.</li>
+      </ul>
+      <p>The Animations panel — titled <span class="ui">Audio</span> while only sounds are
+        selected — shows an <strong>Audio clip</strong> card for a selected clip: its
+        times, its part of the recording, whether its track is muted or locked, and two buttons,
+        <span class="ui">Volume, fades and trim…</span> and
+        <span class="ui">Split selected audio at playhead</span>.</p>
+      <figure>
+        <img src="../media/sound/audio/properties.dark.webp" data-themed
+             alt="The Animations panel with an audio clip selected: its name, its times and source, the Volume, fades and trim button and the Split selected audio at playhead button."
+             width="310" height="290" loading="lazy">
+        <figcaption>The Animations panel, titled <span class="ui">Audio</span> because only a sound
+          is selected: split at the playhead (1) and the volume editor (2).</figcaption>
+      </figure>
+
+      <h2 id="recipes">Two recipes</h2>
+      <h3 id="recipe-pause">Take a pause out</h3>
+      <ol>
+        <li>Put the playhead at the start of the pause and split the clip (<kbd>S</kbd>).</li>
+        <li>Put the playhead at the end of the pause, click the part on its right to select it, and
+          split again.</li>
+        <li>Select the middle part, the pause, and press <kbd>Delete</kbd>.</li>
+        <li>Drag the part on the right to the left until its start meets the end of the part on the
+          left: with <span class="ui">Snap</span> on, it jumps onto that edge.</li>
+      </ol>
+      <h3 id="recipe-duck">Make music quieter under a voice</h3>
+      <ol>
+        <li>Import the music and place it on its own audio track, under the voice.</li>
+        <li>Turn on the music’s volume line, and double-click it four times: just before the voice
+          starts, as it starts, as it ends, and just after.</li>
+        <li>Drag the segment between the middle two points down to about 30%. The two ramps on its
+          sides bring the music down and back up.</li>
+      </ol>
+
+      <h2 id="keys">Keys and gestures at a glance</h2>
+      <table>
+        <thead>
+          <tr><th>What</th><th>How</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Move a clip</td><td>Drag its name. Hold <kbd data-keys="Shift">Shift</kbd> during the drag to place it freely.</td></tr>
+          <tr><td>Trim a clip</td><td>Drag a handle at its top corners.</td></tr>
+          <tr><td>Split at the playhead</td><td><kbd>S</kbd></td></tr>
+          <tr><td>Duplicate</td><td><kbd data-keys="Mod+D">Ctrl+D</kbd></td></tr>
+          <tr><td>Delete</td><td><kbd>Delete</kbd> or <kbd>Backspace</kbd></td></tr>
+          <tr><td>Undo, redo</td><td><kbd data-keys="Mod+Z">Ctrl+Z</kbd>, <kbd data-keys="Mod+Shift+Z">Ctrl+Shift+Z</kbd></td></tr>
+          <tr><td>Add a point to the volume line</td><td>Double-click the line, once it is turned on.</td></tr>
+          <tr><td>Play, pause</td><td><kbd data-keys="Space">Space</kbd></td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="play">Hearing it</h2>
+      <p>Press <kbd>Space</kbd> or <span class="ui">Play</span> in the bar under the Preview: the
+        sound plays with the scene. The first time, the bar says <span class="ui">Preparing
+        audio…</span> while the editor reads the recordings; press the button again to cancel
+        it. Moving the playhead, muting a track and editing a volume line all work while it
+        plays. The sound follows the audio device’s clock, so picture and sound stay together.</p>
+      <p>A scene lasts until its last clip ends, a sound clip included. When the narration is longer
+        than the formulas, the scene — and a video exported by the browser or by ffmpeg — lasts as
+        long as the narration. <span class="ui">File ▸ Project settings…</span> can fix the length
+        instead (<span class="ui">Duration</span> ▸ <span class="ui">Fixed</span>).</p>
+
+      <h2 id="export">Exporting sound</h2>
+      <figure>
+        <img src="../media/sound/audio/export-dialog.dark.webp" data-themed
+             alt="The Export audio dialog: format, start and end in seconds, a note that the file is 48 kHz stereo, and the estimated size of a WAV file."
+             width="520" height="330" loading="lazy">
+        <figcaption><span class="ui">Export ▸ Audio…</span> writes the mix without drawing any
+          formula.</figcaption>
+      </figure>
+      <p><span class="ui">Export ▸ Audio…</span> writes the sound of the scene as a file: 48 kHz,
+        stereo, with the volume curves and the track mutes applied. Choose a
+        <span class="ui">Format</span>, a <span class="ui">Start (s)</span> and an
+        <span class="ui">End (s)</span> — the whole scene by default, up to 60 minutes — and press
+        <span class="ui">Export audio</span>.</p>
+      <table>
+        <thead>
+          <tr><th>Format</th><th>What it is</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">WAV · PCM 16-bit</span></td><td>Uncompressed, about 11 MiB a minute; the dialog shows the estimated size.</td></tr>
+          <tr><td><span class="ui">WebM · Opus</span></td><td>Compressed, small.</td></tr>
+          <tr><td><span class="ui">M4A · AAC</span></td><td>Compressed. Only where the browser can encode AAC (Chrome and Edge on Windows and macOS); the dialog says so where it cannot.</td></tr>
+        </tbody>
+      </table>
+      <p>A video takes the sound along: <span class="ui">Export ▸ Video…</span> has an
+        <span class="ui">Include audio</span> option, described in
+        <a href="video.html#sound">Exporting video</a>. The exported Python has none: its dialog says
+        <em>Audio is omitted from Manim exports</em>. To add the sound to a scene rendered by
+        Manim yourself, call Manim’s <code>self.add_sound("audio-narration.mp3")</code> in the
+        scene (<a href="../manim/python.html">The generated Python</a>).</p>
+      <p>An export needs the recordings of its clips that are not muted. When one is missing, the
+        export stops before it starts and names it.</p>
+
+      <h2 id="save">Saving, and a recording that is missing</h2>
+      <p>A project with recordings is saved as an <strong><code>.mfe</code> package</strong>: one
+        file with the project and every recording in it, the unused and the muted ones too. A
+        project without recordings is saved as <code>.mfe.json</code>, unless it was opened from a
+        package (<span class="ui">File ▸ Save</span> keeps it a package) or holds more font-text
+        shapes than a plain file carries. Open a package like any project
+        (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span> for one
+        from your disk): the editor checks each recording and copies it into the browser’s
+        storage, with a progress dialog and a <span class="ui">Cancel</span> button for a large
+        file.</p>
+      <aside class="callout warning">
+        <p>While you work, the recordings live in the browser’s storage, which the browser may
+          clear. A saved package is the backup. Save before you close the tab, and keep the
+          package.</p>
+      </aside>
+      <p>When the browser no longer holds a recording, its clips stay where they are, hatched and
+        marked <span class="ui">missing media</span>, and the playback skips them. The recording’s
+        row says <span class="ui">Original unavailable</span>, and a notice names the files.</p>
+      <figure>
+        <img src="../media/sound/audio/missing-media.dark.webp" data-themed
+             alt="An audio clip drawn hatched, with a small label that says missing media beside its name."
+             width="692" height="121" loading="lazy">
+        <figcaption>A clip whose recording the browser does not have (1).</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Import the same file again</strong> in the Audio tab: the clips come back to
+          life, with their trims and volumes.</li>
+        <li><span class="ui">File ▸ Save</span> first looks for the missing recordings in the file
+          it is about to replace, and brings them back from it. For what is still missing it asks;
+          <span class="ui">Save without the missing media</span> writes a file whose clips stay
+          marked, and <span class="ui">Cancel</span> writes nothing.</li>
+        <li>An export stops at a recording that is missing and says which.</li>
+      </ul>
+      <p>More about files and recovery: <a href="../start/projects.html">Projects and files</a>. The
+        layout of both kinds of file is in <a href="../reference/files.html">Project files and their
+        format</a>.</p>
+
+      <h2 id="limits">Limits</h2>
+      <ul>
+        <li>A placement ends within 60 minutes of the project, and an export mixes an hour of sound
+          at most. Projects of 40 to 60 minutes work; the usual size is under 15. A scene that is
+          longer plays whole with its sound, but a video of more than 60 minutes is exported
+          without it, and its dialog says so.</li>
+        <li>A recording longer than an hour supplies the pieces you choose, up to 60 minutes each
+          time.</li>
+        <li>Importing MP3 works. Encoding new MP3 files does not.</li>
+        <li>The editor does not record sound, reduce noise, equalise, stretch time or crossfade
+          clips on its own: a fade is yours to draw.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

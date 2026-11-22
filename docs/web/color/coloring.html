@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colouring glyphs and objects · Manim Formula Editor</title>
+  <meta name="description" content="Colour a whole formula or single glyphs, copy colours between glyphs, and carry them from one formula to the next.">
+  <meta name="mfe:id" content="color/coloring">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Colouring">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/color-coloring-glyphs.data.js" defer></script>
+  <script src="../examples/color-coloring-order.data.js" defer></script>
+  <script src="../examples/color-coloring-sequence.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Colouring glyphs and objects</h1>
+      <p class="lead">A formula has one colour, and each of its glyphs can have a colour of its own. You set them in the Creator or straight in the Preview, and a glyph keeps its colour through every transformation.</p>
+
+      <figure class="mfe-player" data-mfe-player="color-coloring-glyphs" data-start="2" data-autoplay data-loop
+              data-caption="Every a is blue and every b gold. The colours stay with their glyphs while the formula grows."></figure>
+
+      <h2 id="where">Where a colour lives</h2>
+      <p>A colour belongs to one of three things:</p>
+      <ul>
+        <li>The <strong>formula</strong> has a colour. Every glyph without a colour of its own is drawn in it, in every clip of that formula.</li>
+        <li>A <strong>glyph</strong> can have a colour of its own, kept with the formula. It shows in every clip too, and it moves with the glyph through a transformation.</li>
+        <li>A <strong>clip</strong> can change colours while it plays, with the animation blocks of <a href="../animations/blocks.html">Animation blocks</a>.</li>
+      </ul>
+      <p>A glyph is named by its place in the formula. The <a href="../reference/glossary.html">glossary</a> calls that place its canonical index; you meet it as the number the glyph view shows under the pointer.</p>
+
+      <h2 id="formula-colour">The colour of a whole formula</h2>
+      <p>Double-click a formula in the Creator (or select it and press <kbd>Enter</kbd>) to open its editor. The <span class="ui">Colour</span> row has a colour picker and a hex field: type a colour, such as <code>#58C4DD</code>, and press <kbd>Enter</kbd>, or leave the field.</p>
+      <figure>
+        <img src="../media/color/coloring/formula-colour.dark.webp" data-themed
+             alt="The top of a formula's editor: name, tag, size and the Colour row, whose picker and hex field are ringed and numbered 1."
+             width="548" height="186" loading="lazy">
+        <figcaption>The <span class="ui">Colour</span> row of a formula's editor (1).</figcaption>
+      </figure>
+      <p>A new formula is white, as Manim draws a formula by default. With a palette active, it takes the palette's <code>formula</code> colour instead; <a href="palettes.html">Palettes</a> tells how.</p>
+      <aside class="callout note">
+        <p>Do not mistake it for the <span class="ui">Tag</span> row above it. The tag only colours the dot that marks the formula in the Creator and on the timeline, and never the scene.</p>
+      </aside>
+
+      <h2 id="creator">Glyph by glyph in the Creator</h2>
+      <p>The right half of the editor is the <strong>glyph view</strong>. It draws every glyph of the formula inside a frame, and shows the index of the one under the pointer. A glyph you have not coloured is drawn in the colour of the formula.</p>
+      <ol>
+        <li>Click a glyph to select it. <kbd>Shift</kbd>+click another to take the range between them, and <kbd data-keys="Mod">Ctrl</kbd>+click to add or remove one. You can also drag a box over several glyphs, and <kbd data-keys="Mod">Ctrl</kbd> held adds them to what is selected.</li>
+        <li>Click a swatch to colour the selection, or type any colour in the hex field beside the swatches.</li>
+        <li><span class="ui">Clear selected</span> gives the selected glyphs back the colour of the formula, and <span class="ui">Clear colours</span> does it for all of them.</li>
+      </ol>
+      <figure>
+        <img src="../media/color/coloring/glyph-view.dark.webp" data-themed
+             alt="The glyph view of y = mx + b with the m and the x selected: the drawing (1), the twelve swatches (2) and the hex field (3), and under them Select all, Clear selected and Clear colours."
+             width="475" height="408" loading="lazy">
+        <figcaption>The glyph view with two glyphs selected: the drawing (1), the swatches (2) and the hex field (3).</figcaption>
+      </figure>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/color/coloring/creator-colour.dark.webm"
+               poster="../media/color/coloring/creator-colour.dark.webp" width="476" height="424"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A click on the m and a <kbd>Shift</kbd>+click on the x select the pair, and a swatch makes it blue. <span class="ui">Clear colours</span> puts everything back.</figcaption>
+      </figure>
+      <p>The twelve swatches are Manim's own colours, <code>WHITE</code> to <code>PURPLE</code>. With a palette active, its roles follow them. A right-click on the selection offers the same colours, and <span class="ui">Hide at the start</span> and <span class="ui">Show at the start</span> for the glyphs that should wait for a transformation.</p>
+      <aside class="callout tip">
+        <p>The key beside the <span class="ui">Glyphs</span> title lists the glyphs under the drawing, a key each with its index and label. It is also how you pick glyphs from the keyboard: <kbd>Tab</kbd> to a glyph's key, then <kbd>Enter</kbd> or <kbd>Space</kbd> to select it. The browser remembers whether you asked for the list.</p>
+      </aside>
+      <aside class="callout note">
+        <p>A LaTeX text or a font text colours its glyphs the same way, in its composition editor: the switch over the stage shows <span class="ui">Glyphs</span> in place of <span class="ui">Placement</span>. <a href="../objects/texts.html">LaTeX texts and font texts</a> tells more.</p>
+      </aside>
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">+ New</span> in the Creator, type <code>y = mx + b</code> in the <span class="ui">Raw LaTeX</span> field and press <span class="ui">Apply</span>.</li>
+          <li>Select the m and the x in the glyph view and click the blue swatch.</li>
+          <li>Type <code>f0ac5f</code> in the hex field with the b selected, and press <kbd>Enter</kbd>.</li>
+        </ol>
+      </aside>
+
+      <h2 id="preview">Glyph by glyph in the Preview</h2>
+      <p>You can also colour glyphs where they are on the scene. Hold <kbd>Alt</kbd> and click a glyph to <strong>pick</strong> it; <kbd>Alt</kbd>+click it again to let it go. <kbd>Alt</kbd>+<kbd>Shift</kbd>+click takes a range, and <kbd>Alt</kbd>+drag from a formula draws a rectangle that picks the glyphs it touches. The picked glyphs light up in yellow, and a bar in the corner of the Preview names them.</p>
+      <figure>
+        <img src="../media/color/coloring/pick-bar.dark.webp" data-themed
+             alt="The Preview with the m and the x of y = mx + b picked in yellow. In the top-left corner a bar reads '2 glyphs of step1: 2, 3' and offers Colour, Brace, Shape and a close button; the bar is ringed and numbered 1."
+             width="803" height="455" loading="lazy">
+        <figcaption>Two glyphs picked, and the bar that acts on them (1).</figcaption>
+      </figure>
+      <p>The bar's <span class="ui">Colour ▾</span> menu has the same swatches. A right-click on the ink of a picked glyph opens the same actions, with the colours under <span class="ui">Colour</span>. <kbd>Esc</kbd> lets the glyphs go, and so does selecting something else.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/color/coloring/alt-pick.dark.webm"
+               poster="../media/color/coloring/alt-pick.dark.webp" width="802" height="454"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Alt+click on the m, Alt+Shift+click on the x, <span class="ui">Colour ▾</span> and a swatch. <kbd>Esc</kbd> lets the glyphs go, and <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes the colour back.</figcaption>
+      </figure>
+      <p>The glyphs can be of several formulas at once: <kbd>Alt</kbd>+click a glyph of another formula and it joins the pick. A colour then goes to all of them as one undo step. <a href="../layout/glyph-picking.html">Picking glyphs</a> tells the rest.</p>
+      <aside class="note">
+        <p>The picked glyphs are yellow because the preference <span class="ui">Preferences ▸ Glyph selection colour</span> is. It offers six colours, so you can choose one that stands out from your formula.</p>
+      </aside>
+      <figure>
+        <img src="../media/color/coloring/pick-colour.dark.webp" data-themed
+             alt="The Preferences menu with Glyph selection colour open: Yellow, Orange, Magenta, Cyan, Green and White."
+             width="463" height="247" loading="lazy">
+        <figcaption>The colours the picked glyphs can wear.</figcaption>
+      </figure>
+
+      <h2 id="any-colour">Any colour: the Hex field</h2>
+      <p>Every <span class="ui">Colour</span> menu has a <span class="ui">Hex</span> field under its swatches. Type <code>#RRGGBB</code>, or <code>#RGB</code> for a short one; the <code>#</code> is optional. The square beside the label shows the colour you typed, and <kbd>Enter</kbd> or <span class="ui">Apply</span> uses it. Something that is not a colour is marked, and <span class="ui">Apply</span> stays off.</p>
+      <p>With <strong>one glyph</strong> picked, <span class="ui">Copy colour to clipboard</span> puts the colour that glyph is seen in on the system clipboard, as <code>#RRGGBB</code>, beside the colour itself. It is the glyph's own colour, or the formula's when it has none. Paste it into another <span class="ui">Hex</span> field with <kbd data-keys="Mod+V">Ctrl+V</kbd>, or into any other program. When the browser does not let the page write to the clipboard, a notice shows the colour so that you can type it.</p>
+      <figure>
+        <img src="../media/color/coloring/colour-menu.dark.webp" data-themed
+             alt="The Colour menu of the bar with one glyph picked: the swatches, the Hex field with 12ab9f typed in it (ringed, 1), Clear colour, Copy colour to clipboard with its colour #58C4DD (ringed, 2), Copy colour sequence, Paste colour sequence, and Hide and Show at the start."
+             width="807" height="459" loading="lazy">
+        <figcaption>A colour typed in the <span class="ui">Hex</span> field (1), and <span class="ui">Copy colour to clipboard</span> (2), which shows the colour it would copy.</figcaption>
+      </figure>
+      <p>A brace, a shape or a line has one colour and no glyphs to pick. The own menu of a brace or a shape has <span class="ui">Colour ▸</span> with the same swatches and the same <span class="ui">Hex</span> field, and a line's colour is in the <span class="ui">Line</span> section of the <span class="ui">Animations</span> panel. See <a href="../objects/braces.html">Braces</a>, <a href="../objects/shapes.html">Shapes</a> and <a href="../objects/lines-arrows.html">Lines and arrows</a>.</p>
+
+      <h2 id="order">Colours in order</h2>
+      <p>Two lines of a derivation often say the same thing with other symbols: the <em>m</em> and the <em>b</em> of <code>y = mx + b</code> become the <em>2</em> and the <em>1</em> of <code>y = 2x + 1</code>. <strong>Colours in order</strong> copies the colours of some glyphs, one by one, and gives them in that order to others, whatever those are.</p>
+      <ol>
+        <li>Press <kbd>Shift+C</kbd>. The Preview says what to do, and the top of the <span class="ui">Animations</span> panel shows a strip, <span class="ui">Colours in order</span>.</li>
+        <li>Click, one by one, the glyphs whose colours you want. Each click adds a chip to the strip, in the order of your clicks, with its number and its colour. A glyph without a colour of its own adds the colour of its formula.</li>
+        <li>Press <kbd>Enter</kbd> (or <span class="ui">Paste…</span>). The first chip is marked as the next to give out.</li>
+        <li>Click the glyphs that take the colours. Each click colours one glyph and removes its chip. With the last colour the mode ends by itself.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/color/coloring/colours-in-order.dark.webm"
+               poster="../media/color/coloring/colours-in-order.dark.webp" width="802" height="454"
+               muted loop playsinline preload="none"></video>
+        <figcaption><kbd>Shift+C</kbd>, a click on the m and one on the b, <kbd>Enter</kbd>, a click on the 2 and one on the 1. <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes the whole paste back in one step.</figcaption>
+      </figure>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/color/coloring/order-strip-copy.dark.webp" data-themed
+               alt="The Colours in order strip while copying: two chips, 1 for the m in blue and 2 for the b in gold, and the buttons Paste… and Cancel."
+               width="308" height="190" loading="lazy">
+          <figcaption>Copying: a chip for each click.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/color/coloring/order-strip-paste.dark.webp" data-themed
+               alt="The Colours in order strip while pasting: the same two chips, the first marked as the next to give out, and a Done button."
+               width="308" height="190" loading="lazy">
+          <figcaption>Pasting: the marked chip is next.</figcaption>
+        </figure>
+      </div>
+      <p>The result is the colouring of the next line, and it holds through the transformation between them:</p>
+      <figure class="mfe-player" data-mfe-player="color-coloring-order" data-timeline data-start="end"
+              data-caption="m and b are blue and gold; the 2 and the 1 took their colours with Colours in order."></figure>
+      <p>A few details help:</p>
+      <ul>
+        <li><kbd>Backspace</kbd> takes the last chip off while you copy, and the last glyph back while you paste. <kbd>Esc</kbd> cancels a copy; during a paste it ends the mode and keeps what was pasted.</li>
+        <li>Only clicks work while the mode is on: no <kbd>Alt</kbd> picks, no rectangle, no drag. The playhead can move between two clicks, so you can copy at one time and paste at another.</li>
+        <li>The whole paste is one undo step. A pasted colour is the formula's, so it shows in every clip of that formula.</li>
+        <li>The list is kept. <kbd>Shift+V</kbd> pastes it again from its first colour, onto other glyphs.</li>
+      </ul>
+      <p>The same two commands are in the <span class="ui">Edit</span> menu, and at the end of the Preview's right-click menu of a clip, as <span class="ui">Copy colours in order…</span> and <span class="ui">Paste colours in order</span>.</p>
+      <figure>
+        <img src="../media/color/coloring/order-menu.dark.webp" data-themed
+             alt="The Edit menu with Colours in order open: Copy… with Shift+C, and Paste with Shift+V."
+             width="421" height="135" loading="lazy">
+        <figcaption><span class="ui">Edit ▸ Colours in order</span>.</figcaption>
+      </figure>
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/color-coloring-order.mfe.json" download>color-coloring-order.mfe.json</a>, choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick it.</li>
+          <li>Double-click <code>step2</code> in the Creator, press <span class="ui">Clear colours</span> in its glyph view and close the editor.</li>
+          <li>Put the playhead at 1.5 s, press <kbd>Shift+C</kbd>, click the m and the b, and press <kbd>Enter</kbd>.</li>
+          <li>Move the playhead to 4 s, where the second line is on screen, and click the 2 and the 1.</li>
+        </ol>
+      </aside>
+
+      <h2 id="sequence">Copying a colour sequence</h2>
+      <p>When the glyphs are the <em>same symbols</em> in two places, a colour sequence is faster. The classic case is a formula and the sentence that explains it: colour the <em>a</em>, <em>b</em> and <em>c</em> of the equation, then give the same colours to the three letters of the sentence.</p>
+      <ol>
+        <li><kbd>Alt</kbd>+click the glyphs of the first object. They need not be next to each other.</li>
+        <li>Open <span class="ui">Colour ▾</span> in the bar (or right-click a picked glyph) and choose <span class="ui">Copy colour sequence</span>. It takes the own colours of the picked glyphs.</li>
+        <li>Press <kbd>Esc</kbd>, then <kbd>Alt</kbd>+click the glyphs of the other object, in this formula or another one.</li>
+        <li>Open the menu again and choose <span class="ui">Paste colour sequence</span>.</li>
+      </ol>
+      <figure>
+        <img src="../media/color/coloring/sequence-copy.dark.webp" data-themed
+             alt="The a, b and c of the equation picked in yellow, and the Colour menu of the bar open with Copy colour sequence ringed and numbered 1."
+             width="807" height="459" loading="lazy">
+        <figcaption>The three letters of the equation are picked: <span class="ui">Copy colour sequence</span> (1) takes their colours.</figcaption>
+      </figure>
+      <p>Each glyph takes the colour of the copied glyph that is its symbol. Of several equal symbols, the first takes the first colour, the second the second, in glyph order. A glyph loses its own colour where the copied one had none. The two picks may list their glyphs in another order, but they must be the same symbols, each as many times.</p>
+      <p>The line under <span class="ui">Paste colour sequence</span> says what would be pasted, or why it cannot be: <q>Nothing copied yet.</q>, <q>The copied sequence has 3 glyphs; this selection has 2.</q> or <q>The symbols differ</q> followed by which.</p>
+      <figure>
+        <img src="../media/color/coloring/sequence-menu.dark.webp" data-themed
+             alt="The Colour menu with the three letters of the sentence picked: Paste colour sequence is on, and the line under it, ringed and numbered 1, reads '3 glyphs of equation, 3 coloured.'"
+             width="807" height="459" loading="lazy">
+        <figcaption>The line under <span class="ui">Paste colour sequence</span> (1).</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="color-coloring-sequence" data-timeline data-start="3.5"
+              data-caption="The equation's a, b and c, and the same letters of the sentence, in the same colours."></figure>
+      <aside class="note">
+        <p>What you copied is kept in the page, not on the system clipboard, until you reload it. It survives opening another project, so you can copy in one project and paste in another. It is a copy of colours, not a link: changing the first object later does not change the second.</p>
+      </aside>
+
+      <h2 id="patterns">Colouring by pattern</h2>
+      <p>To colour every <em>x</em> of a whole derivation without picking a glyph, give the editor a list of LaTeX patterns and their colours. That is <a href="match-colors.html">Match colors</a>.</p>
+
+      <h2 id="python">What reaches Manim</h2>
+      <p>Colours leave the editor as plain values. The exported scene colours each glyph of a formula by its place, as you did: the line <code data-excerpt="examples/color-coloring-order.ce.py">step1_g[2].set_color("#58C4DD")</code> below is the m of <code>y = mx + b</code>. The file needs no palette, no list and nothing of the editor to run.</p>
+      <div class="mfe-code" data-mfe-python="color-coloring-order"></div>
+      <div class="mfe-example" data-mfe-example="color-coloring-order"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="match-colors.html">Match colors</a> colours patterns across many formulas at once.</li>
+        <li><a href="palettes.html">Palettes by role</a> names your colours and gives new objects the right ones.</li>
+        <li><a href="../layout/glyph-picking.html">Picking glyphs</a> covers the <kbd>Alt</kbd> pick in full.</li>
+        <li><a href="../reference/shortcuts.html">Keyboard and mouse shortcuts</a> lists every key of these modes.</li>
+        <li><a href="../tutorials/pythagoras.html">The Pythagorean theorem, in colour</a> builds a whole animation around colours.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A tour of the interface · Manim Formula Editor</title>
+  <meta name="description" content="The menu bar and the four panels of the editor, how to fold and resize them, the narrow layout, and the themes.">
+  <meta name="mfe:id" content="start/interface">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="The interface">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/interface-completing-the-square.data.js" defer></script>
+  <script src="../media/start/interface/panels.tour.js" defer></script>
+  <style>
+    /* A panel's picture with the list that explains its numbers beside it. */
+    .panel-view { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px 32px; align-items: start; margin: var(--doc-space-8) 0; }
+    .panel-view figure { margin: 0; }
+    .panel-view .map-list { margin: 0; }
+    @media (max-width: 820px) { .panel-view { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>A tour of the interface</h1>
+      <p class="lead">The editor is one window: a menu bar over four panels. This page goes through them from top to bottom, then shows how to fold and resize the panels, how the window behaves when it is narrow, and how to change its theme.</p>
+
+      <h2 id="window">The window at a glance</h2>
+      <div class="mfe-tour" data-mfe-tour="start/interface/panels" data-title="The menu bar and the four panels of the editor"></div>
+      <p>The pictures on this page show one project: the quadratic equation solved by completing the square. Its scene plays here, with the strip of its timeline under it:</p>
+      <figure class="mfe-player" data-mfe-player="interface-completing-the-square" data-timeline data-start="13.1"
+              data-caption="The project the pictures show, played by the editor's own renderer."></figure>
+      <p>Download it and open it in the editor to follow along: choose <span class="ui">File ▸ Open…</span> and press <span class="ui">Other file…</span> in the dialog (<a href="projects.html#open">Projects and files</a> explains it). Any other project has the same parts.</p>
+      <div class="mfe-example" data-mfe-example="interface-completing-the-square"></div>
+
+      <h2 id="menu-bar">The menu bar</h2>
+      <p>The bar runs along the top of the window. Its left half holds the menus and the export button.</p>
+      <figure>
+        <img src="../media/start/interface/menu-bar-left.dark.webp" data-themed alt="The left half of the menu bar: the name of the editor, the menus File, Edit, View, Preferences and Help (ringed and numbered 1), and the Export… button with its arrow (2)." width="720" height="68" loading="lazy">
+        <figcaption>The five menus (1) and the <span class="ui">Export…</span> button (2).</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li>The five <strong>menus</strong>. The table below says what each holds; <a href="../reference/menus.html">Every menu</a> lists every entry.</li>
+        <li><strong><span class="ui">Export…</span></strong> opens the Python export for the target you used last (ManimCE the first time). Its arrow lists every export: Python for ManimCE, Python for ManimGL, Video…, Image…, Audio… and HTML…. <a href="../basics/export.html">Exporting</a> says what each gives.</li>
+      </ol>
+      <table>
+        <thead>
+          <tr><th>Menu</th><th>What it holds</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">File</span></td><td>New, Open…, Sync folder…, Recover autosave, Save, Save As… and Project settings…. <a href="projects.html">Projects and files</a></td></tr>
+          <tr><td><span class="ui">Edit</span></td><td>Undo and Redo, Delete formula, copying the properties of a clip, Align and Distribute, Apply palette…, Match colors, Colours in order, the defaults for the intros and outros of new clips, and Suggest morph pairs, which gives a new Morph block pairs to start from.</td></tr>
+          <tr><td><span class="ui">View</span></td><td>The theme, which panels are shown, and Glyph source: which renderer draws the formulas.</td></tr>
+          <tr><td><span class="ui">Preferences</span></td><td>Snapping and its guides, the colour of the glyphs you pick with Alt, the transform handles, how faded the formulas locked in the Preview are drawn, the grid, the standard scale of new formulas, Chroma Lab and Editor palettes.</td></tr>
+          <tr><td><span class="ui">Help</span></td><td>Keyboard shortcuts…, Examples (the example projects the editor carries, <a href="projects.html#examples">Projects and files</a>), Engine inspector…, Third-party licenses… and About.</td></tr>
+        </tbody>
+      </table>
+      <p>The right half of the bar is about the project you have open.</p>
+      <figure>
+        <img src="../media/start/interface/menu-bar-right.dark.webp" data-themed alt="The right half of the menu bar: the project name 'Completing the square' (1), the file 'completing-the-square.mfe.json' (2), the mark 'Saved' (3), 'Renderer: MathJax' (4) and the theme switch (5)." width="740" height="68" loading="lazy">
+        <figcaption>The project's name (1), its file (2) and its mark (3), the renderer (4) and the theme switch (5).</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li>The <strong>project's name</strong>. Click it to rename the project in place: type, then press <kbd data-keys="Enter">Enter</kbd>, or <kbd data-keys="Escape">Esc</kbd> to leave it as it was. A name too long for the bar is cut short; point at it to read the whole name and where it is saved.</li>
+        <li>The <strong>file</strong> the project was opened from or saved to. It appears once the project has one.</li>
+        <li>The <strong>mark</strong>: <em>Not saved yet</em>, <em>Saved</em>, <em>Unsaved changes</em> or <em>Recovered, not saved</em>. <a href="projects.html#status">Projects and files</a> says when each shows.</li>
+        <li>The <strong>renderer</strong> that draws the formulas: <em>MathJax</em> in the browser, <em>LaTeX</em> when a <a href="../manim/companion.html">companion</a> supplies exact glyphs, <em>mixed</em> while both are in use. Point at it for the counts and for the state of the companion.</li>
+        <li>The <strong>theme switch</strong>: dark or light. <a href="#themes">Themes</a> has the rest.</li>
+      </ol>
+
+      <h2 id="creator">Creator</h2>
+      <p>The Creator, on the left, keeps what you can put in the scene. It has three tabs: <span class="ui">Formulas</span> (your formulas and texts), <span class="ui">Templates</span> (a library of ready-made formulas) and <span class="ui">Audio</span> (your recordings).</p>
+      <div class="panel-view">
+        <figure>
+          <img src="../media/start/interface/creator.dark.webp" data-themed alt="The Creator panel with the Formulas tab open. Numbered rings mark the tabs (1), the search and the key of the view (2), the sigma key whose menu selects a kind of object (3), the plus-minus key for the size of the previews (4), the + New button (5) and the row of a formula (6)." width="382" height="583" loading="lazy">
+          <figcaption>The Creator with the Formulas tab open.</figcaption>
+        </figure>
+        <ol class="map-list">
+          <li>The <strong>tabs</strong>: <span class="ui">Formulas</span>, <span class="ui">Templates</span> and <span class="ui">Audio</span>.</li>
+          <li>The <strong>search</strong> (the magnifier, or <kbd data-keys="Mod+F">Ctrl+F</kbd>) and the key of the <strong>view</strong>, which switches the list between the <em>list view</em>, a row per formula with its rendering, and the <em>block view</em>, a grid of squares. It shows the icon of the view it switches to.</li>
+          <li>The <strong>∑ key</strong>: point at it, or click it, and its menu selects every formula, every LaTeX text or every font text of the project (see <a href="../objects/organizing.html#by-kind">Select by kind</a>). A row is greyed while the project has none of its kind.</li>
+          <li>The <strong><span class="ui">+/−</span></strong> key makes the previews of the view you are in larger with a click and smaller with a right-click, up to three times: the rendering of each row in the list view, the tooltip beside a block in the block view (see <a href="../basics/formulas.html#preview-size">Larger previews</a>).</li>
+          <li><strong><span class="ui">+ New</span></strong> writes a new formula. Its arrow lists the other kinds of object.</li>
+          <li>A <strong>row</strong>: the formula's coloured tag, its name (double-click it, or press <kbd data-keys="F2">F2</kbd>, to rename), a badge for its kind (∑ formula, T LaTeX text, P font text), a badge for how it was drawn (<em>MathJax</em>, or <em>exact</em> for LaTeX through the companion), how many clips use it, and the buttons to edit, duplicate and delete it. The drawing under the row shows the formula itself.</li>
+        </ol>
+      </div>
+      <p>Double-click a row to edit its formula, and drag it onto a track of the timeline to put it in the scene. The Creator starts as a fifth of the window, which in a small window can cut long names and the renderer badge: drag the gap beside it to widen it, as the picture above shows. The arrow of <span class="ui">+ New</span> offers three kinds of object:</p>
+      <figure>
+        <img src="../media/start/interface/creator-new-menu.dark.webp" data-themed alt="The + New button with its arrow pressed: a menu with three entries, Formula, Text (LaTeX) and Text (font)." width="261" height="147" loading="lazy">
+        <figcaption>The menu of the <span class="ui">+ New</span> arrow.</figcaption>
+      </figure>
+      <p>Braces, shapes, lines and arrows are not written in the Creator: braces and shapes are added from a clip, and lines and arrows from a clip or from a right-click on empty space in the Preview, as the pages on <a href="../objects/braces.html">braces</a>, <a href="../objects/shapes.html">shapes</a> and <a href="../objects/lines-arrows.html">lines and arrows</a> show. For writing formulas and texts, see <a href="../basics/formulas.html">Writing formulas</a> and <a href="../objects/texts.html">LaTeX texts and font texts</a>.</p>
+
+      <h2 id="preview">Preview</h2>
+      <p>The Preview, in the middle, draws the scene at the playhead, the way the video will show it. The rectangle in the project's background colour is the frame of the scene: what the video will show. Click a formula to select its clip, drag it to move it. A hint at the bottom of the frame says what the pointer can do at that moment, for example that holding <kbd data-keys="Shift">Shift</kbd> shows the transform handles.</p>
+      <p>On its title bar, at the right, are the tools of the view:</p>
+      <figure>
+        <img src="../media/start/interface/preview-tools.dark.webp" data-themed alt="The right end of the Preview's title bar: six tools numbered 1 to 6, from the left: align by symbol, circle selector, keep the transform handles shown, snap to objects, multicamera, and the zoom with its minus, percentage, plus and Fit." width="556" height="66" loading="lazy">
+        <figcaption>The tools of the Preview's title bar.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li><strong>Align by symbol</strong> (<kbd data-keys="Alt+G">Alt+G</kbd>): click a symbol to move, then the symbol it should line up with. <a href="../layout/align-symbol.html">Align by symbol</a></li>
+        <li><strong>Circle selector</strong> (<kbd data-keys="S">S</kbd>): the pointer becomes a circle that picks the nearest symbol, so that thin symbols such as a minus sign can be picked.</li>
+        <li><strong>Keep the transform handles shown</strong>: the handles that scale and rotate the selected clip show only while you hold <kbd data-keys="Shift">Shift</kbd>, unless you press this.</li>
+        <li><strong>Snap to objects</strong>: a dragged formula snaps to the edges and centres of the others and of the frame. Hold <kbd data-keys="Mod">Ctrl</kbd> to suspend it.</li>
+        <li><strong>Multicamera</strong> (<kbd data-keys="Alt+M">Alt+M</kbd>): gives the scene a camera that can move and zoom while the video plays. <a href="../animations/camera.html">The camera</a></li>
+        <li>The <strong>zoom</strong>: <em>Zoom out</em>, the percentage, <em>Zoom in</em>, and <span class="ui">Fit</span>, which shows the whole frame again. Zoom with <kbd data-keys="Mod">Ctrl</kbd> and the wheel, and pan with the middle button.</li>
+      </ol>
+      <p>Under the Preview is the playback bar:</p>
+      <figure>
+        <img src="../media/start/interface/transport.dark.webp" data-themed alt="The playback bar. Rings numbered 1 to 4 mark the five playback keys, the stop and loop keys, the grid controls and the three time readouts." width="808" height="74" loading="lazy">
+        <figcaption>The playback bar.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li>The <strong>playback keys</strong>: <em>Go to start</em> (<kbd data-keys="Home">Home</kbd>), <em>Previous frame</em> (<kbd data-keys="ArrowLeft">←</kbd>), <em>Play</em> and <em>Pause</em> (<kbd data-keys="Space">Space</kbd>), <em>Next frame</em> (<kbd data-keys="ArrowRight">→</kbd>) and <em>Go to end</em> (<kbd data-keys="End">End</kbd>). With <kbd data-keys="Shift">Shift</kbd> the arrows step a second.</li>
+        <li><strong>Stop</strong>, which also returns to the start, and <strong>Loop</strong>.</li>
+        <li>The <strong>grid</strong>: show it, make it sparser or denser, and choose whether it holds the formula's centre or its nearest edges while you drag. <a href="../basics/preview.html">Placing things in the Preview</a></li>
+        <li>The <strong>time</strong> of the playhead, three ways: in seconds, as minutes, seconds and frames, and as the frame number out of the total.</li>
+      </ol>
+
+      <h2 id="animations">Animations</h2>
+      <p>The Animations panel, on the right, edits whatever you have selected. With nothing selected it says <em>Select a clip on the timeline to edit its animations</em>. Select a clip, and it shows that clip:</p>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/start/interface/animations-relations.dark.webp" data-themed alt="The Animations panel for the clip half_b_squared, on its Relations tab: the clip's header (1), the two tabs (2), and a drawing of the glyphs of half_b_squared linked to the glyphs of steps." width="310" height="583" loading="lazy">
+          <figcaption>The <span class="ui">Relations</span> tab.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/start/interface/animations-timing.dark.webp" data-themed alt="The same panel on its Timing tab: the Timing section with the track, start, end and length of the clip, and the Intro section with its animation, duration and easing." width="310" height="583" loading="lazy">
+          <figcaption>The <span class="ui">Timing</span> tab.</figcaption>
+        </figure>
+      </div>
+      <ul>
+        <li>The <strong>header</strong> names the clip and where it is, and has <span class="ui">Delete clip</span>.</li>
+        <li><span class="ui">Relations</span> shows how the glyphs of this clip are linked to the glyphs of other clips, and lets you add, edit and remove relations. <a href="../transforms/relations.html">How relations work</a></li>
+        <li><span class="ui">Timing</span> holds the clip's track, start, end and length; its intro; its initial state (position, scale, colour); its animation blocks, with <span class="ui">Add animation</span>; and its outro. <a href="../basics/intro-outro.html">Appearing and disappearing</a>, <a href="../animations/blocks.html">animation blocks</a></li>
+      </ul>
+      <p>The panel follows the selection: it shows an animation block's own settings when you select a block, the clips of a formula you select in the Creator, and the properties of an audio clip when you select one.</p>
+
+      <h2 id="timeline">Timeline</h2>
+      <p>The Timeline, along the bottom, lays the scene out in time. Its toolbar is on top, then the ruler, then one row for each track: a header on the left and, beside it, the lane that holds the clips.</p>
+      <figure>
+        <img src="../media/start/interface/timeline-toolbar.dark.webp" data-themed alt="The toolbar of the Timeline. Numbered rings mark + Track (1), Audio (2), Snap (3), the zoom out and zoom in keys (4), the slider that moves the view (5), and the key that shows the whole timeline with the readouts of the zoom and the minus and plus of dt (6)." width="910" height="69" loading="lazy">
+        <figcaption>The toolbar of the Timeline.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li><span class="ui">+ Track</span> adds a track on top of the others, in front of them.</li>
+        <li><span class="ui">Audio</span> adds an audio track, for recordings.</li>
+        <li><span class="ui">Snap</span> makes clips snap to the playhead, to the edges of other clips and to the time grid. Hold <kbd data-keys="Shift">Shift</kbd> to suspend it.</li>
+        <li>The <strong>zoom</strong> keys, <em>Zoom out</em> and <em>Zoom in</em>.</li>
+        <li>The <strong>slider</strong> moves the view along the timeline. Its thumb fills the bar while the whole timeline is in view, and gets shorter as you zoom in.</li>
+        <li>The <em>Show the whole timeline</em> key, the zoom in pixels per second, and <strong>dt</strong>: the time between two small ticks of the ruler, which is also the step clips snap to. The <span class="ui">−</span> and <span class="ui">+</span> on either side of it set a dt of your own, until the zoom changes. <a href="../basics/timeline.html#dt-of-your-own">A time step of your own</a></li>
+      </ol>
+      <p>The key between <span class="ui">Snap</span> and the zoom keys turns the Slides mode on and off: the ruler then shows where the scene animates and where it rests, with its pauses and comments. <a href="../basics/slides.html">Slides and the HTML page</a></p>
+      <p>Click or drag along the ruler to move the playhead. Each track has a header:</p>
+      <figure>
+        <img src="../media/start/interface/timeline-tracks.dark.webp" data-themed alt="The corner of the Timeline and the header of its first track, Title, made taller. Numbered rings mark the height keys of the corner (1), the name of the track (2), its own height keys (3), its eye (4), its padlock (5), its two arrows (6) and its cross (7)." width="470" height="138" loading="lazy">
+        <figcaption>The corner of the timeline and the header of the first track, made taller with its own keys so that the numbers fit.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li>The keys in the <strong>corner</strong> make every track lower or taller; the percentage between them puts every track back to the standard height.</li>
+        <li>The track's <strong>name</strong>. Double-click it, or press <kbd data-keys="Enter">Enter</kbd> or <kbd data-keys="F2">F2</kbd>, to rename the track.</li>
+        <li>The <strong>height keys</strong> of this track alone, <em>Lower</em> and <em>Taller</em>.</li>
+        <li>The <strong>eye</strong> hides the track in the Preview; a hidden track is still exported. On an audio track the key mutes it instead.</li>
+        <li>The <strong>padlock</strong> locks the track: its clips cannot be edited.</li>
+        <li>The <strong>arrows</strong> move the track towards the front or towards the back. The track at the top is drawn in front of the others.</li>
+        <li>The <strong>cross</strong> deletes the track. The editor asks first, and lists what goes with it.</li>
+      </ol>
+      <p>A clip is a block in a lane: its intro at the left, its outro at the right, and its animation blocks inside it as small coloured labels. <a href="../basics/timeline.html">Working with the timeline</a> goes through all of it.</p>
+
+      <h2 id="panels">Folding and resizing panels</h2>
+      <p>The gaps between the panels are handles: drag one to give a panel more room or less. The clip drags the gap between the Creator and the Preview, and then the edge of the Timeline, out and back.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/interface/resize-panels.dark.webm" poster="../media/start/interface/resize-panels.dark.webp" width="640" height="340" muted loop playsinline preload="none"></video>
+        <figcaption>Dragging the gap between the Creator and the Preview, and the edge of the Timeline.</figcaption>
+      </figure>
+      <p>The Creator, the Animations panel and the Timeline also fold to their title bars, so the Preview can have the room. Press the arrow in a panel's header, or double-click the header; press it again to bring the panel back. A panel keeps what it was showing while it is folded.</p>
+      <figure>
+        <img src="../media/start/interface/folded.dark.webp" data-themed alt="The editor with the Creator folded to a narrow strip at the left and the Timeline folded to a bar at the bottom, so that the Preview fills the middle of the window. Rings numbered 1 and 2 mark the arrows that bring them back." width="1440" height="900" loading="lazy">
+        <figcaption>The Creator (1) and the Timeline (2) folded. The arrow in each bar brings its panel back.</figcaption>
+      </figure>
+      <p><span class="ui">View ▸ Panels</span> lists the three panels that fold, <span class="ui">Creator</span>, <span class="ui">Animations</span> and <span class="ui">Timeline</span>, ticked while they are open; choosing one folds it or brings it back. Outside a text field, the key <kbd data-keys="C">C</kbd> does it for the Creator and <kbd data-keys="A">A</kbd> for the Animations panel.</p>
+      <p>The sizes of the panels, and which ones are folded, are kept in this browser: the next time you open the editor, it looks as you left it. Dragging a gap past the smallest size a panel can have folds that panel.</p>
+
+      <h2 id="zen">Zen mode</h2>
+      <p>On a small screen the four panels leave the Preview little room. <span class="ui">Preferences ▸ Zen mode</span> arranges the same window another way, designed for a screen of 1366 by 768 pixels: the Timeline becomes a column down the left side, and the Preview takes everything else. Nothing is taken away: the menus, the title bars of the panels and the transport are the ones you know.</p>
+      <figure>
+        <img src="../media/start/interface/zen.dark.webp" data-themed alt="The editor in Zen mode in a small window. Ring 1 marks the Timeline, a narrow column on the left where the tracks stand side by side and time runs down, with the ruler along its right edge. Ring 2 marks a thin strip along the top of the Preview, with the buttons Creator and Animations and a row of small tools. Ring 3 marks the Preview, which fills the rest of the window." width="1366" height="768" loading="lazy">
+        <figcaption>Zen mode at 1366×768: the Timeline as a column (1), the strip with the two panels and the tools (2), and the Preview (3).</figcaption>
+      </figure>
+      <p>The Timeline is the same timeline, turned: <strong>time runs down</strong> the screen, and the tracks stand side by side. It is the usual timeline turned a quarter: the ruler runs down the right edge of the column, beside the Preview, so the pointer has a short way to it, and what is under the ruler in the usual layout is beside it here. The first track is the one next to the ruler, and the others follow to the left. The track headers are at the top of the columns, and the scrollbar of time is on the other side, down the left edge. Everything you do there works along the other direction of the screen:</p>
+      <ul>
+        <li>Drag a clip down to move it later, and sideways to put it on another track. Its start and its end are its top and its bottom edges.</li>
+        <li>The wheel moves along time; <kbd data-keys="Shift">Shift</kbd> with the wheel moves across the tracks, and <kbd data-keys="Mod">Ctrl</kbd> with the wheel zooms about the time under the pointer.</li>
+        <li>The arrow keys follow the screen: <kbd data-keys="ArrowUp">↑</kbd> and <kbd data-keys="ArrowDown">↓</kbd> go along time, <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> across the tracks, <kbd data-keys="ArrowRight">→</kbd> towards the ruler; <kbd data-keys="Alt">Alt</kbd> with <kbd data-keys="ArrowUp">↑</kbd> or <kbd data-keys="ArrowDown">↓</kbd> nudges a clip by a frame.</li>
+        <li>The names of clips and tracks are written across their track, and cut with “…” where they do not fit. The name of an animation, on a block or on the intro or the outro of a clip, runs down what it names under its icon, and reads from top to bottom. The tracks start wider than in the usual layout; the two keys in a track's header, or its side edges, make it wider or narrower, and each layout keeps the sizes you give it.</li>
+      </ul>
+      <p>The Creator and the Animations panel are behind the two buttons at the start of the strip. Each button opens and closes its own panel, as a half of a drawer over the Preview: the Creator on the left, the Animations panel on the right. Open both and they stand side by side; open one and you still see the Preview through the other half. A panel stays open while you work on the timeline. A press on the Preview's scene closes the drawer, and does what a press there always does; so does <kbd data-keys="Escape">Esc</kbd>, though in a field you are typing in <kbd data-keys="Escape">Esc</kbd> belongs to the field. From the keyboard, <kbd data-keys="C">C</kbd> opens and closes the Creator and <kbd data-keys="A">A</kbd> the Animations panel.</p>
+      <figure>
+        <img src="../media/start/interface/zen-drawer.dark.webp" data-themed alt="Zen mode with both buttons of the strip pressed, marked by ring 1: the Creator covers the upper left of the Preview and the Animations panel the upper right. Ring 2 marks the tools of the strip, from a magnifier to the Undo and Redo arrows. Ring 3 marks a short grip in the middle of the lower edge of the Animations panel. Ring 4 marks an arrow at the right end of the strip." width="1366" height="768" loading="lazy">
+        <figcaption>The Creator and the Animations panel, side by side over the Preview (1). The tools of the strip (2), the grip that makes the drawer taller or shorter (3), and the arrow that moves the strip to the bottom of the Preview (4).</figcaption>
+      </figure>
+      <p>Drag the grip on the free edge of a panel to make the drawer taller or shorter, and the line where the two panels meet to give one of them more room; with either focused, the arrow keys do it in steps. The arrow at the far end of the strip moves the strip to the bottom of the Preview, and the drawer then rises from there; press it again to bring the strip back to the top.</p>
+      <p>The strip also keeps at hand what you would open the Creator for: the magnifier that <a href="../basics/formulas.html">searches the formulas</a>, <span class="ui">+ New</span> with the arrow that lists every kind of object, <span class="ui">My templates</span> and <span class="ui">Favorites</span>, and then Undo and Redo.</p>
+      <p>In Zen mode <span class="ui">View ▸ Panels</span> opens and closes the half of <span class="ui">Creator</span> and the half of <span class="ui">Animations</span>, and folds the <span class="ui">Timeline</span> to a strip at the left. The browser remembers the mode, the side of the strip, which panels were open, how tall the drawer was and where its halves met. A window narrower than about 760 pixels keeps the stacked layout below, with Zen mode on or off.</p>
+      <p>In any layout, hold <kbd data-keys="T">T</kbd> and move the mouse: the timeline's view moves along time with it, wherever the pointer is, as if you were dragging its scrollbar. Let go of the key and the view stays there. Hold <kbd data-keys="Shift+T">Shift+T</kbd> and the playhead follows the pointer instead, to the time the pointer is level with; let go and it stays there. While you hold the key, the Preview outlines and selects nothing of what the pointer passes over.</p>
+
+      <h2 id="narrow">Narrow windows</h2>
+      <p>Under about 760 pixels wide, on a phone or on a desktop zoomed to 400 %, four panels side by side would not fit. The window stacks them instead: the Creator, the Preview, the Animations panel and the Timeline, one under the other, each as tall as most of the window. The menu bar stays at the top, wrapped over as many lines as it needs, and the stack scrolls up and down under it, never sideways. The resizable layout comes back as soon as the window is wide enough. While the panels are stacked there is nothing to fold, and the three entries of <span class="ui">View ▸ Panels</span> are greyed out.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/interface/narrow-scroll.dark.webm" poster="../media/start/interface/narrow-scroll.dark.webp" width="420" height="720" muted loop playsinline preload="none"></video>
+        <figcaption>A window 420 pixels wide: the menu bar wrapped over several lines, and the four panels one under the other. The clip scrolls down through them and back up.</figcaption>
+      </figure>
+
+      <h2 id="themes">Themes</h2>
+      <p>The editor has a dark theme and a light one, both in the same Mint style. It starts in the dark one. The half-filled circle at the right end of the menu bar, beside the renderer, flips between them: the whole window changes at once.</p>
+      <figure>
+        <img src="../media/start/interface/theme-menu.dark.webp" data-themed alt="The View menu open with its Theme submenu: System, Dark and Light, with Dark ticked." width="529" height="492" loading="lazy">
+        <figcaption><span class="ui">View ▸ Theme</span>.</figcaption>
+      </figure>
+      <p><span class="ui">View ▸ Theme</span> chooses between <span class="ui">System</span>, <span class="ui">Dark</span> and <span class="ui">Light</span>. System follows your operating system's setting, and follows it when it changes. The switch in the bar, and <span class="ui">View ▸ Toggle theme</span>, flip between dark and light, and from then on the choice is yours rather than the system's. The editor remembers it in this browser.</p>
+      <p>This documentation has a theme switch of its own in its header, and shows its pictures of the editor in the theme you are reading in.</p>
+
+      <h2 id="contrast">High contrast</h2>
+      <p>When the system asks for forced colours, as Windows high contrast does, the browser replaces the colours of the page with the system's. The editor stays readable: every state, such as selected, pressed or focused, keeps a ring, a border or an underline instead of relying on a colour, and the formulas in the Preview and in the Creator keep their own colours.</p>
+      <figure>
+        <img src="../media/start/interface/forced-colours.dark.webp" data-themed alt="The top left of the editor under forced colours: the system's plain colours, every control with a border or an underline, the gaps between the panels in a solid colour, and the formulas in their own colours." width="880" height="360" loading="lazy">
+        <figcaption>The top left of the editor under forced colours.</figcaption>
+      </figure>
+
+      <h2 id="keyboard">Using the keyboard</h2>
+      <p>The menu bar works from the keyboard. <kbd data-keys="Tab">Tab</kbd> moves from one menu to the next, <span class="ui">File</span> first; <kbd data-keys="ArrowDown">↓</kbd> opens the focused menu on its first entry (<kbd data-keys="ArrowUp">↑</kbd>, on its last), and <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> move to the previous or next menu, opening it if one is open. <kbd data-keys="Home">Home</kbd> and <kbd data-keys="End">End</kbd> go to the first and last, a letter goes to the next menu that starts with it, and <kbd data-keys="Escape">Esc</kbd> closes the menu. Inside an open menu, <kbd data-keys="ArrowDown">↓</kbd> and <kbd data-keys="ArrowUp">↑</kbd> move between the entries, <kbd data-keys="ArrowRight">→</kbd> on an entry that has a submenu opens it, and <kbd data-keys="Enter">Enter</kbd> chooses.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/interface/menu-keys.dark.webm" poster="../media/start/interface/menu-keys.dark.webp" width="760" height="330" muted loop playsinline preload="none"></video>
+        <figcaption>Reaching the File menu with Tab, opening it with ↓, then moving along the bar with →.</figcaption>
+      </figure>
+      <aside class="callout tip">
+        <p>Point at almost any button and the editor names it and gives its key. Press <kbd>?</kbd> anywhere outside a text field for the full list, or choose <span class="ui">Help ▸ Keyboard shortcuts…</span>. <a href="../reference/shortcuts.html">Keyboard and mouse shortcuts</a> has the table, searchable.</p>
+      </aside>
+      <aside class="try">
+        <ol>
+          <li>Click the project's name in the bar, type a new one, and press <kbd data-keys="Enter">Enter</kbd>. The mark next to it turns to <em>Unsaved changes</em>.</li>
+          <li>Press the arrow in the Timeline's header. The timeline folds to its title bar.</li>
+          <li>Open <span class="ui">View ▸ Panels ▸ Timeline</span> to bring it back.</li>
+          <li>Press the half-filled circle in the bar to try the other theme, and press it again.</li>
+        </ol>
+      </aside>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="projects.html">Projects and files</a> covers new, open and save, autosave and recovery, and the project library.</li>
+        <li><a href="../basics/formulas.html">Writing formulas</a> begins the basics: the formula editor, its LaTeX fields and the Creator list.</li>
+        <li><a href="../reference/menus.html">Every menu</a> lists every entry of every menu, with its keys.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

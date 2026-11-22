@@ -1,0 +1,756 @@
+/* The project's page (docs/index.html). Its tokens, buttons, cards, player, widgets and Python tabs
+ * are the documentation's (web/assets/site.css, web/widgets/widgets.css): this file lays out the
+ * page alone, in both themes, from 320px wide. */
+
+body.landing {
+  display: block;
+  font-size: 16px;
+}
+
+.landing main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4.8vw, 64px) 40px;
+}
+
+.landing h1,
+.landing h2,
+.landing h3 {
+  color: var(--doc-text);
+}
+
+.landing code {
+  padding: 1px 5px;
+  border: 1px solid var(--doc-border);
+  border-radius: 5px;
+  background: var(--doc-code-bg);
+  font-family: var(--doc-font-mono);
+  font-size: 0.86em;
+}
+
+.landing .mfe-code code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: inherit;
+}
+
+/* ---- The header ------------------------------------------------------------------------------ */
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--doc-space-2);
+  height: var(--doc-header-h);
+  padding: 0 clamp(12px, 3vw, 32px);
+  border-bottom: 1px solid var(--doc-border);
+  background: var(--doc-bar-light), var(--doc-sheen), var(--doc-bar-gradient);
+  box-shadow: 0 6px 18px rgb(0 5 12 / 0.18);
+}
+
+.lp-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin-right: var(--doc-space-4);
+  color: var(--doc-text);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lp-brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lp-nav {
+  display: flex;
+  gap: 2px;
+}
+
+.lp-nav a,
+.lp-header-link {
+  padding: 6px 11px;
+  border: 1px solid transparent;
+  border-radius: var(--doc-radius-control);
+  color: var(--doc-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--doc-motion),
+    border-color var(--doc-motion),
+    color var(--doc-motion);
+}
+
+.lp-nav a:hover,
+.lp-header-link:hover {
+  border-color: var(--doc-border);
+  background: var(--doc-hover);
+  color: var(--doc-text);
+}
+
+.lp-nav a[aria-current='true'] {
+  color: var(--doc-accent);
+}
+
+.lp-header-spacer {
+  flex: 1;
+}
+
+.lp-header-link {
+  color: var(--doc-text);
+}
+
+.lp-short {
+  display: none;
+}
+
+/* ---- Common pieces ----------------------------------------------------------------------------- */
+.lp-section {
+  padding: 72px 0 8px;
+  scroll-margin-top: calc(var(--doc-header-h) + 8px);
+}
+
+.lp-section h2 {
+  margin: 8px 0 0;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 740;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+}
+
+.lp-section h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 680;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.lp-section p {
+  margin: 0;
+  color: var(--doc-text-muted);
+  line-height: 1.6;
+}
+
+.lp-section p strong,
+.lp-section li strong {
+  color: var(--doc-text);
+  font-weight: 650;
+}
+
+.lp-section a:not([class]) {
+  color: var(--doc-link);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--doc-link) 45%, transparent);
+  text-underline-offset: 3px;
+}
+
+.lp-section a:not([class]):hover {
+  text-decoration-color: currentColor;
+}
+
+.lp-section-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: 28px;
+}
+
+.lp-section-top > p {
+  max-width: 34rem;
+  color: var(--doc-text-faint);
+  font-size: 15px;
+}
+
+/* A link onwards, into the documentation: "→ Page". */
+.lp-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 18px !important;
+  font-size: 14px;
+}
+
+.lp-more a:not([class]),
+.lp-tile-link,
+.lp-exports a,
+.lp-get a:not(.btn) {
+  color: var(--doc-link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lp-more a:not([class])::before,
+.lp-tile-link::before,
+.lp-exports a::before,
+.lp-get a:not(.btn)::before {
+  margin-right: 6px;
+  content: '→';
+}
+
+.lp-more a:not([class]):hover,
+.lp-tile-link:hover,
+.lp-exports a:hover,
+.lp-get a:not(.btn):hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lp-card {
+  min-width: 0;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius-panel);
+  background: var(--doc-panel-gradient), var(--doc-surface);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+}
+
+.lp-card > p {
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.lp-card > .lp-more {
+  margin-top: 14px !important;
+  margin-bottom: 0;
+}
+
+/* Two columns: the words and what they are about. */
+.lp-split {
+  display: grid;
+  gap: 32px 48px;
+  align-items: center;
+}
+
+.lp-split-wide {
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+}
+
+.lp-split-media {
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+}
+
+.lp-copy > p + p {
+  margin-top: 12px;
+}
+
+.lp-copy > h2 {
+  margin-bottom: 16px;
+}
+
+.lp-demo {
+  min-width: 0;
+}
+
+.lp-try,
+.lp-points {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--doc-text-muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.lp-try {
+  counter-reset: try;
+}
+
+.lp-try li,
+.lp-points li {
+  position: relative;
+  padding-left: 34px;
+}
+
+.lp-try li + li,
+.lp-points li + li {
+  margin-top: 10px;
+}
+
+.lp-try li::before {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  border: 1px solid color-mix(in srgb, var(--doc-accent-strong) 50%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--doc-accent) 12%, var(--doc-surface));
+  color: var(--doc-accent);
+  font-family: var(--doc-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  content: counter(try);
+  counter-increment: try;
+  place-items: center;
+}
+
+.lp-points li::before {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--doc-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--doc-accent) 18%, transparent);
+  content: '';
+  transform: rotate(45deg);
+}
+
+/* ---- The hero ---------------------------------------------------------------------------------- */
+.lp-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 48px;
+  align-items: center;
+  padding: 64px 0 24px;
+}
+
+.lp-hero h1 {
+  margin: 14px 0 20px;
+  font-size: clamp(34px, 4.6vw, 60px);
+  font-weight: 790;
+  letter-spacing: -0.045em;
+  line-height: 1.06;
+}
+
+.lp-hero h1 em {
+  color: var(--doc-accent);
+  font-style: normal;
+}
+
+.lp-lead {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--doc-text-muted);
+  font-size: 17px;
+  line-height: 1.62;
+}
+
+.lp-lead strong {
+  color: var(--doc-text);
+  font-weight: 650;
+}
+
+.lp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--doc-space-3);
+  margin-top: 28px;
+}
+
+.lp-actions .btn,
+.lp-get .btn {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.lp-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--doc-text-faint);
+  font-size: 13px;
+}
+
+.lp-facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.lp-facts li::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--doc-accent);
+  content: '';
+}
+
+.lp-hero-stage {
+  min-width: 0;
+}
+
+.lp-stage-note {
+  margin: 12px 4px 0;
+  color: var(--doc-text-faint);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lp-stage-note a {
+  color: var(--doc-link);
+}
+
+.landing .device figure.mfe-player {
+  margin: 0;
+}
+
+/* ---- 02: two rows, the words on alternate sides ----------------------------------------------- */
+.lp-rows {
+  display: grid;
+  gap: 48px;
+}
+
+.lp-rows h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+/* ---- 04: the gallery of scenes ----------------------------------------------------------------- */
+.lp-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-tile {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 10px 10px 16px;
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius-panel);
+  background: var(--doc-panel-gradient), var(--doc-surface);
+  box-shadow: inset 0 1px 0 var(--doc-edge-light);
+}
+
+.lp-tile figure.mfe-player {
+  margin: 0 0 14px;
+}
+
+.lp-tile h3,
+.lp-tile p,
+.lp-tile-link {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.lp-tile p {
+  flex: 1;
+  font-size: 14px;
+}
+
+.lp-tile-link {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.lp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-chips a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--doc-border);
+  border-radius: 999px;
+  background: var(--doc-surface);
+  color: var(--doc-text);
+  font-size: 13px;
+  font-weight: 550;
+  text-decoration: none;
+  transition:
+    border-color var(--doc-motion),
+    background-color var(--doc-motion);
+}
+
+.lp-chips a:hover {
+  border-color: var(--doc-accent-strong);
+  background: var(--doc-hover);
+}
+
+.lp-chips [data-icon] {
+  display: inline-flex;
+  color: var(--doc-accent);
+}
+
+/* ---- 05: the Python beside its scene ----------------------------------------------------------- */
+.lp-code {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.lp-code-scene figure.mfe-player {
+  margin: 0;
+}
+
+.lp-code .mfe-code {
+  margin: 0;
+}
+
+.lp-code .mfe-code pre {
+  max-height: 420px;
+}
+
+.lp-exports {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-exports li {
+  display: flex;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius-panel);
+  background: var(--doc-surface);
+}
+
+.lp-exports p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.lp-exports a {
+  font-size: 14px;
+}
+
+/* ---- 06: the exported page --------------------------------------------------------------------- */
+.lp-deck {
+  overflow: hidden;
+  border: 1px solid var(--doc-border);
+  border-radius: var(--doc-radius-panel);
+  background: var(--doc-surface);
+  box-shadow: var(--doc-shadow);
+}
+
+/* ---- 07: the learning path --------------------------------------------------------------------- */
+.lp-path {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ---- 08: getting it ---------------------------------------------------------------------------- */
+.lp-get {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-get .lp-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.lp-get .lp-card > p {
+  flex: 1;
+}
+
+.lp-get-step {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 14px;
+  border-radius: 9px;
+  background: var(--doc-primary-gradient);
+  color: var(--doc-primary-text);
+  font-family: var(--doc-font-mono);
+  font-size: 14px;
+  font-weight: 750;
+  place-items: center;
+}
+
+.lp-get a:not(.btn) {
+  font-size: 14px;
+}
+
+.lp-source {
+  margin-top: 20px !important;
+  font-size: 14px;
+}
+
+.lp-source a {
+  margin-left: 6px;
+}
+
+/* ---- The footer -------------------------------------------------------------------------------- */
+.lp-footer {
+  margin-top: 72px;
+  padding: 28px clamp(16px, 4.8vw, 64px) 36px;
+  border-top: 1px solid var(--doc-border);
+  background: var(--doc-surface-header, var(--doc-surface));
+  color: var(--doc-text-muted);
+  font-size: 14px;
+}
+
+.lp-footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.lp-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--doc-text);
+  font-weight: 650;
+}
+
+.lp-footer-brand .brand-mark {
+  width: 20px;
+  height: 20px;
+}
+
+.lp-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-footer-links a {
+  color: var(--doc-text-muted);
+  text-decoration: none;
+}
+
+.lp-footer-links a:hover {
+  color: var(--doc-link);
+  text-decoration: underline;
+}
+
+.lp-footer-note {
+  max-width: 1240px;
+  margin: 16px auto 0;
+  color: var(--doc-text-faint);
+  font-size: 13px;
+}
+
+/* ---- Narrower windows -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .lp-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lp-path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .lp-nav {
+    display: none;
+  }
+
+  .lp-hero,
+  .lp-split-wide,
+  .lp-split-media,
+  .lp-code {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-hero {
+    gap: 32px;
+    padding-top: 44px;
+  }
+
+  /* The words first, then what they are about. */
+  .lp-split-media > .lp-copy {
+    order: -1;
+  }
+}
+
+@media (max-width: 860px) {
+  .lp-exports,
+  .lp-get {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .lp-header-github {
+    display: none;
+  }
+
+  .lp-brand {
+    margin-right: 0;
+  }
+
+  .lp-section {
+    padding-top: 56px;
+  }
+
+  .lp-gallery,
+  .lp-path {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-card {
+    padding: 16px 14px 18px;
+  }
+
+  .lp-actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 440px) {
+  .lp-header {
+    gap: 2px;
+  }
+
+  .lp-brand {
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .lp-long {
+    display: none;
+  }
+
+  .lp-short {
+    display: inline;
+  }
+}
+
+@media (max-width: 340px) {
+  .lp-brand-name {
+    display: none;
+  }
+}

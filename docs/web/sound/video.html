@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exporting video · Manim Formula Editor</title>
+  <meta name="description" content="Export a video of your scene: encoded in the browser, encoded by the companion's ffmpeg, or rendered by your own Manim.">
+  <meta name="mfe:id" content="sound/video">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Video">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Exporting video</h1>
+      <p class="lead">Turn the scene into a video file. Your browser can encode it, the companion’s
+        ffmpeg can, or your own Manim can draw it: pick the one that fits what you have.</p>
+
+      <h2 id="dialog">The dialog</h2>
+      <p>Choose <span class="ui">Export ▸ Video…</span>. The same entry is in the list that opens
+        from the arrow of the <span class="ui">Export…</span> button, next to the menus.
+        <a href="../basics/export.html">Exporting</a> says what each export is for.</p>
+      <figure>
+        <img src="../media/sound/video/dialog-browser.dark.webp" data-themed
+             alt="The Export video dialog with the Browser encoder chosen; Companion · ffmpeg and Render with Manim are greyed out, each with the reason. Below are the format, size, frame rate and range fields, the summary of the file and the Export button."
+             width="640" height="586" loading="lazy">
+        <figcaption>The dialog with no companion running: <span class="ui">Browser</span> is the
+          encoder that works, and the other two say why they do not.</figcaption>
+      </figure>
+      <ol>
+        <li><strong>Encoder</strong>: what makes the video (next section). One that is not
+          available stays on the list, greyed out, with the reason.</li>
+        <li><strong>Format</strong>: the file type. The list depends on the encoder.</li>
+        <li><strong>Size</strong>: the project’s own size, a preset or a size of your own.</li>
+        <li><strong>Frame rate</strong>: the project’s, a preset or your own.</li>
+        <li><strong>Range</strong>: the whole scene, or a stretch of it.</li>
+        <li><span class="ui">Export</span> starts it.</li>
+      </ol>
+      <p>Under the fields, one line says what you will get — for example <em>672 frames · 11.2 s ·
+        1920 × 1080 at 60 fps</em>. The file is named after the project and lasts exactly its
+        frames divided by its frame rate, to the frame.</p>
+
+      <aside class="try">
+        <ol>
+          <li>Open a project and choose <span class="ui">Export ▸ Video…</span>.</li>
+          <li>Under <span class="ui">Size</span> choose <span class="ui">Custom…</span> and type
+            <code>320</code> and <code>180</code>. Under <span class="ui">Frame rate</span> choose
+            <span class="ui">Custom…</span> and type <code>10</code>. Under
+            <span class="ui">Range</span> choose <span class="ui">Custom</span> and type
+            <code>0</code> to <code>1.5</code>.</li>
+          <li>The line under the fields reads <em>15 frames · 1.5 s · 320 × 180 at 10 fps</em>.
+            Press <span class="ui">Export</span>: a very small file, in a moment.</li>
+        </ol>
+      </aside>
+
+      <h2 id="encoders">Three ways to make the video</h2>
+      <p>The encoder decides who draws and encodes the frames. Each one changes the fields under
+        it; the sections that follow show them one by one.</p>
+      <table>
+        <thead>
+          <tr><th></th><th>Browser</th><th>Companion · ffmpeg</th><th>Render with Manim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>What draws the picture</td><td>The editor, as in the Preview</td><td>The editor, as in the Preview</td><td>Manim, from the exported Python</td></tr>
+          <tr><td>What you need</td><td>A browser that can encode video (Chrome and Edge can)</td><td>The <a href="../manim/companion.html">companion</a> running, and ffmpeg on its machine</td><td>The companion started with <code>--allow-manim-render</code>, and a ManimCE or ManimGL it can reach</td></tr>
+          <tr><td>Formats</td><td>MP4 (H.264 or AV1), WebM (VP9)</td><td>MP4 (H.264), WebM (VP9), MOV (ProRes), GIF</td><td>MP4</td></tr>
+          <tr><td>Range</td><td>Whole scene or custom</td><td>Whole scene or custom</td><td>Whole scene</td></tr>
+          <tr><td>Sound</td><td>Yes</td><td>Yes, except in a GIF</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+      <p>Start with <strong>Browser</strong>: it needs nothing. Choose <strong>Companion ·
+        ffmpeg</strong> for a cleaner H.264 file, for ProRes or for a GIF. Choose <strong>Render
+        with Manim</strong> when the video must be Manim’s own picture, for example to put it next
+        to scenes you wrote by hand.</p>
+
+      <h2 id="browser">In the browser</h2>
+      <p>The browser encodes the frames itself, with WebCodecs, and nothing else has to run. The
+        frames are drawn by the same renderer as the Preview, so the video matches what you see. A
+        scene with a <a href="../animations/camera.html">camera</a> is filmed through it, as the
+        camera view shows it.</p>
+      <ul>
+        <li><span class="ui">MP4 · H.264</span>, <span class="ui">MP4 · AV1</span> and
+          <span class="ui">WebM · VP9</span> are the formats. A format your browser cannot encode
+          at the size you chose is greyed out and says <em>not supported by this browser at this
+          size</em>. When none can be, the dialog says so and suggests a smaller size, or the
+          companion.</li>
+        <li>Where the browser has no WebCodecs at all, <span class="ui">Browser</span> is greyed
+          out: <em>This browser cannot encode video (WebCodecs is missing). Use Chrome or Edge, or
+          the companion.</em></li>
+        <li>The dialog estimates the size: <em>About 25.2 MB (H.264 at 18.7 Mbit/s, written to a
+          file as it is encoded)</em>. It is the bitrate the editor picks, times the length, and
+          the sound when you include it. Where the browser keeps the file in memory it says
+          <em>assembled in memory, then downloaded</em> instead. A simple scene comes out far
+          smaller than the estimate: the one in the last figure of this page was estimated at 92 kB
+          and made 5 kB.</li>
+      </ul>
+      <aside class="callout note">
+        <p>Chrome and Edge ask where to save the file before they start, and write it as it is
+          encoded, so a long video never has to fit in memory. Other browsers keep the whole file
+          in memory and download it at the end; the dialog tells which will happen, and warns when
+          the estimate goes over 1 GB.</p>
+      </aside>
+      <aside class="callout warning">
+        <p><strong>Specks in H.264.</strong> Chrome’s own H.264 encoder can leave a few pixels of a
+          moving object behind it: small dots that stay until the next keyframe, one every two
+          seconds. For an MP4 without them, choose <span class="ui">Companion · ffmpeg</span>,
+          which encodes H.264 with x264. Without a companion, <span class="ui">WebM · VP9</span>
+          leaves far fewer.</p>
+      </aside>
+
+      <h2 id="companion">With the companion’s ffmpeg</h2>
+      <p>The editor draws the same frames and sends them to the companion, a small program on your
+        machine, whose ffmpeg encodes them. It adds formats the browser does not have.</p>
+      <figure>
+        <img src="../media/sound/video/dialog-ffmpeg.dark.webp" data-themed
+             alt="The top of the Export video dialog with Companion · ffmpeg chosen: its format is MP4 · H.264 and its quality is Medium. Under the quality a line reads: Up to 4 GiB per video: the companion’s limit."
+             width="640" height="392" loading="lazy">
+        <figcaption>With a companion that has ffmpeg: the encoder (1), its format (2), its
+          quality (3) and how large a video this companion writes (4).</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Format</th><th>What it is for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">MP4 · H.264</span></td><td>The usual file for the web and for sharing. ffmpeg encodes it with x264.</td></tr>
+          <tr><td><span class="ui">WebM · VP9</span></td><td>An open format for the web.</td></tr>
+          <tr><td><span class="ui">MOV · ProRes 422 HQ</span></td><td>A large, high-quality file to edit in a video editor.</td></tr>
+          <tr><td><span class="ui">GIF</span></td><td>A looping picture without sound. At most 50 frames a second and 1920 pixels on a side. A long or large GIF can run over the companion’s limit: it then refuses the job, and the dialog shows why.</td></tr>
+        </tbody>
+      </table>
+      <p><span class="ui">Quality</span> — <span class="ui">Low (small file)</span>,
+        <span class="ui">Medium</span> or <span class="ui">High (large file)</span> — sets how much
+        the encoder keeps. MOV and GIF have no such choice.</p>
+      <p>Under the quality the dialog says how large a video this companion writes:
+        <em>Up to 4 GiB per video: the companion’s limit. Start it with --max-video-gib to give it
+        another.</em> A video that passes the limit is never saved cut short: the export fails and
+        says so, and nothing is written. The companion also stops an export when its disk is nearly
+        full. <a href="../manim/companion.html#video-limit">How large a video can be</a> has both
+        limits and how to change them.</p>
+      <p>Two things must be in place: the companion running, and ffmpeg on its machine. When
+        either is missing the option says which. The page about the
+        <a href="../manim/companion.html">companion</a> shows how to start it and how to check
+        that ffmpeg is found.</p>
+
+      <h2 id="manim">Rendered by Manim</h2>
+      <p>The editor exports the Python scene (the same one as
+        <a href="../manim/python.html"><span class="ui">Export ▸ Python</span></a>) and the
+        companion has your own Manim render it: the video is Manim’s, frame for frame.</p>
+      <figure>
+        <img src="../media/sound/video/dialog-manim.dark.webp" data-themed
+             alt="The top of the Export video dialog with Render with Manim chosen: a Manim field with ManimCE selected, and the range fixed to the whole scene."
+             width="640" height="462" loading="lazy">
+        <figcaption>Render with Manim (1): the library to use (2) and a range that is always the
+          whole scene (3).</figcaption>
+      </figure>
+      <ul>
+        <li>The <span class="ui">Manim</span> list offers <span class="ui">ManimCE (Community
+          Edition)</span> and <span class="ui">ManimGL (3b1b)</span>. For a library the companion has
+          no Python for, the dialog says so in red and <span class="ui">Export</span> stays off.
+          When it is not the library the project is made for, the dialog says that the exported
+          scene is converted.</li>
+        <li>The size and the frame rate are the ones of the dialog. The range is always the whole
+          scene: the exported Python has no range.</li>
+        <li><strong>It runs code.</strong> The Python that Manim renders is generated by the editor,
+          but it is still run on your machine, so the companion keeps this off until you start it
+          with <code>--allow-manim-render</code>. On Linux with bubblewrap it runs in a sandbox
+          with no network; elsewhere the dialog warns that Manim runs <em>without a sandbox: the
+          exported Python code gets all your permissions</em>.</li>
+        <li>While it works, the dialog says <em>Manim CE is rendering (animation 2)</em> with the
+          frame it has reached. A render that takes longer than ten minutes is stopped; the
+          companion’s <code>--manim-timeout</code> sets the limit.</li>
+        <li>A formula on the timeline that does not render holds this encoder back: it needs the
+          LaTeX of every formula to be right, and says which to fix in the Creator.</li>
+      </ul>
+      <p>The video ends with the last animation. Sound that goes on after it is cut there, and the
+        dialog says by how much.</p>
+
+      <h2 id="size">Size, frame rate and range</h2>
+      <figure>
+        <img src="../media/sound/video/dialog-custom.dark.webp" data-themed
+             alt="The lower part of the Export video dialog with a custom size of 1000 by 1000, a custom frame rate of 30 and a custom range from 2.5 to 7.5 seconds, with the warning about the picture's shape and the summary line."
+             width="640" height="362" loading="lazy">
+        <figcaption>Everything custom. The warning (1) is about the shape of the picture; the
+          summary (2) says what the file will be.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Size</span>: <span class="ui">Project</span> uses the size of the
+          project, the <span class="ui">Resolution</span> of <span class="ui">File ▸ Project
+          settings…</span>. The presets are 720p (1280 × 720), 1080p (1920 × 1080), 1440p (2560 × 1440) and
+          2160p (3840 × 2160). <span class="ui">Custom…</span> takes a width up to 7680 and a
+          height up to 4320, each at least 16. Both must be even, except for a GIF.</li>
+        <li><span class="ui">Frame rate</span>: the project’s (also in <span class="ui">Project
+          settings…</span>), 24, 25, 30 or 60, or a number of your own from 1 to 240. A GIF takes
+          at most 50.</li>
+        <li><span class="ui">Range</span>: <span class="ui">Whole scene</span> (its length in
+          seconds), or <span class="ui">Custom</span> with a start and an end in seconds. Render
+          with Manim always uses the whole scene.</li>
+      </ul>
+      <p>The frame of the scene is always 8 units tall. A picture of another shape than the
+        project’s shows more or less space at the sides than the Preview does, and the dialog warns
+        you.</p>
+
+      <h2 id="sound">Sound in the video</h2>
+      <p>A project with sound clips gets an option at the top of the dialog,
+        <span class="ui">Include audio · volume curves and track mute</span>. It is on by default.
+        The sound is the same mix as <span class="ui">Export ▸ Audio…</span>
+        (<a href="audio.html">Audio</a>): the volume lines and the track mutes are applied.</p>
+      <figure>
+        <img src="../media/sound/video/dialog-sound.dark.webp" data-themed
+             alt="The top of the Export video dialog of a project with sound: the Include audio option, the format, a warning that the sound of this MP4 will be Opus, and under it a button that reads Use Companion · ffmpeg for AAC (MP4 · H.264)."
+             width="640" height="478" loading="lazy">
+        <figcaption>The option (1); in Chrome on Linux, the warning that comes with an MP4 (2); and,
+          with a companion running, the button that goes to its ffmpeg (3).</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Browser.</strong> WebM carries Opus. MP4 carries AAC where the browser has an AAC
+          encoder (Chrome and Edge on Windows and macOS). Where it has none — Chrome on Linux — the
+          MP4 carries Opus: a valid file that browsers and players such as VLC play, and some
+          players and video editors do not. The dialog says so before you export. If a companion
+          with an AAC encoder is running, a button under the warning,
+          <span class="ui">Use Companion · ffmpeg for AAC (MP4 · H.264)</span>, switches to
+          <span class="ui">Companion · ffmpeg</span> with MP4 in one click.</li>
+        <li><strong>Companion · ffmpeg.</strong> The editor sends the mix with the frames and ffmpeg
+          encodes it into the file: AAC in MP4 and MOV, Opus in WebM. A GIF has no sound.</li>
+        <li><strong>Render with Manim.</strong> ffmpeg adds the mix, as AAC, to the video Manim
+          renders. That video ends with the last animation, so sound that goes on longer is cut
+          there.</li>
+        <li><strong>Length.</strong> An export mixes an hour of sound at most. A longer video goes
+          without it, and the dialog says so.</li>
+      </ul>
+      <p>The companion needs to be version 1.5 or newer, with an ffmpeg that has the encoder, to
+        add sound; the dialog says what is missing.</p>
+
+      <h2 id="saving">The file, and stopping</h2>
+      <figure>
+        <img src="../media/sound/video/dialog-done.dark.webp" data-themed
+             alt="The lower part of the Export video dialog after a small export, with a custom size of 320 by 180, a frame rate of 10 and a range from 0 to 1.5 seconds: the estimate of the size, the summary line, a line that says that the file was saved, with its name and size, and a Download again button."
+             width="640" height="419" loading="lazy">
+        <figcaption>After the small export of the Try it, through a browser that downloads: the
+          estimate made before it (1), and the line that names the file and its size (2), with
+          <span class="ui">Download again</span> under it.</figcaption>
+      </figure>
+      <p>The file is named after the project: <em>The square of a sum.mp4</em>. In Chrome and Edge a
+        window asks where to save it before the export starts, and the dialog ends by saying
+        <em>Written to The square of a sum.mp4</em> and its size. Elsewhere the browser downloads
+        the file when it is done, and the dialog says <em>Saved</em> and offers
+        <span class="ui">Download again</span>.</p>
+      <p>While it runs, the dialog shows what it is doing — <em>Encoding</em>, <em>Sending
+        frames</em>, <em>Mixing audio</em> — and a progress bar with the frame it has reached.
+        <span class="ui">Cancel export</span> stops it and throws the partial file away.
+        <span class="ui">Close</span> says <span class="ui">Cancel and close</span> while it runs.
+        When the button says <span class="ui">Saving…</span>, the file is being closed: that cannot
+        be cancelled, and closing the dialog only hides it.</p>
+
+      <h2 id="messages">What the dialog tells you</h2>
+      <table>
+        <thead>
+          <tr><th>Message</th><th>What it means</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><em>Waiting for a formula to render (name)…</em></td><td>A formula on the timeline is still being drawn. Export stays off until it is done, so that no old picture is filmed.</td></tr>
+          <tr><td><em>name does not render with its current LaTeX: the video draws its last good render.</em></td><td>Browser and ffmpeg use the last picture that worked. Render with Manim cannot: fix the formula in the Creator.</td></tr>
+          <tr><td><em>name is empty and will be missing from the video.</em></td><td>A formula with no content has nothing to film.</td></tr>
+          <tr><td><em>The companion is not running. Start it: …</em></td><td>The two companion encoders need it. The line gives the command (<a href="../manim/companion.html#start">Starting it</a>).</td></tr>
+          <tr><td><em>Rendering with Manim is off. Restart the companion with --allow-manim-render…</em></td><td>Render with Manim is off until the companion is started with that option.</td></tr>
+          <tr><td><em>ffmpeg is not installed on the companion’s machine (or not on PATH).</em></td><td>Install ffmpeg where the companion runs. The <code>health</code> command tells how.</td></tr>
+          <tr><td><em>Up to 4 GiB per video: the companion’s limit. Start it with --max-video-gib to give it another.</em></td><td>How large a video <span class="ui">Companion · ffmpeg</span> may write. The number is the one of the companion that is running.</td></tr>
+          <tr><td><em>This companion is older than 1.7: a video over 4 GiB may come back cut short, with no warning. Update companion/mfe_companion.py.</em></td><td>An older companion did not check the size of what it wrote. Use the <code>mfe_companion.py</code> of this version.</td></tr>
+          <tr><td><em>The video is larger than 4 GiB, the most this companion writes for one video, so it was stopped…</em></td><td>The export failed at the companion’s limit, and nothing was saved. Export a shorter range, a smaller size or a lower quality, or restart the companion with a higher limit (<a href="../manim/companion.html#video-limit">How large a video can be</a>).</td></tr>
+          <tr><td><em>The disk of the companion’s temporary folder (…) is nearly full: less than 1 GiB is free there, so the job was stopped…</em></td><td>The companion keeps 1 GiB of that disk free. Free some room in the folder the message names, or start the companion with <code>TMPDIR</code> naming a folder on a larger disk.</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </main>
+</body>
+</html>

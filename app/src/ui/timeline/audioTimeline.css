@@ -1,0 +1,210 @@
+/* An audio clip: a piece of glass tinted with the accent, like a formula's clip with its tag
+ * colour (timeline.css). Written as `.tl-clip.tl-audio-clip`: the clip's own rules come later in
+ * the cascade and would win otherwise (it has no tag colour, so they would leave it bare). */
+.tl-clip.tl-audio-clip {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 17%, var(--panel)),
+    color-mix(in srgb, var(--accent) 10%, var(--panel))
+  );
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--border-strong));
+  overflow: hidden;
+  color: var(--text);
+}
+.tl-clip.tl-audio-clip::before {
+  content: none;
+}
+.tl-clip.tl-audio-clip.is-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.tl-audio-clip.is-muted {
+  opacity: 0.55;
+}
+/* No original in the browser: the clip keeps its place, hatched, and says so. */
+.tl-clip.tl-audio-clip.is-missing {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--warning) 14%, var(--panel)) 0 8px,
+    var(--panel) 8px 16px
+  );
+  border: 1px dashed color-mix(in srgb, var(--warning) 75%, transparent);
+}
+.tl-audio-missing {
+  flex-shrink: 0;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 0 6px;
+  border-radius: 5px;
+  color: var(--warning);
+  border: 1px solid color-mix(in srgb, var(--warning) 60%, transparent);
+  background: var(--panel);
+}
+.tl-audio-caption {
+  position: absolute;
+  top: 3px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  height: 24px;
+}
+.tl-audio-caption span {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Its buttons are 22px high, inside the caption's 24px: the volume graph starts under it. */
+.tl-audio-caption button {
+  flex-shrink: 0;
+  height: 22px;
+  font-size: 11px;
+  line-height: 18px;
+  padding: 1px 8px;
+  border-radius: 6px;
+}
+/* The button that makes the volume line editable on the clip. */
+.tl-audio-caption .tl-audio-line-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  padding: 1px 3px;
+}
+.tl-audio-line-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+/* On, like a primary button, under the pointer too. */
+.tl-audio-caption .tl-audio-line-toggle.is-on,
+.tl-audio-caption .tl-audio-line-toggle.is-on:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent-bright);
+  color: var(--accent-text);
+}
+.tl-audio-caption .tl-audio-line-toggle.is-on:hover:not(:disabled) {
+  background: var(--accent-bright);
+}
+.tl-audio-graph {
+  position: absolute;
+  top: 28px;
+  overflow: visible;
+}
+/* Until its button is on, the volume line is a drawing: thinner, its points small dots, and a
+ * press anywhere on the graph is a press on the clip. */
+.tl-audio-graph:not(.is-editable) .tl-audio-envelope {
+  stroke-width: 1.5;
+  opacity: 0.7;
+}
+.tl-audio-graph circle.tl-audio-dot {
+  fill: var(--accent);
+  stroke: none;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.tl-audio-unity {
+  stroke: currentColor;
+  opacity: 0.2;
+  stroke-dasharray: 3 3;
+}
+.tl-audio-envelope {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+.tl-audio-graph circle {
+  fill: var(--panel);
+  stroke: var(--accent);
+  stroke-width: 2;
+  cursor: move;
+}
+.tl-audio-graph circle:focus-visible {
+  stroke: var(--text);
+  stroke-width: 3;
+  outline: none;
+}
+.tl-audio-trim {
+  position: absolute;
+  top: 0;
+  width: 7px;
+  height: 26px;
+  cursor: ew-resize;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+.tl-audio-trim.start {
+  left: 0;
+}
+.tl-audio-trim.end {
+  right: 0;
+}
+.audio-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.audio-fields label {
+  display: grid;
+  gap: 4px;
+}
+.audio-fields input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.audio-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.audio-points {
+  width: 100%;
+  border-collapse: collapse;
+}
+.audio-points th,
+.audio-points td {
+  padding: 5px;
+  text-align: left;
+}
+.audio-points input {
+  width: 100px;
+}
+.audio-help {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.tl-audio-waveform {
+  pointer-events: none;
+  opacity: 0.22;
+}
+.tl-audio-waveform path {
+  stroke: currentColor;
+  stroke-width: 1;
+  fill: none;
+}
+.tl-audio-waveform text {
+  fill: currentColor;
+  font-size: 11px;
+}
+
+.tl-audio-envelope-hit {
+  stroke: transparent;
+  stroke-width: 12;
+  fill: none;
+  cursor: ns-resize;
+}
+
+.tl-audio-scale {
+  pointer-events: none;
+  fill: currentColor;
+  opacity: 0.65;
+  font-size: 11px;
+}

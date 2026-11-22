@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lines and arrows · Manim Formula Editor</title>
+  <meta name="description" content="Draw lines, dashed lines, arrows and double arrows between formulas or points, choose where each end is, bend them, and move their ends over time.">
+  <meta name="mfe:id" content="objects/lines-arrows">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Lines and arrows">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/lines-curves.data.js" defer></script>
+  <script src="../examples/lines-kinds.data.js" defer></script>
+  <script src="../examples/lines-anchors.data.js" defer></script>
+  <script src="../examples/lines-free-ends.data.js" defer></script>
+  <script src="../examples/lines-stays-put.data.js" defer></script>
+  <script src="../examples/lines-tips.data.js" defer></script>
+  <script src="../examples/lines-grow-arrow.data.js" defer></script>
+  <script src="../examples/lines-ends-transform.data.js" defer></script>
+  <script src="../examples/lines-and-arrows.data.js" defer></script>
+  <script src="../widgets/line-anchors.js" defer></script>
+  <script src="../media/objects/lines-arrows/draw-arrow.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Lines and arrows</h1>
+      <p class="lead">A line runs between two ends. Each end is on a formula, or on some of its glyphs, at the point of its box you choose, or free at a point of the scene. You draw one from a formula's menu, bend it into an arc or a spline, choose its tips, and move its ends over time.</p>
+
+      <figure class="mfe-player" data-mfe-player="lines-curves" data-loop
+              data-caption="Two arcs and a spline between the same two letters, drawn in with GrowArrow."></figure>
+
+      <p>Lines are Manim's <code>Line</code>, <code>DashedLine</code>, <code>Arrow</code> and <code>DoubleArrow</code>. Everything on this page is the same in ManimCE and ManimGL unless a paragraph says otherwise.</p>
+
+      <h2 id="kinds">Four kinds of line</h2>
+      <table>
+        <thead>
+          <tr><th>Kind</th><th>In Manim</th><th>Tips</th><th>Stroke</th><th>Gap at an end</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Line</span></td><td><code>Line</code></td><td>none</td><td>4</td><td>0</td></tr>
+          <tr><td><span class="ui">Dashed line</span></td><td><code>DashedLine</code></td><td>none</td><td>4</td><td>0</td></tr>
+          <tr><td><span class="ui">Arrow</span></td><td><code>Arrow</code></td><td>at the end</td><td>6</td><td>0.25</td></tr>
+          <tr><td><span class="ui">Double arrow</span></td><td><code>DoubleArrow</code></td><td>at both ends</td><td>6</td><td>0.25</td></tr>
+        </tbody>
+      </table>
+
+      <figure class="mfe-player" data-mfe-player="lines-kinds" data-loop
+              data-caption="The four kinds, each between two free points."></figure>
+
+      <p>A new line is white and has Manim's stroke for its kind: 4, and 6 for an arrow, with a tip 0.35 long. It has no animation: it is there when its clip starts.</p>
+
+      <h2 id="drawing">Drawing a line</h2>
+      <p>Right-click a formula or a text, in the Preview or on its clip, and choose <span class="ui">Add line ▸</span> <span class="ui">Line</span>, <span class="ui">Dashed line</span>, <span class="ui">Arrow</span> or <span class="ui">Double arrow</span>. The line <strong>starts on that clip</strong>, or on its picked symbols when the menu opened on them. A small <a href="#anchors">compass</a> asks where on it. Then click where the line ends:</p>
+      <ul>
+        <li>on a formula or a text, for the whole of it; the compass asks again;</li>
+        <li>with <kbd data-keys="Alt">Alt</kbd> held, on the symbol the Preview picks;</li>
+        <li>on empty space, for a free end at that point.</li>
+      </ul>
+
+      <div class="mfe-tour" data-mfe-tour="objects/lines-arrows/draw-arrow" data-title="Drawing an arrow from the menu of a formula"></div>
+
+      <p>The formula the end would go on is marked in the colour of the picks while you choose. <kbd data-keys="Escape">Esc</kbd> closes an open compass, giving up that end; with no compass open, it leaves the mode.</p>
+
+      <p>A start put on symbols with <kbd data-keys="Alt">Alt</kbd> follows them: edit the formula before you click the end, and the start is still on those symbols in the new render. If they are no longer there, the drawing ends, and a notice says so. Two ends at one place make no line: two clicks on one spot, or both ends on one formula at <span class="ui">Auto</span>, where Manim finds no direction between them. The notice <span class="ui">No line made</span> says why, and the mode waits for another end. A project made with an earlier version may hold such a line, or a Transform that carries one to such ends: its panel shows an error, and so does the export.</p>
+
+      <p>While you draw, <kbd data-keys="Mod">Ctrl</kbd> and the wheel zoom the Preview and the middle button pans it, as always. A right-click opens the Preview's menu: an entry you choose there ends the mode first, and <kbd data-keys="Escape">Esc</kbd> closes the menu and leaves the mode on.</p>
+
+      <p>To start a line at a free point, right-click the <strong>empty space</strong> of the Preview. <span class="ui">Add line</span> there takes two clicks: the start, then the end.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/free-start.dark.webp" data-themed
+             alt="The Preview with the letters A and B and the menu of the empty space open: Line, Dashed line, Arrow and Double arrow."
+             width="818" height="700" loading="lazy">
+        <figcaption>The menu of the empty space lists the four kinds. Choose one, click for the start, then click on B.</figcaption>
+      </figure>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/lines-start.mfe.json" download>starting project</a>: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the Projects dialog and pick the downloaded file (<a href="../start/projects.html#open">Opening a project</a>). It holds the letters A and B.</li>
+          <li>Right-click A and choose <span class="ui">Add line ▸ Arrow</span>; in the compass choose the middle of its right edge.</li>
+          <li>Click B and choose the middle of its left edge in the second compass: the arrow is made.</li>
+        </ol>
+      </aside>
+
+      <p>The new line is the object <code>l1</code>, <code>l2</code>…, with its own clip on a track in front of what it runs between. A line between formulas lasts while both are on screen, from the playhead on. A line with two free ends is a free object from the playhead to the end of the scene. Like a brace, it is not listed in the Creator.</p>
+
+      <h2 id="anchors">Where on a formula: the compass</h2>
+      <p>The compass has the nine points of the box of the glyphs, and <span class="ui">Auto</span>. A corner (↖ ↗ ↙ ↘), the middle of an edge (↑ ← → ↓) or the centre (•): these are Manim's <code>get_corner(UL)</code>, <code>get_top()</code>, <code>get_center()</code> and the rest. <span class="ui">Auto</span> is the edge Manim finds towards the other end, as <code data-excerpt="examples/lines-anchors.ce.py">Arrow(a, b)</code> does. The arrow keys move between the points, <kbd data-keys="Enter">Enter</kbd> or a click picks one, and <kbd data-keys="Escape">Esc</kbd> gives up.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/compass.dark.webp" data-themed
+             alt="The compass beside the letter A: the title Start: which point of a, a three by three grid of arrows with a dot in the middle, and an Auto button under it."
+             width="317" height="212" loading="lazy">
+        <figcaption>The compass for the start of a line on A. The mint dot says it is the start; the end's is coral.</figcaption>
+      </figure>
+
+      <table>
+        <thead>
+          <tr><th>Compass</th><th>Point of the glyphs' box</th><th>In the Python</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>↖  ↗  ↙  ↘</td><td>the four corners</td><td><code data-excerpt="examples/lines-anchors.ce.py">get_corner(UL)</code>, <code data-excerpt="examples/lines-anchors.ce.py">get_corner(UR)</code>, <code data-excerpt="examples/lines-anchors.ce.py">get_corner(DL)</code>, <code data-excerpt="examples/lines-anchors.ce.py">get_corner(DR)</code></td></tr>
+          <tr><td>↑  ↓  ←  →</td><td>the middle of an edge</td><td><code>get_top()</code>, <code>get_bottom()</code>, <code>get_left()</code>, <code>get_right()</code></td></tr>
+          <tr><td>•</td><td>the centre</td><td><code>get_center()</code></td></tr>
+          <tr><td><span class="ui">Auto</span></td><td>where the line meets the glyphs on its way to the other end</td><td>the formula itself: <code data-excerpt="examples/lines-anchors.ce.py">Arrow(a, b)</code>, by the names of the two formulas</td></tr>
+        </tbody>
+      </table>
+
+      <p>A line stops a gap short of the glyphs it is on: an arrow's 0.25, a line's 0. With <span class="ui">Auto</span> the two libraries find the edge differently. ManimCE takes the farthest point of the glyphs that way and ManimGL the place where the direction leaves their box. The Preview follows the library the project exports to.</p>
+
+      <div class="mfe-widget" data-mfe-widget="line-anchors" data-options='{"example": "lines-anchors", "formula": "l2"}'></div>
+
+      <figure class="mfe-player" data-mfe-player="lines-anchors" data-loop
+              data-caption="Three arrows between A and B: from the upper right corner of A to the upper left corner of B, from A to B at Auto, by the edges that face each other, and from the lower right corner to the lower left corner."></figure>
+
+      <h2 id="free-ends">Free ends</h2>
+      <p>A free end is exactly where you put it. The gap applies only to ends on glyphs, so an arrow from a free point to a formula leaves the point at the click and stops 0.25 short of the formula. An end on glyphs follows them: it is measured when its clip starts, so move the formula before then and the line follows, and it stays put afterwards.</p>
+
+      <figure class="mfe-player" data-mfe-player="lines-free-ends" data-loop
+              data-caption="Two arrows that start at free points and end on a corner of one symbol of the equation."></figure>
+
+      <p>Because an end on glyphs is measured once, an arrow does not follow its formula when the formula moves later. Below, B moves down at 3.8 s and the arrow stays where it was fitted; at 6.2 s a Transform of the arrow's ends brings its end to B (<a href="#ends-transform">Moving the ends with a Transform</a>).</p>
+
+      <figure class="mfe-player" data-mfe-player="lines-stays-put" data-timeline data-loop
+              data-caption="B moves away and the arrow stays, until a Transform of its ends follows B."></figure>
+
+      <h2 id="handles">Moving the ends</h2>
+      <p>A selected line shows a <strong>handle at each end</strong>: the start's is mint and the end's coral. What a drag does depends on the key you hold:</p>
+      <ul>
+        <li><strong>No key</strong>: the end is left <strong>free</strong> where you drop it. It goes on nothing by itself, even when you drop it over a formula.</li>
+        <li><kbd data-keys="Alt">Alt</kbd> at the drop: the end goes on the symbol under the pointer, and the compass asks where on it.</li>
+        <li><kbd data-keys="Alt+Shift">Alt+Shift</kbd> at the drop: the end goes on the whole formula there.</li>
+        <li><kbd data-keys="Mod">Ctrl</kbd> held: the end stays on the line's own direction, so the line only gets longer or shorter.</li>
+      </ul>
+
+      <p>A drop that would put the two ends at one place, as above, leaves the end where it was, and the notice <span class="ui">The end stays</span> says so.</p>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/lines-arrows/drag-free.dark.webm"
+               poster="../media/objects/lines-arrows/drag-free.dark.webp" width="818" height="476"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Dragged with no key, the end is free where it is dropped.</figcaption>
+      </figure>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/lines-arrows/drag-alt.dark.webm"
+               poster="../media/objects/lines-arrows/drag-alt.dark.webp" width="818" height="476"
+               muted loop playsinline preload="none"></video>
+        <figcaption>With <kbd data-keys="Alt">Alt</kbd> held at the drop, the end leaves B for C and the compass asks where on it; the lower left corner is chosen.</figcaption>
+      </figure>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/lines-arrows/drag-ctrl.dark.webm"
+               poster="../media/objects/lines-arrows/drag-ctrl.dark.webp" width="818" height="476"
+               muted loop playsinline preload="none"></video>
+        <figcaption>With <kbd data-keys="Mod">Ctrl</kbd> held the pointer goes down and to the left, and the arrow only gets shorter.</figcaption>
+      </figure>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/lines-start-arrow.mfe.json" download>starting project</a> as above (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span>): an arrow from A to B. Click the arrow to select it.</li>
+          <li>Drag its end handle to an empty place: the end is free there. Undo with <kbd data-keys="Mod+Z">Ctrl+Z</kbd> and drag it again with <kbd data-keys="Mod">Ctrl</kbd> held: the arrow only gets shorter.</li>
+        </ol>
+      </aside>
+
+      <p>A line with both ends free is dragged by its body. One with an end on glyphs is moved by its handles.</p>
+
+      <h2 id="detach">Detach</h2>
+      <p><strong>Right-click a handle</strong> to <span class="ui">Detach</span> that end, which leaves it free where it is, or to change its point with <span class="ui">Change its point…</span>, which opens the compass with the current point marked.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/handle-menu.dark.webp" data-themed
+             alt="The menu of the start handle of a line: a header Start, on a, right edge, then Detach and Change its point."
+             width="470" height="190" loading="lazy">
+        <figcaption>The menu of a handle says where the end is.</figcaption>
+      </figure>
+
+      <p>The menu of the line's clip has <span class="ui">Detach ▸</span> <span class="ui">Detach start</span>, <span class="ui">Detach end</span> (each marked with its colour) and <span class="ui">Detach all</span>, which frees both ends in one step. A line whose ends are both free is greyed out there. The Line section has a <span class="ui">Detach</span> for each end too.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/line-menu-detach.dark.webp" data-themed
+             alt="The menu of a line with its Detach submenu open: Detach start with a mint dot, Detach end with a coral dot and Detach all."
+             width="365" height="514" loading="lazy">
+        <figcaption>The menu of a line with <span class="ui">Detach ▸</span> open.</figcaption>
+      </figure>
+
+      <p>Deleting the clip an end is on deletes the line with it, unless the line's other end is on another clip. Then the line stays, free, where it was.</p>
+
+      <h2 id="panel">The Line section</h2>
+      <p>Select the line's clip and open the <span class="ui">Timing</span> tab of the Animations panel: its <span class="ui">Line</span> section.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/line-section.dark.webp" data-themed
+             alt="The Line section of the Animations panel for an arrow: Kind, Colour and Reverse points; Stroke, Tip and Gap; Tip shape; Curve with Arc and Spline buttons; and the Start and End, each with a Point list and Detach. Five numbered rings mark these groups."
+             width="310" height="583" loading="lazy">
+        <figcaption>The Line section of an arrow between two formulas.</figcaption>
+      </figure>
+
+      <ol>
+        <li><span class="ui">Kind</span> turns it into another of the four (<a href="#reverse-become">Become</a>), <span class="ui">Colour</span> and <span class="ui">Reverse points</span>.</li>
+        <li><span class="ui">Stroke</span> in Manim's units, <span class="ui">Tip</span> (an arrow's tip length), <span class="ui">Dash</span> (the length of a dashed line's dashes, 0.01 at least) and <span class="ui">Gap</span> at an end on glyphs.</li>
+        <li><span class="ui">Tip shape</span>, and <span class="ui">Start tip shape</span> for a double arrow (<a href="#tips">Tips</a>).</li>
+        <li><span class="ui">Curve</span>: straight, an arc or a spline, and its <span class="ui">Arc</span> field (<a href="#curves">Bending a line</a>).</li>
+        <li>For each end, <span class="ui">Start</span> and <span class="ui">End</span> with their colours, where each is (on a formula, or free), its <span class="ui">Point</span> with the arrow the compass shows, and <span class="ui">Detach</span>.</li>
+      </ol>
+
+      <p>A line has no scale, turn or flip of its own: its two ends say where it is.</p>
+
+      <h2 id="curves">Bending a line</h2>
+      <p>A line can be bent into an arc or a spline, and stays bent; the way back is <kbd data-keys="Mod+Z">Ctrl+Z</kbd>, or a pasted straight path (<a href="#path-shape">below</a>). The clip's menu has <span class="ui">Curve ▸ Arc</span> and <span class="ui">Curve ▸ Spline</span>, and the Line section has the same two buttons.</p>
+
+      <h3 id="arc">Arcs</h3>
+      <p>An <strong>arc</strong> is Manim's <code>path_arc</code>, 30 degrees to begin with. The <span class="ui">Arc</span> field sets the degrees: positive ones bulge to the right of the line's way, and it goes up to 300 either way. In the Preview the selected line shows a <strong>stem</strong> along the arc where it leaves its start, with a handle at its tip. Drag it to bend the line more, less or the other way; <kbd data-keys="Shift">Shift</kbd> goes every 15 degrees. The degrees are read beside it.</p>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/lines-arrows/arc-stem.dark.webm"
+               poster="../media/objects/lines-arrows/arc-stem.dark.webp" width="818" height="476"
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">Curve ▸ Arc</span>, then the stem's handle dragged with <kbd data-keys="Shift">Shift</kbd> held: the degrees go in steps of 15.</figcaption>
+      </figure>
+
+      <h3 id="spline">Splines</h3>
+      <p>A <strong>spline</strong> is a curve through points, shaped in the mode <span class="ui">Edit curve</span> as a custom path is. <span class="ui">Curve ▸ Spline</span> opens the mode on the line as it is bent, the arc of 30 degrees to begin with, with its two ends and a handle each. In the mode:</p>
+      <ul>
+        <li>a <strong>click on the curve</strong> adds a point there, smooth and with two handles of its own;</li>
+        <li>drag a point to move it and a handle to bend the curve: the other handle of a smooth point mirrors it (<kbd data-keys="Shift">Shift</kbd>: it turns but keeps its own length; <kbd data-keys="Mod">Ctrl</kbd>: one handle alone, and the point becomes a corner);</li>
+        <li>double-click a point to make it a corner or smooth again, and press <kbd data-keys="Delete">Delete</kbd> to remove the point you selected (with none selected, the key does nothing: it never deletes the line);</li>
+        <li><kbd data-keys="Enter">Enter</kbd> or <span class="ui">Done</span> keeps the curve, and <kbd data-keys="Escape">Esc</kbd> puts back the one the mode started with.</li>
+      </ul>
+
+      <p>The mode pauses the playback as it opens, and brings the playhead to the line's clip when it is elsewhere. Move the playhead off the clip and the points are not shown, but the mode stays on, and its hint says so: <em>Edit curve: the line is not on screen at the playhead · Enter: done · Esc: as it was</em>. <kbd data-keys="Enter">Enter</kbd>, <kbd data-keys="Escape">Esc</kbd> and <span class="ui">Done</span> work there too. <kbd data-keys="Mod">Ctrl</kbd> and the wheel, the middle button and a right-click do what they do while a line is drawn (<a href="#drawing">above</a>), and an entry of the Preview's menu ends the mode keeping the curve. So do <span class="ui">Reverse points</span> and <span class="ui">Paste path shape</span>, before they change the line.</p>
+
+      <p>A line on a locked track, or locked in the Preview, keeps its curve: the mode does not open on it, and a notice says why. If its line is locked while the mode is on, the mode ends, keeping the curve, and the notice <span class="ui">Edit curve ended</span> says so.</p>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/lines-arrows/spline-edit.dark.webm"
+               poster="../media/objects/lines-arrows/spline-edit.dark.webp" width="818" height="476"
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">Curve ▸ Spline</span> and a click on the curve add a point; a drag moves it, and a drag of one of its handles bends the curve.</figcaption>
+      </figure>
+
+      <p>From the menus and the Line section an arc can be made a spline (the same curve, as points), not the other way round; <span class="ui">Paste path shape</span> (<a href="#path-shape">below</a>) gives any line an arc again, or a straight path. The curve stretches and turns with the two ends of the line, which you move as always. The gap an arrow leaves at a formula is left along the arc, as Manim leaves it.</p>
+
+      <h2 id="tips">Tips</h2>
+      <p>An arrow's <span class="ui">Tip shape</span> — and a double arrow's <span class="ui">Start tip shape</span> — is one of three, the same in both libraries: Manim's <span class="ui">Triangle</span>, a <span class="ui">Stealth</span> tip (ManimCE's notched arrowhead) or a <span class="ui">Dot</span>. <span class="ui">Tip</span> sets the length and width of the tips in scene units, 0.35 by default and never more than a quarter of the arrow.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/tip-fields.dark.webp" data-themed
+             alt="The tip fields of a double arrow in the Animations panel: the Tip length, and the lists Tip shape and Start tip shape. Two numbered rings mark them."
+             width="310" height="583" loading="lazy">
+        <figcaption>The tip fields of a double arrow: the length (1) and the shape of each end (2).</figcaption>
+      </figure>
+
+      <figure class="mfe-player" data-mfe-player="lines-tips" data-loop
+              data-caption="Three tip shapes, and a double arrow with a stealth tip at its start and a dot at its end."></figure>
+
+      <h2 id="appearing">Drawing a line in: GrowArrow</h2>
+      <p>A line has no scale, so nothing grows it about its centre. It comes in with <span class="ui">Create</span>, <span class="ui">Write</span> or <span class="ui">FadeIn</span>, and goes with <span class="ui">Uncreate</span>, <span class="ui">Unwrite</span> or <span class="ui">FadeOut</span>. An arrow or a double arrow can also come in with <span class="ui">GrowArrow</span>, among its intros and in <span class="ui">Appear</span> of its menu; a line without a tip has none.</p>
+      <ul>
+        <li>A <strong>straight</strong> arrow takes Manim's own <code>GrowArrow</code>: it grows from its start, tips and all. In ManimCE the stroke of its shaft grows with it; in ManimGL it does not, and the Preview does as the project's library.</li>
+        <li>A <strong>bent</strong> arrow — an arc or a spline — is drawn along its own way instead, as <span class="ui">Create</span> draws a line, with its tip on the end of what is drawn, turning with the curve. The tip grows out of the start over the first quarter of the way, and the tip at the start of a double arrow grows where it is. Manim has no such animation: the Python carries it as a small <code>_TraceArrow</code> helper, the same in both libraries.</li>
+      </ul>
+
+      <p>A <span class="ui">Lag ratio</span> of its own staggers the parts of a growing arrow: the shaft, then the tip at its end, then the one at its start. The Python passes it on to Manim, as <code>lag_ratio</code>. <span class="ui">Unwrite</span> takes an arrow away in Manim's order, the shaft first and then its tips, the last one first, in the Preview and in both libraries.</p>
+
+      <figure class="mfe-player" data-mfe-player="lines-grow-arrow" data-loop
+              data-caption="GrowArrow on a straight arrow, then on an arc."></figure>
+
+      <h2 id="ends-transform">Moving the ends with a Transform</h2>
+      <p>A <span class="ui">Transform</span> block of a line <strong>carries its two ends</strong>. Add one from the <span class="ui">Add animation</span> menu of the line's clip (its entry says <em>ends · stroke · colour</em>). It starts with the ends the line has. With the playhead on the Transform, or after it, the handles at the ends move <em>its</em> ends: free where dropped, <kbd data-keys="Alt">Alt</kbd> onto a symbol, <kbd data-keys="Alt+Shift">Alt+Shift</kbd> onto a formula, <kbd data-keys="Mod">Ctrl</kbd> along the line. A drop with <kbd data-keys="Alt">Alt</kbd> asks where on the symbol with the compass, as for the line itself (<a href="#handles">Moving the ends</a>). Its panel says where each end goes, the gap, an arc's degrees, and the stroke width, colour and opacity the line arrives with.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/ends-panel.dark.webp" data-themed
+             alt="The Animations panel for the clip of an arrow, with a Transform block open: its start, duration and easing, then the Start and End rows with the glyphs each end goes to, its Point and a Detach button, and the Gap. A numbered ring marks the ends."
+             width="310" height="583" loading="lazy">
+        <figcaption>The ends of a Transform block (1): where each goes, at which point, and the gap.</figcaption>
+      </figure>
+
+      <p>An arrow is drawn anew between its new ends, with its tip and its stroke as an arrow of that length has them, and Manim plays <code>Transform(arrow, new_arrow)</code>. A line and a dashed line keep their shape and their dashes, stretched and turned, as <code>line.animate.put_start_and_end_on(a, b)</code> does. An end on glyphs is measured when the Transform starts.</p>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <a href="../examples/lines-start-three.mfe.json" download>starting project</a> as above (<span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span>): the letters A, B and C, and an arrow from A to B. Select the arrow and move the playhead to 4 s.</li>
+          <li>Choose <span class="ui">Add animation ▸ Transform</span> in the Animations panel, and put the playhead on the new block.</li>
+          <li>Drag the end handle with <kbd data-keys="Alt+Shift">Alt+Shift</kbd> held onto C and choose its lower left corner in the compass. Play: the end travels there.</li>
+        </ol>
+      </aside>
+
+      <figure class="mfe-player" data-mfe-player="lines-ends-transform" data-timeline data-loop
+              data-caption="An arrow from A to B whose end goes to C, and then whose start goes to B."></figure>
+
+      <h2 id="reverse-become">Reverse points and Become</h2>
+      <p><span class="ui">Reverse points</span>, in the line's menu and in the Line section, swaps the start and the end of a line where they are: an arrow points the other way, and what draws the line starts from its other end. <span class="ui">Become ▸</span> makes the line another of the four kinds, keeping its ends, its curve and its tips; the <span class="ui">Kind</span> field does the same. An arrow that grew with GrowArrow and is left without a tip is drawn in with <span class="ui">Create</span>.</p>
+
+      <h2 id="path-shape">Copying a path shape</h2>
+      <p><span class="ui">Curve ▸ Copy path shape</span> takes the shape of a line's path: straight, an arc's degrees or a spline's points. <span class="ui">Curve ▸ Paste path shape</span> gives it to another line of any of the four kinds. From the menu of several selected clips it goes to every line among them. The path stretches and turns with the ends of the line that takes it, which keeps its ends, its kind, its tips and its stroke. Besides <kbd data-keys="Mod+Z">Ctrl+Z</kbd>, pasting a straight path makes a bent line straight again, and pasting an arc makes a spline an arc again.</p>
+
+      <figure>
+        <img src="../media/objects/lines-arrows/line-menu.dark.webp" data-themed
+             alt="The menu of a line with its Curve submenu open: Arc, Spline, Copy path shape (straight) and Paste path shape (nothing copied). The menu also has Become, Reverse points and Detach."
+             width="410" height="514" loading="lazy">
+        <figcaption>The menu of a line, with <span class="ui">Curve ▸</span> open. Beside each entry it says what it will do.</figcaption>
+      </figure>
+
+      <h2 id="menus">The menu of a line</h2>
+      <p>Right-click a line in the Preview or its clip on the timeline. Besides the entries every clip has, its menu offers only what a line takes:</p>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Intro ▸</span>, <span class="ui">Outro ▸</span></td><td>None (appear), Create, Write, FadeIn, and GrowArrow for an arrow; None (disappear), Uncreate, Unwrite, FadeOut</td></tr>
+          <tr><td><span class="ui">Become ▸</span></td><td>another of the four kinds</td></tr>
+          <tr><td><span class="ui">Reverse points</span></td><td>swaps its start and its end</td></tr>
+          <tr><td><span class="ui">Curve ▸</span></td><td><span class="ui">Arc</span>, <span class="ui">Spline</span> or <span class="ui">Edit curve</span>, <span class="ui">Copy path shape</span>, <span class="ui">Paste path shape</span></td></tr>
+          <tr><td><span class="ui">Detach ▸</span></td><td><span class="ui">Detach start</span>, <span class="ui">Detach end</span>, <span class="ui">Detach all</span></td></tr>
+        </tbody>
+      </table>
+      <p>On the timeline, <span class="ui">Add animation</span> offers <span class="ui">Appear</span> (Create, Write, FadeIn and, for an arrow, GrowArrow), <span class="ui">Disappear</span> (Uncreate, Unwrite, FadeOut), one <span class="ui">Transform</span> (its ends, its stroke, its colour and its opacity) and the <span class="ui">Emphasis</span> effects that do not scale the line: Circumscribe, Flash and FocusOn. A block's own menu (<span class="ui">Change animation</span>, <span class="ui">Change effect</span>) and the <span class="ui">Animation</span> and <span class="ui">Effect</span> lists of its panel offer the same, so a block of a line never becomes one a line does not take.</p>
+
+      <p id="arrow-whole"><strong>An arrow is animated whole.</strong> A block of an arrow or a double arrow takes all of it, its shaft and its tips together, as Manim does. Its panel and its dialog have no glyph picker, and its menu has no <span class="ui">Split into runs</span>, <span class="ui">Split…</span> nor <span class="ui">Duplicate for the other glyphs</span>. A block that names only a part of an arrow, as a project made with an earlier version may have it, is an error: <span class="ui">All glyphs</span>, in its panel, gives it the whole arrow.</p>
+
+      <h2 id="python">In the Python</h2>
+      <p>A line is built on the mobjects themselves, or on the points read off them:</p>
+      <pre data-excerpt="examples/lines-and-arrows.ce.py"><code class="language-python">l1 = Line([-2, 1.9, 0], [5, 1.9, 0])
+# ...
+l4 = DoubleArrow([-2, -2, 0], [5, -2, 0], buff=0, color="#FFFF00", tip_length=0.45,
+                 tip_shape_end=ArrowCircleFilledTip, tip_shape_start=StealthTip)
+# ...
+l5 = Arrow(letter_a.get_corner(UR), letter_b.get_corner(UL), path_arc=-50 * DEGREES, color="#83C167")
+# ...
+l6 = Arrow(letter_a.get_right(), letter_b.get_left())</code></pre>
+      <p>An end with the point <span class="ui">Auto</span> is built on the formula itself, <code data-excerpt="examples/lines-anchors.ce.py">Arrow(a, b)</code> in the example of the compass. An arc is the <code data-excerpt="examples/lines-and-arrows.ce.py">path_arc=</code> of its class, and a spline the line bent by a small <code data-excerpt="examples/lines-and-arrows.ce.py">_spline</code> helper. ManimGL's own <code>Arrow</code> is another object, so there an arrow is a <code>Line</code> with a tip of ManimCE's size added by <code data-excerpt="examples/lines-and-arrows.gl.py">add_tip</code>, and a double arrow or another tip shape goes through a small <code data-excerpt="examples/lines-and-arrows.gl.py">_arrow</code> helper. A bent arrow's GrowArrow plays <code data-excerpt="examples/lines-and-arrows.ce.py">_TraceArrow(l5)</code>, defined at the top of the file.</p>
+      <p>A line is never found by position, as the glyphs of a MathJax formula are (<a href="../manim/python.html#positional">the positional helper</a>): its parts, the line, an arrow's tips, the dashes in their order, are the same in both libraries, so the Python names them through the line itself, even with <span class="ui">Always use the positional helper</span> ticked or in the other library than the project's.</p>
+
+      <h2 id="together">Everything together</h2>
+      <p>One scene with the four kinds, the points of a formula an end can be on, arcs, a spline, the three tip shapes, GrowArrow and a Transform that carries the ends. The same file is the example <code>lines.mfe.json</code> of the repository.</p>
+
+      <figure class="mfe-player" data-mfe-player="lines-and-arrows" data-timeline data-loop
+              data-caption="A showcase of lines and arrows, in three short acts."></figure>
+
+      <div class="mfe-example" data-mfe-example="lines-and-arrows"></div>
+      <div class="mfe-code" data-mfe-python="lines-and-arrows"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="braces.html">Braces</a> and <a href="shapes.html">shapes</a> are the other objects fitted to glyphs.</li>
+        <li><a href="../tutorials/annotated-identity.html">An identity with braces and arrows</a> uses them all in one scene.</li>
+        <li><a href="../layout/glyph-picking.html">Picking glyphs</a> explains the <kbd data-keys="Alt">Alt</kbd> pick a line can start from.</li>
+        <li><a href="../transforms/custom-paths.html">Custom paths</a> use the same editing mode as a spline.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

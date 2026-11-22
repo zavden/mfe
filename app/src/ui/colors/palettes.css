@@ -1,0 +1,328 @@
+.palette-library-drop {
+  position: relative;
+}
+/* The frame of the drop area sits in the dialog's padding, clear of the text. */
+.palette-library-drop > .file-drop {
+  inset: -8px;
+}
+.palette-library-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 10px;
+}
+/* The count of palettes beside the buttons. */
+.palette-library-toolbar > span {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+.palette-library-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+}
+.palette-library-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: start;
+  gap: 8px;
+}
+
+/* A palette of the library is a card: its name, and its colours in a line. The one shown is
+ * the selection (teal, with its glow); the one in use says so in its name. */
+.palette-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+.palette-card:hover {
+  background: var(--hover);
+  border-color: var(--accent-bright);
+}
+.palette-card[aria-selected='true'] {
+  background: var(--selection-gradient);
+  border-color: var(--border-strong);
+  box-shadow:
+    inset 0 1px 0 var(--edge-light),
+    var(--selection-glow);
+}
+.palette-card-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.palette-active {
+  color: var(--accent);
+  font-weight: 650;
+}
+.palette-card[aria-selected='true'] .palette-active {
+  color: var(--text);
+}
+/* Colour samples: their colours are the palette's in every theme. */
+.palette-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  forced-color-adjust: none;
+}
+.palette-strip > span {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+.palette-library-detail {
+  min-width: 0;
+}
+.palette-library-detail > h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 650;
+}
+.palette-library-detail > p {
+  margin-block: 6px;
+}
+/* The display name: its label takes the room the Rename button leaves. */
+.palette-name-form {
+  margin-top: 0;
+}
+.palette-name-form > label {
+  display: flex;
+  flex: 1 1 240px;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+}
+.palette-name-form input {
+  flex: 1;
+  min-width: 0;
+}
+.palette-help {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.5;
+}
+/* What needs the reader's care: a warning's bar, as in a notice. */
+.palette-warning {
+  margin-block: 10px;
+  padding: 10px 12px;
+  background: var(--well);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid var(--warning);
+  border-radius: 10px;
+}
+.palette-warning p {
+  margin-block: 6px;
+}
+.palette-warning .palette-library-toolbar {
+  margin-block: 8px 0;
+}
+.palette-error {
+  color: var(--danger);
+}
+/* The eleven roles lie in a sunken tray, one line each: its name, its color field, what the
+ * editor uses it for. */
+.palette-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-block: 10px;
+  padding: 6px;
+  background: var(--well);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+.palette-role-row {
+  display: grid;
+  grid-template-columns: 96px max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding-inline: 6px;
+}
+.palette-role-name {
+  text-transform: capitalize;
+}
+.palette-role-use {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+/* The sample is a picture of the palette: its colors are the palette's in every theme. */
+.palette-sample {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 26px;
+  margin-block: 10px;
+  padding: 12px 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  forced-color-adjust: none;
+}
+.palette-sample p {
+  margin: 0;
+}
+.palette-sample-math {
+  font:
+    24px 'Latin Modern Math',
+    'STIX Two Math',
+    'Cambria Math',
+    Georgia,
+    'Times New Roman',
+    serif;
+  white-space: pre;
+}
+.palette-sample-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.palette-sample-shapes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  line-height: 1;
+}
+.palette-sample-box {
+  width: 36px;
+  height: 22px;
+  border: 2px solid;
+}
+.palette-sample-circle {
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-radius: 50%;
+}
+.palette-role-heading {
+  margin: 6px 0;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.palette-role-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+/* The Roles button beside a colour field: a small button of the 26px rhythm. */
+.btn.palette-role-trigger {
+  flex-shrink: 0;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Seven swatches fit at a stable width, so moving a popup away from the viewport edge does not
+ * change its wrapping after ContextMenu measures it. The menu adds 10 px of border and padding. */
+/* As wide as a context menu lets what it holds be (280px less its padding and border). */
+.palette-role-popup {
+  width: 268px;
+  max-width: calc(100vw - 26px);
+  overflow-wrap: anywhere;
+}
+/* The roles with their names (D154): a block each, its color and its name, two to a line. */
+.palette-role-blocks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+}
+.palette-role-block {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 4px 6px;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.palette-role-block:hover:not(:disabled),
+.palette-role-block:focus-visible {
+  background: var(--hover);
+  border-color: var(--accent-bright);
+}
+.palette-role-block:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.palette-role-chip {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+}
+.palette-role-block-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The roles of the user's in the palette editor: a name to type, its color, Delete. */
+.palette-custom-heading {
+  margin: 2px 6px 4px;
+  font-weight: 650;
+}
+.palette-custom-heading span {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 400;
+}
+.palette-role-row.palette-custom-row {
+  grid-template-columns: minmax(0, 168px) max-content max-content;
+  padding-block: 2px;
+}
+.palette-custom-row .commit-input,
+.palette-custom-row .commit-input input {
+  width: 100%;
+  min-width: 0;
+}
+@media (max-width: 600px) {
+  .palette-library-layout {
+    grid-template-columns: 1fr;
+  }
+  /* What a role is for goes under its field instead of squeezing beside it. */
+  .palette-role-row {
+    grid-template-columns: 84px max-content;
+    gap: 2px 8px;
+    padding-block: 2px 4px;
+  }
+  .palette-role-use {
+    grid-column: 1 / -1;
+  }
+}
+@media (forced-colors: active) {
+  /* Backgrounds and shadows are replaced: the chosen palette is the one with the thick edge. */
+  .palette-card[aria-selected='true'] {
+    padding: 7px 11px;
+    border: 2px solid Highlight;
+  }
+  .palette-role-choices button {
+    forced-color-adjust: none;
+  }
+}

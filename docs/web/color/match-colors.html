@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Match colors · Manim Formula Editor</title>
+  <meta name="description" content="Colour every occurrence of a LaTeX pattern in your formulas, as Manim’s tex_to_color_map does.">
+  <meta name="mfe:id" content="color/match-colors">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Match colors">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/color-match-colors-newton.data.js" defer></script>
+  <script src="../examples/color-match-colors-course.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Match colors</h1>
+      <p class="lead">A match list is a list of LaTeX patterns, each with a colour. Apply it to formulas and every occurrence of every pattern takes its colour, in all of them at once. It is the editor's version of Manim's <code>tex_to_color_map</code>.</p>
+
+      <figure class="mfe-player" data-mfe-player="color-match-colors-newton" data-start="2" data-timeline data-autoplay data-loop
+              data-caption="One list, Newton, colours F red, m blue and a green in all three lines. Each letter keeps its colour as the law is rearranged."></figure>
+
+      <h2 id="why">Why a list</h2>
+      <p>A derivation says the same letters again and again. <a href="coloring.html">Colouring glyphs</a> by hand means picking each one, in each formula, and doing it again when you change a line. A list moves the work to the <em>pattern</em>: you say once that <code>F</code> is red, and every <code>F</code> of every formula you apply the list to is.</p>
+      <p>The list belongs to the project and is saved with it. A project can hold as many lists as you like, each with its own name.</p>
+
+      <h2 id="lists">Lists of patterns</h2>
+      <p>Choose <span class="ui">Edit ▸ Match colors ▸ Create match colors…</span> to make a list; it opens in the <span class="ui">Match colors</span> dialog under the name <em>Match colors 1</em>. The same submenu lists the lists you have, and a click on one opens it for editing.</p>
+      <figure>
+        <img src="../media/color/match-colors/dialog.dark.webp" data-themed
+             alt="The Match colors dialog on the list Course colours. At the left, the lists (1). In the middle, three patterns, x in blue, y in yellow and dy over dx in green, each with a colour chip and its hex (2). Under them, a preview of the formula dy over dx = 2x + 2 with the colours the list gives it (3). At the bottom, the button Apply to 3 formulas (4)."
+             width="780" height="684" loading="lazy">
+        <figcaption>The dialog: the lists (1), the patterns with their colours (2), a preview (3) and the button that applies the list (4).</figcaption>
+      </figure>
+      <p>A list is a name and some entries. Each entry is a pattern and a colour:</p>
+      <ul>
+        <li>Type the <strong>pattern</strong> as you would in a formula: <code>x</code>, <code>\frac{dy}{dx}</code>, <code>\sin</code>. A pair of <code>$…$</code> around it is ignored. <kbd>Enter</kbd> or leaving the field commits it, and <kbd>Esc</kbd> takes the edit back.</li>
+        <li>Click the <strong>colour chip</strong> for the Manim colours and, with a palette active, its roles; or type a hex value or use the picker beside it.</li>
+        <li><span class="ui">▲</span> and <span class="ui">▼</span> move an entry, and <span class="ui">×</span> removes it. <span class="ui">+ Add pattern</span> adds one at the end.</li>
+        <li><span class="ui">Duplicate</span> copies the list; <span class="ui">Delete</span> removes it, and you hold the button for a moment to confirm.</li>
+      </ul>
+      <p>Every edit is one undo step, and <kbd data-keys="Mod+Z">Ctrl+Z</kbd> works while the dialog is open.</p>
+      <p>The <strong>preview</strong> draws one formula of the project with the colours the list would give it, before anything is applied. Choose the formula in the menu above it. It says how many glyphs of that formula take a colour, or that no pattern occurs in it.</p>
+
+      <h2 id="patterns">How a pattern matches</h2>
+      <p>A pattern occurs wherever the formula's LaTeX repeats the pattern's, compared <em>token by token</em>. A token is a command (<code>\frac</code>, <code>\sin</code>, <code>\,</code>), a brace, or one other character. That gives the rules you need:</p>
+      <ul>
+        <li>Spaces do not count: <code>x y</code> is <code>xy</code>.</li>
+        <li><code>x</code> is not found inside <code>\xi</code>, which is one token of its own.</li>
+        <li>A command and its arguments are matched as you write them: <code>\frac{dy}{dx}</code> matches that fraction. A pattern that cuts a command from its arguments, such as <code>\frac</code> alone, cannot be coloured.</li>
+        <li><code>\left(</code> is one token. A delimiter cannot be coloured apart from its command, so a pattern takes <code>\left</code> and <code>\right</code> both or neither.</li>
+      </ul>
+      <p>For the line <code>\frac{dy}{dx} = 2x + 2</code>:</p>
+      <table>
+        <thead><tr><th>Pattern</th><th>What it colours</th></tr></thead>
+        <tbody>
+          <tr><td><code>x</code></td><td>the x of <code>dx</code> and the x of <code>2x</code></td></tr>
+          <tr><td><code>y</code></td><td>the y of <code>dy</code></td></tr>
+          <tr><td><code>2x</code></td><td>the 2 and the x of <code>2x</code> together</td></tr>
+          <tr><td><code>\frac{dy}{dx}</code></td><td>the whole fraction: its d, y, bar, d and x</td></tr>
+          <tr><td><code>$x$</code></td><td>the same as <code>x</code></td></tr>
+        </tbody>
+      </table>
+      <p>An entry the app cannot match says why under its pattern: an empty pattern (<q>Type some LaTeX.</q>), a row or column break (<code>\\</code> or <code>&amp;</code>), braces that do not balance, a <code>\left</code> without its <code>\right</code>. Such an entry is skipped.</p>
+
+      <h3 id="overlap">When patterns overlap</h3>
+      <p>Two patterns can claim the same glyphs: <code>x</code> and <code>\frac{dy}{dx}</code> both claim the x of <code>dx</code>. <strong>The lower entry wins.</strong> With the fraction last, the whole fraction is green. Move it up, and the fraction keeps only what no later entry claims: its y and its x take their own colours, nested inside it.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/color/match-colors/overlap.dark.webm"
+               poster="../media/color/match-colors/overlap.dark.webp" width="530" height="568"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The fraction moves up two places: the green fraction now holds a yellow y and a blue x. It goes back down for the loop.</figcaption>
+      </figure>
+      <p>When an occurrence of one pattern only <em>partly</em> overlaps an occurrence of a lower one, it cannot be nested. It is dropped, and the preview names the pattern: <q>Pattern 1 (“…”) overlaps a lower one here: the lower entry wins.</q></p>
+
+      <h2 id="apply">Applying a list</h2>
+      <p>You apply a list to <strong>formulas</strong>: the formulas you select in the Creator, or the formulas of the clips you select in the Preview or on the timeline. Pick whichever you have at hand:</p>
+      <ul>
+        <li>In the Creator, select the formulas (<kbd>Shift</kbd> or <kbd data-keys="Mod">Ctrl</kbd> and click for several), right-click one and choose <span class="ui">Apply match colors</span>, then the list.</li>
+        <li>In the Preview, right-click a clip and choose <span class="ui">Apply match colors</span>. On the timeline, do the same on several selected clips.</li>
+        <li>With two or more clips selected, the bar in the corner of the Preview has <span class="ui">Match colors ▾</span>.</li>
+        <li>In <span class="ui">Edit together…</span>, the <span class="ui">Match colors</span> button colours all of its formulas.</li>
+        <li>In the dialog, <span class="ui">Apply to 3 formulas</span> does the same for the formulas selected behind it.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/color/match-colors/apply-list.dark.webm"
+               poster="../media/color/match-colors/apply-list.dark.webp" width="802" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Three formulas are selected in the Creator, and the list is applied from their right-click menu. The cards show the colours at once. <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes them back.</figcaption>
+      </figure>
+      <p>Each list in these menus shows its colours after its name, so you can tell lists apart without opening them.</p>
+      <figure>
+        <img src="../media/color/match-colors/apply-menu.dark.webp" data-themed
+             alt="The right-click menu of three selected formulas in the Creator, with Apply match colors open: the lists Course colours and Only x, each with small swatches of its colours."
+             width="488" height="595" loading="lazy">
+        <figcaption>The menu of the selected formulas: each list with its colours.</figcaption>
+      </figure>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/color/match-colors/bar-menu.dark.webp" data-themed
+               alt="The Preview with two clips selected: the bar in its corner has Match colors with a menu open under it that lists the lists." width="531" height="115" loading="lazy">
+          <figcaption>The Preview's bar, with two clips selected.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/color/match-colors/edit-together.dark.webp" data-themed
+               alt="The Edit together dialog with its Match colors button (1) and the menu of lists under it." width="491" height="202" loading="lazy">
+          <figcaption><span class="ui">Edit together…</span> and its <span class="ui">Match colors</span> button (1).</figcaption>
+        </figure>
+      </div>
+      <p>Applying a list <strong>replaces</strong> the glyph colours of the formulas: they become exactly what the list says, and a glyph no pattern reaches goes back to the formula's colour. All the formulas change in one undo step. A notice says how many glyphs took a colour, and which formulas were left alone and why.</p>
+      <figure>
+        <img src="../media/color/match-colors/notice.dark.webp" data-themed
+             alt="A notice: Course colours applied to 3 formulas, with the number of glyphs coloured."
+             width="436" height="70" loading="lazy">
+        <figcaption>The notice after applying a list.</figcaption>
+      </figure>
+
+      <h2 id="limits">What a list leaves alone</h2>
+      <ul>
+        <li><strong>Objects without LaTeX.</strong> A <em>Text (font)</em> has colours glyph by glyph but no LaTeX to search; it keeps its colours, and the notice says so. A brace, a shape or a line has no glyph colours to set, so a list never changes one.</li>
+        <li><strong>Formulas that are not ready.</strong> A formula that has not been drawn yet, or whose glyphs changed while the colours were being worked out, is left alone and named in the notice.</li>
+        <li><strong>Patterns that cannot be drawn.</strong> A pattern that cuts through a macro's arguments cannot be told apart in the render; the notice says that the patterns cannot be rendered on that formula.</li>
+      </ul>
+      <aside class="callout tip">
+        <p>The colours that a list wrote are ordinary glyph colours. You can recolour one glyph by hand afterwards, and a later <span class="ui">Apply match colors</span> will replace that colour too.</p>
+      </aside>
+
+      <h2 id="palette">A list that starts from a palette</h2>
+      <p>With a palette active, <span class="ui">Edit ▸ Match colors ▸ New from active palette…</span> makes a list of four rows, coloured with the palette's <code>variable</code>, <code>constant</code>, <code>operator</code> and <code>result</code> roles and with empty patterns for you to fill. Nothing is coloured until you write the patterns and apply the list. <a href="palettes.html#match">Palettes</a> shows it.</p>
+
+      <h2 id="python">What reaches Manim</h2>
+      <p>The exported scene has no list and no patterns, only the colours they gave: each glyph carries a <code>set_color</code> with a plain hex value. Here is the Newton example as ManimCE writes it.</p>
+      <div class="mfe-code" data-mfe-python="color-match-colors-newton"></div>
+      <p>This second example is the one the dialog above shows: three lines of a derivation coloured by the list <em>Course colours</em>, where the fraction wins over the letters inside it.</p>
+      <figure class="mfe-player" data-mfe-player="color-match-colors-course" data-timeline data-start="3"
+              data-caption="x is blue, y is yellow, and the whole of dy/dx is green."></figure>
+      <div class="mfe-example" data-mfe-example="color-match-colors-newton"></div>
+      <div class="mfe-example" data-mfe-example="color-match-colors-course"></div>
+
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/color-match-colors-newton.mfe.json" download>color-match-colors-newton.mfe.json</a>, choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick it.</li>
+          <li>Open <span class="ui">Edit ▸ Match colors ▸ Newton…</span> and change the colour of <code>F</code> to purple.</li>
+          <li>Close the dialog, select the three formulas in the Creator, right-click one and choose <span class="ui">Apply match colors ▸ Newton</span>.</li>
+          <li>The <code>F</code> of all three lines is purple. Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> twice to put the list and the colours back.</li>
+        </ol>
+      </aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="coloring.html">Colouring glyphs and objects</a> covers colours by hand.</li>
+        <li><a href="palettes.html">Palettes by role</a> names colours and starts a list from them.</li>
+        <li><a href="../objects/organizing.html">Finding and organizing</a> selects formulas by kind, so a list reaches all of them.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

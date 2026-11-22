@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project files and their format · Manim Formula Editor</title>
+  <meta name="description" content="The files the editor writes and reads: .mfe.json projects and .mfe packages, what a project stores, versions and opening older files, and where the format is specified.">
+  <meta name="mfe:id" content="reference/files">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Files and format">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Project files and their format</h1>
+      <p class="lead">What the editor writes when you save, what it reads when you open, what a project holds
+        and what it leaves out, and what happens to a file made by an older or a newer editor.</p>
+
+      <h2 id="projects">Project files</h2>
+      <p>A <strong>project</strong> is one text file in JSON, UTF-8, named after the project with the ending
+        <code>.mfe.json</code>. <span class="ui">File ▸ Save As…</span> suggests the name for you: the project’s name in
+        lower case, with hyphens between its words, so <em>Completing the square</em> becomes
+        <code>completing-the-square.mfe.json</code>. <span class="ui">File ▸ Open…</span> opens the Projects dialog, which
+        lists the projects of your synced folder; its <span class="ui">Other file…</span> button picks a file from anywhere
+        on your computer, and that is how you open a project you downloaded, such as every example of this documentation
+        (<a href="../start/projects.html#open">Projects and files</a> teaches the dialog).</p>
+      <p>Because it is plain text, a project can be read in any text editor, kept in a version-control system and compared.
+        You do not need to edit it by hand, and the editor does not need you to. Here is a small project to download,
+        open with the editor and read:</p>
+      <div class="mfe-example" data-mfe-example="first-transform"></div>
+      <p>This is its top level, with the inside of each section cut short:</p>
+      <pre><code class="language-json">{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": { "name": "First transform", "target": "ce", "width": 1920, "height": 1080,
+            "fps": 60, "background": "#000000", "preamble": "", "duration": null },
+  "formulas": [ { "id": "f_…", "kind": "math", "name": "step1", "source": "x + 3 = 5", … }, … ],
+  "tracks": [ { "id": "t_…", "kind": "visual", "name": "Track 2", "hidden": false, "locked": false, … }, … ],
+  "clips": [ { "id": "c_…", "formulaId": "f_…", "trackId": "t_…", "start": 0, "end": 3.2, … }, … ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [ { "id": "r_…", "fromClipId": "c_…", "toClipId": "c_…", "pairs": [ … ], … }, … ],
+  "colorMatches": []
+}</code></pre>
+      <p>The top of every project says what it is: <code>format</code> is always <code>manim-formula-editor</code>, and
+        <code>version</code> is the number of the format it was written in (below).</p>
+
+      <h2 id="stores">What a project stores</h2>
+      <p>Everything that makes the scene, and nothing that is only how you happen to be looking at it.</p>
+      <table>
+        <caption class="sr-only">The sections of a project file</caption>
+        <thead>
+          <tr><th>Section</th><th>It holds</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>meta</code></td><td>The settings of the scene: name, Manim target, size, frame rate, background, LaTeX preamble and duration. They are what <span class="ui">File ▸ Project settings…</span> shows.</td></tr>
+          <tr><td><code>formulas</code></td><td>Every object of the Creator: its kind (formula, LaTeX text, font text, brace, shape or line), its name, its LaTeX source and packages, its size and colour, the colour of each glyph, the glyphs hidden at the start, its intro, and a snapshot of its glyphs.</td></tr>
+          <tr><td><code>tracks</code></td><td>The rows of the timeline, top to bottom, each with its name, whether it is visual or audio, and whether it is hidden, muted or locked.</td></tr>
+          <tr><td><code>clips</code></td><td>Each appearance of an object on the timeline: which object, which track, when it starts and ends, its position, scale, rotation, flips, opacity and colour, its intro and outro, whether it starts empty and the glyphs it leaves out of its intro, its animation blocks and, for a brace, a shape or a line, what it is attached to.</td></tr>
+          <tr><td><code>relations</code></td><td>The transformations between clips: the two clips, the window of the transformation, its easing, its default style and path arc, and the pairs of glyphs, with the custom paths you shaped. A style, the relation’s or a pair’s own, is <code>transform</code>, <code>copy</code>, <code>fade</code> or <code>fade_copy</code>.</td></tr>
+          <tr><td><code>audioAssets</code>, <code>audioClips</code></td><td>The recordings the project owns, and their instances on audio tracks, with their trims and volume curves.</td></tr>
+          <tr><td><code>colorMatches</code></td><td>The project’s lists of match colours.</td></tr>
+          <tr><td><code>formulaGroups</code></td><td>The groups of formulas of the Creator’s list. It is left out until you make a group.</td></tr>
+          <tr><td><code>textGeometry</code></td><td>Only in a <code>.mfe.json</code>: the saved shapes of the font texts, so they draw as they were saved with no companion.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>A snapshot of its glyphs.</strong> A formula keeps the list of its glyphs as the renderer drew them. Every
+        reference to a glyph in the project, a colour, a pair, a block, is a number in that list, so a project does not depend on which
+        renderer is running when you open it. <a href="glossary.html#canonical-index">Canonical index</a> and
+        <a href="troubleshooting.html#glyph-order">Glyph order</a> say more.</p>
+
+      <h3 id="leaves-out">What a project leaves out</h3>
+      <ul>
+        <li><strong>Preferences.</strong> They are the browser’s, not the file’s:
+          <a href="preferences.html">Preferences</a> lists them.</li>
+        <li><strong>Palettes.</strong> Choosing a palette, or applying one, copies plain colour values into the fields of the project. A
+          project keeps no palette and no role names, so it looks the same on a machine that has no such palette.</li>
+        <li><strong>How you were looking.</strong> The selection, the playhead, the zoom and pan of the Preview, the zoom and the
+          track heights of the timeline, and the undo history are not saved. Open a project and they start afresh.</li>
+        <li><strong>An export.</strong> A Python file or a video is made from a project; it is not the project. Keep the project.</li>
+      </ul>
+
+      <h2 id="packages">Packages: .mfe</h2>
+      <p>A project that has <strong>audio recordings</strong> cannot be a text file: the recordings are bytes. It is saved as a
+        <strong>package</strong>, ending in <code>.mfe</code>, which holds the project and every recording it owns, so that a
+        project and its sound travel in one file. <span class="ui">File ▸ Save As…</span> suggests the <code>.mfe</code> ending
+        for such a project. If you try to save it into a <code>.mfe.json</code> file, the editor refuses:</p>
+      <blockquote><p>“A project with recordings, or with more text geometry than a .mfe.json carries, needs a .mfe package destination.
+        Use Save As and keep the .mfe suffix.”</p></blockquote>
+      <ul>
+        <li>A package is not a ZIP file and you cannot unzip it. It is one file made for the editor: a header, the project, then the
+          recordings. Open it like any project: <span class="ui">File ▸ Open…</span>, then <span class="ui">Other file…</span> for a file that is not in your synced folder.</li>
+        <li>A project with font texts keeps their shapes inside its <code>.mfe.json</code>, up to 64 MiB of them. Beyond that it is saved
+          as a package too.</li>
+        <li>A recording that the browser no longer holds when you save can be left out if you say so: the package then says which, the
+          project opens with that recording marked, and you import it again.</li>
+        <li>A project that has no recordings can be saved as a <code>.mfe.json</code> again with <span class="ui">Save As…</span>.</li>
+      </ul>
+
+      <h2 id="older">Versions and opening older files</h2>
+      <p>The format has a version, a whole number that grows each time a feature needs a field an older editor could misread. The
+        editor always saves the current version, and it opens every version up to the current one.</p>
+      <ul>
+        <li><strong>An older file</strong> is upgraded in memory as it opens, and the editor says so. The file on disk is not touched
+          until you save, and then it is saved in the current format.</li>
+        <li><strong>A newer file</strong> is refused, with a message that names its version and the newest one this editor reads. Use a
+          newer build of the editor.</li>
+        <li><strong>A file that is not a project</strong> is refused too, and nothing about the open project changes.</li>
+        <li><strong>A package</strong> (<a href="#packages">above</a>) whose project the editor does not read, a newer one say, is refused
+          with the reason a <code>.mfe.json</code> of that project gets: <em>“Could not open lecture.mfe”</em>, <em>“The project was saved
+          by a newer version of the app (format 99; this app reads up to 36).”</em> A package is called damaged only when the package
+          itself is.</li>
+      </ul>
+      <figure>
+        <img src="../media/reference/files/upgraded.dark.webp" data-themed
+             alt="A notice: Upgraded from format 1. Saving writes the current format."
+             width="436" height="70" loading="lazy">
+        <figcaption>Opening a small project of format 1, kept for this picture.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/reference/files/newer.dark.webp" data-themed
+             alt="An error notice: Could not open from-the-future.mfe.json. The project was saved by a newer version of the app (format 99; this app reads up to 36)."
+             width="436" height="86" loading="lazy">
+        <figcaption>A file of a later format.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/reference/files/not-a-project.dark.webp" data-themed
+             alt="An error notice: Could not open notes.json. This is not a Manim Formula Editor project."
+             width="436" height="70" loading="lazy">
+        <figcaption>A JSON file that is something else.</figcaption>
+      </figure>
+      <p>A file that opens can still say <em>“Opened with N issues”</em>: its content breaks a rule the editor checks, such as a glyph
+        that does not exist or two clips on one track that overlap. It opens anyway — the notice is red when one of the issues is an error, amber when they are warnings alone —, and the issues show where they apply: the
+        Animations panel, the timeline, the Python export dialog. <a href="troubleshooting.html#open-fails">Troubleshooting</a>
+        lists the messages.</p>
+      <p>A number past what the editor’s fields take is one of those errors too, since a file can hold any number: a dashed line whose
+        dashes are shorter than 0.01, the path arc of a relation or of a Morph block past a full turn (360° either way), a scene, a
+        clip or a sound that ends after 24 hours. Bring the value back within that range, in its field or on the timeline, and the error goes.</p>
+
+      <h3 id="when">Which version a feature needs</h3>
+      <p>An editor refuses every file of a later version than its own, whatever the file holds, and this editor always
+        saves the current version, 36: a project saved here does not open in an older build. A feature is part of
+        the format from some version on, so a file older than that version cannot hold it. The versions, in order:</p>
+      <table>
+        <caption class="sr-only">Format versions and the features a file can use from them</caption>
+        <thead>
+          <tr><th>Format version</th><th>Features a file can use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 to 8</td><td>Formulas, tracks, clips, relations with pairs of glyphs, hidden glyphs, intros and outros, Appear, Disappear, Transform and Morph blocks, how several sources reach one target, match colours, custom paths.</td></tr>
+          <tr><td>9 to 14</td><td>Objects of several kinds: LaTeX texts, braces with labels, shapes, and Emphasis blocks.</td></tr>
+          <tr><td>15 to 19</td><td>Copies pairs that remember their principal source, audio tracks and recordings, font texts, their saved shapes inside the file, and groups of blocks.</td></tr>
+          <tr><td>20 to 25</td><td>Clips locked in the Preview, braces and shapes over several clips, groups of formulas, the fill of a shape and its transform to another target, where a text’s new clips start, and the cross line.</td></tr>
+          <tr><td>26 to 30</td><td>Lines and arrows, the anchors of their ends, curves and tips, GrowArrow, and the Transform of a line’s ends.</td></tr>
+          <tr><td>31</td><td>Clips that start empty, and several relations between the same two clips.</td></tr>
+          <tr><td>32</td><td>A path of its own for one route of a pair (one source glyph on its way to one target glyph), and pairs of one relation that bring the same targets.</td></tr>
+          <tr><td>33</td><td>Glyphs a clip leaves out of its own intro, besides its formula’s hidden glyphs: a split leaves out of its first half the glyphs that only come on screen after the cut. The style Fade copy, for a relation, a Morph block or a pair.</td></tr>
+          <tr><td>34</td><td>The camera of the scene: where it frames the scene at the start, target cameras with a name, and camera moves in time.</td></tr>
+          <tr><td>35</td><td>The Slides mode: pauses and comments at instants of the scene (<a href="../basics/slides.html">Slides and the HTML page</a>).</td></tr>
+          <tr><td>36</td><td>A pause that skips its wait: going on from it, the exported page and the rehearsal jump to where the next animation starts (<a href="../basics/slides.html#skip-wait">A pause that skips its wait</a>).</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="format">The format itself</h2>
+      <p>The format is written down, field by field, in
+        <a href="https://github.com/zavden/mfe/blob/main/docs/FORMAT.md">FORMAT.md</a> in the editor’s repository: every
+        section of a project, the rules that the editor checks when it opens one, the layout of a package, and a table of what each version
+        changed and how an older file is upgraded. The editor’s own code is the final word: the types in <code>app/src/model/types.ts</code>
+        and the checks that mirror them in <code>schema.ts</code>. The repository’s <code>examples/</code> folder holds projects to read
+        next to it, every one of the current format.</p>
+      <aside class="callout tip">
+        <p>A project is data you own. If you ever need to find out how something was stored, open the file in a text editor, look for the
+          name of the formula you are after, and read around it.</p>
+      </aside>
+    </article>
+  </main>
+</body>
+</html>

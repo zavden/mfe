@@ -1,0 +1,578 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Match colors",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_1",
+      "kind": "math",
+      "name": "poly",
+      "source": "y = x^2 + 2x + 1",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#FFFF00",
+        "2": "#58C4DD",
+        "6": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-rea2ew30ie",
+        "glyphs": [
+          {
+            "label": "y",
+            "center": [
+              -1.57334976,
+              -0.11054590271999998
+            ],
+            "size": [
+              0.23836608000000004,
+              0.32455871999999997
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -1.123360704,
+              -0.04481566271999998
+            ],
+            "size": [
+              0.33374592000000003,
+              0.11726207999999999
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.649651968,
+              -0.06210430271999999
+            ],
+            "size": [
+              0.24404544000000006,
+              0.22700735999999996
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -0.3976404739200001,
+              0.15484608
+            ],
+            "size": [
+              0.14136244415999988,
+              0.23595836543999996
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.0224501760000001,
+              -0.04456510272
+            ],
+            "size": [
+              0.3337459199999999,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.453814272,
+              -0.003222702719999998
+            ],
+            "size": [
+              0.19994688000000016,
+              0.33374592
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.7189067520000001,
+              -0.06210430271999999
+            ],
+            "size": [
+              0.24404543999999984,
+              0.22700735999999996
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              1.172270016,
+              -0.04456510272
+            ],
+            "size": [
+              0.3337459199999997,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              1.60634016,
+              -0.003222702719999998
+            ],
+            "size": [
+              0.17238527999999986,
+              0.33374592
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_2",
+      "kind": "math",
+      "name": "deriv",
+      "source": "\\frac{dy}{dx} = 2x + 2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#83C167",
+        "1": "#83C167",
+        "2": "#83C167",
+        "3": "#83C167",
+        "4": "#83C167",
+        "7": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1jghttybig8",
+        "glyphs": [
+          {
+            "label": "d",
+            "center": [
+              -1.16535456,
+              0.34151328000000003
+            ],
+            "size": [
+              0.24554880000000012,
+              0.35278848000000007
+            ]
+          },
+          {
+            "label": "y",
+            "center": [
+              -0.91437696,
+              0.22968
+            ],
+            "size": [
+              0.23836608000000004,
+              0.3245587200000001
+            ]
+          },
+          {
+            "label": "d",
+            "center": [
+              -1.18590048,
+              -0.34101216
+            ],
+            "size": [
+              0.24554880000000012,
+              0.35278848000000007
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.92506752,
+              -0.40440383999999996
+            ],
+            "size": [
+              0.24404543999999995,
+              0.22700736
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              -1.05160032,
+              -0.04334688000000001
+            ],
+            "size": [
+              0.6474470400000001,
+              0.030067200000000002
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.333595584,
+              -0.043346880000000004
+            ],
+            "size": [
+              0.33374592000000014,
+              0.11726207999999999
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.1255806719999999,
+              -0.001753920000000006
+            ],
+            "size": [
+              0.19994688000000016,
+              0.33374592000000003
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.39067315199999986,
+              -0.06063552
+            ],
+            "size": [
+              0.24404544000000006,
+              0.22700736
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.844036416,
+              -0.04309632000000001
+            ],
+            "size": [
+              0.3337459199999997,
+              0.3332448
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              1.2753503999999998,
+              -0.001753920000000006
+            ],
+            "size": [
+              0.19994687999999972,
+              0.33374592000000003
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_3",
+      "kind": "math",
+      "name": "square",
+      "source": "y = (x + 1)^2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#FFFF00",
+        "3": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-hiku63w11h",
+        "glyphs": [
+          {
+            "label": "y",
+            "center": [
+              -1.19010395808,
+              -0.09927070271999998
+            ],
+            "size": [
+              0.23836608000000004,
+              0.32455871999999997
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.74011490208,
+              -0.03354046271999997
+            ],
+            "size": [
+              0.33374592000000003,
+              0.11726207999999999
+            ]
+          },
+          {
+            "label": "(",
+            "center": [
+              -0.29897896608,
+              -0.03354046271999998
+            ],
+            "size": [
+              0.11976767999999993,
+              0.50112
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.07147048608000006,
+              -0.05082910271999998
+            ],
+            "size": [
+              0.24404544000000006,
+              0.22700735999999996
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.38189277792,
+              -0.033289902719999986
+            ],
+            "size": [
+              0.3337459199999999,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              0.81596292192,
+              0.008052497280000015
+            ],
+            "size": [
+              0.1723852800000003,
+              0.33374592
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              1.02618276192,
+              -0.03354046271999998
+            ],
+            "size": [
+              0.11976768000000027,
+              0.50112
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              1.238605776,
+              0.16612128
+            ],
+            "size": [
+              0.14136244415999988,
+              0.23595836543999998
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_1",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_2",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_1",
+      "formulaId": "f_1",
+      "trackId": "t_1",
+      "start": 0,
+      "end": 4,
+      "initial": {
+        "position": [
+          0,
+          1.5
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_2",
+      "formulaId": "f_2",
+      "trackId": "t_2",
+      "start": 2,
+      "end": 7,
+      "initial": {
+        "position": [
+          0,
+          -1
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_3",
+      "formulaId": "f_3",
+      "trackId": "t_1",
+      "start": 5,
+      "end": 9,
+      "initial": {
+        "position": [
+          0,
+          1.5
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": [
+    {
+      "id": "m_1",
+      "name": "Course colours",
+      "entries": [
+        {
+          "pattern": "x",
+          "color": "#58C4DD"
+        },
+        {
+          "pattern": "y",
+          "color": "#FFFF00"
+        },
+        {
+          "pattern": "\\frac{dy}{dx}",
+          "color": "#83C167"
+        }
+      ]
+    },
+    {
+      "id": "m_2",
+      "name": "Only x",
+      "entries": [
+        {
+          "pattern": "$x$",
+          "color": "#FC6255"
+        }
+      ]
+    }
+  ]
+}

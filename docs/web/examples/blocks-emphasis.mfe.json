@@ -1,0 +1,469 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Emphasis blocks",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#070B15",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_qbjgc0ev",
+      "kind": "math",
+      "name": "eq",
+      "source": "a^2 + b^2 = c^2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 168,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-268iw0s8pl",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -4.0906176292800005,
+              -0.32523113951999993
+            ],
+            "size": [
+              0.8296041599999997,
+              0.79101792
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -3.26821068,
+              0.43409520000000007
+            ],
+            "size": [
+              0.49476855456000024,
+              0.82585427904
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -1.7977180132800001,
+              -0.2638439395199999
+            ],
+            "size": [
+              1.16811072,
+              1.1663568
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.3205665892800005,
+              -0.10423721951999992
+            ],
+            "size": [
+              0.6699974399999999,
+              1.2365135999999999
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.3939742799999997,
+              0.43409520000000007
+            ],
+            "size": [
+              0.49476855456000113,
+              0.82585427904
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              1.9618095067199999,
+              -0.26472089951999994
+            ],
+            "size": [
+              1.1681107199999996,
+              0.41041728
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              3.5379404827200007,
+              -0.32640041951999993
+            ],
+            "size": [
+              0.6939676800000001,
+              0.79686432
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              4.258035432000001,
+              0.43409520000000007
+            ],
+            "size": [
+              0.49476855456000024,
+              0.82585427904
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_8xkn78op",
+      "kind": "visual",
+      "name": "Emphasis",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_1g6jmsmk",
+      "formulaId": "f_qbjgc0ev",
+      "trackId": "t_8xkn78op",
+      "start": 0,
+      "end": 4,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_ke2xez3d",
+          "kind": "emphasis",
+          "start": 1,
+          "duration": 1,
+          "easing": "there_and_back",
+          "effect": "indicate",
+          "glyphs": [
+            6,
+            7
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_gf0zsv6u",
+      "formulaId": "f_qbjgc0ev",
+      "trackId": "t_8xkn78op",
+      "start": 4,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_17ar4rgg",
+          "kind": "emphasis",
+          "start": 1,
+          "duration": 2,
+          "easing": "smooth",
+          "effect": "wiggle",
+          "glyphs": [
+            3,
+            4
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 10,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_puq89pjv",
+      "formulaId": "f_qbjgc0ev",
+      "trackId": "t_8xkn78op",
+      "start": 8,
+      "end": 12,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_vdoci8hp",
+          "kind": "emphasis",
+          "start": 1,
+          "duration": 1,
+          "easing": "smooth",
+          "effect": "circumscribe",
+          "glyphs": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_feynl5sm",
+      "formulaId": "f_qbjgc0ev",
+      "trackId": "t_8xkn78op",
+      "start": 12,
+      "end": 16,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_1cmo3xt7",
+          "kind": "emphasis",
+          "start": 1,
+          "duration": 1,
+          "easing": "smooth",
+          "effect": "flash",
+          "glyphs": [
+            5
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_3lh2lfxj",
+      "formulaId": "f_qbjgc0ev",
+      "trackId": "t_8xkn78op",
+      "start": 16,
+      "end": 20,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_qikwo088",
+          "kind": "emphasis",
+          "start": 1,
+          "duration": 2,
+          "easing": "smooth",
+          "effect": "focus_on",
+          "glyphs": [
+            6,
+            7
+          ],
+          "color": "#F4C867",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.35
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

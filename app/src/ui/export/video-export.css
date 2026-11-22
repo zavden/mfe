@@ -1,0 +1,265 @@
+/* Export → Video… and Export → Audio…: the insides of two dialogs. */
+
+/* The encoders: one sunken card to a choice. The chosen one has the accent for its edge and a
+ * teal tint over its sheet; one that cannot be chosen keeps its reason legible. */
+.video-export .encoder-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.video-export .encoder-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--well);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.video-export .encoder-option[data-selected='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--selection) 45%, var(--well));
+  box-shadow:
+    inset 0 1px 0 var(--edge-light),
+    var(--selection-glow);
+}
+
+.video-export .encoder-option[data-disabled='true'] .check {
+  opacity: 0.6;
+}
+
+.video-export .encoder-option .check {
+  font-weight: 600;
+}
+
+.video-export .encoder-option .field-hint {
+  margin-left: 22px;
+}
+
+.video-export .field-warning {
+  color: var(--warning);
+  font-size: 12px;
+}
+
+/* The audio option and the readout of what the export will be: sunken lines, whole width. */
+.video-export .video-audio-option,
+.video-export .video-summary {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--well);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.video-export .video-audio-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.video-export .video-audio-option .field-hint,
+.video-export .video-audio-option .field-warning {
+  margin-left: 22px;
+}
+
+/* What the export will be: a readout, in the font of numbers. */
+.video-export .video-summary {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.video-export .video-summary:not(.field-warning, .field-error) {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A summary line that warns or holds the export back keeps the colour that says so, on a faint
+ * sheet of it with the matching edge. */
+.video-export .video-summary.field-warning {
+  border-color: color-mix(in srgb, var(--warning) 45%, var(--border));
+  background: color-mix(in srgb, var(--warning) 10%, var(--well));
+  box-shadow: inset 3px 0 0 var(--warning);
+  color: var(--warning);
+}
+
+.video-export .video-summary.field-error {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+  background: color-mix(in srgb, var(--danger) 10%, var(--well));
+  box-shadow: inset 3px 0 0 var(--danger);
+  color: var(--danger);
+}
+
+/* The run: its state, a bar, and what Manim or ffmpeg said. */
+.video-export .video-run {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--well);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.video-export .video-error {
+  color: var(--danger);
+}
+
+.video-export .video-done {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.video-export .video-log {
+  max-height: 160px;
+  margin: 0;
+  padding: 8px 10px;
+  overflow: auto;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  box-shadow: inset 0 2px 6px color-mix(in srgb, var(--shadow) 45%, transparent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+/* A progress bar: a sunken groove with the accent poured in. With no total yet, a lit stretch
+ * slides along it. */
+.video-export progress,
+.audio-export-body progress {
+  display: block;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--input-bg);
+  box-shadow:
+    inset 0 0 0 1px var(--border),
+    inset 0 1px 2px color-mix(in srgb, var(--shadow) 60%, transparent);
+}
+
+.video-export progress::-webkit-progress-bar,
+.audio-export-body progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+.video-export progress::-webkit-progress-value,
+.audio-export-body progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  transition: width var(--motion-fast);
+}
+
+.video-export progress::-moz-progress-bar,
+.audio-export-body progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+}
+
+.video-export progress:indeterminate,
+.audio-export-body progress:indeterminate {
+  background-image: linear-gradient(90deg, transparent, var(--accent), transparent);
+  background-repeat: no-repeat;
+  background-size: 40% 100%;
+  animation: export-progress-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes export-progress-slide {
+  from {
+    background-position: -50% 0;
+  }
+  to {
+    background-position: 150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-export progress:indeterminate,
+  .audio-export-body progress:indeterminate {
+    animation: none;
+    background-position: 50% 0;
+  }
+}
+
+/* Forced colours drop backgrounds and shadows: the bar goes back to the system's own. */
+@media (forced-colors: active) {
+  .video-export progress,
+  .audio-export-body progress {
+    appearance: auto;
+  }
+}
+
+/* Export → Audio…: the form, then what the run says. */
+.audio-export-body .audio-fields {
+  gap: 12px 16px;
+  align-items: end;
+}
+
+.audio-export-body .audio-fields label {
+  gap: 6px;
+  color: var(--text-dim);
+}
+
+.audio-export-body .audio-help {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 1;
+}
+
+.audio-export-body .audio-fields > .audio-help {
+  padding-bottom: 6px;
+}
+
+.audio-export-body > p {
+  margin: 12px 0 0;
+}
+
+.audio-export-body .audio-note {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--well);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.audio-export-body .audio-note.audio-done {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.audio-export-body .audio-note.audio-error {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+  background: color-mix(in srgb, var(--danger) 10%, var(--well));
+  box-shadow: inset 3px 0 0 var(--danger);
+  color: var(--danger);
+}
+
+.audio-export-body .audio-run {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--well);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.audio-export-body .audio-run p {
+  margin: 0 0 8px;
+}

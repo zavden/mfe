@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animation blocks · Manim Formula Editor</title>
+  <meta name="description" content="Every animation block a clip can hold, from Write to FocusOn, running side by side: how to add, time and edit one, run several at once, and what the export makes of it.">
+  <meta name="mfe:id" content="animations/blocks">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Animation blocks">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/blocks-appear.data.js" defer></script>
+  <script src="../examples/blocks-disappear.data.js" defer></script>
+  <script src="../examples/blocks-transform.data.js" defer></script>
+  <script src="../examples/blocks-morph.data.js" defer></script>
+  <script src="../examples/blocks-emphasis.data.js" defer></script>
+  <script src="../examples/blocks-parallel.data.js" defer></script>
+  <script src="../widgets/rate-functions.js" defer></script>
+  <script src="../media/animations/blocks/add-menu.tour.js" defer></script>
+  <script src="../media/animations/blocks/dialog.tour.js" defer></script>
+  <style>
+    /* The gallery of this page: a card for each block, two to a row when the column allows it.
+     * The swatches are the colours the app gives each family of blocks on its timeline. */
+    .block-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+      gap: 20px 16px;
+      margin: 1.25rem 0 1.5rem;
+      padding: 0;
+      list-style: none;
+    }
+    .block-gallery > li {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+    }
+    .block-gallery h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 2px 8px;
+      font-size: 1rem;
+    }
+    .block-gallery .mfe-player {
+      margin: 0;
+    }
+    :root {
+      --swatch-appear: #5ad79a;
+      --swatch-disappear: #ff8a7a;
+      --swatch-transform: #b79cff;
+      --swatch-morph: #6fb3ff;
+      --swatch-emphasis: #ffd166;
+    }
+    :root[data-theme='light'] {
+      --swatch-appear: #17794c;
+      --swatch-disappear: #b53a2a;
+      --swatch-transform: #6a43c9;
+      --swatch-morph: #1f63b8;
+      --swatch-emphasis: #8f6300;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme]) {
+        --swatch-appear: #17794c;
+        --swatch-disappear: #b53a2a;
+        --swatch-transform: #6a43c9;
+        --swatch-morph: #1f63b8;
+        --swatch-emphasis: #8f6300;
+      }
+    }
+    .swatch {
+      display: inline-block;
+      flex: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: var(--swatch);
+      box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+      vertical-align: -2px;
+    }
+    .swatch.is-appear { --swatch: var(--swatch-appear); }
+    .swatch.is-disappear { --swatch: var(--swatch-disappear); }
+    .swatch.is-transform { --swatch: var(--swatch-transform); }
+    .swatch.is-morph { --swatch: var(--swatch-morph); }
+    .swatch.is-emphasis { --swatch: var(--swatch-emphasis); }
+    .family-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Animation blocks</h1>
+      <p class="lead">A clip appears with an intro and leaves with an outro. Between the two, <strong>blocks</strong> animate it: a term arrives, another lights up, a line turns into the next. Each block is one animation, on some glyphs, for some seconds.</p>
+
+      <figure class="mfe-player" data-mfe-player="blocks-parallel" data-timeline data-autoplay data-loop data-start="2.4">
+        <figcaption>One clip with four blocks. A Write, an Indicate and a Wiggle run at the same time on different glyphs, each in a lane of its own; a Transform of the Wiggle’s glyphs comes later.</figcaption>
+      </figure>
+
+      <h2 id="what">What a block is</h2>
+      <p>A block is a coloured bar in the upper part of a clip on the timeline. It carries the icon of its animation, then its name and the number of glyphs it acts on: <span class="ui">Wiggle · 2</span>. A block too short for its name shows the icon alone; point at it and its tooltip gives the name. It has a start, a length in seconds, an easing, and, for most blocks, the glyphs it animates.</p>
+      <p>Two other kinds of animation are not blocks. A clip’s <strong>intro</strong> and <strong>outro</strong> are the hatched ends of the clip (see <a href="../basics/intro-outro.html">Appearing and disappearing</a>), and a <strong>relation</strong> carries glyphs from one clip into another (see <a href="../transforms/relations.html">How relations work</a>).</p>
+
+      <p>Blocks come in five families, each with its own colour on the timeline.</p>
+      <table>
+        <thead>
+          <tr><th>Family</th><th>What it does, and what it acts on</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="family-name"><span class="swatch is-appear" aria-hidden="true"></span>Appear</span></td>
+            <td>Brings glyphs on screen: <a href="#write"><span class="ui">Write</span></a>, <a href="#create"><span class="ui">Create</span></a>, <a href="#fade-in"><span class="ui">FadeIn</span></a>, <a href="#grow-from-center"><span class="ui">GrowFromCenter</span></a>, <a href="#draw-border-then-fill"><span class="ui">DrawBorderThenFill</span></a>. It acts on the glyphs you pick.</td>
+          </tr>
+          <tr>
+            <td><span class="family-name"><span class="swatch is-disappear" aria-hidden="true"></span>Disappear</span></td>
+            <td>Takes glyphs off screen: <a href="#fade-out"><span class="ui">FadeOut</span></a>, <a href="#unwrite"><span class="ui">Unwrite</span></a>, <a href="#uncreate"><span class="ui">Uncreate</span></a>, <a href="#shrink-to-center"><span class="ui">ShrinkToCenter</span></a>. It acts on the glyphs you pick.</td>
+          </tr>
+          <tr>
+            <td><span class="family-name"><span class="swatch is-transform" aria-hidden="true"></span>Transform</span></td>
+            <td>Moves, scales, turns or recolours <a href="#whole-formula">the whole formula</a>, or <a href="#part-of-the-formula">some of its glyphs</a>, the ones you pick.</td>
+          </tr>
+          <tr>
+            <td><span class="family-name"><span class="swatch is-morph" aria-hidden="true"></span>Morph</span></td>
+            <td>Turns glyphs of the formula into other glyphs of <a href="#morph-within">the same formula</a>, in pairs that you choose.</td>
+          </tr>
+          <tr>
+            <td><span class="family-name"><span class="swatch is-emphasis" aria-hidden="true"></span>Emphasis</span></td>
+            <td>Draws attention to glyphs for a moment and leaves them as they were: <a href="#indicate"><span class="ui">Indicate</span></a>, <a href="#wiggle"><span class="ui">Wiggle</span></a>, <a href="#circumscribe"><span class="ui">Circumscribe</span></a>, <a href="#flash"><span class="ui">Flash</span></a>, <a href="#focus-on"><span class="ui">FocusOn</span></a>. It acts on the glyphs you pick.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <aside class="callout note">
+        <p>A brace, a shape and a line are one piece each, with no glyphs to animate apart. Their <span class="ui">Transform</span> moves the whole object, and they take no Morph. A line is more limited still. Their own pages say what each one takes: <a href="../objects/braces.html">Braces</a>, <a href="../objects/shapes.html">Shapes</a>, <a href="../objects/lines-arrows.html">Lines and arrows</a>.</p>
+      </aside>
+
+      <h2 id="adding">Adding a block</h2>
+      <h3 id="adding-timeline">From the timeline</h3>
+      <p>Put the playhead at the moment the animation should start (click the ruler there), then right-click the clip, in a place where no block lies. The <span class="ui">Add animation</span> menu opens. Its header says which clip it is for and where the block will start: at the <span class="ui">playhead</span>, with its time. When the playhead is not on the clip, the block starts where you clicked instead, and the header says so: <span class="ui">the playhead is outside this clip</span>.</p>
+      <div class="mfe-tour" data-mfe-tour="animations/blocks/add-menu" data-title="The Add animation menu"></div>
+
+      <p>The block lasts as long as its animation does by default: one second for most, two for <span class="ui">DrawBorderThenFill</span>, <span class="ui">Wiggle</span> and <span class="ui">FocusOn</span>. If other animations of its glyphs are in the way, it goes to the nearest free time, shortened when it must be. When it was to start at the playhead, a notice, <span class="ui">No room at the playhead</span>, says where it starts and what was in the way: the intro, another block, or the end of the clip. If there is no room at all, a notice says why and nothing is added.</p>
+
+      <h3 id="adding-panel">From the Animations panel</h3>
+      <p>Select the clip, open the <span class="ui">Timing</span> tab and press <span class="ui">Add animation</span> in the <span class="ui">Animations</span> section: the same menu opens, for the time the playhead is at, wherever the playhead is. The section lists the clip’s blocks below the button.</p>
+      <figure>
+        <img src="../media/animations/blocks/clip-panel.dark.webp" data-themed
+             alt="The Timing tab of the Animations panel for a clip, with the Add animation button of its Animations section marked 1."
+             width="310" height="695" loading="lazy">
+        <figcaption><span class="ui">Add animation</span> (1) adds a block at the playhead.</figcaption>
+      </figure>
+      <p>From the keyboard, <kbd data-keys="Tab">Tab</kbd> reaches a clip on the timeline, and <kbd data-keys="Shift+F10">Shift+F10</kbd> (or the Menu key) opens the same menu: at the playhead when it is on the clip, else at the clip’s start.</p>
+
+      <h3 id="adding-region">In a region of the timeline</h3>
+      <p>To say when a block starts and when it ends before making it, mark <a href="../basics/timeline.html#region">a region</a> on the timeline’s ruler first. While a region is marked, a block added from either menu takes it whole, wherever the playhead is: it starts where the region starts and lasts until it ends. The header of the menu says so: <span class="ui">region 1.00–3.00 s</span>.</p>
+      <p>A block that does not fit in the region is not added, and a notice says why: the clip does not hold the region, or other animations of its glyphs are in it. Nothing moves the block to a free time nearby. Move the region, or remove it with <kbd data-keys="Escape">Esc</kbd> to add at the playhead again.</p>
+
+      <h3 id="adding-glyphs">Which glyphs a new block takes</h3>
+      <p>A new <span class="ui">Appear</span> or <span class="ui">Disappear</span> block takes every glyph it can: all the glyphs that wait to arrive, or all those on screen. Added where other blocks already run, it names only the glyphs they leave, so moving either block later changes nothing for the other.</p>
+
+      <h2 id="gallery">The blocks, one by one</h2>
+      <p>Every card plays a few seconds of a small example while it is on screen. Press a card to pause it, and drag its time bar to look at a moment closely. Each family ends with the project behind its cards, which opens in the app.</p>
+
+      <h3 id="appear">Appear: bringing glyphs on screen</h3>
+      <p>An Appear block brings on screen the glyphs it names. They wait off screen until it runs, whether the clip starts with them hidden or not: the intro leaves them alone. A glyph a Disappear took away comes back the same way. In these cards the right side of <code>y = ax^2 + bx + c</code> waits for the block.</p>
+      <ul class="block-gallery">
+        <li>
+          <h4 id="write">Write</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-appear" data-from="0" data-to="4" data-start="1" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Draws each glyph stroke by stroke and fills it, one glyph after another. One second, <code>linear</code>.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="create">Create</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-appear" data-from="4" data-to="8" data-start="5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Draws each glyph along its outline, one glyph after another. ManimGL calls it <code>ShowCreation</code>.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="fade-in">FadeIn</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-appear" data-from="8" data-to="12" data-start="9" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Fades all the glyphs in together. <span class="ui">Shift X</span>, <span class="ui">Shift Y</span> and <span class="ui">Scale</span> make them fade in from an offset or at another size.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="grow-from-center">GrowFromCenter</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-appear" data-from="12" data-to="16" data-start="13" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Grows the glyphs from the centre of the group, all together.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="draw-border-then-fill">DrawBorderThenFill</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-appear" data-from="16" data-to="20" data-start="17.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Draws the outlines of all the glyphs at once, then fills them. Two seconds, <code>double_smooth</code>.</figcaption>
+          </figure>
+        </li>
+      </ul>
+      <div class="mfe-example" data-mfe-example="blocks-appear"></div>
+
+      <h3 id="disappear">Disappear: taking glyphs off screen</h3>
+      <p>A Disappear block takes off the glyphs it names. A glyph that is not on screen when the block starts is left alone. Here the right side of the same formula goes, and <code>y =</code> stays.</p>
+      <ul class="block-gallery">
+        <li>
+          <h4 id="fade-out">FadeOut</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-disappear" data-from="0" data-to="4" data-start="1.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Fades the glyphs out together. <span class="ui">Shift X</span>, <span class="ui">Shift Y</span> and <span class="ui">Scale</span> set where they drift to and how large they are at the end.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="unwrite">Unwrite</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-disappear" data-from="4" data-to="8" data-start="5.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Writes backwards: the last glyph is erased first, stroke by stroke.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="uncreate">Uncreate</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-disappear" data-from="8" data-to="12" data-start="9.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Traces the outlines away, one glyph after another, and removes them.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="shrink-to-center">ShrinkToCenter</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-disappear" data-from="12" data-to="16" data-start="13.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Shrinks the glyphs to the centre of the group and removes them.</figcaption>
+          </figure>
+        </li>
+      </ul>
+      <div class="mfe-example" data-mfe-example="blocks-disappear"></div>
+
+      <h3 id="transform">Transform: moving glyphs</h3>
+      <p>A Transform block has two kinds, and the Animations panel switches a block between them with <span class="ui">Whole formula</span> and <span class="ui">Part of the formula</span>.</p>
+      <ul class="block-gallery">
+        <li>
+          <h4 id="whole-formula">Whole formula (keyframe)</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-transform" data-from="0" data-to="4.5" data-start="1.75" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Takes the whole formula to a new state: a position, a scale, a rotation, a flip, an opacity, a colour. Only the fields you tick change.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="part-of-the-formula">Part of the formula</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-transform" data-from="4.5" data-to="9" data-start="6.25" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Moves chosen glyphs from where they are: a shift, a scale and a rotation about their centre, and a colour and an opacity if you tick them.</figcaption>
+          </figure>
+        </li>
+      </ul>
+      <p>A keyframe stays between the end of the intro and the start of the outro. A part of the formula follows the formula if the whole formula moves later.</p>
+      <p>The Animations section of a clip’s <span class="ui">Timing</span> tab has a second button, <span class="ui">Add keyframe at playhead</span>. It adds a whole-formula Transform that starts at the playhead and goes to the state the clip has there; you then edit what it goes to. The panel calls each of these a <em>tween</em>, and heads its editor <span class="ui">Tween 1</span>, <span class="ui">Tween 2</span> and so on.</p>
+      <p>You can set where a Transform ends in the Preview, by hand. Select its block: two round icons appear on its top corners. The left one moves the playhead to where the block starts and shows the state it starts from. The right one moves the playhead to where the block ends and lets you move, scale and turn the formula there, or only the glyphs of a part, with the state it starts from drawn faintly beneath. <kbd data-keys="Escape">Esc</kbd>, pressing the icon again, moving the playhead or selecting something else ends the edit.</p>
+      <figure>
+        <img src="../media/animations/blocks/end-state.dark.webp" data-themed
+             alt="A keyframe selected on the timeline, with the icon at the end of its block marked 1, and the Preview marked 2 showing the formula at the end state: smaller and gold, at the lower right, with its start state faint."
+             width="1120" height="860" loading="lazy">
+        <figcaption>The icon at the end of the block (1) takes the Preview (2) to the end state of the Transform, where the formula is edited.</figcaption>
+      </figure>
+      <div class="mfe-example" data-mfe-example="blocks-transform"></div>
+
+      <h3 id="morph">Morph: one formula becomes the next line</h3>
+      <p>A Morph block turns glyphs of the formula into other glyphs of the same formula, the way a derivation grows line by line. You choose the pairs; the glyphs that arrive through the block skip the intro.</p>
+      <ul class="block-gallery">
+        <li>
+          <h4 id="morph-within">Morph within the formula</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-morph" data-from="0" data-to="6" data-start="2.25" data-autoplay data-loop data-controls="minimal">
+            <figcaption>The second row grows out of copies of the glyphs of the first. The <code>−</code> has nothing to come from, so a Write brings it in.</figcaption>
+          </figure>
+        </li>
+      </ul>
+      <p>Morph blocks have their own page, with the pair editor: <a href="../transforms/morph.html">Morph blocks</a>.</p>
+      <div class="mfe-example" data-mfe-example="blocks-morph"></div>
+
+      <h3 id="emphasis">Emphasis: drawing the eye</h3>
+      <p>An Emphasis block acts on the glyphs that are on screen when it starts, and leaves them as they were. <span class="ui">Indicate</span> and <span class="ui">Wiggle</span> animate the glyphs themselves. <span class="ui">Circumscribe</span>, <span class="ui">Flash</span> and <span class="ui">FocusOn</span> draw something of their own where the glyphs are when the block starts.</p>
+      <p>Two of these cards have their settings turned up, to make the effect visible in a small card: the Wiggle swells to 1.2 and rocks by 10°, where a new one starts with 1.1 and 3.6°, and the FocusOn disc is gold at 0.35 opacity, where a new one is grey at 0.2.</p>
+      <ul class="block-gallery">
+        <li>
+          <h4 id="indicate">Indicate</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-emphasis" data-from="0" data-to="4" data-start="1.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>The glyphs swell and take a colour, then come back. <span class="ui">Scale</span> and <span class="ui">Colour</span> are its settings.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="wiggle">Wiggle</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-emphasis" data-from="4" data-to="8" data-start="6" data-autoplay data-loop data-controls="minimal">
+            <figcaption>The glyphs swell and rock about their centre, then come back. <span class="ui">Scale</span>, <span class="ui">Angle</span> and <span class="ui">Wiggles</span> set how much and how often. Turned up here to be seen.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="circumscribe">Circumscribe</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-emphasis" data-from="8" data-to="12" data-start="9.5" data-autoplay data-loop data-controls="minimal">
+            <figcaption>A rectangle is traced around the glyphs and untraced again. <span class="ui">Colour</span>, <span class="ui">Gap</span>, <span class="ui">Stroke</span> and <span class="ui">Time width</span> shape it.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="flash">Flash</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-emphasis" data-from="12" data-to="16" data-start="13.4" data-autoplay data-loop data-controls="minimal">
+            <figcaption>Twelve lines shoot out of the centre of the glyphs. Its only setting is the <span class="ui">Colour</span>.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <h4 id="focus-on">FocusOn</h4>
+          <figure class="mfe-player" data-mfe-player="blocks-emphasis" data-from="16" data-to="20" data-start="17.8" data-autoplay data-loop data-controls="minimal">
+            <figcaption>A disc shrinks from the whole frame onto the glyphs, over everything else. <span class="ui">Colour</span> and <span class="ui">Opacity</span> are its settings. Turned up here to be seen.</figcaption>
+          </figure>
+        </li>
+      </ul>
+      <p>The defaults of every block, the ones a new block starts with, are in the table of <a href="#timing-defaults">what a new block starts with</a>.</p>
+      <div class="mfe-example" data-mfe-example="blocks-emphasis"></div>
+
+      <h2 id="glyphs">Choosing the glyphs</h2>
+      <p>Appear, Disappear, Emphasis and a part Transform name the glyphs they act on. The <span class="ui">Glyphs</span> section of the Animations panel draws the formula: click a glyph, <kbd data-keys="Shift">Shift</kbd>+click for a range, <kbd data-keys="Mod">Ctrl</kbd>+click to add or remove one, or drag a box over several. A block that names <span class="ui">All</span> becomes an explicit list the first time you pick by hand.</p>
+      <p>Glyphs that are not on screen when the block starts are drawn faint, so you see what the block will find. Four buttons above the formula choose in one press:</p>
+      <ul>
+        <li><span class="ui">All</span>: every glyph of the formula.</li>
+        <li><span class="ui">Not on screen</span>: the glyphs that are not on screen when the block starts, which is what an Appear brings.</li>
+        <li><span class="ui">On screen</span>: the glyphs that are on screen then, which is what a Disappear or an Emphasis takes.</li>
+        <li><span class="ui">Hidden at start</span>: the glyphs the formula hides at the start and
+          those the clip <a href="../basics/intro-outro.html#left-out">leaves out of its intro</a>,
+          or every glyph of a clip that
+          <a href="../basics/intro-outro.html#starts-empty">starts empty</a>.</li>
+      </ul>
+      <p>Picking glyphs with the pointer in the Preview works for this too: see <a href="../layout/glyph-picking.html">Picking glyphs</a>.</p>
+
+      <h2 id="timing">Timing a block</h2>
+      <h3 id="timing-fields">The fields</h3>
+      <p>Select a block on the timeline: the Animations panel shows it. The <span class="ui">Timing</span> section has:</p>
+      <ul>
+        <li><span class="ui">Start</span>: the second of the scene the block begins at. It cannot be earlier than its clip.</li>
+        <li><span class="ui">Duration</span>: how long it lasts, at least 0.05 s.</li>
+        <li><span class="ui">Easing</span>: how its speed changes (below).</li>
+        <li><span class="ui">Lag ratio</span>, for an Appear or a Disappear: how much later each glyph starts than the one before. <span class="ui">Default</span> follows Manim’s own value for the animation; <span class="ui">Custom</span> lets you type one in <span class="ui">Value</span>. 0 plays all the glyphs together; 1 plays them one after another.</li>
+        <li><span class="ui">Shift X</span>, <span class="ui">Shift Y</span> and <span class="ui">Scale</span>, for <span class="ui">FadeIn</span> and <span class="ui">FadeOut</span>: where the glyphs fade in from, or out to, and at what size.</li>
+      </ul>
+      <p>The settings of the animation itself are in the <span class="ui">Animation</span> section above. An Appear or Disappear has just its <span class="ui">Animation</span> menu, so you can change from <span class="ui">Write</span> to <span class="ui">Create</span> without adding a new block. A part Transform has <span class="ui">Shift X</span>, <span class="ui">Shift Y</span>, <span class="ui">Scale</span>, <span class="ui">Rotation</span>, <span class="ui">Set opacity</span> and <span class="ui">Set colour</span>. An Emphasis has its <span class="ui">Effect</span> and the settings of that effect.</p>
+      <figure>
+        <img src="../media/animations/blocks/panel.dark.webp" data-themed
+             alt="The Animations panel with a Wiggle block selected: its Animation section (1), its Timing section (2) and its Glyphs section (3)."
+             width="310" height="695" loading="lazy">
+        <figcaption>The panel for a block: what it animates (1), when (2) and on which glyphs (3).</figcaption>
+      </figure>
+
+      <h3 id="timing-defaults">What a new block starts with</h3>
+      <table>
+        <thead>
+          <tr><th>Block</th><th>Duration</th><th>Easing</th><th>Settings</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Write</span></td><td>1 s</td><td><code>linear</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">Create</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">FadeIn</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio, shift, scale</td></tr>
+          <tr><td><span class="ui">GrowFromCenter</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">DrawBorderThenFill</span></td><td>2 s</td><td><code>double_smooth</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">FadeOut</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio, shift, scale</td></tr>
+          <tr><td><span class="ui">Unwrite</span></td><td>1 s</td><td><code>linear</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">Uncreate</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio</td></tr>
+          <tr><td><span class="ui">ShrinkToCenter</span></td><td>1 s</td><td><code>smooth</code></td><td>Lag ratio</td></tr>
+          <tr><td>Transform, whole formula or part</td><td>1 s</td><td><code>smooth</code></td><td>Position, scale, rotation, flips, opacity, colour</td></tr>
+          <tr><td>Morph</td><td>1 s</td><td><code>smooth</code></td><td>Default style, path arc, pairs</td></tr>
+          <tr><td><span class="ui">Indicate</span></td><td>1 s</td><td><code>there_and_back</code></td><td>Colour (yellow), scale 1.2</td></tr>
+          <tr><td><span class="ui">Wiggle</span></td><td>2 s</td><td><code>smooth</code></td><td>Scale 1.1, angle 3.6°, 6 wiggles</td></tr>
+          <tr><td><span class="ui">Circumscribe</span></td><td>1 s</td><td><code>smooth</code></td><td>Colour (yellow), gap 0.1, stroke 4, time width 0.3</td></tr>
+          <tr><td><span class="ui">Flash</span></td><td>1 s</td><td>none: each library’s own tempo</td><td>Colour (yellow)</td></tr>
+          <tr><td><span class="ui">FocusOn</span></td><td>2 s</td><td><code>smooth</code></td><td>Colour (grey), opacity 0.2</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="easing">Easing</h3>
+      <p>An easing is a rate function: it reshapes the speed of a block without changing its length. The curve plots progress against time, so a steep stretch is fast and a flat one is slow. The eight the editor offers are the ones ManimCE and ManimGL share, named as Manim names them.</p>
+      <div class="mfe-widget" data-mfe-widget="rate-functions" data-options='{"functions": ["smooth", "linear", "rush_into", "rush_from", "slow_into", "double_smooth", "there_and_back", "there_and_back_with_pause"]}'></div>
+      <p>Click a curve to stop on a moment and see how far along each easing is. ManimCE and ManimGL mean other curves by <code>smooth</code>, and by the functions made of it, so the switch above the cards shows either library’s.</p>
+      <p><span class="ui">Indicate</span> offers only the two that come back to where they started, marked <em>comes back</em>: <code>there_and_back</code> and <code>there_and_back_with_pause</code>, since it is a pulse. <span class="ui">Flash</span> has no easing field at all.</p>
+
+      <h3 id="timing-drag">Moving and resizing on the timeline</h3>
+      <p>Drag a block by its body to move it, and by an edge to change its length. It snaps to the ruler’s small ticks, the playhead, the clip’s edges, the end of the intro, the start of the outro, the edges of the clip’s other blocks and the windows of its relations. Hold <kbd data-keys="Shift">Shift</kbd> to move without snapping.</p>
+      <p>A readout under the block gives its start, its end and its length while you drag, and names the blocks it runs alongside. Where the pointer asks for more than the clip or the other animations allow, the block stops and the readout says why.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/animations/blocks/drag-block.dark.webm"
+               poster="../media/animations/blocks/drag-block.dark.webp" width="960" height="250"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The Wiggle dragged to the left runs in parallel with the Write and the Indicate, and the readout says so. Dragged to the right, it stops at 5 s, where a Transform of the same two glyphs starts. <kbd data-keys="Escape">Esc</kbd> puts it back.</figcaption>
+      </figure>
+      <p>With a block selected, <kbd data-keys="Alt+ArrowLeft">Alt+←</kbd> and <kbd data-keys="Alt+ArrowRight">Alt+→</kbd> move it by one frame, and with <kbd data-keys="Shift">Shift</kbd> by five. A block that is in a <a href="groups.html">group</a> takes the whole group with it.</p>
+
+      <h2 id="parallel">Blocks at the same time</h2>
+      <p>Blocks on different glyphs can run at the same time. Where they overlap, the timeline gives each its own lane, and the track grows taller to hold them. The block you drag lies on top of the others.</p>
+      <figure>
+        <img src="../media/animations/blocks/lanes.dark.webp" data-themed
+             alt="A clip on the timeline with three blocks in three lanes: a Write, an Indicate and a Wiggle."
+             width="780" height="116" loading="lazy">
+        <figcaption>The Write (1) and the Indicate (2) start together; the Wiggle (3) starts in the middle of both.</figcaption>
+      </figure>
+      <p>What blocks cannot do is animate the same glyph twice at once. A glyph is busy during the intro, the outro, a relation’s window and any block that animates it; another block cannot take it at the same time. When you drag one into such a clash, it stops short of it.</p>
+      <p>There is one exception. A <span class="ui">Circumscribe</span>, a <span class="ui">Flash</span> or a <span class="ui">FocusOn</span> only looks at its glyphs when it starts, so it may run while another block moves them. It cannot start while something is still drawing them.</p>
+      <p>Three commands help to make blocks that run together. <span class="ui">Split into runs</span> turns one block into one block for each run of consecutive glyphs, all at the same time. <span class="ui">Split…</span> lets you choose the glyphs of each new block. <span class="ui">Duplicate for the other glyphs</span> puts a copy beside the block for the glyphs it does not animate. Blocks made this way start together and last the same, so the timeline draws them as a single block: that is a <a href="groups.html">group of animation blocks</a>.</p>
+
+      <h2 id="dialog">The block dialog</h2>
+      <p>Double-click a block to open its dialog: the fields of the Animations panel with more room, and beside them the formula in large to choose the glyphs. It starts wide, and you can maximise it or drag its corner to resize it; the size is kept for the session. The panel keeps showing the same block, and every edit made in either place is one undo step.</p>
+      <div class="mfe-tour" data-mfe-tour="animations/blocks/dialog" data-title="The block dialog"></div>
+      <p>A keyframe and a Morph name no glyphs, so their dialog is narrower, with the fields alone and the same <span class="ui">Preview</span> button. A button in the dialog that starts something in the Preview, such as <span class="ui">Edit path…</span> of a Morph pair, closes the dialog first, because the dialog would cover what you are about to click.</p>
+      <figure>
+        <img src="../media/animations/blocks/dialog-keyframe.dark.webp" data-themed
+             alt="The dialog of a whole-formula Transform: its start, duration and easing, the position, scale, rotation and colour it moves to, and the Preview button in the title bar."
+             width="544" height="616" loading="lazy">
+        <figcaption>The dialog of a keyframe.</figcaption>
+      </figure>
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/blocks-parallel.mfe.json" download>blocks-parallel.mfe.json</a>. Choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the <a href="../start/projects.html#open">Projects dialog</a> and pick the file.</li>
+          <li>Double-click the <span class="ui">Wiggle · 2</span> block.</li>
+          <li>In the formula on the right, <kbd data-keys="Mod">Ctrl</kbd>+click the <span class="ui">6</span> to add it to the block’s glyphs, and watch the label change to <span class="ui">Wiggle · 3</span>.</li>
+          <li>Press <span class="ui">Preview</span> and close it with <kbd data-keys="Escape">Esc</kbd>. Change the <span class="ui">Easing</span> in the fields and press <span class="ui">Preview</span> again: the curve is the new one.</li>
+        </ol>
+      </aside>
+
+      <h2 id="menu">The menu of a block</h2>
+      <p>Right-click a block for its own menu. An Appear or a Disappear lists the other animations of both families under <span class="ui">Change animation</span>; an Emphasis lists its five effects under <span class="ui">Change effect</span>. Both keep the block’s time and glyphs.</p>
+      <figure>
+        <img src="../media/animations/blocks/block-menu.dark.webp" data-themed
+             alt="The menu of a Wiggle block: Change effect with its five effects, then Duplicate, Duplicate for the other glyphs, Split into runs, Split… and Delete…."
+             width="380" height="340" loading="lazy">
+        <figcaption>The menu of a block that names glyphs.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Duplicate</span> puts a copy right after the block, in the nearest free time. A Morph’s copy has no pairs, since a glyph arrives through one pair only.</li>
+        <li><span class="ui">Duplicate for the other glyphs</span>, <span class="ui">Split into runs</span> and <span class="ui">Split…</span> make blocks that run together, as above.</li>
+        <li><span class="ui">Delete…</span> asks before it deletes.</li>
+      </ul>
+      <p><kbd data-keys="Mod+D">Ctrl+D</kbd> duplicates the selected block, and <kbd data-keys="Delete">Delete</kbd> deletes it after a confirmation.</p>
+
+      <h2 id="export">What the export does with blocks</h2>
+      <p>The Python the app writes follows the timeline. Each block becomes a <code>self.play(…)</code> of the Manim animation it names, and every stretch where nothing happens becomes a <code>self.wait(…)</code>. Glyphs that wait for an Appear are not added to the scene until it plays. This is the first clip of the Appear example:</p>
+      <pre data-excerpt="examples/blocks-appear.ce.py"><code class="language-python">self.add(eq_g[0], eq_g[1])
+# 0 s – 0.5 s
+self.wait(0.5)
+# 0.5 s – 1.5 s: eq write
+self.play(Write(VGroup(*eq_g[2:])), run_time=1)
+# 1.5 s – 4 s
+self.wait(2.5)</code></pre>
+      <p><code>eq_g</code> holds the glyphs of the formula in the editor’s order, so <code>eq_g[2:]</code> is the right side of the equation.</p>
+      <p>Most blocks use Manim’s own classes, with the names you see in the menus. ManimGL calls <span class="ui">Create</span> <code>ShowCreation</code>. <span class="ui">Wiggle</span> and <span class="ui">Circumscribe</span> are written as small helper classes at the top of the file, so that both libraries do the same thing. A whole-formula Transform is a <code>.animate</code> call on the formula, and a part Transform one on the group of its glyphs.</p>
+      <p>Manim plays one <code>self.play</code> at a time. Where blocks overlap without starting and ending together, the export cuts the time into slices, one <code>self.play</code> each, and a small helper called <code>_Part</code> plays the right stretch of every block that runs in a slice. The three blocks that start the clip at the top of this page come out like this:</p>
+      <pre data-excerpt="examples/blocks-parallel.ce.py"><code class="language-python">eq_indicate = Indicate(VGroup(eq_g[0], eq_g[1]))
+eq_appear = Write(VGroup(eq_g[7], eq_g[8]))
+# 1.6 s – 2.2 s: eq indicate, eq write
+self.play(_Part(eq_indicate, 0, 0.6), _Part(eq_appear, 0, 0.6), run_time=0.6)
+eq_wiggle = _Wiggle(VGroup(eq_g[3], eq_g[4]))
+# 2.2 s – 2.6 s: eq indicate, eq write, eq wiggle
+self.play(
+    _Part(eq_indicate, 0.6, 1),
+    _Part(eq_appear, 0.6, 1),
+    _Part(eq_wiggle, 0, 0.2),
+    run_time=0.4,
+)</code></pre>
+      <p>The preview and the exported scene agree on what plays and when. <a href="../manim/python.html">The generated Python</a> says how to run it and how close it is to the editor’s preview.</p>
+      <div class="mfe-example" data-mfe-example="blocks-parallel"></div>
+      <div class="mfe-code" data-mfe-python="blocks-parallel"></div>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="groups.html">Groups of animation blocks</a> makes blocks that start together and last the same one group.</li>
+        <li><a href="timing.html">Timing tools</a> covers the menus of a clip, copying and pasting its timing, and splitting a block.</li>
+        <li><a href="../transforms/morph.html">Morph blocks</a> make a derivation inside one formula, each row grown out of the one above it.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

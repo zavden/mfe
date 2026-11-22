@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transforming one formula into another · Manim Formula Editor</title>
+  <meta name="description" content="The basic move of the editor: one formula on the timeline turns into the next.">
+  <meta name="mfe:id" content="basics/first-transform">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="First transformation">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+  <script src="../examples/first-transform-start.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <script src="../widgets/relation-window.js" defer></script>
+  <script src="../widgets/style-compare.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Transforming one formula into another</h1>
+      <p class="lead">A transformation is the basic move of the editor: one formula turns into the next,
+        and each glyph travels to its new place. You make one by relating two clips on the
+        timeline.</p>
+
+      <figure class="mfe-player" data-mfe-player="first-transform" data-timeline data-loop
+              data-caption="First transform: x + 3 = 5 turns into x = 5 − 3, which turns into x = 2. Two relations make the two transformations."></figure>
+
+      <h2 id="how">How a transformation works</h2>
+      <p>A formula is a set of <strong>glyphs</strong>, the symbols the editor draws: <code>x + 3 = 5</code>
+        has five. A transformation sends the glyphs of one formula to the glyphs of the next. You say
+        which goes where, and the editor animates the journey: the <code>3</code> of
+        <code>x + 3 = 5</code> slides across to become the <code>3</code> of <code>x = 5 − 3</code>.</p>
+      <p>On the timeline a transformation is a <strong>relation</strong> between two clips.</p>
+      <ul>
+        <li>The <strong>source</strong> is the clip of the formula that turns into another one.</li>
+        <li>The <strong>target</strong> is the clip of the formula it becomes.</li>
+        <li>A relation holds <strong>pairs</strong>. Each pair links glyphs of the source to glyphs of the
+          target: <code>x</code> to <code>x</code>, <code>3</code> to <code>3</code>.</li>
+        <li>The <strong>window</strong> is the stretch of time in which the glyphs travel.</li>
+      </ul>
+      <p>A glyph that no pair takes does not travel. A glyph of the source that is in no pair leaves
+        with the <strong>outro</strong> of the source clip. A glyph of the target that is in no pair
+        enters with the <strong>intro</strong> of the target clip. In the example above the
+        <code>+</code> fades out and the <code>−</code> fades in.</p>
+      <p>Here is the same scene without the relations, and with them. Without them the formulas
+        cross-fade. With them the glyphs travel.</p>
+      <figure class="mfe-player" data-mfe-player="first-transform-start" data-from="1.6" data-to="3.8" data-loop
+              data-autoplay data-controls="minimal"
+              data-caption="Before: the two clips overlap, and nothing relates them."></figure>
+      <figure class="mfe-player" data-mfe-player="first-transform" data-from="1.6" data-to="3.8" data-loop
+              data-autoplay data-controls="minimal"
+              data-caption="After: the relation sends each glyph to its place."></figure>
+      <p>Here are the pairs of the first relation. Click a glyph of the top formula and then a glyph of
+        the bottom one to link them yourself, and press <span class="ui">Preview</span> to see your
+        transformation.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs"
+           data-options='{"example": "first-transform", "relation": "r_sb78imuu", "start": "app"}'></div>
+
+      <h2 id="clips">What a relation needs</h2>
+      <p>A relation needs two clips that</p>
+      <ul>
+        <li>are on <strong>different tracks</strong>, and</li>
+        <li><strong>overlap in time</strong>: for a stretch, the source is still on screen (after its intro) while
+          the target already is (before its outro).</li>
+      </ul>
+      <p>The scene of this page has three clips of three formulas, <code>step1</code>,
+        <code>step2</code> and <code>step3</code>. They alternate between two tracks, and each overlaps the next
+        by one second. You relate <code>step1</code> to <code>step2</code>, and then <code>step2</code> to
+        <code>step3</code>. <code>step1</code> and <code>step3</code> are on the same track, so they cannot be related
+        to each other.</p>
+      <p>There are two ways to start a relation.</p>
+      <p><strong>With the pointer.</strong> Hold <kbd data-keys="Shift">Shift</kbd>: a round link port appears at
+        the lower right of each clip. Click the port of the source clip, then click the target clip (or
+        drag from the port onto it).</p>
+      <figure>
+        <img src="../media/basics/first-transform/ports.dark.webp" data-themed
+             alt="The timeline with three clips on two tracks, and a round link port at the lower right of each clip."
+             width="742" height="245" loading="lazy">
+        <figcaption>With <kbd data-keys="Shift">Shift</kbd> held, every clip shows its link port, ringed here: the round mark at its lower right.</figcaption>
+      </figure>
+      <p><strong>From the Animations panel.</strong> Select the source clip. In the <span class="ui">Relations</span>
+        tab, choose the other clip in <span class="ui">Relate with</span> (1), pick the direction (2) and
+        press <span class="ui">Create relation…</span>. This route works from the keyboard too. When
+        the two clips cannot be related, the panel says why (3).</p>
+      <figure>
+        <img src="../media/basics/first-transform/relate-blocked.dark.webp" data-themed
+             alt="The Relations tab of the Animations panel with step3 chosen in Relate with, the direction step1 to step3, and the notice: Clips on the same track cannot be related."
+             width="310" height="583" loading="lazy">
+        <figcaption>Choosing <code>step3</code> for <code>step1</code>: <em>Clips on the same track cannot be
+          related.</em> The button stays off.</figcaption>
+      </figure>
+      <p>When the clips do not overlap, the notice reads <em>The clips must overlap in time: the source
+        must still be on screen (after its intro) while the target is (before its outro).</em></p>
+
+      <h2 id="making">Making one</h2>
+      <p>Open <a href="../examples/first-transform-start.mfe.json" download>the project before the relations</a>
+        with <span class="ui">File ▸ Open…</span>: press <span class="ui">Other file…</span> in the dialog and pick the
+        downloaded file (<a href="../start/projects.html#open">Projects and files</a> explains the dialog). Then
+        relate its three clips.</p>
+      <div class="mfe-example" data-mfe-example="first-transform-start"></div>
+      <aside class="try">
+        <ol>
+          <li>Hold <kbd data-keys="Shift">Shift</kbd>, click the port of <code>step1</code>, then click the
+            <code>step2</code> clip. The relation editor opens. <code>step1</code> is the source, on top, and
+            <code>step2</code> the target, below.</li>
+          <li>Press <span class="ui">Suggest links by label</span> and then <span class="ui">Accept all</span>.
+            The editor links the glyphs that are the same symbol: <code>x</code>, <code>=</code>,
+            <code>5</code> and <code>3</code>. The <code>+</code> and the <code>−</code> are left over.</li>
+          <li>Press <span class="ui">Save relation</span>. The whole session is one step of the undo
+            history.</li>
+          <li>Relate <code>step2</code> to <code>step3</code> the same way: press <span class="ui">Suggest links by
+            label</span>, then <span class="ui">Accept all</span>. This time only <code>x</code> and <code>=</code> are
+            linked: the line above the drawing says <em>2 linked pairs · 3 glyphs leave · 1 glyph arrives</em>.
+            Nothing in <code>5 − 3</code> has the same symbol as the <code>2</code>.</li>
+        </ol>
+      </aside>
+      <p>Link the rest by hand. Click the <code>5</code> of the source, then Shift-click the
+        <code>−</code> and the <code>3</code>. Then click the <code>2</code> of the target: the three
+        source glyphs are linked to it in one pair. In the list of pairs, set this pair's style to
+        <span class="ui">Fade transform</span>, so that the three glyphs fade into the <code>2</code>
+        instead of twisting into its shape. Press <span class="ui">Save relation</span>.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/first-transform/link-by-hand.dark.webm"
+               poster="../media/basics/first-transform/link-by-hand.dark.webp" width="694" height="688"
+               muted loop playsinline preload="none"></video>
+        <figcaption>One pair of three glyphs and one: click <code>5</code>, Shift-click <code>−</code> and
+          <code>3</code>, then click <code>2</code>.</figcaption>
+      </figure>
+      <p>A pair has one of four <strong>styles</strong>. The relation has a default, and each pair can
+        have its own.</p>
+      <table>
+        <thead>
+          <tr><th>Style</th><th>What the glyphs do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Transform</span></td><td>The source glyphs turn into the target glyphs and are gone from where they were.</td></tr>
+          <tr><td><span class="ui">Copy (source stays)</span></td><td>A copy of the source glyphs travels to the target glyphs. The source glyphs stay where they are.</td></tr>
+          <tr><td><span class="ui">Fade transform</span></td><td>The source glyphs fade out as they move and resize onto the target glyphs, which fade in from the place of the source.</td></tr>
+          <tr><td><span class="ui">Fade copy (source stays)</span></td><td>A copy of the source glyphs fades into the target glyphs. The source glyphs stay where they are.</td></tr>
+        </tbody>
+      </table>
+      <p>Here is the second relation played with each style, side by side. Watch what the source glyphs do
+        and what happens to the target.</p>
+      <div class="mfe-widget" data-mfe-widget="style-compare"
+           data-options='{"example": "first-transform", "relation": "r_edq3z6wo", "styles": ["transform", "copy", "fade", "fade_copy"]}'></div>
+      <p>Try the pair that no label can suggest, in the widget below. It starts with no pairs: press
+        <span class="ui">Suggest links by label</span> and accept them, which links the <code>x</code> and the
+        <code>=</code>. Then link the <code>5</code>, the <code>−</code> and the <code>3</code> to the
+        <code>2</code>, and press <span class="ui">Preview</span>.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs"
+           data-options='{"example": "first-transform", "relation": "r_edq3z6wo", "start": "empty"}'></div>
+      <p>Your two relations make the scene of <a href="../examples/first-transform.mfe.json" download>First
+        transform</a>, the example at the top of this page.</p>
+
+      <h2 id="timing">Timing: the window</h2>
+      <p>A relation's window is, by default, one second long, and it sits where the two clips overlap:
+        it starts <strong>where the playhead is</strong> when a window fits there, and otherwise as soon
+        as both clips allow. On the
+        timeline a relation is drawn as an arrow from the source clip to the target clip (1), a band on
+        the target clip, the <strong>window</strong> (2), and a dashed outline on the source clip (3),
+        where the glyphs are taken from.</p>
+      <figure>
+        <img src="../media/basics/first-transform/band.dark.webp" data-themed
+             alt="The timeline of First transform with the first relation selected: an arrow from step1 to step2, a hatched band on step2 from 2.2 to 3.2 seconds, and a dashed outline on step1 over the same time."
+             width="742" height="245" loading="lazy">
+        <figcaption>The arrow (1), the window on the target (2) and its source (3).</figcaption>
+      </figure>
+      <p>Click the band to select the relation. The Animations panel then shows its pairs, and its
+        timing: <span class="ui">Offset</span> is where the window starts, counted from the start of the
+        target clip, and <span class="ui">Duration</span> is how long it lasts. You can also drag the band to
+        move the window, or its edges to make it longer or shorter.</p>
+      <figure>
+        <img src="../media/basics/first-transform/relation-panel.dark.webp" data-themed
+             alt="The Animations panel for a relation: its pairs (1), Offset and Duration (2) and the default style (3)."
+             width="310" height="583" loading="lazy">
+        <figcaption>The panel of a selected relation: the pairs (1), the window (2) and the default style
+          (3).</figcaption>
+      </figure>
+      <p>The window cannot leave the stretch where both clips are on screen: it starts after the intro
+        of the source, and it ends before the source ends and before the outro of the target begins.
+        Drag the window in the widget to see it.</p>
+      <div class="mfe-widget" data-mfe-widget="relation-window"
+           data-options='{"example": "first-transform", "relation": "r_sb78imuu"}'></div>
+      <aside class="callout tip">
+        <p>How the glyphs without a partner leave and enter is set in the <span class="ui">Animation</span> tab
+          of the relation editor, under <span class="ui">Unpaired glyphs</span>: the outro of the source and the
+          intro of the target, each with its duration. The two boxes under them make the outro start
+          with the window and the intro end with it; <span class="ui">Starts empty</span>, between
+          the two, keeps the unpaired glyphs of the target from arriving at all
+          (<a href="../transforms/relations.html#starts-empty">How relations work</a>).</p>
+      </aside>
+
+      <h2 id="playing">Playing it back</h2>
+      <p>You can see a relation in three places.</p>
+      <ul>
+        <li>In the <strong>relation editor</strong>, switch from <span class="ui">Link</span> to
+          <span class="ui">Preview</span>. The two formulas alone play the transformation in a loop, from a
+          little before the window to a little after it, with the pairs as they stand now, before you save
+          anything.</li>
+        <li>In the <strong>Preview</strong> of the editor: put the playhead before the window and press
+          <kbd data-keys="Space">Space</kbd>.</li>
+        <li>With <span class="ui">Preview raw</span>, the last key of the editor's toolbar: the glyphs go from one
+          formula to the other in straight lines, as the pairs and styles say.</li>
+      </ul>
+      <figure>
+        <img src="../media/basics/first-transform/editor-preview.dark.webp" data-themed
+             alt="The relation editor on its Preview view: the transformation at its middle, with the play button, the time bar with the window marked under it, and the percentage transformed."
+             width="1196" height="808" loading="lazy">
+        <figcaption>The <span class="ui">Preview</span> view (1): a bar to choose the moment (2), then the time
+          and how far through the transformation it is (3).</figcaption>
+      </figure>
+      <p>To change a relation later, double-click its band, or right-click it and choose
+        <span class="ui">Edit pairs…</span>. <span class="ui">Delete relation</span> is in the same menu. After a relation
+        is saved, <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes back the whole editing session at once.</p>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../transforms/relations.html">How relations work</a> goes through every kind of pair, the
+          styles and what unpaired glyphs do.</li>
+        <li><a href="../transforms/relation-editor.html">The relation editor</a> covers linking, the pair list
+          and the <span class="ui">Animation</span> tab.</li>
+        <li><a href="../transforms/previewing.html">Previewing a transformation</a> has
+          <span class="ui">Preview</span> and <span class="ui">Preview raw</span> in detail.</li>
+        <li><a href="../transforms/recipes.html">Transformation recipes</a> shows the moves of algebra:
+          moving a term, cancelling, expanding.</li>
+        <li><a href="../start/first-animation.html">Your first animation</a> builds a transformation from an
+          empty project, step by step.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

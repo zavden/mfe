@@ -1,0 +1,529 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Force, mass and acceleration",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_vwzv1k61",
+      "kind": "math",
+      "name": "law",
+      "source": "F = ma",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#FC6255",
+        "2": "#58C4DD",
+        "3": "#83C167"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-8hwipuv2w1",
+        "glyphs": [
+          {
+            "label": "F",
+            "center": [
+              -1.3618437119999998,
+              0.005512320000000015
+            ],
+            "size": [
+              0.7196083200000001,
+              0.6815232
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.33374592000000003,
+              -0.08468927999999999
+            ],
+            "size": [
+              0.6674918400000001,
+              0.23452416
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              0.7745310719999998,
+              -0.11893247999999998
+            ],
+            "size": [
+              0.8378726400000001,
+              0.45468287999999996
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              1.484618112,
+              -0.11926656
+            ],
+            "size": [
+              0.47405951999999996,
+              0.45201023999999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_0najy3o5",
+      "kind": "math",
+      "name": "acceleration",
+      "source": "a = \\frac{F}{m}",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#83C167",
+        "2": "#FC6255",
+        "3": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-gic1eant11",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.2801611519999998,
+              -0.11425536
+            ],
+            "size": [
+              0.47405951999999996,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.35178624000000003,
+              -0.07967808
+            ],
+            "size": [
+              0.6674918399999998,
+              0.23452416
+            ]
+          },
+          {
+            "label": "F",
+            "center": [
+              0.9925182719999999,
+              0.6880377599999998
+            ],
+            "size": [
+              0.7196083199999999,
+              0.6815231999999999
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              0.9769835519999999,
+              -0.8014579199999999
+            ],
+            "size": [
+              0.8378726400000001,
+              0.4546828799999998
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              0.9769835519999999,
+              -0.07967808000000001
+            ],
+            "size": [
+              1.0804147199999998,
+              0.06013439999999998
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_qhk172ty",
+      "kind": "math",
+      "name": "mass",
+      "source": "m = \\frac{F}{a}",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#58C4DD",
+        "2": "#FC6255",
+        "3": "#83C167"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-2gliq2am72i",
+        "glyphs": [
+          {
+            "label": "m",
+            "center": [
+              -1.2145144319999999,
+              -0.11442240000000001
+            ],
+            "size": [
+              0.83787264,
+              0.45468287999999996
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.10623744000000002,
+              -0.0801792
+            ],
+            "size": [
+              0.6674918400000001,
+              0.23452415999999998
+            ]
+          },
+          {
+            "label": "F",
+            "center": [
+              1.1734225919999999,
+              0.6875366399999998
+            ],
+            "size": [
+              0.7196083200000003,
+              0.6815231999999999
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              1.1628990719999996,
+              -0.8022931199999999
+            ],
+            "size": [
+              0.47405951999999996,
+              0.4520102399999999
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              1.1578878719999999,
+              -0.08017920000000002
+            ],
+            "size": [
+              0.95112576,
+              0.060134400000000005
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_vyjup841",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_c6j6gzqi",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_1wg7b979",
+      "formulaId": "f_vwzv1k61",
+      "trackId": "t_vyjup841",
+      "start": 0,
+      "end": 3.7,
+      "initial": {
+        "position": [
+          0.2275,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_c01fabtn",
+      "formulaId": "f_0najy3o5",
+      "trackId": "t_c6j6gzqi",
+      "start": 2.5,
+      "end": 6.4,
+      "initial": {
+        "position": [
+          0.2455,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_plcptyld",
+      "formulaId": "f_qhk172ty",
+      "trackId": "t_vyjup841",
+      "start": 5.2,
+      "end": 7.9,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_ntz81zo7",
+      "fromClipId": "c_1wg7b979",
+      "toClipId": "c_c01fabtn",
+      "offset": 0,
+      "duration": 1.2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            3
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        }
+      ]
+    },
+    {
+      "id": "r_gp18trcu",
+      "fromClipId": "c_c01fabtn",
+      "toClipId": "c_plcptyld",
+      "offset": 0,
+      "duration": 1.2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            3
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            4
+          ],
+          "to": [
+            4
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": [
+    {
+      "id": "m_newton",
+      "name": "Newton",
+      "entries": [
+        {
+          "pattern": "F",
+          "color": "#FC6255"
+        },
+        {
+          "pattern": "m",
+          "color": "#58C4DD"
+        },
+        {
+          "pattern": "a",
+          "color": "#83C167"
+        }
+      ]
+    }
+  ]
+}

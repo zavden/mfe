@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Working with the timeline · Manim Formula Editor</title>
+  <meta name="description" content="Tracks and clips, splitting a clip at the playhead, zoom and the time step dt, snapping, selecting several clips, and the keyboard: how to work on the timeline.">
+  <meta name="mfe:id" content="basics/timeline">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="The timeline">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/timeline-basics.data.js" defer></script>
+  <script src="../media/basics/timeline/parts.tour.js" defer></script>
+  <script src="../media/basics/timeline/track-header.tour.js" defer></script>
+  <script src="../media/basics/timeline/zoom-dt.tour.js" defer></script>
+  <script src="../media/basics/timeline/region.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Working with the timeline</h1>
+      <p class="lead">The timeline says when each formula is on screen. Here you learn its parts,
+        how to put clips on it, move them and cut them in two, how to zoom and snap, and how to get
+        around it with the mouse and the keyboard.</p>
+
+      <figure class="mfe-player" data-mfe-player="timeline-basics" data-timeline data-start="5.5"
+              data-caption="The project of this page. The strip under the scene is its timeline: three tracks, four clips, and an arrow from each step to the next."></figure>
+
+      <p>The timeline is a set of <strong>tracks</strong>, one under another. On a track you put
+        <strong>clips</strong>: a clip is the time during which an object (a formula, a text, a
+        brace, a shape or a line) is on screen. A ruler counts the seconds along the top, and the
+        <strong>playhead</strong> marks the instant the Preview shows.</p>
+
+      <h2 id="parts">The parts of the timeline</h2>
+      <div class="mfe-tour" data-mfe-tour="basics/timeline/parts" data-title="The parts of the timeline"></div>
+      <p>The rest of the page takes the parts one by one. You can follow it on the project above,
+        <code>timeline-basics</code>, which the last section offers for download.</p>
+
+      <h2 id="tracks">Tracks</h2>
+      <p>A <strong>track</strong> is a row of the timeline. The clips of a track never overlap, so
+        two things that are on screen together are on two tracks. Tracks are layers: the one on top
+        is drawn in front of the ones below it. A new project starts with two,
+        <span class="ui">Track 2</span> over <span class="ui">Track 1</span>.</p>
+
+      <div class="mfe-tour" data-mfe-tour="basics/timeline/track-header" data-title="The header of a track"></div>
+
+      <p>Press <span class="ui">+ Track</span>, on the left of the toolbar, to add a track. It goes
+        on top, in front of the others, and takes the next free number as its name.</p>
+      <figure>
+        <img src="../media/basics/timeline/new-track.dark.webp" data-themed
+             alt="The timeline with a new track on top of the others, renamed Notes: its header has the name, the height keys and the buttons, and its lane is empty."
+             width="1084" height="250" loading="lazy">
+        <figcaption>The new track is on top and empty. To rename it, double-click its name, select the
+          text with <kbd data-keys="Mod+A">Ctrl+A</kbd>, type a new name and press
+          <kbd data-keys="Enter">Enter</kbd>. Here it is called <code>Notes</code>.</figcaption>
+      </figure>
+
+      <p>A name is changed by double-clicking it, or by pressing <kbd data-keys="Enter">Enter</kbd>
+        or <kbd data-keys="F2">F2</kbd> on it once <kbd data-keys="Tab">Tab</kbd> has brought the
+        focus there. <kbd data-keys="Enter">Enter</kbd> keeps the new name and
+        <kbd data-keys="Escape">Esc</kbd> keeps the old one.</p>
+
+      <h3 id="track-buttons">The buttons of a track</h3>
+      <ul>
+        <li><strong>Hide</strong> (the eye) hides the track in the Preview, so that you see what
+          is behind it. It is a view only: a hidden track is still exported, in the Python and in
+          the video; the Python export lists it among its issues.</li>
+        <li><strong>Lock</strong> (the padlock) protects the track. Its clips can be selected, but
+          nothing changes them: they cannot be moved, trimmed or deleted, the Animations panel
+          shows them read-only, and nothing can be dropped on the track. Unlock it to work on them
+          again.</li>
+        <li><strong>Up</strong> and <strong>down</strong> (the arrows) move the track towards the
+          front or towards the back. The up arrow of the track on top and the down arrow of the one at
+          the bottom are off.</li>
+        <li><strong>Delete</strong> (the cross) deletes the track with its clips. A dialog lists
+          what goes with it, clips, the objects attached to them and their relations, and its red
+          button has to be <em>held down</em> until it fills, so that nobody deletes a track by
+          accident. One undo step brings everything back.</li>
+      </ul>
+
+      <figure>
+        <img src="../media/basics/timeline/track-delete.dark.webp" data-themed
+             alt="The dialog Delete track?: Track 2 will be deleted together with its 2 clips on the timeline and 2 relations of those clips. The buttons are Cancel and Hold to delete track."
+             width="496" height="204" loading="lazy">
+        <figcaption>The cross asks first. The dialog lists what goes with the track; its red button
+          only deletes once it has been held down.</figcaption>
+      </figure>
+
+      <h3 id="track-heights">Track heights</h3>
+      <p>A track grows by itself when its clips have animation blocks that run at the same time:
+        each one gets a lane. You can also change heights to read better.</p>
+      <ul>
+        <li>The <span class="ui">−</span> and <span class="ui">+</span> beside a track's name make
+          that track alone lower or taller, down to the standard height and up to four times it.
+          Dragging the top or bottom edge of its header does the same: the track an edge resizes
+          lights up as the pointer reaches it, a double-click gives the track the height of the
+          others again, and <kbd data-keys="Escape">Esc</kbd> during the drag puts it back.</li>
+        <li>The keys in the corner over the headers, <span class="ui">−</span>
+          <span class="ui">100 %</span> <span class="ui">+</span>, change every track at once,
+          from the standard height to three times it. The percentage in the middle puts them all
+          back.</li>
+      </ul>
+      <p>Heights are a view of the timeline, like its zoom: the project does not store them.</p>
+
+      <h3 id="which-track">What goes on which track</h3>
+      <p>Formulas, texts, braces, shapes and lines go on the ordinary tracks, the ones
+        <span class="ui">+ Track</span> adds. Recordings go on <strong>audio tracks</strong>, which
+        the <span class="ui">Audio</span> button next to it adds (see
+        <a href="../sound/audio.html#tracks">Audio</a>). A clip never moves onto a track of the other
+        kind.</p>
+
+      <h2 id="clips">Clips</h2>
+      <p>A <strong>clip</strong> is the time an object is on screen: it starts at one time, ends at
+        another and lives on one track. A formula can have many clips. It is still one object, so
+        editing it changes all of them (to give one clip a formula of its own, see
+        <a href="../animations/timing.html#unlink">Unlinking a formula</a>).</p>
+
+      <h3 id="putting-clips">Putting a formula on the timeline</h3>
+      <p>Drag the card of a formula from the Creator onto a track. A dashed <strong>ghost</strong>
+        shows where the clip would go: it is 3 seconds long, its start snaps to the ticks, and if
+        that place is taken it moves to the nearest free time. Drop it and the clip is made and
+        selected.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/drop-clip.dark.webm"
+               poster="../media/basics/timeline/drop-clip.dark.webp" width="540" height="644"
+               aria-label="The card of the formula check is dragged from the Creator to the lane of Track 1, where a dashed ghost shows the clip before it is dropped; Ctrl+Z takes it back."
+               muted loop playsinline preload="none"></video>
+        <figcaption>The card of <code>check</code> dragged onto <span class="ui">Track 1</span>.
+          The ghost fills the free time before <code>step2</code>; dropped, it is a clip of 3 s.</figcaption>
+      </figure>
+      <p>Without dragging, choose <span class="ui">Add to the timeline</span> in the formula's menu
+        (right-click its card), or press the same button in the Animations panel when the formula
+        is not on the timeline yet. The clip goes on the first track that is not locked, at the
+        playhead. What a new clip starts with is the subject of
+        <a href="intro-outro.html">Appearing and disappearing</a>.</p>
+
+      <h3 id="what-a-clip-shows">What a clip shows</h3>
+      <p>A clip wears the tag colour of its formula as a stripe on its left edge, and its name, with
+        the tag's icon when it has one. In its lower corners it names its intro, on the left, and its
+        outro, on the right; both are hatched. Rest the pointer on a clip for a moment and a tooltip
+        shows its formula and its times. Double-click a clip to edit its formula; right-click it for
+        its menu.</p>
+
+      <h3 id="moving-clips">Moving a clip</h3>
+      <p>Drag a clip. Sideways changes its time; up or down puts it on another track. Clips never
+        overlap on a track, so a clip stops at the nearest free place instead of going over a
+        neighbour. It never starts before 0, and it never goes onto a locked track or an audio
+        track. Nor does it leave out the window of a relation whose other clip is on a locked track
+        (<a href="#relations-on-timeline">below</a>). Several selected clips move together, and
+        <kbd data-keys="Escape">Esc</kbd> during the drag puts everything back.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/move-clip.dark.webm"
+               poster="../media/basics/timeline/move-clip.dark.webp" width="592" height="172"
+               aria-label="The clip step3 is dragged to the left along Track 2: it jumps from tick to tick, sticks to the playhead and follows the pointer freely while Shift is held; Ctrl+Z puts it back."
+               muted loop playsinline preload="none"></video>
+        <figcaption>Dragging <code>step3</code> to the left, with the playhead at 5.75 s: it moves in
+          jumps of dt, sticks to the playhead and follows the pointer freely while
+          <kbd data-keys="Shift">Shift</kbd> is held.</figcaption>
+      </figure>
+
+      <h3 id="resizing-clips">Resizing a clip</h3>
+      <p>Drag the left or the right edge of a clip to change when it starts or when it ends. The
+        clip stops at the next clip of its track, and it is never shorter than its intro and its
+        outro together, nor than a tenth of a second, and it stops where the window of a relation
+        with a clip on a locked track would no longer fit in it. Trimming the start does not move
+        what the clip shows: its animation blocks stay at their times, and one that no longer fits
+        inside the clip is shortened or removed.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/trim-clip.dark.webm"
+               poster="../media/basics/timeline/trim-clip.dark.webp" width="536" height="172"
+               aria-label="The right edge of step1 is dragged to the right: the clip grows until it reaches the start of step3 on its track, and no further."
+               muted loop playsinline preload="none"></video>
+        <figcaption>The end of <code>step1</code> dragged to the right: the clip grows until it
+          meets <code>step3</code>.</figcaption>
+      </figure>
+      <p id="resizing-together"><strong>Several clips at once.</strong> With several clips selected
+        (<kbd data-keys="Mod">Ctrl</kbd>-click them, or drag a box over them), drag an edge of one of
+        them: the same edge of every selected clip moves with it, by the same time, each from where it
+        is. Sounds are trimmed along with the clips of the scene. The clips go as far as all of them
+        allow: when one of them meets the next clip of its track, its shortest length, the end of
+        its recording or the window of a relation with a clip on a locked track, they all stop. The edge you hold is the one that snaps. An edge of a clip
+        that is not selected still trims that clip alone, and the edges of an intro or an outro are
+        always one clip's.</p>
+      <aside class="callout tip">
+        <p>The window of a relation lies over part of the lower half of a clip, and an animation
+          block over part of its upper half. A press there is theirs, not the edge's: the end of
+          <code>step1</code> above is trimmed from the upper half of its edge. Press where nothing
+          lies over the edge, or hold <kbd data-keys="Alt">Alt</kbd>: with Alt held only the edges
+          answer the pointer, whatever lies over them
+          (<a href="intro-outro.html#alt">more about it</a>).</p>
+      </aside>
+
+      <h3 id="splitting">Splitting a clip</h3>
+      <p>To cut a clip in two, put the playhead where the cut goes, click the clip to select it and
+        press <kbd data-keys="S">S</kbd>. The clip's menu has
+        <span class="ui">Split at playhead (S)</span> too, on the timeline and in the Preview, and so
+        has the menu of several selected clips, which splits those the playhead is inside. The clip
+        becomes two clips that touch at the playhead.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/split-clip.dark.webm"
+               poster="../media/basics/timeline/split-clip.dark.webp" width="624" height="172"
+               aria-label="With the playhead at 5.5 seconds, step2 is clicked and S pressed: the clip becomes step2, up to the playhead, and step2_s after it, which the arrow to step3 now leaves from; Ctrl+Z makes it one clip again."
+               muted loop playsinline preload="none"></video>
+        <figcaption><code>step2</code> split at 5.5 s. The second half is a clip of
+          <code>step2_s</code>, and the arrow to <code>step3</code> now leaves from it.
+          <kbd data-keys="Mod+Z">Ctrl+Z</kbd> undoes the split in one step.</figcaption>
+      </figure>
+      <p>The <strong>first half</strong> is still a clip of its formula, and keeps the intro. The
+        <strong>second half</strong> is a clip of a <strong>copy</strong> of the formula: a new
+        formula in the Creator, named after it with a suffix, <code>step2_s</code> here, or
+        <code>step2_s1</code>, <code>step2_s2</code>… when that name is taken. From then on the two
+        are separate formulas: editing one no longer changes the other.
+        <span class="ui">Preferences ▸ Split suffix…</span> changes the suffix (see
+        <a href="../reference/preferences.html#new">Preferences</a>).</p>
+      <p>The second half has no intro: it starts exactly as the object is at that instant, with its
+        place, size, turn, colours and opacity, and with the glyphs that are on screen then. The copy
+        hides the other glyphs; a block or a relation after the cut still brings them in. The outro
+        goes with the second half.</p>
+      <p id="split-left-out">The glyphs that have not come on screen yet at the cut, and that an
+        Appear block, a relation or a Morph block brings in after it, stay out of the <strong>first
+        half</strong> too. What brings them goes with the second half, so the first half leaves them
+        out of its intro itself, and up to the cut it shows what the whole clip showed. Its
+        <span class="ui">Timing</span> tab says how many, under <span class="ui">Starts empty</span>:
+        <em>2 glyphs stay out of the intro</em>. <span class="ui">Bring them back</span>
+        (<span class="ui">Bring it back</span> for one glyph) gives them to its intro again, in one
+        undo step (<a href="intro-outro.html#left-out">Appearing and disappearing</a>). If nothing of
+        the clip was on screen before the cut, the first half shows nothing, and its panel says so
+        under <span class="ui">Warnings</span>: <em>… this clip never shows</em>. Delete that half,
+        or trim the clip.</p>
+      <figure>
+        <img src="../media/basics/timeline/split-left-out.dark.webp" data-themed
+             alt="The Intro section of the first half of a split clip: the Starts empty box, unticked; under it the line 2 glyphs stay out of the intro and the button Bring them back, ringed; then the fields of the intro, Animation Write, Duration 1 s, Easing linear and Lag ratio."
+             width="304" height="348" loading="lazy">
+        <figcaption>A clip of <code>a + b = c</code> whose <code>= c</code> an Appear block brings
+          at 2 s, split at 1.8 s: the Intro section of its first half.</figcaption>
+      </figure>
+      <p>What lies whole on one side of the cut goes with its half: the animation blocks, the
+        relations (one whose window comes after the cut now leaves from, or arrives at, the second
+        half) and the objects attached to the clip. A brace, a shape or a line is split the same
+        way: its second half is another object, equal to it. The split is one undo step, and both
+        halves are left selected. A sound selected with the clips is cut at the playhead too, in the
+        same step (<a href="../sound/audio.html#split">Audio</a>).</p>
+      <p id="split-refused"><strong>When the clip stays whole.</strong> The split is refused, and a
+        notice names the reason, when one of the following holds. With several clips selected, the
+        others are split, and one notice lists each clip that stayed whole with its reason.</p>
+      <ul>
+        <li><strong>something crosses the playhead</strong>: an intro or an outro still running, an
+          animation block, the window of a relation, or the clip of an object attached to this one.
+          Move the playhead off it. For an attached object, you can also select its clip:
+          <kbd data-keys="S">S</kbd> then splits both.</li>
+        <li><strong>the second half could not start as the object is then</strong>: glyphs that a
+          Transform block moved or made fainter (a colour it gave them is kept), a shape that a
+          Transform carried to other glyphs, a line whose ends a Transform moved, or an attached
+          object whose target has moved since it was placed, or that a Transform of its own moved
+          (detach it first, and it is split where it is). A formula the Preview has not drawn yet
+          waits for its render.</li>
+        <li><strong>a brace, a shape or a line only comes on screen after the playhead</strong>,
+          through an Appear block, say. It is one piece, so its first half cannot leave it out of
+          its intro, as a formula leaves out some glyphs (<a href="#split-left-out">above</a>):
+          split after it has appeared.</li>
+        <li><strong>a relation whose other clip is on a locked track</strong> has its window after
+          the playhead: it would go to the second half, and a relation of a locked track is not
+          changed. Unlock the track first.</li>
+      </ul>
+      <p>Each half must also last a tenth of a second at least. The menu entry is off while the
+        playhead is outside the clip, or the clip is on a locked track; its tooltip says which.</p>
+      <aside class="callout note">
+        <p><kbd data-keys="S">S</kbd> is also the key of the Preview's
+          <a href="../layout/glyph-picking.html#circle">circle selector</a>. It splits only while a
+          selected clip has the playhead inside it and the keyboard is not in the Preview. After a
+          click on the scene the keyboard is there, and <kbd data-keys="S">S</kbd> switches the
+          circle selector: choose <span class="ui">Split at playhead (S)</span> in the menu
+          instead, or click the clip on the timeline first. With a sound selected,
+          <kbd data-keys="S">S</kbd> always splits.</p>
+      </aside>
+
+      <h3 id="relations-on-timeline">Relations between clips</h3>
+      <p>When one clip turns into another, an <strong>arrow</strong> joins them on the timeline and a
+        band, the <strong>window</strong>, marks on both clips when the transformation runs. The
+        relations of the selected clips are drawn in full, the others faintly. Click an arrow or a
+        band to select the relation, and double-click either to open the relation editor. Drag a band
+        to move its window, or its edges to resize it; a readout gives its start, its end and its
+        length. Right-click a band for the menu of the relation. How relations are made and what they
+        do is the subject of <a href="../transforms/relations.html">How relations work</a>.</p>
+      <p>A relation with a clip on a locked track cannot be changed, so it plays where it does
+        whatever you do to its other clip. A move or a trim of that clip, <kbd data-keys="Alt">Alt</kbd>
+        and the arrow keys, its <span class="ui">Start</span> and <span class="ui">End</span> fields and
+        the length of its intro or outro stop where the window would no longer fit in it. The clip is
+        not deleted, and neither is its track nor its formula in the Creator; it is not split so
+        that the relation would go to its second half either. A notice says why and names the
+        locked track.</p>
+
+      <h3 id="copies-of-clips">Copies and deletion</h3>
+      <p><kbd data-keys="Mod+D">Ctrl+D</kbd> copies the selected clips, each into the nearest free
+        time after it on its own track. <kbd data-keys="Delete">Delete</kbd> deletes them, as one
+        undo step. A clip that has objects attached to it, such as a brace, takes them along, and a
+        dialog you confirm by holding a button says which. A clip with a relation to a clip on a
+        locked track stays (<a href="#relations-on-timeline">above</a>).</p>
+
+      <h2 id="playhead">The playhead</h2>
+      <p>The <strong>playhead</strong> is the instant the Preview shows: a small cap in the ruler and
+        a yellow line over the tracks. Press anywhere on the ruler and the playhead jumps there.
+        Drag, and it follows the pointer while the Preview shows the scene at each instant. It lands
+        on whole frames and stays between 0 and the end of the scene, which is where the last clip
+        ends unless you gave the project a fixed length in
+        <span class="ui">File ▸ Project settings…</span>. With
+        <kbd data-keys="Mod">Ctrl</kbd> held it moves in larger, even steps: see
+        <a href="#playhead-by-dt">the time step</a> below.</p>
+      <figure>
+        <img src="../media/basics/timeline/playhead.dark.webp" data-themed
+             alt="The window with the playhead at 5.5 seconds: its cap in the ruler and its line over the tracks (1), and the Preview (2) showing what is on screen at that instant."
+             width="1092" height="848" loading="lazy">
+        <figcaption>The playhead (1) at 5.5 s. The Preview (2) shows the scene at that instant, and the
+          readouts under it say which one it is.</figcaption>
+      </figure>
+      <p>Other ways to move it:
+        <kbd data-keys="Space">Space</kbd> plays and pauses from where it is,
+        <kbd data-keys="Home">Home</kbd> and <kbd data-keys="End">End</kbd> go to the start and the
+        end, and <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> step one
+        frame, or one second with <kbd data-keys="Shift">Shift</kbd>. Under the Preview the time is
+        written in seconds, as minutes:seconds:frames and as a frame number.</p>
+      <p>The playhead also says <em>where</em> things happen: a clip added with
+        <span class="ui">Add to the timeline</span> starts there, and so does a block added from the
+        Animations panel, a brace or a shape. To say where something ends as well, mark
+        <a href="#region">a region</a> first.</p>
+
+      <h2 id="zoom-step">Zoom and the time step</h2>
+      <p>The scale of the ruler is the zoom of the timeline, in pixels per second. It starts at
+        80 px/s. The toolbar shows it, and next to it <strong>dt</strong>: the time between two
+        small ticks of the ruler at that zoom. That is also the step clips snap to (see
+        <a href="#snapping">Snapping</a>), so dt tells you how finely you can place things.</p>
+      <div class="mfe-tour" data-mfe-tour="basics/timeline/zoom-dt" data-title="The time step dt at three zooms"></div>
+      <p>The ruler chooses its ticks again at every zoom. dt is 0.5 s at 80 px/s, and shrinks as you
+        zoom in until there is room for a tick on every frame: then it is one frame, written as a
+        fraction (<code>1/60 s</code> in a project at 60 frames a second). Zooming out makes it
+        grow: <code>dt 5 s</code> at the lowest zoom of an ordinary project.</p>
+      <p id="playhead-by-dt">dt can be the step of the playhead too. Hold
+        <kbd data-keys="Mod">Ctrl</kbd> while you drag on the ruler, and the playhead goes from one
+        small tick to the next instead of frame by frame: at <code>dt 0.5 s</code> it stops at 0,
+        0.5, 1 and so on, up to the last tick before the end of the scene. Let go of the key and
+        the drag is free again. Whether <span class="ui">Snap</span> is on makes no difference.</p>
+
+      <h3 id="dt-of-your-own">A time step of your own</h3>
+      <p>The <span class="ui">−</span> and <span class="ui">+</span> on either side of dt set a time
+        step of your own, without changing the zoom: each press makes it a tenth of a second
+        shorter or longer. The first press starts from the dt the zoom gave: at
+        <code>dt 0.5 s</code>, <span class="ui">−</span> gives 0.4 s and <span class="ui">+</span>
+        0.6 s; at <code>dt 1/60 s</code>, <span class="ui">+</span> gives 0.1 s. It never goes under
+        0.1 s, so <span class="ui">−</span> is off at 0.1 s and below, nor over an hour.</p>
+      <p>Your own dt is written in the accent colour, and everything that goes by dt goes by it: the
+        small ticks of the ruler (left out where they would be closer together than 4 pixels; the
+        labelled ticks stay the zoom's), the step clips, blocks and windows snap to, and the
+        playhead dragged with <kbd data-keys="Mod">Ctrl</kbd> held. Zoom, with the zoom keys,
+        <kbd data-keys="Mod">Ctrl</kbd> and the wheel or <span class="ui">Show the whole timeline</span>,
+        and dt is the zoom's own again. When the timeline raises its lowest zoom by itself, because the
+        window got wider or the scene shorter, your dt stays. It lasts while the editor is open; no
+        project keeps it.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/dt-keys.dark.webm"
+               poster="../media/basics/timeline/dt-keys.dark.webp" width="646" height="80"
+               aria-label="The minus beside dt is pressed twice: dt becomes 0.4 s, then 0.3 s, written in the accent colour, and the small ticks of the ruler come closer together while the zoom stays at 80 px/s. Ctrl and the wheel then zoom in, and dt is the zoom's own again, 0.2 s; zoomed back out, it is 0.5 s."
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">−</span> beside dt, twice: 0.3 s of your own, and the small
+          ticks follow. Zooming gives back the zoom's own.</figcaption>
+      </figure>
+
+      <h3 id="zooming">Zooming</h3>
+      <ul>
+        <li><kbd data-keys="Mod">Ctrl</kbd> and the wheel zoom about the pointer: the time under it
+          stays under it.<span class="only-mac"> A pinch on the trackpad does the same, as far as
+          your fingers go.</span></li>
+        <li>The <span class="ui">−</span> and <span class="ui">+</span> before the slider zoom about
+          the middle of the view.</li>
+        <li>The key after the slider, <span class="ui">Show the whole timeline</span>, zooms out, or
+          in, to the zoom at which nothing is left to scroll. It is off while the whole timeline is
+          already in view.</li>
+      </ul>
+      <h3 id="moving-the-view">Moving along the timeline</h3>
+      <ul>
+        <li>The <strong>slider</strong> in the middle of the toolbar moves the view. Its thumb is to
+          the bar what the stretch in view is to the whole timeline: it fills the bar while
+          everything is in view and gets shorter as you zoom in. Drag it, or press beside it to
+          bring it under the pointer; <kbd data-keys="Escape">Esc</kbd> puts the view back.</li>
+        <li>The wheel scrolls the timeline, on a trackpad both ways at once. The middle button, held
+          down, drags the view in both directions, and <kbd data-keys="Escape">Esc</kbd> puts it
+          back.</li>
+        <li>Hold <kbd data-keys="T">T</kbd> and move the mouse: the view moves along the time with
+          it, wherever the pointer is, as far as dragging a scrollbar would take it. Let go of
+          the key and the view stays there. It works outside text fields, menus and dialogs.</li>
+        <li>Hold <kbd data-keys="Shift+T">Shift+T</kbd> and the playhead follows the pointer
+          instead: it jumps to the time the pointer is level with, wherever the pointer is, and
+          moves with it. Let go and the playhead stays there. With <kbd data-keys="T">T</kbd> held
+          you can press and release <kbd data-keys="Shift">Shift</kbd> to go from moving the view
+          to moving the playhead and back.</li>
+        <li>While you hold <kbd data-keys="T">T</kbd>, with or without
+          <kbd data-keys="Shift">Shift</kbd>, the mouse is the timeline's: the Preview outlines
+          and selects nothing of what the pointer passes over.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/zoom-wheel.dark.webm"
+               poster="../media/basics/timeline/zoom-wheel.dark.webp" width="1084" height="250"
+               aria-label="Ctrl and the wheel zoom in about the pointer over step2: the ruler spreads out, the slider thumb gets shorter and the readout grows; the wheel then zooms back out."
+               muted loop playsinline preload="none"></video>
+        <figcaption><kbd data-keys="Mod">Ctrl</kbd> and the wheel zoom in about the pointer, and out
+          again. The slider's thumb, the readout and dt follow.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/basics/timeline/toolbar-zoom.dark.webp" data-themed
+             alt="The zoom part of the toolbar: minus and plus, a slider (1), the key that shows the whole timeline, the readout 80 px/s, and dt 0.5 s between a minus and a plus of its own (2), and the ruler under them."
+             width="645" height="79" loading="lazy">
+        <figcaption>The slider (1) moves the view; dt (2) is the time between two small ticks of the
+          ruler below, and its own − and + change it.</figcaption>
+      </figure>
+
+      <h2 id="snapping">Snapping</h2>
+      <p>Snapping makes what you drag stick to useful times. It is on when you start; the
+        <span class="ui">Snap</span> button, with the magnet, turns it off and on.</p>
+      <p>While you drag a clip, or one of its edges, the edges that move stick to whichever of these
+        is nearest, within 8 pixels:</p>
+      <ul>
+        <li>the <strong>playhead</strong>;</li>
+        <li><strong>time 0</strong>, and the end of the scene when you gave the project a fixed
+          length in <span class="ui">File ▸ Project settings…</span>;</li>
+        <li>the <strong>edges of the other clips</strong>, on any track.</li>
+      </ul>
+      <p>Where none of them is near enough, they stick to the nearest <strong>small tick of the
+        ruler</strong>, which is dt apart. A moving clip snaps by both its edges, so it can meet
+        something with either. A formula dropped from the Creator snaps its start in the same way.
+        Animation blocks, relation windows and the inner edges of intros and outros snap too, to the
+        playhead, the ticks and the edges of what is in their own clip: its other blocks, its
+        windows, its intro and its outro, and the clip's own edges.</p>
+      <p>To drag a clip, a block, a window or an edge without snapping, <strong>hold
+        <kbd data-keys="Shift">Shift</kbd></strong> during the drag: let it go and snapping is back.
+        A formula dragged from the Creator is freed the same way: hold Shift once it is over the
+        track. With <span class="ui">Snap</span> off, nothing snaps until you turn it on.</p>
+      <aside class="callout note">
+        <p>The timeline draws no guide where something snaps: you see the clip jump to a tick, to the
+          playhead or to the edge of a neighbour. Something you drag that seems to resist is
+          snapping, and <kbd data-keys="Shift">Shift</kbd> frees it. Zoom in to place something
+          between two ticks: 8 pixels are then a shorter time.</p>
+        <p>Holding <kbd data-keys="Shift">Shift</kbd> also shows a small round <strong>link port</strong>
+          on every clip. The ports are for relating clips to each other
+          (<a href="../transforms/relations.html">How relations work</a>) and have nothing to do with
+          the drag.</p>
+      </aside>
+      <aside class="callout tip">
+        <p>For an exact time, type it. The Timing tab of the Animations panel has the
+          <span class="ui">Start</span> and <span class="ui">End</span> of the selected clip, and
+          <span class="ui">Timing ▸</span> in its menu copies times from another clip
+          (<a href="../animations/timing.html">Timing tools</a>).</p>
+      </aside>
+
+      <h2 id="region">The region: where the next thing goes</h2>
+      <p>A <strong>region</strong> is a stretch of time marked on the ruler, as in an audio editor: a
+        green bracket where it starts, a red one where it ends, and a tint between them, on the ruler
+        and over the tracks. It says when the next thing you create starts and when it ends.</p>
+      <div class="mfe-tour" data-mfe-tour="basics/timeline/region" data-title="A region, and a block made in it"></div>
+
+      <h3 id="region-marking">Marking it</h3>
+      <ul>
+        <li>Hold <kbd data-keys="Shift">Shift</kbd> and drag on the ruler. A plain press on the
+          ruler still moves the playhead, inside the region too.</li>
+        <li>Or use the playhead: <kbd data-keys="I">I</kbd> puts the start of the region where the
+          playhead is, and <kbd data-keys="O">O</kbd> its end. Pressed alone,
+          <kbd data-keys="I">I</kbd> marks from the playhead to the end of the scene, and
+          <kbd data-keys="O">O</kbd> from the start of the scene to the playhead.</li>
+        <li>Drag a bracket by its upper part to move that end; the other end stays. The ends land
+          on whole frames and <a href="#snapping">snap</a> as the edge of a clip does. Hold
+          <kbd data-keys="Shift">Shift</kbd> while dragging a bracket to place it freely, or
+          <kbd data-keys="Mod">Ctrl</kbd> to go <a href="#playhead-by-dt">tick by tick</a>.</li>
+        <li><kbd data-keys="Escape">Esc</kbd> removes the region. When the key has something else
+          to do first, such as closing a menu or letting picked glyphs go, it does that, and the
+          next press removes the region.</li>
+      </ul>
+      <p>The lower part of the ruler under a bracket is still the ruler: right after
+        <kbd data-keys="I">I</kbd> or <kbd data-keys="O">O</kbd> the playhead sits on a bracket, and
+        you can drag it away by its head.</p>
+
+      <h3 id="region-use">What takes it</h3>
+      <p>While a region is marked, three things take it whole, wherever the playhead is:</p>
+      <ul>
+        <li>An <strong>animation block</strong> added from the menu of a clip or with
+          <span class="ui">Add animation</span> in the Animations panel starts where the region
+          starts and lasts until it ends
+          (<a href="../animations/blocks.html#adding-region">Animation blocks</a>).</li>
+        <li>The <strong>window of a new relation</strong> is the region
+          (<a href="../transforms/relations.html#timing-region">Relations</a>).</li>
+        <li>The <strong>clip of a formula</strong> brought to the timeline is the region. Dropped
+          on a track, it goes on that track, and its dashed outline shows it there while you drag.
+          Added with <span class="ui">Add to the timeline</span>, it goes on the first unlocked
+          track that has the region free, or on a new track on top when none has.</li>
+      </ul>
+      <p>What does not fit in the region is not made, and a notice says why: the clip does not hold
+        the region, other animations of its glyphs are in it, the two clips do not overlap all along
+        it, or the track already has a clip there. Nothing is moved to a free time nearby. Move the
+        region, or remove it to work at the playhead again.</p>
+      <p>The region stays after it is used, ready for the next thing. It is a view of the timeline,
+        like the zoom: it is not saved with the project, <span class="ui">Undo</span> does not touch
+        it, and opening another project removes it. When the scene gets shorter and the timeline ends
+        before the region does, the region is shown cut at that end, or not at all; it comes back whole
+        as soon as the timeline grows again, a trim given up with <kbd data-keys="Escape">Esc</kbd> or
+        undone included. Braces, shapes and lines added from the menus do
+        not take it; they go by the playhead as before, and so do the keyframes that an edit in the
+        Preview makes.</p>
+
+      <h2 id="selecting">Selecting several clips</h2>
+      <p>Click a clip to select it. <kbd data-keys="Shift">Shift</kbd> or
+        <kbd data-keys="Mod">Ctrl</kbd> and a click adds a clip to the selection, or takes it out.
+        To select many at once, drag a <strong>rectangle</strong> on an empty part of a lane: every
+        clip it touches is selected. With <kbd data-keys="Shift">Shift</kbd> or
+        <kbd data-keys="Mod">Ctrl</kbd> held, they are added to the selection; <kbd data-keys="Escape">Esc</kbd>
+        cancels the rectangle. A press on the background lets everything go, and
+        <kbd data-keys="Mod+A">Ctrl+A</kbd> selects every clip on screen at the playhead.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/timeline/marquee.dark.webm"
+               poster="../media/basics/timeline/marquee.dark.webp" width="902" height="104"
+               aria-label="A rectangle is dragged over empty space of Track 2 down to Track 1, touching step1 and step2, which are selected and light up with their relations; a click on the background lets them go."
+               muted loop playsinline preload="none"></video>
+        <figcaption>A rectangle dragged from the free time of <span class="ui">Track 2</span>
+          touches <code>step1</code> and <code>step2</code>: both are selected, and their relations
+          light up.</figcaption>
+      </figure>
+      <p>Selected clips move together, and the Preview treats them as a group. Right-click one of them,
+        or press <kbd data-keys="Shift+F10">Shift+F10</kbd>, for the <strong>menu of the selected
+        clips</strong>. Its first line says how many clips and how many formulas there are.</p>
+      <figure>
+        <img src="../media/basics/timeline/clips-menu.dark.webp" data-themed
+             alt="The menu of two selected clips: Edit together, Add brace, Add shape, Apply match colors, Timing, Unlink formula, Split at playhead, Lock in the preview, Duplicate and Delete 2 clips."
+             width="209" height="310" loading="lazy">
+        <figcaption>The menu of two selected clips, <code>title</code> and <code>step1</code>, with the
+          playhead at 2 s. <span class="ui">Unlink formula</span> is off: each of them is the only clip
+          of its formula.</figcaption>
+      </figure>
+      <p>It offers what the Creator offers their formulas (<span class="ui">Edit together…</span>,
+        <span class="ui">Apply match colors</span>), a brace or a shape over all of them, and the
+        commands of the clips themselves: <span class="ui">Timing</span>,
+        <span class="ui">Unlink formula (make a copy)</span>,
+        <span class="ui">Split at playhead (S)</span> (<a href="#splitting">above</a>),
+        <span class="ui">Lock in the preview</span>, <span class="ui">Duplicate</span> and
+        <span class="ui">Delete</span>. Each entry is explained in
+        <a href="../animations/timing.html#menus">Timing tools</a> or on the page of its feature.</p>
+
+      <h2 id="keyboard">From the keyboard</h2>
+      <p>The clips and blocks of the timeline are one grid with a single <kbd data-keys="Tab">Tab</kbd>
+        stop: <kbd data-keys="Tab">Tab</kbd> brings the focus to a clip (the first selected one, else
+        the first of the first track), and the arrows take it from there. Selecting follows the
+        focus, and what happens is announced to screen readers.</p>
+      <table>
+        <thead>
+          <tr><th>Keys</th><th>What they do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd></td><td>the previous or the next clip of the track</td></tr>
+          <tr><td><kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd></td><td>the track above or below, at the clip nearest in time; from a clip, <kbd data-keys="ArrowUp">↑</kbd> climbs into the lanes of its blocks</td></tr>
+          <tr><td><kbd data-keys="Home">Home</kbd> <kbd data-keys="End">End</kbd></td><td>the first or the last clip of the track</td></tr>
+          <tr><td><kbd data-keys="Shift+ArrowLeft">Shift+←</kbd> <kbd data-keys="Shift+ArrowRight">Shift+→</kbd></td><td>add the next clip along the track to the selection</td></tr>
+          <tr><td><kbd data-keys="Enter">Enter</kbd></td><td>open the formula of the clip (the menu of a block)</td></tr>
+          <tr><td><kbd data-keys="Shift+F10">Shift+F10</kbd></td><td>the menu of the clip, or of the selected clips when there are several</td></tr>
+          <tr><td><kbd data-keys="Alt+ArrowLeft">Alt+←</kbd> <kbd data-keys="Alt+ArrowRight">Alt+→</kbd></td><td>move the clip one frame (<kbd data-keys="Alt+Shift+ArrowRight">Alt+Shift+→</kbd>: five frames)</td></tr>
+          <tr><td><kbd data-keys="Alt+ArrowUp">Alt+↑</kbd> <kbd data-keys="Alt+ArrowDown">Alt+↓</kbd></td><td>move the clip to the track above or below</td></tr>
+          <tr><td><kbd data-keys="Delete">Delete</kbd></td><td>delete the selected clips, as the mouse does</td></tr>
+          <tr><td><kbd data-keys="Mod+D">Ctrl+D</kbd></td><td>copy the selected clips</td></tr>
+          <tr><td><kbd data-keys="S">S</kbd></td><td>split the selected clips at the playhead (<a href="#splitting">Splitting a clip</a>)</td></tr>
+          <tr><td><kbd data-keys="Space">Space</kbd></td><td>play and pause, with the focus on a clip too</td></tr>
+        </tbody>
+      </table>
+      <p>When no clip has the focus, <kbd data-keys="Home">Home</kbd>, <kbd data-keys="End">End</kbd>,
+        <kbd data-keys="ArrowLeft">←</kbd> and <kbd data-keys="ArrowRight">→</kbd> move the playhead
+        instead, as under <a href="#playhead">The playhead</a>.</p>
+      <p>The whole list of keys is on <a href="../reference/shortcuts.html">Keyboard and mouse
+        shortcuts</a>.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <aside class="try">
+        <ol>
+          <li>Download the project below and open it: choose <span class="ui">File ▸ Open…</span>, press
+            <span class="ui">Other file…</span> in the dialog and pick the file
+            (<a href="../start/projects.html#open">Projects and files</a>).</li>
+          <li>Drag <code>check</code> from the Creator onto <span class="ui">Track 1</span>, at about
+            0.5 s. The ghost shows 3 seconds ending exactly where <code>step2</code> starts. Let go:
+            the clip is made, and selected.</li>
+          <li>Drag the clip of <code>check</code> sideways and watch it jump from tick to tick. Now
+            hold <kbd data-keys="Shift">Shift</kbd> once you have started: it follows the pointer
+            exactly. Let go of Shift and it jumps again; <kbd data-keys="Escape">Esc</kbd> puts the
+            clip back.</li>
+          <li>Press <span class="ui">+ Track</span>, rename the new track <code>Notes</code> and
+            drag the clip of <code>check</code> onto it.</li>
+          <li>Zoom in until dt says <code>1/60 s</code>, then use
+            <kbd data-keys="Alt+ArrowRight">Alt+→</kbd> to move the clip one frame at a time.</li>
+          <li>Select <code>step1</code> and <code>step2</code> with a rectangle, right-click one of
+            them and look at the menu.</li>
+          <li>Put the playhead at about 5.5 s, click <code>step2</code> alone and press
+            <kbd data-keys="S">S</kbd>. The clip is now two, and the Creator lists
+            <code>step2_s</code>. Press <kbd data-keys="Mod+Z">Ctrl+Z</kbd> to make it one clip
+            again.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="timeline-basics"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <p>Clips come and go with animations: <a href="intro-outro.html">Appearing and
+        disappearing</a> covers intros and outros. To turn one formula into another, go on to
+        <a href="first-transform.html">Transforming one formula into another</a>, and to copy
+        times between clips, to <a href="../animations/timing.html">Timing tools</a>.</p>
+    </article>
+  </main>
+</body>
+</html>

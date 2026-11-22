@@ -1,0 +1,86 @@
+# Off grid — exported by Manim Formula Editor for ManimCE 0.22.
+# Render at 480×270, 25 fps:
+#     manim -r 480,270 --fps 25 Pinned.py Pinned
+# Every play and wait lasts a whole number of frames at 25 fps, so the video has
+# exactly 83 frames, like the editor's video export.
+from manim import *
+
+
+class _Part(Animation):
+    """Plays the stretch [a0, a1] of `anim` (fractions of its run time) inside one
+    self.play, so that animations that overlap in time can start and end between plays.
+    The animation begins in its part with a0 == 0 and finishes (and leaves or enters the
+    scene) in its part with a1 == 1; it keeps its own rate function and lag throughout."""
+
+    def __init__(self, anim, a0, a1):
+        self.anim, self.a0, self.a1 = anim, a0, a1
+        super().__init__(anim.mobject, rate_func=linear)
+
+    def begin(self):
+        if self.a0 == 0:
+            self.anim.begin()
+
+    def _setup_scene(self, scene):  # ManimCE: introducers add their mobject here
+        if self.a0 == 0:
+            self.anim._setup_scene(scene)
+
+    def is_introducer(self):  # ManimCE
+        return self.anim.is_introducer()
+
+    def interpolate(self, alpha):
+        self.anim.interpolate(self.a0 + (self.a1 - self.a0) * alpha)
+
+    def update_mobjects(self, dt):  # ManimCE
+        self.anim.update_mobjects(dt)
+
+    def update_reference_mobjects(self, dt, **kwargs):  # ManimGL
+        self.anim.update_reference_mobjects(dt, **kwargs)
+
+    def finish(self):
+        if self.a1 == 1:
+            self.anim.finish()
+        else:
+            self.anim.interpolate(self.a1)
+
+    def clean_up_from_scene(self, scene):
+        if self.a1 == 1:
+            self.anim.clean_up_from_scene(scene)
+
+
+class Pinned(Scene):
+    def construct(self):
+        self.camera.background_color = "#000000"
+
+        # p: p+q
+        p = MathTex(r"p+q")
+        p.set_z_index(1)
+
+        # q: q+p
+        q = MathTex(r"q+p")
+        q.move_to([0, -1.5, 0])
+
+        # 0 s – 0.8 s: p write
+        self.play(Write(p), run_time=0.8)
+        # 0.8 s – 1.08 s
+        self.wait(0.28)
+        self.add(q[0][1])
+        p_to_q = [
+            ReplacementTransform(p[0][0], q[0][2]),
+            ReplacementTransform(p[0][2], q[0][0]),
+        ]
+        # 1.08 s – 1.88 s: p → q
+        self.play(*(_Part(a, 0, 20 / 23) for a in p_to_q), run_time=0.8)
+        p_out = FadeOut(p[0][1])
+        # 1.88 s – 2 s: p → q, p fade_out
+        self.play(*(_Part(a, 20 / 23, 1) for a in p_to_q), _Part(p_out, 0, 0.25), run_time=0.12)
+        # 2 s – 2.12 s: p fade_out
+        self.play(_Part(p_out, 0.25, 0.5), run_time=0.12)
+        q_move = q.animate.move_to([0, -2.5, 0]).build()
+        # 2.12 s – 2.36 s: p fade_out, q tween
+        self.play(_Part(p_out, 0.5, 1), _Part(q_move, 0, 0.6), run_time=0.24)
+        # 2.36 s – 2.52 s: q tween
+        self.play(_Part(q_move, 0.6, 1), run_time=0.16)
+        # 2.52 s – 2.72 s
+        self.wait(0.2)
+        # 2.72 s – 3.32 s: q fade_out
+        self.play(FadeOut(q), run_time=0.6)

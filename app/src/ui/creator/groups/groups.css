@@ -1,0 +1,185 @@
+/* ---- Groups of formulas in the Creator's list (model/formulaGroups.ts) ----
+ *
+ * A group is a card like a formula's (`.formula-item`, creator.css), which it is also classed
+ * as: the surface, the edge under the pointer, the selection and the mark of a selected clip are
+ * the card's. These rules add what is the group's own, each more specific than the card's so
+ * that the order of the two sheets does not matter. */
+
+/* The row of a group: a card with a doubled lower edge, the hint of the cards under it. */
+.formula-item.formula-group {
+  gap: 6px;
+  box-shadow:
+    0 3px 0 -1px var(--raised),
+    0 3px 0 0 var(--border),
+    inset 0 1px 0 var(--edge-light);
+}
+
+.formula-item.formula-group.formula-selected {
+  box-shadow:
+    0 3px 0 -1px var(--raised),
+    0 3px 0 0 var(--accent),
+    var(--selection-glow),
+    inset 0 1px 0 var(--edge-light);
+}
+
+/* Open, its formulas are under it: the stack is spread out, and the row is one line. */
+.formula-item.formula-group[data-open='true'] {
+  margin-bottom: 6px;
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+.formula-item.formula-group[data-open='true'].formula-selected {
+  box-shadow:
+    var(--selection-glow),
+    inset 0 1px 0 var(--edge-light);
+}
+
+/* A formula dragged from the list is over it: dropped, it goes into the group. */
+.formula-item.formula-group.is-drop {
+  border-color: var(--accent-bright);
+  border-style: dashed;
+  background: var(--selection-gradient);
+}
+
+/* The button that opens it: a chevron that turns down. */
+.formula-group .formula-group-toggle {
+  flex: none;
+  min-width: 22px;
+  margin-left: -4px;
+  padding: 0 3px;
+}
+
+.formula-group .formula-group-toggle svg {
+  transition: transform var(--motion-fast);
+}
+
+.formula-group[data-open='true'] .formula-group-toggle svg {
+  transform: rotate(90deg);
+}
+
+.formula-group .formula-group-toggle[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.formula-row > .badge.formula-group-count {
+  flex-shrink: 0;
+}
+
+.formula-selected .formula-group-count,
+.formula-selected .formula-group-toggle,
+.formula-selected .formula-group-more {
+  color: var(--text);
+}
+
+/* The renderings of its first formulas, side by side, smaller than a formula's own — in the same
+ * proportion at every size of the list's previews (D173: the list sets the height, 36 px at 1×). */
+.formula-group-thumbs {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  min-width: 0;
+}
+
+.formula-group-thumbs > .formula-thumb {
+  flex: 1 1 0;
+  min-width: 0;
+  height: var(--group-preview-height, 36px);
+  padding: 2px 4px;
+}
+
+/* "+2": the formulas of the group that have no rendering in the row. */
+.formula-group-more {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0 2px;
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* A formula of an open group: set in from the list's edge, with a rail that runs from its
+ * group's row down to the last of them. */
+.formula-item.is-grouped {
+  margin-left: 14px;
+}
+
+.formula-item.is-grouped::after {
+  position: absolute;
+  top: -9px;
+  bottom: -1px;
+  left: -9px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--border-strong);
+  content: '';
+  pointer-events: none;
+}
+
+/* ---- The block view ---- */
+
+/* The block of a group: the button, the tag colours of its first formulas, its name, how many
+ * it has. Open, it and the blocks of its formulas, which come right after it, wear the same bar
+ * along the top: the group's in the accent, theirs in the colour of an edge. */
+.formula-block.formula-group-block .formula-group-toggle {
+  height: 20px;
+  margin-left: -3px;
+}
+
+.formula-group-dots {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.formula-block.is-grouped::after,
+.formula-block.formula-group-block[data-open='true']::after {
+  position: absolute;
+  top: -1px;
+  right: 9px;
+  left: 9px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--border-strong);
+  content: '';
+  pointer-events: none;
+}
+
+.formula-block.formula-group-block[data-open='true']::after {
+  background: var(--accent);
+}
+
+/* Its tooltip: the renderings of its first formulas side by side, as tall as a formula's. */
+.formula-tip .formula-tip-thumbs {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+}
+
+.formula-tip .formula-tip-thumbs > .formula-thumb {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 2px 4px;
+}
+
+.formula-block.formula-group-block.is-drop {
+  border-color: var(--accent-bright);
+  border-style: dashed;
+  background: var(--selection-gradient);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formula-group .formula-group-toggle svg {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .formula-block.is-grouped::after,
+  .formula-block.formula-group-block[data-open='true']::after,
+  .formula-item.is-grouped::after {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}

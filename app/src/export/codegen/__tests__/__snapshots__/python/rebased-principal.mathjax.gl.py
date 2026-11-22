@@ -1,0 +1,98 @@
+# Rebased principal — exported by Manim Formula Editor for ManimGL 1.7.
+# Render at 480×270, 30 fps:
+#     manimgl Pinned.py Pinned -w -r 480x270 --fps 30
+# Every play and wait lasts a whole number of frames at 30 fps, so the video has
+# exactly 150 frames, like the editor's video export.
+from manimlib import *
+
+
+def _glyphs(tex, layout):
+    """The glyphs of `tex` in the editor's order. That order (MathJax's, or another
+    template's) can differ from Manim's, so the glyphs are matched by position: `layout`
+    holds each glyph's (x, y, width, height) relative to the formula centre, divided by the
+    formula height, and every real glyph is assigned to one entry with the least total
+    distance. Entries without a counterpart get an empty VMobject."""
+    from scipy.optimize import linear_sum_assignment
+
+    real = tex.family_members_with_points()
+    glyphs = [VMobject() for _ in layout]
+    if len(real) != len(layout):
+        print(f"Warning: Manim made {len(real)} glyphs of a formula the editor split into "
+              f"{len(layout)}; unmatched glyphs are not animated.")
+    if not real or not layout:
+        return glyphs  # nothing to match (a formula without ink, such as \quad)
+    centre, height = tex.get_center(), tex.get_height()
+    if height < 1e-6:
+        height = 1.0  # a flat mobject (a rule): the editor's layout is divided by 1 then too
+    have = np.array([
+        [*((g.get_center() - centre)[:2] / height), g.get_width() / height, g.get_height() / height]
+        for g in real
+    ])
+    want = np.array(layout, dtype=float)
+    cost = np.linalg.norm(want[:, None, :] - have[None, :, :], axis=2)
+    for i, j in zip(*linear_sum_assignment(cost)):
+        glyphs[i] = real[j]
+    return glyphs
+
+
+class Pinned(Scene):
+    default_camera_config = dict(background_color="#000000")
+
+    def construct(self):
+
+        # source: b+a
+        source = Tex(r"b+a")
+        source_g = _glyphs(source, [
+            (-0.875, 0, 0.6875, 1), (0, 0, 0.6875, 1), (0.875, 0, 0.6875, 1),
+        ])
+        source.move_to([-3, 1.5, 0])
+        source.set_z_index(3)
+
+        # derivation: y+x=z
+        derivation = Tex(r"y+x=z")
+        derivation_g = _glyphs(derivation, [
+            (-1.75, 0, 0.6875, 1), (-0.875, 0, 0.6875, 1), (0, 0, 0.6875, 1), (0.875, 0, 0.6875, 1),
+            (1.75, 0, 0.6875, 1),
+        ])
+        derivation.move_to([0, -1.5, 0])
+
+        # target: c
+        target = Tex(r"c")
+        target_g = _glyphs(target, [
+            (0, 0, 0.6875, 1),
+        ])
+        target.move_to([1, 1.5, 0])
+        target.set_z_index(2)
+
+        # later: d
+        later = Tex(r"d")
+        later_g = _glyphs(later, [
+            (0, 0, 0.6875, 1),
+        ])
+        later.move_to([3, 1.5, 0])
+        later.set_z_index(1)
+
+        self.add(source)
+        self.add(*derivation_g[:4])
+        # 0 s – 1 s
+        self.wait(1)
+        # 1 s – 2 s: derivation morph, source → target
+        self.play(
+            TransformFromCopy(derivation_g[0], derivation_g[4]),
+            ReplacementTransform(derivation_g[2], derivation_g[4]),
+            TransformFromCopy(source_g[0], target_g[0]),
+            ReplacementTransform(source_g[2], target_g[0]),
+            run_time=1,
+        )
+        # 2 s – 3 s
+        self.wait(1)
+        # 3 s – 4 s: source → later
+        self.play(TransformFromCopy(source_g[0], later_g[0]), run_time=1)
+        # 4 s – 4.5 s
+        self.wait(0.5)
+        # 4.5 s – 5 s: source fade_out, derivation fade_out
+        self.play(
+            FadeOut(VGroup(source_g[0], source_g[1])),
+            FadeOut(VGroup(derivation_g[0], derivation_g[1], derivation_g[3], derivation_g[4])),
+            run_time=0.5,
+        )

@@ -1,0 +1,771 @@
+/* The look of an exported scene: its stage and its controls. Plain CSS, and yours: change it or
+ * replace it. Every rule is under `.mfe-deck`, so nothing here reaches the page around a scene,
+ * and every rule is one class under it (what more a rule needs is in `:where()`, which counts for
+ * nothing): a rule of the page that hosts a deck, written after this file with the same two
+ * classes, wins. No `!important`, no `id`.
+ *
+ * To change the look, give these custom properties other values, here or from the host page
+ * (`.my-page .mfe-deck { --mfe-accent: #f60 }`). Dark is the default set; the light one applies
+ * with `data-theme="light"` on the deck, or with no `data-theme` on a system set to light (but
+ * not on the scene's own page, which is dark unless its deck says otherwise).
+ *
+ *   --mfe-accent              the played part of the timeline, its thumb, a toggle that is on
+ *   --mfe-bar-background      the bar under the stage
+ *   --mfe-bar-text            its icons and words
+ *   --mfe-bar-text-muted      the slide count and the time
+ *   --mfe-bar-height          its height
+ *   --mfe-radius              the corners of the buttons
+ *   --mfe-font                the font of the controls
+ *   --mfe-pause-mark          a pause's notch on the timeline
+ *   --mfe-skip-wait           a pause that skips its wait: its notch, the dashes of the wait it
+ *                             jumps over, its label in the notes
+ *   --mfe-timeline-track      the timeline's groove
+ *   --mfe-focus-ring          the ring of the control that has the keyboard's focus
+ *   --mfe-notes-background    the notes, for whoever presents
+ *   --mfe-notes-text          their words
+ *   --mfe-notes-text-muted    their headings
+ *   --mfe-notes-height        how tall they grow before they scroll (on the scene's own page,
+ *                             how tall they are)
+ *   --mfe-fullscreen-background   around the stage in full screen
+ *   --mfe-blackout-background     the stage blacked out (B or .)
+ *   --mfe-stage-background    behind the scene: the scene's own (the runtime sets
+ *                             --mfe-scene-background from it; transparent with
+ *                             data-background="transparent")
+ *
+ * The classes are a contract too: a page's own rules and scripts may rely on them.
+ *
+ *   .mfe-deck          the element a scene is mounted in (the page's own)
+ *   .mfe-screen        the box of the stage, in the scene's shape (--mfe-aspect)
+ *   .mfe-stage         the <svg> (or <canvas>) of the scene
+ *   .mfe-layers        over a canvas stage: the free layers
+ *   .mfe-problems      what is wrong with the scene's files (.mfe-problems-title, a list)
+ *   .mfe-sound         the <audio> of the scene's sound, when it has one: not shown
+ *   .mfe-bar           the bar of controls, under the screen
+ *   .mfe-button        every button of the bar, and one of:
+ *     .mfe-previous .mfe-play .mfe-next .mfe-through .mfe-mute .mfe-notes-button
+ *     .mfe-fullscreen
+ *   .mfe-icon          the icon of a button
+ *   .mfe-timeline      the time, a slider; inside it .mfe-timeline-track (holding
+ *                      .mfe-timeline-played and a .mfe-timeline-skip per wait a pause skips,
+ *                      from --mfe-at to --mfe-to), .mfe-pause-mark (one per pause, at --mfe-at;
+ *                      data-skip-wait on one that skips its wait), .mfe-timeline-thumb; the
+ *                      playhead is its --mfe-progress (0…1)
+ *   .mfe-slide-count   "2 / 3"
+ *   .mfe-time          "1.25 / 6.00 s"
+ *   .mfe-notes         the notes, a region under the bar (over the stage in full screen); in
+ *                      it .mfe-notes-heading, .mfe-notes-list of .mfe-note (data-kind pause or
+ *                      comment, data-skip-wait: .mfe-note-label, .mfe-note-text) and
+ *                      .mfe-notes-empty
+ *   .mfe-blackout      over the stage when it is blacked out (B or .)
+ *   .mfe-live          what a screen reader is told when the deck stops at a pause
+ *   .mfe-visually-hidden   words for a screen reader alone
+ *   .mfe-page          the <body> of the scene's own page (index.html): the deck centred, as
+ *                      large as the window allows in the scene's shape, on --mfe-page-background
+ *
+ * The deck's element says what it is doing in data-mfe-state (playing, paused, ended), and the
+ * controls say what they show: data-mfe-controls (full, minimal), data-mfe-notes (the notes are
+ * open), data-mfe-blackout, data-mfe-fullscreen and data-mfe-idle (full screen, and the pointer
+ * has rested: the bar hides). A button that toggles says whether it is on in aria-pressed; one
+ * that can do nothing now has aria-disabled="true". */
+
+/* ---- The custom properties: dark, then light ------------------------------------------------ */
+
+.mfe-deck {
+  --mfe-accent: #43eeca;
+  --mfe-bar-background: #121619;
+  --mfe-bar-text: #d5dee2;
+  --mfe-bar-text-muted: #93a3ab;
+  --mfe-bar-height: 40px;
+  --mfe-radius: 6px;
+  --mfe-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  --mfe-pause-mark: #f4c867;
+  --mfe-skip-wait: #b69cff;
+  --mfe-timeline-track: rgb(255 255 255 / 22%);
+  --mfe-focus-ring: #8cc8ff;
+  --mfe-notes-background: #171c20;
+  --mfe-notes-text: #e4ebee;
+  --mfe-notes-text-muted: #93a3ab;
+  --mfe-notes-height: 140px;
+  --mfe-fullscreen-background: #000;
+  --mfe-blackout-background: #000;
+  /* The stage's background: the scene's own unless you say otherwise. */
+  --mfe-stage-background: var(--mfe-scene-background, #000);
+}
+
+.mfe-deck:where([data-theme='light']) {
+  --mfe-accent: #087568;
+  --mfe-bar-background: #f2f5f6;
+  --mfe-bar-text: #1d2b31;
+  --mfe-bar-text-muted: #56676f;
+  --mfe-pause-mark: #a86a00;
+  --mfe-skip-wait: #7048e8;
+  --mfe-timeline-track: rgb(0 0 0 / 18%);
+  --mfe-focus-ring: #2a5ba8;
+  --mfe-notes-background: #ffffff;
+  --mfe-notes-text: #1d2b31;
+  --mfe-notes-text-muted: #56676f;
+}
+
+@media (prefers-color-scheme: light) {
+  .mfe-deck:where(:not([data-theme], .mfe-page > *)) {
+    --mfe-accent: #087568;
+    --mfe-bar-background: #f2f5f6;
+    --mfe-bar-text: #1d2b31;
+    --mfe-bar-text-muted: #56676f;
+    --mfe-pause-mark: #a86a00;
+    --mfe-skip-wait: #7048e8;
+    --mfe-timeline-track: rgb(0 0 0 / 18%);
+    --mfe-focus-ring: #2a5ba8;
+    --mfe-notes-background: #ffffff;
+    --mfe-notes-text: #1d2b31;
+    --mfe-notes-text-muted: #56676f;
+  }
+}
+
+/* ---- The deck and its stage ----------------------------------------------------------------- */
+
+.mfe-deck {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  /* The controls fit the deck's width, wherever it is embedded. */
+  container: mfe-deck / inline-size;
+}
+
+.mfe-deck:where([tabindex='-1']):focus {
+  /* The deck takes the focus when it is pressed, for its keys; the controls show the ring. */
+  outline: none;
+}
+
+.mfe-deck .mfe-screen {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* The scene's shape: the runtime sets --mfe-aspect from the scene's width and height. */
+  aspect-ratio: var(--mfe-aspect, 16 / 9);
+  background: var(--mfe-stage-background);
+}
+
+.mfe-deck .mfe-stage,
+.mfe-deck .mfe-layers {
+  display: block;
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mfe-deck .mfe-layers {
+  pointer-events: none;
+}
+
+.mfe-deck .mfe-sound {
+  display: none;
+}
+
+/* What is wrong with the scene's files, when something is. */
+.mfe-deck .mfe-problems {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px 20px;
+  background: rgb(20 8 8 / 92%);
+  color: #ffe9e6;
+  font:
+    14px/1.45 system-ui,
+    sans-serif;
+  text-align: left;
+}
+
+.mfe-deck .mfe-problems-title {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.mfe-deck .mfe-problems :where(ul) {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.mfe-deck .mfe-problems :where(li) {
+  margin: 0 0 6px;
+}
+
+.mfe-deck .mfe-problems :where(code) {
+  margin: 0;
+  font:
+    12px/1.45 ui-monospace,
+    monospace;
+  color: #ffb4a8;
+}
+
+/* ---- The bar -------------------------------------------------------------------------------- */
+
+.mfe-deck .mfe-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  height: var(--mfe-bar-height);
+  margin: 0;
+  padding: 0 6px;
+  overflow: hidden;
+  background: var(--mfe-bar-background);
+  color: var(--mfe-bar-text);
+  font: 500 12px/1 var(--mfe-font);
+  letter-spacing: normal;
+  text-align: left;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  user-select: none;
+}
+
+.mfe-deck .mfe-button {
+  appearance: none;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--mfe-radius);
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: none;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.mfe-deck .mfe-button:where(:hover) {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.mfe-deck .mfe-button:where(:focus-visible),
+.mfe-deck .mfe-timeline:where(:focus-visible) {
+  outline: 2px solid var(--mfe-focus-ring);
+  outline-offset: 1px;
+}
+
+.mfe-deck .mfe-button:where([aria-disabled='true']) {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.mfe-deck .mfe-button:where([aria-disabled='true']:hover) {
+  background: transparent;
+}
+
+/* A toggle that is on: its icon in the accent, and a line under it (not told by colour alone). */
+.mfe-deck .mfe-button:where([aria-pressed='true']) {
+  color: var(--mfe-accent);
+}
+
+.mfe-deck .mfe-button:where([aria-pressed='true'])::after {
+  position: absolute;
+  bottom: 3px;
+  left: 9px;
+  right: 9px;
+  border-top: 2px solid currentColor;
+  border-radius: 1px;
+  content: '';
+}
+
+.mfe-deck .mfe-icon {
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* The shapes of an icon: filled, or drawn with a line (`icons.ts` says which in their `fill`); a
+ * page's own rule for `path` does not repaint them. */
+.mfe-deck .mfe-icon :where([fill='currentColor']) {
+  fill: currentColor;
+  stroke: none;
+}
+
+.mfe-deck .mfe-icon :where([fill='none']) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+}
+
+.mfe-deck :where(.mfe-play) .mfe-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- The timeline --------------------------------------------------------------------------- */
+
+.mfe-deck .mfe-timeline {
+  position: relative;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  min-width: 64px;
+  height: 32px;
+  margin: 0 10px;
+  padding: 0;
+  border-radius: var(--mfe-radius);
+  outline: none;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.mfe-deck .mfe-timeline-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  height: 4px;
+  margin: -2px 0 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--mfe-timeline-track);
+}
+
+.mfe-deck .mfe-timeline-played {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: calc(var(--mfe-progress, 0) * 100%);
+  margin: 0;
+  background: var(--mfe-accent);
+}
+
+.mfe-deck .mfe-pause-mark {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: calc(var(--mfe-at, 0) * 100%);
+  box-sizing: border-box;
+  width: 3px;
+  height: 12px;
+  margin: -6px 0 0 -1.5px;
+  padding: 0;
+  border-radius: 1.5px;
+  background: var(--mfe-pause-mark);
+}
+
+/* A notch is small; what a press finds it by is wider. */
+.mfe-deck .mfe-pause-mark::before {
+  position: absolute;
+  inset: -10px -6px;
+  content: '';
+}
+
+/* A pause that skips its wait: its notch in a colour of its own, and the wait that going on from
+ * it jumps over dashed on the track — over the played part, which shows between the dashes. */
+.mfe-deck .mfe-pause-mark:where([data-skip-wait]) {
+  background: var(--mfe-skip-wait);
+}
+
+.mfe-deck .mfe-timeline-skip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--mfe-at, 0) * 100%);
+  right: calc((1 - var(--mfe-to, 0)) * 100%);
+  box-sizing: border-box;
+  margin: 0;
+  background: repeating-linear-gradient(90deg, var(--mfe-skip-wait) 0 3px, transparent 3px 6px);
+}
+
+.mfe-deck .mfe-timeline-thumb {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--mfe-progress, 0) * 100%);
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--mfe-accent);
+  box-shadow: 0 0 0 2px var(--mfe-bar-background);
+  pointer-events: none;
+  transition: transform 120ms ease;
+}
+
+.mfe-deck :where(.mfe-timeline:hover, .mfe-timeline[data-dragging]) .mfe-timeline-thumb {
+  transform: scale(1.25);
+}
+
+/* ---- The words of the bar ------------------------------------------------------------------- */
+
+.mfe-deck .mfe-slide-count,
+.mfe-deck .mfe-time {
+  flex: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 6px;
+  color: var(--mfe-bar-text-muted);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mfe-deck .mfe-slide-count {
+  color: var(--mfe-bar-text);
+}
+
+.mfe-deck .mfe-slide-count > :where(*) {
+  margin: 0;
+}
+
+/* ---- The notes ------------------------------------------------------------------------------ */
+
+.mfe-deck .mfe-notes {
+  box-sizing: border-box;
+  max-height: var(--mfe-notes-height);
+  margin: 0;
+  padding: 10px 14px 12px;
+  overflow: auto;
+  border-top: 1px solid color-mix(in srgb, var(--mfe-notes-text) 12%, transparent);
+  background: var(--mfe-notes-background);
+  color: var(--mfe-notes-text);
+  font: 400 14px/1.45 var(--mfe-font);
+  letter-spacing: normal;
+  text-align: left;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+}
+
+.mfe-deck .mfe-notes-heading {
+  margin: 0 0 6px;
+  padding: 0;
+  color: var(--mfe-notes-text-muted);
+  font: 600 11px/1.4 var(--mfe-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mfe-deck .mfe-notes-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mfe-deck .mfe-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.mfe-deck .mfe-note-label {
+  margin: 0;
+  color: var(--mfe-notes-text-muted);
+  font: 600 11px/1.4 var(--mfe-font);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mfe-deck :where(.mfe-note[data-kind='pause']) .mfe-note-label {
+  color: var(--mfe-pause-mark);
+}
+
+.mfe-deck :where(.mfe-note[data-skip-wait]) .mfe-note-label {
+  color: var(--mfe-skip-wait);
+}
+
+.mfe-deck .mfe-note-text {
+  margin: 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.mfe-deck .mfe-notes-empty {
+  margin: 0;
+  padding: 0;
+  color: var(--mfe-notes-text-muted);
+  font-style: italic;
+}
+
+/* ---- The stage blacked out, and what a screen reader is told -------------------------------- */
+
+.mfe-deck .mfe-blackout {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  margin: 0;
+  background: var(--mfe-blackout-background);
+}
+
+.mfe-deck .mfe-visually-hidden,
+.mfe-deck .mfe-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Full screen: the stage as large as it fits, the bar over its foot ---------------------- */
+
+.mfe-deck:where([data-mfe-fullscreen]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  background: var(--mfe-fullscreen-background);
+}
+
+.mfe-deck:where([data-mfe-fullscreen]) .mfe-screen {
+  flex: none;
+  width: min(100%, calc(100vh * var(--mfe-aspect, 16 / 9)));
+}
+
+.mfe-deck:where([data-mfe-fullscreen]) .mfe-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 0 12px;
+  background: color-mix(in srgb, var(--mfe-bar-background) 90%, transparent);
+  transition: opacity 200ms ease;
+}
+
+.mfe-deck:where([data-mfe-fullscreen]) .mfe-notes {
+  position: absolute;
+  bottom: calc(var(--mfe-bar-height) + 12px);
+  left: 12px;
+  z-index: 2;
+  width: min(640px, calc(100% - 24px));
+  max-height: 40vh;
+  border: 0;
+  border-radius: var(--mfe-radius);
+  background: color-mix(in srgb, var(--mfe-notes-background) 94%, transparent);
+}
+
+/* The pointer has rested: the bar goes, and the pointer with it; not from whoever is in the bar
+ * with the keyboard. */
+.mfe-deck:where([data-mfe-idle]) {
+  cursor: none;
+}
+
+.mfe-deck:where([data-mfe-idle]) .mfe-bar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mfe-deck:where([data-mfe-idle]) .mfe-bar:where(:focus-within) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mfe-deck:where([data-mfe-idle]) .mfe-notes {
+  bottom: 12px;
+}
+
+/* ---- A narrow deck: the least needed goes first --------------------------------------------- */
+
+@container mfe-deck (max-width: 560px) {
+  .mfe-deck .mfe-time {
+    display: none;
+  }
+}
+
+@container mfe-deck (max-width: 460px) {
+  .mfe-deck .mfe-through,
+  .mfe-deck .mfe-slide-count {
+    display: none;
+  }
+
+  .mfe-deck .mfe-timeline {
+    margin: 0 6px;
+  }
+}
+
+@container mfe-deck (max-width: 400px) {
+  .mfe-deck .mfe-notes-button {
+    display: none;
+  }
+
+  .mfe-deck .mfe-notes {
+    padding: 8px 10px 10px;
+    font-size: 13px;
+  }
+}
+
+@container mfe-deck (max-width: 360px) {
+  .mfe-deck .mfe-button {
+    width: 30px;
+  }
+
+  .mfe-deck .mfe-bar {
+    padding: 0 4px;
+  }
+}
+
+/* ---- The scene's own page ------------------------------------------------------------------- */
+
+/* index.html: no margin, a dark backdrop, the deck centred and as large as the window allows in
+ * the scene's shape, with its bar (and its notes, when they are open) in sight. */
+.mfe-page {
+  /* Around the deck. */
+  --mfe-page-background: #0b0d0f;
+  /* The window's height, which the deck fits in. */
+  --mfe-page-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--mfe-page-height);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--mfe-page-background);
+}
+
+@supports (height: 100dvh) {
+  .mfe-page {
+    /* The height a phone shows, its address bar included or not. */
+    --mfe-page-height: 100dvh;
+  }
+}
+
+.mfe-page .mfe-deck {
+  /* What the page holds under the stage: the bar, and the notes. */
+  --mfe-page-chrome: 0px;
+  flex: none;
+  width: min(
+    100vw,
+    calc((var(--mfe-page-height) - var(--mfe-page-chrome)) * var(--mfe-aspect, 16 / 9))
+  );
+  margin: 0;
+}
+
+.mfe-page .mfe-deck:where([data-mfe-controls]) {
+  --mfe-page-chrome: var(--mfe-bar-height);
+}
+
+.mfe-page .mfe-deck:where([data-mfe-controls][data-mfe-notes]) {
+  --mfe-page-chrome: calc(var(--mfe-bar-height) + var(--mfe-notes-height));
+}
+
+.mfe-page .mfe-notes {
+  height: var(--mfe-notes-height);
+}
+
+/* ---- Forced colours: the system's, and the scene as it was made ----------------------------- */
+
+@media (forced-colors: active) {
+  /* The scene is a picture: its colours are its own. */
+  .mfe-deck .mfe-screen {
+    forced-color-adjust: none;
+  }
+
+  .mfe-deck .mfe-problems {
+    forced-color-adjust: auto;
+  }
+
+  .mfe-deck .mfe-bar,
+  .mfe-deck .mfe-notes {
+    border-top: 1px solid CanvasText;
+  }
+
+  .mfe-deck .mfe-button:where([aria-pressed='true']) {
+    color: Highlight;
+  }
+
+  .mfe-deck .mfe-button:where([aria-disabled='true']) {
+    color: GrayText;
+    opacity: 1;
+  }
+
+  .mfe-deck .mfe-button:where(:focus-visible) {
+    outline-color: Highlight;
+  }
+
+  /* The timeline keeps the shapes it is read by, in the system's colours. */
+  .mfe-deck .mfe-timeline {
+    forced-color-adjust: none;
+  }
+
+  .mfe-deck .mfe-timeline:where(:focus-visible) {
+    outline-color: Highlight;
+  }
+
+  .mfe-deck .mfe-timeline-track {
+    background: GrayText;
+  }
+
+  .mfe-deck .mfe-timeline-played,
+  .mfe-deck .mfe-timeline-thumb {
+    background: Highlight;
+  }
+
+  .mfe-deck .mfe-timeline-thumb {
+    box-shadow: 0 0 0 2px Canvas;
+  }
+
+  .mfe-deck .mfe-pause-mark {
+    background: CanvasText;
+  }
+
+  /* A skipped wait: dashes of the text's colour, apart from the groove's grey. */
+  .mfe-deck .mfe-timeline-skip {
+    background: repeating-linear-gradient(90deg, CanvasText 0 3px, Canvas 3px 6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mfe-deck .mfe-button,
+  .mfe-deck .mfe-timeline-thumb,
+  .mfe-deck .mfe-bar {
+    transition: none;
+  }
+}
+
+/* Last, so that it wins over a rule above that shows the same element. */
+.mfe-deck [hidden] {
+  display: none;
+}

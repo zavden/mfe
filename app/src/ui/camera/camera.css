@@ -1,0 +1,49 @@
+/* The scene's camera in the Animations panel (CameraProperties.tsx): its sky blue for the camera
+ * and its moves, as on the timeline's Camera row, and the pink of a target camera. */
+.camera-dot.is-camera {
+  background: var(--block-camera);
+}
+
+.camera-dot.is-target {
+  background: var(--camera-target);
+}
+
+.an-block-chip.is-camera {
+  --block-bg: var(--block-camera);
+  --block-fg: var(--block-camera-text);
+}
+
+.an-section[data-tone='camera'] {
+  --section-color: var(--block-camera);
+  --section-title: var(--block-camera);
+}
+
+.an-section[data-tone='target'] {
+  --section-color: var(--camera-target);
+  --section-title: var(--camera-target);
+}
+
+/* The target cameras of the scene, and the moves that go to one: a line each, its button first. */
+.camera-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.camera-target-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.camera-target-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

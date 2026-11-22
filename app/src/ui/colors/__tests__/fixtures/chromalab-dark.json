@@ -1,0 +1,81 @@
+{
+  "format": "manim-palette",
+  "version": 1,
+  "name": "Midnight chalkboard",
+  "colors": {
+    "background": "#101827",
+    "formula": "#F1F5F9",
+    "variable": "#67D9FF",
+    "constant": "#F9CF72",
+    "operator": "#E3EAF5",
+    "result": "#8BE6BA",
+    "text": "#F1F5F9",
+    "muted": "#9EADC2",
+    "rectangle": "#A9B5FF",
+    "circle": "#FF9AC6",
+    "arrow": "#8BE6BA"
+  },
+  "groups": [
+    [
+      "formula"
+    ],
+    [
+      "variable"
+    ],
+    [
+      "constant"
+    ],
+    [
+      "operator"
+    ],
+    [
+      "result"
+    ],
+    [
+      "text"
+    ],
+    [
+      "muted"
+    ],
+    [
+      "rectangle"
+    ],
+    [
+      "circle"
+    ],
+    [
+      "arrow"
+    ]
+  ],
+  "backgroundMode": "manual",
+  "style": {
+    "fillOpacity": 0.12,
+    "strokeWidth": 3,
+    "fontScale": 1
+  },
+  "seeds": {
+    "master": "manim-colors",
+    "background": "",
+    "symbols": "",
+    "emphasis": ""
+  },
+  "mode": "dark",
+  "locks": {
+    "background": false,
+    "formula": false,
+    "variable": false,
+    "constant": false,
+    "operator": false,
+    "result": false,
+    "text": false,
+    "muted": false,
+    "rectangle": false,
+    "circle": false,
+    "arrow": false
+  },
+  "generation": {
+    "method": "preset",
+    "chroma": 0.4,
+    "diversity": 0.65
+  }
+}

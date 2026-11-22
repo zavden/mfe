@@ -1,0 +1,107 @@
+[
+  {
+    "from": "#FC6255",
+    "to": "#58C4DD",
+    "alpha": 0.0,
+    "gl": [0.9882353, 0.3843137, 0.3333333, 0.8],
+    "gl_interpolate_color": "#fc6255"
+  },
+  {
+    "from": "#FC6255",
+    "to": "#58C4DD",
+    "alpha": 0.25,
+    "gl": [0.827451, 0.4803922, 0.4666667, 0.85],
+    "gl_interpolate_color": "#df8285"
+  },
+  {
+    "from": "#FC6255",
+    "to": "#58C4DD",
+    "alpha": 0.5,
+    "gl": [0.6666667, 0.5764706, 0.6, 0.9],
+    "gl_interpolate_color": "#bd9ba7"
+  },
+  {
+    "from": "#FC6255",
+    "to": "#58C4DD",
+    "alpha": 0.9,
+    "gl": [0.4094118, 0.7301961, 0.8133333, 0.98],
+    "gl_interpolate_color": "#73bdd3"
+  },
+  {
+    "from": "#FC6255",
+    "to": "#58C4DD",
+    "alpha": 1.0,
+    "gl": [0.345098, 0.7686275, 0.8666667, 1.0],
+    "gl_interpolate_color": "#58c4dd"
+  },
+  {
+    "from": "#000000",
+    "to": "#FFFFFF",
+    "alpha": 0.0,
+    "gl": [0.0, 0.0, 0.0, 0.8],
+    "gl_interpolate_color": "black"
+  },
+  {
+    "from": "#000000",
+    "to": "#FFFFFF",
+    "alpha": 0.25,
+    "gl": [0.25, 0.25, 0.25, 0.85],
+    "gl_interpolate_color": "#7f7f7f"
+  },
+  {
+    "from": "#000000",
+    "to": "#FFFFFF",
+    "alpha": 0.5,
+    "gl": [0.5, 0.5, 0.5, 0.9],
+    "gl_interpolate_color": "#b4b4b4"
+  },
+  {
+    "from": "#000000",
+    "to": "#FFFFFF",
+    "alpha": 0.9,
+    "gl": [0.9, 0.9, 0.9, 0.98],
+    "gl_interpolate_color": "#f2f2f2"
+  },
+  {
+    "from": "#000000",
+    "to": "#FFFFFF",
+    "alpha": 1.0,
+    "gl": [1.0, 1.0, 1.0, 1.0],
+    "gl_interpolate_color": "white"
+  },
+  {
+    "from": "#83C167",
+    "to": "#FFFF00",
+    "alpha": 0.0,
+    "gl": [0.5137255, 0.7568628, 0.4039216, 0.8],
+    "gl_interpolate_color": "#83c167"
+  },
+  {
+    "from": "#83C167",
+    "to": "#FFFF00",
+    "alpha": 0.25,
+    "gl": [0.6352941, 0.8176471, 0.3029412, 0.85],
+    "gl_interpolate_color": "#abd259"
+  },
+  {
+    "from": "#83C167",
+    "to": "#FFFF00",
+    "alpha": 0.5,
+    "gl": [0.7568628, 0.8784314, 0.2019608, 0.9],
+    "gl_interpolate_color": "#cbe249"
+  },
+  {
+    "from": "#83C167",
+    "to": "#FFFF00",
+    "alpha": 0.9,
+    "gl": [0.9513725, 0.9756863, 0.0403922, 0.98],
+    "gl_interpolate_color": "#f5f921"
+  },
+  {
+    "from": "#83C167",
+    "to": "#FFFF00",
+    "alpha": 1.0,
+    "gl": [1.0, 1.0, 0.0, 1.0],
+    "gl_interpolate_color": "yellow"
+  }
+]

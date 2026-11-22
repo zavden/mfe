@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exporting · Manim Formula Editor</title>
+  <meta name="description" content="Export the scene as ManimCE or ManimGL Python, as a video, as a picture of one frame, as its audio alone, or as a web page that plays it.">
+  <meta name="mfe:id" content="basics/export">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Exporting">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Exporting</h1>
+      <p class="lead">Export the scene as ManimCE or ManimGL Python, as a video, as a picture of one frame,
+        as its audio alone, or as a web page that plays it. The Python is the way to Manim: you run it there and get the animation in
+        Manim's own renderer.</p>
+
+      <h2 id="overview">What you can export</h2>
+      <p>Everything is in the arrow of the <span class="ui">Export…</span> button, next to the menus. Each entry opens a dialog.</p>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What you get</th><th>What it needs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Python — ManimCE…</span></td><td>A <code>.py</code> scene for ManimCE</td><td>Nothing, to export. Manim, to run it.</td></tr>
+          <tr><td><span class="ui">Python — ManimGL…</span></td><td>A <code>.py</code> scene for ManimGL</td><td>Nothing, to export. Manim, to run it.</td></tr>
+          <tr><td><span class="ui">Video…</span> with <span class="ui">Browser</span></td><td>An MP4 or a WebM, encoded in the page</td><td>Only the browser.</td></tr>
+          <tr><td><span class="ui">Video…</span> with <span class="ui">Companion · ffmpeg</span></td><td>An MP4, WebM, MOV (ProRes) or GIF</td><td>The companion, with ffmpeg.</td></tr>
+          <tr><td><span class="ui">Video…</span> with <span class="ui">Render with Manim</span></td><td>The video Manim renders from the exported scene</td><td>The companion, started to allow it, and your Manim.</td></tr>
+          <tr><td><span class="ui">Image…</span></td><td>The frame at the playhead, as a PNG picture</td><td>Only the browser.</td></tr>
+          <tr><td><span class="ui">Audio…</span></td><td>The sound of the project: a WAV, a WebM or an M4A</td><td>Only the browser.</td></tr>
+          <tr><td><span class="ui">HTML…</span></td><td>A web page that plays the scene live and stops at its pauses: a folder, a zip or one file</td><td>Only the browser.</td></tr>
+        </tbody>
+      </table>
+      <p>Which one do you need?</p>
+      <ul>
+        <li>You want the scene as Manim code, to render with Manim or to change by hand: <strong>Python</strong>.</li>
+        <li>You want a video now, and have no Manim: <strong>Video</strong> with <span class="ui">Browser</span>.</li>
+        <li>You want a GIF, a ProRes file, or an H.264 file without the specks the browser's encoder can leave:
+          <strong>Video</strong> with <span class="ui">Companion · ffmpeg</span>.</li>
+        <li>You want the video Manim itself draws, without leaving the editor: <strong>Video</strong> with
+          <span class="ui">Render with Manim</span>.</li>
+        <li>You want one moment of the scene as a still picture: <strong>Image</strong>.</li>
+        <li>You want the sound alone: <strong>Audio</strong>.</li>
+        <li>You want to present the scene in a talk that stops where you say, put it in a web page of your
+          own, or go on with it in code: <strong>HTML</strong> (<a href="slides.html">Slides and the HTML page</a>).</li>
+      </ul>
+      <aside class="callout note">
+        <p>An export is not a way to save your work. The Python and the video cannot be opened in the
+          editor again. Keep the project itself with <span class="ui">File ▸ Save</span>, which writes its
+          file. <span class="ui">File ▸ Open…</span> opens it again, from the list of your project folder or with
+          <span class="ui">Other file…</span> (<a href="../start/projects.html#open">Projects and files</a>).</p>
+      </aside>
+
+      <h2 id="menu">The Export… button</h2>
+      <p>The <span class="ui">Export…</span> button is the mint button to the right of the menus: the bar has
+        no Export menu. Pressing it opens the dialog of the last Python target you used, ManimCE at first.
+        Its arrow lists the six exports, and this documentation writes an entry of that list as
+        <span class="ui">Export ▸ Video…</span>.</p>
+      <figure>
+        <img src="../media/basics/export/button.dark.webp" data-themed
+             alt="The Export… button of the menu bar, and the menu its arrow opens with the six exports: Python — ManimCE…, Python — ManimGL…, Video…, Image…, Audio… and HTML…."
+             width="420" height="246" loading="lazy">
+        <figcaption>The <span class="ui">Export…</span> button (1) and its arrow (2), with the six exports.</figcaption>
+      </figure>
+
+      <h2 id="python">Python for ManimCE and ManimGL</h2>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span> or <span class="ui">Export ▸ Python — ManimGL…</span>.
+        The dialog writes the scene as you watch, and changes it as you change its options. Nothing is
+        saved until you press <span class="ui">Download &lt;scene name&gt;.py</span> or <span class="ui">Copy</span>.</p>
+      <figure>
+        <img src="../media/basics/export/python.dark.webp" data-themed
+             alt="The Export Python dialog for ManimCE with its six parts numbered: the scene name, two options, the notes, the generated code, and the Copy and Download buttons."
+             width="836" height="782" loading="lazy">
+        <figcaption>The Python dialog, for the scene of <em>First transform</em>.</figcaption>
+      </figure>
+      <ol>
+        <li><span class="ui">Scene name</span>: the name of the Python class and of the file. It starts as the
+          name of the project, written as a Python name (<em>First transform</em> becomes
+          <code>FirstTransform</code>). Type another name in the field, or rename the project in the menu
+          bar.</li>
+        <li><span class="ui">Always use the positional helper</span>: finds every glyph by its position when the
+          scene runs, also for formulas the companion rendered exactly. Without it the file uses the exact
+          index of each glyph where it has one.</li>
+        <li><span class="ui">Comments (formulas, timing)</span>: the comments that name each formula and each step
+          with its times. Untick it for a bare file.</li>
+        <li>The notes. They list what the scene cannot guarantee. For a formula the browser typeset
+          with MathJax they say that its glyphs are found by position when the scene runs, because
+          MathJax and LaTeX can order glyphs differently; the scene still plays as the Preview
+          does. With nothing to say, the dialog reads <em>The scene reproduces the preview: exact glyph
+          indices, whole frames.</em>, or, with the positional helper ticked, <em>The scene reproduces
+          the preview: glyphs matched by position when it runs, whole frames.</em></li>
+        <li><span class="ui">Copy</span> puts the code on the clipboard.</li>
+        <li><span class="ui">Download &lt;scene name&gt;.py</span> saves the file under that name: <code>FirstTransform.py</code>
+          here.</li>
+      </ol>
+      <p>The code is one <code data-excerpt="examples/first-transform.ce.py">MathTex</code> (ManimCE) or <code data-excerpt="examples/first-transform.gl.py">Tex</code> (ManimGL) per clip, and then plain
+        <code data-excerpt="examples/first-transform.ce.py">self.play(…)</code> and <code data-excerpt="examples/first-transform.ce.py">self.wait(…)</code> calls, one for each step of the timeline, each in
+        a whole number of frames. This is the file for <a href="../examples/first-transform.mfe.json" download>First
+        transform</a>, in both versions:</p>
+      <div class="mfe-code" data-mfe-python="first-transform"></div>
+      <p>The first lines of the file are comments that tell you how to render it. Export the version for
+        the Manim you have installed. The two differ in small ways, which
+        <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a> lists. The editor writes for ManimCE 0.22
+        and ManimGL 1.7.</p>
+
+      <h2 id="running">Running the Python</h2>
+      <p>You need Manim installed, as its own documentation says:
+        <a href="https://docs.manim.community/">ManimCE</a> (the Community Edition) or
+        <a href="https://3b1b.github.io/manim/">ManimGL</a> (the version of 3Blue1Brown). Put the downloaded
+        file in a folder, open a terminal there, and run the command written in the first lines of the file.
+        For a project named <em>First transform</em> they are these.</p>
+      <p>ManimCE:</p>
+<pre data-excerpt="examples/first-transform.ce.py"><code class="language-bash">manim -r 1920,1080 --fps 60 FirstTransform.py FirstTransform</code></pre>
+      <p>ManimGL:</p>
+<pre data-excerpt="examples/first-transform.gl.py"><code class="language-bash">manimgl FirstTransform.py FirstTransform -w -r 1920x1080 --fps 60</code></pre>
+      <p>The command gives Manim the file, the name of the scene to render, and the size and frame rate of
+        your project (set in <span class="ui">File ▸ Project settings…</span>). The video lasts exactly as long as
+        the timeline, because every step is a whole number of frames. ManimGL needs <code>-w</code> to write a
+        movie file; without it, it opens its window instead.</p>
+      <ul>
+        <li>ManimCE writes the video under <code>media/videos/</code>, in a folder named after the file and one
+          named after the size and frame rate (<code>1080p60</code> here). Add <code>-p</code> to play it
+          when it is done. For a quick render, leave out <code>-r</code> and <code>--fps</code>, which would
+          override the quality flag, and use <code>-ql</code>:
+          <code>manim -ql -p FirstTransform.py FirstTransform</code> renders at 854×480 and 15 frames a second.</li>
+        <li>ManimGL writes <code>FirstTransform.mp4</code> to its output folder, <code>videos</code> by
+          default. Add <code>-o</code> to open the file when it is done. For a quick render, leave out
+          <code>-r</code> and <code>--fps</code> and use <code>-l</code>:
+          <code>manimgl FirstTransform.py FirstTransform -w -l -o</code> renders at 480p.</li>
+        <li>If the shell does not find <code>manim</code>, <code>python -m manim</code>, with the Python that has Manim
+          installed, does the same.</li>
+      </ul>
+      <p>This is what ManimCE makes of the file above, rendered with <code>-ql</code>:</p>
+      <video class="mfe-manim" src="../examples/first-transform.mp4" controls preload="metadata" playsinline></video>
+      <p>Why the exported scene has a helper at its top, how close it is to the Preview, and how to
+        change it by hand are on <a href="../manim/python.html">The generated Python</a>.</p>
+
+      <h2 id="video">Video</h2>
+      <p><span class="ui">Export ▸ Video…</span> makes a video file of the scene, without Manim. You choose how it is
+        encoded, and its size, its frame rate and the part of the scene it covers.</p>
+      <figure>
+        <img src="../media/basics/export/video.dark.webp" data-themed
+             alt="The Export video dialog: the three encoders, the format, the size, the frame rate, the range, a summary of the frames, and the Export button."
+             width="636" height="582" loading="lazy">
+        <figcaption>The video dialog without the companion: only <span class="ui">Browser</span> is on.</figcaption>
+      </figure>
+      <ol>
+        <li><span class="ui">Encoder</span>. Each choice says what it does. <span class="ui">Browser</span>:
+          <em>Encoded here with WebCodecs. No installation needed.</em> <span class="ui">Companion · ffmpeg</span>:
+          <em>The companion encodes the frames with ffmpeg: MP4, WebM, ProRes and GIF.</em>
+          <span class="ui">Render with Manim</span>: <em>The companion renders the exported Python scene with your
+          Manim: the official look.</em> The last two need the companion, a small program you run on your
+          computer; without it they are greyed out, and each says what is missing
+          (<a href="../manim/companion.html">The companion</a>).</li>
+        <li><span class="ui">Format</span>. For the browser: <span class="ui">MP4 · H.264</span>,
+          <span class="ui">MP4 · AV1</span> or <span class="ui">WebM · VP9</span>, those of them that the browser can
+          encode. With ffmpeg: <span class="ui">MP4 · H.264</span>, <span class="ui">WebM · VP9</span>,
+          <span class="ui">MOV · ProRes 422 HQ</span> or <span class="ui">GIF</span>, and a <span class="ui">Quality</span>
+          from <span class="ui">Low (small file)</span> to <span class="ui">High (large file)</span> for the first two.
+          With Manim there is no format: <span class="ui">Manim</span> chooses <span class="ui">ManimCE (Community
+          Edition)</span> or <span class="ui">ManimGL (3b1b)</span>, and the scene is converted when the project
+          targets the other one. For the browser, the dialog estimates how large the file will be.</li>
+        <li><span class="ui">Size</span>, <span class="ui">Frame rate</span> and <span class="ui">Range</span>: the project's own, or others.
+          <em>Render with Manim always renders the whole scene</em>, and the dialog says so under
+          <span class="ui">Range</span>. The line under them says how many frames the video has, how long it is and at
+          what size.</li>
+        <li><span class="ui">Export</span> starts it. A bar shows how far it is, and <span class="ui">Cancel export</span> stops it.</li>
+      </ol>
+      <figure>
+        <img src="../media/basics/export/video-companion.dark.webp" data-themed
+             alt="The Export video dialog with a companion online: the three encoders on, Render with Manim chosen, and a Manim field under them."
+             width="636" height="578" loading="lazy">
+        <figcaption>The same dialog with the companion online: the three encoders are on (1). With
+          <span class="ui">Render with Manim</span> chosen, a <span class="ui">Manim</span> field (2) asks which Manim.</figcaption>
+      </figure>
+      <p>The file is named after the project (<code>First transform.mp4</code>), and the video lasts exactly the
+        frames of the range divided by the frame rate. In Chrome and Edge the dialog asks where to save
+        the file and writes it as it encodes; in other browsers it assembles the file in memory and
+        downloads it at the end.
+        <a href="../sound/video.html">Exporting video</a> goes through the three encoders, their formats and
+        their limits.</p>
+      <aside class="callout platform" data-platform="linux">
+        <p>Chrome on Linux has no AAC encoder. A project with sound exported to MP4 in the browser carries
+          Opus sound, which some players and video editors do not play, and the dialog says so before it
+          starts. The companion's ffmpeg can encode AAC.</p>
+      </aside>
+
+      <h2 id="image">An image</h2>
+      <p><span class="ui">Export ▸ Image…</span> writes the frame the playhead is at as a PNG picture. It is the
+        frame a video shows at that instant: through the scene's camera when it has one, and with the tracks
+        you hid in the Preview drawn too, since only the Preview hides them
+        (<a href="timeline.html#track-buttons">the buttons of a track</a>).</p>
+      <figure>
+        <img src="../media/basics/export/image.dark.webp" data-themed
+             alt="The Export image dialog with the playhead at 1.5 s: the instant (1), the two sizes, 1920 × 1080 and 3840 × 2160 (2), the Transparent box (3), and the Export button (4)."
+             width="536" height="308" loading="lazy">
+        <figcaption>The image dialog, for the frame at 1.5 s of <em>First transform</em>.</figcaption>
+      </figure>
+      <ol>
+        <li><span class="ui">Frame</span>: the instant it draws, in seconds and as minutes, seconds and frames.
+          Opening the dialog stops the playback, so that this instant is the one of the picture: put the
+          playhead where you want it first.</li>
+        <li><span class="ui">Size</span>: <span class="ui">1×</span> is the project's size;
+          <span class="ui">2×</span> is twice it each way. The scene is curves, so the larger picture is sharper,
+          not stretched.</li>
+        <li><span class="ui">Transparent</span> leaves the scene's background out: what is drawn, over nothing,
+          to lay over another picture.</li>
+        <li><span class="ui">Export</span> draws it. It waits while a formula is rendering. As the video dialog
+          does, the dialog tells of the formulas on screen at that instant that it cannot draw as they are
+          written: one whose LaTeX fails is drawn as its last good render, or left out when it never had
+          one; a font text nothing has shaped is drawn as its placeholder boxes; one with nothing to draw it
+          holds the picture back.</li>
+      </ol>
+      <p>The file is named after the project and the instant (<code>First transform 1.50s.png</code>), so
+        the pictures of several frames have each their name. In Chrome and Edge the dialog
+        asks where to save it; in other browsers it is downloaded, and <span class="ui">Download again</span>
+        downloads it once more. The dialog then says what it saved, with the size of the picture in pixels and
+        of the file. The picture is the one of the click on <span class="ui">Export</span>, whatever changes
+        while the browser asks where it goes.</p>
+      <p>The dialog opens with the size and the background you left it at, while the page is open: for
+        several transparent frames you tick <span class="ui">Transparent</span> once. A page loaded again
+        starts from <span class="ui">1×</span>, with the background.</p>
+
+      <h2 id="audio">Audio</h2>
+      <p><span class="ui">Export ▸ Audio…</span> writes the sound of the project alone: the recordings of the timeline
+        with the volume curves and the muted tracks applied, mixed to stereo at 48 kHz. It does not draw
+        any formula.</p>
+      <figure>
+        <img src="../media/basics/export/audio.dark.webp" data-themed
+             alt="The Export audio dialog with the format (1), the start and end in seconds (2), and the Export audio button (3)."
+             width="516" height="326" loading="lazy">
+        <figcaption>The audio dialog: format (1), the part to export (2) and the button (3).</figcaption>
+      </figure>
+      <p>Choose <span class="ui">WAV · PCM 16-bit</span> or <span class="ui">WebM · Opus</span>, and a start and an end in
+        seconds. <span class="ui">M4A · AAC</span> is offered where the browser can encode AAC. The file is named
+        after the project (<code>First transform.wav</code>). A project without recordings still exports: the file
+        is silent. To put the sound in a video, tick <span class="ui">Include audio · volume curves and track mute</span> in the
+        video dialog, which appears when the project has recordings
+        (<a href="../sound/audio.html">Audio</a>). The exported Python has no sound: when the project has
+        recordings, the Python dialog says <em>Audio is omitted from Manim exports.</em></p>
+
+      <h2 id="html">A web page</h2>
+      <p><span class="ui">Export ▸ HTML…</span> writes the scene as a web page that is the animation itself: the
+        editor's own engine draws it as it plays, sharp at any size, and it opens from disk without a server. It
+        stops at each pause of the Slides mode until its reader goes on, so that you can present the scene in a
+        talk; it can be embedded in a page of your own, and its folder is written for a coding agent to extend.
+        <a href="slides.html">Slides and the HTML page</a> covers it, from the pauses to the agent.</p>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../manim/python.html">The generated Python</a> and <a href="../manim/ce-vs-gl.html">ManimCE and
+          ManimGL</a> explain the scene file.</li>
+        <li><a href="../sound/video.html">Exporting video</a> covers the encoders and the companion.</li>
+        <li><a href="slides.html">Slides and the HTML page</a> covers the web page: pauses, presenting,
+          embedding it, and handing it to a coding agent.</li>
+        <li><a href="../start/first-animation.html">Your first animation</a> ends with an export, step by step.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

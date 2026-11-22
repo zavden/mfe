@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Manim Formula Editor</title>
+  <meta name="description" content="A free editor of formula animations that runs in your browser: write LaTeX, link the glyphs of one formula to the next, move the camera, and export the scene to ManimCE or ManimGL, or as a video.">
+  <meta name="mfe:id" content="landing">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='0' y='0' width='16' height='16' rx='3' fill='%2307121A'/%3E%3Cpath d='M4 12V4L8 8L12 4V11' fill='none' stroke='%23EDF9F9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' /%3E%3Cpath d='M8 8L12 4V11' fill='none' stroke='%2343EECA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' /%3E%3Cpath d='M12 10L14 12L12 14L10 12Z' fill='%2343EECA' stroke='%2343EECA' stroke-width='0' stroke-linecap='round' stroke-linejoin='round' /%3E%3C/svg%3E">
+  <!-- The project's page. It borrows the documentation's look and components (web/): the theme,
+       the player, the widgets and the Python tabs, through site.js in its bare mode
+       (<body data-docs-bare>). Nothing comes from the network: it opens from disk as it is served.
+       Checked by web/tools/check-landing.mjs. -->
+  <link rel="stylesheet" href="web/assets/site.css">
+  <link rel="stylesheet" href="web/widgets/widgets.css">
+  <link rel="stylesheet" href="web/decks/player.css">
+  <link rel="stylesheet" href="landing/landing.css">
+  <script src="web/assets/site.js" defer></script>
+  <script src="web/assets/player.js" defer></script>
+  <script src="web/examples/quadratic-formula.data.js" defer></script>
+  <script src="web/examples/widget-link.data.js" defer></script>
+  <script src="web/examples/widget-window.data.js" defer></script>
+  <script src="web/examples/widget-styles.data.js" defer></script>
+  <script src="web/examples/camera-moves.data.js" defer></script>
+  <script src="web/examples/derivative.data.js" defer></script>
+  <script src="web/examples/annotated-identity.data.js" defer></script>
+  <script src="web/examples/pythagoras.data.js" defer></script>
+  <script src="web/examples/shapes-cancel.data.js" defer></script>
+  <script src="web/examples/first-transform.data.js" defer></script>
+  <script src="web/widgets/link-glyphs.js" defer></script>
+  <script src="web/widgets/relation-window.js" defer></script>
+  <script src="web/widgets/style-compare.js" defer></script>
+  <script src="web/decks/mfe-runtime.js" defer></script>
+  <script src="web/decks/slides-talk/glyphs.js" defer></script>
+  <script src="web/decks/slides-talk/scene.js" defer></script>
+  <script src="landing/landing.js" defer></script>
+</head>
+<body class="landing" data-docs-bare>
+  <a class="skip-link" href="#content">Skip to the content</a>
+
+  <header class="lp-header">
+    <a class="lp-brand" href="index.html" aria-label="Manim Formula Editor: home">
+      <svg class="brand-mark" viewBox="12 18 76 68" aria-hidden="true" focusable="false">
+        <path class="mark-text" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M24 72 V32 Q24 24 30 30 L48 50"/>
+        <path class="mark-accent" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M48 50 L66 30 Q72 24 72 32 V71"/>
+        <rect class="mark-text-fill" x="18" y="66" width="12" height="12" rx="2"/>
+        <path class="mark-accent-fill" d="M72 61 L82 71 L72 81 L62 71 Z"/>
+      </svg>
+      <span class="lp-brand-name">Manim Formula Editor</span>
+    </a>
+    <nav class="lp-nav" aria-label="On this page">
+      <a href="#glyphs">Glyphs</a>
+      <a href="#camera">Camera</a>
+      <a href="#export">Export</a>
+      <a href="#learn">Learn</a>
+      <a href="#get">Get it</a>
+    </nav>
+    <span class="lp-header-spacer"></span>
+    <a class="lp-header-link" href="web/index.html" aria-label="Documentation"><span class="lp-long">Documentation</span><span class="lp-short" aria-hidden="true">Docs</span></a>
+    <a class="lp-header-link lp-header-github" href="https://github.com/zavden/mfe">GitHub</a>
+    <button type="button" class="icon-btn lp-theme" data-lp-theme aria-label="Switch the theme">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><circle fill="none" stroke="currentColor" stroke-width="1.6" cx="8" cy="8" r="5.6"/><path fill="currentColor" d="M8 2.4a5.6 5.6 0 0 1 0 11.2z"/></svg>
+    </button>
+  </header>
+
+  <main id="content">
+
+    <!-- ---- The hero ---------------------------------------------------------------------- -->
+    <section class="lp-hero" aria-labelledby="lp-title">
+      <div class="lp-hero-text">
+        <p class="kicker">Free and open source · MIT · Version 1.0.0</p>
+        <h1 id="lp-title">Animate formulas for Manim, <em>glyph by glyph.</em></h1>
+        <p class="lp-lead">The <strong>Manim Formula Editor</strong> is a video editor for formulas
+          that runs in your browser. Write formulas in LaTeX, place them on a timeline, say where
+          each glyph of one formula goes in the next, and watch the change play. Then export it as
+          a scene for ManimCE or ManimGL, or as a video.</p>
+        <div class="lp-actions">
+          <a class="btn btn-primary" href="https://github.com/zavden/mfe/releases/latest"><span data-icon="download"></span>Download 1.0.0</a>
+          <a class="btn" href="web/index.html"><span data-icon="book"></span>Read the documentation</a>
+        </div>
+        <ul class="lp-facts">
+          <li>Opens from your disk on Linux, macOS and Windows</li>
+          <li>No account, no server</li>
+          <li>No Manim needed to start</li>
+        </ul>
+      </div>
+      <div class="lp-hero-stage">
+        <div class="device">
+          <div class="device-bar" aria-hidden="true"><span>Preview · Timeline</span><span>● ● ●</span></div>
+          <figure class="mfe-player" data-mfe-player="quadratic-formula" data-timeline data-autoplay data-loop data-start="4"></figure>
+        </div>
+        <p class="lp-stage-note">Not a video: the editor’s own engine plays
+          <a href="web/tutorials/quadratic-formula.html">Deriving the quadratic formula</a>, a
+          tutorial of the documentation. Press the scene to pause it, or drag the time.</p>
+      </div>
+    </section>
+
+    <!-- ---- 01 Glyphs ---------------------------------------------------------------------- -->
+    <section class="lp-section" id="glyphs" aria-labelledby="glyphs-title">
+      <div class="lp-split lp-split-wide">
+        <div class="lp-copy">
+          <p class="section-index">01 / GLYPH BY GLYPH</p>
+          <h2 id="glyphs-title">Say where every glyph goes</h2>
+          <p>A transformation is a <strong>relation</strong> between two formulas: pairs of
+            glyphs, drawn as links from one formula to the next. A glyph can go to one glyph or to
+            several, and several can merge into one. What has no partner leaves with its formula’s
+            outro, or arrives with the intro of the next.</p>
+          <ol class="lp-try">
+            <li>Click a glyph of the upper formula, then one of the lower: that links them.</li>
+            <li><strong>Delete link</strong> removes the links of the selected glyphs;
+              <strong>Suggest links by label</strong> offers the pairs the editor finds.</li>
+            <li>Press <strong>Preview</strong> to play the transformation with your links.</li>
+          </ol>
+          <p class="lp-more"><a href="web/transforms/relations.html">How relations work</a>
+            <a href="web/transforms/relation-editor.html">The relation editor</a></p>
+        </div>
+        <div class="lp-demo">
+          <div class="mfe-widget" data-mfe-widget="link-glyphs" data-options='{"example": "widget-link"}'></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- 02 Timing and style ------------------------------------------------------------ -->
+    <section class="lp-section" id="timing" aria-labelledby="timing-title">
+      <div class="lp-section-top">
+        <div>
+          <p class="section-index">02 / TIMING AND STYLE</p>
+          <h2 id="timing-title">Choose when it moves, and how</h2>
+        </div>
+        <p>A relation has a window on the timeline, the time its glyphs take to travel, and each
+          pair a style. Both are yours to change, here as in the editor.</p>
+      </div>
+      <div class="lp-rows">
+        <div class="lp-split lp-split-wide">
+          <div class="lp-copy">
+            <h3>Drag the window</h3>
+            <p>The two clips of a relation, and its window on both. Drag the window to move it in
+              time, or an edge to change its length: the scene plays with the new timing.</p>
+            <p class="lp-more"><a href="web/transforms/relations.html#timing">Timing a relation</a></p>
+          </div>
+          <div class="lp-demo">
+            <div class="mfe-widget" data-mfe-widget="relation-window" data-options='{"example": "widget-window"}'></div>
+          </div>
+        </div>
+        <div class="lp-split lp-split-media">
+          <div class="lp-demo">
+            <div class="mfe-widget" data-mfe-widget="style-compare" data-options='{"example": "widget-styles"}'></div>
+          </div>
+          <div class="lp-copy">
+            <h3>Compare the styles</h3>
+            <p>One relation played with each style of a pair at once:
+              <strong>Transform</strong>, <strong>Copy (source stays)</strong>,
+              <strong>Fade transform</strong> and <strong>Fade copy (source stays)</strong>, with
+              what Manim plays for each.</p>
+            <p class="lp-more"><a href="web/transforms/relations.html#styles">The styles of a pair</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- 03 Camera ---------------------------------------------------------------------- -->
+    <section class="lp-section" id="camera" aria-labelledby="camera-title">
+      <div class="lp-split lp-split-media">
+        <div class="lp-demo">
+          <div class="device">
+            <div class="device-bar" aria-hidden="true"><span>Multicamera</span><span>● ● ●</span></div>
+            <figure class="mfe-player" data-mfe-player="camera-moves" data-timeline data-autoplay data-loop data-start="1.2"></figure>
+          </div>
+        </div>
+        <div class="lp-copy">
+          <p class="section-index">03 / THE CAMERA</p>
+          <h2 id="camera-title">Move the camera through the scene</h2>
+          <p>Turn the <strong>multicamera</strong> on and the frame becomes a camera you move and
+            zoom while the video plays. Here it closes in on c², travels to a formula written
+            outside the first frame, pulls back to show both and returns.</p>
+          <ul class="lp-points">
+            <li><strong>Moves</strong> are blocks on the timeline’s Camera row, each with its
+              start, duration and easing.</li>
+            <li><strong>Target cameras</strong> set a frame aside, for several moves to go
+              to.</li>
+            <li>The video is filmed through the camera, and so is the exported scene: a ManimCE
+              scene becomes a <code>MovingCameraScene</code>, and in both libraries each move
+              is a <code>self.play(…)</code> of the camera’s frame.</li>
+          </ul>
+          <p class="lp-more"><a href="web/animations/camera.html">The camera</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- 04 Beyond one transformation --------------------------------------------------- -->
+    <section class="lp-section" id="more" aria-labelledby="more-title">
+      <div class="lp-section-top">
+        <div>
+          <p class="section-index">04 / AROUND THE FORMULAS</p>
+          <h2 id="more-title">Derivations, braces, shapes and colour</h2>
+        </div>
+        <p>What a lesson needs around its formulas, each part exported to Manim with the rest.
+          Every scene below is an example of the documentation.</p>
+      </div>
+      <ul class="lp-gallery">
+        <li class="lp-tile">
+          <figure class="mfe-player" data-mfe-player="derivative" data-controls="minimal" data-autoplay data-loop data-start="6"></figure>
+          <h3>Morph blocks</h3>
+          <p>A derivation written inside one formula: each row grows out of the row above.</p>
+          <a class="lp-tile-link" href="web/transforms/morph.html">Morph blocks</a>
+        </li>
+        <li class="lp-tile">
+          <figure class="mfe-player" data-mfe-player="annotated-identity" data-controls="minimal" data-autoplay data-loop data-start="end"></figure>
+          <h3>Braces, lines and arrows</h3>
+          <p>A labelled brace under each side, and an arrow that arcs from one side to the
+            other.</p>
+          <a class="lp-tile-link" href="web/objects/braces.html">Braces</a>
+        </li>
+        <li class="lp-tile">
+          <figure class="mfe-player" data-mfe-player="pythagoras" data-controls="minimal" data-autoplay data-loop data-start="3"></figure>
+          <h3>Colour by role</h3>
+          <p>Each term keeps its colour while it becomes a number and then a square. Palettes by
+            role are made in the editor, or designed in Chroma Lab, the colour studio inside
+            it.</p>
+          <a class="lp-tile-link" href="web/color/palettes.html">Palettes and Chroma Lab</a>
+        </li>
+        <li class="lp-tile">
+          <figure class="mfe-player" data-mfe-player="shapes-cancel" data-controls="minimal" data-autoplay data-loop data-start="end"></figure>
+          <h3>Shapes</h3>
+          <p>Boxes, circles, underlines, crosses and highlights on glyphs: here two cross lines
+            strike out a common factor.</p>
+          <a class="lp-tile-link" href="web/objects/shapes.html">Shapes</a>
+        </li>
+      </ul>
+      <ul class="lp-chips" aria-label="More of the editor">
+        <li><a href="web/animations/blocks.html"><span data-icon="film"></span>Animation blocks</a></li>
+        <li><a href="web/transforms/custom-paths.html"><span data-icon="route"></span>Custom paths</a></li>
+        <li><a href="web/layout/align-symbol.html"><span data-icon="align-left"></span>Align by symbol</a></li>
+        <li><a href="web/objects/templates.html"><span data-icon="sigma"></span>Formula templates</a></li>
+        <li><a href="web/objects/texts.html"><span data-icon="file"></span>Texts</a></li>
+        <li><a href="web/sound/audio.html"><span data-icon="waveform"></span>Audio</a></li>
+      </ul>
+    </section>
+
+    <!-- ---- 05 Export ---------------------------------------------------------------------- -->
+    <section class="lp-section" id="export" aria-labelledby="export-title">
+      <div class="lp-section-top">
+        <div>
+          <p class="section-index">05 / EXPORT</p>
+          <h2 id="export-title">Python you can read, for ManimCE or ManimGL</h2>
+        </div>
+        <p><span class="ui">Export ▸ Python</span> writes the scene as a file you can read and
+          change: the same animation for either library, each written its own way.</p>
+      </div>
+      <div class="lp-code">
+        <div class="lp-code-scene">
+          <figure class="mfe-player" data-mfe-player="first-transform" data-controls="minimal" data-loop data-start="end"></figure>
+        </div>
+        <div class="mfe-code" data-mfe-python="first-transform"></div>
+      </div>
+      <ul class="lp-exports">
+        <li>
+          <span class="icon-tile" data-icon="video"></span>
+          <div><h3>A video</h3>
+            <p>MP4 or WebM, drawn by the editor and encoded in the browser, with its sound. With
+              the companion, ffmpeg or your own Manim makes it.</p>
+            <a href="web/sound/video.html">Exporting video</a></div>
+        </li>
+        <li>
+          <span class="icon-tile" data-icon="laptop"></span>
+          <div><h3>A web page</h3>
+            <p>The scene played live in a page that stops at its pauses: made to be embedded,
+              and extended by hand or by an agent.</p>
+            <a href="web/basics/slides.html#export-html">The HTML page</a></div>
+        </li>
+        <li>
+          <span class="icon-tile" data-icon="waveform"></span>
+          <div><h3>Sound and pictures</h3>
+            <p>The mix of your recordings as WAV or WebM, and the frame at the playhead as a
+              PNG.</p>
+            <a href="web/basics/export.html">Exporting</a></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ---- 06 Slides ---------------------------------------------------------------------- -->
+    <section class="lp-section" id="slides" aria-labelledby="slides-title">
+      <div class="lp-split lp-split-media">
+        <div class="lp-demo">
+          <div class="lp-deck">
+            <div class="mfe-deck" data-scene="first-transform-as-a-talk" data-start="1"></div>
+          </div>
+        </div>
+        <div class="lp-copy">
+          <p class="section-index">06 / SLIDES</p>
+          <h2 id="slides-title">Present it, one pause at a time</h2>
+          <p>The <strong>Slides mode</strong> puts pauses and notes on the scene’s time, and
+            <span class="ui">Export ▸ HTML…</span> turns the scene into a page that plays it live
+            and stops at each pause until you go on.</p>
+          <p>This is one such page, embedded here. Press Play: it stops at each pause. Then press
+            Next, or click the scene and use <kbd data-keys="ArrowRight">→</kbd> and
+            <kbd data-keys="ArrowLeft">←</kbd>; <kbd>S</kbd> shows the notes.</p>
+          <p class="lp-more"><a href="web/basics/slides.html">Slides and the HTML page</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- 07 Learn ----------------------------------------------------------------------- -->
+    <section class="lp-section" id="learn" aria-labelledby="learn-title">
+      <div class="lp-section-top">
+        <div>
+          <p class="section-index">07 / LEARN IT</p>
+          <h2 id="learn-title">From the first formula to the last detail</h2>
+        </div>
+        <p>The documentation teaches the editor with live examples like the ones above, captures
+          of every panel, and a reference of every shortcut, menu and preference.
+          <a href="web/index.html">The documentation</a></p>
+      </div>
+      <ol class="path lp-path">
+        <li><a class="path-card" href="web/start/first-animation.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="play-outline"></span><span class="path-card-name"><span class="path-card-index">Start here</span>
+          <span class="path-card-title">Your first animation</span></span></span>
+          <p>Two formulas and a transformation between them, step by step, to the export for
+            Manim.</p>
+          <span class="path-card-foot"><span class="level-badge level-basic"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor" opacity="0.28"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Basic</span></span>
+        </a></li>
+        <li><a class="path-card" href="web/tutorials/linear-equation.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="sigma"></span><span class="path-card-name"><span class="path-card-index">01</span>
+          <span class="path-card-title">Solving a linear equation</span></span></span>
+          <p>Solve a linear equation step by step, each step a transformation.</p>
+          <span class="path-card-foot"><span class="level-badge level-basic"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor" opacity="0.28"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Basic</span></span>
+        </a></li>
+        <li><a class="path-card" href="web/tutorials/pythagoras.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="palette"></span><span class="path-card-name"><span class="path-card-index">02</span>
+          <span class="path-card-title">The Pythagorean theorem, in colour</span></span></span>
+          <p>Animate the Pythagorean theorem, each of its terms in a colour of its own.</p>
+          <span class="path-card-foot"><span class="level-badge level-basic"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor" opacity="0.28"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Basic</span></span>
+        </a></li>
+        <li><a class="path-card" href="web/tutorials/quadratic-formula.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="relate"></span><span class="path-card-name"><span class="path-card-index">03</span>
+          <span class="path-card-title">Deriving the quadratic formula</span></span></span>
+          <p>Complete the square and derive the quadratic formula, one step after another.</p>
+          <span class="path-card-foot"><span class="level-badge level-intermediate"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Intermediate</span></span>
+        </a></li>
+        <li><a class="path-card" href="web/tutorials/derivative.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="film"></span><span class="path-card-name"><span class="path-card-index">04</span>
+          <span class="path-card-title">A derivative from first principles</span></span></span>
+          <p>Derive the derivative of x² from its limit definition, row by row, with Morph blocks.</p>
+          <span class="path-card-foot"><span class="level-badge level-advanced"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor"/></svg>Advanced</span></span>
+        </a></li>
+        <li><a class="path-card" href="web/tutorials/annotated-identity.html">
+          <span class="path-card-top"><span class="icon-tile" data-icon="shapes"></span><span class="path-card-name"><span class="path-card-index">05</span>
+          <span class="path-card-title">An identity with braces and arrows</span></span></span>
+          <p>Explain a² − b² = (a − b)(a + b) with a labelled brace under each side and an arrow.</p>
+          <span class="path-card-foot"><span class="level-badge level-advanced"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor"/></svg>Advanced</span></span>
+        </a></li>
+      </ol>
+    </section>
+
+    <!-- ---- 08 Get it ---------------------------------------------------------------------- -->
+    <section class="lp-section" id="get" aria-labelledby="get-title">
+      <div class="lp-section-top">
+        <div>
+          <p class="section-index">08 / GET IT</p>
+          <h2 id="get-title">Get the editor</h2>
+        </div>
+        <p>Free, and open source under the MIT licence.</p>
+      </div>
+      <ol class="lp-get">
+        <li class="lp-card">
+          <span class="lp-get-step">1</span>
+          <h3>Download it</h3>
+          <p>The ready-built editor is one ZIP of about 2.5 MB, on the project’s releases
+            page.</p>
+          <a class="btn btn-primary" href="https://github.com/zavden/mfe/releases/latest"><span data-icon="download"></span>Download 1.0.0</a>
+        </li>
+        <li class="lp-card">
+          <span class="lp-get-step">2</span>
+          <h3>Open it from your disk</h3>
+          <p>Unzip it and open its <code>index.html</code> in your browser. A recent Chrome or
+            Edge gives the whole editor; Firefox and Safari save a project by downloading it.</p>
+          <a href="web/start/install.html#browsers">Browsers</a>
+        </li>
+        <li class="lp-card">
+          <span class="lp-get-step">3</span>
+          <h3>Add what you need</h3>
+          <p>The companion, one Python file of the repository, adds exact LaTeX glyphs, font
+            text (on Linux), encoding with ffmpeg and rendering with Manim. Manim itself runs the
+            Python you export.</p>
+          <a href="web/start/install.html#companion">The optional companion</a>
+        </li>
+      </ol>
+      <p class="lp-source">Or build it from its source: clone the repository, then
+        <code>npm install</code> and <code>npm run build</code> in <code>app/</code>.
+        <a href="web/start/install.html">Getting the app running</a></p>
+    </section>
+
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-top">
+      <span class="lp-footer-brand">
+        <svg class="brand-mark" viewBox="12 18 76 68" aria-hidden="true" focusable="false">
+          <path class="mark-text" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M24 72 V32 Q24 24 30 30 L48 50"/>
+          <path class="mark-accent" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M48 50 L66 30 Q72 24 72 32 V71"/>
+          <rect class="mark-text-fill" x="18" y="66" width="12" height="12" rx="2"/>
+          <path class="mark-accent-fill" d="M72 61 L82 71 L72 81 L62 71 Z"/>
+        </svg>
+        Manim Formula Editor 1.0.0
+      </span>
+      <ul class="lp-footer-links">
+        <li><a href="web/index.html">Documentation</a></li>
+        <li><a href="web/tutorials/index.html">Tutorials</a></li>
+        <li><a href="web/reference/shortcuts.html">Shortcuts</a></li>
+        <li><a href="web/reference/troubleshooting.html">Troubleshooting</a></li>
+        <li><a href="https://github.com/zavden/mfe">GitHub</a></li>
+      </ul>
+    </div>
+    <p class="lp-footer-note">MIT licence. An independent project: it is not affiliated with
+      3Blue1Brown or the Manim Community, nor endorsed by them. It writes scenes for their
+      libraries.</p>
+  </footer>
+</body>
+</html>

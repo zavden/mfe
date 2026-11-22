@@ -1,0 +1,487 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "An arrow that changes its ends",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_a",
+      "kind": "math",
+      "name": "a",
+      "source": "A",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-mqyhfr6jt9",
+        "glyphs": [
+          {
+            "label": "A",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.03882176,
+              1.07640576
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_b",
+      "kind": "math",
+      "name": "b",
+      "source": "B",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-33uqofwcgd",
+        "glyphs": [
+          {
+            "label": "B",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.08392256,
+              1.02679488
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_c",
+      "kind": "math",
+      "name": "c",
+      "source": "C",
+      "packages": [],
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-nwn8zjgadk",
+        "glyphs": [
+          {
+            "label": "C",
+            "center": [
+              5.551115123125783e-17,
+              5.551115123125783e-17
+            ],
+            "size": [
+              1.0673856000000002,
+              1.09294272
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_l1",
+      "kind": "line",
+      "name": "l1",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        8.43862784,
+        -2.220446049250313e-16
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#FC6255",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFF00",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-olhnuh40ml",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.17499999999999982,
+              1.1562705652901096e-16
+            ],
+            "size": [
+              8.088627840000001,
+              2.128350967920407e-16
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              4.0443139200000005,
+              0
+            ],
+            "size": [
+              0.3500000000000001,
+              0.35
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_4",
+      "kind": "visual",
+      "name": "Track 4",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_3",
+      "kind": "visual",
+      "name": "Track 3",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_2",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_1",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_a",
+      "formulaId": "f_a",
+      "trackId": "t_1",
+      "start": 0,
+      "end": 12,
+      "initial": {
+        "position": [
+          -5,
+          -1.8
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_b",
+      "formulaId": "f_b",
+      "trackId": "t_2",
+      "start": 0,
+      "end": 12,
+      "initial": {
+        "position": [
+          5,
+          -1.8
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_c",
+      "formulaId": "f_c",
+      "trackId": "t_3",
+      "start": 0,
+      "end": 12,
+      "initial": {
+        "position": [
+          0,
+          2.2
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_l1",
+      "formulaId": "f_l1",
+      "trackId": "t_4",
+      "start": 0.8,
+      "end": 12,
+      "initial": {
+        "position": [
+          -0.01127520000000004,
+          -1.8
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_t84x8v0o",
+          "kind": "tween",
+          "start": 3.2,
+          "duration": 1,
+          "easing": "smooth",
+          "to": {
+            "opacity": 1
+          },
+          "ends": {
+            "start": {
+              "clipId": "c_a",
+              "glyphs": "all",
+              "anchor": "right"
+            },
+            "end": {
+              "clipId": "c_c",
+              "glyphs": "all",
+              "anchor": "dl"
+            },
+            "buff": 0.25,
+            "degrees": null,
+            "drawn": {
+              "start": [
+                -4.292444813086586,
+                -1.6353740003035027
+              ],
+              "end": [
+                -0.721837106913414,
+                1.488902640303503
+              ],
+              "trim": 0,
+              "center": [
+                -2.50714096,
+                -0.0732356799999998
+              ]
+            }
+          }
+        },
+        {
+          "id": "a_a7qmcyxf",
+          "kind": "tween",
+          "start": 6.2,
+          "duration": 1,
+          "easing": "smooth",
+          "to": {
+            "opacity": 1
+          },
+          "ends": {
+            "start": {
+              "clipId": "c_b",
+              "glyphs": "all",
+              "anchor": "left"
+            },
+            "end": {
+              "clipId": "c_c",
+              "glyphs": "all",
+              "anchor": "dl"
+            },
+            "buff": 0.25,
+            "degrees": null,
+            "drawn": {
+              "start": [
+                4.252446628458953,
+                -1.6577611449154004
+              ],
+              "end": [
+                -0.3281007084589529,
+                1.5112897849154008
+              ],
+              "trim": 0,
+              "center": [
+                1.9621729600000002,
+                -0.0732356799999998
+              ]
+            }
+          }
+        }
+      ],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "clipId": "c_a",
+          "glyphs": "all",
+          "anchor": "right"
+        },
+        "end": {
+          "clipId": "c_b",
+          "glyphs": "all",
+          "anchor": "left"
+        },
+        "buff": 0.25
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

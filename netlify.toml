@@ -1,0 +1,5 @@
+# The project's website on Netlify: the folder docs/ as it is, with no build. Its index.html is the
+# project's page, which links into the documentation (docs/web/). GitHub Pages serves the same
+# folder ("Deploy from a branch", the folder /docs); docs/.nojekyll keeps its files as they are.
+[build]
+  publish = "docs"

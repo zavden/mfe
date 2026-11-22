@@ -1,0 +1,3 @@
+{
+  "description": "The same relation twice. First the two exponents, which no pair brings, show up at once when the target clip starts; then the target starts empty, so that only the paired glyphs arrive, and an Appear block writes the exponents afterwards."
+}

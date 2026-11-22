@@ -1,0 +1,299 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "A shape that is repainted",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_f",
+      "kind": "math",
+      "name": "formula",
+      "source": "E = mc^2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ocivgkerso",
+        "glyphs": [
+          {
+            "label": "E",
+            "center": [
+              -1.5008759481599996,
+              -0.09597884543999996
+            ],
+            "size": [
+              0.7346419199999998,
+              0.6815232
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.46526135615999975,
+              -0.18618044543999995
+            ],
+            "size": [
+              0.6674918400000001,
+              0.23452415999999998
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              0.6430156358400003,
+              -0.22042364543999995
+            ],
+            "size": [
+              0.8378726400000001,
+              0.45468287999999996
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              1.31535163584,
+              -0.22142588543999997
+            ],
+            "size": [
+              0.39655295999999973,
+              0.45535103999999993
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              1.726834464,
+              0.21314303999999998
+            ],
+            "size": [
+              0.2827248883200002,
+              0.4719167308799999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_box",
+      "kind": "shape",
+      "name": "box",
+      "source": "",
+      "shape": "box",
+      "style": {
+        "fillOpacity": 0,
+        "strokeWidth": 4,
+        "strokeOpacity": 1
+      },
+      "cornerRadius": 0.12,
+      "width": 1.9441175923199998,
+      "height": 1.1982028108799998,
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFF00",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "create",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2a7rgn06gju",
+        "glyphs": [
+          {
+            "label": "▢",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.9441175923199998,
+              1.1982028108799998
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_shape",
+      "kind": "visual",
+      "name": "Box",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_f",
+      "kind": "visual",
+      "name": "Formula",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_f",
+      "formulaId": "f_f",
+      "trackId": "t_f",
+      "start": 0,
+      "end": 10,
+      "initial": {
+        "position": [
+          0,
+          0.2
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.2,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_box",
+      "formulaId": "f_box",
+      "trackId": "t_shape",
+      "start": 1.6,
+      "end": 10,
+      "initial": {
+        "position": [
+          1.0461381120000002,
+          0.2
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "create",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_3",
+          "kind": "tween",
+          "start": 1.4,
+          "duration": 1.2,
+          "easing": "smooth",
+          "to": {
+            "strokeWidth": 8,
+            "fillOpacity": 0.35
+          }
+        },
+        {
+          "id": "a_4",
+          "kind": "tween",
+          "start": 3.6,
+          "duration": 1.2,
+          "easing": "smooth",
+          "to": {
+            "fillColor": "#FC6255"
+          }
+        },
+        {
+          "id": "a_5",
+          "kind": "tween",
+          "start": 5.800000000000001,
+          "duration": 1.2,
+          "easing": "smooth",
+          "to": {
+            "color": "#83C167",
+            "strokeWidth": 4,
+            "fillOpacity": 0
+          }
+        }
+      ],
+      "attach": {
+        "clipId": "c_f",
+        "glyphs": [
+          2,
+          3,
+          4
+        ],
+        "rule": "shape",
+        "buff": 0.15
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

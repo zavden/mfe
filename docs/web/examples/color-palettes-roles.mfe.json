@@ -1,0 +1,501 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Solving 2x + 3 = 11",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_zlpmzz7x",
+      "kind": "math",
+      "name": "step1",
+      "source": "2x + 3 = 11",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F0AC5F",
+        "1": "#58C4DD",
+        "2": "#FFFFFF",
+        "3": "#F0AC5F",
+        "4": "#FFFFFF",
+        "5": "#F0AC5F",
+        "6": "#F0AC5F"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-18fljo0hu79",
+        "glyphs": [
+          {
+            "label": "2",
+            "center": [
+              -2.3081587199999998,
+              0.04109183999999999
+            ],
+            "size": [
+              0.3998937599999999,
+              0.66749184
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -1.77797376,
+              -0.07667136
+            ],
+            "size": [
+              0.4880908799999999,
+              0.4540147199999999
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8712472319999999,
+              -0.04159296000000001
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "3",
+            "center": [
+              -0.008619264000000015,
+              0.029566080000000022
+            ],
+            "size": [
+              0.4159296000000001,
+              0.6885388800000001
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.9107354879999998,
+              -0.04209407999999999
+            ],
+            "size": [
+              0.6674918400000003,
+              0.23452416
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              1.8346003199999998,
+              0.04109183999999999
+            ],
+            "size": [
+              0.3447705600000006,
+              0.66749184
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              2.3357203199999996,
+              0.04109183999999999
+            ],
+            "size": [
+              0.3447705599999997,
+              0.66749184
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_flpma6z0",
+      "kind": "math",
+      "name": "step2",
+      "source": "2x = 8",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F0AC5F",
+        "1": "#58C4DD",
+        "2": "#FFFFFF",
+        "3": "#F0AC5F"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-10pe3jt7d8f",
+        "glyphs": [
+          {
+            "label": "2",
+            "center": [
+              -1.2095032319999999,
+              0.011024639999999974
+            ],
+            "size": [
+              0.3998937600000001,
+              0.66749184
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.6793182720000001,
+              -0.10673856000000001
+            ],
+            "size": [
+              0.4880908799999999,
+              0.4540147199999999
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.28313279999999985,
+              -0.07216128000000001
+            ],
+            "size": [
+              0.6674918400000001,
+              0.23452416
+            ]
+          },
+          {
+            "label": "8",
+            "center": [
+              1.2019864319999998,
+              -2.7755575615628914e-17
+            ],
+            "size": [
+              0.41492735999999963,
+              0.6895411199999999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_tq01y225",
+      "kind": "math",
+      "name": "step3",
+      "source": "x = 4",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#58C4DD",
+        "1": "#FFFFFF",
+        "2": "#83C167"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-pdiloi175i",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -0.9293771519999998,
+              -0.11776319999999998
+            ],
+            "size": [
+              0.48809088,
+              0.4540147199999999
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.033073920000000034,
+              -0.08318591999999998
+            ],
+            "size": [
+              0.66749184,
+              0.23452416
+            ]
+          },
+          {
+            "label": "4",
+            "center": [
+              0.951426432,
+              0.005512320000000015
+            ],
+            "size": [
+              0.4439923200000002,
+              0.67851648
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_jg7hztkh",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_m1mhv2xy",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_mjys0l1a",
+      "formulaId": "f_zlpmzz7x",
+      "trackId": "t_jg7hztkh",
+      "start": 0,
+      "end": 3.7,
+      "initial": {
+        "position": [
+          -0.8777,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_hi0xcn8j",
+      "formulaId": "f_flpma6z0",
+      "trackId": "t_m1mhv2xy",
+      "start": 2.5,
+      "end": 6.4,
+      "initial": {
+        "position": [
+          -0.2501,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_68iotcvd",
+      "formulaId": "f_tq01y225",
+      "trackId": "t_jg7hztkh",
+      "start": 5.2,
+      "end": 7.9,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.2,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_a6e6oldw",
+      "fromClipId": "c_mjys0l1a",
+      "toClipId": "c_hi0xcn8j",
+      "offset": 0,
+      "duration": 1.2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            4
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "to": [
+            3
+          ],
+          "style": null
+        }
+      ]
+    },
+    {
+      "id": "r_hv2rmhs4",
+      "fromClipId": "c_hi0xcn8j",
+      "toClipId": "c_68iotcvd",
+      "offset": 0,
+      "duration": 1.2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            0,
+            3
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

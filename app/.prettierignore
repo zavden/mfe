@@ -1,0 +1,15 @@
+node_modules
+dist
+coverage
+test-results
+playwright-report
+package-lock.json
+# Copied verbatim from ../formula-templates and from the Chroma Lab distribution (kept as their
+# sources write them)
+src/data
+# Third-party licence texts, kept as their authors wrote them.
+build/licenses
+# Portable fixtures copied verbatim from Chroma Lab's examples/manim exports.
+src/ui/colors/__tests__/fixtures/chromalab-*.json
+# Measures taken from real Manim, as the gen_*.py scripts next to them write them (compact JSON).
+src/scene/__tests__/fixtures/manim-*.json

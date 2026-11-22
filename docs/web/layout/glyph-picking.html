@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Picking glyphs with Alt · Manim Formula Editor</title>
+  <meta name="description" content="Pick single glyphs in the Preview with Alt, also across formulas.">
+  <meta name="mfe:id" content="layout/glyph-picking">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Picking glyphs">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/layout-glyph-picking-start.data.js" defer></script>
+  <script src="../examples/layout-glyph-picking.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Picking glyphs with Alt</h1>
+      <p class="lead">A formula is made of glyphs: the letters, the digits, the signs. Hold
+        <kbd data-keys="Alt">Alt</kbd> in the Preview and click a glyph to pick it. Pick a few, in
+        one formula or across several, and colour them, hide them, or put a brace or a shape on
+        them.</p>
+
+      <h2 id="with-alt">Picking with Alt</h2>
+      <p>In the Preview, hold <kbd data-keys="Alt">Alt</kbd> and:</p>
+      <ul>
+        <li><strong>click</strong> a glyph to pick it, in yellow. Click a picked glyph again to take
+          it out;</li>
+        <li><strong>Alt+Shift+click</strong> a glyph to pick a range: from the last glyph you picked
+          in that formula to this one;</li>
+        <li><strong>drag</strong> from a formula to draw a rectangle that picks every glyph it
+          touches, as it grows. With <kbd data-keys="Shift">Shift</kbd> held as you press, the
+          glyphs are added to those already picked; <kbd data-keys="Escape">Esc</kbd> during the
+          drag puts the previous pick back.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/layout/glyph-picking/pick.dark.webm"
+               poster="../media/layout/glyph-picking/pick.dark.webp" width="800" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A click on the <code>2</code> of <code>2ab</code>; Alt+Shift+click on the
+          <code>b</code> picks the range; an Alt+drag from the formula picks what a rectangle
+          touches (here the <code>a²</code>), in place of the glyphs picked before.</figcaption>
+      </figure>
+      <p>A click does not have to hit the glyph's ink: a glyph whose box is within about 6 pixels of
+        the pointer is picked, so a thin stroke or the gap of an <code>=</code> is not hard to aim at
+        (the <a href="#thin">circle selector</a> goes further). A click on a formula but not on a
+        glyph clears the pick. <kbd data-keys="Alt">Alt</kbd> held <em>before</em> you press, on empty
+        space, pans the view instead.</p>
+      <p>The picked glyphs wear a faint yellow fill and a yellow outline, and so does the
+        rectangle; the clip they belong to is selected. Their colour is a preference
+        (<a href="#selection-colour">below</a>).</p>
+
+      <h3 id="bar">The bar</h3>
+      <p>While glyphs are picked, a bar appears in the top-left corner of the Preview. It says what
+        is picked and offers what can be done with it.</p>
+      <figure>
+        <img src="../media/layout/glyph-picking/bar.dark.webp" data-themed
+             alt="The bar of picked glyphs: '6 glyphs of 2 formulas', then Colour, Brace and Shape menus and a close button."
+             width="378" height="68" loading="lazy">
+        <figcaption>(1) What is picked; (2) <span class="ui">Colour ▾</span>; (3) <span class="ui">Brace ▾</span>;
+          (4) <span class="ui">Shape ▾</span>; (5) the button that clears the pick.</figcaption>
+      </figure>
+      <ul>
+        <li>For glyphs of one formula the bar names the formula and numbers the glyphs, up to twelve
+          (“3 glyphs of sum: 10, 11, 12”); past twelve, or over several formulas, it only counts them.
+          They are the numbers the <a href="#glyph-view">glyph view</a> shows when you point at a
+          glyph.</li>
+        <li>A <strong>right-click</strong> on the ink of a picked glyph opens the same actions as a
+          menu. In the hole of a letter, such as the middle of an <code>o</code>, it opens the
+          clip's menu instead.</li>
+        <li><kbd data-keys="Escape">Esc</kbd> clears the pick, and so does selecting something
+          else.</li>
+        <li>The pick follows its formula when it is edited or rendered again: the picked glyphs keep
+          their places in it, a glyph that is gone leaves the pick, and a pick that cannot be
+          followed is cleared, with a notice.</li>
+      </ul>
+
+      <h3 id="glyph-view-gestures">The same gestures in the glyph view</h3>
+      <p>The formula editor's <a href="#glyph-view">glyph view</a> picks glyphs in the same three
+        ways, without <kbd data-keys="Alt">Alt</kbd>:</p>
+      <table>
+        <thead>
+          <tr><th>To pick</th><th>In the Preview</th><th>In the glyph view</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>One glyph; again, take it out</td><td><kbd data-keys="Alt">Alt</kbd>+click</td><td>click picks only that one; <kbd data-keys="Mod">Ctrl</kbd>+click toggles it</td></tr>
+          <tr><td>A range</td><td><kbd data-keys="Alt">Alt</kbd>+<kbd data-keys="Shift">Shift</kbd>+click</td><td><kbd data-keys="Shift">Shift</kbd>+click</td></tr>
+          <tr><td>What a rectangle touches</td><td><kbd data-keys="Alt">Alt</kbd>+drag from a formula; <kbd data-keys="Shift">Shift</kbd> adds</td><td>drag over the drawing; <kbd data-keys="Mod">Ctrl</kbd> or <kbd data-keys="Shift">Shift</kbd> adds</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="across-formulas">Across formulas</h2>
+      <p>Pick a glyph of one formula and then <kbd data-keys="Alt">Alt</kbd>+click a glyph of
+        another: it <strong>joins</strong> the pick. A rectangle takes the glyphs it touches in
+        every formula it crosses. The bar then says, for instance, “6 glyphs of 2 formulas”, and the
+        formulas that have picked glyphs are the selected clips for as long as the pick lasts. (A
+        range is always within one formula.)</p>
+      <figure>
+        <img src="../media/layout/glyph-picking/picked.dark.webp" data-themed
+             alt="Two identities, one under the other, with the 2ab of each in yellow and a teal box round each formula; over them a bar that reads 6 glyphs of 2 formulas."
+             width="801" height="453" loading="lazy">
+        <figcaption>Six glyphs of two formulas, picked: the yellow glyphs, the two selected
+          formulas, the bar, and the hint at the bottom.</figcaption>
+      </figure>
+      <p>With glyphs of several formulas picked, the bar and the menu offer:</p>
+      <ul>
+        <li>a <strong>colour</strong>, or <span class="ui">Clear colour</span>, for all of them, as
+          one undo step. The picked glyphs keep the selection colour until you clear the pick with
+          <kbd data-keys="Escape">Esc</kbd>; then the colour shows, and
+          <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes it back;</li>
+        <li><strong>one brace</strong> or <strong>one shape</strong> over all of them. It is what
+          <code data-excerpt="examples/layout-glyph-picking.ce.py">Brace(VGroup(…), RIGHT, …)</code> is in
+          Manim: fitted to the group when its clip starts, and it follows each of the
+          formulas.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/layout/glyph-picking/across-brace.dark.webm"
+               poster="../media/layout/glyph-picking/across-brace.dark.webp" width="800" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The last glyph of each identity, the exponent of its <code>b²</code>, is
+          picked in both formulas, and <span class="ui">Brace ▾ ▸ Right</span> puts one brace to
+          their right, spanning both formulas. Deleting the clip of one of the formulas does not
+          delete the brace: it stays where it is, detached.</figcaption>
+      </figure>
+      <p>Hiding at the start, the colour sequence and <span class="ui">On some glyphs…</span> are for
+        the glyphs of <em>one</em> formula, so they are not there for a pick across several.</p>
+      <aside class="callout tip">
+        <p>Because <kbd data-keys="Alt">Alt</kbd>+click <em>adds</em>, to pick glyphs of another
+          formula <em>alone</em> you clear the pick first (<kbd data-keys="Escape">Esc</kbd>) or draw
+          the rectangle there.</p>
+      </aside>
+
+      <h2 id="what-for">What picked glyphs are for</h2>
+      <table>
+        <thead>
+          <tr><th>Menu</th><th>What it does with the picked glyphs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Colour ▾</span></td><td>A colour for them — from the Manim palette, from the roles of the active editor palette if there is one, or any <code>#RRGGBB</code> typed in the <span class="ui">Hex</span> field — or, with <span class="ui">Clear colour</span>, none of their own. The colour belongs to the formula, so it shows in every clip of it. <span class="ui">Copy colour to clipboard</span> (for a single glyph) puts its colour on the system clipboard; <span class="ui">Copy colour sequence</span> and <span class="ui">Paste colour sequence</span> carry the colours of a pick to another pick of the same symbols. <span class="ui">Hide at the start</span> and <span class="ui">Show at the start</span>, for the glyphs of one formula: hidden glyphs wait out of the picture when the formula appears, until an Appear block or a relation brings them in.</td></tr>
+          <tr><td><span class="ui">Brace ▾</span></td><td>A brace on them: <span class="ui">Below</span>, <span class="ui">Above</span>, <span class="ui">Left</span> or <span class="ui">Right</span>; for one formula, <span class="ui">On some glyphs…</span> opens the dialog with them picked.</td></tr>
+          <tr><td><span class="ui">Shape ▾</span></td><td>A shape on them: <span class="ui">Box</span>, <span class="ui">Circle</span>, <span class="ui">Underline</span>, <span class="ui">Cross</span>, <span class="ui">Cross line</span> or <span class="ui">Highlight</span>; again <span class="ui">On some glyphs…</span> for one formula.</td></tr>
+        </tbody>
+      </table>
+      <p>The clip's own right-click menu does the same when the glyphs are picked: its
+        <span class="ui">Add brace</span> and <span class="ui">Add shape</span> entries say “on the
+        selected glyphs”.</p>
+      <figure>
+        <img src="../media/layout/glyph-picking/colour-menu.dark.webp" data-themed
+             alt="The Colour menu of picked glyphs: swatches, Clear colour, Copy colour sequence, Paste colour sequence, Hide at the start and Show at the start."
+             width="228" height="294" loading="lazy">
+        <figcaption>The <span class="ui">Colour ▾</span> menu of glyphs of one formula.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/layout/glyph-picking/brace-menu.dark.webp" data-themed
+             alt="The Brace menu for glyphs of several formulas: Below, Above, Left, Right."
+             width="183" height="122" loading="lazy">
+        <figcaption>The <span class="ui">Brace ▾</span> menu for glyphs of several formulas: four
+          sides, and no dialog.</figcaption>
+      </figure>
+      <p>Colours, braces and shapes are described in
+        <a href="../color/coloring.html">Colouring glyphs and objects</a>,
+        <a href="../objects/braces.html">Braces</a> and <a href="../objects/shapes.html">Shapes</a>.
+        Two neighbouring tools pick glyphs with plain clicks instead of Alt:
+        <a href="align-symbol.html">Align by symbol</a> and the copying of colours glyph by glyph in
+        order (<kbd data-keys="Shift+C">Shift+C</kbd>, described in
+        <a href="../color/coloring.html#order">Colouring glyphs and objects</a>).</p>
+      <figure class="mfe-player" data-mfe-player="layout-glyph-picking" data-start="end"
+              data-caption="The result: the 2ab of both identities in red, and one brace to the right of the last glyph of each."></figure>
+
+      <h2 id="selection-colour">The selection colour</h2>
+      <p>The colour of picked glyphs, and of the rectangle that picks them, is a preference:
+        <span class="ui">Preferences ▸ Glyph selection colour</span>. It offers the same six colours
+        as the snapping guides — Yellow, Orange, Magenta, Cyan, Green and White — and starts at
+        yellow. It is separate from <span class="ui">Guide colour</span>: changing one does not move
+        the other. The choice is kept in the browser.</p>
+      <figure>
+        <img src="../media/layout/glyph-picking/preference.dark.webp" data-themed
+             alt="The Preferences menu with the Glyph selection colour submenu open: six colours, Yellow marked."
+             width="460" height="562" loading="lazy">
+        <figcaption>Pick another colour if the glyphs you are working on are yellow themselves.</figcaption>
+      </figure>
+
+      <h2 id="thin">Thin glyphs</h2>
+      <p>A minus, a dot, the bar of a fraction: the thin symbols are the hardest to hit. Two aids
+        make them reachable.</p>
+      <h3 id="circle">The circle selector in the Preview</h3>
+      <p>Press <kbd data-keys="S">S</kbd>, or the second button of the view toolbar (<span class="ui">Circle
+        selector</span>). The pointer becomes a dashed circle, and a click takes the symbol nearest to
+        the pointer within the circle. A plain click takes its formula; <kbd data-keys="Alt">Alt</kbd>+click
+        takes the symbol itself. <kbd data-keys="Shift">Shift</kbd> and the wheel change the reach, and
+        <kbd data-keys="S">S</kbd> again gives the pointer back. The choice is kept. The two pair
+        editors, <a href="../transforms/relation-editor.html#drawing">the relation editor</a> and the
+        pair editor of a Morph block, always take glyphs with the same circle, at the same size.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/layout/glyph-picking/circle-selector.dark.webm"
+               poster="../media/layout/glyph-picking/circle-selector.dark.webp" width="800" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption>An Alt+click a little above the minus picks nothing. With the circle selector on
+          (<kbd data-keys="S">S</kbd>), the same click picks the minus.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p><kbd data-keys="S">S</kbd> splits the selected clips at the playhead instead, and the
+          circle selector does not change, while an audio clip is selected, or while a selected
+          clip has the playhead inside it and the keyboard is not in the Preview
+          (<a href="../basics/timeline.html#splitting">Splitting a clip</a>). After a click on the
+          scene the keyboard is in the Preview, and <kbd data-keys="S">S</kbd> is the
+          selector's.</p>
+      </aside>
+      <h3 id="glyph-view">The glyph view</h3>
+      <p>The formula editor has a <span class="ui">Glyphs</span> view, which draws every glyph of
+        the formula and lets you click, range-select (<kbd data-keys="Shift">Shift</kbd>), toggle
+        (<kbd data-keys="Mod">Ctrl</kbd>) or drag a box over glyphs, to colour or hide them at the
+        start. In it, every glyph has a <strong>frame</strong> that is at least 10 pixels each way,
+        whatever the zoom, drawn under all the glyphs: the bar of a fraction and a minus sign take
+        clicks, show their state — selected, hidden, coloured — and glow like a letter.</p>
+      <figure>
+        <img src="../media/layout/glyph-picking/glyph-view.dark.webp" data-themed
+             alt="The glyph view of a formula with a fraction and a minus: the fraction bar and the minus sign are selected, each with a frame."
+             width="475" height="354" loading="lazy">
+        <figcaption>The bar of the fraction and the minus sign, picked in the glyph view.</figcaption>
+      </figure>
+      <p>The <span class="ui">Glyph list</span> button beside the <span class="ui">Glyphs</span>
+        title lists the glyphs under the drawing, each with its index and label; with the list
+        shown you can pick glyphs from the keyboard. It stays off until you press it.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <p>Open the start file: two identities, one under the other.</p>
+      <div class="mfe-example" data-mfe-example="layout-glyph-picking-start"></div>
+      <aside class="try">
+        <ol>
+          <li>Open the file: choose <span class="ui">File ▸ Open…</span>, press
+            <span class="ui">Other file…</span> in the dialog and pick it (see
+            <a href="../start/projects.html#open">Open</a>). Put the playhead at 4 s.</li>
+          <li>Hold <kbd data-keys="Alt">Alt</kbd> and click the <code>2</code> of <code>2ab</code> in
+            the first line, then <kbd data-keys="Alt">Alt</kbd>+<kbd data-keys="Shift">Shift</kbd>+click
+            the <code>b</code>.</li>
+          <li>Do the same in the second line. The bar says “6 glyphs of 2 formulas”.</li>
+          <li>Open <span class="ui">Colour ▾</span> and choose a colour, then press
+            <kbd data-keys="Escape">Esc</kbd> to clear the pick and see the colours.</li>
+          <li><kbd data-keys="Alt">Alt</kbd>+click the last glyph of each line, the exponent of
+            <code>b²</code>, and open <span class="ui">Brace ▾ ▸ Right</span>: one brace spans
+            both lines.</li>
+          <li>Press <kbd data-keys="S">S</kbd> and pick a minus sign with an
+            <kbd data-keys="Alt">Alt</kbd>+click beside it.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="layout-glyph-picking"></div>
+    </article>
+  </main>
+</body>
+</html>

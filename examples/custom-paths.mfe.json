@@ -1,0 +1,532 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Custom paths",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_sum",
+      "kind": "math",
+      "name": "sum",
+      "source": "a+b+c=d",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1cmb7h6ujie",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.2995043839999998,
+              -0.04535135999999999
+            ],
+            "size": [
+              0.23702975999999998,
+              0.22600511999999998
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8631791999999998,
+              -0.027812160000000002
+            ],
+            "size": [
+              0.33374592000000003,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.44113593599999984,
+              0.01778976
+            ],
+            "size": [
+              0.1914278399999999,
+              0.3532896
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.035579519999999976,
+              -0.027812160000000002
+            ],
+            "size": [
+              0.33374592000000014,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              0.38688134400000007,
+              -0.045685439999999994
+            ],
+            "size": [
+              0.1982764800000001,
+              0.22767551999999996
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.8218368,
+              -0.028062719999999992
+            ],
+            "size": [
+              0.33374592000000014,
+              0.11726208
+            ]
+          },
+          {
+            "label": "d",
+            "center": [
+              1.2952448639999998,
+              0.01804032
+            ],
+            "size": [
+              0.24554880000000034,
+              0.35278847999999996
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_swap",
+      "kind": "math",
+      "name": "swap",
+      "source": "d=c+b+a",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-erpnedi2v",
+        "glyphs": [
+          {
+            "label": "d",
+            "center": [
+              -1.2887303039999998,
+              0.01804032
+            ],
+            "size": [
+              0.2455487999999999,
+              0.35278847999999996
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.8333124479999998,
+              -0.028062719999999992
+            ],
+            "size": [
+              0.33374592000000003,
+              0.11726208
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              -0.38298931199999997,
+              -0.045685439999999994
+            ],
+            "size": [
+              0.19827647999999987,
+              0.22767551999999996
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.024103872000000304,
+              -0.027812160000000002
+            ],
+            "size": [
+              0.3337459199999999,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.4461471360000001,
+              0.01778976
+            ],
+            "size": [
+              0.19142784000000002,
+              0.3532896
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.85165344,
+              -0.027812160000000002
+            ],
+            "size": [
+              0.3337459199999997,
+              0.33324479999999995
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              1.292989824,
+              -0.04535135999999999
+            ],
+            "size": [
+              0.23702975999999998,
+              0.22600511999999998
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_top",
+      "kind": "visual",
+      "name": "Top",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_bottom",
+      "kind": "visual",
+      "name": "Bottom",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_sum",
+      "formulaId": "f_sum",
+      "trackId": "t_top",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          0,
+          1.5
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_swap",
+      "formulaId": "f_swap",
+      "trackId": "t_bottom",
+      "start": 2,
+      "end": 6,
+      "initial": {
+        "position": [
+          0,
+          -1.5
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_sum_swap",
+      "fromClipId": "c_sum",
+      "toClipId": "c_swap",
+      "offset": 0.5,
+      "duration": 2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 30,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            6
+          ],
+          "style": null,
+          "path": {
+            "nodes": [
+              {
+                "at": [
+                  0,
+                  0
+                ],
+                "in": null,
+                "out": [
+                  0.3,
+                  0.35
+                ],
+                "smooth": false
+              },
+              {
+                "at": [
+                  1,
+                  0
+                ],
+                "in": [
+                  0.7,
+                  0.35
+                ],
+                "out": null,
+                "smooth": false
+              }
+            ]
+          }
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            5
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            2
+          ],
+          "to": [
+            4
+          ],
+          "style": null,
+          "path": {
+            "nodes": [
+              {
+                "at": [
+                  0,
+                  0
+                ],
+                "in": null,
+                "out": [
+                  0.2,
+                  0.3
+                ],
+                "smooth": false
+              },
+              {
+                "at": [
+                  0.5,
+                  0
+                ],
+                "in": [
+                  0.35,
+                  0.3
+                ],
+                "out": [
+                  0.65,
+                  -0.3
+                ],
+                "smooth": true
+              },
+              {
+                "at": [
+                  1,
+                  0
+                ],
+                "in": [
+                  0.8,
+                  -0.3
+                ],
+                "out": null,
+                "smooth": false
+              }
+            ]
+          }
+        },
+        {
+          "from": [
+            3
+          ],
+          "to": [
+            3
+          ],
+          "style": "copy"
+        },
+        {
+          "from": [
+            4
+          ],
+          "to": [
+            2
+          ],
+          "style": null,
+          "path": {
+            "nodes": [
+              {
+                "at": [
+                  0,
+                  0
+                ],
+                "in": null,
+                "out": null,
+                "smooth": false
+              },
+              {
+                "at": [
+                  0.5,
+                  0.45
+                ],
+                "in": null,
+                "out": null,
+                "smooth": false
+              },
+              {
+                "at": [
+                  1,
+                  0
+                ],
+                "in": null,
+                "out": null,
+                "smooth": false
+              }
+            ]
+          }
+        },
+        {
+          "from": [
+            5
+          ],
+          "to": [
+            1
+          ],
+          "style": "fade"
+        },
+        {
+          "from": [
+            6
+          ],
+          "to": [
+            0
+          ],
+          "style": null,
+          "path": {
+            "nodes": [
+              {
+                "at": [
+                  0,
+                  0
+                ],
+                "in": null,
+                "out": [
+                  0.3,
+                  -0.35
+                ],
+                "smooth": false
+              },
+              {
+                "at": [
+                  1,
+                  0
+                ],
+                "in": [
+                  0.7,
+                  -0.35
+                ],
+                "out": null,
+                "smooth": false
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

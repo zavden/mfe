@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111317" />
+    <meta
+      name="description"
+      content="Colors by role for formula animations: backgrounds, symbols, and highlights. Twelve web scenes, reproducible themes, and Manim export."
+    />
+    <title>Chroma Lab — Formula Studio</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%23bfed95'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23212825'/%3E%3Ccircle cx='20' cy='12' r='5' fill='%23bfed95'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="studio.css" />
+    <script src="app.bundle.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#explore"
+        ><span class="brand-mark"><i></i><i></i><i></i><i></i></span
+        ><span
+          >chroma<span class="brand-lab">lab</span
+          ><small>COLOR THAT EXPLAINS.</small></span
+        ></a
+      >
+      <div class="nav-group-label">WORKSPACE</div>
+      <nav id="nav"></nav>
+      <div class="sidebar-foot">
+        <span class="online-dot"></span
+        ><span
+          >Everything runs in your browser<small
+            >No accounts. No file uploads.</small
+          ></span
+        >
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          Workspace <span>/</span>
+          <strong id="breadcrumb">Explore harmonies</strong>
+        </div>
+        <div class="top-actions">
+          <span class="local-pill"
+            ><span class="online-dot"></span> 100% local</span
+          ><button
+            class="icon-btn"
+            id="undo"
+            title="Undo (Ctrl+Z)"
+            aria-label="Undo"
+            disabled
+          ></button
+          ><button
+            class="icon-btn"
+            id="redo"
+            title="Redo (Ctrl+Shift+Z)"
+            aria-label="Redo"
+            disabled
+          ></button
+          ><span class="toolbar-divider"></span
+          ><button
+            class="icon-btn"
+            id="theme"
+            title="Switch theme"
+            aria-label="Switch theme"
+          ></button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">
+              <span></span> COLOR FOR MATHEMATICAL ANIMATIONS
+            </div>
+            <h1 id="page-title">Color in perspective<span>.</span></h1>
+            <p id="page-description">
+              Explore relationships, discover contrast, and build your next
+              palette.
+            </p>
+          </div>
+          <button class="primary-btn" id="randomize"></button>
+        </div>
+        <section class="control-panel" aria-label="Generation parameters">
+          <div class="control-main">
+            <div class="field base-field">
+              <label for="base-hex">BASE COLOR</label>
+              <div class="color-input">
+                <input
+                  id="base-picker"
+                  type="color"
+                  value="#4169e1"
+                  aria-label="Visual base color picker"
+                /><input
+                  id="base-hex"
+                  value="#4169E1"
+                  maxlength="7"
+                  spellcheck="false"
+                  aria-label="Base color in hexadecimal"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label for="space">GENERATION SPACE</label
+              ><select id="space">
+                <option value="oklch">OKLCH · perceptual</option>
+                <option value="hsl">HSL · geometric</option>
+                <option value="hsv">HSV · geometric</option>
+                <option value="hsi">HSI · geometric</option>
+                <option value="lch">CIELCH · D50</option>
+                <option value="cam02">CIECAM02 · JCh</option>
+                <option value="cam16">CAM16 · JCh</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="scheme">ACTIVE HARMONY</label
+              ><select id="scheme"></select>
+            </div>
+            <div class="field count-field">
+              <label for="count">COLORS</label>
+              <div class="stepper">
+                <button id="count-minus" aria-label="Fewer colors">−</button
+                ><input
+                  id="count"
+                  type="number"
+                  min="2"
+                  max="24"
+                  value="5"
+                  aria-label="Number of colors"
+                /><button id="count-plus" aria-label="More colors">+</button
+                ><span id="count-background" hidden>+ background</span>
+              </div>
+            </div>
+            <button
+              class="settings-btn"
+              id="advanced-toggle"
+              aria-expanded="false"
+              aria-controls="advanced"
+            >
+              Settings <span>⌄</span>
+            </button>
+          </div>
+          <div id="advanced" class="advanced-controls" hidden>
+            <label
+              >Angular separation <output id="angle-value">30°</output
+              ><input id="angle" type="range" min="5" max="90" value="30"
+            /></label>
+            <label
+              >Target lightness <output id="lightness-value">65%</output
+              ><input id="lightness" type="range" min="5" max="95" value="65"
+            /></label>
+            <label
+              >Saturation / relative chroma <output id="chroma-value">40%</output
+              ><input id="chroma" type="range" min="0" max="100" value="40"
+            /></label>
+            <label
+              >Tonal variation <output id="variation-value">18%</output
+              ><input id="variation" type="range" min="0" max="45" value="18"
+            /></label>
+            <label
+              >Reproducible seed<input
+                id="seed"
+                type="text"
+                value="chroma-2026"
+                maxlength="80"
+            /></label>
+            <div class="advanced-note">
+              Angles depend on the selected space. The same separation does not
+              imply the same perceptual distance. The first color retains the
+              base color in hue-based schemes.
+            </div>
+            <details class="view-conditions">
+              <summary>Viewing conditions · CIECAM02 / CAM16</summary>
+              <div class="mini-form">
+                <label
+                  >Adapting luminance L<sub>A</sub> (cd/m²)<input
+                    id="view-la"
+                    type="number"
+                    value="64"
+                    min="0.001"
+                    max="10000"
+                    step="1" /></label
+                ><label
+                  >Background Y<sub>b</sub> (white = 100)<input
+                    id="view-yb"
+                    type="number"
+                    value="20"
+                    min="0.001"
+                    max="100"
+                    step="1" /></label
+                ><label
+                  >Surround<select id="view-surround">
+                    <option value="average">Average</option>
+                    <option value="dim">Dim</option>
+                    <option value="dark">Dark</option>
+                  </select></label
+                ><label
+                  >White point<select id="view-white">
+                    <option value="d65">D65 · 95.047, 100, 108.883</option>
+                    <option value="d50">D50 · 96.422, 100, 82.521</option>
+                  </select></label
+                >
+              </div>
+              <p>
+                Relative XYZ with Y<sub>w</sub> = 100. Partial adaptation
+                is calculated by the model. sRGB is referenced to D65; the model’s
+                white point describes the observer.
+              </p>
+            </details>
+          </div>
+        </section>
+        <div id="view"></div>
+        <footer class="main-footer">
+          <span
+            >CHROMA LAB <span class="muted">/</span> One lab, endless
+            relationships.</span
+          ><a href="docs/MATHEMATICS.md" target="_blank" rel="noopener"
+            >Notes on color and precision ↗</a
+          >
+        </footer>
+      </main>
+    </div>
+    <dialog id="color-dialog" aria-labelledby="color-dialog-title">
+      <form id="color-editor">
+        <div class="dialog-heading">
+          <h2 id="color-dialog-title">Edit color</h2>
+          <button
+            type="button"
+            class="icon-btn"
+            data-close="color-dialog"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <div id="editor-preview"></div>
+        <div class="mini-form">
+          <label>Picker<input id="edit-picker" type="color" /></label
+          ><label>Hexadecimal<input id="edit-hex" maxlength="7" /></label>
+        </div>
+        <label>Representation<select id="edit-space"></select></label>
+        <div id="edit-coordinates" class="coordinates"></div>
+        <p id="editor-note" class="muted"></p>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-btn" id="apply-coordinates">
+            Convert components</button
+          ><button type="submit" class="primary-btn">Apply color</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="export-dialog" aria-labelledby="export-title">
+      <div class="dialog-heading">
+        <h2 id="export-title">Take your palette with you</h2>
+        <button class="icon-btn" data-close="export-dialog" aria-label="Close">
+          ×
+        </button>
+      </div>
+      <div class="mini-form">
+        <label
+          >Name<input
+            id="export-name"
+            value="chroma-palette"
+            maxlength="60" /></label
+        ><label
+          >Format<select id="export-format">
+            <option value="css">CSS variables</option>
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+            <option value="oklch">OKLCH</option>
+            <option value="json">JSON</option>
+            <option value="tailwind">Tailwind CSS · configuration</option>
+            <option value="svg">SVG</option>
+            <option value="png">PNG</option>
+          </select></label
+        >
+      </div>
+      <pre id="export-preview"></pre>
+      <div class="dialog-actions">
+        <button class="secondary-btn" id="export-copy">Copy code</button
+        ><button class="primary-btn" id="export-download">
+          Download file
+        </button>
+      </div>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <noscript
+      >Enable JavaScript to use the lab. All processing runs
+      locally.</noscript
+    >
+  </body>
+</html>

@@ -1,0 +1,283 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "A brace stays where it was fitted",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_f",
+      "kind": "math",
+      "name": "series",
+      "source": "x + y + z",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ail2tpjext",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -1.730317248,
+              0.02655935999999999
+            ],
+            "size": [
+              0.4880908799999999,
+              0.45401472
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.82359072,
+              0.061637759999999986
+            ],
+            "size": [
+              0.6674918400000001,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "y",
+            "center": [
+              0.048391487999999816,
+              -0.07032384
+            ],
+            "size": [
+              0.4767321599999996,
+              0.6491174399999999
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.8927452799999995,
+              0.061637759999999986
+            ],
+            "size": [
+              0.6674918399999998,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "z",
+            "center": [
+              1.7573777279999998,
+              0.02655935999999999
+            ],
+            "size": [
+              0.43396992,
+              0.45401472
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_brace",
+      "kind": "brace",
+      "name": "b1",
+      "source": "",
+      "sharpness": 2,
+      "width": 3.948725376,
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-i6lxgtbv74",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              3.9487253759999996,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_brace",
+      "kind": "visual",
+      "name": "Brace",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_f",
+      "kind": "visual",
+      "name": "Formula",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_f",
+      "formulaId": "f_f",
+      "trackId": "t_f",
+      "start": 0,
+      "end": 11,
+      "initial": {
+        "position": [
+          -2,
+          0.6
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.4,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_1",
+          "kind": "tween",
+          "start": 3.6,
+          "duration": 1.2,
+          "easing": "smooth",
+          "to": {
+            "position": [
+              2,
+              0.6
+            ]
+          }
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_brace",
+      "formulaId": "f_brace",
+      "trackId": "t_brace",
+      "start": 2,
+      "end": 11,
+      "initial": {
+        "position": [
+          -2.0000000000000004,
+          -0.13137504040500003
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 0.7,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_2",
+          "kind": "tween",
+          "start": 4,
+          "duration": 1.2,
+          "easing": "smooth",
+          "to": {
+            "position": [
+              2,
+              -0.131375
+            ]
+          }
+        }
+      ],
+      "attach": {
+        "clipId": "c_f",
+        "glyphs": "all",
+        "rule": "brace",
+        "direction": 0,
+        "buff": 0.2
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

@@ -1,0 +1,327 @@
+/* The Slides mode on the timeline (SlideMarks.tsx, D200). Its two colours are the theme's
+ * (`--slide-pause`, `--slide-busy`, styles.css): blue-green where a pause may stand, red-orange
+ * where something animates — told apart in red-green colour blindness too, and the animations
+ * hatched besides, so that colour is not all that tells them. A third, `--slide-skip`, a violet, is
+ * a pause that skips its wait and the stretch it skips (D202); its tag says «‖▸» besides. */
+
+/* How strong the tints of the ruler are: the ruler's numbers stay readable over them
+ * (themeContrast.test.ts reads these two). */
+.tl {
+  --slide-tint: 22%;
+  --slide-hatch: 34%;
+}
+
+/* ---- The ruler by zone ---------------------------------------------------------------------- */
+/* Under the ruler's ticks and numbers, which come after it, and under the region; the small ticks
+ * along the foot of the ruler show through. Nothing here takes the pointer. */
+.tl-slide-zones {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tl-slide-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.tl-slide-zone.is-pause {
+  background: color-mix(in srgb, var(--slide-pause) var(--slide-tint), transparent);
+}
+
+.tl-slide-zone.is-busy {
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--slide-busy) var(--slide-tint), transparent) 0 4px,
+    color-mix(in srgb, var(--slide-busy) var(--slide-hatch), transparent) 4px 5.5px
+  );
+}
+
+/* A zone of no length: a notch the whole height of the ruler, in the pause colour. */
+.tl-slide-zone.is-notch {
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--slide-pause);
+}
+
+/* ---- The marks ------------------------------------------------------------------------------ */
+/* In the upper part of the ruler, as the region's marks: its foot, where the playhead has its
+ * head, stays the playhead's. A mark is centred on its instant (SlideMarks.tsx moves those that
+ * share one to stand side by side); over the ticks, the region and the playhead's head. */
+.tl-slide-mark {
+  --mark: var(--slide-pause);
+  position: absolute;
+  top: 0;
+  z-index: 4;
+  width: 13px;
+  height: 15px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  color: var(--mark);
+  cursor: grab;
+  touch-action: none;
+}
+
+.tl-slide-mark:active {
+  cursor: grabbing;
+}
+
+/* A pause that skips its wait; a warning wins over it. */
+.tl-slide-mark.is-skip {
+  --mark: var(--slide-skip);
+}
+
+.tl-slide-mark.is-warned {
+  --mark: var(--warning);
+}
+
+.tl-slide-mark svg {
+  display: block;
+  overflow: visible;
+}
+
+/* A pause: a tag filled with its colour, a rim of the bar's colour to part it from the tint under
+ * it, and its «‖» in the panel's colour. */
+.tl-slide-mark-shape {
+  fill: var(--mark);
+  stroke: var(--panel-header);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+.tl-slide-mark-glyph.is-bars {
+  fill: none;
+  stroke: var(--panel);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* «‖▸»: the bars closer, and the point of an arrow after them. */
+.tl-slide-mark-glyph.is-skip .is-bars {
+  fill: none;
+  stroke: var(--panel);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.tl-slide-mark-glyph.is-skip .is-arrow {
+  fill: var(--panel);
+  stroke: var(--panel);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
+/* A comment: a bubble drawn hollow, its three dots in its colour. */
+.tl-slide-mark-shape.is-bubble {
+  fill: var(--panel-header);
+  stroke: var(--mark);
+  stroke-width: 1.5;
+}
+
+.tl-slide-mark-glyph.is-dots {
+  fill: var(--mark);
+}
+
+.tl-slide-mark:hover .tl-slide-mark-shape {
+  filter: brightness(1.15);
+}
+
+.tl-slide-mark:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* Drawn vertical, what is inside a mark stays upright: «‖» and the dots read across the screen. */
+.tl.is-vertical .tl-slide-mark-glyph {
+  transform: rotate(-90deg);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* A thin line down the tracks at each pause, as the region's lines: over the clips, under the
+ * playhead's line. */
+.tl-slide-line {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 0;
+  border-left: 1px dashed color-mix(in srgb, var(--slide-pause) 80%, transparent);
+  pointer-events: none;
+}
+
+.tl-slide-line.is-skip {
+  border-left-color: color-mix(in srgb, var(--slide-skip) 80%, transparent);
+}
+
+.tl-slide-line.is-warned {
+  border-left-color: color-mix(in srgb, var(--warning) 80%, transparent);
+}
+
+/* The stretch a pause skips (SlideSkipsOnRuler): a line along the ruler under the numbers and over
+ * its small ticks, from the pause's point to where the scene goes on, ended by an arrow's point
+ * whose tip is that instant. Under the marks; nothing here takes the pointer. */
+.tl-slide-skips {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tl-slide-skip {
+  position: absolute;
+  top: 17px;
+  height: 2px;
+  background: var(--slide-skip);
+}
+
+.tl-slide-skip::after {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--slide-skip);
+  content: '';
+}
+
+/* The words of a mark (SlideMarkTip): a small sheet of glass like the clips' tooltip, its words in
+ * their own lines, and what the project says of the mark in the warning colour. */
+.tl-slide-tip {
+  position: fixed;
+  z-index: 130;
+  max-width: 300px;
+  padding: 6px 9px;
+  pointer-events: none;
+  background: var(--popup-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow:
+    var(--shadow-popup),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.tl-slide-tip.is-warned {
+  border-color: var(--warning);
+}
+
+.tl-slide-tip-title {
+  color: var(--text-dim);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* What a pause that skips its wait skips, in the colour of such a pause. */
+.tl-slide-tip-skip {
+  margin-top: 2px;
+  color: var(--slide-skip);
+}
+
+.tl-slide-tip-words {
+  display: -webkit-box;
+  max-height: calc(8 * 16px);
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--text);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+}
+
+.tl-slide-tip-warning {
+  margin-top: 4px;
+  color: var(--warning);
+}
+
+/* ---- Forced colours (see styles.css) ---- */
+/* The tints were backgrounds: a pause zone is a bar of the selection's colour along the top of
+ * the ruler, an animation a hatch of the grey text's, a notch a bar of the selection's. */
+@media (forced-colors: active) {
+  .tl-slide-zone {
+    forced-color-adjust: none;
+  }
+
+  .tl-slide-zone.is-pause {
+    background: none;
+    box-shadow: inset 0 3px 0 Highlight;
+  }
+
+  .tl-slide-zone.is-busy {
+    background: repeating-linear-gradient(135deg, transparent 0 4px, GrayText 4px 5.5px);
+  }
+
+  .tl-slide-zone.is-notch {
+    background: Highlight;
+    box-shadow: none;
+  }
+
+  /* A mark in the text's colour, a warned one in the selection's; their lines the same. */
+  .tl-slide-mark {
+    forced-color-adjust: none;
+    --mark: CanvasText;
+  }
+
+  /* A pause that skips its wait in the links' colour, besides its «‖▸» and the line of what it
+   * skips; a warned one in the selection's. */
+  .tl-slide-mark.is-skip {
+    --mark: LinkText;
+  }
+
+  .tl-slide-mark.is-warned {
+    --mark: Highlight;
+  }
+
+  .tl-slide-mark-shape {
+    stroke: Canvas;
+  }
+
+  .tl-slide-mark-shape.is-bubble {
+    fill: Canvas;
+  }
+
+  .tl-slide-mark-glyph.is-bars,
+  .tl-slide-mark-glyph.is-skip .is-bars {
+    stroke: Canvas;
+  }
+
+  .tl-slide-mark-glyph.is-skip .is-arrow {
+    fill: Canvas;
+    stroke: Canvas;
+  }
+
+  .tl-slide-skip {
+    forced-color-adjust: none;
+    background: LinkText;
+  }
+
+  .tl-slide-skip::after {
+    border-left-color: LinkText;
+  }
+
+  .tl-slide-tip-skip {
+    color: LinkText;
+  }
+
+  .tl-slide-line {
+    border-left-color: CanvasText;
+  }
+
+  .tl-slide-line.is-skip {
+    border-left-color: LinkText;
+  }
+
+  .tl-slide-line.is-warned {
+    border-left-color: Highlight;
+  }
+
+  .tl-slide-tip.is-warned {
+    border-color: Highlight;
+  }
+}

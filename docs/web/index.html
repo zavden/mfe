@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manim Formula Editor · Documentation</title>
+  <meta name="description" content="Learn the Manim Formula Editor: write LaTeX formulas, place them on a timeline, transform one into the next, and export the scene to ManimCE or ManimGL.">
+  <meta name="mfe:id" content="index">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/nav.js" defer></script>
+  <script src="assets/search-index.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="assets/player.js" defer></script>
+  <script src="examples/hero.data.js" defer></script>
+</head>
+<body class="page-home">
+  <main id="content">
+    <article class="doc home">
+
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="home-hero-text">
+          <p class="kicker">Documentation</p>
+          <h1 id="home-title">Write a formula.<br><em>Watch it transform.</em></h1>
+          <p>The <strong>Manim Formula Editor</strong> makes formula animations, and it runs in your
+            browser. Write formulas in LaTeX, place them on a timeline, relate the glyphs of one
+            formula to the glyphs of the next, and the editor animates the change. Export the scene
+            as Python for ManimCE or ManimGL, or as a video.</p>
+          <p>These pages teach it from your first formula to the last detail. You need no Manim to
+            start: the editor plays the animation on its own.</p>
+          <div class="home-actions">
+            <a class="btn btn-primary" href="start/first-animation.html"><span data-icon="play"></span>Make your first animation</a>
+            <a class="btn" href="start/interface.html">Tour the interface</a>
+          </div>
+        </div>
+        <div class="device">
+          <div class="device-bar" aria-hidden="true"><span>Preview</span><span>● ● ●</span></div>
+          <figure class="mfe-player" data-mfe-player="hero" data-start="8" data-autoplay data-loop></figure>
+        </div>
+      </section>
+
+      <section class="home-section" aria-labelledby="at-a-glance">
+        <div class="home-section-top">
+          <div>
+            <p class="section-index">01 / AT ONE LOOK</p>
+            <h2 id="at-a-glance">What the editor does</h2>
+          </div>
+          <p>Four steps make an animation, and each has a panel of its own in the editor.</p>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-head"><span class="icon-tile" data-icon="sigma"></span><p class="step-title">Write</p><span class="step-index">1</span></div>
+            <p>Write each formula in LaTeX in the <span class="ui">Creator</span>, in a visual math
+              field or in its raw LaTeX, which stay in step.</p>
+          </li>
+          <li class="step">
+            <div class="step-head"><span class="icon-tile" data-icon="tracks"></span><p class="step-title">Place</p><span class="step-index">2</span></div>
+            <p>Drag formulas onto the tracks of the <span class="ui">Timeline</span>, where each clip
+              says when it shows, and place them in the <span class="ui">Preview</span>.</p>
+          </li>
+          <li class="step">
+            <div class="step-head"><span class="icon-tile" data-icon="relate"></span><p class="step-title">Transform</p><span class="step-index">3</span></div>
+            <p>Relate glyphs from one formula to the next (one to one, one to many, many to one), or
+              morph glyphs within one formula for a derivation.</p>
+          </li>
+          <li class="step">
+            <div class="step-head"><span class="icon-tile" data-icon="code"></span><p class="step-title">Export</p><span class="step-index">4</span></div>
+            <p>Export the scene as Python for ManimCE or ManimGL, as a video, or its sound alone.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="home-section" aria-labelledby="where-to-start">
+        <div class="home-section-top">
+          <div>
+            <p class="section-index">02 / WHERE TO START</p>
+            <h2 id="where-to-start">Three ways in</h2>
+          </div>
+          <p>Pick the one that fits you; the learning path below holds every page.</p>
+        </div>
+        <ul class="ways">
+          <li class="way">
+            <div class="way-head"><span class="icon-tile" data-icon="play-outline"></span><p class="way-title">New to the editor</p></div>
+            <p>Start from what the editor does, get it running, and make a first animation step by
+              step. No Manim needed.</p>
+            <ul class="way-links">
+              <li><a href="start/overview.html">What the editor does</a></li>
+              <li><a href="start/install.html">Getting the app running</a></li>
+              <li><a href="start/first-animation.html">Your first animation</a></li>
+              <li><a href="tutorials/linear-equation.html">Solving a linear equation</a></li>
+            </ul>
+          </li>
+          <li class="way">
+            <div class="way-head"><span class="icon-tile" data-icon="code"></span><p class="way-title">You know Manim</p></div>
+            <p>Read the Python the editor writes, see how it differs between ManimCE and ManimGL,
+              and how pairs of glyphs become its transformations.</p>
+            <ul class="way-links">
+              <li><a href="manim/python.html">The generated Python</a></li>
+              <li><a href="manim/ce-vs-gl.html">ManimCE and ManimGL</a></li>
+              <li><a href="transforms/relations.html">How relations work</a></li>
+              <li><a href="manim/companion.html">The companion</a></li>
+            </ul>
+          </li>
+          <li class="way">
+            <div class="way-head"><span class="icon-tile" data-icon="book"></span><p class="way-title">Looking something up</p></div>
+            <p>Tables to look things up, not to read in order. Or press <kbd>/</kbd> on any page to
+              search the whole documentation.</p>
+            <ul class="way-links">
+              <li><a href="reference/shortcuts.html">Keyboard and mouse shortcuts</a></li>
+              <li><a href="reference/menus.html">Every menu</a></li>
+              <li><a href="reference/glossary.html">Glossary</a></li>
+              <li><a href="reference/troubleshooting.html">Troubleshooting and questions</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="home-section" aria-labelledby="learning-path">
+        <div class="home-section-top">
+          <div>
+            <p class="section-index">03 / LEARNING PATH</p>
+            <h2 id="learning-path">Learn it step by step</h2>
+          </div>
+          <p>Each section builds on the ones before it. The bar of a card fills as you read its
+            pages.</p>
+        </div>
+        <ol class="path">
+          <li><a class="path-card" id="path-start" data-path-section="start" href="start/overview.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="play-outline"></span><span class="path-card-name"><span class="path-card-index">01</span>
+            <span class="path-card-title">Get started</span></span></span>
+            <p>What the editor does, how to run it, your first animation, the interface, and your
+              projects.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">5 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-basics" data-path-section="basics" href="basics/formulas.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="sigma"></span><span class="path-card-name"><span class="path-card-index">02</span>
+            <span class="path-card-title">Basics</span></span></span>
+            <p>Formulas, the Preview, the timeline, intros and outros, a first transformation, and
+              exporting.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">6 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-transforms" data-path-section="transforms" href="transforms/relations.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="relate"></span><span class="path-card-name"><span class="path-card-index">03</span>
+            <span class="path-card-title">Transformations</span></span></span>
+            <p>Relations between glyphs, the relation editor, previewing, custom paths, Morph blocks
+              and recipes.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">6 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-animations" data-path-section="animations" href="animations/blocks.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="film"></span><span class="path-card-name"><span class="path-card-index">04</span>
+            <span class="path-card-title">Animations and timing</span></span></span>
+            <p>Animation blocks, groups of blocks, and the tools that set the timing of clips.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">3 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-objects" data-path-section="objects" href="objects/texts.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="shapes"></span><span class="path-card-name"><span class="path-card-index">05</span>
+            <span class="path-card-title">Texts and objects</span></span></span>
+            <p>LaTeX texts and font texts, templates, finding things, braces, shapes, lines and
+              arrows.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">6 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-layout" data-path-section="layout" href="layout/align.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="align-left"></span><span class="path-card-name"><span class="path-card-index">06</span>
+            <span class="path-card-title">Layout</span></span></span>
+            <p>Align and distribute, align by symbol, and picking glyphs with Alt.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">3 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-color" data-path-section="color" href="color/coloring.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="palette"></span><span class="path-card-name"><span class="path-card-index">07</span>
+            <span class="path-card-title">Colour</span></span></span>
+            <p>The colour menus and colour order, palettes by role with Chroma Lab, and
+              <span class="ui">Match colors</span>.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">3 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-sound" data-path-section="sound" href="sound/audio.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="waveform"></span><span class="path-card-name"><span class="path-card-index">08</span>
+            <span class="path-card-title">Audio and video</span></span></span>
+            <p>Recordings on the timeline, and the three ways to export a video.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">2 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-manim" data-path-section="manim" href="manim/python.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="code"></span><span class="path-card-name"><span class="path-card-index">09</span>
+            <span class="path-card-title">Manim</span></span></span>
+            <p>The Python the editor writes, working without the companion, ManimCE and ManimGL
+              side by side, and the companion.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">4 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-reference" data-path-section="reference" href="reference/shortcuts.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="book"></span><span class="path-card-name"><span class="path-card-index">10</span>
+            <span class="path-card-title">Reference</span></span></span>
+            <p>Shortcuts, menus, preferences, a glossary, troubleshooting and the file
+              format.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">6 pages</span></span>
+          </a></li>
+          <li><a class="path-card" id="path-tutorials" data-path-section="tutorials" href="tutorials/index.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="route"></span><span class="path-card-name"><span class="path-card-index">11</span>
+            <span class="path-card-title">Tutorials</span></span></span>
+            <p>Complete animations from start to finish, from a linear equation to an annotated
+              identity.</p>
+            <span class="path-card-foot"><span class="path-progress"><span></span></span><span class="path-progress-text">6 pages</span></span>
+          </a></li>
+        </ol>
+      </section>
+
+      <section class="home-section" aria-labelledby="tutorials">
+        <div class="home-section-top">
+          <div>
+            <p class="section-index">04 / TUTORIALS</p>
+            <h2 id="tutorials">Whole animations, start to finish</h2>
+          </div>
+          <p>Each one plays in its page, with the project to download, its Python and the video
+            Manim renders. <a href="tutorials/index.html">All tutorials</a></p>
+        </div>
+        <ol class="path">
+          <li><a class="path-card" href="tutorials/linear-equation.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="sigma"></span><span class="path-card-name"><span class="path-card-index">01</span>
+            <span class="path-card-title">Solving a linear equation</span></span></span>
+            <p>Solve a linear equation step by step, each step a transformation.</p>
+            <span class="path-card-foot"><span class="level-badge level-basic"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor" opacity="0.28"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Basic</span></span>
+          </a></li>
+          <li><a class="path-card" href="tutorials/pythagoras.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="palette"></span><span class="path-card-name"><span class="path-card-index">02</span>
+            <span class="path-card-title">The Pythagorean theorem, in colour</span></span></span>
+            <p>Animate the Pythagorean theorem, each of its terms in a colour of its own.</p>
+            <span class="path-card-foot"><span class="level-badge level-basic"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor" opacity="0.28"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Basic</span></span>
+          </a></li>
+          <li><a class="path-card" href="tutorials/quadratic-formula.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="relate"></span><span class="path-card-name"><span class="path-card-index">03</span>
+            <span class="path-card-title">Deriving the quadratic formula</span></span></span>
+            <p>Complete the square and derive the quadratic formula, one step after another.</p>
+            <span class="path-card-foot"><span class="level-badge level-intermediate"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor" opacity="0.28"/></svg>Intermediate</span></span>
+          </a></li>
+          <li><a class="path-card" href="tutorials/derivative.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="film"></span><span class="path-card-name"><span class="path-card-index">04</span>
+            <span class="path-card-title">A derivative from first principles</span></span></span>
+            <p>Derive the derivative of x² from its limit definition, row by row, with Morph blocks.</p>
+            <span class="path-card-foot"><span class="level-badge level-advanced"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor"/></svg>Advanced</span></span>
+          </a></li>
+          <li><a class="path-card" href="tutorials/annotated-identity.html">
+            <span class="path-card-top"><span class="icon-tile" data-icon="shapes"></span><span class="path-card-name"><span class="path-card-index">05</span>
+            <span class="path-card-title">An identity with braces and arrows</span></span></span>
+            <p>Explain a² − b² = (a − b)(a + b) with a labelled brace under each side and an arrow.</p>
+            <span class="path-card-foot"><span class="level-badge level-advanced"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="2" y="9.5" width="3" height="4" rx="0.8" fill="currentColor"/><rect x="6.5" y="6.5" width="3" height="7" rx="0.8" fill="currentColor"/><rect x="11" y="3.5" width="3" height="10" rx="0.8" fill="currentColor"/></svg>Advanced</span></span>
+          </a></li>
+        </ol>
+        <p class="home-note"><strong>Two optional parts.</strong> Chroma Lab, the colour studio,
+          comes inside the app. The companion, a small Python helper you run on your computer, adds
+          exact LaTeX glyphs, font text, fast video encoding with ffmpeg and rendering with Manim.
+          You need neither to start.</p>
+        <p class="home-note"><strong>An independent project.</strong> The Manim Formula Editor is
+          not affiliated with 3Blue1Brown or the Manim Community, nor endorsed by them. It writes
+          scenes for their libraries.</p>
+      </section>
+
+    </article>
+  </main>
+</body>
+</html>

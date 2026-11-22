@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A derivative from first principles · Manim Formula Editor</title>
+  <meta name="description" content="Derive the derivative of x² from the limit definition: a five-row derivation that writes itself line by line, built with Morph blocks.">
+  <meta name="mfe:id" content="tutorials/derivative">
+  <meta name="mfe:level" content="tutorial">
+  <meta name="mfe:difficulty" content="advanced">
+  <meta name="mfe:short" content="A derivative">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/derivative.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>A derivative from first principles</h1>
+      <p class="lead">Derive the derivative of x² from the limit definition as a derivation that
+        writes itself, line by line. One formula holds all five rows, Morph blocks grow each row out of
+        the one above, and the result lights up at the end.</p>
+
+      <h2 id="what-you-make">What you will make</h2>
+      <figure class="mfe-player" data-mfe-player="derivative" data-start="19" data-timeline data-autoplay data-loop
+              data-caption="The derivative of x² as the limit of a quotient: 21 seconds, a five-row formula, four Morph blocks."></figure>
+      <p>A title, <code>f(x) = x²</code>, and a derivation of five rows. The first row is the
+        definition of the derivative, applied to <code>x²</code>. The next three appear one after another,
+        each copied out of the row above: the square is expanded, the terms that cancel are left behind,
+        and the common <code>h</code> is divided out. The last row is the answer, <code>2x</code>, and it
+        swells in a flash of colour. Every <code>h</code> is gold, so the eye can follow the variable that
+        goes to zero.</p>
+      <p>You will use a Morph block four times, an Appear block twice, two more blocks for the finish,
+        and the pair editor to link glyphs by groups. It is a long tutorial: the steps are the same
+        for each row, so the first block is the one to take slowly.</p>
+
+      <h2 id="before">Before you start</h2>
+      <ul>
+        <li>You can write a formula and put it on the timeline:
+          <a href="../basics/formulas.html">Writing formulas</a> and
+          <a href="../basics/timeline.html">Working with the timeline</a>.</li>
+        <li>You have read <a href="../transforms/morph.html">Morph blocks</a>, which explains the pair
+          editor. This tutorial uses it without stopping to explain.</li>
+        <li>No companion is needed. The glyph numbers of this project are those of the browser's own
+          rendering (MathJax); you link by clicking glyphs, so you never type them.</li>
+      </ul>
+      <p>The finished project is below. To compare as you go, download it, choose <span class="ui">File ▸ Open…</span>,
+        press <span class="ui">Other file…</span> and pick the file
+        (<a href="../start/projects.html#open">Projects</a> explains the dialog).</p>
+      <div class="mfe-example" data-mfe-example="derivative"></div>
+
+      <h2 id="steps">Step by step</h2>
+
+      <h3 id="write">1. Write the derivation</h3>
+      <p>Press <span class="ui">+ New</span> in the Creator and give the formula the name
+        <code>derivation</code>. In the <span class="ui">Raw LaTeX</span> field type the five rows, then press
+        <span class="ui">Apply</span>. Manim sets every formula in an aligned environment, so the <code>&amp;</code> before
+        each <code>=</code> lines the equals signs up and <code>\\</code> ends a row:</p>
+<pre><code class="language-latex">f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} \\
+  &amp;= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h} \\
+  &amp;= \lim_{h \to 0} \frac{2xh + h^2}{h} \\
+  &amp;= \lim_{h \to 0} (2x + h) \\
+  &amp;= 2x</code></pre>
+      <figure>
+        <img src="../media/tutorials/derivative/formula.dark.webp" data-themed
+             alt="The formula editor with the five-row source in the Raw LaTeX field and the five rows drawn beside it."
+             width="1052" height="888" loading="lazy">
+        <figcaption>The formula editor after <span class="ui">Apply</span>: the source on the left and the
+          five rows rendered beside it.</figcaption>
+      </figure>
+      <p>Choose <span class="ui">FadeIn</span> in the <span class="ui">Appears with</span> menu: new clips of this
+        formula start with that intro. Then add a second formula, <code>title</code>, with the source
+        <code>f(x) = x^2</code>, and in its <span class="ui">Size</span> row type 72 in the second box, the one
+        that shows Manim's <code>font_size</code>.</p>
+      <aside class="callout note">
+        <p>Nothing needs hiding. A glyph that a Morph block brings in skips the intro and arrives through
+          the block, so the clip will show only the first row when it starts.</p>
+      </aside>
+
+      <h3 id="timeline">2. Put them on the timeline</h3>
+      <p>Right-click each formula and choose <span class="ui">Add to the timeline</span>, <code>derivation</code>
+        first. A new clip goes on the top track, <span class="ui">Track 2</span>, at the playhead, and a track holds one
+        clip at a time: the second clip lands on the same track, right after the first. So open the
+        <span class="ui">Timing</span> tab of the <code>title</code> clip and choose <span class="ui">Track 1</span> in its
+        <span class="ui">Track</span> list <em>first</em>: <span class="ui">Start</span> and <span class="ui">End</span> stop at the
+        neighbour on the same track. Then set the times and the place of both clips:</p>
+      <table>
+        <thead>
+          <tr><th>Clip</th><th>Track</th><th>Start</th><th>End</th><th>Initial state</th><th>Intro · Outro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>title</code></td><td>Track 1</td><td>0</td><td>21.4</td><td>X −4.6 · Y 3.3</td><td>Write 1 s · FadeOut 1 s</td></tr>
+          <tr><td><code>derivation</code></td><td>Track 2</td><td>1</td><td>21.4</td><td>X 0 · Y −0.2 · Scale 1.2</td><td>FadeIn 1 s · FadeOut 1 s</td></tr>
+        </tbody>
+      </table>
+      <p>A dropped clip is three seconds long, so the <span class="ui">End</span> field (or the right edge of the clip)
+        is the first thing to change: the blocks below need room until about 18 seconds. The finished project calls
+        its two tracks Derivation and Title; the names of a new project's tracks do not matter.</p>
+
+      <h3 id="first-block">3. The first Morph block: row 1 into row 2</h3>
+      <p>Put the playhead at 3.6 s, right-click the <code>derivation</code> clip and choose <span class="ui">Morph within the formula</span>.
+        With the block selected, press <span class="ui">Edit pairs…</span> in the Animations panel. The editor
+        draws the whole derivation twice, side by side: what can be a source at the left, what can arrive at
+        the right. You link a glyph of row 1 at the left to a glyph of row 2 at the right. (The playhead does
+        not have to be exactly on 3.6 s: the <span class="ui">Start</span> field in the block's panel sets the
+        time.)</p>
+      <p><span class="ui">Suggest pairs by label</span> is not the tool here. On this block it proposes
+        33 pairs at once, one for nearly every glyph that has a twin, and it picks the nearest twin in
+        reading order. This derivation repeats its symbols (<code>x</code>, <code>h</code>, <code>2</code>,
+        brackets), so that twin is not always the glyph the algebra means. Link by groups instead. Drag
+        a <strong>box</strong> over a run of glyphs at the left, another over the matching run at the right,
+        and press <span class="ui">Link</span>: one pair for the whole run. For a glyph that goes to two places, click it, then
+        <kbd data-keys="Shift">Shift</kbd>-click both targets and press <span class="ui">Link</span>.</p>
+
+      <figure>
+        <img src="../media/tutorials/derivative/box-drag.dark.webp" data-themed
+             alt="The first row of the derivation in the pair editor, with a box being dragged over the glyphs = lim h→0."
+             width="330" height="98" loading="lazy">
+        <figcaption>A box dragged over <em>= lim h→0</em> in the left copy selects those seven glyphs. Drag a
+          box over the same glyphs of row 2 in the right copy, then press <span class="ui">Link</span>: one
+          pair for the whole run.</figcaption>
+      </figure>
+
+      <p>Seven links make the block. The first is the box you just saw.</p>
+      <table>
+        <thead>
+          <tr><th>Sources (row 1)</th><th>Targets (row 2)</th><th>How</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>=</code> and <code>lim h→0</code>, seven glyphs</td><td>the same seven</td><td>a box on each side</td></tr>
+          <tr><td>the <code>x</code> of <code>(x + h)</code></td><td>the <code>x</code> of <code>x²</code> and the <code>x</code> of <code>2xh</code></td><td>click, then Shift-click both</td></tr>
+          <tr><td>the exponent of <code>(x + h)²</code></td><td>the exponents of <code>x²</code> and <code>h²</code></td><td>click, then Shift-click both</td></tr>
+          <tr><td>the <code>+</code> of <code>(x + h)</code></td><td>both <code>+</code> of <code>x² + 2xh + h²</code></td><td>click, then Shift-click both</td></tr>
+          <tr><td>the <code>h</code> of <code>(x + h)</code></td><td>the <code>h</code> of <code>2xh</code> and the <code>h</code> of <code>h²</code></td><td>click, then Shift-click both</td></tr>
+          <tr><td><code>− x²</code>, three glyphs</td><td>the same three</td><td>a box on each side</td></tr>
+          <tr><td>the <code>h</code> under the bar, and the bar</td><td>the same two</td><td>a box on each side</td></tr>
+        </tbody>
+      </table>
+      <p>The <code>f′(x)</code> and the brackets of <code>(x + h)</code> are not linked: they stay in row 1 and do
+        not appear in row 2. Press <span class="ui">Save pairs</span>.</p>
+      <aside class="callout tip">
+        <p>If <span class="ui">Save pairs</span> stays grey, the problems listed in the side column of the editor
+          say why. The usual cause is a glyph that ended up on both sides of the block: a source that you
+          also linked as a target.</p>
+      </aside>
+
+      <figure>
+        <img src="../media/tutorials/derivative/pairs-block-1.dark.webp" data-themed
+             alt="The pair editor of the first block in the finished project: the derivation drawn twice, one copy over the other, with seven coloured links from row 1 of the upper copy to row 2 of the lower one."
+             width="1180" height="641" loading="lazy">
+        <figcaption>The pair editor of the first block, saved, as the finished project opens it: the two
+          copies one over the other this time, since the drawing takes the layout that shows the glyphs
+          that can take part larger. Each group is one link; the badge at its junction gives its number
+          and the initial of its style (<em>I:</em> when the pair takes the block's).</figcaption>
+      </figure>
+
+      <h3 id="write-two">4. The glyph no pair brings</h3>
+      <p>Row 2 has one glyph that comes from nothing: the <code>2</code> of <code>2xh</code>, the coefficient the
+        expansion creates. Put the playhead at 4.9 s, right-click the clip and choose <span class="ui">Appear</span> ▸ <span class="ui">Write</span>.
+        In the panel of the new block pick that glyph in the glyph view (it is the <code>2</code> in front of
+        the <code>xh</code> of the second row). Set its duration to 0.6 s.</p>
+      <aside class="callout warning">
+        <p>A glyph that no pair and no Appear block names appears with the clip's intro, with row 1. If a
+          row shows up too early while you play it, look for a glyph you forgot.</p>
+      </aside>
+
+      <h3 id="other-rows">5. The other rows</h3>
+      <p>The same two moves, three more times. Add each block where the table says; link with boxes and
+        Shift-clicks as before. In the editor of a later block the glyphs of the rows already on screen
+        are dimmed as targets and the later rows are free: that is how you know you are on the right row.</p>
+      <figure>
+        <img src="../media/tutorials/derivative/pairs-block-2.dark.webp" data-themed
+             alt="The pair editor of the second block, side by side: row 2 of the copy at the left linked to row 3 of the copy at the right with three coloured arcs; rows 1 and 2 are dimmed in the copy at the right."
+             width="1180" height="521" loading="lazy">
+        <figcaption>The second block: three links from row 2 to row 3. The terms that cancel stay where
+          they are, unlinked.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Start</th><th>Block</th><th>Links (sources → targets)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>7.2 s</td><td>Morph, row 2 into row 3</td><td><code>= lim h→0</code> → the same (box on each side) · the numerator <code>2xh + h²</code> (six glyphs) → the numerator of row 3 · the <code>h</code> under the bar and the bar → the same</td></tr>
+          <tr><td>10.2 s</td><td>Morph, row 3 into row 4</td><td><code>= lim h→0</code> → the same · <code>2x</code> of the numerator → the <code>2x</code> of row 4 · <code>+ h</code> of the numerator → the <code>+ h</code> of row 4</td></tr>
+          <tr><td>11.6 s</td><td>Appear ▸ FadeIn, 0.6 s</td><td>the two brackets of row 4</td></tr>
+          <tr><td>14 s</td><td>Morph, row 4 into row 5</td><td>the <code>=</code> → the <code>=</code> · <code>2x</code> in the brackets → the <code>2x</code> of row 5</td></tr>
+        </tbody>
+      </table>
+      <p>Look at what stays unlinked. In row 2 the terms <code>x²</code> and <code>− x²</code> cancel, so they are not carried
+        into row 3. In row 3 the <code>h</code> of <code>2xh</code> and the <code>h</code> under the bar cancel, so row 4 starts from
+        <code>2x + h</code>. The derivation shows the algebra by what it leaves behind.</p>
+
+      <h3 id="colour">6. Colour the h</h3>
+      <p>In the formula editor, in the <span class="ui">Glyphs</span> view on the right, pick the thirteen <code>h</code> of the
+        derivation (<kbd data-keys="Mod">Ctrl</kbd>-click each, or drag a box over several) and give them
+        one colour; the project uses gold (<code>#F4C867</code>). A colour belongs to a glyph, and Morph copies keep it, so every row
+        inherits it. <span class="ui">Match colors</span> does the same job in one step for every
+        <code>h</code> at once: see <a href="../color/match-colors.html">Match colors</a>.</p>
+
+      <h3 id="finish">7. The finish</h3>
+      <p>The answer should arrive with some noise. At 16 s add a <span class="ui">Transform</span> ▸
+        <span class="ui">Part of the formula</span> block, pick the <code>2x</code> of the last row, set its
+        <span class="ui">Scale</span> to 1.3, tick <span class="ui">Set colour</span> and choose a teal. At 17.2 s add an
+        <span class="ui">Emphasis</span> ▸ <span class="ui">Indicate</span> block on the same two glyphs. Indicate swells them
+        and turns them yellow for a moment, then lets them go back.</p>
+
+      <figure>
+        <img src="../media/tutorials/derivative/blocks.dark.webp" data-themed
+             alt="The timeline of the derivation clip with eight blocks: Morph, Write, Morph, Morph, FadeIn, Morph, Transform and Indicate."
+             width="1424" height="83" loading="lazy">
+        <figcaption>The clip with its eight blocks: four Morph blocks, a Write and a FadeIn for the glyphs no
+          pair brings, a Transform and an Indicate for the answer.</figcaption>
+      </figure>
+
+      <h3 id="play">8. Play it and export</h3>
+      <p>Press <kbd data-keys="Space">Space</kbd> and watch the derivation write itself. Fix timings by dragging
+        blocks, as in <a href="../basics/timeline.html">the timeline page</a>. When you are happy,
+        <span class="ui">Export ▸ Python — ManimCE…</span> or <span class="ui">Export ▸ Python — ManimGL…</span> writes the
+        scene (see <a href="../basics/export.html#python">Exporting</a>).</p>
+
+      <h2 id="result">The result</h2>
+      <p>This is the scene as <strong>ManimCE</strong> renders it from the Python the editor exports, at 480p:</p>
+      <video class="mfe-manim" src="../examples/derivative.mp4" controls preload="metadata" playsinline></video>
+      <p>And the exported Python, for both libraries. Each Morph block is one <code>self.play(…)</code> with an
+        animation for each pair; a pair of groups is one <code>ReplacementTransform</code> of copies of the
+        glyphs. The first block starts like this:</p>
+<pre data-excerpt="examples/derivative.ce.py"><code class="language-python">        self.play(
+            ReplacementTransform(VGroup(*derivation_g[5:12]).copy(), VGroup(*derivation_g[23:30])),
+            ReplacementTransform(VGroup(derivation_g[13]).copy(), VGroup(derivation_g[30], derivation_g[34])),
+            …
+            run_time=1.2,
+        )</code></pre>
+      <p>The helper at the top of the file matches the editor's glyphs to Manim's by position.</p>
+      <div class="mfe-code" data-mfe-python="derivative"></div>
+      <div class="mfe-example" data-mfe-example="derivative"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li>Give a pair a path of its own: select a Morph pair, press <span class="ui">Edit path…</span>, and see
+          <a href="../transforms/custom-paths.html#by-hand">Custom paths</a>.</li>
+        <li>Change the style of a link: <span class="ui">Transform</span> takes the glyph out of its row, and
+          <span class="ui">Fade transform</span> fades it. <a href="../transforms/morph.html#settings">The block's settings</a> compares them.</li>
+        <li>Move a single term across an equals sign, or cancel a factor, with
+          <a href="../transforms/recipes.html">the recipes</a>.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

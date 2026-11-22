@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Palettes by role and Chroma Lab · Manim Formula Editor</title>
+  <meta name="description" content="Name your colours by role, make a palette in the editor or design one in Chroma Lab, and use it for new objects and for a whole project.">
+  <meta name="mfe:id" content="color/palettes">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Palettes">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/color-palettes-roles.data.js" defer></script>
+  <script src="../widgets/palette-roles.js" defer></script>
+  <script src="../media/color/palettes/library.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Palettes by role and Chroma Lab</h1>
+      <p class="lead">A palette gives your colours names: one for the background, one for formulas, one for variables, and so on. You make it once, and the editor uses it for what you create from then on. Chroma Lab, the colour studio inside the app, designs whole palettes for you.</p>
+
+      <div class="mfe-widget" data-mfe-widget="palette-roles" data-options='{"example": "color-palettes-roles"}'></div>
+
+      <h2 id="what">What a palette is</h2>
+      <p>A palette is a set of <strong>eleven roles</strong>, each with a colour. Every palette has all eleven, and the editor knows what to do with most of them:</p>
+      <table>
+        <thead><tr><th>Role</th><th>What the editor does with it</th></tr></thead>
+        <tbody>
+          <tr><td><code>background</code></td><td>The background of a new project.</td></tr>
+          <tr><td><code>formula</code></td><td>The colour of a new formula.</td></tr>
+          <tr><td><code>variable</code>, <code>constant</code>, <code>operator</code>, <code>result</code></td><td>The colours of a <a href="match-colors.html">Match colors</a> list made from the palette. They are also offered wherever you choose a colour.</td></tr>
+          <tr><td><code>text</code></td><td>The colour of a new text.</td></tr>
+          <tr><td><code>muted</code></td><td>The colour of a new brace.</td></tr>
+          <tr><td><code>rectangle</code></td><td>The colour of a new box, highlight or underline.</td></tr>
+          <tr><td><code>circle</code></td><td>The colour of a new circle.</td></tr>
+          <tr><td><code>arrow</code></td><td>The colour of a new cross, cross line or line.</td></tr>
+        </tbody>
+      </table>
+      <p>You can add <strong>roles of your own</strong> to a palette: a name and a colour, such as <em>Highlight</em>. Nothing takes them by itself. They are offered wherever you choose a colour by role.</p>
+      <aside class="callout note">
+        <p>A palette is a preference of the editor, kept in this browser. A project never stores one. It stores plain colours, and so does the exported Python. A project opened on a machine without your palette looks exactly the same.</p>
+      </aside>
+
+      <h2 id="make">Making a palette</h2>
+      <p>Choose <span class="ui">Preferences ▸ Editor palettes…</span>. The dialog holds up to 24 palettes. <span class="ui">New palette</span> starts one from the colours the editor uses without a palette, <span class="ui">Import palette…</span> reads a theme file, and <span class="ui">Duplicate</span> copies the one selected.</p>
+      <figure>
+        <img src="../media/color/palettes/preferences-menu.dark.webp" data-themed
+             alt="The end of the Preferences menu, from Show grid on. Chroma Lab… is ringed and numbered 1, and Editor palettes… is ringed and numbered 2."
+             width="271" height="365" loading="lazy">
+        <figcaption>Chroma Lab… (1) and Editor palettes… (2) are the last entries of <span class="ui">Preferences</span>.</figcaption>
+      </figure>
+      <div class="mfe-tour" data-mfe-tour="color/palettes/library" data-title="The Editor palettes dialog"></div>
+      <p>To make one:</p>
+      <ol>
+        <li>Press <span class="ui">New palette</span>. It appears selected, and not yet active.</li>
+        <li>Give it a name in <span class="ui">Display name</span> and press <span class="ui">Rename</span>.</li>
+        <li>Change a role: type a hex value in its field and press <kbd>Enter</kbd>, or use the picker beside it. The sample above the roles shows the palette at work on its own background.</li>
+        <li>Under the eleven roles, <span class="ui">Your roles</span> adds roles of your own: type a name, choose a colour and press <span class="ui">Add role</span> (or <kbd>Enter</kbd> in the name).</li>
+        <li>Press <span class="ui">Activate</span>.</li>
+      </ol>
+      <p>A colour is saved as soon as its field is accepted. There is no draft and no undo, so <span class="ui">Duplicate</span> a palette first if you want to keep it as it is. A role of your own is renamed and recoloured in place and removed with <span class="ui">Delete</span>; a palette holds up to 24 of them.</p>
+      <p><span class="ui">Export JSON</span> writes the palette to a file named after it. The file is the same palette when you import it again, here or in Chroma Lab. Your own roles travel in a field of their own, <code>customRoles</code>, beside the eleven <code>colors</code>.</p>
+
+      <h2 id="use">Using a palette</h2>
+      <p><span class="ui">Activate</span> makes a palette the one the editor works with, marked <strong>Active</strong> in the list. From then on:</p>
+      <ul>
+        <li>New projects start with its <code>background</code>, and new objects with the colour of their role (the table above).</li>
+        <li>Colour fields show a <span class="ui">Roles</span> button beside their hex box, and the swatches of a colour menu are followed by the roles.</li>
+        <li>A colour you change in the active palette applies from then on, with no need to activate it again.</li>
+      </ul>
+      <p>Nothing that already exists changes, and activating adds no undo step. To go back, select <strong>Manim defaults</strong> in the list and press <span class="ui">Use Manim defaults</span>. Deleting the active palette does the same, and the objects keep their colours.</p>
+      <p>The <span class="ui">Roles</span> button opens every role as a block with its name beside its colour, and your own roles under <span class="ui">Your roles</span>. Choosing one puts its colour in the field. The swatches of a menu keep the names in their tooltips.</p>
+      <figure>
+        <img src="../media/color/palettes/roles-popup.dark.webp" data-themed
+             alt="The top of a formula's editor with the Roles button of the Colour row (ringed, 1) and its pop-up: the eleven roles of the palette Chalkboard as coloured blocks with their names, two to a row, and under the heading Your roles, Highlight and Soft grid."
+             width="544" height="398" loading="lazy">
+        <figcaption>The <span class="ui">Roles</span> button of a colour field (1).</figcaption>
+      </figure>
+
+      <h2 id="apply">Recolouring what exists</h2>
+      <p><span class="ui">Edit ▸ Apply palette…</span> recolours the objects of the project with the role of their kind. The entry is off until a palette is active. The dialog shows what would change before anything does.</p>
+      <figure>
+        <img src="../media/color/palettes/edit-menu.dark.webp" data-themed
+             alt="The middle of the Edit menu, from Distribute to Colours in order. Apply palette… is ringed and numbered 1, and Match colors is ringed and numbered 2."
+             width="229" height="142" loading="lazy">
+        <figcaption><span class="ui">Apply palette…</span> (1), and the lists of <span class="ui">Match colors</span> (2).</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/color/palettes/apply-palette.dark.webp" data-themed
+             alt="The Apply palette dialog: the palette Chalkboard with its colours (1), the counts of objects that will change, are skipped or already match (2), the checkbox Apply background (3) and the list of skipped objects with their reasons (4)."
+             width="600" height="388" loading="lazy">
+        <figcaption>The palette (1), what will change (2), the background (3) and what is skipped (4).</figcaption>
+      </figure>
+      <ul>
+        <li>Each object takes the colour of its role: a formula its <code>formula</code>, a brace its <code>muted</code>, and so on.</li>
+        <li><span class="ui">Apply background</span> also sets the background of the scene, behind everything, locked objects included. You can leave it off.</li>
+        <li>An object is <strong>skipped</strong>, with its reason in the list, when it is used on a locked track, or when it has glyph colours of its own. Glyph colours, the colours that clips and animations override, tags, styles and timing are never touched.</li>
+        <li>The whole change is one undo step. If the project or the palette changes while the dialog is open, it asks you to review a fresh preview first.</li>
+      </ul>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/color/palettes/scene-before.dark.webp" data-themed
+               alt="The scene before Apply palette: a black background, a white sum and three braces." width="803" height="455" loading="lazy">
+          <figcaption>Before.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/color/palettes/scene-after.dark.webp" data-themed
+               alt="The same scene after Apply palette: the background and the colours of the palette Chalkboard." width="803" height="455" loading="lazy">
+          <figcaption>After Apply palette with the palette Chalkboard.</figcaption>
+        </figure>
+      </div>
+
+      <h2 id="match">Roles and Match colors</h2>
+      <p>The roles <code>variable</code>, <code>constant</code>, <code>operator</code> and <code>result</code> are for the glyphs of an equation. The editor cannot tell which glyph is a variable, so you say it with patterns. <span class="ui">Edit ▸ Match colors ▸ New from active palette…</span> makes a list of four rows coloured with those roles, and leaves the patterns empty for you to fill. It colours nothing by itself.</p>
+      <figure>
+        <img src="../media/color/palettes/match-from-palette.dark.webp" data-themed
+             alt="The Match colors dialog on a list made from the palette Chalkboard: four rows with empty patterns and the colours of variable, constant, operator and result (1)."
+             width="780" height="824" loading="lazy">
+        <figcaption>Four rows, one for each role. Write the patterns and apply the list.</figcaption>
+      </figure>
+
+      <h2 id="chroma-lab">Chroma Lab</h2>
+      <p><strong>Chroma Lab</strong> is the editor's colour studio. It generates palettes from harmonies and seeds, keeps roles linked, checks their contrast against the scene's background, extracts colours from an image and tries a palette on animated scenes. It comes inside the app and works offline: open it with <span class="ui">Preferences ▸ Chroma Lab…</span>. You do not need it to use palettes, but it is the quickest way to a good one.</p>
+      <figure>
+        <img src="../media/color/palettes/chroma-lab.dark.webp" data-themed
+             alt="The Chroma Lab dialog open over the editor: its title bar has Import palette… (ringed, 1), Editor palettes… (2) and an information button (3), and the studio below shows a scene and its colour roles, with the button Send to Manim Formula Editor ringed and numbered 4."
+             width="1408" height="860" loading="lazy">
+        <figcaption>Chroma Lab in its dialog. The title bar has <span class="ui">Import palette…</span> (1), <span class="ui">Editor palettes…</span> (2) and the information button (3); <span class="ui">Send to Manim Formula Editor</span> (4) is in the studio.</figcaption>
+      </figure>
+      <p>A theme reaches the editor's palettes in two ways, and nothing is written to your project in either:</p>
+      <ul>
+        <li><strong>Send.</strong> <span class="ui">Send to Manim Formula Editor</span>, under <q>Use in your animation</q> in <em>Exploration</em> and beside <em>JSON</em> in <em>Seeds &amp; themes</em>, puts the theme in the palettes and opens <span class="ui">Editor palettes</span> on it, ready to activate. Sending the same theme again finds the entry it made; a changed one makes another, named like the first with <em>(2)</em>.</li>
+        <li><strong>File.</strong> Save the theme with <span class="ui">JSON</span> in Chroma Lab, then use <span class="ui">Import palette…</span>, in the title bar of the dialog or in <span class="ui">Editor palettes</span>. You can also drag the file onto either dialog.</li>
+      </ul>
+      <figure>
+        <img src="../media/color/palettes/chroma-sent.dark.webp" data-themed
+             alt="The Editor palettes dialog opened on the theme just sent from Chroma Lab: its name and the Activate button are ringed and numbered 1."
+             width="820" height="984" loading="lazy">
+        <figcaption>After <span class="ui">Send</span>: the theme is selected in <span class="ui">Editor palettes</span>, ready to activate (1).</figcaption>
+      </figure>
+      <p>The <strong>ⓘ</strong> button in the title bar says this again, and links to the notices of Chroma Lab. The general <span class="ui">Export palette</span> file of Chroma Lab has no named roles, and the editor cannot import it.</p>
+      <aside class="callout warning">
+        <p>Chroma Lab keeps its own work in the browser's storage, which can be unavailable. Send or export your theme before you close the dialog; it says so in its footer.</p>
+      </aside>
+      <p>A palette that you edit in the editor, adding roles of your own, is not sent back. If you send the theme from Chroma Lab again, it arrives as a new palette without your roles.</p>
+      <p>Chroma Lab is a part of the editor that has a repository of its own, and it also opens alone from there. <a href="../start/install.html">Getting the app running</a> tells how the two fit together.</p>
+
+      <h2 id="try">Try a palette on a scene</h2>
+      <p>The widget at the top of the page recolours a short derivation with the roles of a palette: pick a palette, and every glyph takes the colour of its role. A palette that looks good on a swatch row can look very different on a scene, so look at it on one before you activate it. The project below is that derivation: download it, choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick it, to try a palette of your own on it.</p>
+      <div class="mfe-example" data-mfe-example="color-palettes-roles"></div>
+      <aside class="try">
+        <ol>
+          <li>Open <span class="ui">Preferences ▸ Editor palettes…</span> and press <span class="ui">New palette</span>.</li>
+          <li>Set <code>variable</code> to a colour you like and press <span class="ui">Activate</span>.</li>
+          <li>Press <span class="ui">+ New</span> in the Creator and open the <span class="ui">Colour</span> row's <span class="ui">Roles</span> button: your palette is there.</li>
+          <li>Open <span class="ui">Edit ▸ Apply palette…</span> to see what it would change in your project.</li>
+        </ol>
+      </aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="match-colors.html">Match colors</a> turns the four glyph roles into colours on your formulas.</li>
+        <li><a href="coloring.html">Colouring glyphs and objects</a> covers colours by hand.</li>
+        <li><a href="../reference/preferences.html">Preferences</a> lists every preference of the editor.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

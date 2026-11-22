@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Placing things in the Preview · Manim Formula Editor</title>
+  <meta name="description" content="Select, drag and snap; the grid, axis lock and nudging; the handles; and working on several things at once.">
+  <meta name="mfe:id" content="basics/preview">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="The Preview">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/preview-placing.data.js" defer></script>
+  <script src="../examples/preview-guides.data.js" defer></script>
+  <script src="../media/basics/preview/parts.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Placing things in the Preview</h1>
+      <p class="lead">The Preview is where you put things on the scene. Click to select, drag to
+        move, with guides that line things up; nudge with the arrow keys; scale and turn with
+        handles; and work on several things at once.</p>
+
+      <h2 id="preview">The Preview at a glance</h2>
+      <p>The Preview shows the scene at the time of the playhead (the line you move along the
+        ruler of the <a href="timeline.html">timeline</a>), as Manim will draw it. What you
+        do in it edits the <strong>clip</strong> of the formula you touch — one appearance of that
+        formula on the timeline (see the <a href="../reference/glossary.html#clip">glossary</a>): its
+        position, its scale and its rotation. Scene positions are in Manim's units: the frame is 8 units tall and, at
+        16:9, 14.22 units wide, with the origin at its centre and <em>y</em> going up.</p>
+      <div class="mfe-tour" data-mfe-tour="basics/preview/parts" data-title="The parts of the Preview"></div>
+      <p>The view toolbar sits in the title bar of the panel, at the right. Its buttons, from the
+        left:</p>
+      <figure>
+        <img src="../media/basics/preview/toolbar.dark.webp" data-themed
+             alt="The Preview's toolbar with seven numbered parts: five buttons, the zoom control and the Fit button."
+             width="305" height="61" loading="lazy">
+        <figcaption>(1) <span class="ui">Align by symbol</span>, (2) <span class="ui">Circle
+          selector</span>, (3) <span class="ui">Keep the transform handles shown</span>, (4)
+          <span class="ui">Snap to objects</span>, (5) <span class="ui">Multicamera</span>, which gives
+          the scene a <a href="../animations/camera.html">camera</a>, (6) <span class="ui">Zoom out</span>,
+          the zoom and <span class="ui">Zoom in</span>, (7) <span class="ui">Fit</span>.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p>A clip that has a <span class="ui">Transform</span> block is <strong>locked after the
+          first one</strong>. Before it, a drag in the Preview edits the clip's starting state;
+          after it, the Preview does not move the clip, and a notice says where to edit instead:
+          the end icon of the block on the timeline, or the padlock of the clip. See
+          <a href="../animations/blocks.html#transform">Animation blocks</a>.</p>
+      </aside>
+
+      <h2 id="select">Selecting</h2>
+      <p>Point at a formula and the glyph under the pointer is outlined. Click, and the formula's
+        clip is selected: it gets a teal box. A click on a clip of the timeline selects the same
+        thing, so the Preview and the timeline always agree.</p>
+      <p>While the scene plays, the Preview leaves the pointer alone: nothing is outlined,
+        selected or dragged, and the transform handles are hidden. What is selected stays
+        selected. Stop the scene to work on it. You can still pan and zoom the view while it
+        plays.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/select.dark.webm"
+               poster="../media/basics/preview/select.dark.webp" width="800" height="452"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A click selects a clip; <kbd data-keys="Mod">Ctrl</kbd>+click adds a second
+          one; a rectangle drawn from empty space selects the clips it touches, in place of the
+          ones selected before.</figcaption>
+      </figure>
+      <ul>
+        <li><kbd data-keys="Mod">Ctrl</kbd>+click or <kbd data-keys="Shift">Shift</kbd>+click adds
+          a clip to the selection, or takes it out when it is already there. Such a click only
+          changes the selection: nothing is dragged.</li>
+        <li>A drag that starts on empty space draws a rectangle. It selects every clip whose
+          formula it touches, as it grows. With <kbd data-keys="Mod">Ctrl</kbd> or
+          <kbd data-keys="Shift">Shift</kbd> held when you press, it adds to the selection;
+          <kbd data-keys="Escape">Esc</kbd> brings the selection from before back.</li>
+        <li>A plain click on empty space clears the selection.</li>
+        <li><kbd data-keys="Mod+A">Ctrl+A</kbd> selects every clip that is on screen at the
+          playhead.</li>
+        <li>With several clips selected, a plain click on one of them narrows the selection to it.</li>
+      </ul>
+      <p>The whole formula counts, not only its ink: the gap between two glyphs belongs to the
+        formula. To pick single glyphs of a formula, hold <kbd data-keys="Alt">Alt</kbd>: that is
+        <a href="../layout/glyph-picking.html">its own page</a> in the Layout section.</p>
+
+      <h2 id="drag-snap">Dragging and snapping</h2>
+      <p>Press on a formula and drag: its clip follows the pointer. If it is one of several
+        selected clips, they all move together. The box around what you move
+        <strong>snaps</strong> to the edges and the centres of the other formulas and of the
+        frame, as soon as it is within 8 pixels of a match. Yellow guides show what it lines up
+        with.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/drag-snap.dark.webm"
+               poster="../media/basics/preview/drag-snap.dark.webp" width="800" height="296"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The third formula goes up to the row of the other two: the yellow lines say
+          what its box is lined up with, first the middle of the frame, then the other formulas.
+          Between the two it stops where the gaps are equal.
+          <kbd data-keys="Mod+Z">Ctrl+Z</kbd> undoes the whole drag.</figcaption>
+      </figure>
+      <p>On an axis where no edge or centre matches, a dragged formula can still snap to the spot
+        that is as far from two formulas as they are from it, or to the gap two neighbours keep.
+        Those <em>equal gaps</em> are drawn as bars with a tick at each end.</p>
+      <figure>
+        <img src="../media/basics/preview/guides.dark.webp" data-themed
+             alt="A formula between two others on one row, with a yellow line along their tops and two yellow bars with end ticks under the gaps."
+             width="801" height="453" loading="lazy">
+        <figcaption>The yellow line says the tops are level; the two bars under the gaps say the
+          gaps are equal.</figcaption>
+      </figure>
+      <p>A corner drag of a handle (below) sticks the same way to the width or the height of
+        another formula, and shows the two equal sizes as bars.</p>
+      <p>Snapping has a switch: the magnet button of the view toolbar (<span class="ui">Snap to
+        objects</span>, also in <span class="ui">Preferences ▸ Snap to objects</span>). The colour
+        and the width of the guides are in the same menu, as <span class="ui">Guide colour</span>
+        and <span class="ui">Guide width</span>.</p>
+      <p>One drag is one undo step, and <kbd data-keys="Escape">Esc</kbd> during the drag puts
+        everything back.</p>
+
+      <h2 id="axis-lock">Holding a drag to one axis, or setting it free</h2>
+      <p>Press the button first, then the key: with a key already down, the press means something
+        else (<kbd data-keys="Mod">Ctrl</kbd>+click adds to the selection, and
+        <kbd data-keys="Alt">Alt</kbd>+click picks glyphs or pans the view).</p>
+      <aside class="callout platform" data-platform="mac">
+        <p>On a Mac the app takes ⌘ where other systems take Ctrl (a Ctrl+click is the secondary
+          click there) and ⌥ is Alt. The keys of this page are written for your system.</p>
+      </aside>
+      <table>
+        <thead>
+          <tr><th>Held during the drag</th><th>What the drag does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>nothing</td><td>Follows the pointer, snapping to the other formulas and to the grid.</td></tr>
+          <tr><td><kbd data-keys="Alt">Alt</kbd></td><td>Moves only along one axis: horizontally or vertically, whichever the pointer has gone further along since the drag began. It still snaps along that axis.</td></tr>
+          <tr><td><kbd data-keys="Mod">Ctrl</kbd></td><td>Follows the pointer with no snapping at all: no guides, no grid.</td></tr>
+          <tr><td><kbd data-keys="Mod+Alt">Ctrl+Alt</kbd></td><td>Along one axis, with no snapping.</td></tr>
+        </tbody>
+      </table>
+      <p>The axis is chosen again as the pointer moves, and a note at the bottom of the Preview
+        says which one holds. Let go of <kbd data-keys="Alt">Alt</kbd> and the drag follows the
+        pointer again. A key pressed or let go changes the drag at once, without a pointer move.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/axis-lock.dark.webm"
+               poster="../media/basics/preview/axis-lock.dark.webp" width="448" height="364"
+               muted loop playsinline preload="none"></video>
+        <figcaption><kbd data-keys="Alt">Alt</kbd> pressed in the middle of a drag holds the formula
+          on one horizontal line, and it still snaps along it; let go of Alt and the formula goes
+          to the pointer.</figcaption>
+      </figure>
+
+      <h2 id="nudge">Nudging with the arrow keys</h2>
+      <p>Click a formula, and the arrow keys move the selected clips: <kbd data-keys="ArrowLeft">←</kbd>
+        <kbd data-keys="ArrowRight">→</kbd> <kbd data-keys="ArrowUp">↑</kbd>
+        <kbd data-keys="ArrowDown">↓</kbd> by 0.01 scene units, with <kbd data-keys="Shift">Shift</kbd>
+        by 0.1. A hint at the bottom of the Preview says so once it has the keys. There is no
+        snapping: a press moves by its step exactly.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/nudge.dark.webm"
+               poster="../media/basics/preview/nudge.dark.webp" width="696" height="250"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The <span class="ui">X</span> and <span class="ui">Y</span> of the clip's
+          <span class="ui">Initial state</span>, in the <span class="ui">Timing</span> tab of the
+          Animations panel (ringed), follow the keys. Four presses of <kbd data-keys="ArrowRight">→</kbd>
+          make X 3.74; two of <kbd data-keys="Shift+ArrowUp">Shift+↑</kbd> make Y 2.75; one of
+          <kbd data-keys="Shift+ArrowLeft">Shift+←</kbd> makes X 3.64. One
+          <kbd data-keys="Mod+Z">Ctrl+Z</kbd> undoes the whole run.</figcaption>
+      </figure>
+      <ul>
+        <li>The keys edit the clip at the playhead, as a drag would. A clip that a drag would leave
+          where it is stays, and a notice names it.</li>
+        <li>A run of presses is <strong>one undo step</strong>, a key held down included. Any other
+          edit in between, a new click on the scene, or another time of the playhead starts a new
+          step.</li>
+        <li>With nothing selected on screen, <kbd data-keys="ArrowLeft">←</kbd> and
+          <kbd data-keys="ArrowRight">→</kbd> step the playhead, as everywhere else. With
+          <kbd data-keys="Mod">Ctrl</kbd> or <kbd data-keys="Alt">Alt</kbd> held the arrows are
+          not taken.</li>
+      </ul>
+      <p>For an exact place, type it: the <span class="ui">X</span>, <span class="ui">Y</span>,
+        <span class="ui">Scale</span> and <span class="ui">Rotation</span> fields of
+        <span class="ui">Initial state</span> take numbers, and <span class="ui">Flip X</span> and
+        <span class="ui">Flip Y</span> mirror the formula.</p>
+
+      <h2 id="grid">The grid</h2>
+      <p>The <span class="ui">Show grid</span> button, in the middle of the transport bar, draws a
+        grid under the formulas and makes a dragged formula land on its nearest node. The grid
+        exists only in the editor: it is never in an export.</p>
+      <figure>
+        <img src="../media/basics/preview/grid-controls.dark.webp" data-themed
+             alt="The grid controls of the transport bar: a button with a hash sign (1), a minus, the number 1 and a plus (2), and a button with a square dot (3)."
+             width="189" height="65" loading="lazy">
+        <figcaption>(1) <span class="ui">Show grid</span>; (2) <span class="ui">Sparser grid</span>,
+          the spacing in Manim units and <span class="ui">Denser grid</span>; (3) what the grid
+          holds.</figcaption>
+      </figure>
+      <ul>
+        <li>The spacing goes through 2, 1, 0.5, 0.25 and 0.1 units. The shortcuts are
+          <kbd data-keys="Mod+'">Ctrl+'</kbd> to show or hide the grid, and
+          <kbd data-keys="Alt+ArrowUp">Alt+↑</kbd> and <kbd data-keys="Alt+ArrowDown">Alt+↓</kbd>
+          for denser and sparser.</li>
+        <li>The last button chooses what lands on a node: the formula's centre (a dot in a box) or
+          its nearest edges (four corners).</li>
+        <li><kbd data-keys="Mod">Ctrl</kbd> held during the drag frees it. A guide to another
+          formula wins on its axis, because a line-up with another formula is more specific.</li>
+        <li>The same choices are in <span class="ui">Preferences ▸ Show grid</span>,
+          <span class="ui">Grid spacing</span> and <span class="ui">Grid snaps</span>.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/grid-drag.dark.webm"
+               poster="../media/basics/preview/grid-drag.dark.webp" width="818" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The grid is shown (1 unit). With the magnet off, so that only the grid holds
+          the formula, a drag across it jumps from node to node by the formula's centre.</figcaption>
+      </figure>
+
+      <h2 id="handles">Scale and rotate: the handles</h2>
+      <p>Hold <kbd data-keys="Shift">Shift</kbd> over a selected clip and its <strong>transform
+        handles</strong> appear, with a hint in the corner. The button that keeps them on without
+        Shift is the third one of the view toolbar (<span class="ui">Preferences ▸ Keep the
+        transform handles shown</span>).</p>
+      <figure>
+        <img src="../media/basics/preview/handles-shot.dark.webp" data-themed
+             alt="A formula inside a teal box with a square handle at each corner and a small circle above it; the hint at the bottom says what to drag."
+             width="801" height="453" loading="lazy">
+        <figcaption>Four square handles scale; the circle above the box turns.</figcaption>
+      </figure>
+      <ul>
+        <li>A <strong>corner</strong> scales the formula uniformly about its centre. The scale goes
+          in steps, 0.05 by default: change it with <span class="ui">Preferences ▸ Scale
+          step</span> (0.05, 0.1, 0.15, 0.2, or <span class="ui">Custom…</span>, which takes a
+          number or a fraction such as 1/3).</li>
+        <li>The <strong>circle</strong> above the box turns the formula, in steps of 15°.</li>
+        <li>Hold <kbd data-keys="Mod">Ctrl</kbd> while dragging for free values, with no steps.</li>
+        <li>A readout next to the pointer says the scale (× 1.45) or the angle (30°). A corner
+          drag also sticks to the width or the height of another formula, showing the two equal
+          sizes as bars; Ctrl frees that too.</li>
+      </ul>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/handles.dark.webm"
+               poster="../media/basics/preview/handles.dark.webp" width="696" height="330"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A corner scales the formula and the circle turns it; the ringed
+          <span class="ui">Scale</span> and <span class="ui">Rotation</span> fields of its
+          <span class="ui">Initial state</span> follow.</figcaption>
+      </figure>
+
+      <h2 id="several">Several at once</h2>
+      <p>With two or more clips selected, a <strong>bar</strong> appears in the top-left corner of
+        the Preview: the number of clips, the buttons to align and distribute them
+        (<a href="../layout/align.html">Align and distribute</a>), and the menus
+        <span class="ui">Paste properties</span> and <span class="ui">Match colors</span>
+        (<a href="../color/match-colors.html">Match colors</a>).
+        Dragging any of the selected clips moves them all, and the box around the whole group is
+        what snaps.</p>
+      <p>Hold <kbd data-keys="Shift">Shift</kbd> and the handles frame the whole group: a corner
+        scales every clip about the middle of the group, and the circle turns the group, each clip
+        about that same point. The scale snaps in steps, as for one clip.</p>
+      <figure>
+        <img src="../media/basics/preview/group-handles.dark.webp" data-themed
+             alt="The four formulas of the scene selected, one teal box round all of them with a square handle at each corner and a circle above it."
+             width="801" height="453" loading="lazy">
+        <figcaption><kbd data-keys="Mod+A">Ctrl+A</kbd> selects the four formulas; with
+          <kbd data-keys="Shift">Shift</kbd> held, the handles frame the group. A corner scales them
+          all toward its middle; the circle turns them all.</figcaption>
+      </figure>
+      <p>Not every selected clip can move. A clip on a locked track, a clip
+        <a href="#lock">locked in the preview</a>, a clip locked after its transformations and a
+        clip that is not on screen stay where they are. A drag leaves them without a word; Align,
+        Distribute and Paste properties name them in a notice, and so do the arrow keys and the
+        group's handles for the ones that are on screen. Braces, shapes and labels attached to a
+        formula follow the formula they hang on.</p>
+
+      <h2 id="stays">When a clip does not move</h2>
+      <p>Some clips cannot be moved from the Preview. For the first three kinds below, a notice
+        says why:</p>
+      <ul>
+        <li><strong>Locked after its first transformation.</strong> The clip has a
+          <span class="ui">Transform</span> block and the playhead is past its start. A notice says
+          so and says where to edit: the end icon of the block on the timeline, or the padlock of
+          the clip.</li>
+        <li><strong>Attached.</strong> A brace, a shape, a label or a line with an end on glyphs
+          is placed by the glyphs it hangs on. The notice reads “Attached to …”, and
+          <span class="ui">Detach</span>, in the Animations panel, frees it.</li>
+        <li><strong>Carried by a Transform.</strong> A shape that a Transform took to other
+          glyphs is placed by them: the notice reads “Carried to … by its Transform”.</li>
+        <li><strong>On a locked track</strong> (the padlock of the track's header), or
+          <a href="#lock">locked in the preview</a>: nothing is dragged. Unlock it first.</li>
+        <li><strong>Not on screen</strong> at the playhead: there is nothing to press. Move the
+          playhead into the clip.</li>
+      </ul>
+      <p>When several clips are selected and only some of them can move, the others stay. A drag
+        leaves them without a word; <a href="../layout/align.html#takes-part">Align</a>,
+        Distribute, Paste properties, the arrow keys and the group's handles name them in a
+        notice (“2 clips stayed”).</p>
+
+      <h2 id="view">Zooming and panning</h2>
+      <p>Zoom with <kbd data-keys="Mod">Ctrl</kbd> and the mouse wheel, about the pointer, or with
+        the <span class="ui">Zoom out</span> and <span class="ui">Zoom in</span> buttons of the
+        toolbar (about the middle of the view). Pan with the middle mouse button held, or with
+        <kbd data-keys="Alt">Alt</kbd> held while you drag on empty space. <span class="ui">Fit</span>
+        shows the whole frame again.</p>
+      <aside class="callout platform" data-platform="mac">
+        <p>On a trackpad, a pinch zooms about the pointer as far as your fingers go: twice as far
+          apart, twice as large. A scroll with two fingers moves the view, and the scene follows
+          your fingers. With a mouse the wheel alone moves the view too, and ⌘ and the wheel
+          zoom.</p>
+      </aside>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/preview/view.dark.webm"
+               poster="../media/basics/preview/view.dark.webp" width="818" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Ctrl and the wheel zoom about the formula under the pointer; Alt and a drag on
+          empty space pan; <span class="ui">Fit</span> brings the whole frame back.</figcaption>
+      </figure>
+      <p>The view is for looking: zooming and panning change nothing in the project, and they do
+        not move the formulas or the export.</p>
+
+      <h2 id="lock">Locking a formula in the preview</h2>
+      <p>A formula you have placed can be locked, so that you cannot move it by accident while you
+        place the others around it. Right-click its clip on the timeline and choose
+        <span class="ui">Lock in the preview</span>.</p>
+      <figure>
+        <img src="../media/basics/preview/lock-menu.dark.webp" data-themed
+             alt="The menu of a clip on the timeline, with its last entry, Lock in the preview, highlighted."
+             width="245" height="470" loading="lazy">
+        <figcaption>The entry is at the end of the clip's menu on the timeline.</figcaption>
+      </figure>
+      <ul>
+        <li>The Preview draws the formula faded (<span class="ui">Preferences ▸ Locked
+          formulas</span>: 20 % to 100 %), and the pointer goes through it: a click selects what is
+          under it, and a rectangle or <kbd data-keys="Mod+A">Ctrl+A</kbd> leaves it out.</li>
+        <li>It has no handles, and Align, Distribute, Align by symbol and Paste properties leave it
+          alone.</li>
+        <li>The other formulas still snap to it as you drag them, which is what it is for.</li>
+        <li>The timeline and the Animations panel edit it as any other clip. Its clip on the
+          timeline wears a mark; click it, or choose <span class="ui">Unlock in the preview</span>,
+          to unlock.</li>
+      </ul>
+      <figure>
+        <img src="../media/basics/preview/locked.dark.webp" data-themed
+             alt="The Preview with four formulas, one of them, in the upper right, drawn faded."
+             width="818" height="583" loading="lazy">
+        <figcaption>The formula at the upper right is locked: it is drawn at 40 %.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/basics/preview/lock-mark.dark.webp" data-themed
+             alt="The start of a clip on the timeline with a small mark, a crossed-out pointer, before the formula's name."
+             width="458" height="96" loading="lazy">
+        <figcaption>The mark on a locked clip.</figcaption>
+      </figure>
+      <p>Locking is for the editor only: the exported Python and the video are the same with or
+        without it.</p>
+
+      <h2 id="menus">Right-click and double-click</h2>
+      <p>A right-click on a formula selects its clip (unless it is already among the selected ones)
+        and opens its menu.</p>
+      <figure>
+        <img src="../media/basics/preview/menu.dark.webp" data-themed
+             alt="The Preview's right-click menu of a clip: Copy properties, Paste properties, Align, Distribute, Add brace, Add shape, Add line, Intro, Outro, Remove animations, Remove relations, Unlink formula, Split at playhead, Apply match colors, and the colours in order."
+             width="209" height="460" loading="lazy">
+        <figcaption>The menu of a formula in the Preview.</figcaption>
+      </figure>
+      <p><span class="ui">Copy properties</span> and <span class="ui">Paste properties ▸</span> copy the
+        look of a clip — scale, rotation, flips, opacity, colours — and, if you choose
+        <span class="ui">Position</span>, its place, onto other clips;
+        <span class="ui">Align ▸</span> and <span class="ui">Distribute ▸</span> are described in
+        <a href="../layout/align.html">Align and distribute</a>; <span class="ui">Add brace ▸</span>,
+        <span class="ui">Add shape ▸</span> and <span class="ui">Add line ▸</span> add those
+        objects on the formula (<a href="../objects/braces.html">Braces</a>,
+        <a href="../objects/shapes.html">Shapes</a>,
+        <a href="../objects/lines-arrows.html">Lines and arrows</a>); the rest are the clip's own
+        entries, as on the timeline.</p>
+      <p>A right-click on empty space opens a small menu of scene actions, <span class="ui">Add
+        line</span>. A <strong>double-click</strong> on a text in the Preview opens that text in the
+        composition editor, at that clip (<a href="../objects/texts.html">LaTeX texts and font
+        texts</a>); a formula opens from the Creator, or by a double-click on its clip on the
+        timeline.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <p>Open <code>preview-placing</code> and put the four formulas where you want them.</p>
+      <div class="mfe-example" data-mfe-example="preview-placing"></div>
+      <aside class="try">
+        <ol>
+          <li>Open the file: choose <span class="ui">File ▸ Open…</span>, press
+            <span class="ui">Other file…</span> in the dialog and pick it (see
+            <a href="../start/projects.html#open">Open</a>). Click the ruler of the timeline at 4 s,
+            so that all four formulas are on screen.</li>
+          <li>Drag <code>circle</code> (the area of a circle, at the lower left) up toward
+            <code>pythagoras</code>. Watch the yellow guides when their left edges line up.</li>
+          <li>Drag <code>circle</code> again; with the mouse button down, hold
+            <kbd data-keys="Alt">Alt</kbd> and move the pointer sideways: the formula slides along
+            one line.</li>
+          <li>Click <code>euler</code>, press <kbd data-keys="ArrowRight">→</kbd> three times, then
+            read its X in the Animations panel (<span class="ui">Timing</span> tab).</li>
+          <li>Hold <kbd data-keys="Shift">Shift</kbd> and scale <code>quadratic</code> with a
+            corner: watch the readout, and try the same with
+            <kbd data-keys="Mod">Ctrl</kbd> held.</li>
+          <li>Press <kbd data-keys="Mod+A">Ctrl+A</kbd>, hold Shift, and drag a corner of the group
+            toward its centre. Then undo with <kbd data-keys="Mod+Z">Ctrl+Z</kbd>.</li>
+          <li>Right-click the clip of <code>euler</code> on the timeline and choose <span class="ui">Lock
+            in the preview</span>. Drag <code>pythagoras</code> up until it is level with it: it
+            still snaps to the locked formula, which you cannot move by accident.</li>
+        </ol>
+      </aside>
+      <p>The scene itself writes its four formulas one after the other. Here it is, as you
+        will find it once you have tidied the layout:</p>
+      <figure class="mfe-player" data-mfe-player="preview-placing" data-start="end" data-timeline
+              data-caption="Four formulas written one after the other. Each has its own position, set by dragging."></figure>
+      <p>The snapping example, <code>preview-guides</code>, is the scene of the clips about guides:</p>
+      <div class="mfe-example" data-mfe-example="preview-guides"></div>
+
+      <h2 id="keys">Keys and gestures of this page</h2>
+      <table>
+        <thead>
+          <tr><th>Gesture</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Click; <kbd data-keys="Mod">Ctrl</kbd> or <kbd data-keys="Shift">Shift</kbd>+click</td><td>Select; add to the selection or take out</td></tr>
+          <tr><td>Drag on empty space</td><td>Rectangle that selects the clips it touches (<kbd data-keys="Escape">Esc</kbd> cancels)</td></tr>
+          <tr><td><kbd data-keys="Mod+A">Ctrl+A</kbd></td><td>Select every clip on screen at the playhead</td></tr>
+          <tr><td>Drag; then <kbd data-keys="Alt">Alt</kbd></td><td>Move; hold to one axis</td></tr>
+          <tr><td>Drag; then <kbd data-keys="Mod">Ctrl</kbd></td><td>Move without snapping</td></tr>
+          <tr><td><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd> <kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd>; with <kbd data-keys="Shift">Shift</kbd></td><td>Move the selected clips 0.01; 0.1</td></tr>
+          <tr><td><kbd data-keys="Shift">Shift</kbd> held</td><td>Show the transform handles (a group's when several are selected)</td></tr>
+          <tr><td><kbd data-keys="Mod">Ctrl</kbd> held while scaling or turning</td><td>Free values, no steps and no size guides</td></tr>
+          <tr><td><kbd data-keys="Mod+'">Ctrl+'</kbd>; <kbd data-keys="Alt+ArrowUp">Alt+↑</kbd> <kbd data-keys="Alt+ArrowDown">Alt+↓</kbd></td><td>Show or hide the grid; denser, sparser</td></tr>
+          <tr><td><span class="only-mac">Pinch or </span><kbd data-keys="Mod">Ctrl</kbd> + wheel; <span class="only-mac">scroll, </span>middle button or <kbd data-keys="Alt">Alt</kbd> + drag on empty space</td><td>Zoom about the pointer; pan</td></tr>
+          <tr><td><kbd data-keys="Escape">Esc</kbd></td><td>Cancel the drag in progress</td></tr>
+        </tbody>
+      </table>
+      <p>The whole list is in the <a href="../reference/shortcuts.html">keyboard and mouse
+        reference</a>. To pick single glyphs, see <a href="../layout/glyph-picking.html">Picking
+        glyphs with Alt</a>; to line formulas up exactly, <a href="../layout/align.html">Align and
+        distribute</a> and <a href="../layout/align-symbol.html">Align by symbol</a>.</p>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="timeline.html">Working with the timeline</a> covers tracks and clips, the playhead, zoom and snapping.</li>
+        <li><a href="../animations/blocks.html">Animation blocks</a> covers every animation block a clip can hold, from Write to FocusOn.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

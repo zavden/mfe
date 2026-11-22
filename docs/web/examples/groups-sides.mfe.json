@@ -1,0 +1,216 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Both sides at once",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#070B15",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_fsdin44t",
+      "kind": "math",
+      "name": "eq",
+      "source": "2x + 4 = 10",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 120,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-2bf1iatsx8u",
+        "glyphs": [
+          {
+            "label": "2",
+            "center": [
+              -2.9058696,
+              0.04447439999999997
+            ],
+            "size": [
+              0.4998672000000002,
+              0.8343648
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -2.2431384000000003,
+              -0.1027296
+            ],
+            "size": [
+              0.6101136,
+              0.5675184
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -1.1097302400000002,
+              -0.05888159999999998
+            ],
+            "size": [
+              0.8343648000000001,
+              0.8331120000000001
+            ]
+          },
+          {
+            "label": "4",
+            "center": [
+              -0.03144528000000002,
+              0.05136479999999999
+            ],
+            "size": [
+              0.5549903999999999,
+              0.8481456
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              1.11774816,
+              -0.05950800000000003
+            ],
+            "size": [
+              0.8343648000000004,
+              0.2931552
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              2.2725792000000005,
+              0.04447439999999997
+            ],
+            "size": [
+              0.4309631999999999,
+              0.8343648
+            ]
+          },
+          {
+            "label": "0",
+            "center": [
+              2.8920888000000002,
+              0.03069359999999996
+            ],
+            "size": [
+              0.5274288,
+              0.8619264
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_8grk61px",
+      "kind": "visual",
+      "name": "Equation",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_e88lezvx",
+      "formulaId": "f_fsdin44t",
+      "trackId": "t_8grk61px",
+      "start": 0,
+      "end": 5,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_eimuwx49",
+          "kind": "appear",
+          "start": 1,
+          "duration": 1,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1,
+          "group": "g_mrt3g1hw"
+        },
+        {
+          "id": "a_xlku9m93",
+          "kind": "appear",
+          "start": 1,
+          "duration": 1,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            5,
+            6
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1,
+          "group": "g_mrt3g1hw"
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

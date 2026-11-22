@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What the editor does · Manim Formula Editor</title>
+  <meta name="description" content="The Manim Formula Editor at one look: formulas, the timeline, transformations between glyphs, and the Python it writes for Manim.">
+  <meta name="mfe:id" content="start/overview">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Overview">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/hero.data.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <style>
+    /* The five steps of the workflow, a card each, joined by a chevron. */
+    .flow { margin: var(--doc-space-8) 0; container-type: inline-size; }
+    .flow-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; margin: 0; padding: 0; list-style: none; }
+    .flow-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      margin: 0;
+      padding: 14px 12px 12px;
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-radius);
+      background: var(--doc-panel-gradient), var(--doc-surface);
+      box-shadow: var(--doc-shadow), inset 0 1px 0 var(--doc-edge-light);
+    }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid var(--doc-accent);
+      border-right: 2px solid var(--doc-accent);
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .flow-step .icon-tile { margin-bottom: 8px; }
+    .flow-verb { color: var(--doc-text); font-size: 16px; font-weight: 680; line-height: 1.2; }
+    .flow-where { color: var(--doc-link); font-size: 13px; font-weight: 600; }
+    .flow-gets { color: var(--doc-text-muted); font-size: 13px; line-height: 1.4; }
+    .flow-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border: 1px dashed var(--doc-border-strong);
+      border-radius: var(--doc-radius);
+      background: var(--doc-well);
+      color: var(--doc-text-muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .flow-preview b { color: var(--doc-text); }
+    .flow-preview .icon-tile { width: 32px; height: 32px; }
+    @container (max-width: 620px) {
+      .flow-steps { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+      .flow-step { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; padding: 12px; }
+      .flow-step .icon-tile { grid-row: 1 / span 3; margin: 0; }
+      .flow-step:not(:last-child)::after { top: auto; right: auto; bottom: -19px; left: 27px; transform: rotate(135deg); }
+    }
+
+    /* The glyph pairs of one transformation, drawn. */
+    .pairs svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
+    .pairs { padding: 14px; border: 1px solid var(--doc-border); border-radius: var(--doc-radius); background: var(--doc-panel-gradient), var(--doc-surface); box-shadow: var(--doc-shadow); }
+    .pairs figcaption { margin: 10px auto 0; }
+    .pairs .chip { fill: var(--doc-surface-2); stroke: var(--doc-border-strong); stroke-width: 1.5; }
+    .pairs .chip.is-alone { fill: none; stroke-dasharray: 5 4; }
+    .pairs .glyph { fill: var(--doc-text); font-family: 'STIX Two Math', 'Cambria Math', 'Latin Modern Math', 'Times New Roman', serif; font-size: 30px; font-style: italic; text-anchor: middle; dominant-baseline: central; }
+    .pairs .glyph.is-plain { font-style: normal; }
+    .pairs .glyph.is-alone { opacity: 0.55; }
+    .pairs .glyph.is-colour { fill: var(--doc-warning); }
+    .pairs .link { fill: none; stroke: var(--doc-accent); stroke-width: 2.2; stroke-linecap: round; }
+    .pairs .link.is-colour { stroke: var(--doc-warning); }
+    .pairs .tag { fill: var(--doc-text-muted); font-family: var(--doc-font); font-size: 12px; text-anchor: middle; }
+    .pairs .index { fill: var(--doc-text-faint); font-family: var(--doc-font-mono); font-size: 11px; text-anchor: start; }
+    .pairs .row-label { fill: var(--doc-link); font-family: var(--doc-font); font-size: 12px; font-weight: 600; text-anchor: start; }
+
+    /* A short table of where to go, by what you want to do. */
+    .goals td:first-child { width: 46%; }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>What the editor does</h1>
+      <p class="lead">The Manim Formula Editor is a browser app for animating formulas. You write them in LaTeX, lay them out in time, turn one into the next, and export the scene for Manim or as a video.</p>
+
+      <h2 id="see-it">See it move</h2>
+      <figure class="mfe-player" data-mfe-player="hero" data-start="8" data-timeline data-autoplay data-loop
+              data-caption="A scene made in the editor: four formulas, each one a step further than the one before."></figure>
+      <p>Four formulas, one on each step of <code>(a+b)^2 = a^2 + 2ab + b^2</code>. The glyphs that stay glide to their new places, new ones come in, and a block at the end draws a box round the result. The letters <em>a</em> and <em>b</em> keep their colours all the way.</p>
+      <p>The player is the editor's own renderer playing the project, so the strip under the scene is the timeline the scene was built on: two tracks of clips, the three transformations between them, and the block at the end. You can <a href="../examples/hero.mfe.json" download>download this project</a> and open it in the editor to take it apart: choose <span class="ui">File ▸ Open…</span>, then press <span class="ui">Other file…</span> in the dialog (<a href="projects.html#open">Projects and files</a> explains it).</p>
+
+      <h2 id="idea">The idea</h2>
+      <p>Manim can turn one formula into another, but you describe it in code, glyph by glyph: <code>formula[0][3]</code> is the fourth symbol, and you count them by hand. The editor makes that visual. You write the formulas, put them on a timeline, say which glyph of the first becomes which glyph of the second, and press Play. When the animation looks right, you export it.</p>
+      <p>A <strong>glyph</strong> is one drawn symbol of a formula: the <em>x</em>, the <em>+</em>, the <em>3</em>. A <strong>clip</strong> is one appearance of a formula on the timeline. A <strong>relation</strong> says how the glyphs of one clip become the glyphs of the next.</p>
+      <p>The editor is for teachers, video makers and anyone who explains mathematics by showing it move. You can know a little LaTeX and no Manim at all.</p>
+
+      <h2 id="workflow">The workflow</h2>
+      <figure class="flow">
+        <ol class="flow-steps">
+          <li class="flow-step"><span class="icon-tile" data-icon="sigma"></span><b class="flow-verb">Write</b><span class="flow-where">Creator</span><span class="flow-gets">formulas and texts, in LaTeX</span></li>
+          <li class="flow-step"><span class="icon-tile" data-icon="tracks"></span><b class="flow-verb">Place</b><span class="flow-where">Timeline, Preview</span><span class="flow-gets">clips on tracks, set in the frame</span></li>
+          <li class="flow-step"><span class="icon-tile" data-icon="film"></span><b class="flow-verb">Animate</b><span class="flow-where">Animations</span><span class="flow-gets">intros, outros, animation blocks</span></li>
+          <li class="flow-step"><span class="icon-tile" data-icon="relate"></span><b class="flow-verb">Transform</b><span class="flow-where">Animations</span><span class="flow-gets">pairs of glyphs between formulas</span></li>
+          <li class="flow-step"><span class="icon-tile" data-icon="code"></span><b class="flow-verb">Export</b><span class="flow-where">Export… button</span><span class="flow-gets">Python for Manim, video, sound</span></li>
+        </ol>
+        <div class="flow-preview"><span class="icon-tile" data-icon="play-outline"></span><span><b>Preview</b> runs through all of it: play the scene in the editor after every change, with no Manim installed.</span></div>
+        <figcaption>The five steps of an animation, and the panel where you do each one.</figcaption>
+      </figure>
+      <ol>
+        <li><strong>Write.</strong> Press <span class="ui">+ New</span> in the Creator and write a formula in a visual math field or in raw LaTeX; the two stay in step. Texts are written there too. <a href="../basics/formulas.html">Writing formulas</a></li>
+        <li><strong>Place.</strong> Drag a formula onto a track of the timeline. Its clip says when the formula is on screen; the Preview says where. <a href="../basics/timeline.html">The timeline</a>, <a href="../basics/preview.html">the Preview</a></li>
+        <li><strong>Animate.</strong> Each clip can come in and go out with an intro and an outro (<em>Write</em>, <em>FadeIn</em>…), and take animation blocks in between, such as an emphasis. <a href="../basics/intro-outro.html">Appearing and disappearing</a>, <a href="../animations/blocks.html">animation blocks</a></li>
+        <li><strong>Transform.</strong> Relate the glyphs of one clip to the glyphs of the next, and the formula turns into the other. Inside one formula, a Morph block writes a derivation line by line. <a href="../basics/first-transform.html">A first transformation</a>, <a href="../transforms/relations.html">relations</a>, <a href="../transforms/morph.html">Morph blocks</a></li>
+        <li><strong>Export.</strong> Choose <span class="ui">Export ▸ Python — ManimCE…</span> or <span class="ui">Python — ManimGL…</span> for a scene Manim runs, or <span class="ui">Video…</span> for a file. <a href="../basics/export.html">Exporting</a></li>
+      </ol>
+
+      <h2 id="window">The window</h2>
+      <p>The editor is one window with a menu bar and four panels. Each panel is a step of the workflow.</p>
+      <figure>
+        <img src="../media/start/overview/window.dark.webp" data-themed alt="The editor's window with a project open. Numbers on the title bars mark the menu bar (1), the Creator on the left (2), the Preview in the middle (3), the Animations panel on the right (4) and the Timeline along the bottom (5)." width="1440" height="900" loading="lazy">
+        <figcaption>The window with the square of a sum open. Click the picture to enlarge it.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li><strong>The menu bar</strong> holds the file commands, the edit commands, the view and the preferences, the export, and the help. It also shows where the project is saved.</li>
+        <li><strong>The Creator</strong> keeps what you can put in the scene: your formulas and texts, a library of templates, and your audio recordings.</li>
+        <li><strong>The Preview</strong> draws the scene at the playhead. Click a formula to select it, drag it to move it, and play the scene from the bar under it.</li>
+        <li><strong>The Animations panel</strong> edits the selected clip: its relations to other formulas, its timing, and its animations.</li>
+        <li><strong>The Timeline</strong> lays the scene out in time: tracks of clips under a ruler, with the playhead you scrub.</li>
+      </ol>
+      <p>The next pages take you through them one by one: <a href="interface.html">a tour of the interface</a>.</p>
+      <aside class="try">
+        <ol>
+          <li>Open the editor (<a href="install.html">Getting the app running</a> says how).</li>
+          <li>Download <a href="../examples/hero.mfe.json" download>the square of a sum</a>. Choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick the file.</li>
+          <li>Click a clip on the timeline. The Animations panel shows how its glyphs are linked to the next formula's.</li>
+          <li>Press Play under the Preview, or <kbd data-keys="Space">Space</kbd>, and watch the scene you saw above.</li>
+        </ol>
+      </aside>
+
+      <h2 id="transformations">How one formula becomes another</h2>
+      <p>This is the idea the editor is built on. To turn <code>x + 3 = 5</code> into <code>x = 5 − 3</code>, you do not move the whole formula: you pair its glyphs. The <em>x</em> goes to the <em>x</em>, the equals sign to the equals sign, and so on. A glyph with no partner leaves with the outro of its clip, or comes in with the intro of the next clip: in this example, a fade out and a fade in.</p>
+      <figure class="pairs">
+        <svg viewBox="0 0 560 206" role="img" aria-labelledby="pairs-title pairs-desc">
+          <title id="pairs-title">The pairs of one transformation</title>
+          <desc id="pairs-desc">The glyphs of x + 3 = 5 are drawn above the glyphs of x = 5 − 3, numbered 0 to 4. The x, the equals sign, the 5 and the 3 are each joined to their twin below. The plus sign has no partner and fades out. The minus sign has no partner and fades in.</desc>
+          <text class="row-label" x="6" y="31">Before</text>
+          <text class="row-label" x="6" y="171">After</text>
+          <!-- the pairs -->
+          <path class="link" d="M120 64 C120 98 120 94 120 128"/>
+          <path class="link" d="M372 64 C372 98 204 94 204 128"/>
+          <path class="link" d="M456 64 C456 98 288 94 288 128"/>
+          <path class="link is-colour" d="M288 64 C288 98 456 94 456 128"/>
+          <!-- before: x + 3 = 5 -->
+          <rect class="chip" x="92" y="12" width="56" height="52" rx="10"/>
+          <text class="glyph" x="120" y="39">x</text>
+          <rect class="chip is-alone" x="176" y="12" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain is-alone" x="204" y="39">+</text>
+          <rect class="chip" x="260" y="12" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain is-colour" x="288" y="39">3</text>
+          <rect class="chip" x="344" y="12" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain" x="372" y="39">=</text>
+          <rect class="chip" x="428" y="12" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain" x="456" y="39">5</text>
+          <!-- after: x = 5 − 3 -->
+          <rect class="chip" x="92" y="128" width="56" height="52" rx="10"/>
+          <text class="glyph" x="120" y="155">x</text>
+          <rect class="chip" x="176" y="128" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain" x="204" y="155">=</text>
+          <rect class="chip" x="260" y="128" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain" x="288" y="155">5</text>
+          <rect class="chip is-alone" x="344" y="128" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain is-alone" x="372" y="155">−</text>
+          <rect class="chip" x="428" y="128" width="56" height="52" rx="10"/>
+          <text class="glyph is-plain is-colour" x="456" y="155">3</text>
+          <text class="index" x="99" y="27">0</text>
+          <text class="index" x="183" y="27">1</text>
+          <text class="index" x="267" y="27">2</text>
+          <text class="index" x="351" y="27">3</text>
+          <text class="index" x="435" y="27">4</text>
+          <text class="index" x="99" y="143">0</text>
+          <text class="index" x="183" y="143">1</text>
+          <text class="index" x="267" y="143">2</text>
+          <text class="index" x="351" y="143">3</text>
+          <text class="index" x="435" y="143">4</text>
+          <!-- what has no partner -->
+          <text class="tag" x="204" y="84">fades out</text>
+          <text class="tag" x="372" y="198">fades in</text>
+        </svg>
+        <figcaption>Four pairs and two glyphs without a partner: the plus sign leaves and the minus sign arrives. The 3 keeps its amber colour on its way across. The small numbers are the glyphs' indices, which the Python below uses.</figcaption>
+      </figure>
+      <p>Here is the same relation running, as the editor plays it:</p>
+      <figure class="mfe-player" data-mfe-player="first-transform" data-from="1.6" data-to="3.7" data-loop data-autoplay data-controls="minimal"
+              data-caption="x + 3 = 5 becomes x = 5 − 3: the pairs of the drawing above, in motion."></figure>
+      <p>Now make the pairs yourself. Click a glyph of the formula on top and then a glyph of the formula below: a line joins them. Give each glyph its partner, the <em>x</em>, the equals sign, the <em>5</em> and the <em>3</em>; the plus sign and the minus sign have none, and the line under the drawing says what happens to them. Then choose <span class="ui">Preview</span> in the switch above the drawing to watch the transformation with your pairs. <span class="ui">Suggest links by label</span> offers the pairs the editor would make by itself.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs" data-options='{"example": "first-transform", "relation": "r_sb78imuu", "start": "empty"}'></div>
+      <p>And here is what the editor writes for Manim from that relation, an excerpt of the exported file. Each pair here is one <code>ReplacementTransform</code>; the glyph with no partner on the left is a <code>FadeOut</code>, the outro of its clip, and the one with no partner on the right is a <code>FadeIn</code>, the intro of its clip:</p>
+<pre data-excerpt="first-transform.ce.py"><code class="language-python"># 2.2 s – 3.2 s: step1 fade_out, step1 → step2, step2 fade_in
+self.play(
+    FadeOut(step1_g[1]),
+    ReplacementTransform(step1_g[0], step2_g[0]),
+    ReplacementTransform(step1_g[3], step2_g[1]),
+    ReplacementTransform(step1_g[4], step2_g[2]),
+    ReplacementTransform(step1_g[2], step2_g[4]),
+    FadeIn(step2_g[3]),
+    run_time=1,
+)</code></pre>
+      <p>You never write those lines. You make the pairs by clicking, or let the editor suggest them, and the Python follows. <a href="../transforms/relations.html">How relations work</a> says what a pair can do.</p>
+
+      <h2 id="output">What you get</h2>
+      <table>
+        <thead>
+          <tr><th>You make</th><th>With</th><th>It is</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Python for Manim</td><td><span class="ui">Export ▸ Python — ManimCE…</span> or <span class="ui">Python — ManimGL…</span></td><td>A <code>.py</code> scene that renders the same animation in ManimCE or in ManimGL.</td></tr>
+          <tr><td>A video</td><td><span class="ui">Export ▸ Video…</span></td><td>A file drawn frame by frame by the editor and encoded in the browser, as MP4 or WebM. With the companion, ffmpeg can encode it instead (MP4, WebM, ProRes or GIF), or your own Manim can render it.</td></tr>
+          <tr><td>Sound</td><td><span class="ui">Export ▸ Audio…</span></td><td>The sound of the project, mixed into one WAV or WebM file (M4A where your browser can encode AAC).</td></tr>
+          <tr><td>Your work</td><td><span class="ui">File ▸ Save</span></td><td>A <code>.mfe.json</code> project file, or a <code>.mfe</code> package when the project holds recordings.</td></tr>
+        </tbody>
+      </table>
+      <p>The video the editor draws itself needs no Manim at all. The Python is for when you want Manim's own render, or want to change the scene by hand afterwards. <a href="../manim/python.html">The generated Python</a> explains the file.</p>
+
+      <h2 id="needs">What you need</h2>
+      <table>
+        <thead>
+          <tr><th>Part</th><th>Do you need it?</th><th>What it gives you</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A browser</td><td>Yes</td><td>The editor itself. Chrome or Edge read and write your files in place; Firefox and Safari work on copies. <a href="install.html#browsers">Browsers</a></td></tr>
+          <tr><td>Manim</td><td>Only to run the exported Python</td><td>ManimCE 0.22 or ManimGL 1.7 render the <code>.py</code> file the editor writes. <a href="install.html#manim">Manim</a></td></tr>
+          <tr><td>The companion</td><td>No</td><td>A small Python program you start yourself. It adds exact LaTeX glyphs, font text, fast video encoding with ffmpeg, and rendering with Manim. <a href="install.html#companion">The companion</a></td></tr>
+          <tr><td>Chroma Lab</td><td>It comes inside</td><td>A colour studio for designing palettes, opened from <span class="ui">Preferences ▸ Chroma Lab…</span>. <a href="install.html#chroma-lab">Chroma Lab</a></td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="path">Where to go next</h2>
+      <p>The pages are in the order of a first project. <a href="install.html">Getting the app running</a> comes next, then <a href="first-animation.html">your first animation</a>, step by step. After that, each section builds on the ones before it: the <a href="../basics/formulas.html">basics</a>, <a href="../transforms/relations.html">transformations</a>, <a href="../animations/blocks.html">animations and timing</a>, <a href="../objects/texts.html">texts and objects</a>, <a href="../layout/align.html">layout</a>, <a href="../color/coloring.html">colour</a>, <a href="../sound/audio.html">audio and video</a>, and <a href="../manim/python.html">Manim</a>. The examples on these pages play in the page and download as projects you can open in the editor.</p>
+      <p>Or start from what you want to do:</p>
+      <table class="goals">
+        <thead>
+          <tr><th>If you want to…</th><th>Read</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Make a first animation, step by step</td><td><a href="first-animation.html">Your first animation</a>, then <a href="../tutorials/linear-equation.html">Solving a linear equation</a></td></tr>
+          <tr><td>Know your way around the window</td><td><a href="interface.html">A tour of the interface</a>, <a href="projects.html">Projects and files</a></td></tr>
+          <tr><td>Show an equation changing, line by line</td><td><a href="../transforms/relations.html">How relations work</a>, <a href="../transforms/recipes.html">Transformation recipes</a>, <a href="../transforms/morph.html">Morph blocks</a></td></tr>
+          <tr><td>Colour the parts of a formula</td><td><a href="../color/coloring.html">Colouring glyphs and objects</a>, <a href="../color/palettes.html">Palettes and Chroma Lab</a></td></tr>
+          <tr><td>Add braces, boxes, lines and arrows</td><td><a href="../objects/braces.html">Braces</a>, <a href="../objects/shapes.html">Shapes</a>, <a href="../objects/lines-arrows.html">Lines and arrows</a></td></tr>
+          <tr><td>Get a video, with sound</td><td><a href="../basics/export.html">Exporting</a>, <a href="../sound/audio.html">Audio</a>, <a href="../sound/video.html">Exporting video</a></td></tr>
+          <tr><td>Use the Python in Manim</td><td><a href="../manim/python.html">The generated Python</a>, <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a></td></tr>
+          <tr><td>Look something up</td><td><a href="../reference/shortcuts.html">Shortcuts</a>, <a href="../reference/menus.html">Every menu</a>, <a href="../reference/glossary.html">Glossary</a>, <a href="../reference/troubleshooting.html">Troubleshooting</a></td></tr>
+        </tbody>
+      </table>
+    </article>
+  </main>
+</body>
+</html>

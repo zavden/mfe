@@ -1,0 +1,401 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Formula and glyph colours",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_wt42hch6",
+      "kind": "math",
+      "name": "whole",
+      "source": "a + b = c",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-20ccsj84a4",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.72268352,
+              -0.09070271999999999
+            ],
+            "size": [
+              0.47405951999999973,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8500331519999997,
+              -0.055624320000000005
+            ],
+            "size": [
+              0.6674918399999998,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.005946623999999789,
+              0.03557952
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065792
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.8607905279999999,
+              -0.056125439999999985
+            ],
+            "size": [
+              0.6674918399999998,
+              0.23452416
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              1.7614367999999998,
+              -0.09137087999999999
+            ],
+            "size": [
+              0.39655295999999973,
+              0.45535103999999993
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_9r06ijkp",
+      "kind": "math",
+      "name": "parts",
+      "source": "a + b = c",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#FFD166",
+        "2": "#EF476F",
+        "4": "#06D6A0"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-20ccsj84a4",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.72268352,
+              -0.09070271999999999
+            ],
+            "size": [
+              0.47405951999999973,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8500331519999997,
+              -0.055624320000000005
+            ],
+            "size": [
+              0.6674918399999998,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.005946623999999789,
+              0.03557952
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065792
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.8607905279999999,
+              -0.056125439999999985
+            ],
+            "size": [
+              0.6674918399999998,
+              0.23452416
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              1.7614367999999998,
+              -0.09137087999999999
+            ],
+            "size": [
+              0.39655295999999973,
+              0.45535103999999993
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_6ea84lls",
+      "kind": "math",
+      "name": "both",
+      "source": "a + b = c",
+      "packages": [],
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#58C4DD",
+      "glyphColors": {
+        "4": "#FFD166"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-20ccsj84a4",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -1.72268352,
+              -0.09070271999999999
+            ],
+            "size": [
+              0.47405951999999973,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8500331519999997,
+              -0.055624320000000005
+            ],
+            "size": [
+              0.6674918399999998,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -0.005946623999999789,
+              0.03557952
+            ],
+            "size": [
+              0.3828556799999998,
+              0.7065792
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              0.8607905279999999,
+              -0.056125439999999985
+            ],
+            "size": [
+              0.6674918399999998,
+              0.23452416
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              1.7614367999999998,
+              -0.09137087999999999
+            ],
+            "size": [
+              0.39655295999999973,
+              0.45535103999999993
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_s5d89n03",
+      "kind": "visual",
+      "name": "Formulas",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_0qmpe5k0",
+      "formulaId": "f_wt42hch6",
+      "trackId": "t_s5d89n03",
+      "start": 0,
+      "end": 3.6,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_v9fyuxsl",
+      "formulaId": "f_9r06ijkp",
+      "trackId": "t_s5d89n03",
+      "start": 3.6,
+      "end": 7.2,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_z39hlesl",
+      "formulaId": "f_6ea84lls",
+      "trackId": "t_s5d89n03",
+      "start": 7.2,
+      "end": 10.8,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

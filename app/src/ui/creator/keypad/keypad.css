@@ -1,0 +1,124 @@
+/* The on-screen keyboard of the formula editor: the editor's own keypad. */
+
+/* The key that shows the keyboard (beside the title of the section): raised in the teal of the
+ * selection while it shows, like the key of the glyph list. */
+.latex-head .btn[aria-pressed='true'] {
+  background: var(--selection-gradient);
+  border-color: var(--border-strong);
+  box-shadow:
+    0 1px 3px var(--shadow),
+    inset 0 1px 0 var(--edge-light);
+  color: var(--text);
+}
+
+/* ---- The keypad, in the dialog, under the visual field ---- */
+
+.formula-keypad {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.formula-keypad .tabs-list {
+  margin: 0 0 6px;
+  padding: 3px;
+}
+
+.formula-keypad .tabs-tab {
+  padding: 2px;
+  font-size: 12px;
+}
+
+.keypad-keys {
+  display: grid;
+  grid-template-columns: repeat(var(--keypad-columns), minmax(0, 1fr));
+  gap: 4px;
+}
+
+.keypad-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--motion-fast);
+}
+
+/* The face is the key's: a press on the drawing is a press on the key. */
+.keypad-face {
+  pointer-events: none;
+}
+
+.keypad-face-math {
+  display: inline-block;
+}
+
+.keypad-tone-template {
+  background: color-mix(in srgb, var(--accent) 13%, var(--raised));
+}
+
+.keypad-tone-operator {
+  background: color-mix(in srgb, var(--accent) 5%, var(--well));
+}
+
+.keypad-tone-nav {
+  background: var(--panel-header);
+  color: var(--text-dim);
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+
+.keypad-tone-action {
+  background: var(--primary-gradient);
+  border-color: var(--primary-edge);
+  color: var(--primary-text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.keypad-key:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
+.keypad-tone-action:hover {
+  background: var(--primary-gradient-hover);
+  color: var(--primary-text);
+}
+
+.keypad-key:active,
+.keypad-key[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.keypad-key:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* A face taller than a line is drawn smaller, to fit: a fraction, a sum with its limits. */
+.keypad-key[data-lines='2'] {
+  font-size: 12px;
+}
+
+.keypad-key[data-lines='3'] {
+  font-size: 10px;
+}
+
+@media (forced-colors: active) {
+  .keypad-key[aria-pressed='true'] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

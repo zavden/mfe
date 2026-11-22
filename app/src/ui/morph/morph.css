@@ -1,0 +1,26 @@
+/* The pair editor of Morph blocks: it reuses the relation editor's layout (relations.css). */
+
+/* One formula drawn twice is tall (an aligned derivation more so): a lower canvas keeps the
+ * toolbar and a message under it in view. A resized or maximized dialog lets it grow
+ * (`.modal.is-sized .rel-canvas` outranks this). */
+.morph-body .rel-canvas {
+  max-height: min(52vh, 500px);
+}
+
+/* The suggestion sits in the side column, under the pairs it would add to. */
+.morph-body .rel-side .rel-suggestion > span {
+  flex-basis: 100%;
+}
+
+/* The block's settings, read-only here: a line of facts and where to change them. */
+.morph-body [data-testid='morph-block'] .rel-window {
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+/* Save is held back until the editor is opened again: a stronger note than a passing message. */
+.morph-stale {
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+  border-left-color: var(--danger);
+}

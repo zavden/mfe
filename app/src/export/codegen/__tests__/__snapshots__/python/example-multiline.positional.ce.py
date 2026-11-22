@@ -1,0 +1,86 @@
+# Multi-line derivation — exported by Manim Formula Editor for ManimCE 0.22.
+# Render at 1920×1080, 60 fps:
+#     manim -r 1920,1080 --fps 60 Pinned.py Pinned
+# Every play and wait lasts a whole number of frames at 60 fps, so the video has
+# exactly 480 frames, like the editor's video export.
+from manim import *
+
+
+def _glyphs(tex, layout):
+    """The glyphs of `tex` in the editor's order. That order (MathJax's, or another
+    template's) can differ from Manim's, so the glyphs are matched by position: `layout`
+    holds each glyph's (x, y, width, height) relative to the formula centre, divided by the
+    formula height, and every real glyph is assigned to one entry with the least total
+    distance. Entries without a counterpart get an empty VMobject."""
+    from scipy.optimize import linear_sum_assignment
+
+    real = tex.family_members_with_points()
+    glyphs = [VMobject() for _ in layout]
+    if len(real) != len(layout):
+        print(f"Warning: Manim made {len(real)} glyphs of a formula the editor split into "
+              f"{len(layout)}; unmatched glyphs are not animated.")
+    if not real or not layout:
+        return glyphs  # nothing to match (a formula without ink, such as \quad)
+    centre, height = tex.get_center(), tex.get_height()
+    if height < 1e-6:
+        height = 1.0  # a flat mobject (a rule): the editor's layout is divided by 1 then too
+    have = np.array([
+        [*((g.get_center() - centre)[:2] / height), g.get_width() / height, g.get_height() / height]
+        for g in real
+    ])
+    want = np.array(layout, dtype=float)
+    cost = np.linalg.norm(want[:, None, :] - have[None, :, :], axis=2)
+    for i, j in zip(*linear_sum_assignment(cost)):
+        glyphs[i] = real[j]
+    return glyphs
+
+
+class Pinned(Scene):
+    def construct(self):
+        self.camera.background_color = "#000000"
+
+        # rows: A &= x_1 \\ &= x_2 \\ &= x_3
+        rows = MathTex(r"""A &= x_1 \\
+  &= x_2 \\
+  &= x_3""")
+        rows_g = _glyphs(rows, [
+            (-0.2956, 0.4077, 0.1768, 0.1845), (-0.028, 0.3799, 0.1714, 0.0603), (0.2156, 0.371, 0.1284, 0.1168), (0.3437, 0.3367, 0.0657, 0.1198),
+            (-0.028, -0.0067, 0.1714, 0.0603), (0.2156, -0.0156, 0.1284, 0.1168), (0.3425, -0.0499, 0.0797, 0.1198), (-0.028, -0.3933, 0.1714, 0.0603),
+            (0.2156, -0.4022, 0.1284, 0.1168), (0.3425, -0.4383, 0.083, 0.1234),
+        ])
+        rows.scale(1.5)
+
+        # 0 s – 1 s: rows fade_in
+        self.play(FadeIn(VGroup(*rows_g[:4])), run_time=1)
+        # 1 s – 2 s
+        self.wait(1)
+        # 2 s – 3 s: rows morph
+        self.play(
+            ReplacementTransform(rows_g[1].copy(), rows_g[4]),
+            ReplacementTransform(rows_g[2].copy(), rows_g[5]),
+            run_time=1,
+        )
+        # 3 s – 3.6 s: rows write
+        self.play(Write(rows_g[6]), run_time=0.6)
+        # 3.6 s – 4 s
+        self.wait(0.4)
+        # 4 s – 5 s: rows morph
+        self.play(
+            ReplacementTransform(rows_g[4].copy(), rows_g[7]),
+            ReplacementTransform(rows_g[5].copy(), rows_g[8]),
+            run_time=1,
+        )
+        # 5 s – 5.6 s: rows write
+        self.play(Write(rows_g[9]), run_time=0.6)
+        # 5.6 s – 6 s
+        self.wait(0.4)
+        rows_pivot = VGroup(rows_g[8], rows_g[9]).get_center()
+        # 6 s – 6.8 s: rows part
+        self.play(
+            VGroup(rows_g[8], rows_g[9]).animate.scale(1.2, about_point=rows_pivot).set_color("#FFFF00"),
+            run_time=0.8,
+        )
+        # 6.8 s – 7.4 s
+        self.wait(0.6)
+        # 7.4 s – 8 s: rows fade_out
+        self.play(FadeOut(rows), run_time=0.6)

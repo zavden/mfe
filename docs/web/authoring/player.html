@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The player · Manim Formula Editor</title>
+  <meta name="description" content="Every option of the example player of the documentation, with its markup, and the engine that widgets build on.">
+  <meta name="mfe:id" content="authoring/player">
+  <meta name="mfe:level" content="reference">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+  <script src="../examples/hero.data.js" defer></script>
+  <style>
+    /* This page's own: the markup beside each player, and a plain page where the site's
+     * stylesheet is not loaded (the player styles itself either way). */
+    .player-showcase {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 16px 48px;
+      color: var(--doc-text, inherit);
+      font-family: var(--doc-font, Inter, 'Segoe UI', 'Noto Sans', system-ui, sans-serif);
+      line-height: 1.6;
+    }
+    .player-showcase pre {
+      overflow-x: auto;
+      padding: 10px 12px;
+      background: var(--doc-code-bg, rgb(127 127 127 / 0.12));
+      border: 1px solid var(--doc-border, rgb(127 127 127 / 0.3));
+      border-radius: 8px;
+      font-family: var(--doc-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .player-showcase code {
+      font-family: var(--doc-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+      font-size: 0.92em;
+    }
+    .player-showcase table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .player-showcase th,
+    .player-showcase td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--doc-border, rgb(127 127 127 / 0.3));
+      text-align: left;
+      vertical-align: top;
+    }
+    .glyph-demo {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .glyph-demo canvas {
+      display: block;
+      width: 100%;
+      height: 180px;
+    }
+    .glyph-demo .glyph-index {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      padding: 0 4px;
+      border-radius: 4px;
+      background: rgb(7 11 21 / 0.75);
+      color: #f4c867;
+      font: 600 12px/16px var(--doc-font-mono, ui-monospace, monospace);
+      pointer-events: none;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    /* The page's colours where the site's stylesheet does not give them. */
+    body {
+      background-color: var(--doc-bg, #e4eef0);
+      color: var(--doc-text, #0e2a31);
+    }
+    :root[data-theme='dark'] body {
+      background-color: var(--doc-bg, #07121a);
+      color: var(--doc-text, #edf9f9);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) body {
+        background-color: var(--doc-bg, #07121a);
+        color: var(--doc-text, #edf9f9);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc player-showcase">
+      <h1>The player</h1>
+      <p>
+        A player draws an example's scene the way the app's Preview draws it: the same evaluator and
+        the same canvas renderer, built into <code>assets/player.js</code> from the app's own code.
+        It needs the example's data script (<code>examples/&lt;slug&gt;.data.js</code>) in the page's
+        head, after <code>player.js</code>. <code>tools/EXAMPLES.md</code> tells how to make an
+        example; this page shows every option of the player with its markup.
+      </p>
+
+      <h2 id="basic">The default player</h2>
+      <p>
+        The figure names the example. Press Play, drag the time, step a frame with the arrow keys
+        (Shift: a second), change the speed. Space or <kbd data-keys="K">K</kbd> plays and pauses
+        while the player has the focus; a click on the scene does too.
+      </p>
+      <figure class="mfe-player" data-mfe-player="first-transform"></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="first-transform"&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="timeline">With the timeline strip</h2>
+      <p>
+        <code>data-timeline</code> adds a small version of the app's timeline under the scene: its
+        tracks, its clips with their formulas' names, the intro and outro of each clip, the animation
+        blocks and the relations between clips. A press or a drag on it moves the time.
+      </p>
+      <figure class="mfe-player" data-mfe-player="first-transform" data-timeline
+              data-caption="x + 3 = 5 solved in two steps."></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="first-transform" data-timeline
+        data-caption="x + 3 = 5 solved in two steps."&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="autoplay">Playing by itself, in a loop</h2>
+      <p>
+        <code>data-autoplay</code> plays while at least half of the player is on screen, and
+        <code>data-loop</code> starts it again at the end. A reader whose system asks for reduced
+        motion is never played to; any player that leaves the screen pauses, and goes on when it
+        comes back. It plays from its <code>data-start</code> (below): give it an instant where the
+        scene shows what it is about, which is what the page shows before it plays and all that
+        reader sees. Here, the last formula, whole.
+      </p>
+      <figure class="mfe-player" data-mfe-player="hero" data-autoplay data-loop data-start="8" data-timeline></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="hero" data-autoplay data-loop data-start="8" data-timeline&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="range">A part of the scene</h2>
+      <p>
+        <code>data-from</code> and <code>data-to</code> (seconds) play only that part; the time bar
+        and the strip show only it. <code>data-start</code> is the instant shown before Play: a time,
+        or <code>end</code>. Here, the last step of the derivation, shown finished.
+      </p>
+      <figure class="mfe-player" data-mfe-player="first-transform" data-from="3.8" data-to="6"
+              data-start="end" data-timeline></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="first-transform" data-from="3.8" data-to="6"
+        data-start="end" data-timeline&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="controls">Fewer controls</h2>
+      <p>
+        <code>data-controls="minimal"</code> keeps Play, the time bar and the time;
+        <code>data-controls="none"</code> keeps the scene alone, which a click (or Space, Enter or
+        K) plays and pauses. <code>data-speed</code> starts it at 0.5, 1 or 2 times its speed.
+      </p>
+      <figure class="mfe-player" data-mfe-player="hero" data-controls="minimal" data-speed="0.5"></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="hero" data-controls="minimal" data-speed="0.5"&gt;&lt;/figure&gt;</code></pre>
+      <figure class="mfe-player" data-mfe-player="first-transform" data-controls="none" data-loop
+              data-caption="Click the scene to play it."></figure>
+      <pre><code>&lt;figure class="mfe-player" data-mfe-player="first-transform" data-controls="none" data-loop
+        data-caption="Click the scene to play it."&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="missing">An example the page has not loaded</h2>
+      <p>
+        A figure whose example's script is not in the page shows what is missing, and the console
+        says it too. Nothing else on the page breaks.
+      </p>
+      <figure class="mfe-player" data-mfe-player="not-loaded" data-expect="missing"></figure>
+
+      <h2 id="options">Every option</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Attribute</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>data-mfe-player</code></td><td>a slug</td><td>The example (required): <code>window.MFE_EXAMPLES[slug]</code>, from <code>examples/&lt;slug&gt;.data.js</code>.</td></tr>
+            <tr><td><code>data-timeline</code></td><td>boolean</td><td>The timeline strip under the scene.</td></tr>
+            <tr><td><code>data-autoplay</code></td><td>boolean</td><td>Plays while at least half of it shows; never with reduced motion.</td></tr>
+            <tr><td><code>data-loop</code></td><td>boolean</td><td>Starts again at the end (the Loop key shows it on).</td></tr>
+            <tr><td><code>data-from</code>, <code>data-to</code></td><td>seconds</td><td>The part of the scene it plays and shows.</td></tr>
+            <tr><td><code>data-start</code></td><td>seconds, or <code>end</code></td><td>The instant it shows before it plays (default: the start of its part).</td></tr>
+            <tr><td><code>data-controls</code></td><td><code>full</code>, <code>minimal</code>, <code>none</code></td><td>Its controls (default <code>full</code>).</td></tr>
+            <tr><td><code>data-speed</code></td><td><code>0.5</code>, <code>1</code>, <code>2</code></td><td>The speed it starts at.</td></tr>
+            <tr><td><code>data-caption</code></td><td>text</td><td>A caption under it, unless the figure has a <code>&lt;figcaption&gt;</code> of its own.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        A boolean attribute is on when present (<code>data-loop</code>), off with
+        <code>"false"</code> or <code>"0"</code>. A mounted figure carries
+        <code>data-mfe-mounted</code> and says how it stands in <code>data-time</code>,
+        <code>data-progress</code> and <code>data-playing</code>.
+      </p>
+
+      <h2 id="engine">The engine, for widgets</h2>
+      <p>
+        <code>MFEPlayer.engine</code> gives a widget the example's project and glyphs, scenes of
+        modified copies of the project, and the drawing. Below, the last step of the hero example
+        drawn alone and large, with the canonical index of each glyph over it — the index a relation
+        pair or a glyph colour names it by.
+      </p>
+      <div class="glyph-demo" id="glyph-demo"><canvas aria-label="The glyphs of the last step of the hero example, with their indices" role="img"></canvas></div>
+      <pre><code>const example = MFEPlayer.engine.example('hero');
+const scene = example.formulaScene('step4');      // the formula alone, at the centre
+MFEPlayer.engine.sizeCanvas(canvas);              // its bitmap on device pixels
+const region = MFEPlayer.engine.padBox(scene.contentBox(0), 0.3);
+const view = scene.draw(canvas, 0, { region });   // drawn large
+for (const [index, box] of scene.geometry(0)[0].glyphs) {
+  const { left, top, width } = view.boxToCss(box); // where the glyph is on the canvas
+  // … put the index over it
+}</code></pre>
+    </article>
+  </main>
+  <script>
+    // The engine demo above: classic script, run once the deferred scripts have.
+    document.addEventListener('DOMContentLoaded', () => {
+      const box = document.getElementById('glyph-demo');
+      const canvas = box.querySelector('canvas');
+      const example = window.MFEPlayer && window.MFEPlayer.engine.example('hero');
+      if (!example) return;
+      const scene = example.formulaScene('step4');
+      box.style.background = scene.background;
+      const draw = () => {
+        window.MFEPlayer.engine.sizeCanvas(canvas);
+        const region = window.MFEPlayer.engine.padBox(scene.contentBox(0), 0.3);
+        const view = scene.draw(canvas, 0, { region });
+        box.querySelectorAll('.glyph-index').forEach((label) => label.remove());
+        for (const [index, glyph] of scene.geometry(0)[0].glyphs) {
+          const { left, top, width } = view.boxToCss(glyph);
+          const label = document.createElement('span');
+          label.className = 'glyph-index';
+          label.textContent = String(index);
+          label.style.left = `${left + width / 2}px`;
+          label.style.top = `${top - 2}px`;
+          box.append(label);
+        }
+      };
+      draw();
+      new ResizeObserver(draw).observe(canvas);
+    });
+  </script>
+</body>
+</html>

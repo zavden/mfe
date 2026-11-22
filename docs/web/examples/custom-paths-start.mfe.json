@@ -1,0 +1,253 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Swap, straight paths",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_ab",
+      "kind": "math",
+      "name": "ab",
+      "source": "a \\qquad\\qquad b",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#58C4DD",
+        "1": "#F4C867"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1ve4zkcuk0r",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -3.3412176000000002,
+              -0.18942335999999999
+            ],
+            "size": [
+              0.7110892799999999,
+              0.67801536
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              3.4096204800000005,
+              0
+            ],
+            "size": [
+              0.5742835199999998,
+              1.0598688
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_ba",
+      "kind": "math",
+      "name": "ba",
+      "source": "b \\qquad\\qquad a",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "1": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-14lmr1fx3dg",
+        "glyphs": [
+          {
+            "label": "b",
+            "center": [
+              -3.3923318399999998,
+              0
+            ],
+            "size": [
+              0.5742835200000003,
+              1.0598688
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              3.32392896,
+              -0.18942335999999999
+            ],
+            "size": [
+              0.7110892800000004,
+              0.67801536
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_top",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_bottom",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_ab",
+      "formulaId": "f_ab",
+      "trackId": "t_top",
+      "start": 0,
+      "end": 3.6,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 0.8,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_ba",
+      "formulaId": "f_ba",
+      "trackId": "t_bottom",
+      "start": 1.6,
+      "end": 4.4,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_swap",
+      "fromClipId": "c_ab",
+      "toClipId": "c_ba",
+      "offset": 0,
+      "duration": 2,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

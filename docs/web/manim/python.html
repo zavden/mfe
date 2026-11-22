@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The generated Python · Manim Formula Editor</title>
+  <meta name="description" content="Read an exported scene line by line, run it with ManimCE or ManimGL, and change it afterwards.">
+  <meta name="mfe:id" content="manim/python">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="The Python">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/python-scene.data.js" defer></script>
+  <script src="../examples/ce-gl-shapes.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>The generated Python</h1>
+      <p class="lead">Every project exports as a plain Manim scene that you can read, run and change.
+        This page reads one scene line by line, runs it, and says what is safe to edit.</p>
+
+      <figure class="mfe-player" data-mfe-player="python-scene" data-timeline data-loop data-start="1.5"
+              data-caption="The scene of this page: three equations, each turning into the next."></figure>
+
+      <h2 id="export">Getting the file</h2>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span> or
+        <span class="ui">Export ▸ Python — ManimGL…</span>. The <span class="ui">Export…</span>
+        button next to the menus opens the last one you used, and its arrow lists every export
+        (<a href="../basics/export.html">Exporting</a> compares them).</p>
+      <figure>
+        <img src="../media/manim/python/export-dialog.dark.webp" data-themed
+             alt="The Export Python dialog for ManimCE: the scene name, two options, a list of notes that says every formula is matched by position, the generated code and the Copy and Download buttons."
+             width="840" height="786" loading="lazy">
+        <figcaption>The dialog for the scene of this page.</figcaption>
+      </figure>
+      <ol>
+        <li><span class="ui">Scene name</span>: the name of the Python class, and of the file. It must
+          be a valid class name that the generated code does not use itself; when it is not,
+          the dialog suggests a safe spelling.</li>
+        <li><span class="ui">Always use the positional helper</span>: how the scene finds the
+          glyphs of a formula (<a href="#glyphs">further down</a>).</li>
+        <li><span class="ui">Comments (formulas, timing)</span>: the comment lines that name each
+          formula and say which seconds each step covers. Turn them off for a shorter file.</li>
+        <li>The <strong>notes</strong> list what the code cannot guarantee. An empty list says
+          <em>The scene reproduces the preview: exact glyph indices, whole frames.</em>, or, with
+          the positional helper ticked, <em>The scene reproduces the preview: glyphs matched by
+          position when it runs, whole frames.</em></li>
+        <li>The <strong>code</strong>, to read.</li>
+        <li><span class="ui">Copy</span> puts the code on the clipboard, and
+          <span class="ui">Download SceneToRead.py</span> saves it.</li>
+      </ol>
+      <p>While a formula of the timeline is still being drawn, the dialog says <em>Waiting for a
+        formula to render</em> and gives no code, so that it never exports a partial scene. Copy and
+        Download stay off while a formula has no render of its current LaTeX; the Creator shows the
+        error.</p>
+      <p>Should the editor fail to write the scene, the dialog says so where the code would be,
+        <em>The scene could not be written as Python (…)</em>, with nothing to copy or download. It is a
+        fault of the editor, not of your scene; the project is as it was, so save it, and fixing the
+        problems it has may get around the fault.</p>
+
+      <h2 id="what">What the file holds</h2>
+      <p>The file is a normal Manim scene. This is the exported file of the scene above, with the
+        tabs for both libraries; the rest of the section reads the ManimCE tab. Play the scene
+        above and watch its strip: the first formula writes itself during seconds 0 to 1, the first
+        transformation runs from 2 to 3, the second from 4 to 5. The comments of the code name the
+        same seconds.</p>
+      <div class="mfe-code" data-mfe-python="python-scene"></div>
+
+      <h3 id="header">The header</h3>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python"># Scene to read — exported by Manim Formula Editor for ManimCE 0.22.
+# Render at 1920×1080, 60 fps:
+#     manim -r 1920,1080 --fps 60 SceneToRead.py SceneToRead
+# Every play and wait lasts a whole number of frames at 60 fps, so the video has
+# exactly 360 frames, like the editor's video export.
+from manim import *</code></pre>
+      <p>The first line of the comment names the project and the library it is written for
+        (ManimCE 0.22 here; ManimGL 1.7 for the other export). The next two give the size and frame
+        rate of the project and the command that renders the scene at them. Two more lines, which
+        come with the option <span class="ui">Comments (formulas, timing)</span> (on by default),
+        say that every play and wait lasts a whole number of frames and how many the video has:
+        the scene lasts 6 seconds at 60 frames a second, which is 360 frames, exactly the frames
+        of the timeline.</p>
+      <p>When the project has sound that goes on after the last animation, the end of that comment
+        says so instead (again only with Comments on): <em>The editor’s video export is longer (…
+        frames): it lasts until the project’s audio ends, and this scene has no audio.</em> The
+        Python is the picture alone.</p>
+
+      <h3 id="scene">The scene</h3>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python">class SceneToRead(Scene):
+    def construct(self):
+        self.camera.background_color = "#000000"</code></pre>
+      <p>One <code>Scene</code> class holds everything. Its name is the one in the dialog, and the
+        project’s background colour (<span class="ui">File ▸ Project settings…</span>) is set
+        first.</p>
+      <p>A scene with a <a href="../animations/camera.html#python">camera</a> is a
+        <code>MovingCameraScene</code> in ManimCE, and each camera move is a play of its own among
+        the others.</p>
+
+      <h3 id="formulas">The formulas</h3>
+      <p>Each formula that the timeline uses is built once, before anything plays. Here is the first
+        one:</p>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python">        # step1: 2x + 1 = 7
+        step1 = MathTex(r"2x + 1 = 7", font_size=96)
+        step1_g = _glyphs(step1, [
+            (-2.7467, 0.0475, 0.5264, 0.8786), (-2.0488, -0.1075, 0.6425, 0.5976), (-0.8553, -0.0613, 0.8786, 0.8773), (0.2875, 0.0475, 0.4538, 0.8786),
+            (1.4904, -0.062, 0.8786, 0.3087), (2.7263, 0.0396, 0.5673, 0.9208),
+        ])
+        step1_g[1].set_color("#F4C867")
+        step1.move_to([-1.0921, 0, 0])
+        step1.set_z_index(1)</code></pre>
+      <ul>
+        <li>The comment is the formula’s name in the editor, and its LaTeX.</li>
+        <li><code>MathTex</code> is Manim’s class for a formula, with the LaTeX as a raw string and
+          the formula’s size as <code>font_size</code>. A formula that is on the timeline twice gets
+          one object per clip (<code>step1</code>, <code>step1_2</code>).</li>
+        <li><code>step1_g</code> is the list of the formula’s glyphs, numbered as the editor numbers
+          them (<a href="#glyphs">below</a>). In <code>2x + 1 = 7</code>, glyph 1 is the
+          <em>x</em>.</li>
+        <li><code>set_color</code> gives that glyph the colour it has in the editor.</li>
+        <li><code>move_to</code> is where the clip puts the formula, in scene units: the origin is the
+          middle of the frame, <em>y</em> points up, and the frame is 8 units tall.</li>
+        <li><code>set_z_index</code> is the layer. The front track of the timeline gets the higher
+          number, so a formula in front is drawn over one behind it.</li>
+      </ul>
+
+      <h3 id="steps">The timeline: plays and waits</h3>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python">        # 0 s – 1 s: step1 write
+        self.play(Write(VGroup(*step1_g[:])), run_time=1)
+        # 1 s – 2 s
+        self.wait(1)
+        # 2 s – 3 s: step1 fade_out, step1 → step2
+        self.play(
+            FadeOut(VGroup(step1_g[2], step1_g[3])),
+            ReplacementTransform(step1_g[0], step2_g[0]),
+            ReplacementTransform(step1_g[1], step2_g[1]),
+            ReplacementTransform(step1_g[4], step2_g[2]),
+            ReplacementTransform(step1_g[5], step2_g[3]),
+            run_time=1,
+        )</code></pre>
+      <p>The timeline is cut at every moment when something starts or stops. A stretch with
+        nothing running is <code>self.wait(…)</code>; a stretch with animations is one
+        <code>self.play(…)</code> that holds all of them, so they run together. The comment above
+        each line says which seconds it covers and what is in it. Every duration is a whole number
+        of frames, so the scene lasts exactly as long as the editor’s own video.</p>
+      <p>What each line is, and where it comes from in the editor:</p>
+      <table>
+        <thead>
+          <tr><th>In the code</th><th>In the editor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code data-excerpt="examples/python-scene.ce.py">Write(VGroup(*step1_g[:]))</code></td><td>The <em>Write</em> intro of the first clip, on every glyph of the formula.</td></tr>
+          <tr><td><code data-excerpt="examples/python-scene.ce.py">ReplacementTransform(step1_g[0], step2_g[0])</code></td><td>A pair of a relation: glyph 0 of <code>step1</code> becomes glyph 0 of <code>step2</code>.</td></tr>
+          <tr><td><code data-excerpt="examples/python-scene.ce.py">FadeOut(VGroup(step1_g[2], step1_g[3]))</code></td><td>The glyphs of the source that no pair takes (the <em>+</em> and the <em>1</em>) leave with the clip’s outro.</td></tr>
+          <tr><td><code data-excerpt="examples/python-scene.ce.py">FadeTransform(step2_g[3], step3_g[2])</code></td><td>A pair whose style is <em>fade</em>, in the next relation.</td></tr>
+          <tr><td><code>self.wait(1)</code></td><td>A stretch with no animation.</td></tr>
+        </tbody>
+      </table>
+      <p>When a formula comes on a track in front of the one it came from, its glyphs are moved to
+        the new layer just before they move, so that they are drawn in front all the way:</p>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python">        step2_g[1].set_z_index(1)
+        step2_g[2].set_z_index(1)
+        step2_g[3].set_z_index(1)</code></pre>
+
+      <h3 id="video">What it makes</h3>
+      <p>The video that ManimCE renders from the file above, at 480p and 15 frames a second to keep
+        it small:</p>
+      <video class="mfe-manim" src="../examples/python-scene.mp4" controls preload="metadata"
+             playsinline></video>
+      <div class="mfe-example" data-mfe-example="python-scene"></div>
+
+      <h2 id="glyphs">How the scene finds the glyphs</h2>
+      <p>A transformation names glyphs: <em>this one becomes that one</em>. The editor numbers the
+        glyphs of a formula in the order its renderer gives them. Manim numbers them in its own
+        order, and the two can differ: MathJax puts the bar of a fraction after its numerator and
+        denominator, for example. There are two ways to keep them in step.</p>
+
+      <h3 id="exact">Exact indices</h3>
+      <p>A formula that the editor drew with the <a href="companion.html">companion</a> has Manim’s
+        own glyphs, in Manim’s order. The scene then names them directly, by their place in the
+        formula (in ManimCE the glyphs sit one level down, so the index starts with
+        <code>[0]</code>). This is the scene of the example below, exported for the library it was
+        drawn for:</p>
+<pre data-excerpt="examples/ce-gl-shapes.ce.py"><code class="language-python">        # sum: 1+2+3+4+5+6
+        sum = MathTex(r"1+2+3+4+5+6", font_size=60)
+        sum.move_to([0, 0.6, 0])</code></pre>
+<pre data-excerpt="examples/ce-gl-shapes.ce.py"><code class="language-python">        frame = SurroundingRectangle(sum[0][:5], buff=0.15, color="#FFFF00", corner_radius=0.12).set_fill("#FFFF00")</code></pre>
+      <p>There is no helper in the file, and <code>sum[0][:5]</code> means the first five glyphs.
+        This is the shortest, most readable form of the scene.</p>
+      <div class="mfe-example" data-mfe-example="ce-gl-shapes"></div>
+
+      <h3 id="positional">The positional helper</h3>
+      <p>A formula that the editor drew with MathJax, which is what you get without the companion,
+        cannot promise Manim’s order. The scene then carries a small function that finds the glyphs
+        when it runs:</p>
+<pre data-excerpt="examples/python-scene.ce.py"><code class="language-python">def _glyphs(tex, layout):
+    """The glyphs of `tex` in the editor's order. That order (MathJax's, or another
+    template's) can differ from Manim's, so the glyphs are matched by position: `layout`
+    holds each glyph's (x, y, width, height) relative to the formula centre, divided by the
+    formula height, and every real glyph is assigned to one entry with the least total
+    distance. Entries without a counterpart get an empty VMobject."""
+    from scipy.optimize import linear_sum_assignment
+
+    real = tex.family_members_with_points()
+    glyphs = [VMobject() for _ in layout]
+    if len(real) != len(layout):
+        print(f"Warning: Manim made {len(real)} glyphs of a formula the editor split into "
+              f"{len(layout)}; unmatched glyphs are not animated.")
+    if not real or not layout:
+        return glyphs  # nothing to match (a formula without ink, such as \quad)
+    centre, height = tex.get_center(), tex.get_height()
+    if height &lt; 1e-6:
+        height = 1.0  # a flat mobject (a rule): the editor's layout is divided by 1 then too
+    have = np.array([
+        [*((g.get_center() - centre)[:2] / height), g.get_width() / height, g.get_height() / height]
+        for g in real
+    ])
+    want = np.array(layout, dtype=float)
+    cost = np.linalg.norm(want[:, None, :] - have[None, :, :], axis=2)
+    for i, j in zip(*linear_sum_assignment(cost)):
+        glyphs[i] = real[j]
+    return glyphs</code></pre>
+      <p>Each formula brings a list, <code data-excerpt="examples/python-scene.ce.py">step1_g = _glyphs(step1, [ … ])</code>, with one entry
+        of four numbers per glyph: where that glyph sits in the editor’s drawing, relative to the
+        centre of the formula and divided by its height, with its width and its height. When the
+        scene runs, <code>_glyphs</code> asks Manim for the glyphs it really built and pairs each
+        with the closest entry of the list, so that the total distance is as small as it can be.
+        After that, <code>step1_g[1]</code> is the editor’s glyph 1, whatever Manim’s own number
+        for it is.</p>
+      <ul>
+        <li><strong>What you need.</strong> Nothing beyond Manim. The matching uses
+          <code>scipy</code>, which both ManimCE and ManimGL need and install with themselves; the
+          function imports it only when the scene runs. A plain Manim install is enough.</li>
+        <li><strong>When it is there.</strong> For every formula drawn by MathJax; for a formula
+          drawn for the other library than the one you export for; and for every formula when you
+          tick <span class="ui">Always use the positional helper</span>, which is also the safer
+          choice when the scene must work across Manim versions and TeX templates. A scene made only
+          of exact formulas has no helper at all. A line or an arrow never uses it: its parts are the
+          same in both libraries, and the scene names them through the line itself.</li>
+        <li><strong>What it says.</strong> With the tick off, the dialog lists each formula that
+          uses it, with the reason; with the tick on, every formula uses it, the notes are not
+          written and the line of an empty list says that the glyphs are matched by position. If
+          Manim builds a different number of glyphs than the editor split the formula into, the
+          scene prints <em>Warning: Manim made N glyphs of a formula the editor split into
+          M; unmatched glyphs are not animated.</em> when it runs. Which formulas those are, and what
+          the video then shows, is on <a href="without-companion.html#python">Without the
+          companion</a>.</li>
+      </ul>
+      <aside class="callout tip">
+        <p>To get exact indices, run the companion before you export, and let the formulas render
+          with it: the badge in the menu bar says <span class="ui">Renderer: LaTeX</span> when they
+          did.</p>
+      </aside>
+
+      <aside class="try">
+        <ol>
+          <li>Download the project of the card above (<em>A box and a brace</em>) and open it:
+            choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span>
+            and pick the file.</li>
+          <li>Choose <span class="ui">Export ▸ Python — ManimCE…</span> and read the notes: there
+            is one, which says that the scene reproduces the Preview.</li>
+          <li>Tick <span class="ui">Always use the positional helper</span> and watch the code:
+            the helper <code>_glyphs</code> appears at its top, and the glyphs are named through
+            lists such as <code>sum_g[:5]</code> instead of <code>sum[0][:5]</code>. (In a project
+            whose formulas were drawn by MathJax, like the scene at the top of this page, the code
+            does not change when you tick it: every formula already uses the helper, and only the
+            notes about matching by position go away.)</li>
+        </ol>
+      </aside>
+
+      <h2 id="running">Running it</h2>
+      <p>You need Manim, and a LaTeX installation that Manim can find, because Manim typesets
+        formulas with LaTeX. The page <a href="ce-vs-gl.html#installing">ManimCE and ManimGL</a>
+        has the links to install each.</p>
+      <p>Save the code as <code>SceneToRead.py</code> (the dialog’s <span class="ui">Download</span>
+        does) and run the command of its header, from the folder that holds it:</p>
+<pre><code class="language-bash"># ManimCE
+manim -r 1920,1080 --fps 60 SceneToRead.py SceneToRead
+
+# ManimGL
+manimgl SceneToRead.py SceneToRead -w -r 1920x1080 --fps 60</code></pre>
+      <ul>
+        <li>ManimCE writes the video to <code>media/videos/SceneToRead/1080p60/SceneToRead.mp4</code>.
+          For a quick look, take <code>-r …</code> and <code>--fps …</code> out of the command and
+          use the low quality: <code>manim -pql SceneToRead.py SceneToRead</code> renders at 480p
+          and 15 frames a second and opens the result (<code>-p</code>). A quality flag added to
+          the command above changes nothing, because <code>-r</code> and <code>--fps</code> come
+          after it; lowering those two numbers works too.</li>
+        <li>ManimGL writes the video into a <code>videos</code> folder with <code>-w</code>. Without
+          <code>-w</code> it opens a window that plays the scene. For a quick look, leave
+          <code>-r</code> out and add <code>-l</code> (480p): <code>manimgl SceneToRead.py
+          SceneToRead -w -l</code>.</li>
+      </ul>
+      <aside class="callout note">
+        <p>The scene is written for the frame rate of its header: its durations are whole frames at
+          that rate. Render it with the same <code>--fps</code> to get the editor’s timing to the
+          frame.</p>
+      </aside>
+
+      <h2 id="changing">Changing it afterwards</h2>
+      <p>The file is yours: read it, change it, build on it. A few edits are safe and common.</p>
+      <ul>
+        <li><strong>Rename the scene.</strong> Change the class name and the command in the header
+          comment, or pick the name in the dialog before you download.</li>
+        <li><strong>Colours.</strong> Change the strings of <code>set_color(…)</code> and of
+          <code>self.camera.background_color</code>.</li>
+        <li><strong>Add your own animations</strong> between the <code>self.play</code> and
+          <code>self.wait</code> lines of the scene, not inside them:
+<pre data-excerpt="examples/python-scene.ce.py" data-excerpt-ignore="# yours"><code class="language-python">        # 3 s – 4 s
+        self.wait(1)
+        self.play(Indicate(step2_g[1]))   # yours</code></pre>
+          What you add takes time of its own: the video gets longer than the editor’s timeline.</li>
+        <li><strong>Add sound.</strong> The exported Python has none: its dialog says <em>Audio is
+          omitted from Manim exports</em>. Manim can add a file at any moment of the scene, with
+          <code>self.add_sound("narration.mp3")</code>, in both libraries. To get the sound mixed
+          as it plays in the editor, export a video with sound instead
+          (<a href="../sound/video.html">Exporting video</a>).</li>
+      </ul>
+      <p>Leave the glyph lists (<code>_glyphs(step1, [ … ])</code>) and the helper alone: they carry
+        the editor’s drawing of each formula, and the glyph numbers of the animations rest on
+        them.</p>
+      <aside class="callout warning">
+        <p>Exporting again writes a new file; it does not merge with your edits. Make the changes
+          to the animation in the editor, where they can be repeated, and keep to the Python for what
+          the editor cannot do.</p>
+      </aside>
+
+      <h2 id="faithful">How close it is to the Preview</h2>
+      <p>The scene is built to reproduce what the Preview shows: the same glyphs in the same places
+        and colours at every frame, with the timing of the timeline in whole frames. The editor’s
+        own tests check it: they export scenes, render them with ManimCE and ManimGL, and compare
+        the number of frames and the glyphs drawn in every frame with the editor’s.</p>
+      <p>What the code cannot promise is in the dialog’s notes: formulas matched by position,
+        glyph counts that differ between MathJax and LaTeX, packages MathJax does not know, hidden
+        tracks (exported anyway), an export for the other library than the project’s, and
+        animations that were shorter than a frame and had to be stretched to one. A scene exported
+        for ManimGL is not frame-for-frame the scene exported for ManimCE; the next page says
+        where they differ.</p>
+      <p>Next: <a href="without-companion.html">Without the companion</a>, where matching by position
+        falls short; <a href="ce-vs-gl.html">ManimCE and ManimGL</a>; and
+        <a href="companion.html">the companion</a> for exact glyphs.</p>
+    </article>
+  </main>
+</body>
+</html>

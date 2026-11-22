@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Algebra",
+    "slug": "algebra",
+    "description": "Identities, factoring, quadratic formula, binomial theorem, exponents and logarithms."
+  },
+  {
+    "name": "Functions",
+    "slug": "functions",
+    "description": "Function properties, common function families, growth and models."
+  },
+  {
+    "name": "Trigonometry",
+    "slug": "trigonometry",
+    "description": "Identities, laws of triangles, angle formulas."
+  },
+  {
+    "name": "Analytic geometry",
+    "slug": "analytic-geometry",
+    "description": "Lines, distances, circles and conics, coordinates."
+  },
+  {
+    "name": "Sequences and series",
+    "slug": "sequences-and-series",
+    "description": "Arithmetic and geometric sequences, classic sums, power series."
+  },
+  {
+    "name": "Limits",
+    "slug": "limits",
+    "description": "Limit laws, notable limits, continuity."
+  },
+  {
+    "name": "Derivatives",
+    "slug": "derivatives",
+    "description": "Definition, rules and common derivatives."
+  },
+  {
+    "name": "Integrals",
+    "slug": "integrals",
+    "description": "Antiderivatives, techniques, definite integrals, FTC, applications."
+  },
+  {
+    "name": "Multivariable calculus",
+    "slug": "multivariable-calculus",
+    "description": "Partial derivatives, gradient, multiple integrals, vector calculus theorems."
+  },
+  {
+    "name": "Linear algebra",
+    "slug": "linear-algebra",
+    "description": "Vectors, matrices, determinants, eigenvalues, linear systems."
+  },
+  {
+    "name": "Differential equations",
+    "slug": "differential-equations",
+    "description": "ODE methods, classic models, PDEs, Laplace transform."
+  },
+  {
+    "name": "Complex numbers",
+    "slug": "complex-numbers",
+    "description": "Forms, Euler's formula, roots, complex analysis."
+  },
+  {
+    "name": "Probability and statistics",
+    "slug": "probability-and-statistics",
+    "description": "Counting, probability rules, descriptive statistics, distributions."
+  },
+  {
+    "name": "Sets and logic",
+    "slug": "sets-and-logic",
+    "description": "Set operations, De Morgan, quantifiers, induction."
+  },
+  {
+    "name": "Physics",
+    "slug": "physics",
+    "description": "Kinematics, dynamics, energy, waves, electromagnetism, quantum."
+  }
+]

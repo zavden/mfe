@@ -1,0 +1,60 @@
+{
+  "format": "manim-formula-editor",
+  "version": 1,
+  "meta": {
+    "name": "Quadratic formula",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_quad0001",
+      "name": "eq1",
+      "latex": "ax^2+bx+c=0",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "snapshot": null
+    },
+    {
+      "id": "f_quad0002",
+      "name": "eq2",
+      "latex": "ax^2+bx=-c",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "snapshot": null
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_track001",
+      "name": "Track 2",
+      "hidden": false,
+      "locked": false
+    },
+    {
+      "id": "t_track002",
+      "name": "Track 1",
+      "hidden": false,
+      "locked": false
+    }
+  ],
+  "clips": [],
+  "relations": []
+}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Groups of animation blocks · Manim Formula Editor</title>
+  <meta name="description" content="Blocks that start together and last the same can be one group: how to make one, how the timeline folds it, how to move and edit it, and the rules a group keeps.">
+  <meta name="mfe:id" content="animations/groups">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Block groups">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/groups-sides.data.js" defer></script>
+  <script src="../examples/groups-split.data.js" defer></script>
+  <script src="../examples/groups-mixed.data.js" defer></script>
+  <script src="../media/animations/groups/split-runs.tour.js" defer></script>
+  <script src="../media/animations/groups/fold.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Groups of animation blocks</h1>
+      <p class="lead">Some blocks belong together: the two sides of an equation written at once, three terms that light up in the same second. A <strong>group</strong> ties such blocks into one thing on the timeline, so that you move, stretch, copy and delete them as one.</p>
+
+      <figure class="mfe-player" data-mfe-player="groups-sides" data-autoplay data-loop data-start="1.6">
+        <figcaption>Both sides of 2x + 4 = 10 are written at once. Two Write blocks do it, one for each side, and the timeline draws them as one block.</figcaption>
+      </figure>
+
+      <h2 id="what">What a group is</h2>
+      <p>A group is a set of blocks of one clip that start together and last the same. Each keeps its own animation, its own glyphs and its own settings, as the animations of Manim’s <code>AnimationGroup</code> do. What they share is their time: a group has one start and one length.</p>
+      <p>The timeline draws a folded group as one block on one lane, with a double line along its foot to say there are blocks under it. Its label names the animation and says how many blocks run it: <span class="ui">Write ×2</span>. When the members run different animations it reads <span class="ui">Group ×3</span> instead, and when they are of different families, such as an Emphasis and an Appear, the block takes a colour of its own.</p>
+      <p>Only blocks that name glyphs can be in a group: <span class="ui">Appear</span>, <span class="ui">Disappear</span>, a part of the formula <span class="ui">Transform</span> and <span class="ui">Emphasis</span>. A keyframe takes the whole formula, so no block that animates glyphs runs beside it; a Morph names pairs, not glyphs, and is not grouped either.</p>
+      <aside class="callout note">
+        <p>A group is only a mark on its blocks. It changes nothing of what plays and nothing of the Python the app exports: blocks that run together are one <code>self.play</code> already. A group is there for you, so that you can work with its blocks as one.</p>
+      </aside>
+
+      <h2 id="making">Making a group</h2>
+      <h3 id="split">By splitting a block</h3>
+      <p>The usual way is to split a block. Right-click a block that names glyphs and choose <span class="ui">Split into runs</span>: the block becomes one block for each run of consecutive glyphs, all at its time. Here a Write over <code>2x + 4</code> and <code>10</code>, which leaves the equal sign out, becomes two blocks, one for each side.</p>
+      <div class="mfe-tour" data-mfe-tour="animations/groups/split-runs" data-title="Splitting a block into runs"></div>
+      <p>The other commands that make blocks run together make groups too. <span class="ui">Split…</span> moves glyphs you choose to new blocks, one or several at once (<a href="timing.html">Timing tools</a> shows its dialog), and <span class="ui">Duplicate for the other glyphs</span> puts a copy of the block beside it for the glyphs it does not animate.</p>
+      <div class="mfe-example" data-mfe-example="groups-split"></div>
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/groups-split.mfe.json" download>groups-split.mfe.json</a>. Choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> in the <a href="../start/projects.html#open">Projects dialog</a> and pick the file.</li>
+          <li>Right-click the <span class="ui">Write · 6</span> block and choose <span class="ui">Split into runs</span>.</li>
+          <li>Press Play: both sides write at the same time, as in the player above.</li>
+        </ol>
+      </aside>
+
+      <h3 id="by-hand">By hand</h3>
+      <p>Any blocks of a clip that start together and last the same can be grouped. Right-click one of them: if others run with it, the menu has <span class="ui">Group with the block that runs with it</span>, or with the number of them, for instance <span class="ui">Group with the 2 blocks that run with it</span>. If their starts or their lengths differ, even a little, the entry is not there.</p>
+      <figure>
+        <img src="../media/animations/groups/group-with.dark.webp" data-themed
+             alt="The menu of an Indicate block, whose first entry reads Group with the 2 blocks that run with it."
+             width="460" height="460" loading="lazy">
+        <figcaption>An Indicate, a Wiggle and a Write start together and last one second: each one’s menu offers to group the other two.</figcaption>
+      </figure>
+      <p>Grouped, they read <span class="ui">Group ×3</span> on the timeline, since they run three animations, and the block takes a colour of its own, since they are of two families: Emphasis and Appear.</p>
+      <figure>
+        <img src="../media/animations/groups/mixed.dark.webp" data-themed
+             alt="A folded group on the timeline, labelled Group ×3, in the colour of mixed families."
+             width="760" height="124" loading="lazy">
+        <figcaption>A folded group of different animations (1).</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="groups-mixed" data-autoplay data-loop data-start="1.5" data-controls="minimal">
+        <figcaption>The same three blocks, played: the left side lights up, the Wiggle rocks, and the right side is written, all in the same second.</figcaption>
+      </figure>
+      <div class="mfe-example" data-mfe-example="groups-mixed"></div>
+
+      <h2 id="folding">Folding and unfolding</h2>
+      <p>A folded group is one block. To work on its members apart, unfold it: press the arrow at the left of the group, or double-click it. The members take a lane each, with dashed borders to show that they are grouped. The arrow on the first of them folds the group again.</p>
+      <div class="mfe-tour" data-mfe-tour="animations/groups/fold" data-title="Folding and unfolding a group"></div>
+      <p>Which groups are unfolded is only how you view the timeline. The project file does not keep it, so a project opens with its groups folded, even when you open the same project again. The menus have the same commands for the keyboard: <span class="ui">Unfold</span> in a group’s menu, and <span class="ui">Fold the group</span> in the menu of one of its unfolded members.</p>
+      <p>Rest the pointer on a folded group to see its tooltip: how many animations it holds, what each one is, and when the group runs.</p>
+
+      <h2 id="moving">Moving and stretching</h2>
+      <p>Drag a folded group by its body to move all its blocks, or by one of its edges to stretch all of them. The group has the limits all its members share: it stops where any of them would run into an animation of the same glyphs, or leave its clip, and the readout under it says which. <kbd data-keys="Escape">Esc</kbd> puts it back.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/animations/groups/drag-group.dark.webm"
+               poster="../media/animations/groups/drag-group.dark.webp" width="760" height="124"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The group dragged by its body: both blocks move, and both sides of the equation will write a second later.</figcaption>
+      </figure>
+      <p>Unfolded, dragging any member moves all of them as well. With a folded group selected, <kbd data-keys="Mod+D">Ctrl+D</kbd> copies the whole group (another group, right after it) and <kbd data-keys="Delete">Delete</kbd> asks <span class="ui">Delete the group?</span> and deletes all of it. With a member of an unfolded group selected, <kbd data-keys="Mod+D">Ctrl+D</kbd> and <kbd data-keys="Delete">Delete</kbd> act on that member alone. <kbd data-keys="Alt+ArrowLeft">Alt+←</kbd> and <kbd data-keys="Alt+ArrowRight">Alt+→</kbd> move the whole group by a frame (by five with <kbd data-keys="Shift">Shift</kbd>), folded or not, as a drag does.</p>
+
+      <h2 id="panel">In the Animations panel</h2>
+      <p>Select a group and the Animations panel shows <span class="ui">Group ×2</span> at the top: a key for each member, and <span class="ui">Take out</span> and <span class="ui">Ungroup</span> beside the title. Press a key to see that member’s animation, its glyphs and its settings; change them without touching the others.</p>
+      <figure>
+        <img src="../media/animations/groups/panel.dark.webp" data-themed
+             alt="The Animations panel for a group of two Write blocks: a key for each member (1), the Take out button (2) and the Timing section (3)."
+             width="310" height="695" loading="lazy">
+        <figcaption>The members of the group (1), the buttons that take a block out or undo the group (2), and the timing, which is the group’s (3).</figcaption>
+      </figure>
+      <p>The <span class="ui">Timing</span> section is shared. Change <span class="ui">Start</span> or <span class="ui">Duration</span> of any member and the whole group changes with it.</p>
+      <ul>
+        <li><span class="ui">Take out</span> makes the member you are looking at a block on its own again. The others stay grouped; if only one is left, it stops being a group too.</li>
+        <li><span class="ui">Ungroup</span> undoes the group: its blocks are blocks on their own again, where they are.</li>
+      </ul>
+
+      <h2 id="menus">The menus of a group</h2>
+      <p>Right-click a folded group for its menu. Its header says what it is and the line under it lists its blocks.</p>
+      <figure>
+        <img src="../media/animations/groups/group-menu.dark.webp" data-themed
+             alt="The menu of a folded group: Write ×2, the list of its two blocks, then Unfold, Ungroup, Duplicate and Delete…."
+             width="360" height="360" loading="lazy">
+        <figcaption>The menu of a folded group.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Unfold</span> shows its blocks on lanes of their own, and <span class="ui">Ungroup</span> undoes the group.</li>
+        <li><span class="ui">Group with the 2 blocks that run with it</span> takes in blocks that start with the group and last as long, if there are any.</li>
+        <li><span class="ui">Duplicate</span> copies the whole group, and <span class="ui">Delete…</span> deletes all of it after you confirm.</li>
+      </ul>
+      <p>What one animation of the group can do on its own, such as changing its animation or splitting it, is in the menu of that block, once the group is unfolded, and in the Animations panel. That menu starts with the group’s commands: <span class="ui">Fold the group</span>, <span class="ui">Take out of the group</span> and <span class="ui">Ungroup</span>.</p>
+
+      <h2 id="rules">The rules of a group</h2>
+      <ul>
+        <li>A group has at least two blocks, and they are all blocks of one clip.</li>
+        <li>They start together and last the same.</li>
+        <li>They name glyphs: no keyframe and no Morph.</li>
+        <li>Inside a group the rule of any two blocks holds: two of them cannot animate the same glyph at the same time.</li>
+        <li>If an edit leaves a block that no longer runs with the others of its group, that block leaves the group by itself, and a group left with one block stops being one.</li>
+      </ul>
+      <p>Groups are saved with the project, and a project made before groups existed opens as it was. In the exported Python a group is one <code>self.play</code> with all its animations, the same text the blocks give without the group:</p>
+      <pre data-excerpt="examples/groups-sides.ce.py"><code class="language-python"># 1 s – 2 s: eq write, eq write
+self.play(Write(VGroup(*eq_g[:4])), Write(VGroup(eq_g[5], eq_g[6])), run_time=1)</code></pre>
+      <p>More on the blocks themselves, and on blocks that overlap without being grouped, is in <a href="blocks.html">Animation blocks</a>.</p>
+      <div class="mfe-example" data-mfe-example="groups-sides"></div>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="timing.html">Timing tools</a> covers the menus of a clip, copying and pasting its timing, and splitting a block.</li>
+        <li><a href="../manim/python.html">The generated Python</a> reads an exported scene line by line.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

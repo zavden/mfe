@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The relation editor · Manim Formula Editor</title>
+  <meta name="description" content="Linking glyphs, the pair list, the styles of pairs and the Animation tab.">
+  <meta name="mfe:id" content="transforms/relation-editor">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Relation editor">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/relations-distribute.data.js" defer></script>
+  <script src="../examples/relation-editor-chain.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <script src="../media/transforms/relation-editor/editor.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>The relation editor</h1>
+      <p class="lead">The relation editor is where you tell the app which glyph of one formula becomes
+        which glyph of the next. You link glyphs, choose how each pair moves, set the timing and watch
+        the result, all in one dialog that changes the project only when you press
+        <span class="ui">Save relation</span>.</p>
+
+      <h2 id="opening">Opening the editor</h2>
+      <p>The editor opens on two clips: to make a new relation between them, or to change the one they
+        already have. <a href="relations.html">How relations work</a> explains what a relation is; this
+        page is about the tool.</p>
+      <p>A new relation is made <strong>where the playhead is</strong>: its window starts at the
+        yellow line of the timeline, when a window fits there. Put the playhead where the
+        transformation should begin, then ask for the relation.
+        <a href="relations.html#timing-playhead">How relations work</a> tells what happens when none
+        fits.</p>
+      <h3 id="from-the-timeline">From the timeline</h3>
+      <p>Hold <kbd data-keys="Shift">Shift</kbd>. A link port, a small round dot, shows in the lower half
+        of every clip. Click the port of the source clip, then click the target clip. A line follows the
+        pointer between the two clicks; <kbd data-keys="Escape">Esc</kbd> cancels it. You can also drag
+        from the port and release over the target.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/relation-editor/shift-link.dark.webm"
+               poster="../media/transforms/relation-editor/shift-link.dark.webp" width="900" height="178"
+               muted loop playsinline preload="none"></video>
+        <figcaption>With Shift held, the ports appear. A click on the port of <i>second</i> and a click
+          on <i>third</i> open the editor on a new relation from <i>second</i> to <i>third</i>.</figcaption>
+      </figure>
+      <p>If the two clips cannot be related, a notice says why: they have to be on different tracks, they
+        have to overlap in time, and neither track can be locked. If they are related already, a menu
+        opens where the pointer is and asks which of their relations to edit, or to add another:
+        <a href="#second-relation">see below</a>.</p>
+      <h3 id="from-the-panel">From the Animations panel</h3>
+      <p>Select the source clip. On its <span class="ui">Relations</span> tab, choose the other clip in
+        <span class="ui">Relate with</span> (1), the direction (2) and press
+        <span class="ui">Create relation…</span> (3). When the two clips are related already, the button
+        reads <span class="ui">Edit or add a relation…</span> and opens a menu:
+        <a href="#second-relation">see below</a>.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/create-form.dark.webp" data-themed
+             alt="The Relations tab of the Animations panel, with the other clip chosen in Relate with, the direction, and the Create relation button, each marked with a number."
+             width="285" height="158" loading="lazy">
+        <figcaption>The form that makes a relation, in the Relations tab of a clip.</figcaption>
+      </figure>
+      <h3 id="from-a-relation">From a relation that exists</h3>
+      <ul>
+        <li>Double-click its band or its arrow on the timeline.</li>
+        <li>Right-click its band and choose <span class="ui">Edit pairs…</span>.</li>
+        <li>Press <span class="ui">Edit…</span> beside it in the Relations tab of a clip, or
+          <span class="ui">Edit pairs…</span> in the panel of the selected relation.</li>
+      </ul>
+      <h3 id="second-relation">Between two clips that are related already</h3>
+      <p>Two clips can have <a href="relations.html#twice">several relations</a>. So when you ask for
+        a relation between two clips that have one already, with the button of the Relations tab or
+        with a link port, a menu asks what you mean:</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/choice-menu.dark.webp" data-themed
+             alt="The menu under the button Edit or add a relation: a header with the two formulas and the number of relations, Edit relation 1 and Edit relation 2 with the window and the pairs of each, and Add another relation."
+             width="285" height="276" loading="lazy">
+        <figcaption>The menu of two clips that have two relations.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Edit relation 1…</span>, <span class="ui">Edit relation 2…</span>: the
+          relations the two clips have in that direction, in the order of their windows, each with
+          its window in seconds and its number of pairs. One opens that relation in the editor.</li>
+        <li><span class="ui">Add another relation…</span> opens the editor on a new relation between
+          the same two clips. Its window starts at the playhead, or, when no window fits there, where
+          the last one of theirs ends; with <a href="../basics/timeline.html#region">a region</a>
+          marked on the timeline, its window is the region. If it cannot be made (the clips no longer overlap, for one),
+          the entry is off and a line under it says why.</li>
+      </ul>
+      <p>The title of the editor then names the relation by its number,
+        <code>Relation 2 of 2: source → target</code>, and so does the list of the Relations tab. The
+        number is the order on the timeline: the relation that plays first is 1, and it follows the
+        window when you move it. The other direction counts apart: a relation from the second clip
+        back to the first is the first of its own.</p>
+
+      <h2 id="tour">A tour of the editor</h2>
+      <p>This is the editor on the relation of <code>a(b + c)</code> into <code>ab + ac</code>. Step
+        through it, or let it go on by itself.</p>
+      <div class="mfe-tour" data-mfe-tour="transforms/relation-editor/editor" data-title="The relation editor, area by area"></div>
+      <p>The editor works on a copy of the relation. Nothing changes in the project, neither the
+        timeline nor the preview, until you press <span class="ui">Save relation</span>. Then the whole
+        session is one undo step.</p>
+
+      <h2 id="linking">Linking glyphs</h2>
+      <p>The source is on top and the target below, or at the left of it when that draws the glyphs
+        of a tall formula larger (<a href="#drawing">the drawing</a>). The glyphs are the buttons: click them to select, and
+        the toolbar under the drawing tells what is selected. You need not hit the ink of a glyph: a dashed
+        circle follows the pointer, and a click takes the glyph under the pointer or, on none, the nearest
+        one inside the circle. The glyph it would take is marked as you move, and its number appears at
+        its lower left, the number the pair is stored by. A glyph that has a link takes the colour of its
+        pair. <a href="#drawing">The drawing</a> also zooms and moves.</p>
+
+      <h3 id="link-one">A glyph to a glyph</h3>
+      <p>Click a glyph of the source, then a glyph of the target. The link appears, with the colour and
+        the number of the new pair. You can start from the target as well. A plain click on a side that
+        has nothing selected, while the other side has a selection, links at once.</p>
+
+      <h3 id="link-several">One glyph to several</h3>
+      <p>Hold <kbd data-keys="Shift">Shift</kbd> (or <kbd data-keys="Mod">Ctrl</kbd>) while you click to
+        add glyphs to the selection of a side, or to take one out. With glyphs selected on both sides, press
+        <span class="ui">Link</span>: they become one pair. Selecting several sources and then clicking
+        one target links them at once, many-to-one.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/relation-editor/link-gestures.dark.webm" width="678" height="672"
+               poster="../media/transforms/relation-editor/link-gestures.dark.webp"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The plus signs are linked already, by a click on each. Then the <i>a</i> of the source is
+          selected, the two <i>a</i> of the target are added with Shift, and
+          <span class="ui">Link</span> makes one pair of one glyph and two.</figcaption>
+      </figure>
+
+      <h3 id="link-box">With a box</h3>
+      <p>Drag a rectangle over the glyphs: every glyph it touches is selected, on either formula. A side the
+        box does not touch keeps its selection, so you can pick one side and then the other. Hold
+        <kbd data-keys="Shift">Shift</kbd> or <kbd data-keys="Mod">Ctrl</kbd> when you press, and the box
+        adds to the selection instead of replacing it.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/relation-editor/link-box.dark.webm"
+               poster="../media/transforms/relation-editor/link-box.dark.webp" width="678" height="672"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A box over the two <i>x</i> of the source, and one click on the <i>x</i> of the
+          target: a pair of two glyphs and one.</figcaption>
+      </figure>
+
+      <h3 id="joining">Linking a target that is linked already</h3>
+      <p>When you link a source to a target glyph that has a pair, the source <em>joins</em> that pair
+        instead of making a second one: two glyphs become one. A message says so
+        (<code>Glyph b (2) joined pair 1: a (0), b (2) → a (0).</code>). The new source has the style
+        of the pair it joined, and it joins the pair’s choice of how the extra sources arrive
+        (<a href="#pair-list">below</a>).</p>
+
+      <h3 id="separate-pairs">Separate pairs onto one target</h3>
+      <p>A pair has one style, so the sources that join cannot do different things: they all transform,
+        or they all send a copy. To give each source its own style, and
+        <a href="custom-paths.html">its own path</a>, take the pair apart: right-click a glyph of the
+        pair and choose <span class="ui">Split into separate pairs</span>. Each source becomes a pair of
+        its own onto the same target, with the style it played (a source that only sent a copy becomes a
+        Copy) and the path it followed. The animation is the same until you change one of them, unless
+        the pair merged its sources (<a href="#pair-list">Merge</a>): apart, every source arrives.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/split-menu.dark.webp" data-themed
+             alt="The drawing of a pair of two x onto one x, with its menu open: the styles, Split into separate pairs, Edit path and Delete link."
+             width="672" height="571" loading="lazy">
+        <figcaption>The menu of a pair of two sources onto one target.</figcaption>
+      </figure>
+      <p><span class="ui">Join into one pair</span>, in the menu of any pair whose target other pairs
+        bring too, puts them back into one. Their paths are kept, as one path when they all followed the
+        same one and as paths of their routes otherwise. One pair has one style, so the pairs can be
+        joined when it can play what they play: the same style for all of them, or one that transforms
+        with copies around it. Otherwise the entry is greyed out, with the reason under it: give the
+        pairs one style first. A pair that merges its sources (<span class="ui">Merge (Manim)</span>) is
+        not joined with another either, since each of its sources would then arrive on its own: set it
+        to <span class="ui">Separate</span> first.</p>
+      <p>Pairs can share a target only inside one relation, and only when they bring exactly the same
+        glyphs. Linking still joins by itself; the menu of the next section makes a separate pair while
+        linking. Once two pairs bring a target, a new link onto it is one more pair of its own, and a
+        message says so.</p>
+
+      <h3 id="link-as">Choosing the style while linking</h3>
+      <p>A link made by a click has the style of the relation: <span class="ui">Transform</span>, unless
+        you changed it in the <a href="#animation-tab">Animation tab</a>. To give a pair a style of its
+        own from the start, select the glyphs of one side and <strong>right-click</strong> a glyph of
+        the other side, where you would have clicked it. The glyph joins the selection and a menu opens
+        with <span class="ui">Link as Transform</span>, <span class="ui">Link as Copy</span>,
+        <span class="ui">Link as Fade transform</span> and <span class="ui">Link as Fade copy</span>.
+        With glyphs selected on both sides already, a right-click on any of them opens the same
+        menu.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/link-as.dark.webp" data-themed
+             alt="The drawing with the a of the source outlined in red dashes and a menu over the second a of the target: Link as Transform and Link as Fade transform greyed out, each over the sentence that says the source is already consumed by another pair, Link as Copy between them and Link as Fade copy after them, and under a line the entries of the pair the source has."
+             width="714" height="719" loading="lazy">
+        <figcaption>The <i>a</i> of the source already turns into the first <i>a</i> of the target, and
+          is outlined in red. To the second one it can only send a copy: the two styles that would
+          consume it again are greyed out, over the reason. The entries of the pair it has
+          follow.</figcaption>
+      </figure>
+      <p>The menu tries each style before it offers it. A style those glyphs cannot take is greyed
+        out, with the reason under it: a source that another pair consumes, or that
+        <a href="#taken">another relation</a> consumes later, can only be copied. When no style can be,
+        as for a target that arrives through another relation, the reason is said once. A style that
+        would bring a warning stays available, and the warning is written under it. Onto a target
+        that has a pair the menu offers <span class="ui">Join pair <i>N</i></span>, since by default
+        the source <a href="#joining">joins that pair</a> and takes its style, and under it
+        <span class="ui">Separate pair as Transform</span>, <span class="ui">Copy</span>,
+        <span class="ui">Fade transform</span> and <span class="ui">Fade copy</span>, which make
+        <a href="#separate-pairs">a pair of its own</a> onto that target. When the selected glyphs
+        have links already, the entries of <a href="#pair-menu">their pairs</a> come after a line.</p>
+
+      <h3 id="suggest">Suggest links by label</h3>
+      <p><span class="ui">Suggest links by label</span> proposes one-to-one links between glyphs that
+        have the same label: the first <i>x</i> of the source with the first <i>x</i> of the target, the
+        second with the second, in reading order, left to right and then top to bottom. A glyph that has a
+        pair is left out. The suggestions are drawn dashed, with a bar that lists them.
+        <span class="ui">Accept all</span> makes them pairs; <span class="ui">Dismiss</span> drops them.
+        When no glyphs are left to match, the editor says so.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/suggestion.dark.webp" data-themed
+             alt="The drawing with dashed links between glyphs with the same label, and a bar under the toolbar that lists four suggested links with Accept all and Dismiss."
+             width="678" height="724" loading="lazy">
+        <figcaption>The suggestions, before they are accepted. The bar (1) lists them.</figcaption>
+      </figure>
+      <p>A suggestion is a start, not an answer: it knows labels, not mathematics. Accept it and fix what
+        is wrong. <span class="ui">Edit</span>, in the pair list, takes a pair apart and selects its glyphs
+        again: add the second <i>a</i> with <kbd data-keys="Shift">Shift</kbd> and press
+        <span class="ui">Link</span> (<a href="#pair-list">the pair list</a>, below).</p>
+
+      <h3 id="keyboard">From the keyboard</h3>
+      <p>The key before the eye in the toolbar lists the glyphs of both formulas under the drawing, a key
+        each, with its number and its label. A press does what a click on the glyph does, Shift and Ctrl
+        included. The lists are left out until you ask for them, because they grow with the formulas; the
+        browser remembers your choice. After a click on a glyph, <kbd data-keys="Enter">Enter</kbd> does
+        what <span class="ui">Link</span> does. The menu key on one of these keys (or
+        <kbd data-keys="Shift+F10">Shift+F10</kbd>, or a right-click) opens the menu of the drawing:
+        <a href="#link-as">Link as</a>, and the entries of the pairs.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/glyph-lists.dark.webp" data-themed
+             alt="The drawing with the lists of glyphs under it: a key for each glyph of the source and of the target."
+             width="676" height="93" loading="lazy">
+        <figcaption>The key that lists the glyphs (1), and the lists (2).</figcaption>
+      </figure>
+      <p>The eye hides the links and their badges, so that you can see the glyphs alone.</p>
+
+      <h3 id="consumed">A source a transform consumes</h3>
+      <p>A pair with the style <span class="ui">Transform</span> or
+        <span class="ui">Fade transform</span> consumes its sources: once it has played they are gone,
+        so another pair can only copy them. The drawing outlines such a source in <strong>red
+        dashes</strong>, and its tooltip names the pair that consumes it, for example
+        <code>pair 1 consumes it (Transform): another pair can only copy it</code>. Of several sources
+        that arrive as <span class="ui">Copies</span>, only the principal is outlined. A pair that
+        copies, <span class="ui">Copy</span> or <span class="ui">Fade copy</span>, leaves its sources
+        on screen and outlines nothing: give the pair one of those styles and the outline goes.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/consumed.dark.webp" data-themed
+             alt="The drawing of a(b + c) and ab + ac: the a and the c of the source are outlined in red dashes; the b and the plus sign are not, and the badges of their pairs read FC and C."
+             width="678" height="672" loading="lazy">
+        <figcaption>The pairs of the <i>a</i> and the <i>c</i> transform: their sources are outlined.
+          The <i>b</i> fades as a copy (<code>FC</code>) and the plus sign is copied
+          (<code>C</code>): they stay, and have no outline.</figcaption>
+      </figure>
+      <p>A source that <a href="#taken">another relation</a> or a Morph block consumes, when this
+        window starts or later, is outlined in the same way, and its tooltip names what consumes
+        it.</p>
+
+      <h3 id="refused">What the editor refuses</h3>
+      <p>Some links would be errors, and the editor says so instead of making them. The message sits under
+        the toolbar.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/refused.dark.webp" data-themed
+             alt="The drawing with the message: Source glyph a (0) is already consumed by another pair. Make one of the pairs a copy."
+             width="678" height="714" loading="lazy">
+        <figcaption>The <i>a</i> of the source has gone to the two <i>a</i> of the target already (its
+          red outline says so), so it cannot go to the plus sign as well (1).</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>The message says</th><th>What to do</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A source glyph <em>is already consumed by another pair</em>.</td>
+            <td>A glyph can leave once. Make one of the two pairs a Copy, or put both targets in one
+              pair.</td>
+          </tr>
+          <tr>
+            <td>Target glyphs <em>are linked in different pairs</em>.</td>
+            <td>Link onto the targets of one pair, to add a source to it.</td>
+          </tr>
+          <tr>
+            <td>A target glyph <em>is not linked, while another is in pair N</em>.</td>
+            <td>Link onto the targets of that pair alone, to add a source to it, or take the pair apart first with
+              <span class="ui">Edit</span>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="taken">Glyphs another relation has taken</h3>
+      <p>A glyph does one thing in the whole scene: it arrives through one pair and is consumed by
+        one. In a second relation between two clips, or in a relation into a clip that another one
+        feeds, some glyphs are spoken for. The drawing shows them <strong>dimmed</strong>, and their
+        tooltip says why:</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/taken.dark.webp" data-themed
+             alt="The drawing of the second relation between two clips: the c and the equals sign of both formulas are dimmed, the other glyphs are bright."
+             width="678" height="672" loading="lazy">
+        <figcaption>The second relation of the example: the first one took the <i>c</i> and the equals
+          sign, on both sides.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>The tooltip says</th><th>What it means</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A target is <em>brought in by</em> another relation, or by a Morph block.</td>
+            <td>It arrives through that pair already. A second pair onto it would be an error.</td>
+          </tr>
+          <tr>
+            <td>A glyph was <em>consumed earlier by</em> another relation, or by a Morph block.</td>
+            <td>It turned into other glyphs before this window starts: it is gone.</td>
+          </tr>
+          <tr>
+            <td>A source is <em>still arriving through</em> another relation.</td>
+            <td>It is not whole yet when this window starts. Start the window once it has arrived.</td>
+          </tr>
+          <tr>
+            <td>Another relation <em>takes</em> a target <em>before it would have arrived</em>.</td>
+            <td>Something leaves from that glyph while this window would still be bringing it. End
+              the window before that.</td>
+          </tr>
+          <tr>
+            <td>Another relation <em>consumes it</em>, or <em>copies it later: here it can only be
+              copied</em> (not dimmed; outlined in red dashes when the other consumes it).</td>
+            <td>The other pair needs the glyph at the same time or later. A
+              <span class="ui">Copy</span> or <span class="ui">Fade copy</span> pair can still start
+              from it; a pair that consumes it cannot.</td>
+          </tr>
+          <tr>
+            <td>Another relation <em>brings it in later: it is not on screen yet</em> (not
+              dimmed).</td>
+            <td>The source is not there when this window starts. Copied, it would appear out of
+              nowhere; start the window once it has arrived.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The other relation is named by its two formulas, and by its number when the two clips have
+        several: <code>relation 1 of 2 (source → target)</code>. The reasons follow the window: move
+        it, in the <span class="ui">Animation</span> tab, and a glyph that was only noted can become
+        dimmed. A dimmed glyph can still be clicked; the link it
+        makes is listed among the <a href="#problems">problems</a>.
+        <span class="ui">Suggest links by label</span> leaves these glyphs out.</p>
+
+      <h2 id="drawing">The drawing: aim, zoom and layout</h2>
+      <p>The drawing is the same in this editor and in the
+        <a href="morph.html#pairs">pair editor of a Morph block</a>. It is spaced by the size of its
+        text, the mark of a glyph is the glyph's own box, and the badges of the pairs keep their size on
+        screen: a formula of several lines is drawn as large as the dialog allows.</p>
+      <ul>
+        <li><strong>The circle</strong> is the Preview's
+          <a href="../layout/glyph-picking.html#circle">circle selector</a>, always on here: a minus sign, a dot or
+          the bar of a fraction is easy to take. <kbd data-keys="Shift">Shift</kbd> and the wheel make
+          it larger or smaller; it is one size for the Preview and for the two editors, and the browser
+          remembers it.</li>
+        <li><kbd data-keys="Mod">Ctrl</kbd> and the wheel <strong>zoom</strong> about the pointer. The
+          middle button, or <kbd data-keys="Alt">Alt</kbd> and a drag, <strong>moves</strong> the
+          view; on a Mac a scroll moves it and a pinch zooms. The keys over the upper right corner
+          zoom in steps and say how near the view is, and <span class="ui">Fit</span> shows the whole
+          drawing.</li>
+        <li>The drawing <strong>opens framed</strong> on what takes part: the glyphs that can be
+          linked and those of the pairs made. When that is about all of it, it opens whole.</li>
+        <li>There are two <strong>layouts</strong>. Stacked, the source is over the target and the
+          links go through the gap between them. Side by side, the source is at the left, each line of
+          a tall formula is beside its own, and the links are arcs over the two. The drawing opens in
+          the layout that draws the glyphs that can take part larger: stacked for most formulas of one
+          line, side by side for tall ones, whose glyphs would be small stacked. A short formula, as
+          <code>xx</code> into <code>x²</code> <a href="#link-box">above</a>, is drawn large either
+          way, and opens stacked. The first key of the corner changes it while the editor is open. The
+          <a href="previewing.html#preview-raw">raw preview</a> follows the layout.</li>
+      </ul>
+      <figure>
+        <img src="../media/transforms/relation-editor/view-keys.dark.webp" data-themed
+             alt="The upper right corner of the drawing of a(b + c) into ab + ac, with the keys of its view: the layout key, the zoom keys around the percentage, and Fit."
+             width="376" height="167" loading="lazy">
+        <figcaption>Over the corner of the drawing: the layout (1), the zoom (2) and
+          <span class="ui">Fit</span> (3).</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/transforms/relation-editor/side-by-side.dark.webp" data-themed
+             alt="The same relation side by side: a(b + c) at the left, ab + ac at the right, and each pair an arc over the two with its badge on the arc."
+             width="676" height="265" loading="lazy">
+        <figcaption>The same relation side by side: each link is an arc over the two formulas.</figcaption>
+      </figure>
+
+      <h2 id="pair-list">The pair list</h2>
+      <p>The <span class="ui">Pairs</span> tab lists every pair of the relation, in the order you made
+        them, with the number and the colour of its link. Each row has, from left to right:</p>
+      <ul>
+        <li>the glyphs of the pair, <code>a → a a</code>, and its shape, <code>1→2</code>;</li>
+        <li>its style, in a list: <span class="ui">Inherit: Transform</span> (the relation’s
+          <span class="ui">Default style</span>, whatever it is), <span class="ui">Transform</span>,
+          <span class="ui">Copy (source stays)</span>, <span class="ui">Fade transform</span> or
+          <span class="ui">Fade copy (source stays)</span>;</li>
+        <li><span class="ui">Edit</span>, which takes the pair apart: it leaves the list and its glyphs
+          are selected again, so that you can change them and press <span class="ui">Link</span>;</li>
+        <li><span class="ui">Edit path…</span>, which saves the relation and opens the preview’s
+          Edit-path mode on this pair;</li>
+        <li><span class="ui">×</span>, which deletes the pair.</li>
+      </ul>
+      <p>Point at a row and its links light up in the drawing; point at a glyph and its pairs light up in
+        the list, which scrolls to them.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/pair-list.dark.webp" data-themed
+             alt="The list of seven pairs of the custom paths example: each with its glyphs, its shape, a style list, Edit, Edit path and a cross; four of them have a small dot."
+             width="454" height="275" loading="lazy">
+        <figcaption>The list of a relation with paths of its own. The dot (1) marks a pair whose path was
+          shaped by hand; a pair can have a style of its own (2); <span class="ui">Edit path…</span> (3)
+          goes to the preview to shape one.</figcaption>
+      </figure>
+      <p>A pair of several sources and one target has one more row under it,
+        <span class="ui">Sources</span>: how the sources beyond the first arrive
+        (<span class="ui">Separate</span>, <span class="ui">Merge (Manim)</span> or
+        <span class="ui">Copies</span>). <a href="relations.html#extras">How relations work</a> shows
+        the three. With <span class="ui">Copies</span> the row also names the principal source.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/extras.dark.webp" data-themed
+             alt="A pair of two glyphs and one in the pair list, with the Sources list set to Copies and the text Principal: x (0)."
+             width="454" height="81" loading="lazy">
+        <figcaption>The choice of how the extra sources arrive (1), and the principal (2).</figcaption>
+      </figure>
+      <h3 id="pair-menu">The menu of a pair</h3>
+      <p>Right-click a glyph that has links. The menu is for the pairs that hold the selected glyphs: their
+        style, all at once; <span class="ui">Edit path…</span> when it is one pair;
+        <span class="ui">Straight path</span> to drop a path drawn by hand;
+        <span class="ui">Split into separate pairs</span> or <span class="ui">Join into one pair</span>
+        (<a href="#separate-pairs">above</a>); and
+        <span class="ui">Delete link…</span>, which asks first. A press on the badge of a link opens the same
+        menu, when the pair holds a selected glyph.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/pair-menu.dark.webp" data-themed
+             alt="The drawing with the sources outlined in red dashes and the menu of the pair of the first a: Inherit Transform, Transform, Copy, Fade transform, Fade copy, Edit path and Delete link."
+             width="672" height="571" loading="lazy">
+        <figcaption>The menu of a pair.</figcaption>
+      </figure>
+
+      <h2 id="animation-tab">The Animation tab</h2>
+      <p>The second tab of the side column has two groups of settings, shown in the last steps of the tour
+        above.</p>
+      <ul>
+        <li><strong>Timing and style</strong>: <span class="ui">Offset</span> and
+          <span class="ui">Duration</span> of the window, with a line that gives the window in seconds and the
+          range it is allowed in (and, for a new relation whose window could not start at the
+          playhead, a line that says so); <span class="ui">Easing</span>; the
+          <span class="ui">Default style</span> of the pairs; and the <span class="ui">Path arc</span> in
+          degrees.</li>
+        <li><strong>Unpaired glyphs</strong>: what the glyphs of the source that no pair takes do when they
+          leave (the <span class="ui">Outro</span> of the source clip), and what the glyphs of the target
+          that no pair brings do when they arrive (the <span class="ui">Intro</span> of the target clip),
+          each with its <span class="ui">Duration</span> and a checkbox that runs it during the window.
+          A line over each names its glyphs, those that no relation and no block of the clip takes care
+          of: <em>1 glyph of source is not taken away by a relation or a block (+)</em>, <em>… is not
+          brought in by a relation or a block (−)</em>.
+          Between the two, <span class="ui">Starts empty</span> makes the target show only what is
+          brought into it: its unpaired glyphs then stay out, and the fields of its intro wait.</li>
+      </ul>
+      <p>The outro, the intro and <span class="ui">Starts empty</span> belong to the clips: changing them
+        here changes those clips when you save.
+        <a href="relations.html#timing">How relations work</a> explains the window,
+        <a href="relations.html#unpaired">the unpaired glyphs</a> and
+        <a href="relations.html#starts-empty">a target that starts empty</a>.</p>
+      <p>A press on the drawing, or on a key of the glyph lists, brings the Pairs tab back, with the row of
+        the pair you pressed in view.</p>
+
+      <h2 id="problems">Problems and saving</h2>
+      <p>The editor checks the relation as you work. What it finds is listed under both tabs, one line
+        each, led by <code>error</code> or <code>warning</code>. In the list of pairs, a pair with an error is
+        outlined in red, and a pair with only warnings in amber. A problem that is an
+        error keeps <span class="ui">Save relation</span> off, and the button says why. A warning only
+        tells you.</p>
+      <figure>
+        <img src="../media/transforms/relation-editor/problems.dark.webp" data-themed
+             alt="The side column of the editor with a problem listed in red, and the footer with the Save relation button turned off."
+             width="472" height="133" loading="lazy">
+        <figcaption>A relation whose window opens while the source glyphs are still arriving through
+          another relation. The problem is listed (1), and <span class="ui">Save relation</span> (2) is
+          off.</figcaption>
+      </figure>
+      <p>This one is common when you chain relations: the second formula is still receiving its glyphs
+        when the next relation starts. Move the window of the new relation later, in the
+        <span class="ui">Animation</span> tab, until it starts after the first one has ended.</p>
+      <p><span class="ui">Save relation</span> is also off when there is no pair yet, when nothing has
+        changed in a relation that exists, and when a formula changed under the editor: close it and open it
+        again.</p>
+      <ul>
+        <li><span class="ui">Close</span> closes the editor; once you have changed something it reads
+          <span class="ui">Cancel</span> and asks <em>Discard the changes to this relation?</em>
+          <kbd data-keys="Escape">Esc</kbd> does the same, after it has cleared the selection.</li>
+        <li><span class="ui">Delete relation</span>, on a relation that exists, asks before it deletes the
+          relation and all its pairs.</li>
+        <li>Saving is one undo step: <kbd data-keys="Mod+Z">Ctrl+Z</kbd> takes back the whole session,
+          pairs, window and the changes to the intro and the outro.</li>
+      </ul>
+
+      <h2 id="preview">Watching it</h2>
+      <p>The switch <span class="ui">Link | Preview</span> over the drawing puts the transformation in its
+        place, and <span class="ui">Preview raw</span>, the last key of the toolbar, animates the drawing
+        itself. Neither saves anything. <a href="previewing.html">Previewing a transformation</a> shows
+        both.</p>
+
+      <h2 id="try">Try it</h2>
+      <p>The widget below is a light version of the editor, on the relation of the page about relations.
+        Link a few glyphs, then press <span class="ui">Preview</span>.</p>
+      <div class="mfe-widget" data-mfe-widget="link-glyphs"
+           data-options='{"example": "relations-distribute", "relation": "r_distribute", "start": "app"}'></div>
+      <aside class="try">
+        <ol>
+          <li>Download <a href="../examples/relation-editor-chain.mfe.json">the chain example</a>, three
+            formulas on three tracks, and open it with <span class="ui">File ▸ Open…</span>, then
+            <span class="ui">Other file…</span> in the dialog that opens
+            (<a href="../start/projects.html#open">Projects</a> explains it).</li>
+          <li>Hold <kbd data-keys="Shift">Shift</kbd>, click the port of <i>second</i> and then
+            <i>third</i>.</li>
+          <li>Link the <i>b</i> of <i>second</i> to the <i>b</i> of <i>third</i>, and read the problem the
+            editor lists.</li>
+          <li>Open the <span class="ui">Animation</span> tab and raise the <span class="ui">Offset</span>
+            until the problem goes. Then press <span class="ui">Save relation</span>.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="relation-editor-chain"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="previewing.html">Previewing a transformation</a>: the Preview tab and Preview raw.</li>
+        <li><a href="custom-paths.html">Custom paths</a>: what <span class="ui">Edit path…</span> opens.</li>
+        <li><a href="relations.html">How relations work</a>: pairs, styles, unpaired glyphs and timing.</li>
+        <li><a href="morph.html">Morph blocks</a>: the same pair editor, inside one formula.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

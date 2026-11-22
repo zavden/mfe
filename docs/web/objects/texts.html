@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LaTeX texts and font texts · Manim Formula Editor</title>
+  <meta name="description" content="Write a text in LaTeX or in any font, place it on the stage of the composition editor, colour its glyphs, choose where its new clips start, and see what a font text looks like without the companion.">
+  <meta name="mfe:id" content="objects/texts">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Texts">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/texts-title.data.js" defer></script>
+  <script src="../examples/texts-layout.data.js" defer></script>
+  <script src="../examples/texts-font.data.js" defer></script>
+  <script src="../media/objects/texts/workspace.tour.js" defer></script>
+  <script src="../media/objects/texts/glyphs.tour.js" defer></script>
+  <script src="../media/objects/texts/start-position.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>LaTeX texts and font texts</h1>
+      <p class="lead">A formula is mathematics. A <strong>text</strong> is words: a title, a caption, a note, with some mathematics inside it if you want. The editor has two kinds of text, and one place to write both: the <strong>composition editor</strong>.</p>
+
+      <figure class="mfe-player" data-mfe-player="texts-title" data-timeline data-autoplay data-loop data-start="3">
+        <figcaption>A title written in LaTeX, with its maths coloured glyph by glyph, writes in above a formula.</figcaption>
+      </figure>
+
+      <h2 id="kinds">Two kinds of text</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>LaTeX text</th><th>Font text</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>You write</td><td>LaTeX in text mode: <code>$x^2$</code> for maths, <code>\\</code> for a line break, a blank line for a paragraph.</td><td>Plain text in any font. Enter adds a line.</td></tr>
+          <tr><td>Marked in the Creator by</td><td><span class="ui">T</span></td><td><span class="ui">P</span></td></tr>
+          <tr><td>Drawn by</td><td>LaTeX, when the companion runs; MathJax otherwise.</td><td>Pango, when the companion runs. Without it, as placeholder boxes.</td></tr>
+          <tr><td>Its form has</td><td>Size, colour, width, alignment, line spacing, name, tag and <span class="ui">Appears with</span>.</td><td>Font family, size, bold, italic and colour.</td></tr>
+          <tr><td>Glyph colours in the editor</td><td>In the <span class="ui">Glyphs</span> view: each glyph coloured or hidden at the start.</td><td>One colour for the whole text.</td></tr>
+        </tbody>
+      </table>
+      <p>Use a LaTeX text when the words have mathematics in them, or when you want the look of LaTeX. Use a font text for a typeface that LaTeX does not have.</p>
+
+      <h2 id="new">Making a text</h2>
+      <p>The <span class="ui">+ New</span> button of the Creator makes a formula. Its arrow lists every kind of object: <span class="ui">Formula</span>, <span class="ui">Text (LaTeX)</span> and <span class="ui">Text (font)</span>. Choose one of the texts and the composition editor opens.</p>
+      <figure>
+        <img src="../media/objects/texts/new-menu.dark.webp" data-themed
+             alt="The Creator’s New menu, opened from the arrow of the + New button, with Formula, Text (LaTeX) and Text (font)."
+             width="440" height="250" loading="lazy">
+        <figcaption>The arrow of <span class="ui">+ New</span> lists the kinds of object; the ring (1) is on <span class="ui">Text (LaTeX)</span>.</figcaption>
+      </figure>
+      <p>Nothing is added to the Creator until you press <span class="ui">Apply</span>. <span class="ui">Cancel</span> leaves nothing behind.</p>
+
+      <h2 id="composition">The composition editor</h2>
+      <p>The editor is a dialog with a form on the left and a <strong>stage</strong> on the right: the video frame, in which the text is drawn and placed. It is the same for both kinds, with the fields of each kind in the form.</p>
+      <div class="mfe-tour" data-mfe-tour="objects/texts/workspace" data-title="The composition editor"></div>
+      <p>Maximise the dialog, or drag its corner, and it gives its room to the stage, which stays whole at the frame’s aspect ratio, and to the text field.</p>
+
+      <h3 id="writing">Writing a LaTeX text</h3>
+      <p>Type in the <span class="ui">Text</span> field. The text is in LaTeX’s <em>text mode</em>: ordinary words, with <code>$…$</code> around a piece of mathematics, <code>\\</code> to break a line, and a blank line to start a paragraph. <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd> applies from the keyboard.</p>
+      <p>The stage draws the text a moment after you stop typing. The line over the stage says how many glyphs it has and who drew them: <span class="ui">41 glyphs · MathJax</span> in the browser alone, <span class="ui">41 glyphs · exact (LaTeX)</span> when the companion typesets it.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/texts/typing.dark.webm"
+               poster="../media/objects/texts/typing.dark.webp" width="1204" height="724"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A LaTeX text typed, with a piece of maths in it, and then dragged on the stage.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p>Without the companion, MathJax breaks a paragraph into lines by measuring words, which is approximate: a line may break a little differently from how LaTeX would. The strip under the stage says so. See <a href="../manim/companion.html#exact-glyphs">The companion</a>.</p>
+      </aside>
+
+      <h3 id="size">Size and colour</h3>
+      <p><span class="ui">Size</span> is one number written twice: the <span class="ui">Scale</span> and Manim’s <span class="ui">Font size</span>, with the scale times 48 equal to the font size, so 1.5 × 48 = 72. Type either, or a fraction such as <code>3/2</code> for the scale. <span class="ui">Colour</span> is a hexadecimal colour for the whole text.</p>
+
+      <h3 id="layout">Layout</h3>
+      <p>The layout decides how the lines of the text sit in a block.</p>
+      <ul>
+        <li><span class="ui">Width</span> is the width of the block in scene units. Empty means “as wide as the text comes”. The frame of a 16:9 project is 14.2 units wide, and the field says the frame’s width of your project beside it.</li>
+        <li><span class="ui">Align</span> sets how the lines sit inside the block: <span class="ui">Left</span>, <span class="ui">Centre</span> or <span class="ui">Right</span>.</li>
+        <li><span class="ui">Line spacing</span> is a factor of the normal distance between lines, from 0.5 to 3.</li>
+      </ul>
+      <figure class="mfe-player" data-mfe-player="texts-layout" data-autoplay data-loop data-start="3" data-controls="minimal">
+        <figcaption>The same paragraph, 4 units wide, with its lines aligned left, centred and right.</figcaption>
+      </figure>
+
+      <h3 id="object">The text as an object</h3>
+      <p>The <span class="ui">Object</span> group holds what the text is in the Creator: its <span class="ui">Name</span> (a name already in use is refused when you leave the field), its <span class="ui">Tag</span> (a colour and a short icon) and <span class="ui">Appears with</span>, the intro its new clips start with. A clip that still has the previous intro follows when you change it.</p>
+
+      <h3 id="stage">The stage and the position</h3>
+      <p>Drag the text on the stage to place it. Two boxes above the stage help: <span class="ui">Grid</span> draws a grid, whose spacing you choose from 2 down to 0.1 units, and <span class="ui">Snap</span> makes the text stick to the lines of the frame. The text snaps to the grid as well. Hold <kbd data-keys="Mod">Ctrl</kbd> while you drag to move without snapping. The arrow keys, with the stage focused, move the text by 0.1 units, and with <kbd data-keys="Shift">Shift</kbd> by 1.</p>
+      <p>Under the stage, <span class="ui">X</span> and <span class="ui">Y</span> give the position in scene units, and <span class="ui">Center horizontally</span> and <span class="ui">Center vertically</span> bring the text to the middle of the frame along one axis.</p>
+      <p><span class="ui">Fit frame</span>, the zoom and the pan change what you see of the stage without changing where the text is placed. Zoom with <span class="ui">−</span> and <span class="ui">+</span> or with <kbd data-keys="Mod">Ctrl</kbd> and the wheel<span class="only-mac"> (or with a pinch on the trackpad)</span>, and pan with the middle button or with <kbd data-keys="Alt">Alt</kbd> held while you drag.</p>
+
+      <h3 id="start-position">New clips start here</h3>
+      <p>A text opened from the Creator is a library object: no clip is being edited, so the stage places nothing on the timeline. It shows where the <strong>new clips</strong> of the text will start. The box <span class="ui">New clips start here</span> is ticked whenever the editor opens. With it ticked, <span class="ui">Apply</span> keeps the position in the text: every clip of it that you drop on the timeline or add from a menu afterwards starts there instead of at the centre of the frame. Clips already on the timeline stay where they are.</p>
+      <div class="mfe-tour" data-mfe-tour="objects/texts/start-position" data-title="Where the new clips of a text start"></div>
+      <p>Untick the box and the position is only somewhere to look at the text: it is not saved, and the text keeps the start position it already had. To start at the centre again, set <span class="ui">X</span> and <span class="ui">Y</span> to 0, or press both centre buttons, and apply.</p>
+      <p>The position of a clip itself belongs to that clip. Moving one clip does not move the others, and it does not change where the text’s next clip starts.</p>
+
+      <h3 id="status">The status line, the dot and the strip</h3>
+      <p>The dot beside the line over the stage tells what the render of your draft is doing:</p>
+      <ul>
+        <li>amber while the text is being rendered again (the last appearance stays on the stage meanwhile);</li>
+        <li>green when what is drawn is current;</li>
+        <li>red when the text was refused;</li>
+        <li>hollow when there is nothing to draw.</li>
+      </ul>
+      <p>While you type, the words beside the dot stay as they are and the stage does not move: only the dot changes. What the renderer says goes into a strip under the stage, of a fixed height, scrolled when it is long: the error LaTeX gave with its log, warnings such as approximate line breaks, or the <code>fontenc</code> line that accented letters need, and the reason <span class="ui">Apply</span> waits, if it does.</p>
+      <figure>
+        <img src="../media/objects/texts/latex-error.dark.webp" data-themed
+             alt="The stage side of the composition editor with a LaTeX text that does not compile: a red dot and Cannot render over the stage, which keeps the last text that did render, and the error under it."
+             width="818" height="640" loading="lazy">
+        <figcaption>A text that does not compile: a red dot, and the error under the stage. The stage keeps the last appearance that rendered, and the centre buttons wait for a text that renders.</figcaption>
+      </figure>
+
+      <h3 id="glyph-colours">Glyph colours</h3>
+      <p>For a LaTeX text, the switch over the stage shows <span class="ui">Glyphs</span> in place of <span class="ui">Placement</span>: the glyphs of the draft, to colour or to hide at the start, as in the formula editor. Click a glyph, <kbd data-keys="Shift">Shift</kbd>+click for a range, <kbd data-keys="Mod">Ctrl</kbd>+click to add or remove one, or drag a box over several; then press a colour. <span class="ui">Clear colours</span> takes them away, and <span class="ui">Hide</span>, <span class="ui">Show</span> and <span class="ui">Show all</span> set which glyphs are hidden at the start.</p>
+      <div class="mfe-tour" data-mfe-tour="objects/texts/glyphs" data-title="Colouring the glyphs of a text"></div>
+      <p>What you colour stays with its glyphs while you go on typing or change the layout. Apply writes the colours with the text, and carries along the pairs, blocks and attachments that name glyphs of the text. Colours need a text that renders: while it does not, Apply waits, and a line says why. Where a change cannot be followed glyph by glyph, the view says so, and the text keeps the colours it had. See <a href="../color/coloring.html">Colouring glyphs and objects</a> for the other ways to colour.</p>
+
+      <h2 id="apply">Apply, Cancel and Add to the timeline</h2>
+      <p><span class="ui">Apply</span> makes the text an object of the Creator, or updates the one you opened, as a single undo step: its text, its layout, its colours and its position go back with one <kbd data-keys="Mod+Z">Ctrl+Z</kbd>. <span class="ui">Cancel</span> throws the draft away. A click outside the dialog does neither: it stays open.</p>
+      <p>Everything you type or place stays in a draft until Apply. While the editor is open, playback pauses and does not start again by itself, and <span class="ui">Save</span>, <span class="ui">Open</span> and <span class="ui">Export</span> wait: apply or cancel first, then run the command again. If the tab closes with a draft unapplied, the editor offers <span class="ui">Recover unapplied draft</span> the next time you open that text.</p>
+      <p>Apply puts nothing on the timeline: the text is in the Creator, ready to use. The line at the left of the footer says so for a new text: <em>New library object · no clip will be added</em>. Putting a clip on the timeline is a separate step, with the text selected in the Creator.</p>
+      <figure>
+        <img src="../media/objects/texts/creator-list.dark.webp" data-themed
+             alt="The Creator listing a LaTeX text marked T, a formula, and a font text marked P with the badge needs the companion."
+             width="282" height="583" loading="lazy">
+        <figcaption>The Creator after Apply: the LaTeX text (T), a formula, and a font text (P), drawn as placeholder boxes, with the badge that says it needs the companion.</figcaption>
+      </figure>
+      <ul>
+        <li>Drag its card onto the timeline.</li>
+        <li>Right-click its card and choose <span class="ui">Add to the timeline</span>.</li>
+        <li>Select the card and press <span class="ui">Add to the timeline</span> in the Animations panel, which adds a clip at the playhead.</li>
+      </ul>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/objects/texts/card-menu.dark.webp" data-themed
+               alt="The Creator with the menu of a text’s card open: Edit, Add to the timeline, Apply match colors, Duplicate and Delete."
+               width="310" height="583" loading="lazy">
+          <figcaption>The menu of a card in the Creator.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/objects/texts/add-to-timeline.dark.webp" data-themed
+               alt="The Animations panel with a text selected that no clip uses: a note that says it is not on the timeline yet, and the button Add to the timeline."
+               width="310" height="250" loading="lazy">
+          <figcaption>The Animations panel, with a text that no clip uses selected. It calls every object of the Creator a “formula”.</figcaption>
+        </figure>
+      </div>
+
+      <h2 id="editing">Editing a text again</h2>
+      <p>Open a text that exists in any of four ways: double-click its card in the Creator, double-click its clip on the timeline, double-click the text itself in the Preview, or select two or more clips of it, right-click and choose <span class="ui">Edit…</span>.</p>
+      <p>What the stage places depends on where you came from. From the Creator, or from several selected clips, the text is a library object, with <span class="ui">New clips start here</span>. From one clip or from the Preview, the stage places <em>that clip</em>, and the box is not there. The line under the stage says <em>Placement: clip initial state. Changes apply only to this occurrence.</em></p>
+      <figure>
+        <img src="../media/objects/texts/from-clip.dark.webp" data-themed
+             alt="The foot of the composition editor opened from a clip: X and Y, the two centre buttons, the line Placement: clip initial state, and Apply."
+             width="802" height="222" loading="lazy">
+        <figcaption>Opened from its clip, the editor places that clip: there is no <span class="ui">New clips start here</span> box.</figcaption>
+      </figure>
+      <p>The text itself, with its layout and its colours, is shared by every clip that uses it. Change it and every clip changes, the position of each clip aside. When a text has more than one use and you opened it from a clip, <span class="ui">Make independent on Apply</span> gives that clip a copy of the text of its own, and Apply changes only the copy.</p>
+
+      <h2 id="font-text">Font text</h2>
+      <p>A <span class="ui">Text (font)</span> is plain text in a typeface you name. Its form has the <span class="ui">Font family</span>, the <span class="ui">Size</span> (the font size, from 4 to 512), <span class="ui">Bold</span>, <span class="ui">Italic</span> and the <span class="ui">Colour</span> of the whole text. The stage and its controls are the same as for a LaTeX text.</p>
+      <p>A font text needs the <a href="../manim/companion.html">companion</a> to be drawn with its real glyphs. The companion shapes the text with Pango, in the fonts of your machine, and proposes the families it has as you type the name. In version 1.0 it does this on Linux only: on macOS and Windows a font text stays as boxes. Without it, a font text is drawn as <strong>placeholder boxes</strong>: one box for each character, laid out with the font the browser has under that name. The badge <span class="ui">needs the companion</span> says so, in the editor and in the Creator.</p>
+      <figure>
+        <img src="../media/objects/texts/font-boxes.dark.webp" data-themed
+             alt="The composition editor with a font text drawn as placeholder boxes, with the badge needs the companion, and a note under the stage that says what to start."
+             width="1204" height="724" loading="lazy">
+        <figcaption>A font text without the companion: a placeholder box for each character, the badge, and the note under the stage.</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="texts-font" data-autoplay data-loop data-controls="minimal" data-start="3">
+        <figcaption>The same kind of text in a scene, as the editor draws it without the companion: a placeholder box for each character.</figcaption>
+      </figure>
+      <p>A font text drawn as boxes still works like any other object. You can compose it, place it, colour it, give it an intro and animate it. The project saves, opens and exports. <span class="ui">Export ▸ Python — ManimCE…</span> (or <span class="ui">Python — ManimGL…</span>) writes the text and counts its glyphs one for each character, and says so. A video exported in the browser shows the boxes, as the Preview does.</p>
+      <p>When the companion shapes the text, its real glyphs take the place of the boxes and keep what you did to them. The shape it found is saved in the project, so a project with font text opens with its real appearance even on a machine without the fonts or the companion. <span class="ui">Refresh appearance</span> accepts a new shape on purpose, after you change fonts or versions: reconnecting the companion never replaces a saved shape by itself.</p>
+
+      <h2 id="export">What the export writes</h2>
+      <p>A LaTeX text is exported as a <code>Tex</code> object. Its width becomes a <code>\parbox</code>, and its alignment <code>\centering</code>, <code>\raggedright</code> or <code>\raggedleft</code>:</p>
+      <pre data-excerpt="examples/texts-title.ce.py"><code class="language-python">title = Tex(r"\parbox{120.45pt}{\centering Completing the square starts from $x^2 + bx + c$\par}", font_size=72)</code></pre>
+      <p>The glyphs are matched to the editor’s by position, as for every formula. <a href="../manim/python.html">The generated Python</a> explains how.</p>
+      <p>A font text is exported as a Manim <code>Text</code>, with the family, the size, the weight and the slant you chose. Right after it the file checks the text: if Manim draws it with a different number of glyphs than the editor counted, because fonts or versions differ, it prints a warning on stderr and renders the scene all the same.</p>
+      <pre data-excerpt="examples/texts-font.ce.py"><code class="language-python">caption = Text(r"Any font on your machine", font=r"DejaVu Sans", font_size=96, weight=r"BOLD", slant=r"NORMAL", disable_ligatures=False)
+_mfe_verify_text(caption, r"caption", "ce", 20)</code></pre>
+      <p>A font text is shaped for the Manim library the project targets. An export for the other library writes the same text at a converted size, and says what may differ: the size by a few percent, the spacing of lines and tabs.</p>
+      <p>The export never waits for the companion over a text. It lists the texts the editor cannot vouch for, because there is no companion to compare the fonts of this machine with, and goes on.</p>
+      <div class="mfe-example" data-mfe-example="texts-title"></div>
+      <div class="mfe-example" data-mfe-example="texts-layout"></div>
+      <div class="mfe-example" data-mfe-example="texts-font"></div>
+      <aside class="try">
+        <ol>
+          <li>Press the arrow of <span class="ui">+ New</span> and choose <span class="ui">Text (LaTeX)</span>.</li>
+          <li>Type <code>Pythagoras said $a^2 + b^2 = c^2$ about right triangles</code>.</li>
+          <li>Drag the text to the upper left of the stage. <span class="ui">New clips start here</span> is ticked: leave it.</li>
+          <li>Press <span class="ui">Apply</span>, then drag the new card of the Creator onto the timeline. The clip starts where you left the text.</li>
+        </ol>
+      </aside>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="templates.html">The template library</a> starts a formula from one of 257 ready-made ones, by filling in its placeholders.</li>
+        <li><a href="../color/coloring.html">Colouring glyphs and objects</a> covers the other ways to colour glyphs.</li>
+        <li><a href="../manim/companion.html">The companion</a> draws exact LaTeX glyphs and the real glyphs of a font text.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

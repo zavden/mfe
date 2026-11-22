@@ -1,0 +1,520 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Cancelling a common factor",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_one",
+      "kind": "math",
+      "name": "fraction",
+      "source": "\\frac{ab}{ac}",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-2kvdg3udco",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.31495392,
+              0.8353670400000001
+            ],
+            "size": [
+              0.7110892799999999,
+              0.6780153600000001
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              0.42244416000000007,
+              1.0247904
+            ],
+            "size": [
+              0.57428352,
+              1.0598688
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -0.31796064,
+              -1.21220928
+            ],
+            "size": [
+              0.7110892800000002,
+              0.6780153599999998
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              0.4206902400000001,
+              -1.21321152
+            ],
+            "size": [
+              0.5948294400000003,
+              0.6830265600000001
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              0,
+              -0.12903839999999994
+            ],
+            "size": [
+              1.74690432,
+              0.09020160000000002
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_two",
+      "kind": "math",
+      "name": "result",
+      "source": "\\frac{b}{c}",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-m3rp762or8",
+        "glyphs": [
+          {
+            "label": "b",
+            "center": [
+              0.024805439999999984,
+              1.0247904
+            ],
+            "size": [
+              0.57428352,
+              1.0598688
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              0.023051520000000048,
+              -1.21321152
+            ],
+            "size": [
+              0.5948294400000002,
+              0.6830265600000001
+            ]
+          },
+          {
+            "label": "—",
+            "center": [
+              0,
+              -0.12903839999999994
+            ],
+            "size": [
+              0.9516268800000001,
+              0.09020160000000002
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_cross1",
+      "kind": "shape",
+      "name": "x1",
+      "source": "",
+      "shape": "cross_line",
+      "style": {
+        "fillOpacity": 0,
+        "strokeWidth": 6,
+        "strokeOpacity": 1
+      },
+      "cornerRadius": 0,
+      "width": 0.7110892799999999,
+      "height": 0.6780153600000001,
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FC6255",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "create",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-18hya1nm1nf",
+        "glyphs": [
+          {
+            "label": "╱",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              0.7110892799999999,
+              0.6780153600000001
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_cross2",
+      "kind": "shape",
+      "name": "x2",
+      "source": "",
+      "shape": "cross_line",
+      "style": {
+        "fillOpacity": 0,
+        "strokeWidth": 6,
+        "strokeOpacity": 1
+      },
+      "cornerRadius": 0,
+      "width": 0.7110892800000002,
+      "height": 0.6780153599999998,
+      "tag": {
+        "color": "#FC6255",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FC6255",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "create",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-fkjoi51whu",
+        "glyphs": [
+          {
+            "label": "╱",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              0.7110892800000002,
+              0.6780153599999998
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_cross",
+      "kind": "visual",
+      "name": "Cross lines",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_cross2",
+      "kind": "visual",
+      "name": "Cross lines 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_two",
+      "kind": "visual",
+      "name": "Result",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_one",
+      "kind": "visual",
+      "name": "Fraction",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_one",
+      "formulaId": "f_one",
+      "trackId": "t_one",
+      "start": 0,
+      "end": 6,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.2,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_two",
+      "formulaId": "f_two",
+      "trackId": "t_two",
+      "start": 5,
+      "end": 10,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_cross1",
+      "formulaId": "f_cross1",
+      "trackId": "t_cross",
+      "start": 2,
+      "end": 4.8,
+      "initial": {
+        "position": [
+          -0.31495392,
+          0.8353670400000001
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "create",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_one",
+        "glyphs": [
+          0
+        ],
+        "rule": "shape",
+        "buff": 0
+      }
+    },
+    {
+      "id": "c_cross2",
+      "formulaId": "f_cross2",
+      "trackId": "t_cross2",
+      "start": 2,
+      "end": 4.8,
+      "initial": {
+        "position": [
+          -0.31796064,
+          -1.21220928
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "create",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_one",
+        "glyphs": [
+          2
+        ],
+        "rule": "shape",
+        "buff": 0
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_cancel",
+      "fromClipId": "c_one",
+      "toClipId": "c_two",
+      "offset": 0,
+      "duration": 1,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            3
+          ],
+          "to": [
+            1
+          ],
+          "style": null
+        },
+        {
+          "from": [
+            4
+          ],
+          "to": [
+            2
+          ],
+          "style": null
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing formulas · Manim Formula Editor</title>
+  <meta name="description" content="Type a formula in the formula editor: LaTeX fields, the on-screen keyboard, errors, packages, size, colour, name and tag, the Creator list, and why glyph order matters.">
+  <meta name="mfe:id" content="basics/formulas">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Formulas">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/formulas-ladder.data.js" defer></script>
+  <script src="../examples/formulas-packages.data.js" defer></script>
+  <script src="../examples/formulas-colour.data.js" defer></script>
+  <script src="../media/basics/formulas/editor.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+
+      <h1>Writing formulas</h1>
+      <p class="lead">A formula is LaTeX typed into the formula editor. This page follows one from its
+      first keystroke to its card in the Creator: how to type it, what the editor says when it fails,
+      its packages, size, colour and name, and why the order in which the app numbers its glyphs
+      matters once you start to animate.</p>
+
+      <h2 id="create">Create a formula</h2>
+      <p>The <strong>Creator</strong>, on the left, keeps every formula of the project. Press
+      <span class="ui">+ New</span> to write one. The formula editor opens with the cursor in its LaTeX field, and the
+      formula has a name of its own already (<code>f1</code>, then <code>f2</code>…) that you can change
+      whenever you like.</p>
+      <figure>
+        <img src="../media/basics/formulas/creator-empty.dark.webp" data-themed
+             alt="The Creator of a project with no formulas: its three tabs, the toolbar with the + New button, a card of glass with a sigma over the words No formulas yet and Press + New to write one, then drag it onto the timeline, and under them Or open a project: with the buttons Try an example and Sync folder…." width="282" height="516" loading="lazy">
+        <figcaption>A project with no formulas says what to press first, and offers an example to open
+          (<a href="../start/projects.html#examples">The examples</a>).</figcaption>
+      </figure>
+      <p>The arrow beside the button lists every kind of object the Creator makes: <span class="ui">Formula</span>,
+      <span class="ui">Text (LaTeX)</span> and <span class="ui">Text (font)</span>. A formula is maths; the two texts have an editor of
+      their own, described in <a href="../objects/texts.html#composition">LaTeX texts and font texts</a>.</p>
+      <figure>
+        <img src="../media/basics/formulas/new-menu.dark.webp" data-themed
+             alt="The + New button of the Creator and, under its arrow, a menu with Formula, Text (LaTeX) and Text (font)." width="257" height="143" loading="lazy">
+        <figcaption><span class="ui">+ New</span> writes a formula. Its arrow lists the other kinds.</figcaption>
+      </figure>
+      <p>A formula in the Creator is not on the screen of your scene yet. It is an object that
+      <em>clips</em> show: drag it onto the timeline, or choose <span class="ui">Add to the timeline</span> in its menu
+      (see <a href="../basics/timeline.html#putting-clips">Working with the timeline</a>).</p>
+
+      <h2 id="formula-editor">The formula editor</h2>
+      <p>Double-click a formula in the Creator, or press <kbd>Enter</kbd> on it, to open the editor again.
+      Go through its parts one by one:</p>
+      <div class="mfe-tour" data-mfe-tour="basics/formulas/editor" data-title="The formula editor"></div>
+      <p>The fields of the header act on the formula at once, each change as one undo step.
+      The LaTeX and the packages wait for <span class="ui">Apply</span>, so you can type for as long as
+      you like and still see the formula as it was. Outside a text field, <kbd data-keys="Mod+Z">Ctrl+Z</kbd> undoes the header's
+      changes and the applied LaTeX while the editor is open. Drag the bar between the two columns to give the
+      glyphs more or less room, or the corner of the dialog to resize it.</p>
+
+      <h2 id="typing">Typing LaTeX</h2>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/formulas/type-formula.dark.webm"
+               poster="../media/basics/formulas/type-formula.dark.webp" width="1052" height="706"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Typing in <span class="ui">Raw LaTeX</span>: the visual field above it typesets the formula as you go, the line beside <span class="ui">Apply</span> counts its glyphs, and <span class="ui">Apply</span> draws them in the column on the right.</figcaption>
+      </figure>
+      <p>There are two fields for the same formula, and they stay in step:</p>
+      <ul>
+        <li>The <strong>LaTeX</strong> field is a visual math editor (<a href="https://mathlive.io">MathLive</a>).
+        It typesets what you write, and the <span class="ui">⌨ Keyboard</span> key beside its title shows keys
+        that write in it (see <a href="#keyboard">The on-screen keyboard</a>).</li>
+        <li>The <strong>Raw LaTeX</strong> field is the text itself. What you type there is kept exactly
+        as you typed it: the visual field may write the same formula another way, and never rewrites
+        yours.</li>
+      </ul>
+      <p>A formula with several rows uses <code>&amp;</code> to line the rows up and <code>\\</code> to end
+      a row, as Manim's <code>align*</code> reads them. The visual field shows such a formula inside an
+      <code>aligned</code> block, and the raw field keeps what you typed.</p>
+      <p>When you are ready, press <span class="ui">Apply</span> or <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd>. The LaTeX and the
+      packages go into the project as one undo step, and the glyph column draws the formula. Until then
+      the footer says <em>Unapplied changes</em>, <span class="ui">Revert</span> brings the applied formula back, and
+      closing the dialog asks before it throws your changes away.</p>
+      <aside class="callout note"><p>A new formula that is still empty says <em>Empty: nothing is
+      drawn.</em> beside <span class="ui">Apply</span>. Nothing breaks if you close it: the formula stays in the Creator,
+      empty, until you write something.</p></aside>
+
+      <h3 id="keyboard">The on-screen keyboard</h3>
+      <p>If you would rather press a fraction than type <code>\frac</code>, press
+      <span class="ui">⌨ Keyboard</span>, beside the <strong>LaTeX</strong> title (1). A keypad opens in the
+      editor, under the visual field. Its four tabs (2) are <span class="ui">Algebra</span>,
+      <span class="ui">Trigonometry</span>, <span class="ui">Calculus</span> and <span class="ui">Alphabet</span>,
+      which has the digits, the letters and two rows of Greek ones. A key writes a digit, an operator, a
+      function, or a structure with its holes: a fraction, a root, a power, an absolute value, a limit, an
+      integral, a sum. A hole you have not filled yet is an empty group in the raw LaTeX
+      (<code>\frac{}{}</code>), and the formula still renders. The last row (3) moves the caret, deletes
+      backward, clears the field (<span class="ui">AC</span>) and applies (<span class="ui">Apply</span>, the
+      same as the editor's button).</p>
+      <figure>
+        <img src="../media/basics/formulas/keyboard.dark.webp" data-themed
+             alt="The LaTeX section of the formula editor with the keypad open. The Keyboard key beside the LaTeX title is ringed (1). The visual field holds the fraction 1 over 2. Under it, the tabs Algebra, Trigonometry, Calculus and Alphabet are ringed (2), over the keys of Algebra: a fraction and other structures drawn with empty squares for their holes, comparisons, the digits and the four operations. The last row, ringed (3), has left and right arrows, delete, AC and Apply. The Raw LaTeX field reads \frac12." width="544" height="500" loading="lazy">
+        <figcaption><span class="ui">⌨ Keyboard</span> (1) shows the keypad: its tabs (2) and its last row (3).
+        The fraction key, <span class="ui">1</span>, <span class="ui">→</span> and <span class="ui">2</span> wrote
+        the formula in the visual field, and the raw LaTeX followed.</figcaption>
+      </figure>
+      <p>A press leaves the cursor in the visual field, so what you type next goes on in the formula.
+      A keypad left shown is there again the next time the editor opens, until its key hides it.</p>
+
+      <h2 id="preview">The status line and the errors</h2>
+      <p>About a fifth of a second after you stop typing, the editor renders your draft, before you apply
+      it, and reports the result beside <span class="ui">Apply</span>:</p>
+      <table>
+        <thead><tr><th>The line says</th><th>It means</th></tr></thead>
+        <tbody>
+          <tr><td><em>Rendering…</em></td><td>The draft is being typeset.</td></tr>
+          <tr><td><em>16 glyphs · MathJax</em></td><td>It rendered: the number of glyphs, and which renderer drew them. See
+          <a href="#glyph-order">Why the order of glyphs matters</a>.</td></tr>
+          <tr><td><em>16 glyphs · exact (LaTeX)</em></td><td>The same, typeset by real LaTeX through the
+          <a href="../manim/companion.html">companion</a>.</td></tr>
+          <tr><td><em>Cannot render</em></td><td>The LaTeX has a problem. A panel under the line says what.</td></tr>
+        </tbody>
+      </table>
+      <p>The panel names the problem in plain words, and, when it can tell, what to do about it. A brace
+      left open:</p>
+      <figure>
+        <img src="../media/basics/formulas/error-brace.dark.webp" data-themed
+             alt="The line beside Apply says Cannot render, and a red panel under it reads: Missing close brace" width="548" height="98" loading="lazy">
+        <figcaption>A brace that is never closed.</figcaption>
+      </figure>
+      <p>A command from a package you have not added names the package:</p>
+      <figure>
+        <img src="../media/basics/formulas/error-package.dark.webp" data-themed
+             alt="The Packages row with its Common: buttons, and under it the line Cannot render with a panel that reads: Undefined control sequence \cancel. It comes from the &quot;cancel&quot; package: add it under Packages. The cancel button is ringed." width="548" height="265" loading="lazy">
+        <figcaption>The panel names the package that has the command, and the <span class="ui">Common:</span> row (1) offers it.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/basics/formulas/error-fixed.dark.webp" data-themed
+             alt="The same area after the click: a cancel chip in the Packages row, and the line beside Apply says how many glyphs the formula has and that MathJax drew them, with no panel under it." width="548" height="216" loading="lazy">
+        <figcaption>One click on <code>cancel</code> adds the chip (1), and the formula renders.</figcaption>
+      </figure>
+      <p>With the companion running, the panel adds LaTeX's own log under the message. Warnings, such as a
+      package MathJax cannot load, are listed under the line in the same place.</p>
+
+      <h2 id="examples">Formulas to try</h2>
+      <p>Six formulas, from a plain equation to two aligned rows. Type each one into the
+      <span class="ui">Raw LaTeX</span> field of a new formula, and look at what the status line says. The
+      project with all six is at the end of this section if you would rather open it.</p>
+      <h3 id="try-plain">Plain</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-caption="Letters, digits and signs need nothing special." data-from="0.0" data-to="3.6" data-start="2.4" data-autoplay data-loop data-controls="minimal"></figure>
+      <pre><code class="language-latex">x + 3 = 5</code></pre>
+      <h3 id="try-fractions">Fractions</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-caption="Two fractions and their sum." data-from="3.6" data-to="7.2" data-start="6.0" data-autoplay data-loop data-controls="minimal"></figure>
+      <p><code>\frac{numerator}{denominator}</code>: each braced group is one piece. Spaces in the source
+      are for you; LaTeX sets the spacing of a formula itself.</p>
+      <pre><code class="language-latex">\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}</code></pre>
+      <h3 id="try-roots">Roots, powers and symbols</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-caption="A root, a power and a plus-or-minus sign." data-from="7.2" data-to="10.8" data-start="9.6" data-autoplay data-loop data-controls="minimal"></figure>
+      <p><code>\sqrt{…}</code> draws a root, <code>^</code> raises, and <code>\pm</code> is one of many named
+      symbols (<code>\pi</code>, <code>\alpha</code>, <code>\infty</code>…).</p>
+      <pre><code class="language-latex">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</code></pre>
+      <h3 id="try-sums">Sums and limits</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-caption="A sum with its limits below and above." data-from="10.8" data-to="14.4" data-start="13.2" data-autoplay data-loop data-controls="minimal"></figure>
+      <p><code>_</code> lowers and <code>^</code> raises. Braces make a longer index one piece:
+      <code>_{k=1}</code>.</p>
+      <pre><code class="language-latex">\sum_{k=1}^{n} k = \frac{n(n+1)}{2}</code></pre>
+      <h3 id="try-integrals">Integrals</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-from="14.4" data-to="18.0" data-start="16.8" data-autoplay data-loop data-controls="minimal">
+        <figcaption>An integral, with a thin space before the <code>dx</code>.</figcaption>
+      </figure>
+      <p><code>\,</code> is a thin space. It reads better before the <code>dx</code>.</p>
+      <pre><code class="language-latex">\int_0^1 x^2 \, dx = \frac{1}{3}</code></pre>
+      <h3 id="try-rows">Rows</h3>
+      <figure class="mfe-player" data-mfe-player="formulas-ladder" data-caption="Two rows, lined up at their equals signs." data-from="18.0" data-to="21.6" data-start="20.4" data-autoplay data-loop data-controls="minimal"></figure>
+      <p>One <code>&amp;</code> before the sign each row is lined up on, and <code>\\</code> between
+      rows.</p>
+      <pre><code class="language-latex">(a + b)^2 &amp;= a^2 + 2ab + b^2 \\
+(a - b)^2 &amp;= a^2 - 2ab + b^2</code></pre>
+      <div class="mfe-example" data-mfe-example="formulas-ladder"></div>
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">+ New</span> and click <span class="ui">Raw LaTeX</span>.</li>
+          <li>Type the fractions: <code>\frac{a}{b} + \frac{c}{d}</code>. Watch the line beside
+          <span class="ui">Apply</span> count the glyphs.</li>
+          <li>Break it on purpose: delete the last <code>}</code>, and read what the editor says. Put it back.</li>
+          <li>Press <span class="ui">Apply</span>, then name the formula <code>sum_of_fractions</code> and give it a tag icon.</li>
+          <li>Drag it onto the timeline, and press play.</li>
+        </ol>
+      </aside>
+
+      <h2 id="packages">LaTeX packages</h2>
+      <p>Some commands are not plain LaTeX: <code>\cancel</code> belongs to the <code>cancel</code> package,
+      <code>\dv</code> to <code>physics</code>, <code>\bm</code> to <code>bm</code>. A formula lists the
+      packages it needs under <strong>Packages</strong>, one chip each.</p>
+      <figure>
+        <img src="../media/basics/formulas/packages-picker.dark.webp" data-themed
+             alt="The package picker: chips for physics and tikz-cd, a search box with the letters &quot;mat&quot; typed and a list of matching packages, the Common row of quick buttons, and a note that MathJax cannot load tikz-cd." width="544" height="405" loading="lazy">
+        <figcaption>Chips with a ×, the search, its results, the <span class="ui">Common:</span> row and, under them, notes about what the preview cannot do.</figcaption>
+      </figure>
+      <ul>
+        <li>Press a name in the <span class="ui">Common:</span> row to add it.</li>
+        <li>Type in <span class="ui">Search packages, or type any name…</span> to search a catalogue of more than eighty
+        packages by name or by what they do. The results that carry a <em>preview</em> tag are ones the
+        visual field also understands.</li>
+        <li>A package that is not in the catalogue works too: type its name (letters, digits, <code>-</code>
+        and <code>_</code>) and press <span class="ui">Add</span> or <kbd>Enter</kbd>.</li>
+        <li>The × on a chip removes it.</li>
+      </ul>
+      <p>Manim's own template already loads <code>amsmath</code> and <code>amssymb</code>, so you never add
+      those. Packages count when you press <span class="ui">Apply</span>, like the LaTeX.</p>
+      <aside class="callout note"><p>In the browser the preview is MathJax, which knows some packages
+      (<code>physics</code>, <code>mathtools</code>, <code>cancel</code>, <code>braket</code>,
+      <code>mhchem</code> and a few more) and approximates a few others (<code>bm</code>,
+      <code>siunitx</code>, <code>esvect</code>). For any other the chip turns amber, and the note under it
+      says that the preview ignores the package. The exported scene still asks for it, and the
+      <a href="../manim/companion.html">companion</a> compiles it with real LaTeX.</p></aside>
+      <p>What every formula of the project needs, such as a <code>\newcommand</code>, goes in the project's
+      LaTeX preamble instead: <span class="ui">File ▸ Project settings…</span>, field <span class="ui">LaTeX preamble</span>. It is added after
+      the packages of each formula.</p>
+      <figure class="mfe-player" data-mfe-player="formulas-packages" data-from="0.0" data-to="3.8" data-start="2.6" data-controls="minimal">
+        <figcaption><code>cancel</code>: crossed-out terms.</figcaption>
+      </figure>
+      <pre><code class="language-latex">\frac{\cancel{x}\,y}{\cancel{x}\,z} = \frac{y}{z}</code></pre>
+      <figure class="mfe-player" data-mfe-player="formulas-packages" data-from="3.8" data-to="7.6" data-start="6.4" data-controls="minimal">
+        <figcaption><code>physics</code>: <code>\dv{f}{x}</code> is the derivative d f / d x.</figcaption>
+      </figure>
+      <pre><code class="language-latex">\dv{f}{x} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}</code></pre>
+      <figure class="mfe-player" data-mfe-player="formulas-packages" data-from="7.6" data-to="11.4" data-start="10.2" data-controls="minimal">
+        <figcaption><code>bm</code>: bold symbols.</figcaption>
+      </figure>
+      <pre><code class="language-latex">\bm{F} = m\,\bm{a}</code></pre>
+      <p>When you export Python, each formula's packages become a <code>TexTemplate</code> (ManimCE) or an
+      <code>additional_preamble</code> string (ManimGL) in the scene, and the formula is built with it. These
+      are the lines the editor exports for the first formula above, in ManimCE:</p>
+      <pre data-excerpt="examples/formulas-packages.ce.py"><code class="language-python">template = TexTemplate()
+template.add_to_preamble(r"\usepackage{cancel}")
+…
+cancelled = MathTex(r"…", font_size=72, tex_template=template)</code></pre>
+      <p>and in ManimGL:</p>
+      <pre data-excerpt="examples/formulas-packages.gl.py"><code class="language-python">preamble = r"\usepackage{cancel}"
+…
+cancelled = Tex(r"…", font_size=74.2416, additional_preamble=preamble)</code></pre>
+      <p>The whole file, for the three formulas, is under the tabs. <a href="../manim/python.html">The generated
+      Python</a> explains the rest of it.</p>
+      <div class="mfe-code" data-mfe-python="formulas-packages"></div>
+      <div class="mfe-example" data-mfe-example="formulas-packages"></div>
+
+      <h2 id="size">Size</h2>
+      <figure>
+        <img src="../media/basics/formulas/header-fields.dark.webp" data-themed
+             alt="The header of the editor with five numbered fields: 1 Name, 2 Tag, 3 Size with Scale 1.5 and font size 72, 4 Colour, 5 Appears with." width="550" height="190" loading="lazy">
+        <figcaption>The header of the editor: Name (1), Tag (2), Size (3), Colour (4) and Appears with (5).</figcaption>
+      </figure>
+      <p><span class="ui">Size</span> (3) is one value written twice. <strong>Scale</strong> is a factor of Manim's default
+      font size, 48, and the second field is the font size it makes: <code>1.5 × 48 = 72</code>. Change either
+      and the other follows. The scale takes a number or a fraction (<code>3/2</code>) from 0.1 to 10, and the
+      font size a number from 4 to 512.</p>
+      <p>Changing the size resizes every clip of the formula where it stands. A clip also has a scale of
+      its own, which the handles of the <a href="../basics/preview.html">Preview</a> change; the two multiply.</p>
+      <p>New formulas start at the <em>standard scale</em>, 1 unless you say otherwise, set in
+      <span class="ui">Preferences ▸ Standard scale…</span>. That dialog can also give the same scale to every formula of the
+      project (see <a href="../objects/organizing.html#standard-scale">Standard scale</a>).</p>
+
+      <h2 id="colour">Colour</h2>
+            <p><span class="ui">Colour</span> (4) colours the whole formula, every glyph at once. Click the swatch to pick a colour
+      in your system's picker, or type a hex value, <code>#RRGGBB</code>, and press <kbd>Enter</kbd>. The glyph
+      column and the Preview use it straight away.</p>
+      <p>To colour only some glyphs, select them in the glyph column and choose a colour for them. A glyph
+      with a colour of its own keeps it when you change the colour of the formula. The same formula, three
+      ways:</p>
+      <figure class="mfe-player" data-mfe-player="formulas-colour" data-caption="The colour of the whole formula: blue." data-from="0.0" data-to="3.6" data-start="2.0" data-controls="minimal"></figure>
+      <figure class="mfe-player" data-mfe-player="formulas-colour" data-caption="A colour of its own on three glyphs, and the formula left white." data-from="3.6" data-to="7.2" data-start="5.6" data-controls="minimal"></figure>
+      <figure class="mfe-player" data-mfe-player="formulas-colour" data-caption="Blue for the whole formula, and one glyph with a colour of its own: it keeps it." data-from="7.2" data-to="10.8" data-start="9.2" data-controls="minimal"></figure>
+      <div class="mfe-example" data-mfe-example="formulas-colour"></div>
+      <p><a href="../color/coloring.html">Colouring glyphs and objects</a> covers colours of single glyphs, and
+      <a href="../color/palettes.html">Palettes and Chroma Lab</a> the named colours a project can share.</p>
+
+      <h2 id="names-tags">Names and tags</h2>
+      <p>The <strong>Name</strong> (1) identifies the formula in the Creator, the timeline and your exported
+      code, where it becomes a Python variable. For that reason a name has rules, and the field tells you which
+      one it breaks as you type:</p>
+      <figure>
+        <img src="../media/basics/formulas/name-rule.dark.webp" data-themed
+             alt="The Name field of the editor with the text my formula and, under it, in red: Use letters, digits and &quot;_&quot;, not starting with a digit: the name becomes a Python variable." width="554" height="72" loading="lazy">
+        <figcaption>A space is not allowed in a name. The reason shows under the field as you type; the name is kept when it is valid and you press <kbd>Enter</kbd> or leave the field.</figcaption>
+      </figure>
+      <ul>
+        <li>Letters, digits and <code>_</code>, not starting with a digit.</li>
+        <li>Not a Python keyword (<code>for</code>, <code>class</code>, <code>None</code>…).</li>
+        <li>Not the name of another formula.</li>
+      </ul>
+      <p>The <strong>Tag</strong> (2) is a small mark for finding the formula in the lists: one of eight colours or
+      a hex value of your own, and optionally an icon of up to eight characters (a letter, an emoji). A tag
+      never colours the glyphs of the formula. It identifies it: the dot in the Creator, and the clips
+      of the formula on the timeline.</p>
+      <p><span class="ui">Appears with</span> (5) chooses the intro that every new clip of the formula starts with. It is
+      explained in <a href="../basics/intro-outro.html#defaults">Appearing and disappearing</a>.</p>
+
+      <h2 id="creator-list">The Creator list</h2>
+      <p>Every formula of the project is a card in the Creator. In the list view a card has a row of
+      information and a drawing of the formula on the project's background. You can drag the bar between the
+      Creator and the Preview to give the cards room.</p>
+      <figure>
+        <img src="../media/basics/formulas/list-view.dark.webp" data-themed
+             alt="The Creator widened, showing the cards of plain, fractions, quadratic and series, each with a tag dot, its name, a sigma mark, a MathJax badge, a clip count and three buttons, above a drawing of the formula." width="532" height="460" loading="lazy">
+        <figcaption>The list view, with the Creator widened by dragging the bar beside it.</figcaption>
+      </figure>
+      <p>Each card says:</p>
+      <figure>
+        <img src="../media/basics/formulas/card-parts.dark.webp" data-themed
+             alt="One card of the list with six numbered parts: 1 the tag dot, 2 the name, 3 the kind mark, 4 the status badge, 5 the clip count and 6 the three buttons." width="589" height="134" loading="lazy">
+        <figcaption>The parts of a card.</figcaption>
+      </figure>
+      <ol>
+        <li>Its <strong>tag</strong>: the dot, with its icon if it has one.</li>
+        <li>Its <strong>name</strong>. Double-click it, or press <kbd>F2</kbd> on the card, to rename it.</li>
+        <li>Its <strong>kind</strong>: ∑ for a formula, T for a LaTeX text, P for a font text.</li>
+        <li>Its <strong>status</strong>: <em>MathJax</em> or <em>exact</em> once it has rendered (see below),
+        <em>rendering…</em> while it is being typeset, <em>error</em> when its LaTeX does not compile, and
+        <em>empty</em> before you write anything. Point at the badge for the tooltip.</li>
+        <li>How many <strong>clips</strong> use it on the timeline.</li>
+        <li>Three buttons: edit (the pencil), duplicate and delete.</li>
+      </ol>
+      <p>A click selects a card; <kbd data-keys="Mod">Ctrl</kbd>+click and <kbd>Shift</kbd>+click select several (see
+      <a href="../objects/organizing.html#select-in-list">Finding and organizing</a>, which also lists the keys). A
+      double-click or <kbd>Enter</kbd> opens the editor. The arrow keys walk the list, and a card can be dragged onto
+      the timeline.</p>
+      <h3 id="list-blocks">List and blocks</h3>
+      <p>The key beside the magnifier switches how the Creator draws its cards, between the list view and
+      the block view: it shows the icon of the view a press brings. In the block view
+      each formula is a small square with its tag, name, clip count, kind and status. Point at a block and a
+      tooltip beside it shows the formula's drawing. Its edit, duplicate and delete buttons appear while the
+      pointer or the focus is on it. The choice is a preference of the editor, and it is remembered.</p>
+      <figure>
+        <img src="../media/basics/formulas/block-view.dark.webp" data-themed
+             alt="The Creator in the block view: six squares in two columns, each with the dot of its tag, its name, its clip count, its kind and the badge MathJax, and a tooltip beside the fractions block with its drawing, its name, its kind and the words Double-click to edit, F2 to rename." width="569" height="576" loading="lazy">
+        <figcaption>The block view, with the tooltip of the block the pointer is on.</figcaption>
+      </figure>
+      <p>A block narrower than 112 px has no room for all of that beside its name. It shows a
+      <strong>compact face</strong> instead: the whole block is a pane of glass tinted with the colour of its
+      tag, with the name alone on it. The rest comes at once while the pointer is on the block, in its
+      corners: the edit, duplicate and delete buttons at the top, the kind and a letter for the status at the
+      bottom left, the clip count at the bottom right. The blocks are that narrow whenever the Creator is
+      wide enough for four columns or more, and often when it is narrower.</p>
+      <table>
+        <thead>
+          <tr><th>Letter</th><th>The formula is</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">M</span></td><td>drawn by MathJax</td></tr>
+          <tr><td><span class="ui">e</span></td><td>drawn with the exact glyphs, from the companion</td></tr>
+          <tr><td><span class="ui">?</span></td><td>a font text that needs the companion</td></tr>
+          <tr><td><span class="ui">…</span></td><td>not drawn yet</td></tr>
+          <tr><td><span class="ui">!</span></td><td>in error. This one shows without the pointer, and so does the warning mark ⚠</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/basics/formulas/block-compact.dark.webp" data-themed
+             alt="A wide Creator in the block view: six columns of small squares, each a pane of glass tinted with the colour of its tag, with the name of its formula; the pointer is on one, which shows three buttons at the top, the kind and the letter M at the bottom left and its clip count at the bottom right."
+             width="899" height="300" loading="lazy">
+        <figcaption>Compact blocks: (1) the name on glass tinted with the tag’s colour; (2) the buttons, (3) the kind and the status letter and (4) the clip count of the block the pointer is on.</figcaption>
+      </figure>
+      <h3 id="preview-size">Larger previews</h3>
+      <p>The <strong>+/−</strong> key of the toolbar, after the ∑ key, makes the previews of the view you see
+      larger with a click and smaller with a right-click (or <kbd data-keys="Shift">Shift</kbd>+click): 1×, 1.5×,
+      2× or 3×. With the focus on it, <kbd data-keys="ArrowUp">↑</kbd> and <kbd data-keys="ArrowDown">↓</kbd> do
+      the same. In the list view it sizes the drawing of every card, 52 pixels tall at 1× and 156 at 3×. In the
+      block view it sizes the tooltip beside a block, its drawing as many times wider and taller. The formula is
+      always drawn as large as its box allows.</p>
+      <figure>
+        <img src="../media/basics/formulas/preview-size.dark.webp" data-themed
+             alt="The Creator in the list view with the previews at 2×: each card's drawing twice as tall as at first, and the plus-minus key of the toolbar ringed." width="532" height="460" loading="lazy">
+        <figcaption>The list at 2×, with <strong>+/−</strong> ringed.</figcaption>
+      </figure>
+      <p>Each view keeps its own size: the cards of the list can stay small while the tooltips of the blocks are
+      large. Both are preferences of the editor, and they are remembered. The tooltip of the key says the size now,
+      and which end is reached: at 1× a right-click does nothing, at 3× a click.</p>
+      <h3 id="rename-duplicate-delete">Rename, duplicate and delete</h3>
+      <p>To rename a formula from the list, double-click its name (or press <kbd>F2</kbd> on the card): the name
+      becomes a field, and <kbd>Enter</kbd> keeps the new one. The rules of a name are the editor's own.</p>
+      <p><span class="ui">Duplicate</span> makes a copy right after the original, with everything the original has (its
+      LaTeX, size, colours, hidden glyphs, packages, tag and intro) under the next free name:
+      <code>plain</code> becomes <code>plain2</code>, and <code>f007</code> becomes <code>f008</code>. The copy
+      is a new formula with no clips.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/formulas/duplicate.dark.webm"
+               poster="../media/basics/formulas/duplicate.dark.webp" width="530" height="372"
+               muted loop playsinline preload="none"></video>
+        <figcaption>The duplicate button of a card puts a copy after it.</figcaption>
+      </figure>
+      <p>Deleting a formula removes its clips, and the relations those clips have, with it, so the editor
+      asks first and lists what will go. The button has to be held down: it fills while you hold it.
+      <kbd data-keys="Delete">Del</kbd> on the selected formula, or <span class="ui">Edit ▸ Delete formula</span>, does the same. One
+      undo step brings everything back.</p>
+      <figure>
+        <img src="../media/basics/formulas/delete-confirm.dark.webp" data-themed
+             alt="The question Delete &quot;plain&quot;? says the formula is used on the timeline and lists the clip that would go with it, with a Cancel button and a red button, Hold to delete formula." width="496" height="188" loading="lazy">
+        <figcaption>What deleting a formula asks, and lists.</figcaption>
+      </figure>
+
+      <h2 id="glyph-order">Why the order of glyphs matters</h2>
+      <p>The editor does not animate a formula as a picture. It animates its <strong>glyphs</strong>, the
+      individual characters and rules it is made of, and everything that points at a glyph does so by its
+      number: its colour, whether it is hidden at the start, and above all the pairs that make one formula
+      turn into another. Hover over the glyph column in the editor, or press its list button, and each glyph
+      shows its number.</p>
+      <p>Which number a glyph gets depends on who typeset the formula, and that is where the editor's two
+      renderers differ.</p>
+      <ul>
+        <li><strong>MathJax</strong> runs in the browser and needs nothing else. It typesets well, but it
+        numbers the glyphs in its own order.</li>
+        <li><strong>Real LaTeX</strong>, through the <a href="../manim/companion.html">companion</a>, is how
+        Manim itself builds a formula. The editor then uses Manim's glyphs, in Manim's order: <em>exact
+        mode</em>.</li>
+      </ul>
+      <p>The two orders often agree and often do not. A fraction shows it. MathJax numbers its numerator,
+      its denominator and then its bar; LaTeX numbers the numerator, the bar and then the denominator.</p>
+      <figure>
+        <img src="../media/basics/formulas/order-fraction.dark.webp" data-themed
+             alt="The glyph column of the formula a over b: the drawing, and under it three keys numbered 0 a, 1 b and 2 with a bar, which is the order MathJax gives." width="475" height="301" loading="lazy">
+        <figcaption>MathJax numbers the glyphs of a fraction: <em>a</em> (0), <em>b</em> (1), then the bar (2).</figcaption>
+      </figure>
+      <table>
+        <thead><tr><th>Formula</th><th>MathJax order</th><th>LaTeX order (as Manim builds it)</th></tr></thead>
+        <tbody>
+          <tr><td><code>\frac{a}{b}</code></td><td>a, b, bar</td><td>a, bar, b</td></tr>
+          <tr><td><code>\sum_{i=0}^{n} i^2</code></td><td>∑, i, =, 0, n, i, 2</td><td>n, ∑, i, =, 0, i, 2</td></tr>
+        </tbody>
+      </table>
+            <p>You can work in the browser alone. A project that relates the glyphs of two formulas, or colours
+      single glyphs, stores them by the numbers the editor sees. When it exports Python and those numbers are
+      MathJax's, the exported scene finds each glyph by where it sits in the formula, which is reliable whenever
+      the two typesettings make the same glyphs. Where they do not (tall brackets, stretchy arrows, ligatures), the
+      scene prints a warning when you run it, and the glyphs without a counterpart are not animated.</p>
+      <p>With the companion running, the badge in the glyph column says <strong>exact</strong>, the status line
+      says <em>exact (LaTeX)</em>, and the exported Python uses Manim's numbers straight, with no matching. The
+      menu bar says <span class="ui">Renderer: MathJax</span>, <span class="ui">Renderer: LaTeX</span> or
+      <span class="ui">Renderer: mixed</span>, as the formulas of the project stand. A formula you made without the companion keeps working when it comes up: the editor
+      re-numbers its glyphs and carries your colours and pairs over to the new numbers.</p>
+      <p>The <span class="ui">View</span> menu lets you ask for one renderer: <span class="ui">Glyph source: Automatic</span> (LaTeX when the
+      companion is online), <span class="ui">Glyph source: MathJax</span> or <span class="ui">Glyph source: LaTeX (companion)</span>.</p>
+      <aside class="callout tip"><p>If you plan to relate glyphs and render with Manim, start the companion
+      before you write the formulas. Nothing is lost if you do not, but you will see the real order from the
+      start.</p></aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../basics/timeline.html">Working with the timeline</a>: put a formula in the scene.</li>
+        <li><a href="../basics/first-transform.html">Transforming one formula into another</a>: where the glyph
+        numbers pay off.</li>
+        <li><a href="../objects/templates.html">The template library</a>: start from a ready-made formula.</li>
+        <li><a href="../objects/organizing.html">Finding and organizing</a>: search, groups, several at once.</li>
+        <li><a href="../color/coloring.html">Colouring glyphs and objects</a>.</li>
+      </ul>
+
+    </article>
+  </main>
+</body>
+</html>

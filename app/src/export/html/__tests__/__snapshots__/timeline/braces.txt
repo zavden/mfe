@@ -1,0 +1,46 @@
+/* Braces — a scene made with Manim Formula Editor, 8.00 s long.
+ *
+ * This file is the animation: the project as the editor keeps it. Edit it, reload the page,
+ * and the page says what it could not read; `node check.mjs` says it without a browser. What
+ * follows in this comment was written at the export, to find your way in the data below: it
+ * does not follow your edits. Positions are Manim’s: y up, the frame 8 units tall about the
+ * origin. Its times are the scene’s; in the data, a block’s `start` counts from its clip’s
+ * `start`, and a relation’s `offset` from its target clip’s.
+ *
+ * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   sum      clips[0]  0.00–8.00 s  formulas[0] math “1+2+3+4+5+6”
+ *   first    clips[1]  2.00–8.00 s  formulas[1] brace
+ *   six      clips[2]  2.00–8.00 s  formulas[2] math “6”
+ *   second   clips[3]  3.20–8.00 s  formulas[3] brace
+ *   fifteen  clips[4]  3.20–8.00 s  formulas[4] math “15”
+ *   whole    clips[5]  4.60–8.00 s  formulas[5] brace
+ *   total    clips[6]  4.60–8.00 s  formulas[6] math “6+15=21”
+ *
+ * The glyphs of each formula, by the index that "glyphs": [3, 4] names:
+ *   sum:  0 1  1 +  2 2  3 +  4 3  5 +  6 4  7 +  8 5  9 +  10 6
+ *   first:  0 ⏟
+ *   six:  0 6
+ *   second:  0 ⏟
+ *   fifteen:  0 1  1 5
+ *   whole:  0 ⏟
+ *   total:  0 6  1 +  2 1  3 5  4 =  5 2  6 1
+ *
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.50 s  sum  write  clips[0].intro
+ *   2.00–2.60 s  first  grow_from_center  clips[1].intro
+ *   2.00–2.60 s  six  fade_in  clips[2].intro
+ *   3.20–3.80 s  second  grow_from_center  clips[3].intro
+ *   3.20–3.80 s  fifteen  fade_in  clips[4].intro
+ *   4.60–5.20 s  whole  grow_from_center  clips[5].intro
+ *   4.60–5.60 s  total  fade_in  clips[6].intro
+ *   4.60–5.80 s  six → total  (copy, 1 pair)  relations[0]
+ *   4.60–5.80 s  fifteen → total  (copy, 1 pair)  relations[1]
+ *   7.20–8.00 s  sum  fade_out  clips[0].outro
+ *   7.20–8.00 s  first  fade_out  clips[1].outro
+ *   7.20–8.00 s  six  fade_out  clips[2].outro
+ *   7.20–8.00 s  second  fade_out  clips[3].outro
+ *   7.20–8.00 s  fifteen  fade_out  clips[4].outro
+ *   7.20–8.00 s  whole  fade_out  clips[5].outro
+ *   7.20–8.00 s  total  fade_out  clips[6].outro
+ *
+ * AGENTS.md tells what each part means. */

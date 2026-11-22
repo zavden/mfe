@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timing tools · Manim Formula Editor</title>
+  <meta name="description" content="The menus of a clip and of several clips, copying and pasting a clip's timing, splitting an animation block, Appears with, unlinking a formula, and copying properties.">
+  <meta name="mfe:id" content="animations/timing">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Timing tools">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/timing-clips.data.js" defer></script>
+  <script src="../examples/timing-split-start.data.js" defer></script>
+  <script src="../examples/timing-split.data.js" defer></script>
+  <script src="../media/animations/timing/split-dialog.tour.js" defer></script>
+  <script src="../media/animations/timing/timing-paste.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Timing tools</h1>
+      <p class="lead">Small commands that save you from typing numbers and from doing work twice:
+        copy the times of one clip onto another, split an animation block, say how new clips come
+        in, give a clip a formula of its own, and copy how a clip looks onto others.</p>
+
+      <figure class="mfe-player" data-mfe-player="timing-clips" data-timeline data-start="3"
+              data-caption="The project of the first sections: a formula, energy, on a clip of 1 to 5 s, and a note under it, whose formula has a second clip on the track of energy."></figure>
+
+      <p>Most of these live in the <strong>menu of a clip</strong>, so that is where this page
+        starts.</p>
+
+      <h2 id="menus">The menus of a clip and of several clips</h2>
+      <p>Right-click a clip on the timeline, or press <kbd data-keys="Shift+F10">Shift+F10</kbd>
+        with the focus on it, and its menu opens. Its first entries add animations at the playhead,
+        or where you clicked when the playhead is not on the clip; the rest are about the clip
+        itself.</p>
+      <figure>
+        <img src="../media/animations/timing/clip-menu.dark.webp" data-themed
+             alt="The menu of the clip note: Add animation with Appear, Disappear, Transform, Morph within the formula and Emphasis; Add brace, Add shape, Add line; Intro, Outro, Timing; Remove animations, Remove relations, Unlink formula (make a copy), Split at playhead (S); Lock in the preview."
+             width="292" height="485" loading="lazy">
+        <figcaption>The menu of a clip of a formula, on the timeline.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Appear</span>, <span class="ui">Disappear</span>, <span class="ui">Transform</span>, <span class="ui">Morph within the formula</span>, <span class="ui">Emphasis</span></td><td>Add an animation block to the clip at the playhead, or where you right-clicked when the playhead is not on the clip (the Animations panel adds one at the playhead). See <a href="blocks.html#adding-timeline">Animation blocks</a>.</td></tr>
+          <tr><td><span class="ui">Add brace</span>, <span class="ui">Add shape</span>, <span class="ui">Add line</span></td><td>Hang a new object on the clip. See <a href="../objects/braces.html#adding">Braces</a>, <a href="../objects/shapes.html#adding">Shapes</a> and <a href="../objects/lines-arrows.html#drawing">Lines and arrows</a>.</td></tr>
+          <tr><td><span class="ui">Intro</span>, <span class="ui">Outro</span></td><td>Give the clip the animation it starts or ends with. See <a href="../basics/intro-outro.html#menu">Appearing and disappearing</a>.</td></tr>
+          <tr><td><span class="ui">Timing</span></td><td>Copy the clip's times, or paste times copied from another clip. See <a href="#timing">below</a>.</td></tr>
+          <tr><td><span class="ui">Remove animations</span></td><td>Take off the intro, the outro and every block but the Morph ones, in one step.</td></tr>
+          <tr><td><span class="ui">Remove relations</span></td><td>Formulas and texts only: take off the clip's transformations of glyphs, that is its relations with other clips and its Morph blocks. A relation whose other clip is on a locked track stays, and a notice says so.</td></tr>
+          <tr><td><span class="ui">Unlink formula (make a copy)</span></td><td>Give the clip a copy of its formula of its own. See <a href="#unlink">below</a>.</td></tr>
+          <tr><td><span class="ui">Lock in the preview</span></td><td>Make the Preview leave that formula alone, so that something under it can be reached. The timeline and the panels still edit it, and the lock is saved with the project (<a href="../basics/preview.html">Placing things in the Preview</a>).</td></tr>
+        </tbody>
+      </table>
+      <p>A brace, a shape or a line has fewer entries and some of its own (a colour, a direction,
+        <span class="ui">Detach</span>, <span class="ui">Become</span>): they are on the pages of those
+        objects. The Preview has a menu of its own for a clip. It shares
+        <span class="ui">Intro</span>, <span class="ui">Outro</span>, <span class="ui">Remove animations</span>,
+        <span class="ui">Remove relations</span> and <span class="ui">Unlink formula (make a copy)</span> with
+        the timeline's, and adds the entries for copying properties
+        (<a href="#properties">below</a>), aligning, match colors and colours in order.</p>
+
+      <h3 id="several-clips">Several clips</h3>
+      <p>With several clips selected, right-click one of them: the menu is of the whole selection.
+        Its first line says how many clips and how many formulas they are.</p>
+      <figure>
+        <img src="../media/animations/timing/clips-menu.dark.webp" data-themed
+             alt="The menu of two selected clips, energy and note: the first line says 2 clips · 2 formulas; then Edit together…, Add brace, Add shape, Apply match colors, Timing with its submenu open (From energy: Paste start, Paste end, Paste duration, Paste intro time, Paste outro time), Unlink formula (make a copy), Split at playhead (S), Lock in the preview, Duplicate and Delete 2 clips."
+             width="375" height="310" loading="lazy">
+        <figcaption>The menu of two selected clips, with <span class="ui">Timing</span> open after copying
+          the times of <code>energy</code>: the pastes, and no copy.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Edit…</span> or <span class="ui">Edit together…</span></td><td>Open the formula, when the clips are of one; or open the formulas together, with one scale and one match list for all of them (<a href="../objects/organizing.html">Finding and organizing</a>).</td></tr>
+          <tr><td><span class="ui">Add brace</span>, <span class="ui">Add shape</span></td><td>One brace over them all, or one shape around them all. They are greyed out, with the reason as a tooltip, when the clips are never on screen together from the playhead on.</td></tr>
+          <tr><td><span class="ui">Apply match colors</span></td><td>Colour their formulas by one of the project's match lists (<a href="../color/match-colors.html">Match colors</a>).</td></tr>
+          <tr><td><span class="ui">Timing</span></td><td>Paste a part of the copied timing onto all of them. There is no copy here: copying is of one clip.</td></tr>
+          <tr><td><span class="ui">Unlink formula (make a copy)</span></td><td>Give each formula among them a copy of its own, shared by its selected clips.</td></tr>
+          <tr><td><span class="ui">Lock in the preview</span></td><td>Lock them all, or unlock them all when they are all locked.</td></tr>
+          <tr><td><span class="ui">Duplicate</span>, <span class="ui">Delete</span></td><td>Copy or delete the clips (not their formulas), as <kbd data-keys="Mod+D">Ctrl+D</kbd> and <kbd data-keys="Delete">Delete</kbd> do. Clips on locked tracks are left out, and the entry says so.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="timing">Copying and pasting the timing</h2>
+      <p>To make two clips start together, last the same, or have intros of the same length, copy the
+        timing of one and paste it onto the other. It is all in the <span class="ui">Timing</span>
+        entry of the clip's menu, which opens a small menu beside it.</p>
+      <ol>
+        <li>Right-click the clip to copy from and choose <span class="ui">Timing ▸ Copy timing</span>. The
+          entry shows its times, such as <code>1 s–5 s</code>. One copy takes the start, the end and the
+          lengths of the intro and of the outro. A clip on a locked track can be copied from too: a copy
+          changes nothing.</li>
+        <li>Right-click the clip to change, or select several, and choose what to paste.</li>
+      </ol>
+      <figure>
+        <img src="../media/animations/timing/timing-menu.dark.webp" data-themed
+             alt="The menu of the clip note with its Timing submenu open: Copy timing, 2 s–4.5 s; then, under From energy, Paste start (starts at 1 s), Paste end (ends at 5 s), Paste duration (4 s long), Paste intro time (1 s) and Paste outro time (1 s)."
+             width="458" height="485" loading="lazy">
+        <figcaption>After copying the times of <code>energy</code>, each paste entry says what it
+          would paste. A line names the clip they come from.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What the clip gets</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Paste start</span></td><td>It starts when the copied clip does, and keeps its length: the two clips are aligned on their left edge.</td></tr>
+          <tr><td><span class="ui">Paste end</span></td><td>It ends when the copied clip does, and keeps its length: aligned on their right edge.</td></tr>
+          <tr><td><span class="ui">Paste duration</span></td><td>It lasts as long as the copied clip, from where it starts.</td></tr>
+          <tr><td><span class="ui">Paste intro time</span></td><td>Its intro lasts as long as the copied clip's intro. Off, saying <em>it has no intro</em>, when the copied clip has none.</td></tr>
+          <tr><td><span class="ui">Paste outro time</span></td><td>Its outro lasts as long as the copied clip's outro.</td></tr>
+        </tbody>
+      </table>
+      <div class="mfe-tour" data-mfe-tour="animations/timing/timing-paste" data-title="Copy the timing of one clip and paste it on another"></div>
+      <p>Each paste is one undo step: <kbd data-keys="Mod+Z">Ctrl+Z</kbd> puts the clip back as it was.</p>
+
+      <h3 id="timing-rules">A paste does what it says, or nothing</h3>
+      <p>Where a drag would stop, a paste stops too: the clip stays as it is, and a notice says why.
+        That happens when</p>
+      <ul>
+        <li>another clip of the track is in the way (the notice names it and its times);</li>
+        <li>the track is locked;</li>
+        <li>the new length would cut an animation block or a relation of the clip, or the new intro
+          would run into a keyframe;</li>
+        <li>the window of a relation whose other clip is on a locked track would no longer fit in the
+          clip: such a relation stays where it plays;</li>
+        <li>a clip would start before 0, or be shorter than its intro and its outro, or longer than the
+          room it has.</li>
+      </ul>
+      <figure>
+        <img src="../media/animations/timing/timing-notice.dark.webp" data-themed
+             alt="A notice: “note” keeps its start. The start of “energy” was not pasted where it does not fit: “note”: “energy” (1 s–5 s) is in its way on the same track."
+             width="436" height="90" loading="lazy">
+        <figcaption>The second clip of <code>note</code> is on the track of <code>energy</code>: it
+          cannot start where <code>energy</code> does.</figcaption>
+      </figure>
+      <p>A paste never cuts anything: a clip made shorter than its blocks or its relations reach
+        stays as it was. Onto <strong>several clips</strong> a paste applies to each in turn, in the
+        order of the timeline, each planned where the ones before it left things; the ones that fit
+        change, in one undo step, and the notice names the ones that stay.</p>
+      <aside class="callout tip">
+        <p>The menu of a <strong>sound</strong> has <span class="ui">Timing</span> too, without the intro and the outro
+          (a sound has neither). Copy the timing of a formula and paste its start onto a recording, or the
+          other way round, to line a formula up with a narration (<a href="../sound/audio.html">Audio</a>).</p>
+      </aside>
+      <aside class="callout note">
+        <p>A clip with a relation moves with <span class="ui">Paste start</span> and <span class="ui">Paste end</span>
+          as it does when dragged: the window of the relation goes with its target clip.</p>
+      </aside>
+
+      <h2 id="split">Split</h2>
+      <p>An animation block animates glyphs, and Manim cannot run two animations on one glyph at the
+        same time. But two blocks may run at once on <em>different</em> glyphs: the two sides of an
+        equation, written at the same time. <strong>Splitting</strong> a block makes that
+        from the block you have: one block per part, all at the same time and of the same length, each
+        with its own animation and its own glyphs.</p>
+      <div class="side-by-side">
+        <figure class="mfe-player" data-mfe-player="timing-split-start" data-start="1" data-timeline data-autoplay data-loop data-controls="minimal"
+                data-caption="Before: one Write block brings in the six glyphs of the two sides, one after the other, from the a to the d; the = was there from the start."></figure>
+        <figure class="mfe-player" data-mfe-player="timing-split" data-start="1" data-timeline data-autoplay data-loop data-controls="minimal"
+                data-caption="After the split: one Write block for each side, a group. The two sides are written at the same time."></figure>
+      </div>
+      <p>Splitting is offered on the blocks that name glyphs: <span class="ui">Appear</span>,
+        <span class="ui">Disappear</span>, a <span class="ui">Transform</span> of part of the formula and
+        <span class="ui">Emphasis</span>. A block of an arrow is not split: it
+        <a href="../objects/lines-arrows.html#arrow-whole">takes the whole arrow</a>. Right-click the
+        block:</p>
+      <figure>
+        <img src="../media/animations/timing/block-menu.dark.webp" data-themed
+             alt="The menu of an Appear block: Change animation with Appear · Write and its kin, then Duplicate, Duplicate for the other glyphs, Split into runs, Split… and Delete…."
+             width="211" height="423" loading="lazy">
+        <figcaption>The menu of a block that names glyphs. Here <span class="ui">Duplicate for the other
+          glyphs</span> is off: the only glyph the block leaves out, the <code>=</code>, is on screen
+          already, so an Appear has nothing to bring in for it.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Split into runs</span> makes one block per run of <em>consecutive</em> glyphs
+          the block animates: with the glyphs 0, 1, 2 and 4, 5, 6 it makes two. It is the quickest way to
+          animate the two sides of an equation together, since the <code>=</code> between them is a gap.
+          It is off when the block's glyphs make a single run.</li>
+        <li><span class="ui">Split…</span> opens a dialog where <em>you</em> choose which glyphs go to new
+          blocks.</li>
+        <li><span class="ui">Duplicate for the other glyphs</span> puts a copy of the block beside it for
+          the glyphs it does not animate. It is off when there are none.</li>
+      </ul>
+
+      <h3 id="split-dialog">The Split dialog</h3>
+      <div class="mfe-tour" data-mfe-tour="animations/timing/split-dialog" data-title="The Split dialog"></div>
+      <p>Choose the glyphs that go to <em>one</em> new block and press <span class="ui">Split</span>; the
+        others stay in the block you split. For <em>several</em> new blocks, choose the glyphs of the first,
+        press <span class="ui">Another block</span> (it is listed under the formula, tinted like its glyphs, and
+        a × gives its glyphs back), and choose those of the next. A glyph is in one block only, so what
+        you choose again is taken from the block that had it. The dialog can be resized from its
+        corner or maximized, and it keeps its size for the session: the room it gains goes to the
+        formula.</p>
+      <figure>
+        <img src="../media/animations/timing/split-result.dark.webp" data-themed
+             alt="The timeline after a split: on the clip of the equation, the two Appear blocks are folded into one group block, Write ×2 (1)."
+             width="1084" height="250" loading="lazy">
+        <figcaption>The clip of the equation after <span class="ui">Split…</span>, the glyphs of the
+          right side and <span class="ui">Split</span>: its two blocks are folded into one group
+          (1), <em>Write ×2</em>.</figcaption>
+      </figure>
+
+      <h3 id="split-result">What a split leaves</h3>
+      <p>The new blocks are a <strong>group</strong>, like Manim's <code>AnimationGroup</code>: they start
+        together and last the same, each keeping its own animation, glyphs and options, and the timeline
+        draws them as one block on one lane (<em>Write ×2</em>, or <em>Group ×2</em> when their animations
+        differ), so a block split in ten does not take ten lanes. A group moves and stretches as one
+        block; its arrow, or a double-click, unfolds it into its blocks, and the arrow on the first of
+        them folds it back. A split is one undo step, and what plays does not change: the two players
+        above are the same scene. In the export, one animation over all the glyphs becomes one
+        animation for each part, side by side in the same <code>self.play</code>:</p>
+<pre data-excerpt="examples/timing-split-start.ce.py"><code class="language-python">self.play(Write(VGroup(*equation_g[:3], *equation_g[4:])), run_time=1.2)</code></pre>
+<pre data-excerpt="examples/timing-split.ce.py"><code class="language-python">self.play(Write(VGroup(*equation_g[:3])),
+          Write(VGroup(*equation_g[4:])), run_time=1.2)</code></pre>
+      <p>To give the right side another animation, unfold the group and change that block's animation
+        from its menu. Groups have their own page: <a href="groups.html">Groups of animation blocks</a>.</p>
+
+      <h2 id="appears-with">Appears with</h2>
+      <p><span class="ui">Appears with</span> is a field of the formula editor (double-click a formula in
+        the Creator, or press <kbd data-keys="Enter">Enter</kbd> on its card). It is the <strong>intro every new
+        clip of that formula starts with</strong>, and its length.</p>
+      <figure>
+        <img src="../media/animations/timing/appears-with.dark.webp" data-themed
+             alt="The fields of the formula editor for note: Name, Tag, Size (1.3333 × 48 = 64), Colour, and Appears with set to Write for 1 s, with the hint: New clips start with it; clips still at the previous intro follow."
+             width="544" height="188" loading="lazy">
+        <figcaption>The top of the formula editor. <span class="ui">Appears with</span> is the last field.</figcaption>
+      </figure>
+      <p>The list holds <span class="ui">Default</span> (written <span class="ui">Default (none)</span> or
+        <span class="ui">Default (Write)</span>, following the <span class="ui">Always add intro</span> preference of the
+        <span class="ui">Edit</span> menu, and <span class="ui">Default (none)</span> on an object that does not take
+        the intro of that preference: a line is never grown, for one), <span class="ui">None (appear)</span> and every
+        intro the object takes, GrowArrow among them for an arrow. A length field appears next to a real animation.</p>
+      <h3 id="appears-with-clips">What it changes</h3>
+      <ul>
+        <li><strong>New clips</strong> of the formula, from a drop on the timeline or from
+          <span class="ui">Add to the timeline</span>, start with it.</li>
+        <li><strong>Clips already there</strong> that still have the <em>previous</em> intro (the same kind
+          and the same length) follow the change, each as far as its blocks, its outgoing relations and
+          its outro leave room. A clip you retouched in the Animations panel, or from its menu, keeps its
+          own, and so does a clip on a locked track, which a notice counts.</li>
+        <li>It also goes the other way: an intro you give a clip from the menu entry
+          <span class="ui">Intro</span> becomes what <span class="ui">Appears with</span> says from then on. The
+          formula's other clips stay as they are.</li>
+      </ul>
+      <figure>
+        <img src="../media/animations/timing/appears-with-clips.dark.webp" data-themed
+             alt="The timeline after Appears with of the formula note was set to Write: the second clip of note, which had no intro, now starts with Write; the first, which fades in, kept its FadeIn."
+             width="1084" height="250" loading="lazy">
+        <figcaption>After setting <span class="ui">Appears with</span> to Write for <code>note</code>: its
+          clip over 6–8 s, which had no intro, now writes in; the clip over 2–4.5 s, which had its own
+          FadeIn, kept it.</figcaption>
+      </figure>
+      <p>The composition editor of a LaTeX text has the same field. What intros there are, and the
+        preference behind <span class="ui">Default</span>, are on
+        <a href="../basics/intro-outro.html#defaults">Appearing and disappearing</a>.</p>
+
+      <h2 id="unlink">Unlinking a formula</h2>
+      <p>A formula on the timeline more than once is <strong>one object</strong>: change its LaTeX, its
+        size or its colour and every clip shows it. That is what you want until you do not.
+        <span class="ui">Unlink formula (make a copy)</span> gives one clip a copy of the formula of its own, so
+        that editing either no longer changes the clips of the other.</p>
+      <figure>
+        <img src="../media/animations/timing/unlink.dark.webp" data-themed
+             alt="The Creator's list after unlinking a clip of note: the formulas energy, note and, right after the original, the copy note2."
+             width="222" height="591" loading="lazy">
+        <figcaption><code>note</code> has two clips. Unlinking the one on <span class="ui">Notes</span> gave it
+          <code>note2</code>, right after the original in the Creator; the clip changes name, and the
+          other keeps <code>note</code>.</figcaption>
+      </figure>
+      <ul>
+        <li>The copy is made as <span class="ui">Duplicate</span> makes it in the Creator: under the next free
+          name (<code>note</code> becomes <code>note2</code>), right after the original in the list and in
+          its group.</li>
+        <li>The clip keeps everything it had: its blocks, its colours, its relations as source or as
+          target, the objects hung on it or on its glyphs, and the glyphs picked on it. The copy has the
+          same glyphs, so the Preview does not change. One undo step brings the clip back to the original
+          and removes the copy.</li>
+        <li>With <strong>several clips</strong> selected, the selected clips of each formula share one copy;
+          among clips of several formulas the entry reads <span class="ui">Unlink formulas (make 3
+          copies)</span>, or however many.</li>
+      </ul>
+      <p>The entry is <strong>off</strong>, and its tooltip says why, for a formula's only clip (there is
+        nothing to unlink it from), when all the clips of a formula are selected together, and on a locked
+        track: a selected clip on a locked track keeps its formula, and a notice says so. Braces, shapes
+        and lines have no such entry: they live with their clips.</p>
+
+      <h2 id="properties">Copying and pasting properties</h2>
+      <p>To make one formula look and sit like another, copy its <strong>properties</strong> and paste
+        them. This is done in the Preview, on the clips of the scene at the playhead. <span class="ui">Copy
+        properties</span> takes the state of one clip as it is shown at the playhead: its position, scale,
+        rotation, flips, opacity, colour and the colours of its glyphs. A paste is one undo step.</p>
+      <ul>
+        <li>Right-click the clip in the Preview and choose <span class="ui">Copy properties</span>. The
+          clip under the pointer is the one copied.</li>
+        <li>Select the clips to change (<kbd data-keys="Mod">Ctrl</kbd> or <kbd data-keys="Shift">Shift</kbd> and a
+          click, or a rectangle), right-click one of them and open <span class="ui">Paste properties</span>.</li>
+        <li><span class="ui">Edit ▸ Copy properties</span>, which wants exactly one clip selected, and
+          <span class="ui">Edit ▸ Paste properties</span> do the same.</li>
+        <li>With two or more clips selected, a bar in the top-left corner of the Preview has
+          <span class="ui">Paste properties</span> as a small menu next to the align keys.</li>
+      </ul>
+      <figure>
+        <img src="../media/animations/timing/paste-menu.dark.webp" data-themed
+             alt="The Preview's menu of the clip note with Paste properties open: All but position (× 1.25 · 8° · 80 % · #F4C867), Transformation (× 1.25 · 8°), Appearance (80 % · #F4C867), Glyph colours (none) and Position (0.00, 1.40)."
+             width="485" height="460" loading="lazy">
+        <figcaption>After copying <code>energy</code>, scaled ×1.25, turned 8°, at 80 % opacity and
+          yellow: each entry shows what it would paste.</figcaption>
+      </figure>
+      <table>
+        <thead>
+          <tr><th>Entry</th><th>What it pastes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">All but position</span></td><td>The transformation, the appearance and the glyph colours below.</td></tr>
+          <tr><td><span class="ui">Transformation</span></td><td>Scale, rotation and flips.</td></tr>
+          <tr><td><span class="ui">Appearance</span></td><td>Opacity and colour.</td></tr>
+          <tr><td><span class="ui">Glyph colours</span></td><td>The colours of single glyphs, onto clips of <em>the same formula</em> only, since they go by glyph.</td></tr>
+          <tr><td><span class="ui">Position</span></td><td>The place on the frame. Pasted onto several clips it stacks them on one point, on purpose.</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/animations/timing/properties-bar.dark.webp" data-themed
+             alt="The bar in the top-left corner of the Preview with two clips selected: 2 clips, the align and distribute keys, Paste properties and Match colors as menus."
+             width="450" height="45" loading="lazy">
+        <figcaption>The bar that appears over the Preview when two clips are selected.</figcaption>
+      </figure>
+      <p>A paste changes what a drag in the Preview would change at the playhead: the clip's starting
+        state, or the keyframe in effect there. A clip it cannot change now stays as it is and a notice
+        names it: one that is not on screen at the playhead, one on a locked track, or one locked after
+        its transformations. A line has no scale, turn or flip of its own: it takes the rest of what is
+        pasted.</p>
+
+      <h2 id="try-it">Try it</h2>
+      <aside class="try">
+        <ol>
+          <li>Download <code>timing-clips</code> below and open it: choose <span class="ui">File ▸ Open…</span>,
+            press <span class="ui">Other file…</span> in the dialog and pick the file
+            (<a href="../start/projects.html#open">Projects and files</a>).</li>
+          <li>Right-click the clip of <code>energy</code> and choose <span class="ui">Timing ▸ Copy timing</span>.</li>
+          <li>Right-click the first clip of <code>note</code> (on the Notes track) and choose
+            <span class="ui">Timing ▸ Paste start</span>, then <span class="ui">Paste duration</span>. Undo twice.</li>
+          <li>Try <span class="ui">Paste start</span> on the second clip of <code>note</code>: it is on the track of
+            <code>energy</code>, so a notice says what is in its way and nothing moves.</li>
+          <li>Right-click either clip of <code>note</code> and choose <span class="ui">Unlink formula (make a
+            copy)</span>. Open <code>note2</code> in the Creator, change its LaTeX, and see only that
+            clip change.</li>
+          <li>Open <code>note</code> in the Creator, set <span class="ui">Appears with</span> to
+            <span class="ui">Write</span>, and watch which clips follow.</li>
+          <li>Download <code>timing-split-start</code> below and open it. Right-click its Appear block, choose
+            <span class="ui">Split…</span>, click the glyphs 4, 5 and 6, which are the right side, and press
+            <span class="ui">Split</span>. Play the scene: it is the one it was.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="timing-clips"></div>
+      <div class="mfe-example" data-mfe-example="timing-split-start"></div>
+
+      <h2 id="next">Where to go next</h2>
+      <p>The animations a clip plays are on <a href="blocks.html">Animation blocks</a>, and groups of
+        blocks on <a href="groups.html">Groups of animation blocks</a>. The clip's own times in numbers
+        are in the Timing tab of the Animations panel; moving and trimming clips with the mouse is in
+        <a href="../basics/timeline.html#moving-clips">Working with the timeline</a>.</p>
+    </article>
+  </main>
+</body>
+</html>

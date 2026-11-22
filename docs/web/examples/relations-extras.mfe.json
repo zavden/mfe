@@ -1,0 +1,468 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Two sources, one target",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_source",
+      "kind": "math",
+      "name": "source",
+      "source": "xx",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 192,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867",
+        "1": "#58C4DD"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-15ig6d4n95y",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -0.5732812800000001,
+              -2.7755575615628914e-17
+            ],
+            "size": [
+              0.97618176,
+              0.90802944
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              0.5732812799999998,
+              -2.7755575615628914e-17
+            ],
+            "size": [
+              0.9761817599999998,
+              0.90802944
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_target",
+      "kind": "math",
+      "name": "target",
+      "source": "x^2",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 192,
+      "color": "#FFFFFF",
+      "glyphColors": {
+        "0": "#F4C867"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1jwc32jd5d3",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -0.40133999232,
+              -0.44285177088
+            ],
+            "size": [
+              0.9761817599999999,
+              0.9080294399999999
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.606705984,
+              0.4249497599999999
+            ],
+            "size": [
+              0.5654497766399997,
+              0.9438334617599998
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "tk_top",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "tk_bottom",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_source_1",
+      "formulaId": "f_source",
+      "trackId": "tk_top",
+      "start": 0,
+      "end": 4.6,
+      "initial": {
+        "position": [
+          0,
+          1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 0.8,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_target_1",
+      "formulaId": "f_target",
+      "trackId": "tk_bottom",
+      "start": 1.6,
+      "end": 4.8,
+      "initial": {
+        "position": [
+          0,
+          -1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_source_2",
+      "formulaId": "f_source",
+      "trackId": "tk_top",
+      "start": 5.6,
+      "end": 10.2,
+      "initial": {
+        "position": [
+          0,
+          1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 0.8,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_target_2",
+      "formulaId": "f_target",
+      "trackId": "tk_bottom",
+      "start": 7.199999999999999,
+      "end": 10.399999999999999,
+      "initial": {
+        "position": [
+          0,
+          -1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_source_3",
+      "formulaId": "f_source",
+      "trackId": "tk_top",
+      "start": 11.2,
+      "end": 15.799999999999999,
+      "initial": {
+        "position": [
+          0,
+          1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 0.8,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_target_3",
+      "formulaId": "f_target",
+      "trackId": "tk_bottom",
+      "start": 12.799999999999999,
+      "end": 16,
+      "initial": {
+        "position": [
+          0,
+          -1.9
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [
+    {
+      "id": "r_separate",
+      "fromClipId": "c_source_1",
+      "toClipId": "c_target_1",
+      "offset": 0,
+      "duration": 1.6,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null,
+          "extras": "separate"
+        }
+      ]
+    },
+    {
+      "id": "r_merge",
+      "fromClipId": "c_source_2",
+      "toClipId": "c_target_2",
+      "offset": 0,
+      "duration": 1.6,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null,
+          "extras": "merge"
+        }
+      ]
+    },
+    {
+      "id": "r_copies",
+      "fromClipId": "c_source_3",
+      "toClipId": "c_target_3",
+      "offset": 0,
+      "duration": 1.6,
+      "easing": "smooth",
+      "style": "transform",
+      "pathArc": 0,
+      "pairs": [
+        {
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            0
+          ],
+          "style": null,
+          "extras": "copies",
+          "principal": 0
+        }
+      ]
+    }
+  ],
+  "colorMatches": []
+}

@@ -1,0 +1,28 @@
+# Every text file has LF line ends in the repository and in every checkout, whatever
+# `core.autocrlf` says (Git for Windows sets it to true and would check them out with CRLF).
+# The checks read files from disk and compare them byte by byte with what the code makes or
+# with a recorded hash, and the shell scripts must run in Git Bash.
+* text=auto eol=lf
+
+# Verbatim copies of sources kept outside the repo. The bytes of the Chroma Lab distribution
+# are pinned by a manifest (app/src/ui/chroma/snapshot.json) that the Vite config checks before
+# anything else: nothing may convert them.
+app/src/data/** -text
+
+# Never text, whatever their first bytes look like.
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.mp3 binary
+*.mp4 binary
+*.m4a binary
+*.wav binary
+*.webm binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.wasm binary
+*.pdf binary

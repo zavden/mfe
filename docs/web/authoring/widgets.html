@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Widgets · Manim Formula Editor</title>
+  <meta name="description" content="Every interactive widget of the documentation, live, with its options and the markup that embeds it.">
+  <meta name="mfe:id" content="authoring/widgets">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Widgets">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../widgets/widgets.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/widget-link.data.js" defer></script>
+  <script src="../examples/widget-window.data.js" defer></script>
+  <script src="../examples/widget-styles.data.js" defer></script>
+  <script src="../examples/widget-anchors.data.js" defer></script>
+  <script src="../examples/widget-palette.data.js" defer></script>
+  <script src="../widgets/link-glyphs.js" defer></script>
+  <script src="../widgets/relation-window.js" defer></script>
+  <script src="../widgets/rate-functions.js" defer></script>
+  <script src="../widgets/line-anchors.js" defer></script>
+  <script src="../widgets/style-compare.js" defer></script>
+  <script src="../widgets/palette-roles.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Widgets</h1>
+      <p class="lead">Small interactive pieces that make an idea click: the reader plays with the
+        idea itself, outside the app, on the app's own glyphs and scene engine. Each one is live
+        here with its options and the markup that embeds it.</p>
+      <aside class="callout note">
+        <p>This page is for the authors of the documentation. <code>widgets/README.md</code> says
+          how to embed a widget, every option, and how to make a new one.</p>
+      </aside>
+
+      <h2 id="embedding">Embedding a widget</h2>
+      <p>A widget is a <code>div.mfe-widget</code> whose <code>data-mfe-widget</code> names it and
+        whose <code>data-options</code> holds its options as JSON, in single quotes. The page loads
+        the widget's script, its stylesheet, the player (the widgets draw with its engine) and the
+        data of the examples the widget names:</p>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="../widgets/widgets.css"&gt;
+&lt;script src="../assets/player.js" defer&gt;&lt;/script&gt;
+&lt;script src="../examples/widget-link.data.js" defer&gt;&lt;/script&gt;
+&lt;script src="../widgets/link-glyphs.js" defer&gt;&lt;/script&gt;
+…
+&lt;div class="mfe-widget" data-mfe-widget="link-glyphs"
+     data-options='{"example": "widget-link"}'&gt;&lt;/div&gt;</code></pre>
+      <p>When the head lacks the player, the example's data or the stylesheet, the widget loads
+        them itself, a moment later: list them in the head all the same, so that the widget shows
+        at once. Any example of <code>examples/</code> can be given to a widget, not only the
+        <code>widget-…</code> ones made for this page.</p>
+
+      <h2 id="link-glyphs">Linking glyphs: <code>link-glyphs</code></h2>
+      <p>The relation editor's drawing: the source formula on top, the target below. Click a glyph
+        of the source, then one of the target, to link them. Shift, Ctrl or ⌘ adds glyphs to the
+        selection of a side, and <span class="ui">Link</span> makes one pair of them: several
+        glyphs onto one, or one onto several. <span class="ui">Delete link</span> (or the Delete
+        key) removes the pairs of the selected glyphs; <span class="ui">Suggest links by
+        label</span> proposes the pairs the app suggests. <span class="ui">Preview</span> plays the transformation with your
+        pairs; the glyphs nobody pairs leave with the source's outro and arrive with the target's
+        intro.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="link-glyphs" data-options='{"example": "widget-link", "relation": "step1:step2"}'></div>
+      </div>
+      <p>The same relation with no pairs to start from:</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="link-glyphs" data-options='{"example": "widget-link", "start": "empty"}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>example</code></td><td>a slug</td><td>The example (required).</td></tr>
+            <tr><td><code>relation</code></td><td>an id, <code>"from:to"</code> or a number</td><td>The relation: its id, the names of its two formulas, or its place in the file (1 for the first). Two clips can have several relations: the names then give the first of them, so use the id or the place. Default: the first.</td></tr>
+            <tr><td><code>start</code></td><td><code>"app"</code>, <code>"empty"</code></td><td>Start from the example's own pairs (default), or from none.</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="relation-window">The window of a relation: <code>relation-window</code></h2>
+      <p>The two clips on a small timeline, the relation's window on both, and the room the clips
+        leave it (dashed). Drag the window to move it in time, an edge to make it longer or
+        shorter; Shift leaves the 0.05 s grid. The window stops where the app stops it. The scene
+        above plays with that timing.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="relation-window" data-options='{"example": "widget-window"}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>example</code></td><td>a slug</td><td>The example (required).</td></tr>
+            <tr><td><code>relation</code></td><td>an id, <code>"from:to"</code> or a number</td><td>The relation. Default: the first.</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="rate-functions">Rate functions: <code>rate-functions</code></h2>
+      <p>Every rate function the app offers, as a curve of progress over time with a dot on it,
+        and a glyph that moves that far: the same seconds, played out differently. A click on a
+        curve shows that moment. The switch shows ManimCE's curves or ManimGL's.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="rate-functions"></div>
+      </div>
+      <p>A few of them, in ManimGL, with a glyph of an example:</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="rate-functions" data-options='{"functions": ["smooth", "linear", "there_and_back"], "target": "gl", "example": "widget-styles", "formula": "xy"}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>functions</code></td><td>a list of names</td><td>The rate functions shown, in that order. Default: every one the app offers.</td></tr>
+            <tr><td><code>target</code></td><td><code>"ce"</code>, <code>"gl"</code></td><td>The library whose curves it starts with (default ManimCE); the reader can switch.</td></tr>
+            <tr><td><code>duration</code></td><td>seconds</td><td>How long a run lasts (default 2).</td></tr>
+            <tr><td><code>example</code>, <code>formula</code></td><td>a slug; an id or name</td><td>The glyph that moves: the first glyph of that formula (default: an italic x).</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="line-anchors">The ends of a line: <code>line-anchors</code></h2>
+      <p>The compass of a line's end: the nine points of the box of the glyphs it is on, and Auto,
+        the edge Manim finds towards the other end. Click a dot on the scene, or a key of a
+        compass, to put that end there: the arrow is placed and built again at once.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="line-anchors" data-options='{"example": "widget-anchors", "formula": "arrow"}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>example</code></td><td>a slug</td><td>The example (required).</td></tr>
+            <tr><td><code>formula</code></td><td>an id or a name</td><td>The line. Default: the first line whose ends are on glyphs.</td></tr>
+            <tr><td><code>time</code></td><td>seconds</td><td>The instant shown. Default: once the line is drawn.</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="style-compare">Styles side by side: <code>style-compare</code></h2>
+      <p>One relation played with each style the app offers for a pair, on one clock.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="style-compare" data-options='{"example": "widget-styles"}'></div>
+      </div>
+      <p>A pair of several glyphs onto one, with each way its sources can arrive:</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="style-compare" data-options='{"example": "widget-window", "pair": 1, "extras": ["separate", "merge", "copies"]}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>example</code></td><td>a slug</td><td>The example (required).</td></tr>
+            <tr><td><code>relation</code></td><td>an id, <code>"from:to"</code> or a number</td><td>The relation. Default: the first.</td></tr>
+            <tr><td><code>styles</code></td><td>a list of <code>"transform"</code>, <code>"copy"</code>, <code>"fade"</code>, <code>"fade_copy"</code></td><td>The panels, in that order. Default: all four.</td></tr>
+            <tr><td><code>pair</code></td><td>a number</td><td>Only this pair takes each style (1 for the first); the others keep theirs. Default: the whole relation.</td></tr>
+            <tr><td><code>extras</code></td><td>a list of <code>"separate"</code>, <code>"merge"</code>, <code>"copies"</code></td><td>Compares how the sources of <code>pair</code> (several glyphs onto one) arrive, instead of styles.</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="palette-roles">Palettes by role: <code>palette-roles</code></h2>
+      <p>A scene made with each palette the app comes with: the editor's own colours and the
+        themes of Chroma Lab. Hover a glyph to read its role, or a role of the legend to light its
+        glyphs; with the scene focused, the arrow keys go from glyph to glyph.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="palette-roles" data-options='{"example": "widget-palette"}'></div>
+      </div>
+        <table>
+          <thead><tr><th>Option</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>example</code></td><td>a slug</td><td>The example (required).</td></tr>
+            <tr><td><code>palettes</code></td><td>a list of ids</td><td>The palettes offered: <code>editor</code>, <code>midnight-chalkboard</code>, <code>ink-and-paper</code>, <code>orbital-violet</code>, <code>light-laboratory</code>. Default: all.</td></tr>
+            <tr><td><code>roles</code></td><td><code>{"formula": {"role": [indices]}}</code></td><td>Roles of glyphs by hand, by formula id or name, over the ones read from the example's colours.</td></tr>
+            <tr><td><code>time</code></td><td>seconds</td><td>The instant shown. Default: the end of the scene.</td></tr>
+          </tbody>
+        </table>
+
+      <h2 id="missing">A widget that cannot show</h2>
+      <p>An option the widget cannot read, an example that has no data or a relation it does not
+        have: a notice in its place says what is wrong, and the rest of the page goes on.</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="link-glyphs" data-options='{"example": "widget-link", "start": "half"}' data-expect="missing"></div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

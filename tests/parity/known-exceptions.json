@@ -1,0 +1,48 @@
+{
+ "_comment": "Known, explained differences. ceGl: CE vs GL glyph count (run.mjs). mathjaxCount / mathjaxMatch: MathJax vs LaTeX glyph count / matcher label agreement (engine.parity.ts). Keys are the corpus LaTeX strings.",
+ "exceptions": [
+  {
+   "latex": "\\text{office}",
+   "ceGl": "CE merges the ffi ligature (4 glyphs); the GL template disables ligatures (6)",
+   "mathjaxCount": "CE only: ffi ligature (MathJax has no ligatures, like GL)"
+  },
+  {
+   "latex": "\\text{flow}",
+   "ceGl": "CE merges the fl ligature (3 glyphs); the GL template disables ligatures (4)",
+   "mathjaxCount": "CE only: fl ligature (MathJax has no ligatures, like GL)"
+  },
+  {
+   "latex": "\\iint_D f(x,y)\\,dA",
+   "mathjaxCount": "CE only: amsmath builds \\iint from two ∫ glyphs; MathJax draws one ∬ (like GL)",
+   "ceGl": "the GL template loads wasysym, whose \\iint is one glyph (GL 10); amsmath's is two ∫ (CE 11)"
+  },
+  {
+   "latex": "\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}",
+   "mathjaxCount": "Tall delimiter: TeX and MathJax assemble it from different numbers of pieces (brackets: TeX 2 per side, MathJax 3)"
+  },
+  {
+   "latex": "\\det \\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc",
+   "mathjaxCount": "Tall delimiter: TeX and MathJax assemble it from different numbers of pieces (TeX stacks repeated | extenders)"
+  },
+  {
+   "latex": "\\left| \\sum_{i=1}^{n} x_i \\right|",
+   "mathjaxCount": "Tall delimiter: TeX and MathJax assemble it from different numbers of pieces (TeX stacks repeated | extenders)"
+  },
+  {
+   "latex": "\\left( \\begin{matrix} a \\\\ b \\\\ c \\\\ d \\end{matrix} \\right)",
+   "mathjaxCount": "Tall delimiter: TeX and MathJax assemble it from different numbers of pieces (parentheses)"
+  },
+  {
+   "latex": "\\bar{z} \\neq \\widehat{xy}",
+   "mathjaxCount": "TeX draws \\neq as / overlaid on = (2 glyphs); MathJax draws one ≠"
+  },
+  {
+   "latex": "\\overrightarrow{AB} + \\underline{x}",
+   "mathjaxCount": "Stretchy arrow: TeX assembles \\overrightarrow from minus signs and an arrowhead"
+  },
+  {
+   "latex": "\\underbrace{x + \\cdots + x}_{k \\text{ times}}",
+   "mathjaxCount": "Stretchy brace: TeX and MathJax assemble it from different pieces"
+  }
+ ]
+}

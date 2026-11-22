@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Components · Manim Formula Editor</title>
+  <meta name="description" content="Every component a page of the documentation can use, live, with the markup that makes it.">
+  <meta name="mfe:id" content="authoring/components">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Components">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script>
+    /* Sample data of this page only. A real page loads ../examples/<slug>.data.js and
+       ../media/<page-id>/<tour>.tour.js instead (tools/EXAMPLES.md, tools/CAPTURES.md). */
+    (window.MFE_EXAMPLES ||= {})['sample-hello'] = {
+      meta: {
+        slug: 'sample-hello',
+        title: 'Hello: one-to-one',
+        description: 'Sample data of this page: the project examples/hello.mfe.json, and the Python the app exports for it (the copy pinned by its tests, which name the scene Pinned).',
+        duration: 5,
+        fps: 60,
+        files: { project: 'authoring/samples/hello.mfe.json', ce: 'hello.ce.py', gl: 'hello.gl.py' },
+      },
+      python: { ce: "# Hello: one-to-one \u2014 exported by Manim Formula Editor for ManimCE 0.22.\n# Render at 1920\u00d71080, 60 fps:\n#     manim -r 1920,1080 --fps 60 Pinned.py Pinned\n# Every play and wait lasts a whole number of frames at 60 fps, so the video has\n# exactly 300 frames, like the editor's video export.\nfrom manim import *\n\n\nclass Pinned(Scene):\n    def construct(self):\n        self.camera.background_color = \"#000000\"\n\n        # a1: mx+y=0\n        a1 = MathTex(r\"mx+y=0\")\n        a1[0][2].set_color(\"#FFFF00\")\n        a1.set_z_index(1)\n\n        # f2: mx=-y\n        f2 = MathTex(r\"mx=-y\")\n        f2[0][3].set_color(\"#FFFF00\")\n\n        # 0 s \u2013 1 s: a1 write\n        self.play(Write(a1), run_time=1)\n        # 1 s \u2013 2 s\n        self.wait(1)\n        # 2 s \u2013 3 s: a1 fade_out, a1 \u2192 f2\n        self.play(\n            FadeOut(a1[0][5]),\n            ReplacementTransform(a1[0][:2], f2[0][:2]),\n            ReplacementTransform(a1[0][4], f2[0][2]),\n            ReplacementTransform(a1[0][2], f2[0][3]),\n            ReplacementTransform(a1[0][3], f2[0][4]),\n            run_time=1,\n        )\n        # 3 s \u2013 3.2 s\n        self.wait(0.2)\n        # 3.2 s \u2013 3.8 s: f2 tween\n        self.play(f2.animate.move_to([0, 1.5, 0]), run_time=0.6)\n        # 3.8 s \u2013 4 s\n        self.wait(0.2)\n        # 4 s \u2013 5 s: f2 fade_out\n        self.play(FadeOut(f2), run_time=1)\n", gl: "# Hello: one-to-one \u2014 exported by Manim Formula Editor for ManimGL 1.7.\n# Render at 1920\u00d71080, 60 fps:\n#     manimgl Pinned.py Pinned -w -r 1920x1080 --fps 60\n# Every play and wait lasts a whole number of frames at 60 fps, so the video has\n# exactly 300 frames, like the editor's video export.\nfrom manimlib import *\n\n\ndef _glyphs(tex, layout):\n    \"\"\"The glyphs of `tex` in the editor's order. That order (MathJax's, or another\n    template's) can differ from Manim's, so the glyphs are matched by position: `layout`\n    holds each glyph's (x, y, width, height) relative to the formula centre, divided by the\n    formula height, and every real glyph is assigned to one entry with the least total\n    distance. Entries without a counterpart get an empty VMobject.\"\"\"\n    from scipy.optimize import linear_sum_assignment\n\n    real = tex.family_members_with_points()\n    glyphs = [VMobject() for _ in layout]\n    if len(real) != len(layout):\n        print(f\"Warning: Manim made {len(real)} glyphs of a formula the editor split into \"\n              f\"{len(layout)}; unmatched glyphs are not animated.\")\n    if not real or not layout:\n        return glyphs  # nothing to match (a formula without ink, such as \\quad)\n    centre, height = tex.get_center(), tex.get_height()\n    have = np.array([\n        [*((g.get_center() - centre)[:2] / height), g.get_width() / height, g.get_height() / height]\n        for g in real\n    ])\n    want = np.array(layout, dtype=float)\n    cost = np.linalg.norm(want[:, None, :] - have[None, :, :], axis=2)\n    for i, j in zip(*linear_sum_assignment(cost)):\n        glyphs[i] = real[j]\n    return glyphs\n\n\nclass Pinned(Scene):\n    default_camera_config = dict(background_color=\"#000000\")\n\n    def construct(self):\n\n        # a1: mx+y=0\n        a1 = Tex(r\"mx+y=0\")\n        a1_g = _glyphs(a1, [\n            (-2.3783, -0.0173, 0.9403, 0.5202), (-1.5546, -0.0173, 0.5718, 0.5202), (-0.5165, 0.0224, 0.7635, 0.7647), (0.4835, -0.1286, 0.5292, 0.7428),\n            (1.5544, 0.0224, 0.7635, 0.2687), (2.6068, 0.1051, 0.4833, 0.7898),\n        ])\n        a1_g[2].set_color(\"#FFFF00\")\n        a1.set_z_index(1)\n\n        # f2: mx=-y\n        f2 = Tex(r\"mx=-y\")\n        f2_g = _glyphs(f2, [\n            (-2.4749, 0.1499, 1.2659, 0.7003), (-1.366, 0.1499, 0.7698, 0.7003), (0.1177, 0.2032, 1.0279, 0.3618), (1.7491, 0.2032, 0.9445, 0.0617),\n            (2.7516, 0, 0.7124, 1),\n        ])\n        f2_g[3].set_color(\"#FFFF00\")\n\n        # 0 s \u2013 1 s: a1 write\n        self.play(Write(VGroup(*a1_g[:]), stroke_color=\"#FFFFFF\"), run_time=1)\n        # 1 s \u2013 2 s\n        self.wait(1)\n        # 2 s \u2013 3 s: a1 fade_out, a1 \u2192 f2\n        self.play(\n            FadeOut(VGroup(a1_g[5])),\n            ReplacementTransform(VGroup(a1_g[0], a1_g[1]), VGroup(f2_g[0], f2_g[1])),\n            ReplacementTransform(a1_g[4], f2_g[2]),\n            ReplacementTransform(a1_g[2], f2_g[3]),\n            ReplacementTransform(a1_g[3], f2_g[4]),\n            run_time=1,\n        )\n        # 3 s \u2013 3.2 s\n        self.wait(0.2)\n        # 3.2 s \u2013 3.8 s: f2 tween\n        self.play(f2.animate.move_to([0, 1.5, 0]), run_time=0.6)\n        # 3.8 s \u2013 4 s\n        self.wait(0.2)\n        # 4 s \u2013 5 s: f2 fade_out\n        self.play(FadeOut(f2), run_time=1)\n" },
+    };
+    (window.MFE_TOURS ||= {})['authoring/components/sample'] = {
+      width: 960,
+      height: 600,
+      base: 'authoring/samples/',
+      ext: 'svg',
+      steps: [
+        { image: 'tour-app', caption: 'The <b>menu bar</b> runs along the top: <span class="ui">File ▸ Open…</span> opens a project.', boxes: [{ x: 0, y: 0, w: 960, h: 40 }] },
+        { image: 'tour-app', caption: 'The <b>Creator</b> holds the formulas of the project. <kbd data-keys="Mod+F">Ctrl+F</kbd> searches them.', boxes: [{ x: 8, y: 48, w: 228, h: 352 }] },
+        { image: 'tour-app', caption: 'The <b>Preview</b> shows the scene at the time of the playhead.', boxes: [{ x: 244, y: 48, w: 472, h: 352 }] },
+        { image: 'tour-timeline', caption: 'A step can show several boxes: here the <b>tracks</b> of the timeline and its <b>playhead</b>.', boxes: [{ x: 34, y: 214, w: 892, h: 92 }, { x: 446, y: 178, w: 16, h: 256 }] },
+      ],
+    };
+    (window.MFE_WIDGETS ||= {})['sample-theme'] = {
+      mount(element, options, context) {
+        const line = document.createElement('p');
+        const show = (theme) => {
+          line.textContent = `${options.label}: you read this page in the ${theme} theme, on ${context.platform}; Mod+S is ${context.formatKeys('Mod+S')} here.`;
+        };
+        show(context.theme());
+        context.onTheme(show);
+        element.append(line);
+      },
+    };
+  </script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Components</h1>
+      <p class="lead">Every component a page can use, live, with the markup that makes it. Copy the
+        markup; <a href="../AUTHORING.md">AUTHORING.md</a> says what each attribute does.</p>
+      <aside class="callout note">
+        <p>This page is for the authors of the documentation. Pages under
+          <code>authoring/</code> stay out of the navigation and the search. The samples here are
+          inline (hence <code>data-inline</code> on some of them): a real page loads its data
+          files instead, and never writes <code>data-inline</code>.</p>
+      </aside>
+
+      <h2 id="prose">Prose</h2>
+      <p>A page is an <code>article.doc</code> with one <code>h1</code>; every <code>h2</code> and
+        <code>h3</code> has an <code>id</code> (the contents of the page and the links to a section
+        use it). The first paragraph can be a <code>p.lead</code>. Links between pages are relative
+        (<code>../basics/timeline.html#tracks</code>), and a prose link carries no class.</p>
+      <div class="demo">
+        <p>Write each formula in LaTeX in the <span class="ui">Creator</span>: a
+          <strong>formula</strong> is one object, however many clips show it. See
+          <a href="../basics/timeline.html#clips">Clips</a>, and the source
+          <code>\frac{a}{b}</code>.</p>
+        <ul>
+          <li>A list item.</li>
+          <li>Another one, with <em>emphasis</em>.</li>
+        </ul>
+        <ol>
+          <li>A numbered step.</li>
+          <li>The next one.</li>
+        </ol>
+      </div>
+
+      <h2 id="labels-keys">Interface labels and keys</h2>
+      <p>The app's own labels are quoted exactly as the app shows them, in a
+        <code>span.ui</code>; a menu path uses ▸. A key combination is a <code>kbd</code> with
+        <code>data-keys</code>: <code>Mod</code> is Ctrl, or ⌘ on a Mac; <code>Alt</code> is ⌥ and
+        <code>Shift</code> is ⇧ there, in the order a Mac's menus write them (⇧⌘Z). The text inside
+        is what a reader without JavaScript sees. A shortcut that has other keys on a Mac names
+        them in <code>data-keys-mac</code>, and a few words for one system alone go in a
+        <code>span.only-mac</code> or a <code>span.not-mac</code>.</p>
+      <div class="demo">
+        <p>Choose <span class="ui">File ▸ Open…</span> or press <kbd data-keys="Mod+O">Ctrl+O</kbd>.
+          Undo with <kbd data-keys="Mod+Z">Ctrl+Z</kbd>, redo with
+          <kbd data-keys="Mod+Shift+Z">Ctrl+Shift+Z</kbd>. With clips selected in the Preview,
+          <kbd data-keys="Alt+A">Alt+A</kbd> aligns them to the left; <kbd data-keys="ArrowLeft">←</kbd>
+          and <kbd data-keys="ArrowRight">→</kbd> step one frame.</p>
+        <p><span class="ui">File ▸ Save As…</span> is
+          <kbd data-keys="Mod+Alt+S" data-keys-mac="Mod+Shift+S">Ctrl+Alt+S</kbd>, and the menu of
+          what has the focus opens with <kbd data-keys="Shift+F10">Shift+F10</kbd><span class="not-mac">
+          or the <kbd data-keys="Menu">Menu</kbd> key</span><span class="only-mac"> (with Fn, on a
+          laptop)</span>.</p>
+      </div>
+
+      <h2 id="callouts">Callouts</h2>
+      <p>Four kinds: <code>tip</code>, <code>note</code>, <code>warning</code> and
+        <code>platform</code> (with <code>data-platform</code>: <code>mac</code>,
+        <code>windows</code> or <code>linux</code>). site.js adds the label; a platform callout of
+        the reader's own system says so.</p>
+      <div class="demo">
+        <aside class="callout tip">
+          <p>Double-click the name of a formula, or press <kbd data-keys="F2">F2</kbd>, to rename
+            it.</p>
+        </aside>
+        <aside class="callout note">
+          <p>A formula on the timeline more than once is one object: editing it changes every clip
+            of it.</p>
+        </aside>
+        <aside class="callout warning">
+          <p>Apply or Cancel the text editor before Save, Open or Export, then choose that command
+            again.</p>
+        </aside>
+        <aside class="callout platform" data-platform="mac">
+          <p>The app takes ⌘ where other systems take Ctrl, and a Ctrl+click is the secondary
+            click.</p>
+        </aside>
+        <aside class="callout platform" data-platform="windows">
+          <p>The repository's scripts run in Git Bash.</p>
+        </aside>
+        <aside class="callout platform" data-platform="linux">
+          <p>Chrome has no AAC encoder here: an MP4 exported in the browser carries Opus sound.</p>
+        </aside>
+      </div>
+
+      <h2 id="try-it">Try it</h2>
+      <p>A short exercise, as an ordered list in an <code>aside.try</code>.</p>
+      <div class="demo">
+        <aside class="try">
+          <ol>
+            <li>Press <span class="ui">+ New</span> in the Creator.</li>
+            <li>Type <code>x + 2 = 5</code> and press <span class="ui">Apply</span>.</li>
+            <li>Drag the formula onto the timeline.</li>
+          </ol>
+        </aside>
+      </div>
+
+      <h2 id="code">Code</h2>
+      <p>A <code>pre</code> with a <code>code</code> of class <code>language-python</code>,
+        <code>language-latex</code>, <code>language-json</code>, <code>language-bash</code>,
+        <code>language-html</code> or <code>language-js</code> is highlighted, and every
+        <code>pre</code> of a page gets a copy button. Escape <code>&lt;</code> and
+        <code>&amp;</code> inside.</p>
+      <div class="demo">
+<pre><code class="language-python">class Pinned(Scene):
+    def construct(self):
+        a1 = MathTex(r"mx+y=0")
+        a1[0][2].set_color("#FFFF00")  # the y
+        self.play(Write(a1), run_time=1)</code></pre>
+<pre><code class="language-latex">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} % the quadratic formula</code></pre>
+<pre><code class="language-json">{ "format": "manim-formula-editor", "version": 34, "meta": { "fps": 60 } }</code></pre>
+<pre><code class="language-bash">cd app
+npm run dev   # the app's dev server</code></pre>
+      </div>
+
+      <h2 id="tables">Tables</h2>
+      <p>A plain <code>table</code> with a <code>thead</code>; a wide one scrolls on its own. A
+        cell of keys that must stay on one line is a <code>td.keys</code>. A page of wide tables
+        (the reference of menus, keys and preferences) marks its article
+        <code>article.doc.wide-tables</code>: its tables keep 36rem at least and scroll sideways on
+        a phone instead of squeezing their columns.</p>
+      <div class="demo">
+        <table>
+          <thead>
+            <tr><th>Keys</th><th>Where</th><th>What</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="keys"><kbd data-keys="Mod+S">Ctrl+S</kbd></td><td>anywhere</td><td>Save</td></tr>
+            <tr><td class="keys"><kbd data-keys="Space">Space</kbd></td><td>outside fields, menus and dialogs</td><td>Play / pause</td></tr>
+            <tr><td class="keys"><kbd data-keys="Mod+Shift+Z">Ctrl+Shift+Z</kbd> <kbd data-keys="Mod+Y">Ctrl+Y</kbd></td><td>anywhere</td><td>Redo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="images">Images</h2>
+      <p>A capture of the app exists in both themes. The page names the dark file; site.js swaps
+        <code>.dark.</code> for <code>.light.</code> when the reader sees the light theme. Always
+        <code>alt</code>, <code>width</code> and <code>height</code> (from the capture's
+        manifest) and <code>loading="lazy"</code>. A click enlarges an image.</p>
+      <div class="demo">
+        <figure>
+          <img src="samples/panel.dark.svg" data-themed alt="The Creator with three formulas: x + 2 = 5, x = 5 − 2 and x = 3." width="640" height="360" loading="lazy">
+          <figcaption>A themed image (a drawing made for this page, not a capture).</figcaption>
+        </figure>
+      </div>
+
+      <h2 id="side-by-side">Figures side by side</h2>
+      <p>Two figures that go together (before and after, two states of a panel, two players) in a
+        <code>div.side-by-side</code>: each takes half the column, and a picture narrower than its
+        half keeps its own size. Under 720px they stand one under the other.</p>
+      <div class="demo">
+        <div class="side-by-side">
+          <figure>
+            <img src="samples/panel.dark.svg" data-themed alt="The Creator with three formulas, before." width="640" height="360" loading="lazy">
+            <figcaption>Before.</figcaption>
+          </figure>
+          <figure>
+            <img src="samples/panel.dark.svg" data-themed alt="The Creator with three formulas, after." width="640" height="360" loading="lazy">
+            <figcaption>After.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <h2 id="map-list">The numbers of a picture</h2>
+      <p>When a capture numbers its boxes 1, 2, 3 …, the list under it that explains them is an
+        <code>ol.map-list</code>: each item wears the number of its box, in the same order.</p>
+      <div class="demo">
+        <ol class="map-list">
+          <li>The <strong>menu bar</strong>: the file, edit and view commands.</li>
+          <li>The <strong>Creator</strong>: the formulas of the project.</li>
+          <li>The <strong>Preview</strong>: the scene at the playhead.</li>
+        </ol>
+      </div>
+
+      <h2 id="clips">Clips</h2>
+      <p>A short silent video of an interaction. It plays while it is on screen and pauses when it
+        leaves. Its buttons (pause or play, and play again) sit in a bar under the picture, with a
+        line of how far the loop is, so they cover nothing of the capture; with reduced motion it
+        waits for a click.</p>
+      <div class="demo">
+        <figure>
+          <video class="mfe-clip" data-themed src="samples/clip.dark.webm" poster="samples/clip.dark.webp" width="640" height="400" muted loop playsinline preload="none"></video>
+          <figcaption>The playhead crosses three clips, and the Preview follows it (a drawing).</figcaption>
+        </figure>
+      </div>
+
+      <h2 id="tours">Tours</h2>
+      <p>Steps over the app, each with a caption and the boxes of what it is about. Arrow keys,
+        the step keys and the buttons move through it; it plays by itself while it is on screen
+        until the reader takes over. <code>data-title</code> names it for screen readers;
+        <code>data-autoplay="off"</code> keeps it still; <code>data-start="2"</code> opens it at a
+        step.</p>
+      <div class="demo">
+        <div class="mfe-tour" data-mfe-tour="authoring/components/sample" data-title="A sample tour of the editor" data-inline></div>
+      </div>
+
+      <h2 id="players">Players</h2>
+      <p>The scene of an example, played by the app's own renderer. The player has its own
+        showcase, <a href="player.html">player.html</a>, with every option; the page needs
+        <code>assets/player.js</code> and the example's data:</p>
+<pre><code class="language-html">&lt;script src="../assets/player.js" defer&gt;&lt;/script&gt;
+&lt;script src="../examples/first-transform.data.js" defer&gt;&lt;/script&gt;
+…
+&lt;figure class="mfe-player" data-mfe-player="first-transform"&gt;&lt;/figure&gt;</code></pre>
+
+      <h2 id="python">The Python of an example</h2>
+      <p>The ManimCE and ManimGL code of an example, in tabs, with copy and download. The tab a
+        reader picks is the one every such block shows from then on; <code>data-tab="gl"</code>
+        fixes one.</p>
+      <div class="demo">
+        <div class="mfe-code" data-mfe-python="sample-hello" data-inline></div>
+      </div>
+
+      <h2 id="example-cards">Example cards</h2>
+      <p>The title and description of an example, its length, and its files: the project to open
+        with <span class="ui">File ▸ Open…</span>, the two Pythons and, for a tutorial, the video
+        Manim rendered.</p>
+      <div class="demo">
+        <div class="mfe-example" data-mfe-example="sample-hello" data-inline></div>
+      </div>
+
+      <h2 id="manim-videos">Manim videos</h2>
+      <p>The scene of an example as ManimCE rendered it: a plain video with its controls,
+        <code>../examples/&lt;slug&gt;.mp4</code> on a real page.</p>
+      <div class="demo">
+        <video class="mfe-manim" src="samples/clip.dark.webm" controls preload="metadata" playsinline width="640" height="400"></video>
+      </div>
+
+      <h2 id="widgets">Widgets</h2>
+      <p>An interactive concept, from <code>widgets/&lt;name&gt;.js</code>, which registers
+        <code>MFE_WIDGETS[name] = { mount(element, options, context) }</code>. Its options are the
+        JSON of <code>data-options</code>; the context gives the theme, the system, the examples
+        and more (AUTHORING.md lists it).</p>
+      <div class="demo">
+        <div class="mfe-widget" data-mfe-widget="sample-theme" data-options='{"label": "A sample widget"}' data-inline></div>
+      </div>
+
+      <h2 id="icons">Icons</h2>
+      <p>The app's own drawings, by name, in any empty element with <code>data-icon</code>;
+        <code>span.icon-tile</code> gives one the glass tile of the cards.</p>
+      <div class="demo">
+        <ul class="icon-grid">
+          <li><span class="icon-tile" data-icon="sigma"></span>sigma</li>
+          <li><span class="icon-tile" data-icon="tracks"></span>tracks</li>
+          <li><span class="icon-tile" data-icon="relate"></span>relate</li>
+          <li><span class="icon-tile" data-icon="film"></span>film</li>
+          <li><span class="icon-tile" data-icon="play-outline"></span>play-outline</li>
+          <li><span class="icon-tile" data-icon="layers"></span>layers</li>
+          <li><span class="icon-tile" data-icon="shapes"></span>shapes</li>
+          <li><span class="icon-tile" data-icon="align-left"></span>align-left</li>
+          <li><span class="icon-tile" data-icon="palette"></span>palette</li>
+          <li><span class="icon-tile" data-icon="waveform"></span>waveform</li>
+          <li><span class="icon-tile" data-icon="code"></span>code</li>
+          <li><span class="icon-tile" data-icon="book"></span>book</li>
+          <li><span class="icon-tile" data-icon="route"></span>route</li>
+          <li><span class="icon-tile" data-icon="keyboard"></span>keyboard</li>
+          <li><span class="icon-tile" data-icon="terminal"></span>terminal</li>
+          <li><span class="icon-tile" data-icon="question"></span>question</li>
+          <li><span class="icon-tile" data-icon="folder"></span>folder</li>
+          <li><span class="icon-tile" data-icon="file"></span>file</li>
+          <li><span class="icon-tile" data-icon="video"></span>video</li>
+          <li><span class="icon-tile" data-icon="search"></span>search</li>
+          <li><span class="icon-tile" data-icon="sliders"></span>sliders</li>
+          <li><span class="icon-tile" data-icon="laptop"></span>laptop</li>
+        </ul>
+      </div>
+
+      <h2 id="buttons">Buttons</h2>
+      <p>The app's buttons, for the rare page that needs one: the mint primary (one per place), a
+        plain one and a quiet one.</p>
+      <div class="demo">
+        <p><a class="btn btn-primary" href="../start/first-animation.html">Make your first animation</a>
+          <a class="btn" href="../start/interface.html">Tour the interface</a>
+          <a class="btn btn-ghost" href="../reference/glossary.html">Glossary</a></p>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

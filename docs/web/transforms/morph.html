@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morph blocks · Manim Formula Editor</title>
+  <meta name="description" content="A derivation inside one formula: Morph blocks grow each row out of the one above it.">
+  <meta name="mfe:id" content="transforms/morph">
+  <meta name="mfe:level" content="advanced">
+  <meta name="mfe:short" content="Morph blocks">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/morph-rows.data.js" defer></script>
+  <script src="../examples/morph-styles.data.js" defer></script>
+  <script src="../examples/first-transform.data.js" defer></script>
+  <script src="../media/transforms/morph/pair-editor.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Morph blocks</h1>
+      <p class="lead">A Morph block turns glyphs of a formula into other glyphs of the same formula,
+        the way a derivation is written: each row grows out of the one above it, and the rows stay.</p>
+
+      <figure class="mfe-player" data-mfe-player="morph-rows" data-start="7.6" data-timeline data-autoplay data-loop
+              data-caption="One formula, three rows. Two Morph blocks copy glyphs of a row into the next; a Write block draws the 2."></figure>
+
+      <h2 id="what">What a Morph block does</h2>
+      <p>You write the whole derivation as <strong>one formula</strong>, one row per line, and put it
+        on the timeline. Only its first row appears with the clip. A <strong>Morph block</strong> placed
+        later in the clip names pairs of glyphs: a <em>source</em>, which is on screen when the block
+        starts, and a <em>target</em>, a glyph of a later row. During the block the targets arrive,
+        moving out of their sources. By default the sources stay where they are, so the rows pile up like a
+        derivation on a blackboard.</p>
+      <p>A Morph block is a relation inside one clip. Its pairs, their styles, the arc of their
+        paths and their timing work as they do between two clips: see
+        <a href="relations.html">How relations work</a> and the
+        <a href="relation-editor.html">relation editor</a>. What is new is where the glyphs live.</p>
+      <p>A Morph block works on an object that has glyphs, such as a formula or a text. A brace, a shape
+        or a line is one piece and has no Morph.</p>
+
+      <h2 id="morph-or-relation">Morph, or a relation between clips?</h2>
+      <p>Both solve the same equation in the same three steps. Here is the equation of
+        <a href="../basics/first-transform.html">the first transform</a> twice: on the left three
+        formulas linked by two relations, each replacing the one before it; on the right one formula with
+        two Morph blocks, whose rows stay.</p>
+
+      <div class="side-by-side">
+        <figure class="mfe-player" data-mfe-player="first-transform" data-start="1.5" data-autoplay data-loop data-controls="minimal"
+                data-caption="Three formulas, two relations."></figure>
+        <figure class="mfe-player" data-mfe-player="morph-rows" data-start="1.5" data-autoplay data-loop data-controls="minimal"
+                data-caption="One formula, two Morph blocks."></figure>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th></th><th>Relation between clips</th><th>Morph block</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Formulas</td><td>Two, each with its own clip on its own track.</td><td>One, in one clip.</td></tr>
+          <tr><td>Layout</td><td>Each clip is placed, scaled and coloured on its own.</td><td>LaTeX lays the rows out: an <code>&amp;</code> lines the equals signs up.</td></tr>
+          <tr><td>The source</td><td>Consumed by <span class="ui">Transform</span> and <span class="ui">Fade transform</span>; stays with <span class="ui">Copy (source stays)</span> and <span class="ui">Fade copy (source stays)</span>.</td><td>Stays: Copy is the default style.</td></tr>
+          <tr><td>Timing</td><td>A window inside the target clip.</td><td>A block anywhere in the clip, with the same easing and duration.</td></tr>
+          <tr><td>The glyphs come from</td><td>Another formula, which may be anywhere in the scene.</td><td>Other glyphs of the same formula.</td></tr>
+        </tbody>
+      </table>
+      <p>Choose Morph for a <strong>derivation that stays on screen</strong>, aligned on an equals
+        sign, where each line comes from the one above. Choose a relation when one formula becomes
+        another <strong>in place</strong>, when the second one must be placed, scaled or coloured on
+        its own, or when the first one leaves. The two mix: a glyph of a row can also arrive from
+        another formula through a relation.</p>
+
+      <h2 id="formula">Write the derivation</h2>
+      <p>Type the rows in the <span class="ui">Raw LaTeX</span> field of the formula editor, one per
+        line. Manim sets every formula in an aligned environment, so <code>&amp;</code> marks the
+        column the rows line up on and <code>\\</code> ends a row:</p>
+<pre><code class="language-latex">x + 3 &amp;= 5 \\
+x &amp;= 5 - 3 \\
+x &amp;= 2</code></pre>
+      <p>Place the formula on the timeline as it is: <strong>nothing needs hiding</strong>. A glyph
+        that a Morph block brings in skips the clip's intro and arrives through the block. A dropped
+        clip lasts three seconds; drag its right edge, or set its <span class="ui">End</span> in the
+        <span class="ui">Timing</span> tab, so that there is room for the blocks.</p>
+      <aside class="callout note">
+        <p>Keep a <code>{{ }}</code> group inside one cell of an aligned line. ManimGL cannot compile
+          a group that spans <code>&amp;</code>, and the formula gets a warning.</p>
+      </aside>
+
+      <h2 id="making">Add a Morph block</h2>
+      <p>Put the playhead at the time the block should start, right-click the clip and choose
+        <span class="ui">Morph within the formula</span>: the block starts at the playhead. (The
+        <span class="ui">Add animation</span> button of the <span class="ui">Timing</span> tab offers the same
+        entry, at the playhead too.) The block is one second
+        long and has no pairs yet: the timeline writes it <code>Morph · 0</code>, the number being its
+        pairs.</p>
+
+      <figure>
+        <img src="../media/transforms/morph/add-morph.dark.webp" data-themed
+             alt="The menu that opens over a clip of the timeline when it is right-clicked: Add animation, with its groups and the entry Morph within the formula under the pointer."
+             width="744" height="478" loading="lazy">
+        <figcaption>With the playhead at 2 s, a right-click on the clip opens the
+          <span class="ui">Add animation</span> menu; <span class="ui">Morph within the formula</span> starts
+          a block there.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../media/transforms/morph/blocks.dark.webp" data-themed
+             alt="The timeline of the derivation: a clip with two Morph blocks, labelled Morph · 5 and Morph · 2, and a Write block."
+             width="938" height="83" loading="lazy">
+        <figcaption>The clip with its three blocks. The first Morph block has five pairs, the second two.</figcaption>
+      </figure>
+
+      <h2 id="pairs">Choose the pairs</h2>
+      <p>Open the pair editor with <span class="ui">Edit pairs…</span>: in the Animations panel when
+        the block is selected, or in the block's right-click menu. The editor draws the formula
+        <strong>twice</strong>: the glyphs that are on screen when the block starts, the sources, and
+        the glyphs the block can bring in, the targets. It lays the two copies out the way that draws
+        the glyphs that can take part larger. For these three rows that is one over the other: the
+        sources above, the targets below. In a taller derivation a block may open side by side, the
+        sources at the left, each line beside its own and the links as arcs over them, as the second
+        block of <a href="../tutorials/derivative.html#other-rows">the derivative tutorial</a> does.
+        The first key over the corner of the drawing changes the layout, and the drawing takes glyphs
+        with a circle, zooms and moves as <a href="relation-editor.html#drawing">the relation
+        editor's</a> does.</p>
+
+      <div class="mfe-tour" data-mfe-tour="transforms/morph/pair-editor" data-title="The pair editor of a Morph block"></div>
+
+      <h3 id="linking">Linking glyphs</h3>
+      <ul>
+        <li><strong>Click</strong> a source, then a target (or the other way round): they become a pair.</li>
+        <li><strong>Several at once</strong>: <kbd data-keys="Shift">Shift</kbd>-click glyphs of one
+          side, or drag a box over them (with <kbd data-keys="Shift">Shift</kbd> or
+          <kbd data-keys="Mod">Ctrl</kbd> held it adds to what is selected), do the same on the other
+          side, and press <span class="ui">Link</span>. The pair has many sources,
+          many targets, or both.</li>
+        <li><strong>A target that is already linked</strong> takes the new source into its pair, so two
+          glyphs become one.</li>
+        <li><strong>The style from the start</strong>: a pair made by a click has the style of the
+          block. Right-click the target instead of clicking it and choose
+          <span class="ui">Link as Transform</span>, <span class="ui">Link as Copy</span>,
+          <span class="ui">Link as Fade transform</span> or
+          <span class="ui">Link as Fade copy</span>; a style those glyphs cannot take is greyed
+          out, with the reason under it, as in the
+          <a href="relation-editor.html#link-as">relation editor</a>.</li>
+        <li><strong>A source that a pair consumes</strong>, with the style
+          <span class="ui">Transform</span> or <span class="ui">Fade transform</span>, is outlined in
+          red dashes, as in the <a href="relation-editor.html#consumed">relation editor</a>: it is
+          gone once the pair has played, so another pair can only copy it.
+          <span class="ui">Copy</span>, the block's default, and <span class="ui">Fade copy</span>
+          outline nothing.</li>
+        <li>Each row of the list of pairs has a menu for the <strong>style</strong> of its pair, and an
+          <span class="ui">Edit path…</span> button. Right-click a glyph of a pair (or select it and click the badge
+          of its link) for the same choices and for <span class="ui">Delete link…</span>.</li>
+      </ul>
+
+      <h3 id="suggest">Suggest pairs by label</h3>
+      <p><span class="ui">Suggest pairs by label</span> draws dashed links for you: each glyph that
+        can arrive takes the nearest glyph before it, in reading order, that has the same label and
+        can be a source. <span class="ui">Accept all</span> turns them into pairs;
+        <span class="ui">Dismiss</span> throws them away. It is a quick start for the glyphs that stay
+        the same from one row to the next. It cannot know that a <code>+</code> becomes a
+        <code>−</code>: link those by hand, as the clip shows.</p>
+      <aside class="callout tip">
+        <p>Suggest looks at labels only. When a symbol repeats inside a row, as the <code>x</code> and
+          <code>h</code> of a derivative do, check each dashed link before you accept, or link by hand.
+          <a href="../tutorials/derivative.html">The derivative tutorial</a> does the latter.</p>
+      </aside>
+
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/transforms/morph/link-pairs.dark.webm"
+               poster="../media/transforms/morph/link-pairs.dark.webp" width="1068" height="472"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Suggest pairs by label, Accept all, and the plus linked to the minus by two clicks.
+          The five pairs are then ready to be saved with <span class="ui">Save pairs</span>.</figcaption>
+      </figure>
+
+      <h3 id="dimmed">Which glyphs can take part</h3>
+      <p>Glyphs that cannot take part as they are drawn dimmed; point at one and its tooltip says why.
+        A source must be fully on screen when the block starts. A target must not be on screen yet, or
+        be there only because the intro brought it, and nothing else may bring it in. Neither may be
+        busy with another animation while the block runs.</p>
+
+      <figure>
+        <img src="../media/transforms/morph/pair-editor-dimmed.dark.webp" data-themed
+             alt="The Morph pairs dialog of the second block: the glyphs of the first two rows are dimmed on the lower copy, and the 2 of the third row is dimmed on the upper copy."
+             width="1068" height="698" loading="lazy">
+        <figcaption>The second block. Below, where the targets are, rows 1 and 2 are dimmed: they are on
+          screen before the block starts, so nothing can bring them in. Above, where the sources are, the
+          <em>2</em> of row 3 is dimmed: it is not on screen yet.</figcaption>
+      </figure>
+
+      <table>
+        <thead>
+          <tr><th>The tooltip says</th><th>It means</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>not on screen yet · still arriving · off screen by then</td><td>As a source: it is not fully on screen when the block starts.</td></tr>
+          <tr><td>consumed earlier</td><td>An earlier pair of the clip took the glyph out with <span class="ui">Transform</span> or <span class="ui">Fade transform</span>: it is gone, as a source and as a target.</td></tr>
+          <tr><td>a source of an earlier transfer</td><td>As a target: an earlier pair copies from it, so it must be on screen already.</td></tr>
+          <tr><td>brought in by a relation · brought in by another Morph block</td><td>As a target: something else brings it in. A glyph has one owner.</td></tr>
+          <tr><td>on screen already · on screen earlier</td><td>As a target: it is there before the block.</td></tr>
+          <tr><td>busy during the block (…)</td><td>Another animation, the intro or the outro runs on it.</td></tr>
+        </tbody>
+      </table>
+
+      <p>A pair is never made of one glyph on both sides of the block. When the pairs would break a
+        rule, the side column of the editor lists the problems, each line starting with
+        <em>error</em> or <em>warning</em>, and <span class="ui">Save pairs</span> waits until no error is
+        left. The whole session is one step of the undo history; <span class="ui">Cancel</span> asks before it
+        throws changes away.</p>
+
+      <h2 id="arrivals">Glyphs that no pair brings</h2>
+      <p>The 2 of the last row comes from nothing: no glyph turns into it. Give it its own block. Add an
+        <span class="ui">Appear</span> animation, such as <span class="ui">Write</span>, at the time it
+        should be drawn, and pick the glyph in the panel of the block. A glyph that is the target of a
+        pair, or the glyph of an Appear block, waits off screen by itself.</p>
+      <aside class="callout warning">
+        <p>A glyph that nothing brings in appears with the clip's intro, like the first row. If a row
+          shows up too early, look for a glyph that no pair and no Appear block names.</p>
+      </aside>
+
+      <figure>
+        <img src="../media/transforms/morph/appear-panel.dark.webp" data-themed
+             alt="The panel of the Write block: its animation, its timing and the glyph picker with the 2 of the last row chosen."
+             width="324" height="845" loading="lazy">
+        <figcaption>The Write block of the 2. Its glyph picker shows the formula; the glyphs it names are marked.</figcaption>
+      </figure>
+
+      <h2 id="settings">The block's settings</h2>
+      <p>Select the block to see its panel. Its <span class="ui">Default style</span> is the style of every
+        pair that has none of its own (a pair can choose in the editor):</p>
+      <ul>
+        <li><span class="ui">Copy (source stays)</span>, the default, sends a copy of the glyph and leaves the
+          original in its row, as Manim's <code>TransformFromCopy</code> does.</li>
+        <li><span class="ui">Transform</span> moves the glyph itself: its row loses it (Manim's
+          <code>ReplacementTransform</code>).</li>
+        <li><span class="ui">Fade transform</span> fades the source into the target (<code>FadeTransform</code>).</li>
+        <li><span class="ui">Fade copy (source stays)</span> fades a copy of the source into the target
+          and leaves the original in its row (<code>FadeTransform</code> of a copy).</li>
+      </ul>
+
+      <figure class="mfe-player" data-mfe-player="morph-styles" data-start="1.0" data-timeline data-autoplay data-loop
+              data-caption="The same Morph block four times, from left to right: Copy leaves the first row, Transform takes it along, Fade transform fades it into the second, and Fade copy fades a copy into the second and leaves the first."></figure>
+
+      <p>A default style that would give the project an error, a source that another pair consumes
+        already for instance, is not set, and the notice <span class="ui">Default style not
+        changed</span> says why: give the pairs that clash a style of their own, or keep the default.</p>
+
+      <p>Below the style come the <span class="ui">Path arc</span>, in degrees (a full turn at most,
+        either way), that bends the glyphs' paths (<a href="custom-paths.html">Custom paths</a> explains
+        it), the pairs, read-only, each with
+        what its glyphs follow and its own <span class="ui">Edit path…</span>, and the usual timing: start,
+        duration and easing.</p>
+
+      <figure>
+        <img src="../media/transforms/morph/block-panel.dark.webp" data-themed
+             alt="The panel of a Morph block: a hint, Default style and Path arc, the list of its five pairs with Edit path… buttons, and the Timing section."
+             width="324" height="617" loading="lazy">
+        <figcaption>The panel of the first block: its default style, its arc, its pairs and its timing.</figcaption>
+      </figure>
+
+      <h2 id="editing">Moving, copying and deleting</h2>
+      <p>Drag a block on the timeline to move it and pull its edges to resize it, like any block. A
+        Morph block stops before it would run into another animation of one of its glyphs. A block's
+        right-click menu has <span class="ui">Edit pairs…</span>, <span class="ui">Duplicate without pairs</span>
+        (a glyph arrives through one pair only, so a copy starts empty) and <span class="ui">Delete…</span>.</p>
+
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/transforms/morph/block-menu.dark.webp" data-themed
+               alt="The right-click menu of a Morph block: Edit pairs…, Duplicate without pairs and Delete…."
+               width="238" height="150" loading="lazy">
+          <figcaption>The menu of a Morph block.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/transforms/morph/suggest-preference.dark.webp" data-themed
+               alt="The Edit menu with the entry Suggest morph pairs highlighted."
+               width="231" height="460" loading="lazy">
+          <figcaption><span class="ui">Edit ▸ Suggest morph pairs</span>.</figcaption>
+        </figure>
+      </div>
+      <p>With <span class="ui">Edit ▸ Suggest morph pairs</span> on (it is off by default), a new Morph
+        block starts with the pairs Suggest finds, as one undo step.</p>
+
+      <h2 id="export">How it exports</h2>
+      <p>A Morph block is a <code>self.play(…)</code> over its window, with one animation for each pair; when
+        another animation starts or ends inside the window, the export cuts the play into slices
+        (<a href="../animations/blocks.html#export">the blocks page</a> shows how).
+        A copy is <code>ReplacementTransform</code> of a copy of the source in ManimCE and
+        <code>TransformFromCopy</code> in ManimGL; the block's duration becomes
+        <code>run_time</code>, and an easing other than the default <code>smooth</code> becomes
+        <code>rate_func</code>. The first block of the project below, in ManimCE and in ManimGL:</p>
+<pre data-excerpt="examples/morph-rows.ce.py"><code class="language-python">        self.play(
+            ReplacementTransform(rows_g[0].copy(), rows_g[5]),
+            ReplacementTransform(rows_g[3].copy(), rows_g[6]),
+            …
+            run_time=1,
+        )</code></pre>
+<pre data-excerpt="examples/morph-rows.gl.py"><code class="language-python">        self.play(
+            TransformFromCopy(rows_g[0], rows_g[5]),
+            TransformFromCopy(rows_g[3], rows_g[6]),
+            …
+            run_time=1,
+        )</code></pre>
+      <div class="mfe-code" data-mfe-python="morph-rows"></div>
+
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">+ New</span> in the Creator and type the three rows above in the
+            <span class="ui">Raw LaTeX</span> field. Press <span class="ui">Apply</span>.</li>
+          <li>Add the formula to the timeline and drag the right edge of its clip to about 9 seconds.</li>
+          <li>Put the playhead at 2 s, right-click the clip and choose
+            <span class="ui">Morph within the formula</span>, then
+            <span class="ui">Edit pairs…</span>. Press <span class="ui">Suggest pairs by label</span>,
+            <span class="ui">Accept all</span>, then link the <code>+</code> of row 1 to the
+            <code>−</code> of row 2 and press <span class="ui">Save pairs</span>.</li>
+          <li>Add a second block at 4.4 s the same way. Suggest pairs row 2 with row 3 this time.</li>
+          <li>Add <span class="ui">Appear</span> ▸ <span class="ui">Write</span> at 5.6 s and pick the <code>2</code>
+            of the last row. Press <kbd data-keys="Space">Space</kbd>.</li>
+        </ol>
+      </aside>
+      <div class="mfe-example" data-mfe-example="morph-rows"></div>
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="recipes.html">Transformation recipes</a> gives eight common moves of algebra, each a small project to play and open.</li>
+        <li><a href="../tutorials/derivative.html">A derivative from first principles</a> builds a five-row derivation with Morph blocks, from start to finish.</li>
+        <li><a href="custom-paths.html">Custom paths</a> makes glyphs travel along an arc, or along a path you draw in the Preview.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

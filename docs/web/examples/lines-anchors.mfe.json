@@ -1,0 +1,581 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Where an end is on a formula",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_a",
+      "kind": "math",
+      "name": "a",
+      "source": "A",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-mqyhfr6jt9",
+        "glyphs": [
+          {
+            "label": "A",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.03882176,
+              1.07640576
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_b",
+      "kind": "math",
+      "name": "b",
+      "source": "B",
+      "packages": [],
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 144,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-33uqofwcgd",
+        "glyphs": [
+          {
+            "label": "B",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              1.08392256,
+              1.02679488
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_arrow1",
+      "kind": "line",
+      "name": "l1",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        6.838630696277699,
+        -0.023115389840871914
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#83C167",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2ez3t6fppfy",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.17499900030280502,
+              0.010966177364741057
+            ],
+            "size": [
+              6.488632695672089,
+              0.021932354729482142
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              3.244020589058197,
+              0
+            ],
+            "size": [
+              0.3505895181613057,
+              0.34999800060561087
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_arrow2",
+      "kind": "line",
+      "name": "l2",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        6.838628786852301,
+        -0.013308857101482552
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#FC6255",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-28aobixd0fw",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.17499966860169502,
+              0.006313856536260165
+            ],
+            "size": [
+              6.4886294496489105,
+              0.012627713072520341
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              3.244144438817215,
+              0
+            ],
+            "size": [
+              0.3503399092178703,
+              0.34999933720338927
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_arrow3",
+      "kind": "line",
+      "name": "l3",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        6.838630696277699,
+        0.023115389840871914
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": null,
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#9A72AC",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1jxykki3yuq",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.17499900030280502,
+              -0.010966177364741057
+            ],
+            "size": [
+              6.488632695672089,
+              0.021932354729482142
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              3.244020589058197,
+              0
+            ],
+            "size": [
+              0.3505895181613057,
+              0.34999800060561087
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_arrow3",
+      "kind": "visual",
+      "name": "Arrow 4",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_arrow2",
+      "kind": "visual",
+      "name": "Arrow 3",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_arrow1",
+      "kind": "visual",
+      "name": "Arrow 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_b",
+      "kind": "visual",
+      "name": "B",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_a",
+      "kind": "visual",
+      "name": "A",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_a",
+      "formulaId": "f_a",
+      "trackId": "t_a",
+      "start": 0,
+      "end": 7,
+      "initial": {
+        "position": [
+          -4.2,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_b",
+      "formulaId": "f_b",
+      "trackId": "t_b",
+      "start": 0.3,
+      "end": 7,
+      "initial": {
+        "position": [
+          4.2,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_arrow1",
+      "formulaId": "f_arrow1",
+      "trackId": "t_arrow3",
+      "start": 1.8,
+      "end": 7,
+      "initial": {
+        "position": [
+          -0.01127520000000004,
+          0.5154255001909538
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "clipId": "c_a",
+          "glyphs": "all",
+          "anchor": "ur"
+        },
+        "end": {
+          "clipId": "c_b",
+          "glyphs": "all",
+          "anchor": "ul"
+        },
+        "buff": 0.25
+      }
+    },
+    {
+      "id": "c_arrow2",
+      "formulaId": "f_arrow2",
+      "trackId": "t_arrow2",
+      "start": 2.6,
+      "end": 7,
+      "initial": {
+        "position": [
+          -0.01127520000000004,
+          -0.4971961645217791
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "clipId": "c_a",
+          "glyphs": "all",
+          "anchor": "auto"
+        },
+        "end": {
+          "clipId": "c_b",
+          "glyphs": "all",
+          "anchor": "auto"
+        },
+        "buff": 0.25
+      }
+    },
+    {
+      "id": "c_arrow3",
+      "formulaId": "f_arrow3",
+      "trackId": "t_arrow1",
+      "start": 3.4000000000000004,
+      "end": 7,
+      "initial": {
+        "position": [
+          -0.01127520000000004,
+          -0.5154255001909538
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "clipId": "c_a",
+          "glyphs": "all",
+          "anchor": "dr"
+        },
+        "end": {
+          "clipId": "c_b",
+          "glyphs": "all",
+          "anchor": "dl"
+        },
+        "buff": 0.25
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

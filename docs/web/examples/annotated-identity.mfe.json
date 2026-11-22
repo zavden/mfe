@@ -1,0 +1,1100 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "An identity with braces and arrows",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_identity",
+      "kind": "math",
+      "name": "identity",
+      "source": "a^2 - b^2 = (a - b)(a + b)",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1f63gofriob",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -4.86236736,
+              -0.10165820543999995
+            ],
+            "size": [
+              0.47405951999999996,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -4.392420531839999,
+              0.33224256
+            ],
+            "size": [
+              0.28272488831999976,
+              0.47191673087999997
+            ]
+          },
+          {
+            "label": "−",
+            "center": [
+              -3.5521390079999997,
+              -0.06708092543999995
+            ],
+            "size": [
+              0.6113664000000005,
+              0.040089599999999975
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -2.7080524799999997,
+              0.024624034560000035
+            ],
+            "size": [
+              0.3828556799999996,
+              0.7065792
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -2.2997434118399998,
+              0.33224256
+            ],
+            "size": [
+              0.2827248883200002,
+              0.47191673087999997
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -1.4038375679999997,
+              -0.06708092543999994
+            ],
+            "size": [
+              0.6674918399999994,
+              0.23452415999999998
+            ]
+          },
+          {
+            "label": "(",
+            "center": [
+              -0.5215656959999997,
+              -0.06708092543999997
+            ],
+            "size": [
+              0.23953535999999964,
+              1.00224
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -0.07556889599999961,
+              -0.10165820543999995
+            ],
+            "size": [
+              0.47405951999999996,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "−",
+            "center": [
+              0.7970814720000003,
+              -0.06708092543999995
+            ],
+            "size": [
+              0.6113663999999996,
+              0.040089599999999975
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              1.6412682240000005,
+              0.024624034560000035
+            ],
+            "size": [
+              0.3828556799999996,
+              0.7065792
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              2.0146026240000006,
+              -0.06708092543999997
+            ],
+            "size": [
+              0.23953536000000053,
+              1.00224
+            ]
+          },
+          {
+            "label": "(",
+            "center": [
+              2.4435613440000004,
+              -0.06708092543999997
+            ],
+            "size": [
+              0.23953536000000053,
+              1.00224
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              2.889558144,
+              -0.10165820543999995
+            ],
+            "size": [
+              0.47405951999999996,
+              0.45201023999999995
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              3.762208512,
+              -0.06657980543999997
+            ],
+            "size": [
+              0.6674918400000003,
+              0.6664895999999999
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              4.60629504,
+              0.024624034560000035
+            ],
+            "size": [
+              0.3828556799999987,
+              0.7065792
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              4.97962944,
+              -0.06708092543999997
+            ],
+            "size": [
+              0.23953535999999964,
+              1.00224
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_8fxmmxq2",
+      "kind": "brace",
+      "name": "b1",
+      "source": "",
+      "sharpness": 2,
+      "width": 2.9410161523200005,
+      "tag": {
+        "color": "#83C167",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1aankoihpi4",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              2.9410161523200005,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_l3fuh6ae",
+      "kind": "math",
+      "name": "f2",
+      "source": "\\text{difference of squares}",
+      "packages": [],
+      "tag": {
+        "color": "#FFFF00",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-1te9uyghnlu",
+        "glyphs": [
+          {
+            "label": "d",
+            "center": [
+              -2.03304384,
+              0.043263360000000015
+            ],
+            "size": [
+              0.25106112000000014,
+              0.35362368
+            ]
+          },
+          {
+            "label": "i",
+            "center": [
+              -1.8265824,
+              0.03958848000000001
+            ],
+            "size": [
+              0.11475647999999983,
+              0.33524928
+            ]
+          },
+          {
+            "label": "f",
+            "center": [
+              -1.6579555199999998,
+              0.04860864000000001
+            ],
+            "size": [
+              0.17338752000000013,
+              0.3532896
+            ]
+          },
+          {
+            "label": "f",
+            "center": [
+              -1.5046127999999999,
+              0.04860864000000001
+            ],
+            "size": [
+              0.17338752000000013,
+              0.3532896
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              -1.3399948799999999,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.1939334399999999,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "r",
+            "center": [
+              -1.1322806399999998,
+              -0.017121599999999987
+            ],
+            "size": [
+              0.17238528000000009,
+              0.22182912
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              -0.9210585599999999,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.1939334399999999,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "n",
+            "center": [
+              -0.66749184,
+              -0.017121599999999987
+            ],
+            "size": [
+              0.2590790399999998,
+              0.22182912
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              -0.4184351999999999,
+              -0.018708479999999986
+            ],
+            "size": [
+              0.19092672,
+              0.23034816
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              -0.19744127999999994,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.19393344000000012,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "o",
+            "center": [
+              0.16436735999999996,
+              -0.01829087999999998
+            ],
+            "size": [
+              0.22199615999999978,
+              0.22951296
+            ]
+          },
+          {
+            "label": "f",
+            "center": [
+              0.3896208000000001,
+              0.04860864000000001
+            ],
+            "size": [
+              0.1733875199999999,
+              0.3532896
+            ]
+          },
+          {
+            "label": "s",
+            "center": [
+              0.66674016,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.16336512000000036,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "q",
+            "center": [
+              0.90828,
+              -0.06589727999999999
+            ],
+            "size": [
+              0.25156224000000016,
+              0.31871231999999994
+            ]
+          },
+          {
+            "label": "u",
+            "center": [
+              1.1726208,
+              -0.01987775999999998
+            ],
+            "size": [
+              0.25907904000000004,
+              0.22734143999999998
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              1.4412211199999998,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.23001408000000012,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "r",
+            "center": [
+              1.65595104,
+              -0.017121599999999987
+            ],
+            "size": [
+              0.17238527999999986,
+              0.22182912
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              1.8671731199999997,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.1939334399999999,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "s",
+            "center": [
+              2.07689184,
+              -0.01854143999999998
+            ],
+            "size": [
+              0.16336511999999992,
+              0.23001407999999998
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_z80idfkh",
+      "kind": "brace",
+      "name": "b2",
+      "source": "",
+      "sharpness": 2,
+      "width": 5.740730495999999,
+      "tag": {
+        "color": "#FC6255",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#83C167",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2818id9mvv2",
+        "glyphs": [
+          {
+            "label": "⏟",
+            "center": [
+              0,
+              0
+            ],
+            "size": [
+              5.740730495999999,
+              0.27298503918999995
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_9dwdfgy3",
+      "kind": "math",
+      "name": "f3",
+      "source": "\\text{a product}",
+      "packages": [],
+      "tag": {
+        "color": "#9A72AC",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-4b8pxeigjw",
+        "glyphs": [
+          {
+            "label": "a",
+            "center": [
+              -0.90051264,
+              -0.015952319999999978
+            ],
+            "size": [
+              0.2300140799999999,
+              0.23001407999999998
+            ]
+          },
+          {
+            "label": "p",
+            "center": [
+              -0.52091424,
+              -0.06314111999999998
+            ],
+            "size": [
+              0.25156224000000005,
+              0.31904639999999995
+            ]
+          },
+          {
+            "label": "r",
+            "center": [
+              -0.2818800000000001,
+              -0.014532479999999987
+            ],
+            "size": [
+              0.17238527999999997,
+              0.22182912
+            ]
+          },
+          {
+            "label": "o",
+            "center": [
+              -0.05662656000000005,
+              -0.01570175999999998
+            ],
+            "size": [
+              0.2219961599999999,
+              0.22951296
+            ]
+          },
+          {
+            "label": "d",
+            "center": [
+              0.21147263999999988,
+              0.045852480000000015
+            ],
+            "size": [
+              0.2510611199999999,
+              0.35362368
+            ]
+          },
+          {
+            "label": "u",
+            "center": [
+              0.48959423999999996,
+              -0.01728863999999998
+            ],
+            "size": [
+              0.25907904000000004,
+              0.22734143999999998
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              0.7386508799999999,
+              -0.016119359999999985
+            ],
+            "size": [
+              0.19092672,
+              0.23034816
+            ]
+          },
+          {
+            "label": "t",
+            "center": [
+              0.9365932799999998,
+              0.026141760000000014
+            ],
+            "size": [
+              0.1578527999999999,
+              0.3132
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_zvgt83ph",
+      "kind": "line",
+      "name": "l1",
+      "source": "",
+      "line": "arrow",
+      "vector": [
+        5.410065219771344,
+        -0.12390477333065064
+      ],
+      "strokeWidth": 6,
+      "tipLength": 0.35,
+      "dashLength": 0.05,
+      "curve": {
+        "shape": "arc",
+        "degrees": -55,
+        "trim": 0.04104699691921425
+      },
+      "tip": "triangle",
+      "startTip": "triangle",
+      "tag": {
+        "color": "#FF862F",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-by2omp4ur",
+        "glyphs": [
+          {
+            "label": "—",
+            "center": [
+              -0.15653950358148117,
+              0.06275297293368243
+            ],
+            "size": [
+              5.096986212608382,
+              0.5884505030204161
+            ]
+          },
+          {
+            "label": "▸",
+            "center": [
+              2.5093766653283573,
+              -0.1989112880038405
+            ],
+            "size": [
+              0.39131188911462944,
+              0.31307900716296133
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_57evozyv",
+      "kind": "visual",
+      "name": "Track 3",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_2",
+      "kind": "visual",
+      "name": "Track 2",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_066yschh",
+      "kind": "visual",
+      "name": "Track 5",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_vjxgzluk",
+      "kind": "visual",
+      "name": "Track 4",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_2xmgzo0r",
+      "kind": "visual",
+      "name": "Track 6",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_1",
+      "kind": "visual",
+      "name": "Track 1",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_identity",
+      "formulaId": "f_identity",
+      "trackId": "t_1",
+      "start": 0,
+      "end": 11,
+      "initial": {
+        "position": [
+          0,
+          0.4
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.8,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_1d27nahd",
+      "formulaId": "f_8fxmmxq2",
+      "trackId": "t_2",
+      "start": 2.6,
+      "end": 11,
+      "initial": {
+        "position": [
+          -3.6288890438399997,
+          -0.2651580458449999
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_identity",
+        "glyphs": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "rule": "brace",
+        "direction": 0,
+        "buff": 0.2
+      }
+    },
+    {
+      "id": "c_wmqw2ci6",
+      "formulaId": "f_l3fuh6ae",
+      "trackId": "t_57evozyv",
+      "start": 2.6,
+      "end": 11,
+      "initial": {
+        "position": [
+          -3.628889043839999,
+          -0.8769040054399999
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_1d27nahd",
+        "glyphs": "all",
+        "rule": "tip",
+        "buff": null
+      }
+    },
+    {
+      "id": "c_clfvwbif",
+      "formulaId": "f_z80idfkh",
+      "trackId": "t_vjxgzluk",
+      "start": 4.4,
+      "end": 11,
+      "initial": {
+        "position": [
+          2.229031872,
+          -0.504693405845
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_from_center",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_identity",
+        "glyphs": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "rule": "brace",
+        "direction": 0,
+        "buff": 0.2
+      }
+    },
+    {
+      "id": "c_kfw4uc9g",
+      "formulaId": "f_9dwdfgy3",
+      "trackId": "t_066yschh",
+      "start": 4.4,
+      "end": 11,
+      "initial": {
+        "position": [
+          2.2290318719999993,
+          -1.11351616544
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "clipId": "c_clfvwbif",
+        "glyphs": "all",
+        "rule": "tip",
+        "buff": null
+      }
+    },
+    {
+      "id": "c_x1iurmnr",
+      "formulaId": "f_zvgt83ph",
+      "trackId": "t_2xmgzo0r",
+      "start": 6.4,
+      "end": 11,
+      "initial": {
+        "position": [
+          -0.6973859773296893,
+          1.3055628119376304
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "grow_arrow",
+        "duration": 1.4,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": {
+        "rule": "ends",
+        "start": {
+          "clipId": "c_identity",
+          "glyphs": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "anchor": "up"
+        },
+        "end": {
+          "clipId": "c_identity",
+          "glyphs": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "anchor": "up"
+        },
+        "buff": 0.25
+      }
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

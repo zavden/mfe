@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Pythagorean theorem, in colour · Manim Formula Editor</title>
+  <meta name="description" content="Animate the Pythagorean theorem, each of its terms in a colour of its own.">
+  <meta name="mfe:id" content="tutorials/pythagoras">
+  <meta name="mfe:level" content="tutorial">
+  <meta name="mfe:difficulty" content="basic">
+  <meta name="mfe:short" content="Pythagoras in colour">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/pythagoras.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>The Pythagorean theorem, in colour</h1>
+      <p class="lead">Animate a² + b² = c² so that each term keeps its colour while it turns into a number and then into a square. On the way you write three formulas, colour their glyphs, put them on the timeline, link them and export the scene.</p>
+
+      <h2 id="what-you-make">What you will make</h2>
+      <p>Three lines of one derivation: the theorem, the 3-4-5 triangle that makes it concrete, and the sum of two squares that equals a third. The term <em>a²</em> is blue, <em>b²</em> gold and <em>c²</em> green, and each keeps its colour as it becomes <em>3²</em> and then <em>9</em>.</p>
+      <figure class="mfe-player" data-mfe-player="pythagoras" data-timeline data-loop data-start="1.5"
+              data-caption="The finished scene: seven seconds, three formulas and two transformations."></figure>
+      <p>You will end with a project file, the Python that Manim runs, and a video like the one at the end of this page. Everything is in your browser. Manim itself is only needed for the very last step.</p>
+
+      <h2 id="before">Before you start</h2>
+      <ul>
+        <li>Open the editor and start an empty project with <span class="ui">File ▸ New</span>. <a href="../start/install.html">Getting the app running</a> tells how to open it.</li>
+        <li>Give the project its name: click <span class="ui">Untitled</span>, the project's name in the menu bar, type <code>The Pythagorean theorem, in colour</code> and press <kbd>Enter</kbd>. The Manim scene you export in step 9 is named after it.</li>
+        <li>If you have not used the editor, <a href="../start/first-animation.html">Your first animation</a> is a shorter version of this tutorial, without colour.</li>
+        <li>You can download the <a href="../examples/pythagoras.mfe.json" download>finished project</a> and open it at any point, to compare with yours: choose <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick the file. <a href="../start/projects.html#open">Projects</a> explains that dialog.</li>
+      </ul>
+
+      <h2 id="steps">Step by step</h2>
+
+      <h3 id="step-theorem">1. Write the theorem</h3>
+      <p>In the <span class="ui">Creator</span> press <span class="ui">+ New</span>. The editor of a new formula opens.</p>
+      <ol>
+        <li>Click the <span class="ui">Raw LaTeX</span> field and type <code>a^2 + b^2 = c^2</code>.</li>
+        <li>Press <span class="ui">Apply</span> (or <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd>). The glyph view on the right draws the formula and counts eight glyphs.</li>
+        <li>Type <code>theorem</code> in the <span class="ui">Name</span> field and press <kbd>Enter</kbd>. The name becomes a variable in the Python and the label of the clip on the timeline.</li>
+        <li>Type <code>2</code> in the first box of <span class="ui">Size</span>, the scale, and press <kbd>Enter</kbd>. The box at its right then reads <code>96</code>, Manim's <code>font_size</code>: twice its default of 48, which reads better in a video.</li>
+      </ol>
+      <figure>
+        <img src="../media/tutorials/pythagoras/new-formula.dark.webp" data-themed
+             alt="The editor of the formula theorem: its name (1), its size 2 times 48 equals 96 (2), the Raw LaTeX field with a^2 + b^2 = c^2 (3) and the Apply button (4); at the right, the glyph view draws the formula."
+             width="1040" height="694" loading="lazy">
+        <figcaption>The editor after step 1: the name (1), the size (2), the LaTeX (3) and <span class="ui">Apply</span> (4).</figcaption>
+      </figure>
+
+      <h3 id="step-colour">2. Colour its three terms</h3>
+      <p>Each glyph has a number, its place in the formula: <em>a</em> is 0 and its exponent 1, the <em>+</em> is 2, <em>b</em> and its exponent are 3 and 4, and so on up to the exponent of <em>c</em>, 7. You colour glyphs by selecting them in the glyph view.</p>
+      <ol>
+        <li>Drag a box over the <em>a</em> and its exponent. The box selects every glyph it touches.</li>
+        <li>Click the blue swatch under the drawing.</li>
+        <li>Do the same for <em>b</em> and its exponent with the gold swatch, and for <em>c</em> and its exponent with the green one.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/tutorials/pythagoras/colour-terms.dark.webm"
+               poster="../media/tutorials/pythagoras/colour-terms.dark.webp" width="476" height="290"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A box over <em>a</em> and its exponent, then the blue swatch; the same for <em>b</em> with the gold one.</figcaption>
+      </figure>
+      <p>Press <span class="ui">Close</span>. <a href="../color/coloring.html">Colouring glyphs and objects</a> shows the other ways to select glyphs and to give them colours.</p>
+
+      <h3 id="step-more">3. Write and colour the other two</h3>
+      <p>Press <span class="ui">+ New</span> twice more, and give each formula its LaTeX, its name, a size of 2 and its colours the same way:</p>
+      <table>
+        <thead><tr><th>Name</th><th>LaTeX</th><th>Colours</th></tr></thead>
+        <tbody>
+          <tr><td><code>numbers</code></td><td><code>3^2 + 4^2 = 5^2</code></td><td>3 and its exponent blue, 4 and its exponent gold, 5 and its exponent green</td></tr>
+          <tr><td><code>squares</code></td><td><code>9 + 16 = 25</code></td><td>9 blue, 16 gold, 25 green</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/tutorials/pythagoras/three-formulas.dark.webp" data-themed
+             alt="The Creator with three formula cards: theorem, numbers and squares, each with its terms in blue, gold and green."
+             width="282" height="583" loading="lazy">
+        <figcaption>The Creator after step 3.</figcaption>
+      </figure>
+      <aside class="callout tip">
+        <p>Colouring each formula by hand takes a minute. Once the formulas are on the timeline you can copy the colours of one onto the next with <a href="../color/coloring.html#order">Colours in order</a>, or colour all three at once with a list of <a href="../color/match-colors.html">Match colors</a>.</p>
+      </aside>
+
+      <h3 id="step-timeline">4. Put the formulas on the timeline</h3>
+      <p>Drag each card of the Creator onto a track of the timeline. A track holds clips that do not overlap, so use both:</p>
+      <ul>
+        <li><code>theorem</code> at 0 s on the upper track,</li>
+        <li><code>numbers</code> at 2 s on the lower track,</li>
+        <li><code>squares</code> at 4 s on the upper track again.</li>
+      </ul>
+      <p>A dropped clip is three seconds long, and its start snaps to the ticks of the ruler. The clips overlap on purpose: a transformation starts when the second clip does, while the first is still on screen. The timeline at the end of step 7 shows how it should look.</p>
+
+      <h3 id="step-intro">5. Let the first formula write itself</h3>
+      <p>Right-click the clip of <code>theorem</code> and choose <span class="ui">Intro ▸ Write</span>. The formula now draws itself during the first second, as Manim's <code>Write</code> does.</p>
+      <figure>
+        <img src="../media/tutorials/pythagoras/intro-menu.dark.webp" data-themed
+             alt="The right-click menu of the clip theorem, with its Intro submenu open."
+             width="552" height="474" loading="lazy">
+        <figcaption>The <span class="ui">Intro</span> submenu of a clip.</figcaption>
+      </figure>
+
+      <h3 id="step-link">6. Link the glyphs of the first two formulas</h3>
+      <p>A <strong>relation</strong> says which glyphs of one clip become which glyphs of the next. Select the clip of <code>theorem</code>. In the <span class="ui">Animations</span> panel, under <span class="ui">Relations</span>:</p>
+      <ol>
+        <li>Choose <code>numbers</code> in <span class="ui">Relate with</span>, and press <span class="ui">Create relation…</span>. The relation editor opens: the source above, the target below.</li>
+        <li>Press <span class="ui">Suggest links by label</span>. The glyphs that have the same label, the exponents, the <em>+</em> and the <em>=</em>, are proposed as dashed links. Press <span class="ui">Accept all</span>.</li>
+        <li>Click the <em>a</em> of the source, then the <em>3</em> of the target: a click on a glyph of one side followed by a click on the other links them at once. Do the same for <em>b</em> and <em>4</em>, and for <em>c</em> and <em>5</em>.</li>
+        <li>Press <span class="ui">Save relation</span>.</li>
+      </ol>
+      <figure>
+        <img src="../media/tutorials/pythagoras/relation-suggest.dark.webp" data-themed
+             alt="The relation editor from theorem to numbers after Suggest links by label (ringed, 1): dashed links join the exponents, the plus and the equals sign, and the bar with Accept all (2) offers them."
+             width="1180" height="876" loading="lazy">
+        <figcaption>After <span class="ui">Suggest links by label</span> (1): five dashed links, and <span class="ui">Accept all</span> (2).</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/tutorials/pythagoras/relation-linked.dark.webp" data-themed
+             alt="The relation editor with all eight glyphs of theorem linked to the eight glyphs of numbers; the list of pairs at the right."
+             width="1180" height="848" loading="lazy">
+        <figcaption>All eight glyphs linked, ready for <span class="ui">Save relation</span>.</figcaption>
+      </figure>
+
+      <h3 id="step-link-two">7. Link the second pair</h3>
+      <p>Select the clip of <code>numbers</code>, relate it with <code>squares</code> and open the relation editor again. This time several glyphs become one or two, so you select them first: <kbd>Shift</kbd>+click glyphs of a side to select more than one, then click a glyph of the other side, or press <span class="ui">Link</span> when both sides hold several.</p>
+      <table>
+        <thead><tr><th>In <code>numbers</code></th><th>In <code>squares</code></th><th>How</th></tr></thead>
+        <tbody>
+          <tr><td>3 and its exponent</td><td>9</td><td><kbd>Shift</kbd>+click both, then click the 9</td></tr>
+          <tr><td>+</td><td>+</td><td>click, click</td></tr>
+          <tr><td>4 and its exponent</td><td>1 and 6</td><td><kbd>Shift</kbd>+click both, <kbd>Shift</kbd>+click the 1 and the 6, press <span class="ui">Link</span></td></tr>
+          <tr><td>=</td><td>=</td><td>click, click</td></tr>
+          <tr><td>5 and its exponent</td><td>2 and 5</td><td>as for the 4</td></tr>
+        </tbody>
+      </table>
+      <p>Press <span class="ui">Save relation</span>. <a href="../transforms/relation-editor.html">The relation editor</a> explains every control.</p>
+      <figure>
+        <img src="../media/tutorials/pythagoras/numbers-to-squares.dark.webp" data-themed
+             alt="The relation editor from numbers to squares with its five pairs linked and listed at the right."
+             width="1180" height="850" loading="lazy">
+        <figcaption>The second relation, as the finished project has it.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/tutorials/pythagoras/timeline.dark.webp" data-themed
+             alt="The timeline with three clips, theorem and squares on the upper track and numbers on the lower one, and a band between each pair of clips that are related."
+             width="1000" height="250" loading="lazy">
+        <figcaption>The timeline after step 7: a band joins the clips of each relation.</figcaption>
+      </figure>
+
+      <h3 id="step-play">8. Play it</h3>
+      <p>Press the Play button under the Preview, or <kbd>Space</kbd>. Each term keeps its colour as it turns into the next one.</p>
+      <figure>
+        <img src="../media/tutorials/pythagoras/play.dark.webp" data-themed
+             alt="The Preview in the middle of the first transformation: the letters a, b and c are turning into 3, 4 and 5, each in its own colour."
+             width="803" height="455" loading="lazy">
+        <figcaption>The Preview at 2.5 seconds, half way through the first transformation, from <code>theorem</code> to <code>numbers</code>.</figcaption>
+      </figure>
+
+      <h3 id="step-export">9. Export it</h3>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span> and press <span class="ui">Download ThePythagoreanTheoremInColour.py</span> (1). The button names the file after the scene, and the scene is named after the project, as you set up in <a href="#before">Before you start</a>. The first lines of the file say how to render it at the project's size, 1920×1080 at 60 frames a second:</p>
+      <pre><code class="language-bash" data-excerpt="examples/pythagoras.ce.py">manim -r 1920,1080 --fps 60 ThePythagoreanTheoremInColour.py ThePythagoreanTheoremInColour</code></pre>
+      <p>That takes a while. For a quick draft, take <code>-r 1920,1080 --fps 60</code> out and put <code>-ql</code> in its place, a low-quality 854×480 at 15 frames a second, and add <code>-p</code> to play the video when it is done:</p>
+      <pre><code class="language-bash">manim -pql ThePythagoreanTheoremInColour.py ThePythagoreanTheoremInColour</code></pre>
+      <p>Adding <code>-ql</code> to the first command would change nothing: Manim applies <code>-r</code> and <code>--fps</code> after the quality flag.</p>
+      <figure>
+        <img src="../media/tutorials/pythagoras/export.dark.webp" data-themed
+             alt="The Export Python dialog for ManimCE with the scene name, the options and a preview of the code; the Download button, which carries the scene's file name, is ringed and numbered 1."
+             width="820" height="764" loading="lazy">
+        <figcaption>The Python export dialog, with <span class="ui">Download ThePythagoreanTheoremInColour.py</span> (1).</figcaption>
+      </figure>
+      <p>The warnings in the dialog say that, without the companion, the scene finds the glyphs of each formula by their position when it runs. The Python page explains why, and the generated file works as it is. <a href="../manim/python.html">The generated Python</a> goes through it, and <a href="../basics/export.html">Exporting</a> covers ManimGL, video and audio.</p>
+
+      <h2 id="result">The result</h2>
+      <p>This is the Python the editor exports for the project you made, for each Manim:</p>
+      <div class="mfe-code" data-mfe-python="pythagoras"></div>
+      <p>And this is the scene as ManimCE renders it from the ManimCE file:</p>
+      <video class="mfe-manim" src="../examples/pythagoras.mp4" controls preload="metadata" playsinline></video>
+      <div class="mfe-example" data-mfe-example="pythagoras"></div>
+
+      <h2 id="further">Ideas to go further</h2>
+      <ul>
+        <li>Make the third line stay longer, and add a <a href="../animations/blocks.html">block</a> that makes <em>25</em> indicate itself.</li>
+        <li>Swap the colours for the roles of a <a href="../color/palettes.html">palette</a> and apply it.</li>
+        <li>Change a pair of the second relation to the <em>copy</em> style, so that the source stays, and watch what <a href="../transforms/relations.html">a relation</a> does.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

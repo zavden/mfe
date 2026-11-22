@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The template library · Manim Formula Editor</title>
+  <meta name="description" content="Start from one of 257 ready-made formulas by filling in its placeholders, write templates of your own, keep favourites, and learn where they are kept.">
+  <meta name="mfe:id" content="objects/templates">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="Templates">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/templates-from-library.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+
+      <h1>The template library</h1>
+      <p class="lead">A template is a formula with blanks. The editor comes with 257 of them, from high-school
+      algebra to university physics: you fill in the blanks, and the formula is in your project. You can
+      write templates of your own, star the ones you reach for most, and take them to another machine.</p>
+
+      <h2 id="library">The template library</h2>
+      <p>The <strong>Templates</strong> tab is the second tab of the Creator. It has four entries, and each one
+      opens a pop-up.</p>
+      <figure>
+        <img src="../media/objects/templates/entries.dark.webp" data-themed
+             alt="The Templates tab of the Creator with four entries: Default templates, My templates, Create template and Favorites, each with a line saying how many it holds." width="282" height="430" loading="lazy">
+        <figcaption>The four entries of the Templates tab.</figcaption>
+      </figure>
+      <table>
+        <thead><tr><th>Entry</th><th>What it opens</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ui">Default templates</span></td><td>The 257 formulas that come with the editor.</td></tr>
+          <tr><td><span class="ui">My templates</span></td><td>Your own templates, with the buttons to change them.</td></tr>
+          <tr><td><span class="ui">Create template</span></td><td>The form that writes a new template of yours.</td></tr>
+          <tr><td><span class="ui">Favorites</span></td><td>Every template you gave a star, yours and the default ones.</td></tr>
+        </tbody>
+      </table>
+      <h3 id="default-templates">Default templates</h3>
+      <p>The default library has 257 formulas in 15 categories: Algebra, Functions, Trigonometry, Analytic
+      geometry, Sequences and series, Limits, Derivatives, Integrals, Multivariable calculus, Linear algebra,
+      Differential equations, Complex numbers, Probability and statistics, Sets and logic, and Physics. Each
+      one is marked <em>High school</em> or <em>University</em>.</p>
+      <figure>
+        <img src="../media/objects/templates/default-library.dark.webp" data-themed
+             alt="The Default templates pop-up with the word derivative typed in its search: cards of derivative formulas, each with its drawing, a level badge, a star, and the buttons Use and Save a copy." width="1052" height="572" loading="lazy">
+        <figcaption>The default library, searched for <em>derivative</em>. Each card shows the formula with the template's own values.</figcaption>
+      </figure>
+      <p>Along the top of the pop-up are a search field, a category list and a level list, and a count that says
+      <em>N of 257</em> while they filter the cards. Search takes any number of words, and every word has to
+      appear in the name, the description, the LaTeX or the category of a template. Both lists start at
+      <em>All</em>: type, and the cards narrow at once while the count follows. The cards are grouped under the
+      name of their category.</p>
+            <p>On each card:</p>
+      <ul>
+        <li>the <strong>name</strong>, its level, and a <strong>star</strong> that keeps it in
+        <span class="ui">Favorites</span>;</li>
+        <li>the <strong>drawing</strong> of the formula, with the values the template comes with;</li>
+        <li><span class="ui">Use</span>, which is the same as a double-click on the card, and <span class="ui">Save a copy</span>, which puts a copy
+        among your own templates (see <a href="#your-own">Your own templates</a>).</li>
+      </ul>
+      <p>The pop-up is resizable, and the search and the filters of each list are still there the next time you
+      open it. In the search field, <kbd>Esc</kbd> empties the search first; with nothing to empty, and anywhere else
+      in the pop-up, it closes it.</p>
+
+      <h2 id="use">Using a template</h2>
+      <p>Press <span class="ui">Use</span> on a card. What happens next depends on whether the template has blanks, which the
+      editor calls <strong>placeholders</strong>.</p>
+      <ul>
+        <li>A template <strong>without</strong> placeholders, such as <em>Euler's identity</em>, is added to the
+        project at once: no dialog.</li>
+        <li>A template <strong>with</strong> placeholders opens a dialog that asks for their values.</li>
+      </ul>
+      <figure>
+        <img src="../media/objects/templates/use-dialog.dark.webp" data-themed
+             alt="The Use template dialog for Product of powers: a drawing of the formula (1), the LaTeX under it (2), three fields numbered #1 base, #2 first exponent and #3 second exponent (3), a Formula name field (4) and a Create formula button (5)." width="740" height="622" loading="lazy">
+        <figcaption>The dialog of <em>Product of powers</em>: the drawing (1), its LaTeX (2), a field for each placeholder (3), the name of the formula (4) and <span class="ui">Create formula</span> (5).</figcaption>
+      </figure>
+      <ol>
+        <li>The <strong>drawing</strong> shows the formula the values make, and redraws as you type.</li>
+        <li>Under it, the <strong>LaTeX</strong> those values give.</li>
+        <li>A <strong>field for each placeholder</strong>, labelled <code>#1</code>, <code>#2</code>… and, when the
+        template says what each one is, with its name (<em>base</em>, <em>first exponent</em>). It starts with the
+        template's own value. Type any LaTeX there.</li>
+        <li>The <strong>name</strong> the new formula will have. It starts as the template's name made into a
+        valid one (<code>product_of_powers</code>), and the rules of
+        <a href="../basics/formulas.html#names-tags">names</a> apply.</li>
+        <li><span class="ui">Create formula</span> adds the formula to the project. <span class="ui">Reset values</span> puts back the values the
+        template came with, and <span class="ui">Cancel</span> leaves without making anything.</li>
+      </ol>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/objects/templates/use-values.dark.webm"
+               poster="../media/objects/templates/use-values.dark.webp" width="740" height="474"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Type a value in a field and the drawing follows: <em>x</em> for the base, then <em>2k</em> for the first exponent.</figcaption>
+      </figure>
+      <p>A value that LaTeX cannot draw shows the error under the LaTeX, and <span class="ui">Create formula</span> stays off until
+      the value is right. <kbd>Enter</kbd> in any field creates the formula, too.</p>
+      <h3 id="how-values-go-in">How a value goes into the formula</h3>
+      <p>The template's LaTeX names its blanks <code>#1</code>, <code>#2</code>… and each is replaced by the value
+      you typed, the way a LaTeX macro takes its arguments. The <em>braces are the template's</em>, not yours, so a
+      value that is longer than one character stays together:</p>
+      <table>
+        <thead><tr><th>Template</th><th>Values</th><th>Formula</th></tr></thead>
+        <tbody>
+          <tr><td><code>#1^{#2}\cdot #1^{#3}=#1^{#2+#3}</code></td>
+          <td><code>x</code>, <code>2k</code>, <code>3</code></td>
+          <td><code>x^{2k}\cdot x^{3}=x^{2k+3}</code></td></tr>
+        </tbody>
+      </table>
+      <p>Where two pieces would run together (a command followed by a letter, or two braces side by side), the
+      editor puts a space between them, as LaTeX ignores it in maths.</p>
+      <h3 id="what-you-get">What you get</h3>
+      <figure>
+        <img src="../media/objects/templates/after-create.dark.webp" data-themed
+             alt="The Creator on its Formulas tab with the new formula product_of_powers selected in the list, with its drawing." width="532" height="290" loading="lazy">
+        <figcaption>After <span class="ui">Create formula</span> the Creator goes to its <span class="ui">Formulas</span> tab with the new formula selected.</figcaption>
+      </figure>
+      <p>The formula is an ordinary one: its LaTeX is final, with the values already in it, and nothing remembers
+      that it came from a template. Edit it, rename it or delete it as you would any other (see
+      <a href="../basics/formulas.html#rename-duplicate-delete">Writing formulas</a>). Because the LaTeX was final from the start, its
+      glyphs are made once, of what it is, so nothing has to be matched again afterwards.</p>
+      <figure>
+        <img src="../media/objects/templates/no-placeholders.dark.webp" data-themed
+             alt="The Creator after Use on Euler&#x27;s identity: the formula eulers_identity is in the list without any dialog." width="532" height="290" loading="lazy">
+        <figcaption>A template without placeholders goes straight into the project, named after itself.</figcaption>
+      </figure>
+      <figure class="mfe-player" data-mfe-player="templates-from-library" data-start="2.6" data-loop data-controls="minimal" data-caption="Three formulas made with Use: the first two with their values changed, the last as it comes."></figure>
+      <div class="mfe-example" data-mfe-example="templates-from-library"></div>
+      <aside class="callout tip"><p>The dialog, and the form that writes a template, are drawn 30 % larger than the
+      rest of the editor, and can be resized by their corner or maximized. What you gain goes to the drawing of the
+      formula.</p></aside>
+
+      <aside class="try">
+        <ol>
+          <li>Open the <span class="ui">Templates</span> tab and press <span class="ui">Default templates</span>.</li>
+          <li>Type <code>quadratic</code> in the search, and press <span class="ui">Use</span> on <em>Quadratic formula</em>.</li>
+          <li>The dialog has four fields: the unknown, and the three coefficients. Change the unknown to
+          <code>t</code>, and watch the drawing.</li>
+          <li>Press <span class="ui">Create formula</span>, then double-click the new formula in the Creator to read its LaTeX.</li>
+          <li>Back in the library, give the template a star, and open <span class="ui">Favorites</span>.</li>
+        </ol>
+      </aside>
+
+      <h2 id="your-own">Your own templates</h2>
+      <p>When you write the same shape of formula again and again, make it a template. Press
+      <span class="ui">Create template</span> in the Templates tab, or <span class="ui">New template</span> in <span class="ui">My templates</span>, and fill in the form.</p>
+            <figure>
+        <img src="../media/objects/templates/template-form.dark.webp" data-themed
+             alt="The Create template form: fields Name, Category, Description and LaTeX, a table of placeholders #1 and #2 with default values a and b and names first term and second term, a drawing of a plus b equals b plus a, a LaTeX packages line and the Save template button." width="844" height="790" loading="lazy">
+        <figcaption>The form with <code>{#1}+{#2}={#2}+{#1}</code> written: a row for each number, a default value in each, and the drawing the values make.</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Name</strong>, <strong>Category</strong> and <strong>Description</strong>. The category is any
+        name; the list offers the library's and the ones you have used.</li>
+        <li><strong>LaTeX</strong>: the formula, with <code>#1</code>, <code>#2</code>… where a value goes. The braces
+        around a number are yours, as in a LaTeX macro: <code>x^{#2}</code> takes <code>m+1</code> whole.
+        <code>\#</code> prints a hash.</li>
+        <li><strong>Placeholders</strong>: a row for every number in the LaTeX, with its <em>Default value</em> and,
+        optionally, <em>What it is</em> (<em>base</em>, <em>exponent</em>, <em>angle</em>…). A default value is
+        required. The drawing uses a box <code>\square</code> for a number that has none yet.</li>
+        <li><strong>LaTeX packages</strong>, folded away until you open it, for a template that needs some.</li>
+      </ul>
+      <p>The line beside the buttons tells you what is missing: <em>Give the template a name</em>,
+      <em>Write the LaTeX of the template</em>, <em>Give #1 a default value</em> or the reason the LaTeX cannot be
+      drawn. <span class="ui">Save template</span> is off until the form is complete. Take a number out of the LaTeX and write it
+      again, and it comes back with the value and the name it had. Closing a form with something written asks
+      before it throws it away.</p>
+      <h3 id="my-templates">My templates</h3>
+      <figure>
+        <img src="../media/objects/templates/my-templates.dark.webp" data-themed
+             alt="The My templates pop-up with one card, Commutative sum, with its drawing and the buttons Use, Edit, Duplicate and Delete, and above the list the buttons New template, Import and Export all; below the list a line says where the templates are kept." width="1052" height="452" loading="lazy">
+        <figcaption><span class="ui">My templates</span>: the buttons of a card, the file buttons above, and under the list where the templates are kept.</figcaption>
+      </figure>
+      <p>On each card of yours: <span class="ui">Use</span>, <span class="ui">Edit</span> (the same form, with your template in it), <span class="ui">Duplicate</span>
+      and <span class="ui">Delete</span>. Deleting asks first, and the button has to be held down. A formula you already made from
+      the template stays. Tick the boxes to pick which templates <span class="ui">Export</span> takes.</p>
+      <p>The default templates cannot be changed. To change one, press <span class="ui">Save a copy</span> on its card: a notice
+      says it is now among yours, with a button, <span class="ui">Open My templates</span>, and the copy is yours to edit.</p>
+      <figure>
+        <img src="../media/objects/templates/save-copy.dark.webp" data-themed
+             alt="The notice that follows Save a copy: the template is now among your templates, with an Open My templates button." width="436" height="108" loading="lazy">
+        <figcaption>The notice after <span class="ui">Save a copy</span>.</figcaption>
+      </figure>
+
+      <h2 id="favorites">Favorites</h2>
+      <p>The star on any card, default or yours, keeps the template in <span class="ui">Favorites</span>. That pop-up lists them
+      together, with <em>Mine</em> on the ones you wrote, and press the star again to take one out. Your stars
+      are kept like your templates.</p>
+      <figure>
+        <img src="../media/objects/templates/favorites.dark.webp" data-themed
+             alt="The Favorites pop-up with two starred derivative templates and their drawings." width="1052" height="569" loading="lazy">
+        <figcaption>Two templates with a star.</figcaption>
+      </figure>
+
+      <h2 id="storage">Where your templates are kept</h2>
+      <p>Your templates and your stars belong to the editor, not to a project: they are kept in this browser,
+      like the editor's preferences, so they are there in every project you open in it, and they are not in a
+      project file.</p>
+      <ul>
+        <li><strong>In the browser.</strong> Always. A browser that does not let the editor keep anything says so in
+        the line under <span class="ui">My templates</span>; then the templates last until the tab is closed, and <span class="ui">Export</span> is
+        how you keep them.</li>
+        <li><strong>In a synced folder</strong> (Chrome and Edge). After <span class="ui">File ▸ Sync folder…</span> the templates are
+        also written to <code>templates/templates.json</code> in that folder, so they travel with it. The browser
+        asks once for leave to write the folder. The file is read again whenever the folder is listed: of a
+        template changed in two places the one changed last stays, and one deleted in one place and still in
+        the other comes back. A library holds 500 templates. When the file and the browser have more than
+        that together, or the file has entries that are not templates, the editor never writes the file
+        again with less than it holds: it leaves it as it is, and the line under the list says what to do,
+        such as deleting some templates here or in the file and listing the folder again.</li>
+        <li><strong>As a file.</strong> <span class="ui">Export all</span> downloads your templates and favorites as
+        <code>mfe-templates.json</code>, or <span class="ui">Export N selected</span> the ticked ones. <span class="ui">Import…</span> reads such a
+        file. When a template of the file is one of yours with other content, a question asks:
+        <span class="ui">Replace mine</span>, <span class="ui">Keep both</span> or <span class="ui">Keep mine</span>.</li>
+      </ul>
+      <p>The line under the list says which of these is in force, and offers <span class="ui">Try again</span> or
+      <span class="ui">Write to the folder</span> when the folder could not be written.</p>
+      <aside class="callout note"><p>In a browser that cannot write to folders (Firefox, Safari) the templates stay
+      in the browser, and the line says so. Export them to take them elsewhere.</p></aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="../basics/formulas.html">Writing formulas</a>: edit what a template made.</li>
+        <li><a href="organizing.html">Finding and organizing</a>: search, group and tidy your formulas.</li>
+        <li><a href="../start/projects.html">Projects and files</a>: the Sync folder.</li>
+      </ul>
+
+    </article>
+  </main>
+</body>
+</html>

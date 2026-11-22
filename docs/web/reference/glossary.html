@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossary · Manim Formula Editor</title>
+  <meta name="description" content="The words of the editor and of Manim, each defined in a sentence or two and linked to the page that teaches it.">
+  <meta name="mfe:id" content="reference/glossary">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Glossary">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <style>
+    .glossary-letters { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0 0 var(--doc-space-6); font-weight: 650; }
+    .glossary-letters a { min-width: 1.4em; text-align: center; }
+    .doc dd .see { color: var(--doc-text-muted); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Glossary</h1>
+      <p class="lead">The words of the editor and of Manim, each in a sentence or two, with the page that
+        teaches it. A term in italics inside an entry has an entry of its own.</p>
+
+      <p class="glossary-letters" id="terms" aria-label="Terms by letter">
+        <a href="#a">A</a> <a href="#b">B</a> <a href="#c">C</a> <a href="#d">D</a> <a href="#e">E</a>
+        <a href="#f">F</a> <a href="#g">G</a> <a href="#h">H</a> <a href="#i">I</a> <a href="#k">K</a>
+        <a href="#l">L</a> <a href="#m">M</a> <a href="#o">O</a> <a href="#p">P</a> <a href="#r">R</a>
+        <a href="#s">S</a> <a href="#t">T</a> <a href="#u">U</a> <a href="#w">W</a>
+      </p>
+
+      <h2 id="a">A</h2>
+      <dl>
+        <dt id="anchor">Anchor</dt>
+        <dd>The point of a formula’s box where an end of a line sits: a corner, the middle of an edge or the
+          centre, picked on a compass, or <span class="ui">Auto</span>, which lets Manim find where the line leaves the
+          glyphs towards its other end. <a href="../objects/lines-arrows.html">Lines and arrows</a></dd>
+        <dt id="animation-block">Animation block</dt>
+        <dd>See <a href="#block">block</a>.</dd>
+        <dt id="appear">Appear and Disappear</dt>
+        <dd>Two kinds of <em>block</em>: an Appear block brings some glyphs in at a time you choose (Write,
+          Create, FadeIn…), a Disappear block takes them out. <a href="../animations/blocks.html">Animation blocks</a></dd>
+        <dt id="appears-with">Appears with</dt>
+        <dd>The field of a formula’s editor that says which <em>intro</em> its new clips get, when it should
+          not be the one chosen in the preferences. <a href="../basics/intro-outro.html">Appearing and disappearing</a></dd>
+        <dt id="audio-clip">Audio clip</dt>
+        <dd>A recording, or a part of one, placed on an audio <em>track</em>, with its own trim and volume
+          curve. <a href="../sound/audio.html">Audio</a></dd>
+        <dt id="autosave">Autosave</dt>
+        <dd>The copy of your work that each browser tab keeps by itself, so a reload or a crash does not lose
+          it. It is a safety net: <span class="ui">File ▸ Save</span> still writes the real file.
+          <a href="troubleshooting.html#recover">Recovering your work</a></dd>
+      </dl>
+
+      <h2 id="b">B</h2>
+      <dl>
+        <dt id="background">Background</dt>
+        <dd>The colour of the scene behind everything. A setting of the project.
+          <a href="preferences.html#project-settings">Project settings</a></dd>
+        <dt id="block">Block</dt>
+        <dd>A bar in the top half of a <em>clip</em> that animates some of its glyphs at a time: Appear,
+          Disappear, Transform, Morph or Emphasis. Blocks that start together and last the same can form a
+          <em>group</em>. <a href="../animations/blocks.html">Animation blocks</a></dd>
+        <dt id="brace">Brace</dt>
+        <dd>An object: a curly brace fitted to the glyphs of another clip, on the side you choose, that can carry
+          a label. It follows what it hangs on. <a href="../objects/braces.html">Braces</a></dd>
+      </dl>
+
+      <h2 id="c">C</h2>
+      <dl>
+        <dt id="camera">Camera</dt>
+        <dd>The frame the scene is filmed through, once the <em>multicamera</em> is on: it can move and zoom
+          while the video plays. In the Preview it is the sky-blue rectangle.
+          <a href="../animations/camera.html">The camera</a></dd>
+        <dt id="camera-move">Camera move</dt>
+        <dd>A block of the timeline’s Camera row that takes the <em>camera</em> to another frame over a time: a
+          frame of its own, a <em>target camera</em> or the frame of 0 s. Nothing else animates while it runs.
+          <a href="../animations/camera.html#move">The camera</a></dd>
+        <dt id="camera-view">Camera view</dt>
+        <dd>The Preview looking through the <em>camera</em> at the playhead, as the video does, instead of
+          showing the <em>world</em> with the camera’s rectangles.
+          <a href="../animations/camera.html#view">The camera</a></dd>
+        <dt id="canonical-index">Canonical index</dt>
+        <dd>The position of a glyph in the saved list of glyphs of its formula (its <em>snapshot</em>). Every
+          reference in a project to a glyph — a colour, a pair, a block — uses it, so a project does not depend on
+          which <em>renderer</em> drew the formula.
+          <a href="troubleshooting.html#glyph-order">Glyph order</a></dd>
+        <dt id="chroma-lab">Chroma Lab</dt>
+        <dd>The colour studio that comes inside the editor: you make a <em>palette</em> there and send it to the
+          editor’s palettes. <a href="../color/palettes.html">Palettes and Chroma Lab</a></dd>
+        <dt id="clip">Clip</dt>
+        <dd>One appearance of an object on the <em>timeline</em>, from a start to an end. A formula can have as
+          many clips as you like, and each clip becomes one Manim object. <a href="../basics/timeline.html">The timeline</a></dd>
+        <dt id="comment">Comment (Slides mode)</dt>
+        <dd>Words at an instant of the scene for whoever works on it after the export: a <code>#&nbsp;NOTE</code> in the
+          Python, a note of the exported page and a task of its folder’s guide. <a href="../basics/slides.html#add">Slides and the HTML page</a></dd>
+        <dt id="companion">Companion</dt>
+        <dd>An optional helper that runs on your own computer, one Python file. With it the editor draws
+          formulas with real LaTeX, shapes font text, encodes video with ffmpeg and can render with Manim.
+          <a href="../manim/companion.html">The companion</a></dd>
+        <dt id="compass">Compass</dt>
+        <dd>The small choice of a side, a corner or the centre that appears when you align by symbol or put the
+          end of a line on a formula. <a href="../layout/align-symbol.html">Align by symbol</a></dd>
+        <dt id="copies">Copies</dt>
+        <dd>One of the three ways (<em>extras</em>) several sources reach one target: the principal source
+          transforms, and the others send a copy and stay where they are.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="creator">Creator</dt>
+        <dd>The panel on the left that holds the formulas and texts of the project, the template library and
+          the audio recordings. <a href="../start/interface.html">A tour of the interface</a></dd>
+        <dt id="custom-path">Custom path</dt>
+        <dd>The path one pair of glyphs follows, shaped by hand as a spline in the Preview, instead of a straight
+          line or the relation’s <em>path arc</em>. <a href="../transforms/custom-paths.html">Custom paths</a></dd>
+      </dl>
+
+      <h2 id="d">D</h2>
+      <dl>
+        <dt id="distribute">Distribute</dt>
+        <dd>Spaces three or more selected clips so the gaps between neighbours are equal, horizontally or
+          vertically. <a href="../layout/align.html">Align and distribute</a></dd>
+        <dt id="dt">dt</dt>
+        <dd>The time between two small ticks of the timeline’s ruler: the zoom’s own, or one of your own
+          set with the − and + beside it. Clips snap to it.
+          <a href="../basics/timeline.html">The timeline</a></dd>
+      </dl>
+
+      <h2 id="e">E</h2>
+      <dl>
+        <dt id="easing">Easing</dt>
+        <dd>How the progress of an animation runs over its time: <code>linear</code>, <code>smooth</code>,
+          <code>double_smooth</code>, <code>there_and_back</code> and the others the app offers. Manim calls it a
+          rate function. <a href="../basics/intro-outro.html">Appearing and disappearing</a></dd>
+        <dt id="emphasis">Emphasis</dt>
+        <dd>A kind of <em>block</em> that draws attention to some glyphs without changing the scene: Indicate,
+          Wiggle, Circumscribe, Flash or FocusOn. <a href="../animations/blocks.html">Animation blocks</a></dd>
+        <dt id="exact-mode">Exact mode</dt>
+        <dd>The editor with the <em>companion</em> running and LaTeX installed on its machine: formulas are drawn by
+          real LaTeX, so their glyphs and their order are the ones Manim will build. <a href="../manim/companion.html">The companion</a></dd>
+        <dt id="export">Export</dt>
+        <dd>Taking the scene out of the editor: as a Python file for ManimCE or ManimGL, as a video, as an
+          audio file or as a web page that plays it. A project file is not an export. <a href="../basics/export.html">Exporting</a></dd>
+        <dt id="extras">Extras</dt>
+        <dd>The setting of a pair with several sources and one target that says how they reach it:
+          <span class="ui">Separate</span> (each source makes its own transform), <span class="ui">Merge (Manim)</span> (Manim’s own
+          alignment, where the sources beyond the first fade into the target) or <span class="ui">Copies</span>.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+      </dl>
+
+      <h2 id="f">F</h2>
+      <dl>
+        <dt id="font-text">Font text</dt>
+        <dd>An object that is plain text in any font you choose, with no LaTeX: <span class="ui">Text (font)</span> in
+          the Creator. Shaping it needs the <em>companion</em>; until then it is drawn as placeholder boxes, unless the
+          project file already carries its shape.
+          <a href="../objects/texts.html">LaTeX texts and font texts</a></dd>
+        <dt id="formula">Formula</dt>
+        <dd>An object of the Creator whose source is LaTeX in math mode. One formula can have many <em>clips</em>;
+          its name becomes the Python variable of the exported scene. <a href="../basics/formulas.html">Writing formulas</a></dd>
+        <dt id="frame">Frame</dt>
+        <dd>The rectangle of the scene that the video shows. In Manim’s units it is 8 tall, and 14.22 wide at
+          16:9, with its origin at the centre and the <var>y</var> axis pointing up. <a href="../basics/preview.html">The Preview</a></dd>
+      </dl>
+
+      <h2 id="g">G</h2>
+      <dl>
+        <dt id="glyph">Glyph</dt>
+        <dd>One drawn piece of a formula: a letter, a digit, an operator, a fraction bar. Colours, pairs, blocks,
+          braces and lines name glyphs. Each has an index and a <em>label</em>.
+          <a href="../layout/glyph-picking.html">Picking glyphs</a></dd>
+        <dt id="glyph-label">Glyph label</dt>
+        <dd>What a glyph is, as the editor names it: its character, or a dash for a rule such as a fraction bar.
+          <span class="ui">Suggest links by label</span> in the relation editor pairs glyphs that have the same label.
+          <a href="../transforms/relation-editor.html">The relation editor</a></dd>
+        <dt id="glyph-source">Glyph source</dt>
+        <dd>The renderer you ask for with the three <span class="ui">Glyph source</span> items of the
+          <span class="ui">View</span> menu: Automatic, MathJax or LaTeX (companion).
+          <a href="preferences.html#output">Preferences</a></dd>
+        <dt id="group-blocks">Group (of blocks)</dt>
+        <dd>Blocks of one clip that start together and last the same, drawn as one block until you unfold them.
+          <a href="../animations/groups.html">Groups of animation blocks</a></dd>
+        <dt id="group-formulas">Group (of formulas)</dt>
+        <dd>A named set of formulas that the Creator’s list keeps together, to fold and select as one.
+          <a href="../objects/organizing.html">Finding and organizing</a></dd>
+        <dt id="guides">Guides</dt>
+        <dd>The coloured lines the Preview draws while a drag snaps to other formulas, the frame or the grid.
+          <a href="../basics/preview.html">The Preview</a></dd>
+      </dl>
+
+      <h2 id="h">H</h2>
+      <dl>
+        <dt id="hidden-at-start">Hidden at the start</dt>
+        <dd>A glyph that is off the screen when its clip starts, until an Appear block, a relation or a Morph block
+          brings it in. <a href="../animations/blocks.html">Animation blocks</a></dd>
+        <dt id="hidden-track">Hidden track</dt>
+        <dd>A track that the Preview does not draw. It is still exported, and the export dialog says so.
+          <a href="../basics/timeline.html">The timeline</a></dd>
+      </dl>
+
+      <h2 id="i">I</h2>
+      <dl>
+        <dt id="intro">Intro and outro</dt>
+        <dd>The animation a clip starts with and the one it ends with, drawn as the hatched ends of the clip on
+          the timeline. The choice <span class="ui">None</span> makes the clip appear or disappear at once.
+          <a href="../basics/intro-outro.html">Appearing and disappearing</a></dd>
+      </dl>
+
+      <h2 id="k">K</h2>
+      <dl>
+        <dt id="keyframe">Keyframe</dt>
+        <dd>The state of a clip — position, scale, rotation, flips, opacity and colour — at a time. A Transform
+          block of the whole formula adds one, and the clip moves to it over the block.
+          <a href="../animations/blocks.html">Animation blocks</a></dd>
+      </dl>
+
+      <h2 id="l">L</h2>
+      <dl>
+        <dt id="latex-text">LaTeX text</dt>
+        <dd>An object that is text with formulas inside it between dollar signs: <span class="ui">Text (LaTeX)</span> in
+          the Creator. <a href="../objects/texts.html">LaTeX texts and font texts</a></dd>
+        <dt id="line">Line and arrow</dt>
+        <dd>An object drawn between two ends: a line, a dashed line, an arrow or a double arrow. Each end is free in
+          the scene or on the glyphs of another clip. <a href="../objects/lines-arrows.html">Lines and arrows</a></dd>
+        <dt id="link-port">Link port</dt>
+        <dd>The small control in the lower half of a clip that appears while you hold Shift: click it, then another
+          clip, to start a relation. <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="locked-region">Locked region</dt>
+        <dd>The time of a <em>camera move</em>, drawn as a hatched band across the tracks: no animation may run
+          in it. <a href="../animations/camera.html#locked">The camera</a></dd>
+        <dt id="lock">Lock</dt>
+        <dd>Three different things. A locked <em>track</em> cannot be edited on the timeline. A clip <em>locked in the
+          Preview</em> is drawn and left alone there, so a click goes through it to what is under it; the timeline and
+          the panels still edit it. And a clip <em>locked after its first transformation</em> (a padlock by its name):
+          the Preview edits its transformations only through the end icon of their blocks.
+          <a href="../basics/timeline.html">The timeline</a></dd>
+      </dl>
+
+      <h2 id="m">M</h2>
+      <dl>
+        <dt id="manim-ce-gl">ManimCE and ManimGL</dt>
+        <dd>The two Python libraries the editor writes for: ManimCE, the Community Edition, and ManimGL, 3Blue1Brown’s
+          original. A project has one <em>target</em>, and exports can be made for either.
+          <a href="../manim/ce-vs-gl.html">ManimCE and ManimGL</a></dd>
+        <dt id="match-colors">Match colors</dt>
+        <dd>A list of LaTeX patterns and the colour each one gives, applied to the glyphs of formulas across the
+          project. <a href="../color/match-colors.html">Match colors</a></dd>
+        <dt id="mathjax">MathJax</dt>
+        <dd>The renderer that is in the browser and needs nothing installed. It draws formulas that look like
+          LaTeX, but the order of its glyphs can differ from LaTeX’s. <a href="troubleshooting.html#glyph-order">Glyph order</a></dd>
+        <dt id="morph">Morph</dt>
+        <dd>A kind of <em>block</em> that moves glyphs of a formula onto other glyphs of the same formula, the way
+          one line of a derivation grows out of the last. <a href="../transforms/morph.html">Morph blocks</a></dd>
+        <dt id="multicamera">Multicamera</dt>
+        <dd>The switch that gives a scene its <em>camera</em>: with it on, the timeline has a Camera row and the
+          Preview shows the <em>world</em>. <a href="../animations/camera.html#on">The camera</a></dd>
+      </dl>
+
+      <h2 id="o">O</h2>
+      <dl>
+        <dt id="offset">Offset</dt>
+        <dd>Where the <em>window</em> of a relation starts, counted from the start of the target clip.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="outro">Outro</dt>
+        <dd>See <a href="#intro">intro and outro</a>.</dd>
+      </dl>
+
+      <h2 id="p">P</h2>
+      <dl>
+        <dt id="package-latex">Package (LaTeX)</dt>
+        <dd>A LaTeX package that a formula loads, chosen in its editor under <span class="ui">Packages</span>, such as
+          <code>physics</code> or <code>cancel</code>. <a href="../basics/formulas.html">Writing formulas</a></dd>
+        <dt id="package-mfe">Package (.mfe)</dt>
+        <dd>A project file that also carries its recordings, so audio travels with it. A project with no audio is usually a
+          plain <code>.mfe.json</code>. <a href="files.html#packages">Project files</a></dd>
+        <dt id="pair">Pair</dt>
+        <dd>A link in a <em>relation</em> between glyphs of the source formula and glyphs of the target formula: one to
+          one, one to many or many to one. The pair says which glyph becomes which, and in what <em>style</em>.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="palette">Palette</dt>
+        <dd>A set of colours with names, kept in the editor’s palette library. An active palette changes the colours
+          the editor offers and gives new objects. <a href="../color/palettes.html">Palettes and Chroma Lab</a></dd>
+        <dt id="pango">Pango</dt>
+        <dd>The text library Manim uses for font text. The <em>companion</em> shapes text with it on Linux; on other
+          systems font text stays as placeholder boxes. <a href="../objects/texts.html">LaTeX texts and font texts</a></dd>
+        <dt id="path-arc">Path arc</dt>
+        <dd>The bend of the way glyphs travel in a relation, in degrees: 0 is a straight line. It is Manim’s
+          <code>path_arc</code>. <a href="../transforms/custom-paths.html">Custom paths</a></dd>
+        <dt id="pause">Pause (Slides mode)</dt>
+        <dd>An instant where the scene rests and the exported web page stops until its reader goes on; it may carry a
+          note for whoever presents, and <em>skip the wait</em> after it. <a href="../basics/slides.html#add">Slides and the HTML page</a></dd>
+        <dt id="playhead">Playhead</dt>
+        <dd>The vertical line of the timeline that marks the time the Preview shows. Move it by clicking the ruler.
+          <a href="../basics/timeline.html">The timeline</a></dd>
+        <dt id="positional-matching">Positional matching</dt>
+        <dd>How an exported scene finds the glyphs of a formula without the companion: by where they are, not by their
+          number, with a small helper at the top of the Python. <a href="../manim/python.html">The generated Python</a></dd>
+        <dt id="preamble">Preamble</dt>
+        <dd>The LaTeX lines added after the packages of every formula, in <span class="ui">File ▸ Project settings…</span>.
+          <a href="preferences.html#project-settings">Project settings</a></dd>
+        <dt id="preview">Preview</dt>
+        <dd>The panel in the middle that draws the scene at the playhead, where you select, move and scale clips.
+          <a href="../basics/preview.html">Placing things in the Preview</a></dd>
+        <dt id="project">Project</dt>
+        <dd>The document you work on: formulas, tracks, clips, relations and the settings of the scene, saved as one
+          file. <a href="files.html">Project files</a></dd>
+      </dl>
+
+      <h2 id="r">R</h2>
+      <dl>
+        <dt id="rate-function">Rate function</dt>
+        <dd>See <a href="#easing">easing</a>.</dd>
+        <dt id="region">Region</dt>
+        <dd>A stretch of time marked on the ruler of the timeline, from a green bracket to a red one: the next
+          animation block, relation or clip of a formula you create takes it, from its start to its end.
+          <a href="../basics/timeline.html#region">The timeline</a></dd>
+        <dt id="relation">Relation</dt>
+        <dd>A transformation of one <em>clip</em> into another: it links a source clip to a target clip through
+          <em>pairs</em> of glyphs and runs during a <em>window</em> of the target clip. Two clips can have several.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="render-with-manim">Render with Manim</dt>
+        <dd>A way to make a video in <span class="ui">Export ▸ Video…</span>: the companion runs the exported Python with your
+          own Manim. It is off unless the companion is started for it. <a href="../sound/video.html">Exporting video</a></dd>
+        <dt id="renderer">Renderer</dt>
+        <dd>What draws the glyphs of a formula: MathJax in the browser, LaTeX through the <em>companion</em>, or Pango for
+          font text. The <span class="ui">Renderer</span> badge in the menu bar says which one the project is using.
+          <a href="../start/interface.html">A tour of the interface</a></dd>
+        <dt id="role">Role</dt>
+        <dd>A named colour of a <em>palette</em>, such as <code>background</code> or <code>formula</code>: eleven are
+          standard, and you can add roles of your own. <a href="../color/palettes.html">Palettes and Chroma Lab</a></dd>
+      </dl>
+
+      <h2 id="s">S</h2>
+      <dl>
+        <dt id="scale-step">Scale step</dt>
+        <dd>The step a corner drag of the Preview’s handles snaps its scale to. A preference.
+          <a href="preferences.html">Preferences</a></dd>
+        <dt id="shape">Shape</dt>
+        <dd>An object fitted to a clip or to some of its glyphs: a box, a circle, an underline, a cross, a cross line or
+          a highlight. <a href="../objects/shapes.html">Shapes</a></dd>
+        <dt id="skip-wait">Skip the wait (Slides mode)</dt>
+        <dd>What a <em>pause</em> can do: going on from it, the exported web page and the rehearsal jump over the rest
+          that follows, to where the next animation starts. Only where the scene stopped there: played through, in the
+          Python and in a video, the rest stays. <a href="../basics/slides.html#skip-wait">Slides and the HTML page</a></dd>
+        <dt id="slides-mode">Slides mode</dt>
+        <dd>The switch of a project that puts <em>pauses</em> and <em>comments</em> on the scene’s time, for a talk:
+          <span class="ui">View ▸ Slides</span>. The ruler then shows where the scene rests. <a href="../basics/slides.html">Slides and the HTML page</a></dd>
+        <dt id="snap">Snap</dt>
+        <dd>The pull that makes a dragged clip or formula stick to the edges, centres and ticks near it. The
+          <span class="ui">Snap</span> key of the timeline and the magnet of the Preview turn it on and off.
+          <a href="../basics/timeline.html">The timeline</a></dd>
+        <dt id="snapshot">Snapshot</dt>
+        <dd>The list of a formula’s glyphs that the project saves, whichever renderer drew them. It defines the
+          <em>canonical indices</em>. <a href="files.html">Project files</a></dd>
+        <dt id="source">Source and target</dt>
+        <dd>Two meanings. The <em>source</em> of a formula is the LaTeX you type. In a relation, the source clip is where
+          the glyphs come from and the target clip where they go. <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="split">Split</dt>
+        <dd>Dividing a block that names glyphs into several, by runs of consecutive glyphs or as you choose.
+          <a href="../animations/timing.html">Timing tools</a></dd>
+        <dt id="standard-scale">Standard scale</dt>
+        <dd>The size new formulas and texts are born with, where 1 is Manim’s font size 48. A preference.
+          <a href="preferences.html">Preferences</a></dd>
+        <dt id="starts-empty">Starts empty</dt>
+        <dd>A box of a clip’s intro. Ticked, no glyph of the clip comes in with the intro: each appears only when a
+          <em>relation</em>, a <em>Morph</em> block or an Appear block brings it. It makes the target of a transformation
+          show only what was transformed. A clip can also leave only some glyphs out of its intro: the first half of a
+          split clip leaves out those that came on screen after the cut, and its intro says how many, with
+          <span class="ui">Bring them back</span>.
+          <a href="../transforms/relations.html#starts-empty">How relations work</a>,
+          <a href="../basics/timeline.html#split-left-out">Splitting a clip</a></dd>
+        <dt id="style">Style (of a pair)</dt>
+        <dd>How a glyph reaches its target: <span class="ui">Transform</span> moves it, <span class="ui">Copy (source stays)</span> sends a copy
+          and leaves the source, <span class="ui">Fade transform</span> fades one out as the other fades in,
+          <span class="ui">Fade copy (source stays)</span> fades a copy and leaves the source. A pair can have its own style or
+          follow its relation’s. <a href="../transforms/relations.html">How relations work</a></dd>
+        <dt id="suggest">Suggest</dt>
+        <dd>The buttons that propose pairs for you, linking glyphs that have the same label in reading order:
+          <span class="ui">Suggest links by label</span> in the relation editor and
+          <span class="ui">Suggest pairs by label</span> in the Morph editor.
+          <a href="../transforms/relation-editor.html#suggest">The relation editor</a>,
+          <a href="../transforms/morph.html#suggest">Morph blocks</a></dd>
+        <dt id="sync-folder">Sync folder</dt>
+        <dd>The folder you pick once with <span class="ui">File ▸ Sync folder…</span> to hold your projects, which the Projects
+          dialog then lists. <a href="../start/projects.html">Projects and files</a></dd>
+      </dl>
+
+      <h2 id="t">T</h2>
+      <dl>
+        <dt id="target">Target</dt>
+        <dd>The Manim library a project is for, ManimCE or ManimGL: a <a href="preferences.html#project-settings">project setting</a>. In a <em>relation</em>,
+          the target is also the clip the glyphs arrive in.
+          <a href="preferences.html#project-settings">Project settings</a></dd>
+        <dt id="target-camera">Target camera</dt>
+        <dd>A frame with a name, drawn in pink in the Preview, set aside for <em>camera moves</em> to go to.
+          Several moves can share one. <a href="../animations/camera.html#targets">The camera</a></dd>
+        <dt id="template">Template</dt>
+        <dd>A formula written once, with gaps called placeholders (<code>#1</code>, <code>#2</code>…) that you fill in when
+          you use it. <a href="../objects/templates.html">The template library</a></dd>
+        <dt id="timeline">Timeline</dt>
+        <dd>The panel at the bottom: tracks of clips under a ruler, with the playhead. It says when each object is on
+          screen. <a href="../basics/timeline.html">The timeline</a></dd>
+        <dt id="track">Track</dt>
+        <dd>A row of the timeline that holds clips. Visual tracks can be hidden or locked, and the first one is drawn
+          in front; audio tracks can be muted and locked. <a href="../basics/timeline.html">The timeline</a></dd>
+        <dt id="transform">Transform</dt>
+        <dd>A kind of <em>block</em> that moves, rotates, rescales or recolours a whole object or some of its glyphs.
+          Not to be confused with a <em>relation</em>, which turns one clip into another.
+          <a href="../animations/blocks.html">Animation blocks</a></dd>
+      </dl>
+
+      <h2 id="u">U</h2>
+      <dl>
+        <dt id="unlink">Unlink formula</dt>
+        <dd>Giving a clip a copy of its formula of its own, so that editing one no longer changes the other.
+          <a href="../animations/timing.html">Timing tools</a></dd>
+        <dt id="unpaired">Unpaired glyphs</dt>
+        <dd>Glyphs of the source that no pair takes, which leave with the source clip’s outro, and glyphs of the target
+          that no pair brings, which arrive with the target clip’s intro, or stay out when the target
+          <em>starts empty</em>. A glyph that a block of its clip takes away or brings in is the block’s.
+          <a href="../transforms/relations.html#unpaired">How relations work</a></dd>
+      </dl>
+
+      <h2 id="w">W</h2>
+      <dl>
+        <dt id="world">World (view)</dt>
+        <dd>What the Preview shows while the <em>multicamera</em> is on: the scene around the frame, nothing cut,
+          with the <em>camera</em> and the <em>target cameras</em> drawn as rectangles.
+          <a href="../animations/camera.html#on">The camera</a></dd>
+        <dt id="window">Window (of a relation)</dt>
+        <dd>The stretch of time of the target clip during which a relation’s transformation runs, set by its
+          <em>offset</em> and its duration. On the timeline it is a band you can drag and resize.
+          <a href="../transforms/relations.html">How relations work</a></dd>
+      </dl>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,674 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Emphasis",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_square",
+      "kind": "math",
+      "name": "square",
+      "source": "(a+b)^2=a^2+2ab+b^2",
+      "packages": [],
+      "tag": {
+        "color": "#FFFFFF",
+        "icon": null
+      },
+      "fontSize": 60,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1nhvu7jeu0f",
+        "glyphs": [
+          {
+            "label": "(",
+            "center": [
+              -3.1353500000000003,
+              -0.03975471875000003
+            ],
+            "size": [
+              0.1444583125000003,
+              0.622665
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -2.8595777500000006,
+              -0.06123665625000002
+            ],
+            "size": [
+              0.2851805625000008,
+              0.28206725
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -2.317668031250001,
+              -0.03975471874999999
+            ],
+            "size": [
+              0.41407225000000025,
+              0.414694875
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              -1.7930744062500006,
+              0.017219125000000002
+            ],
+            "size": [
+              0.2291407500000009,
+              0.43897881250000004
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              -1.5619618750000015,
+              -0.03975471875000003
+            ],
+            "size": [
+              0.1444583124999994,
+              0.622665
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -1.3037487499999996,
+              0.20637987500000002
+            ],
+            "size": [
+              0.1926525624999993,
+              0.28941468750000005
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.7333352812499996,
+              -0.03975471875
+            ],
+            "size": [
+              0.41407225000000025,
+              0.14570362500000006
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -0.15048875000000006,
+              -0.06123665625000002
+            ],
+            "size": [
+              0.2851805625000008,
+              0.28206725
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              0.13493475000000021,
+              0.20637987500000002
+            ],
+            "size": [
+              0.1926525624999993,
+              0.28941468750000005
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.6707565937499993,
+              -0.03975471874999999
+            ],
+            "size": [
+              0.41407225000000025,
+              0.414694875
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              1.2068694375,
+              0.011926468749999988
+            ],
+            "size": [
+              0.24844331250000096,
+              0.414694875
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              1.5303451249999993,
+              -0.06123665625000002
+            ],
+            "size": [
+              0.2851805625000008,
+              0.28206725
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              1.8358184687499994,
+              0.017219125000000002
+            ],
+            "size": [
+              0.2291407500000009,
+              0.43897881250000004
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              2.3394819687500004,
+              -0.03975471874999999
+            ],
+            "size": [
+              0.41407225000000025,
+              0.414694875
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              2.864075593749999,
+              0.017219125000000002
+            ],
+            "size": [
+              0.2291407500000009,
+              0.43897881250000004
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              3.111252875000001,
+              0.20637987500000002
+            ],
+            "size": [
+              0.1926525624999993,
+              0.28941468750000005
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_title",
+      "kind": "tex",
+      "name": "title",
+      "source": "The square of a sum",
+      "layout": {
+        "width": null,
+        "align": "center",
+        "lineSpacing": 1
+      },
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 40,
+      "color": "#58C4DD",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2fua3zahald",
+        "glyphs": [
+          {
+            "label": "T",
+            "center": [
+              -1.7129554375000011,
+              0.034454125
+            ],
+            "size": [
+              0.269406375,
+              0.2810294583333333
+            ]
+          },
+          {
+            "label": "h",
+            "center": [
+              -1.4451163750000005,
+              0.03798256250000001
+            ],
+            "size": [
+              0.20880033333333436,
+              0.28808633333333333
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              -1.2402358333333336,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.16064758333333362,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "s",
+            "center": [
+              -0.9277499791666672,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.13574095833333288,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "q",
+            "center": [
+              -0.7291424791666676,
+              -0.05458695833333331
+            ],
+            "size": [
+              0.20464920833333444,
+              0.2640099583333333
+            ]
+          },
+          {
+            "label": "u",
+            "center": [
+              -0.5088110000000006,
+              -0.01660439583333332
+            ],
+            "size": [
+              0.20880033333333436,
+              0.18804483333333333
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -0.2848353541666673,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.1872146250000002,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "r",
+            "center": [
+              -0.10695993750000099,
+              -0.014321291666666652
+            ],
+            "size": [
+              0.13947695833333285,
+              0.183478625
+            ]
+          },
+          {
+            "label": "e",
+            "center": [
+              0.06621083333333244,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.16064758333333362,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "o",
+            "center": [
+              0.400697479166666,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.18389370833333363,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "f",
+            "center": [
+              0.5856298333333321,
+              0.04026566666666667
+            ],
+            "size": [
+              0.13449566666666612,
+              0.29265254166666665
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              0.8809349374999993,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.1872146249999993,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "s",
+            "center": [
+              1.1973876874999991,
+              -0.015359062499999986
+            ],
+            "size": [
+              0.13574095833333288,
+              0.19053550000000002
+            ]
+          },
+          {
+            "label": "u",
+            "center": [
+              1.3972404999999997,
+              -0.01660439583333332
+            ],
+            "size": [
+              0.20880033333333436,
+              0.18804483333333333
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              1.6855581666666657,
+              -0.014321291666666652
+            ],
+            "size": [
+              0.3242009166666673,
+              0.183478625
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_title",
+      "kind": "visual",
+      "name": "Title",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_formula",
+      "kind": "visual",
+      "name": "Formula",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_title",
+      "formulaId": "f_title",
+      "trackId": "t_title",
+      "start": 1,
+      "end": 15,
+      "initial": {
+        "position": [
+          0,
+          2
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          -0.3
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_title_wiggle",
+          "kind": "emphasis",
+          "start": 12,
+          "duration": 1,
+          "easing": "smooth",
+          "effect": "wiggle",
+          "glyphs": "all",
+          "color": "#FFFF00",
+          "scale": 1.1,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_square",
+      "formulaId": "f_square",
+      "trackId": "t_formula",
+      "start": 0,
+      "end": 15,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1.5,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.8,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_indicate",
+          "kind": "emphasis",
+          "start": 2,
+          "duration": 1,
+          "easing": "there_and_back",
+          "effect": "indicate",
+          "glyphs": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_frame",
+          "kind": "emphasis",
+          "start": 3.5,
+          "duration": 1,
+          "easing": "smooth",
+          "effect": "circumscribe",
+          "glyphs": [
+            10,
+            11,
+            12
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_flash",
+          "kind": "emphasis",
+          "start": 5,
+          "duration": 1,
+          "easing": "smooth",
+          "effect": "flash",
+          "glyphs": [
+            6
+          ],
+          "color": "#FFFF00",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_wiggle",
+          "kind": "emphasis",
+          "start": 6,
+          "duration": 2,
+          "easing": "smooth",
+          "effect": "wiggle",
+          "glyphs": [
+            14,
+            15
+          ],
+          "color": "#FFFF00",
+          "scale": 1.1,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_focus",
+          "kind": "emphasis",
+          "start": 8,
+          "duration": 2,
+          "easing": "smooth",
+          "effect": "focus_on",
+          "glyphs": [
+            7,
+            8
+          ],
+          "color": "#888888",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_pulse",
+          "kind": "emphasis",
+          "start": 10.2,
+          "duration": 1.5,
+          "easing": "there_and_back_with_pause",
+          "effect": "indicate",
+          "glyphs": "all",
+          "color": "#83C167",
+          "scale": 1.1,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.1,
+          "strokeWidth": 4,
+          "timeWidth": 0.3,
+          "opacity": 0.2
+        },
+        {
+          "id": "a_frame_all",
+          "kind": "emphasis",
+          "start": 12,
+          "duration": 1.5,
+          "easing": "smooth",
+          "effect": "circumscribe",
+          "glyphs": "all",
+          "color": "#FC6255",
+          "scale": 1.2,
+          "angle": 3.6,
+          "wiggles": 6,
+          "buff": 0.2,
+          "strokeWidth": 6,
+          "timeWidth": 0.6,
+          "opacity": 0.2
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

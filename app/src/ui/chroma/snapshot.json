@@ -1,0 +1,87 @@
+{
+  "upstream": {
+    "repository": "https://github.com/zavden/chromalab",
+    "commit": "7ca3a2fddac8b7bb2b41152479d96171d641632a",
+    "packageVersion": "1.3.0",
+    "applicationLicense": "A top-level LICENSE file (MIT) is present at this commit, added after the first snapshot; it is not part of the selection. The build's notices say that Chroma Lab is distributed with Manim Formula Editor under the same license."
+  },
+  "selection": "Verbatim functional distribution, local previews/help, and dependency notices. No source maps or duplicate vendor runtime modules.",
+  "distributionBytes": 759253,
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 11232,
+      "sha256": "bfa3a037e5cd3adb15e64d4ba2f4f286a84e1d66edc28482f02f91bc4eab5544"
+    },
+    {
+      "path": "app.bundle.js",
+      "bytes": 303802,
+      "sha256": "04c75212c0fb5cbc8c12fdda6e6708b5695bc9845bc6e6e49cc708de5c50c6d8"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 29945,
+      "sha256": "70f4a52ebabe12a31497e092dd24cadcf94661dfc28d744ecdaba6577ee6a6b4"
+    },
+    {
+      "path": "studio.css",
+      "bytes": 27832,
+      "sha256": "89b87bc8a21f9979cb7e75ad3f7b60003f56632be3afa920fafbaca30e2625ac"
+    },
+    {
+      "path": "examples/previews/fraction-light.mp4",
+      "bytes": 89242,
+      "sha256": "de0ca1035a75149fc91aa5602bb72aa8b1b610062c3d22855708411ab40f42c8"
+    },
+    {
+      "path": "examples/previews/fraction-light.png",
+      "bytes": 32286,
+      "sha256": "c5b4d4658026b05ea6ba05be195deea87e5f260b026fe71851732568979be301"
+    },
+    {
+      "path": "examples/previews/linear-dark.mp4",
+      "bytes": 135867,
+      "sha256": "32801332f14326d310ac2a1f3a8e7a8f51a416adf36f778c9f3aa423a8bad29e"
+    },
+    {
+      "path": "examples/previews/linear-dark.png",
+      "bytes": 18682,
+      "sha256": "7b1cf95c97a6097c92da82d53c02302bdb571a009034d561d2a2bef28bd6540b"
+    },
+    {
+      "path": "examples/previews/mathtex.mp4",
+      "bytes": 64459,
+      "sha256": "56e1135352705eb4fac6e35d15d4f63747020f86a971a4525d6368da43879559"
+    },
+    {
+      "path": "examples/previews/mathtex.png",
+      "bytes": 23718,
+      "sha256": "95410e1e7927aabe5f75ba9e252759afb538f0558ea40362fc899a86849ba8a1"
+    },
+    {
+      "path": "docs/MANIM.md",
+      "bytes": 6978,
+      "sha256": "33ab1aac29c48f53800d36ceb4bd7180521c2e6956b6f8f93755e2ae478d01b2"
+    },
+    {
+      "path": "docs/MATHEMATICS.md",
+      "bytes": 10892,
+      "sha256": "2c2d38614d6e6cd5e6df31f9bf0185653a24b5e369ecb88b402a1694cd669fab"
+    },
+    {
+      "path": "vendor/README.md",
+      "bytes": 1773,
+      "sha256": "501625de0fdc8affa2a3880e83380285148162340fa2eadcaed2b6e7f9020c46"
+    },
+    {
+      "path": "vendor/COLORJS-LICENSE",
+      "bytes": 1080,
+      "sha256": "feee8a4ec1649b385f3ec9ac73174501cbfc9d5a75171a056d94cb452d3f3ec3"
+    },
+    {
+      "path": "vendor/COLOUR-LICENSE",
+      "bytes": 1465,
+      "sha256": "cd9efcd4b6ac5218189d90ffc25f9766f8411e62c5526c452145e1cc8b19baf7"
+    }
+  ]
+}

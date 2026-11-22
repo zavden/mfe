@@ -1,0 +1,151 @@
+/* The transport bar under the preview: a bar of glass with round corners (lit along its top),
+ * three groups — playback on the left, the grid in the middle, the readouts on the right. Play is
+ * the bar's one main action: a mint key. A toggle that is on (loop, grid) is mint and flat. */
+.transport {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 2px;
+  min-height: 38px;
+  padding: 2px 8px;
+  background: var(--sheen), var(--panel-header);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 var(--edge-light);
+}
+
+/* An icon button: 30px, dim until the pointer is on it. */
+.transport-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.transport-button:hover:not(:disabled) {
+  background: var(--hover);
+  color: var(--text);
+}
+
+.transport-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.transport-button.is-on {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.transport-button.is-on:hover:not(:disabled) {
+  background: var(--accent-bright);
+  color: var(--accent-text);
+}
+
+/* Play / Pause: a square key of the primary gradient, its icon dark, a glow of its own colour;
+ * brighter while it plays. A little apart from the frame steps on either side. */
+.transport-button.transport-play,
+.transport-button.transport-play.is-on {
+  width: 32px;
+  height: 32px;
+  margin: 0 3px;
+  background: var(--primary-gradient);
+  border-color: var(--primary-edge);
+  border-radius: var(--radius-control);
+  color: var(--primary-text);
+  box-shadow:
+    inset 0 1px 0 var(--primary-hover-from),
+    var(--primary-glow);
+}
+
+.transport-button.transport-play:hover:not(:disabled),
+.transport-button.transport-play.is-on {
+  background: var(--primary-gradient-hover);
+  color: var(--primary-text);
+  box-shadow:
+    inset 0 1px 0 var(--primary-hover-from),
+    var(--primary-glow-hover);
+}
+
+.transport-button.transport-play:active {
+  transform: translateY(1px);
+}
+
+.transport-play svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* A thin line between two groups of buttons. */
+.transport-sep {
+  flex: none;
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: var(--border);
+}
+
+.transport-spacer {
+  flex: 1;
+}
+
+.transport-grid {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.transport-grid-step {
+  margin: 0 2px;
+  min-width: 2.6em;
+  text-align: center;
+}
+
+.transport-readout {
+  margin-left: 12px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.transport-grid > .transport-readout {
+  margin-left: 2px;
+}
+
+.transport-readout.dim {
+  color: var(--text-dim);
+}
+
+/* The playhead's time, in the playhead's colour. */
+.transport-readout.is-time {
+  color: var(--time);
+  font-weight: 650;
+}
+
+.transport-readout.audio-clipping {
+  color: var(--danger);
+}
+
+/* ---- Forced colours (see styles.css) ---- */
+@media (forced-colors: active) {
+  /* The gradient goes: the key keeps a heavier edge. */
+  .transport-button.transport-play {
+    border-width: 2px;
+  }
+}

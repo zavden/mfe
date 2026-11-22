@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Without the companion · Manim Formula Editor</title>
+  <meta name="description" content="What the editor does opened from disk with no companion, what the companion would add, and the one place its absence shows: formulas that Manim splits into other glyphs.">
+  <meta name="mfe:id" content="manim/without-companion">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Without the companion">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/sum-with-dots.data.js" defer></script>
+  <script src="../examples/sum-with-dots-whole.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Without the companion</h1>
+      <p class="lead">You can open the editor with a double click and never start the companion. This page
+        says what you have then, what the companion would add, and the one place where its absence
+        shows in what you make: the Manim video of a few formulas.</p>
+
+      <h2 id="from-disk">Opened with a double click</h2>
+      <p>The built editor opens from <code>app/dist/index.html</code>
+        (<a href="../start/install.html#built-app">Getting the app running</a>): no server, no companion
+        and no network. Keep the whole <code>dist/</code> folder together: the fonts, Chroma Lab and the
+        licence files are beside the page.</p>
+      <p>Opened so, the editor does all of its own work:</p>
+      <ul>
+        <li>formulas, drawn by MathJax;</li>
+        <li>the timeline with every block, relation and path, the camera, braces, shapes and lines;</li>
+        <li>projects opened and saved in place (in Chrome and Edge), the autosave, the templates, the
+          palettes and Chroma Lab, and the examples of <span class="ui">Help ▸ Examples</span>;</li>
+        <li>every export the browser makes by itself: Python for ManimCE and ManimGL, video (MP4 and
+          WebM), the frame as a PNG image, audio, and the scene as a web page
+          (<a href="../basics/export.html">Exporting</a>).</li>
+      </ul>
+
+      <h2 id="adds">What the companion adds</h2>
+      <p>What you have without it, and what it gives once it runs
+        (<a href="companion.html">The companion</a> says how to start it):</p>
+      <table>
+        <thead>
+          <tr><th></th><th>Without the companion</th><th>With it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The glyphs of a formula</td><td>MathJax’s: the same formula, at times split into other glyphs than Manim’s (<a href="#python">below</a>). The menu bar says <span class="ui">Renderer: MathJax</span>.</td><td>LaTeX’s, which are Manim’s own: <span class="ui">Renderer: LaTeX</span>.</td></tr>
+          <tr><td>Accented letters in a LaTeX text</td><td>Drawn without their accents.</td><td>Drawn; for ManimCE the editor suggests the <code>fontenc</code> line.</td></tr>
+          <tr><td>A LaTeX text with a width</td><td>Its lines are broken about where LaTeX would break them, and the text says so.</td><td>LaTeX breaks them.</td></tr>
+          <tr><td>Font text</td><td>Placeholder boxes, one a character, composed, placed, coloured and animated all the same.</td><td>The outlines of the font (shaped on Linux in version 1.0).</td></tr>
+          <tr><td>Video</td><td>The browser’s encoders: MP4 (H.264, AV1) and WebM (VP9).</td><td>ffmpeg too: x264, ProRes, GIF.</td></tr>
+          <tr><td>AAC sound in an MP4</td><td>Only where the browser encodes AAC (not Chrome on Linux); WebM with Opus otherwise.</td><td>ffmpeg encodes it.</td></tr>
+          <tr><td><span class="ui">Render with Manim</span></td><td>Not offered: the video dialog greys it out and says why.</td><td>The exported scene, rendered by your own Manim.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="python">Where it shows: the exported Python</h2>
+      <p>Inside the editor a formula drawn by MathJax is as good as one drawn by LaTeX: it is coloured,
+        animated and saved the same. The exported scene is another matter, because there the glyphs are
+        Manim’s, and the script has to find, when it runs, which glyph of Manim is each glyph of the
+        editor. It finds them by where they are, with the
+        <a href="python.html#positional">positional helper</a>.</p>
+      <p>That works when MathJax and LaTeX split the formula into the same number of glyphs, in
+        whatever order. Measured on 862 formulas (the 257 templates, 338 formulas of the author’s own
+        projects and 267 written to cover the cases), 9 in 10 are split into the same number, and among
+        those the helper’s pairing was right in 771 of 777. It does not work for the rest, and those
+        are a short list of things.</p>
+
+      <h3 id="differ">What makes the numbers differ</h3>
+      <table>
+        <thead>
+          <tr><th>In the formula</th><th>MathJax draws</th><th>LaTeX (and Manim) draws</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>\cdots</code>, <code>\ldots</code>, <code>\dots</code>, <code>\vdots</code>, <code>\ddots</code></td><td>one glyph</td><td>three dots</td></tr>
+          <tr><td><code>\left|…\right|</code>, <code>vmatrix</code>, <code>\middle|</code> around something tall</td><td>one bar</td><td>several pieces, stacked</td></tr>
+          <tr><td><code>\iint</code>, <code>\iiint</code>, <code>\oint</code></td><td>one glyph</td><td>two or three (ManimGL draws <code>\iint</code> as one)</td></tr>
+          <tr><td><code>\neq</code>, <code>\ne</code>, <code>\notin</code>, <code>\not=</code></td><td>one glyph</td><td>a stroke over <code>=</code> or <code>∈</code>: two</td></tr>
+          <tr><td><code>\Longrightarrow</code>, <code>\iff</code>, <code>\longmapsto</code></td><td>one long arrow</td><td>pieces</td></tr>
+          <tr><td>A tall <code>\sqrt</code>; <code>\cancel</code>, <code>\boxed</code>, <code>\underbrace</code>, <code>\xrightarrow</code>, <code>\overrightarrow</code></td><td>other pieces</td><td>other pieces</td></tr>
+        </tbody>
+      </table>
+      <p>Of the measured formulas that differ, <code>\cdots</code> and its kin are the most common (24 of
+        79), then the tall bars (18) and <code>\neq</code> and <code>\notin</code> (13).</p>
+
+      <h2 id="video">What the video shows</h2>
+      <p>Take <code>1+2+\cdots+n</code> turning into <code>1+2+\cdots+n=\frac{n(n+1)}{2}</code> through a
+        relation of seven pairs, exported with no companion. MathJax draws the three dots as one glyph,
+        so the editor splits the sum into seven glyphs; Manim makes nine of it, and the script reaches
+        seven of them. <strong>The two dots it does not reach are left out of every animation of
+        glyphs.</strong> What the video shows then depends on how the formula comes in. ManimCE 0.22.1
+        rendered the videos below; ManimGL 1.7.2 does the same.</p>
+
+      <h3 id="glyph-by-glyph">A formula that comes in glyph by glyph</h3>
+      <p>Here the sum writes itself in. The Write of the scene plays the sum’s list of glyphs, the seven
+        the script reached:</p>
+<pre data-excerpt="examples/sum-with-dots.ce.py"><code class="language-python">        self.play(Write(VGroup(*step1_g[:])), run_time=1)</code></pre>
+      <p>A formula that comes in so, glyph by glyph (Write, Create, any intro with a lag), is drawn
+        without the two dots that are in no list: one dot of three, from the first frame to the
+        last.</p>
+      <div class="side-by-side">
+        <figure class="mfe-player" data-mfe-player="sum-with-dots" data-start="1.5" data-loop data-controls="minimal"
+                data-caption="In the editor: the three dots, MathJax’s one glyph, written in with the rest."></figure>
+        <figure>
+          <video class="mfe-manim" src="../examples/sum-with-dots.mp4" controls preload="metadata"
+                 playsinline></video>
+          <figcaption>Rendered by ManimCE: only the middle dot, in the sum and in the equation it turns
+            into, from the first frame to the last.</figcaption>
+        </figure>
+      </div>
+      <div class="mfe-example" data-mfe-example="sum-with-dots"></div>
+
+      <h3 id="whole">A formula that comes in whole</h3>
+      <p>With no intro, or a fade, the scene adds the formula whole, and its three dots are there:</p>
+<pre data-excerpt="examples/sum-with-dots-whole.ce.py"><code class="language-python">        self.add(step1)</code></pre>
+      <p>When its glyphs go to the next formula, the relation moves the seven the script reached, and two
+        of the dots stay where they were. This is the same scene with no intro on the sum, and centred,
+        so that its glyphs travel to the equation:</p>
+      <div class="side-by-side">
+        <figure class="mfe-player" data-mfe-player="sum-with-dots-whole" data-start="1" data-loop data-controls="minimal"
+                data-caption="In the editor: the sum is there from the start, and moves left into the equation."></figure>
+        <figure>
+          <video class="mfe-manim" src="../examples/sum-with-dots-whole.mp4" controls preload="metadata"
+                 playsinline></video>
+          <figcaption>Rendered by ManimCE: three dots until the sum moves; then one goes with it, and two
+            stay behind, on the <em>n</em> and in the equals sign of the equation.</figcaption>
+        </figure>
+      </div>
+      <div class="mfe-example" data-mfe-example="sum-with-dots-whole"></div>
+      <p>Either way the scene says so when it runs, in a line for each such formula. For the sum it
+        prints <code>Warning: Manim made 9 glyphs of a formula the editor split into 7; unmatched glyphs
+        are not animated.</code></p>
+
+      <h2 id="dialog">Why the export does not warn you</h2>
+      <p>The export dialog cannot say it sooner. With no companion it has no LaTeX render to count
+        against, so every formula drawn by MathJax gets the same note there, the ones that will come out
+        right and the others alike:</p>
+      <blockquote><p>Glyphs of "step1" are matched by position when the scene runs, because it was
+        rendered with MathJax, whose glyph order can differ from LaTeX. Render with the companion online
+        for exact indices.</p></blockquote>
+      <p>Nothing in the editor warns of the things of the list above while you type them.</p>
+      <p><strong>The way out is the companion.</strong> With it online the formulas are rendered by
+        LaTeX, the script names Manim’s glyphs by their index, with no helper
+        (<a href="python.html#exact">Exact indices</a>), and all of them are drawn. Start it before you
+        export, and let the formulas render with it: the badge of the menu bar says
+        <span class="ui">Renderer: LaTeX</span> when they did
+        (<a href="companion.html#badge">Is it working?</a>).</p>
+      <aside class="try">
+        <ol>
+          <li>Download the project of the first card above and open it: choose
+            <span class="ui">File ▸ Open…</span>, press <span class="ui">Other file…</span> and pick the
+            file.</li>
+          <li>Choose <span class="ui">Export ▸ Python — ManimCE…</span> and read the notes: each formula
+            has the same one, whatever it holds.</li>
+          <li>Download the scene and run it with ManimCE (<a href="python.html#running">Running it</a>).
+            The terminal prints the warning above, and the video has one dot of three.</li>
+        </ol>
+      </aside>
+
+      <h2 id="storage">Your work, opened from disk</h2>
+      <p>Chrome gives every page opened from a file the same storage. The autosave, your templates,
+        your palettes and the recordings you imported live in that browser profile, shared with any
+        other page opened from disk.</p>
+      <aside class="callout warning">
+        <p>Clearing the site’s data clears them too. A project saved to a file is what keeps the work
+          (<a href="../start/projects.html#save">Projects and files</a>).</p>
+      </aside>
+      <p>A companion you start later is found by itself, but it refuses a page opened from a file
+        unless it was started with <code>--allow-file-origin</code> (the editor shows the command), or
+        serves the build itself: <code>serve --app app/dist</code>, then open
+        <code>http://127.0.0.1:7799/app/</code> (<a href="companion.html#start">Starting it</a>;
+        <a href="companion.html#security">Security</a> says what the first option costs).</p>
+      <p>Next: <a href="ce-vs-gl.html">ManimCE and ManimGL</a>, and
+        <a href="companion.html">the companion</a> for exact glyphs.</p>
+    </article>
+  </main>
+</body>
+</html>

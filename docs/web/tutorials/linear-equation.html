@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solving a linear equation · Manim Formula Editor</title>
+  <meta name="description" content="Solve a linear equation step by step, each step a transformation.">
+  <meta name="mfe:id" content="tutorials/linear-equation">
+  <meta name="mfe:level" content="tutorial">
+  <meta name="mfe:difficulty" content="basic">
+  <meta name="mfe:short" content="A linear equation">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/linear-equation.data.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Solving a linear equation</h1>
+      <p class="lead">Make the board of a maths lesson: <code>2x + 3 = 11</code> is solved in four moves, and
+        each move is a transformation. The <code>3</code> that crosses the equals sign is gold, so the
+        eye follows it. You write five formulas, place their clips, relate them in pairs and export the
+        scene.</p>
+
+      <h2 id="what-you-make">What you will make</h2>
+      <p>Sixteen seconds of algebra. The first formula writes itself in. Each formula stays long enough to
+        read, and then turns into the next: the <code>3</code> crosses the equals sign and the plus becomes
+        a minus, <code>11 − 3</code> collapses into <code>8</code>, the <code>2</code> drops under the
+        <code>8</code>, and the fraction becomes <code>4</code>.</p>
+      <figure class="mfe-player" data-mfe-player="linear-equation" data-start="2" data-timeline data-loop data-autoplay
+              data-caption="The finished animation, played by the editor's own renderer. The strip is its timeline: five clips on two tracks, and an arrow for each transformation."></figure>
+      <p>Along the way you meet the moves that every animation of this kind repeats:</p>
+      <ul>
+        <li>writing formulas and naming them;</li>
+        <li>colouring a glyph, so a viewer can follow it;</li>
+        <li>placing clips on two tracks, each overlapping the next;</li>
+        <li>relating two clips by label, and linking glyphs by hand where labels cannot;</li>
+        <li>choosing how a group of glyphs becomes one (<span class="ui">Fade transform</span>);</li>
+        <li>exporting the scene for Manim.</li>
+      </ul>
+      <p>It takes about half an hour. It is the work of <a href="../start/first-animation.html">Your first
+        animation</a>, five times over, so do that one first if you have not.</p>
+
+      <h2 id="before">Before you start</h2>
+      <p>Open the editor with an empty project (<span class="ui">File ▸ New</span>). Name it: click
+        <em>Untitled</em> in the menu bar, type <code>Solving a linear equation</code> and press
+        <kbd data-keys="Enter">Enter</kbd>. The scene of the export will take that name.</p>
+      <p>Then tick two preferences in the <span class="ui">Edit</span> menu: <span class="ui">Always add intro (Write)</span>
+        (1) and <span class="ui">Always add outro (FadeOut)</span> (2). From then on every new clip starts with a
+        <span class="ui">Write</span> and ends with a <span class="ui">FadeOut</span>, so you do not have to give them one by
+        one.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/edit-menu.dark.webp" data-themed
+             alt="The Edit menu with Always add intro (Write) and Always add outro (FadeOut) both ticked."
+             width="251" height="500" loading="lazy">
+        <figcaption>The two preferences, ticked: <span class="ui">Always add intro (Write)</span> (1) and
+          <span class="ui">Always add outro (FadeOut)</span> (2).</figcaption>
+      </figure>
+      <p>These are the five formulas. Each has a name, which becomes a Python variable in the export: a name
+        takes letters, digits and underscores, and does not start with a digit.</p>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>LaTeX</th><th>What happens to it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>equation</code></td><td><code>2x + 3 = 11</code></td><td>The equation to solve.</td></tr>
+          <tr><td><code>subtract</code></td><td><code>2x = 11 - 3</code></td><td>The 3 crosses the equals sign, and the plus becomes a minus.</td></tr>
+          <tr><td><code>simplify</code></td><td><code>2x = 8</code></td><td><code>11 − 3</code> is 8.</td></tr>
+          <tr><td><code>divide</code></td><td><code>x = \frac{8}{2}</code></td><td>Both sides are divided by 2: the 2 drops under the 8.</td></tr>
+          <tr><td><code>answer</code></td><td><code>x = 4</code></td><td>8 over 2 is 4.</td></tr>
+        </tbody>
+      </table>
+      <p>If you want to skip a part, <a href="../examples/linear-equation-clips.mfe.json" download>this project</a>
+        holds the work of the first four steps: the formulas, the colours and the clips, with nothing
+        related yet. Open it with <span class="ui">File ▸ Open…</span>: press <span class="ui">Other file…</span> in the
+        dialog and pick the downloaded file (<a href="../start/projects.html#open">Projects and files</a> explains
+        the dialog). Then go on from step 5.</p>
+
+      <h2 id="steps">Step by step</h2>
+
+      <h3 id="formulas">1. Write the five formulas</h3>
+      <p>For each formula in the table:</p>
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">+ New</span>.</li>
+          <li>Click the <span class="ui">Raw LaTeX</span> field and type the LaTeX of the table. It keeps exactly
+            what you type, a fraction included.</li>
+          <li>Type the name in the <span class="ui">Name</span> field and press
+            <kbd data-keys="Enter">Enter</kbd>.</li>
+          <li>Type <code>2</code> in the first box of <span class="ui">Size</span>, and press
+            <kbd data-keys="Enter">Enter</kbd>: the formulas are drawn twice as large as the default.</li>
+          <li>Press <span class="ui">Apply</span>, then <span class="ui">Close</span>.</li>
+        </ol>
+      </aside>
+      <p>When the five are written, the Creator lists them. Its list scrolls; this picture was taken in a
+        taller window to show them all.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/formulas.dark.webp" data-themed
+             alt="The Creator with five formulas listed: equation, subtract, simplify, divide and answer, each with its rendering."
+             width="412" height="821" loading="lazy">
+        <figcaption>The five formulas in the Creator.</figcaption>
+      </figure>
+
+      <h3 id="colour">2. Colour the glyphs that travel</h3>
+      <p>The <code>3</code> changes sides in the first move, and the <code>2</code> changes place in the third.
+        Colour them, and the eye can follow them. The glyph view of the formula editor does it.</p>
+      <aside class="try">
+        <ol>
+          <li>Press the pencil on the card of <code>equation</code> to open its editor.</li>
+          <li>In the <span class="ui">Glyphs</span> column, click the <code>3</code> (1). It is outlined: it is
+            selected.</li>
+          <li>Click the gold swatch (2). The <code>3</code> takes the colour.</li>
+          <li>Press <span class="ui">Close</span>.</li>
+        </ol>
+      </aside>
+      <figure>
+        <img src="../media/tutorials/linear-equation/colour.dark.webp" data-themed
+             alt="The formula editor of equation in its glyph view: the 3 of 2x + 3 = 11 outlined and drawn in gold, and the row of swatches with the gold one chosen."
+             width="1052" height="706" loading="lazy">
+        <figcaption>The glyph picked (1) and the swatch chosen (2).</figcaption>
+      </figure>
+      <p>Colour three more glyphs the same way. A glyph colour belongs to the formula, so every clip of
+        the formula shows it.</p>
+      <table>
+        <thead>
+          <tr><th>Formula</th><th>Glyph</th><th>Colour</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>equation</code></td><td>the <code>3</code></td><td>gold</td></tr>
+          <tr><td><code>subtract</code></td><td>the <code>3</code>, the last glyph</td><td>gold</td></tr>
+          <tr><td><code>simplify</code></td><td>the <code>2</code>, the first glyph</td><td>blue</td></tr>
+          <tr><td><code>divide</code></td><td>the <code>2</code>, under the bar</td><td>blue</td></tr>
+        </tbody>
+      </table>
+      <p><a href="../color/coloring.html">Colouring glyphs and objects</a> has the other ways to colour: the
+        hex field, colours in order, and copying a sequence of colours.</p>
+
+      <h3 id="clips">3. Put the clips on the timeline</h3>
+      <p>Drag each card from the Creator onto a track. Alternate the two tracks, and start each clip
+        three seconds after the one before. The timeline snaps clips to its ticks, half a second apart,
+        so a drop near a time lands on it.</p>
+      <table>
+        <thead>
+          <tr><th>Formula</th><th>Track</th><th>Drop it at</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>equation</code></td><td><span class="ui">Track 2</span></td><td>0 s</td></tr>
+          <tr><td><code>subtract</code></td><td><span class="ui">Track 1</span></td><td>3 s</td></tr>
+          <tr><td><code>simplify</code></td><td><span class="ui">Track 2</span></td><td>6 s</td></tr>
+          <tr><td><code>divide</code></td><td><span class="ui">Track 1</span></td><td>9 s</td></tr>
+          <tr><td><code>answer</code></td><td><span class="ui">Track 2</span></td><td>12 s</td></tr>
+        </tbody>
+      </table>
+      <p>The timeline is wider than its panel. Press the key that shows the whole timeline, in its
+        toolbar, to see every clip. Each clip starts with a <span class="ui">Write</span> and ends with a
+        <span class="ui">FadeOut</span>, from the two preferences you ticked.</p>
+
+      <h3 id="time">4. Give each formula time</h3>
+      <p>Every clip is three seconds long, so clips that start three seconds apart only touch, and a relation
+        needs them to overlap. Lengthen each clip by one second: select it, open the
+        <span class="ui">Timing</span> tab of the Animations panel, type the new <span class="ui">End</span> (1) and
+        press <kbd data-keys="Enter">Enter</kbd>. Or drag the right edge of the clip.</p>
+      <table>
+        <thead>
+          <tr><th>Formula</th><th>End</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>equation</code></td><td>4</td></tr>
+          <tr><td><code>subtract</code></td><td>7</td></tr>
+          <tr><td><code>simplify</code></td><td>10</td></tr>
+          <tr><td><code>divide</code></td><td>13</td></tr>
+          <tr><td><code>answer</code></td><td>16</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="../media/tutorials/linear-equation/end-field.dark.webp" data-themed
+             alt="The Timing tab of the Animations panel for the clip of subtract: its start, its end, and the Intro and Outro animations."
+             width="310" height="583" loading="lazy">
+        <figcaption>The <span class="ui">Start</span> and <span class="ui">End</span> of a clip (1), and the
+          <span class="ui">Animation</span> of its intro (2).</figcaption>
+      </figure>
+      <p>Each clip now overlaps the next by a second, and a formula stays on screen, still, for two seconds
+        between its arrival and its departure. Last, let the answer stay: select the clip of
+        <code>answer</code>, scroll the panel down to its <span class="ui">Outro</span> section, and choose
+        <span class="ui">None (disappear)</span> as the <span class="ui">Animation</span>.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/clips.dark.webp" data-themed
+             alt="The whole timeline: five clips alternating between Track 2 and Track 1, each overlapping the next by one second, each with a Write intro and a FadeOut outro, the last without an outro."
+             width="1424" height="245" loading="lazy">
+        <figcaption>The five clips. Click the picture to see it larger.</figcaption>
+      </figure>
+
+      <h3 id="relations">5. Relate the formulas</h3>
+      <p>Relate each formula to the next: four relations. For each pair of neighbours, do what you did in
+        <a href="../start/first-animation.html#transformation">your first animation</a>. Hold
+        <kbd data-keys="Shift">Shift</kbd>, click the port of the first clip, click the second clip, press
+        <span class="ui">Suggest links by label</span> and <span class="ui">Accept all</span>, and press
+        <span class="ui">Save relation</span>. The first pair needs nothing else.</p>
+      <p><strong><code>equation</code> to <code>subtract</code>.</strong> The glyphs that are the same symbol are
+        linked: <code>2</code>, <code>x</code>, <code>=</code>, <code>3</code> and the two <code>1</code>s.
+        The <code>+</code> has no partner and leaves, and the <code>−</code> arrives.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/relation-1.dark.webp" data-themed
+             alt="The relation editor for equation to subtract: six glyph pairs drawn as numbered lines, and the list of pairs."
+             width="1196" height="866" loading="lazy">
+        <figcaption>The first relation: what the editor says (1), the pairs (2) and <span class="ui">Save
+          relation</span> (3).</figcaption>
+      </figure>
+      <p><strong><code>subtract</code> to <code>simplify</code>.</strong> Suggesting links by label links the
+        <code>2</code>, the <code>x</code> and the <code>=</code>. The right side is left: nothing in
+        <code>11 − 3</code> is the same symbol as <code>8</code>. Link it by hand. Click the first
+        <code>1</code> of the top formula, Shift-click the second <code>1</code>, the <code>−</code> and the
+        <code>3</code>, then click the <code>8</code> of the bottom one. The four glyphs are one pair.
+        In the list of pairs, set the style of that pair to <span class="ui">Fade transform</span>, so that they
+        fade into the <code>8</code>. Press <span class="ui">Save relation</span>.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/link-many.dark.webp" data-themed
+             alt="The drawing of the relation editor for subtract to simplify: the four glyphs 1, 1, minus and 3 of 2x = 11 − 3 selected, and the 8 of 2x = 8 below, which a click makes the target."
+             width="694" height="688" loading="lazy">
+        <figcaption>Four glyphs picked (1): the first with a click, the others with Shift. A click on the
+          <code>8</code> (2) makes the pair.</figcaption>
+      </figure>
+      <p><strong><code>simplify</code> to <code>divide</code>.</strong> By label again: the <code>2</code> goes
+        under the <code>8</code>, and the <code>x</code>, the <code>=</code> and the <code>8</code> go to their
+        places. The fraction bar has no partner, so it arrives with the intro of <code>divide</code>.</p>
+      <p><strong><code>divide</code> to <code>answer</code>.</strong> The <code>x</code> and the <code>=</code> are
+        linked by label. Link the fraction by hand: click the <code>8</code>, Shift-click the
+        <code>2</code> and the bar, then click the <code>4</code>, and set the style of the pair to
+        <span class="ui">Fade transform</span>. Press <span class="ui">Save relation</span>.</p>
+      <figure>
+        <img src="../media/tutorials/linear-equation/relation-4.dark.webp" data-themed
+             alt="The relation editor for divide to answer: x and equals linked one to one, and the 8, the 2 and the fraction bar linked together to the 4 with the Fade transform style."
+             width="1196" height="866" loading="lazy">
+        <figcaption>The last relation: the pair of three glyphs and one (1), and <span class="ui">Save
+          relation</span> (2).</figcaption>
+      </figure>
+      <aside class="callout tip">
+        <p>Switch from <span class="ui">Link</span> to <span class="ui">Preview</span> in the relation editor before you save:
+          the transformation loops, so you see a pair that looks wrong before it is in the project.</p>
+      </aside>
+
+      <h3 id="play">6. Play it</h3>
+      <p>Move the playhead to the start with <kbd data-keys="Home">Home</kbd> and press
+        <kbd data-keys="Space">Space</kbd>. The first formula writes itself in; each next formula takes shape as
+        the glyphs of the one before travel into it, and the glyphs with no partner are written in.
+        If a move is too quick, select its relation by clicking its band on the timeline and make its
+        <span class="ui">Duration</span> longer in the Animations panel; the clips must then overlap by that much
+        (<a href="../basics/first-transform.html#timing">Transforming one formula into another</a> says how
+        the window works).</p>
+
+      <h3 id="export">7. Export it</h3>
+      <p>Choose <span class="ui">Export ▸ Python — ManimCE…</span>. The scene is named after your project:
+        <code>SolvingALinearEquation</code>. Press <span class="ui">Download SolvingALinearEquation.py</span>.
+        The dialog is the one of <a href="../start/first-animation.html#export">your first animation</a>, and
+        <a href="../basics/export.html">Exporting</a> explains its options.</p>
+      <p>Run it from the folder of the file, with the command at the top of the file:</p>
+<pre data-excerpt="examples/linear-equation.ce.py"><code class="language-bash">manim -r 1920,1080 --fps 60 SolvingALinearEquation.py SolvingALinearEquation</code></pre>
+      <p>That renders at 1920×1080 and 60 frames a second. For a quick look, run
+        <code>manim -ql -p SolvingALinearEquation.py SolvingALinearEquation</code> instead: <code>-ql</code> renders
+        at 854×480 and 15 frames a second, and <code>-p</code> plays the video when it is done. Leave out
+        <code>-r</code> and <code>--fps</code>, which would override <code>-ql</code>.</p>
+
+      <h2 id="result">The result</h2>
+      <p>This is what ManimCE renders from the exported scene with <code>-ql</code>, the quick low-quality
+        render (854×480 at 15 frames a second):</p>
+      <video class="mfe-manim" src="../examples/linear-equation.mp4" controls preload="metadata" playsinline></video>
+      <p>And this is the Python the editor exports, for both libraries. It is plain Manim: one
+        <code data-excerpt="examples/linear-equation.ce.py">MathTex</code> per formula, then a <code data-excerpt="examples/linear-equation.ce.py">self.play(…)</code> per step of the timeline.</p>
+      <div class="mfe-code" data-mfe-python="linear-equation"></div>
+      <p>Open the project in the editor, change it, and export again:</p>
+      <div class="mfe-example" data-mfe-example="linear-equation"></div>
+      <h3 id="try">Try changing it</h3>
+      <ul>
+        <li>Solve another equation: write five new formulas, for <code>3x - 4 = 11</code> say, and follow the
+          same steps.</li>
+        <li>Make a transformation slower: select its band and lengthen its <span class="ui">Duration</span>, or
+          change its <span class="ui">Easing</span>.</li>
+        <li>Line up the equals signs of the five formulas with
+          <a href="../layout/align-symbol.html">Align by symbol</a>, so that the sign stays still while the
+          rest moves.</li>
+        <li>Make the next tutorial: <a href="pythagoras.html">The Pythagorean theorem, in colour</a>.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

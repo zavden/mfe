@@ -1,0 +1,27 @@
+/* Camera — a scene made with Manim Formula Editor, 10.50 s long.
+ *
+ * This file is the animation: the project as the editor keeps it. Edit it, reload the page,
+ * and the page says what it could not read; `node check.mjs` says it without a browser. What
+ * follows in this comment was written at the export, to find your way in the data below: it
+ * does not follow your edits. Positions are Manim’s: y up, the frame 8 units tall about the
+ * origin. Its times are the scene’s; in the data, a block’s `start` counts from its clip’s
+ * `start`, and a relation’s `offset` from its target clip’s.
+ *
+ * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   theorem  clips[0]  0.00–10.50 s  formulas[0] math “a^2+b^2=c^2”
+ *   root     clips[1]  5.40–10.50 s  formulas[1] math “c=\sqrt{a^2+b^2}”
+ *
+ * The glyphs of each formula, by the index that "glyphs": [3, 4] names:
+ *   theorem:  0 a  1 2  2 +  3 b  4 2  5 =  6 c  7 2
+ *   root:  0 c  1 =  2 √  3 —  4 a  5 2  6 +  7 b  8 2
+ *
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.00 s  theorem  write  clips[0].intro
+ *   1.50–2.50 s  camera → centre (-0.85, 1), height 3  camera.moves[0]
+ *   2.80–3.60 s  theorem  emphasis indicate [6, 7]  clips[0].actions[0]
+ *   3.90–5.10 s  camera → “Result”  camera.moves[1]
+ *   5.40–6.40 s  root  write  clips[1].intro
+ *   6.90–8.10 s  camera → “Wide”  camera.moves[2]
+ *   8.70–9.90 s  camera → the start  camera.moves[3]
+ *
+ * AGENTS.md tells what each part means. */

@@ -1,0 +1,1953 @@
+/* Theme "Mint" (the owner's style guide, D96): night-blue surfaces that float as rounded cards,
+ * a luminous mint for the primary action and for what is on, glass edges, and a glow only on
+ * points of interest. Dark is the guide's; light is its counterpart. Three colour domains stay
+ * apart: these UI tokens follow the theme; the identification colours (formula tags, relation
+ * pairs) and the scene's own colours (background, glyphs) never do.
+ *   --bg          the window                 --panel       a panel, a dialog
+ *   --panel-header  bars and title bars      --raised      a secondary button, a card on a panel
+ *   --well        a sunken area (lanes)      --input-bg    a field
+ *   --hover       what is under the pointer  --menu-hover  the same, in a menu
+ *   --border      a decorative divider       --border-strong  edges that identify a control (3:1)
+ *   --text, --text-dim (labels, help) and --text-muted (placeholders, metadata; on --bg,
+ *   --panel and --input-bg only)
+ *   --accent      what is on, what is chosen --accent-text text on an accent fill
+ *   --accent-bright  the accent's light: the edge of a hovered control
+ *   --selection   selected item background (with --text on it); --selection-from and
+ *                 --selection-to, its gradient: the active tab
+ *   --time        playhead, time readouts    --on-danger   text on a danger fill
+ *   --danger      an error, which needs an edit, and what destroys
+ *   --warning     a warning, a notice that needs no edit (D177), and unsaved work
+ *   --info        neutral information
+ *   --focus-ring  keyboard focus halo (blue, never the accent: focus is not selection)
+ *   --on-id-color text on an identification colour (tags, relation pairs): those colours are
+ *                 bright in both themes, so it stays dark in both
+ *   --block-<category> and --block-<category>-text: animation blocks on the timeline, one pair
+ *   for appear, disappear, transform and morph; saturated enough to stand out on any formula tag
+ *   (morph is a blue, away from the amber playhead and the teal relation windows).
+ *   --slide-pause, --slide-busy: the ruler of the Slides mode — where a pause may stand (a
+ *   blue-green) and where something animates (a red-orange), told apart in red-green colour
+ *   blindness too; tints of them carry the ruler's numbers. --slide-skip, a violet: a pause that
+ *   skips its wait, and the stretch it skips (D202).
+ *   --badge-exact, --badge-approx, --on-badge-color: the render badges (exact LaTeX, MathJax
+ *   approximation), dark fills with white text that read the same in both themes.
+ *   --primary-from, --primary-mid, --primary-to: the fill of a primary button, mint from its top
+ *   left to its bottom right, and --primary-text on it (dark, AA on every stop); a step lighter
+ *   under the pointer (--primary-hover-*). The same in both themes; --primary-edge, the rim that
+ *   tells the button from the panel, and --primary-glow, the light around it, follow the theme.
+ * What is not one colour: --app-backdrop (the window's two soft lights), --panel-gradient,
+ * --bar-gradient, --sheen (the light along the top of a bar), --edge-light (the glass edge inside
+ * a border), --popup-bg (a menu: the panel, slightly see-through), --swoosh (a curve of light: a
+ * decoration of the menu bar and of an empty panel) and the shadows.
+ * Shapes and rhythm, the same in both themes: --radius-control (8px), --radius-card (12px),
+ * --radius-panel (14px); a control is 32px high, a small one 26px, a main action 36px;
+ * --motion-fast for hover and press. */
+:root {
+  --on-id-color: #101419;
+  --badge-exact: #2e7d4f;
+  --badge-approx: #8a6d1d;
+  --on-badge-color: #fff;
+  --primary-from: #7bf4e6;
+  --primary-mid: #43eeca;
+  --primary-to: #20e3b2;
+  --primary-hover-from: #9afff0;
+  --primary-hover-mid: #5ef0da;
+  --primary-hover-to: #2be8bc;
+  --primary-text: #072c32;
+  --primary-gradient: linear-gradient(
+    160deg,
+    var(--primary-from) 0%,
+    var(--primary-mid) 55%,
+    var(--primary-to) 100%
+  );
+  --primary-gradient-hover: linear-gradient(
+    160deg,
+    var(--primary-hover-from) 0%,
+    var(--primary-hover-mid) 58%,
+    var(--primary-hover-to) 100%
+  );
+  --selection-gradient: linear-gradient(160deg, var(--selection-from) 0%, var(--selection-to) 100%);
+  --font-ui: Inter, 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-panel: 14px;
+  --motion-fast: 140ms;
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #07121a;
+  --panel: #10212c;
+  --panel-header: #132832;
+  --raised: #173039;
+  --well: #0d1c26;
+  --input-bg: #0b1a24;
+  --border: #25444e;
+  --border-strong: #41838a;
+  --separator: #25444e;
+  --separator-active: #43eeca;
+  --text: #edf9f9;
+  --text-dim: #acc3cb;
+  --text-muted: #7895a0;
+  --accent: #43eeca;
+  --accent-bright: #7bf4e6;
+  --accent-text: #072c32;
+  --primary-edge: #65f7dd;
+  --focus-ring: #8cc8ff;
+  --hover: #1c3741;
+  --menu-hover: #214a4f;
+  --selection: #155e60;
+  --selection-from: #1b6c6b;
+  --selection-to: #0d4e54;
+  --time: #f4c867;
+  --danger: #f1787f;
+  /* The two ends of a line (D140). */
+  --line-start: var(--accent);
+  --line-end: var(--danger);
+  --on-danger: #2a0a10;
+  --ok: #7fe0a2;
+  --info: #8cc8ff;
+  --warning: #f4c867;
+  --shadow: rgb(0 5 12 / 0.55);
+  --block-appear: #5ad79a;
+  --block-appear-text: #06241a;
+  --block-disappear: #ff8a7a;
+  --block-disappear-text: #330a06;
+  --block-transform: #b79cff;
+  --block-transform-text: #1c0c45;
+  --block-morph: #6fb3ff;
+  --block-morph-text: #04213f;
+  --block-emphasis: #ffd166;
+  --block-emphasis-text: #332500;
+  /* The scene's camera (D190): its moves on the timeline, and its row. */
+  --block-camera: #7dd3fc;
+  --block-camera-text: #06283a;
+  /* A target camera: a frame set aside for the camera to go to. */
+  --camera-target: #ff7ad9;
+  /* The Slides mode's ruler (D200): where a pause may stand, and where something animates. */
+  --slide-pause: #3cc4d6;
+  --slide-busy: #ff7b4a;
+  /* A pause that skips its wait, and what it skips (D202): the violet of the exported page's. */
+  --slide-skip: #b69cff;
+  /* The Initial state section of the Animations panel (R5): a tone of its own, AA on the panel. */
+  --section-initial: #f7a1d3;
+  --app-backdrop:
+    radial-gradient(ellipse 900px 540px at 12% -180px, rgb(24 149 132 / 0.16), transparent 72%),
+    radial-gradient(ellipse 580px 520px at 95% 25%, rgb(20 105 107 / 0.08), transparent 80%);
+  --panel-gradient: linear-gradient(155deg, #152d38 0%, #0d1d27 72%, #112d35 100%);
+  --bar-gradient: linear-gradient(180deg, #15303b 0%, #0c1e28 100%);
+  --sheen: linear-gradient(180deg, rgb(190 255 240 / 0.06), rgb(190 255 240 / 0) 85%);
+  --edge-light: rgb(190 255 240 / 0.07);
+  --popup-bg: rgb(19 42 52 / 0.94);
+  --shadow-panel: 0 14px 28px rgb(0 5 12 / 0.22);
+  --shadow-popup: 0 20px 36px rgb(0 0 0 / 0.5);
+  --primary-glow: 0 0 0 1px rgb(109 255 226 / 0.25), 0 4px 18px rgb(32 227 178 / 0.2);
+  --primary-glow-hover: 0 0 0 1px rgb(135 255 235 / 0.45), 0 6px 22px rgb(32 227 178 / 0.3);
+  --selection-glow: 0 2px 12px rgb(30 198 171 / 0.15);
+  --bar-light:
+    radial-gradient(
+      ellipse 420px 130px at 58% -94px,
+      rgb(32 227 178 / 0) 78%,
+      rgb(32 227 178 / 0.07) 96%,
+      rgb(123 244 230 / 0.3) 99.3%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 640px 260px at 82% -228px,
+      rgb(32 227 178 / 0) 90%,
+      rgb(32 227 178 / 0.05) 98%,
+      rgb(123 244 230 / 0.2) 99.6%,
+      transparent 100%
+    );
+  --swoosh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='rgb(32,227,178)' stop-opacity='.26'/%3E%3Cstop offset='1' stop-color='rgb(32,227,178)' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(123,244,230)' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='rgb(123,244,230)' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='rgb(123,244,230)' stop-opacity='.08'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M150 200C250 192 330 150 400 104V200Z' fill='url(%23a)' opacity='.55'/%3E%3Cpath d='M0 200C150 196 235 150 300 92C340 56 372 40 400 34V200Z' fill='url(%23a)'/%3E%3Cpath d='M0 200C150 196 235 150 300 92C340 56 372 40 400 34' fill='none' stroke='url(%23b)' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #e4eef0;
+  --panel: #ffffff;
+  --panel-header: #eef6f7;
+  --raised: #f4f9f9;
+  --well: #edf4f5;
+  --input-bg: #ffffff;
+  --border: #c9dadd;
+  --border-strong: #63858c;
+  --separator: #c9dadd;
+  --separator-active: #087568;
+  --text: #0e2a31;
+  --text-dim: #415c66;
+  --text-muted: #526d77;
+  --accent: #087568;
+  --accent-bright: #09806f;
+  --accent-text: #ffffff;
+  --primary-edge: #0a8572;
+  --focus-ring: #2a5ba8;
+  --hover: #dfecee;
+  --menu-hover: #d3ece7;
+  --selection: #cdeee6;
+  --selection-from: #d6f3ec;
+  --selection-to: #bfe9df;
+  --time: #8a5700;
+  --danger: #b52b45;
+  --on-danger: #ffffff;
+  --ok: #27693a;
+  --info: #2a5ba8;
+  --warning: #8a5700;
+  --shadow: rgb(14 42 49 / 0.22);
+  --block-appear: #17794c;
+  --block-appear-text: #ffffff;
+  --block-disappear: #b53a2a;
+  --block-disappear-text: #ffffff;
+  --block-transform: #6a43c9;
+  --block-transform-text: #ffffff;
+  --block-morph: #1f63b8;
+  --block-morph-text: #ffffff;
+  --block-emphasis: #8f6300;
+  --block-emphasis-text: #ffffff;
+  --block-camera: #0b6f9c;
+  --block-camera-text: #ffffff;
+  --camera-target: #b0167f;
+  --slide-pause: #0e8aa3;
+  --slide-busy: #d0501f;
+  --slide-skip: #7048e8;
+  --section-initial: #a0307c;
+  --app-backdrop:
+    radial-gradient(ellipse 900px 540px at 12% -180px, rgb(67 238 202 / 0.3), transparent 72%),
+    radial-gradient(ellipse 580px 520px at 95% 25%, rgb(32 227 178 / 0.12), transparent 80%);
+  --panel-gradient: linear-gradient(155deg, #ffffff 0%, #f8fcfc 72%, #edf8f5 100%);
+  --bar-gradient: linear-gradient(180deg, #ffffff 0%, #eaf3f4 100%);
+  --sheen: linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 85%);
+  --edge-light: rgb(255 255 255 / 0.85);
+  --popup-bg: rgb(255 255 255 / 0.95);
+  --shadow-panel: 0 10px 24px rgb(14 42 49 / 0.1);
+  --shadow-popup: 0 16px 32px rgb(14 42 49 / 0.22);
+  --primary-glow: 0 0 0 1px rgb(10 133 114 / 0.16), 0 4px 14px rgb(32 227 178 / 0.34);
+  --primary-glow-hover: 0 0 0 1px rgb(10 133 114 / 0.3), 0 6px 18px rgb(32 227 178 / 0.45);
+  --selection-glow: 0 2px 10px rgb(8 117 104 / 0.14);
+  --bar-light:
+    radial-gradient(
+      ellipse 420px 130px at 58% -94px,
+      rgb(32 227 178 / 0) 78%,
+      rgb(32 227 178 / 0.12) 96%,
+      rgb(8 117 104 / 0.3) 99.3%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 640px 260px at 82% -228px,
+      rgb(32 227 178 / 0) 90%,
+      rgb(32 227 178 / 0.08) 98%,
+      rgb(8 117 104 / 0.2) 99.6%,
+      transparent 100%
+    );
+  --swoosh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='rgb(32,227,178)' stop-opacity='.3'/%3E%3Cstop offset='1' stop-color='rgb(32,227,178)' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(8,117,104)' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='rgb(8,117,104)' stop-opacity='.4'/%3E%3Cstop offset='1' stop-color='rgb(8,117,104)' stop-opacity='.06'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M150 200C250 192 330 150 400 104V200Z' fill='url(%23a)' opacity='.55'/%3E%3Cpath d='M0 200C150 196 235 150 300 92C340 56 372 40 400 34V200Z' fill='url(%23a)'/%3E%3Cpath d='M0 200C150 196 235 150 300 92C340 56 372 40 400 34' fill='none' stroke='url(%23b)' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--app-backdrop), var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+/* Slim scrollbars in the theme's colours. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Keyboard focus is a halo outside the element, in its own colour; selection is drawn inside
+ * or on the edge in the accent (D27), so the two never look alike. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Read by assistive technology, never seen (the live region of Announcer). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* The panels float on the window: a margin around them, a gap between them (the separators). */
+.app-main {
+  flex: 1;
+  min-height: 0;
+  padding: 8px;
+}
+
+/* ---- Menu bar ---- */
+
+/* A bar of glass along the top: lit from above, two curves of light behind its right half. */
+.menu-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 44px;
+  padding: 0 12px;
+  background: var(--bar-light), var(--sheen), var(--bar-gradient);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 18px rgb(0 5 12 / 0.18);
+  flex: none;
+}
+
+/* The menubar itself: the menus and Export…, in a row of their own inside the bar. */
+.menu-bar-menus {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.app-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-right: 14px;
+}
+
+.brand-mark {
+  flex: none;
+}
+
+.menu {
+  position: relative;
+}
+
+/* A split button: the main part acts, the arrow opens a menu. The Export… button beside the
+ * menus (D62: Python for the last target used; the arrow, every export) and the
+ * Creator's «+ New ▸» (D61). Its two parts are one pill (below, with the primary button). */
+.split-button {
+  display: inline-flex;
+}
+
+.export-split {
+  margin-left: 10px;
+}
+
+.menu-button,
+.theme-toggle {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  padding: 5px 11px;
+  line-height: 18px;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+
+.menu-button:hover,
+.menu-button[aria-expanded='true'],
+.theme-toggle:hover {
+  background: var(--hover);
+  border-color: var(--border);
+}
+
+/* A menu is a sheet of glass over the app: the panel's colour, what is under it blurred. */
+.menu-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+  padding: 4px;
+  background: var(--popup-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow:
+    var(--shadow-popup),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 10px 6px 6px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-check {
+  flex: none;
+  width: 14px;
+  text-align: center;
+}
+
+.menu-swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  /* Visible on the popup and on the highlighted entry, whatever the colour. */
+  box-shadow: 0 0 0 1px var(--border-strong);
+}
+
+/* An icon in the same place, as dim as the label when the item is disabled. */
+.menu-icon {
+  display: flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  /* 8px from the label with the item's gap. */
+  margin-right: 2px;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+.menu-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.menu-shortcut {
+  margin-left: 24px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.menu-item:hover:not(:disabled) .menu-shortcut {
+  color: inherit;
+}
+
+.menu-separator {
+  height: 1px;
+  margin: 4px 2px;
+  background: var(--border);
+}
+
+.menu-item:hover:not(:disabled) {
+  background: var(--menu-hover);
+  color: var(--text);
+}
+
+.menu-item:disabled {
+  color: var(--text-dim);
+  opacity: 0.6;
+  cursor: default;
+  /* The pointer goes through to the popup, which closes an open submenu when it is hovered. */
+  pointer-events: none;
+}
+
+.menu-sub {
+  position: relative;
+  display: flex;
+}
+
+.menu-sub > .menu-item {
+  flex: 1;
+}
+
+/* A top-level menu that would leave a narrow window hangs from its button's right edge. */
+.menu-popup.is-right-aligned {
+  left: auto;
+  right: 0;
+}
+
+/* A submenu opens beside its entry, level with it; flipped to the left near the window's edge. */
+.menu-submenu {
+  top: -5px;
+  left: 100%;
+  margin-left: 2px;
+}
+
+.menu-submenu.is-flipped {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 2px;
+}
+
+.menu-chevron {
+  margin-left: 16px;
+}
+
+.menu-spacer {
+  flex: 1;
+}
+
+/* The renderer in use, after the document's name and state: a thin line between the two. */
+.status {
+  margin-right: 6px;
+  padding-left: 14px;
+  border-left: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* A long name is cut short (its tooltip has it whole); the document's state stays visible. */
+.project-name {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 440px;
+  margin-right: 14px;
+  white-space: nowrap;
+  color: var(--text-dim);
+}
+
+/* The name is a button: it looks like text and renames the project in place. */
+.project-name-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: text;
+}
+
+.project-name-text:hover {
+  color: var(--text);
+  text-decoration: underline dotted;
+}
+
+.project-name-input {
+  width: 180px;
+  padding: 1px 6px !important;
+}
+
+.doc-status {
+  flex: none;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+/* The file the project was opened from or saved to, after its name. */
+.doc-file {
+  min-width: 0;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.doc-file::before {
+  margin: 0 0.4em;
+  content: '·';
+}
+
+.doc-status::before {
+  margin: 0 0.4em;
+  content: '·';
+}
+
+/* Unsaved work asks for attention: bold, in the warning colour of the theme. */
+.project-name[data-dirty='true'] .doc-status {
+  color: var(--warning);
+  font-weight: 600;
+}
+
+/* Work brought back by the autosave lives only in this browser until it is saved. */
+.doc-status[data-recovered='true'] {
+  color: var(--warning);
+  font-weight: 600;
+}
+
+.project-name[data-dirty='true'] {
+  color: var(--text);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 7px;
+}
+
+/* ---- Panels ---- */
+
+.panel-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden !important;
+}
+
+/* A panel's content lives in a node of its own, which the layout in use puts in its place
+ * (`useHome`, AppLayout.tsx): neither the node nor its place is a box. */
+.panel-home,
+.panel-home-slot {
+  display: contents;
+}
+
+/* ---- Zen mode (D182, D188): the Preview with a strip of buttons and a drawer over it ---- */
+.zen-stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.zen-stage[data-strip='bottom'] {
+  flex-direction: column-reverse;
+}
+
+/* The strip: one thin row — the two panels' buttons, the tools, and at its far end the arrow
+ * that moves it. */
+.zen-strip {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--well);
+}
+
+.zen-strip-room {
+  flex: 1;
+}
+
+.zen-strip-sep {
+  flex: none;
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: var(--border-strong);
+}
+
+.zen-strip-tab,
+.zen-strip-tool {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.zen-strip-tool {
+  width: 26px;
+  padding: 0;
+}
+
+.zen-strip-tab svg,
+.zen-strip-tool svg {
+  width: 15px;
+  height: 15px;
+}
+
+.zen-strip-tab:hover,
+.zen-strip-tool:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--hover);
+}
+
+.zen-strip-tool:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.zen-strip-tab.is-active,
+.zen-strip-tool.is-on {
+  border-color: var(--border-strong);
+  background: var(--selection-gradient);
+  color: var(--text);
+  box-shadow:
+    var(--selection-glow),
+    inset 0 1px 0 var(--edge-light);
+}
+
+/* «+ New» and the arrow of its menu, as in the Creator, at the strip's height. */
+.zen-strip-new {
+  flex: none;
+  margin: 0 2px;
+}
+
+.zen-strip-new .btn {
+  height: 24px;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.zen-strip-tab:focus-visible,
+.zen-strip-tool:focus-visible,
+.zen-drawer-edge:focus-visible,
+.zen-drawer-split:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.zen-stage-body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* The drawer: a half for each panel over the Preview, from the strip's side — the Creator on
+ * the left, the Animations panel on the right. A half that is closed leaves the Preview seen,
+ * and reached. Under the search of formulas, which covers the Preview's place whole. */
+.zen-drawer {
+  position: absolute;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-popup);
+}
+
+.zen-drawer[hidden] {
+  display: none;
+}
+
+.zen-drawer.is-creator {
+  left: 0;
+}
+
+.zen-drawer.is-animations {
+  right: 0;
+}
+
+.zen-stage[data-strip='top'] .zen-drawer,
+.zen-stage[data-strip='top'] .zen-drawer-split {
+  top: 0;
+}
+
+.zen-stage[data-strip='bottom'] .zen-drawer,
+.zen-stage[data-strip='bottom'] .zen-drawer-split {
+  bottom: 0;
+}
+
+.zen-stage[data-strip='bottom'] .zen-drawer {
+  flex-direction: column-reverse;
+}
+
+.zen-drawer-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* The free edge of a half: a grip to drag, as tall as a separator. */
+.zen-drawer-edge {
+  flex: none;
+  height: 8px;
+  margin: 0 35%;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text-dim) 45%, transparent);
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+/* Where the two halves meet: a line to drag, down the drawer's height. */
+.zen-drawer-split {
+  position: absolute;
+  z-index: 9;
+  width: 8px;
+  margin-left: -4px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.zen-drawer-split::after {
+  position: absolute;
+  top: 30%;
+  bottom: 30%;
+  left: 2px;
+  width: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--text-dim) 45%, transparent);
+  content: '';
+}
+
+.zen-drawer-edge:hover,
+.zen-drawer-split:hover::after {
+  background: var(--accent);
+}
+
+/* A panel is a card of glass: the panel's gradient, a thin edge lit from inside, round corners
+ * and a soft shadow on the window. */
+.panel-frame {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: var(--panel-gradient), var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-panel);
+  box-shadow:
+    var(--shadow-panel),
+    inset 0 1px 0 var(--edge-light);
+  overflow: hidden;
+}
+
+/* Its title bar, `FOLDED_PX` high with the frame's edges (panelsStore.ts): the panel's icon in
+ * the accent, its title, and the fold button at the far end. */
+.panel-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  background: var(--sheen);
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--accent);
+}
+
+.panel-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* A panel's own tools, at the far end of its title bar (PanelFrame `tools`). A bar too narrow
+ * for them and the title loses the title — the panel's icon still says which panel it is, and
+ * the heading stays for assistive technology — and what still does not fit scrolls sideways. */
+.panel-header:has(> .panel-tools) {
+  container: panel-header / inline-size;
+}
+
+.panel-tools {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  min-width: 0;
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+@container panel-header (max-width: 400px) {
+  .panel-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* The fold button of a foldable panel: a chevron pointing where the panel goes (D62). */
+.panel-fold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: background-color var(--motion-fast);
+}
+
+.panel-fold:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
+.panel-fold[data-direction='left'] svg {
+  transform: rotate(90deg);
+}
+
+.panel-fold[data-direction='right'] svg {
+  transform: rotate(-90deg);
+}
+
+.panel-fold[data-direction='up'] svg {
+  transform: rotate(180deg);
+}
+
+/* Folded to a side: the header runs down the strip, its button on top. */
+.panel-frame.is-folded[data-side='left'] .panel-header,
+.panel-frame.is-folded[data-side='right'] .panel-header {
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 8px 3px;
+  border-bottom: 0;
+}
+
+.panel-frame.is-folded[data-side='left'] .panel-fold,
+.panel-frame.is-folded[data-side='right'] .panel-fold {
+  order: -1;
+  margin-left: 0;
+}
+
+/* Folded to its title bar, a panel has no line under it. */
+.panel-frame.is-folded .panel-header {
+  border-bottom: 0;
+}
+
+.panel-frame.is-folded[data-side='left'] .panel-title,
+.panel-frame.is-folded[data-side='right'] .panel-title {
+  writing-mode: vertical-rl;
+}
+
+/* Panel titles in sentence case: "Creator", "Preview", "Animations", "Timeline". */
+.panel-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 10px;
+}
+
+/* A folded panel's body: `hidden` must win over a body's own display (the Creator's flex). */
+.panel-body[hidden] {
+  display: none;
+}
+
+.placeholder {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+/* ---- Separators ---- */
+
+/* The gap between two panels is the handle that resizes them: nothing to see until the pointer
+ * is on it, then a short bar of the accent in its middle. */
+.separator {
+  position: relative;
+  flex: none;
+  background: transparent;
+}
+
+.separator::after {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 2px;
+  background: var(--border-strong);
+  opacity: 0;
+  content: '';
+  transition:
+    opacity var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.separator-vertical {
+  width: 8px;
+}
+
+.separator-vertical::after {
+  width: 2px;
+  height: min(56px, 40%);
+}
+
+.separator-horizontal {
+  height: 8px;
+}
+
+.separator-horizontal::after {
+  width: min(56px, 40%);
+  height: 2px;
+}
+
+.separator[data-separator='hover']::after,
+.separator[data-separator='active']::after,
+.separator:focus-visible::after {
+  background: var(--separator-active);
+  opacity: 1;
+}
+
+/* ---- Shared controls ---- */
+
+/* Controls are told apart by a stronger edge than the decorative dividers (--border). A button
+ * is 32px high (a small one 26px): its label is semi-bold, its edge lights up under the pointer
+ * and it gives a pixel when pressed. */
+.btn {
+  padding: 6px 14px;
+  background: var(--raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  box-shadow: inset 0 1px 0 var(--edge-light);
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--hover);
+  border-color: var(--accent-bright);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* The primary action of a place (D96): mint from its top left to its bottom right, its label
+ * dark and bold, a line of light along its top and a glow of its own colour around it. One per
+ * context: the rest are plain buttons. */
+.btn-primary {
+  background: var(--primary-gradient);
+  border-color: var(--primary-edge);
+  color: var(--primary-text);
+  font-weight: 650;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.5),
+    var(--primary-glow);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-gradient-hover);
+  border-color: var(--primary-edge);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.6),
+    var(--primary-glow-hover);
+}
+
+.btn-primary:disabled {
+  box-shadow: none;
+}
+
+.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--on-danger);
+  font-weight: 650;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--danger);
+  border-color: var(--text);
+  filter: brightness(1.1);
+}
+
+.btn-small {
+  padding: 3px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+/* The two parts of a split button are one control: the main part keeps its round left corners,
+ * the arrow the right ones, and a dark line, half see-through, is all there is between them. */
+.btn-primary.split-main {
+  padding-right: 12px;
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-primary.split-arrow {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 9px;
+  padding-left: 8px;
+  border-left-color: rgb(7 44 50 / 0.3);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-primary.split-arrow svg {
+  width: 12px;
+  height: 12px;
+}
+
+.btn-small.btn-primary.split-arrow {
+  padding-right: 8px;
+  padding-left: 7px;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='search'],
+select,
+textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  padding: 5px 9px;
+  transition: border-color var(--motion-fast);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+input[type='text']:hover:not(:disabled, :focus),
+input[type='number']:hover:not(:disabled, :focus),
+input[type='search']:hover:not(:disabled, :focus),
+select:hover:not(:disabled, :focus),
+textarea:hover:not(:disabled, :focus) {
+  border-color: var(--accent-bright);
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+textarea {
+  font-family: var(--font-mono);
+  resize: vertical;
+}
+
+input[type='color'] {
+  width: 30px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+input[type='checkbox'],
+input[type='radio'],
+input[type='range'],
+progress {
+  accent-color: var(--accent);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px 12px;
+  align-items: start;
+}
+
+.form-grid > label,
+.form-grid > .form-label {
+  padding-top: 5px;
+  color: var(--text-dim);
+}
+
+.field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.field-stack > textarea,
+.field-stack > select {
+  width: 100%;
+}
+
+.inline-fields {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.inline-fields input[type='text'] {
+  width: 70px;
+}
+
+/* A colour among inline fields keeps the width of its seven characters. */
+.inline-fields input[type='text'].color-hex {
+  width: 82px;
+}
+
+/* A checkbox with its words, among inline fields (a shape's own fill colour). */
+.check-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.check-field input {
+  margin: 0;
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.field-hint {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.color-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.color-hex {
+  width: 82px;
+  font-family: var(--font-mono);
+}
+
+/* --- Tabs (ui/Tabs.tsx) ------------------------------------------------------------------ */
+/* The tabs sit side by side in one rounded tray; the active one is a raised key of the selection
+ * gradient with a lit edge — teal, never the mint of the primary button beside it. A tab may
+ * carry an icon over its label. */
+.tabs-list {
+  display: flex;
+  gap: 4px;
+  margin: 8px 8px 0;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--well);
+}
+
+.tabs-tab {
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 5px 2px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.tabs-tab-icon {
+  display: inline-flex;
+}
+
+.tabs-tab-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.tabs-tab-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Under an icon the label is a caption: a size smaller, so three tabs fit a narrow panel. */
+.tabs-tab-icon + .tabs-tab-label {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.tabs-tab:hover {
+  color: var(--text);
+  background: var(--hover);
+}
+
+.tabs-tab.is-active {
+  border-color: var(--border-strong);
+  background: var(--selection-gradient);
+  color: var(--text);
+  box-shadow:
+    var(--selection-glow),
+    inset 0 1px 0 var(--edge-light);
+}
+
+.tabs-tab:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* --- Hold-to-confirm button (ui/HoldButton.tsx) --------------------------------------------- */
+.hold-button {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.hold-button-fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: rgb(255 255 255 / 0.28);
+  pointer-events: none;
+}
+
+.hold-button.is-holding .hold-button-fill {
+  transform: scaleX(1);
+  transition: transform var(--hold-ms, 700ms) linear;
+}
+
+.hold-button-label {
+  position: relative;
+}
+
+/* --- Segmented switch (ui/SegmentedControl.tsx) ------------------------------------------- */
+.segmented {
+  --pad: 3px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--segments, 2), minmax(0, 1fr));
+  padding: var(--pad);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--input-bg);
+  box-shadow: inset 0 1px 2px var(--shadow);
+}
+
+.segmented-thumb {
+  position: absolute;
+  top: var(--pad);
+  bottom: var(--pad);
+  left: var(--pad);
+  width: calc((100% - 2 * var(--pad)) / var(--segments, 2));
+  border-radius: 7px;
+  background: linear-gradient(160deg, var(--accent-bright), var(--accent));
+  box-shadow:
+    0 1px 3px var(--shadow),
+    0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent);
+  transform: translateX(calc(100% * var(--index, 0)));
+  transition: transform 220ms cubic-bezier(0.3, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.segmented-option {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.segmented-option:hover:not(.is-checked) {
+  color: var(--text);
+}
+
+.segmented-option.is-checked {
+  color: var(--accent-text);
+}
+
+.segmented-option:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.segmented-arrow {
+  margin: 0 0.35em;
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmented-thumb,
+  .segmented-option {
+    transition: none;
+  }
+}
+
+/* ---- Rectangle selection (useMarquee) ---- */
+
+/* The same, drawn over HTML (a container of several glyph views); the container is positioned. */
+.marquee-box {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  border: 1px dashed var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  pointer-events: none;
+}
+
+.marquee-rect {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+  stroke: var(--accent);
+  stroke-width: 1px;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+
+/* ---- Context menus (ContextMenu) ---- */
+
+.ctx-menu {
+  position: fixed;
+  z-index: 140;
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  max-width: 280px;
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--popup-bg);
+  box-shadow:
+    var(--shadow-popup),
+    inset 0 1px 0 var(--edge-light);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.ctx-header {
+  padding: 4px 10px 2px;
+  overflow: hidden;
+  color: var(--text-dim);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A header that says more than a name — where "Add animation" adds, and why not at the playhead
+   (D171) —: it wraps rather than being cut. */
+.ctx-header.is-wrapping {
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.ctx-group {
+  padding-top: 6px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ctx-item {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* An item led by an icon (the align and distribute items). */
+.ctx-item.has-icon {
+  display: flex;
+  align-items: center;
+}
+
+.ctx-icon {
+  display: flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+/* A submenu's entry: its label, then a chevron at the right; it stays highlighted while its
+   panel is open. The panel is another .ctx-menu, placed beside the entry (`placeSubmenu`). */
+.ctx-sub-entry {
+  display: flex;
+  align-items: center;
+}
+
+.ctx-sub-entry[aria-expanded='true'] {
+  background: var(--menu-hover);
+}
+
+.ctx-sub-label {
+  flex: 1;
+}
+
+.ctx-chevron {
+  margin-left: 16px;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ctx-item:hover:not(:disabled),
+.ctx-item:focus-visible {
+  background: var(--menu-hover);
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.ctx-item:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* The mark of an end of a line (D140): the start in the accent, the end in the colour of the
+   theme that reads apart from it — on its handle in the preview, in the menus that free it and
+   in the Animations panel. */
+.line-end-dot {
+  display: inline-block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--line-start);
+  box-shadow: 0 0 0 1px var(--border-strong);
+}
+
+.line-end-dot[data-side='end'] {
+  background: var(--line-end);
+}
+
+.ctx-icon .line-end-dot {
+  margin: auto;
+}
+
+/* The two ends at once («Detach all»): both marks, side by side in the place of one. */
+.ctx-icon .line-end-dot.is-half {
+  width: 6px;
+  height: 6px;
+  margin: auto 1px;
+}
+
+/* A note after an item's text ("coming next"). */
+.ctx-hint {
+  margin-left: 10px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+/* A line after an item that says more about it: what it would do, or why it cannot now. */
+.ctx-note {
+  padding: 0 10px 4px;
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* The box of a toggle (a `menuitemcheckbox`), in the place of an icon: ticked when it is on. */
+.ctx-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  margin: auto;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ctx-checkbox.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.ctx-item.is-current {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.ctx-item.is-current::before {
+  content: '✓ ';
+}
+
+.ctx-item.is-danger {
+  color: var(--danger);
+}
+
+.ctx-sep {
+  width: 100%;
+  margin: 4px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+/* A row of colour swatches inside a menu. */
+.ctx-swatches {
+  display: grid;
+  grid-template-columns: repeat(7, 22px);
+  gap: 4px;
+  padding: 4px 10px 6px;
+}
+
+/* A colour to pick: in the context menus and in the Creator's palettes. */
+.ctx-swatch,
+.palette-swatch {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ctx-swatch:hover,
+.ctx-swatch:focus-visible,
+.palette-swatch:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* A colour typed as hexadecimal, under the swatches: its label, a sample of what is typed, the
+   field and Apply. */
+.ctx-hex {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px 6px;
+}
+
+.ctx-hex-label {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.ctx-hex-sample {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 5px;
+}
+
+.ctx-hex-sample[style] {
+  border-style: solid;
+}
+
+.ctx-hex-input {
+  flex: 1;
+  width: 78px;
+  min-width: 0;
+  height: 24px;
+  padding: 0 6px;
+  color: var(--text);
+  background: var(--well);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ctx-hex-input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.ctx-hex-input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.ctx-hex-apply {
+  flex: none;
+  height: 24px;
+  padding: 0 8px;
+  color: var(--text);
+  background: var(--raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ctx-hex-apply:hover:not(:disabled),
+.ctx-hex-apply:focus-visible {
+  background: var(--menu-hover);
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.ctx-hex-apply:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ErrorBoundary: what is left when rendering throws. */
+.crash {
+  max-width: 640px;
+  margin: 12vh auto 0;
+  padding: 24px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-panel);
+}
+
+.crash h1 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.crash-actions {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.crash pre {
+  max-height: 240px;
+  overflow: auto;
+  color: var(--text-dim);
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+/* ---- Narrow windows: a phone, or the desktop at 400 % zoom ---- */
+/* Below the width of `NARROW_LAYOUT` (useMediaQuery.ts) the four panels stack, each as tall as
+ * most of the window, and the page scrolls down — never sideways: the bars wrap their controls
+ * and the title keeps only its mark. The resizable layout comes back with the room. */
+.app-main.is-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.stacked-panel {
+  flex: none;
+  height: 60vh;
+  min-height: 240px;
+}
+
+@media (max-width: 760px) {
+  .menu-bar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 44px;
+    padding: 4px 6px;
+  }
+
+  /* Beside the first row of the menus, as tall as a menu's button, when they take two. */
+  .app-title {
+    align-self: flex-start;
+    min-height: 30px;
+    margin-right: 4px;
+  }
+
+  .app-title-text {
+    display: none;
+  }
+
+  /* Its menus wrap as the bar does, beside the title (a basis of 0: as wide as all of them, it
+   * would go to a line of its own). */
+  .menu-bar-menus {
+    flex: 1 1 0;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  /* The project's name and state take a line of their own. */
+  .menu-spacer {
+    flex: 1 1 100%;
+    height: 0;
+  }
+
+  .project-name {
+    flex: 1 1 auto;
+    max-width: none;
+    margin-right: 6px;
+  }
+
+  .transport,
+  .tl-tools {
+    flex-wrap: wrap;
+  }
+
+  /* The timeline's tools wrap, and its slider takes a line of its own under them. */
+  .tl-toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .tl-tools {
+    flex: 1 1 100%;
+  }
+
+  .tl-slider-cell {
+    flex-basis: 100%;
+  }
+
+  .tl-slider-cell::after {
+    display: none;
+  }
+
+  /* What follows the slider takes a line of its own, under it. */
+  .tl-slider-row {
+    grid-template-columns: var(--tl-slider-side) minmax(0, 1fr);
+    row-gap: 4px;
+  }
+
+  .tl-slider-side.is-after {
+    grid-column: 2;
+  }
+}
+
+/* ---- Forced colours (Windows high contrast and the like) ---- */
+/* The browser repaints every background, text and border in the system palette and drops the
+ * shadows, so a state that was only a background would vanish. Each one gets a ring, a border
+ * or an underline in the system colours instead; colour samples and formula previews keep their
+ * own colours, which are the point of them. The other stylesheets have blocks of their own. */
+@media (forced-colors: active) {
+  /* A toggle that is on, a chosen option: a ring inside the control. */
+  [aria-pressed='true'],
+  .is-on,
+  .segmented-option.is-checked {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .segmented-thumb {
+    display: none;
+  }
+
+  .tabs-tab.is-active,
+  .zen-strip-tab.is-active {
+    border-color: Highlight;
+    text-decoration: underline 2px;
+  }
+
+  /* Zen mode's drawer has no shadow to lift it off the Preview: an edge instead. */
+  .zen-drawer {
+    outline: 1px solid CanvasText;
+  }
+
+  .menu-button[aria-expanded='true'] {
+    border-color: Highlight;
+  }
+
+  .menu-item:hover:not(:disabled),
+  .ctx-item:hover:not(:disabled) {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+
+  .ctx-sub-entry[aria-expanded='true'] {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+
+  .ctx-item.is-current {
+    text-decoration: underline;
+  }
+
+  .btn-primary {
+    border-width: 2px;
+  }
+
+  /* The handles between the panels: a visible bar. */
+  .separator {
+    forced-color-adjust: none;
+    background: GrayText;
+  }
+
+  .separator[data-separator='hover'],
+  .separator[data-separator='active'] {
+    background: Highlight;
+  }
+
+  /* Colour samples stay what they are. */
+  .menu-swatch,
+  .palette-swatch,
+  .formula-tag-dot {
+    forced-color-adjust: none;
+  }
+}

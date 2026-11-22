@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preferences · Manim Formula Editor</title>
+  <meta name="description" content="Every preference of the editor: what it does, where you change it, what it is by default, and how it differs from the settings of a project.">
+  <meta name="mfe:id" content="reference/preferences">
+  <meta name="mfe:level" content="reference">
+  <meta name="mfe:short" content="Preferences">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc wide-tables">
+      <h1>Preferences</h1>
+      <p class="lead">Every preference of the editor: what it does, where you change it, and what it is the
+        first time you open the app. Preferences belong to you and your browser; the settings of a project
+        are a different thing, at the end of the page.</p>
+
+      <h2 id="where-kept">Where preferences are kept</h2>
+      <p>A preference is kept in the browser you use, for you, and not in a project file. It is the same for
+        every project you open, and it does not travel with a project: open the same file on another
+        computer and the editor behaves as that computer’s browser remembers. Change one and it takes
+        effect at once; there is nothing to save and nothing to undo.</p>
+      <aside class="callout note">
+        <p>If the browser blocks its storage (some private windows do), the preferences still work while the
+          tab is open, but they are not kept: the next visit starts from the defaults. Clearing the site data
+          of the editor in your browser resets all of them, and also removes the autosaves, your templates, your
+          palettes and the recordings the browser holds, so save your projects to files first.</p>
+      </aside>
+
+      <h2 id="menu">The Preferences menu</h2>
+      <p>Most preferences are in the <span class="ui">Preferences</span> menu, grouped by what they do. The others
+        are in the <span class="ui">Edit</span> and <span class="ui">View</span> menus, or on a button of the panel
+        they change, and the tables below say where.</p>
+      <figure>
+        <img src="../media/reference/preferences/menu.dark.webp" data-themed
+             alt="The Preferences menu open with Scale step: 0.05 ticked, 0.1, 0.15, 0.2 and Custom…. Above it Snap to objects, Guide colour, Guide width, Glyph selection colour and Keep the transform handles shown; below it Locked formulas, Show grid, Grid spacing, Grid snaps, Show the camera’s route, Dim what the camera leaves out, Standard scale…, Split suffix (_s)…, Zen mode, Chroma Lab… and Editor palettes…."
+             width="468" height="600" loading="lazy">
+        <figcaption>The <span class="ui">Preferences</span> menu with <span class="ui">Scale step</span> open: a tick marks the choice in use.</figcaption>
+      </figure>
+      <p>The entries are described one by one in <a href="menus.html#preferences-menu">Every menu</a>; here
+        they are described by what they change.</p>
+
+      <h2 id="look">Look and layout</h2>
+      <p>How the editor looks and how its panels are arranged.</p>
+<!-- reference-table:preferences:look begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">Look and layout</caption>
+<thead><tr><th>Preference</th><th>Where you change it</th><th>What it does</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Theme</span></td><td><span class="ui">View ▸ Theme</span><br><span class="ui">View ▸ Toggle theme</span><br>the button at the end of the menu bar</td><td>Dark, Light, or System, which follows the colour scheme of your operating system as it changes. The button and <span class="ui">Toggle theme</span> flip between dark and light and keep that choice.<br>See <a href="../start/interface.html#themes">The interface</a>.</td><td>Dark</td></tr>
+<tr><td><span class="ui">Panels</span></td><td><span class="ui">View ▸ Panels</span><br>the chevron in a panel’s header<br>dragging the gaps between panels</td><td>Folds the Creator, the Animations panel and the Timeline to their title bars, and sets their sizes. The browser remembers both, so the layout comes back as you left it. In the stacked layout of a narrow window there is nothing to fold.<br>See <a href="../start/interface.html#panels">The interface</a>.</td><td>All three shown, at their standard sizes</td></tr>
+<tr><td><span class="ui">Zen mode</span></td><td><span class="ui">Preferences ▸ Zen mode</span></td><td>An arrangement for small windows: the timeline is a column on the left, drawn vertical, and the Preview takes all the rest. The Creator and the Animations panel are behind two buttons of a strip along the Preview, each opening its panel as a half of a drawer over it. The browser also remembers the side of the Preview the strip is on, which halves are open, the drawer’s height and where its halves meet.<br>See <a href="../start/interface.html#zen">The interface</a>.</td><td>Off</td></tr>
+<tr><td>Creator list</td><td>the key beside the search in the Creator, which switches to the other view</td><td>Shows the formulas as rows with their rendering, or as a grid of blocks.<br>See <a href="../basics/formulas.html#list-blocks">Formulas</a>.</td><td>List</td></tr>
+<tr><td>Previews of the Creator list</td><td>the +/− key of the Creator’s toolbar (a click larger, a right-click smaller), in the list view</td><td>How tall the drawing of each card of the list view is: 1×, 1.5×, 2× or 3× its standard height of 52 pixels. The block view has a size of its own.<br>See <a href="../basics/formulas.html#preview-size">Formulas</a>.</td><td>1×</td></tr>
+<tr><td>Preview tooltip of the blocks</td><td>the +/− key of the Creator’s toolbar (a click larger, a right-click smaller), in the block view</td><td>How large the tooltip beside a block is, with its drawing: 1×, 1.5×, 2× or 3×, the drawing as many times wider and taller. The list view has a size of its own.<br>See <a href="../basics/formulas.html#preview-size">Formulas</a>.</td><td>1×</td></tr>
+<tr><td><span class="ui">Glyph list</span></td><td>the Glyph list key beside the Glyphs title in the formula editor and the text editor</td><td>Lists the glyphs under the drawing as keys, each with its index and label: the way to pick glyphs from the keyboard. It takes room, so it shows only when asked for.<br>See <a href="../layout/glyph-picking.html#glyph-view">Picking glyphs</a>.</td><td>Off</td></tr>
+<tr><td>Glyph list of the pair editors</td><td>the Glyph list key in the relation editor and in the pair editor of a Morph block</td><td>The same list under each of the two formulas of a pair editor: one choice for the two editors.<br>See <a href="../transforms/relation-editor.html#keyboard">Relation editor</a>.</td><td>Off</td></tr>
+<tr><td><span class="ui">Formula keypad</span></td><td>the ⌨ Keyboard key beside the LaTeX title of the formula editor, which shows and hides it</td><td>Whether the on-screen keypad of the formula editor, under the visual field, was left shown: it is there again the next time the editor opens, until its key hides it.<br>See <a href="../basics/formulas.html#keyboard">Formulas</a>.</td><td>Hidden</td></tr>
+</tbody>
+</table>
+<!-- reference-table:preferences:look end -->
+
+      <h2 id="preview">The Preview</h2>
+      <p>Aids for placing things in the Preview. Three of them are also buttons in the toolbar at the end of
+        the Preview’s title bar, so you can switch them without opening a menu.</p>
+      <figure>
+        <img src="../media/reference/preferences/preview-tools.dark.webp" data-themed
+             alt="The Preview’s toolbar with three buttons ringed, each numbered below it: 1 the circle selector, 2 the handles button, 3 the magnet that snaps to objects."
+             width="305" height="73" loading="lazy">
+        <figcaption>The Preview’s toolbar: the circle selector (1), the transform handles kept shown (2) and
+          snapping to objects (3) are preferences you switch here or in the menu.</figcaption>
+      </figure>
+<!-- reference-table:preferences:preview begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">The Preview</caption>
+<thead><tr><th>Preference</th><th>Where you change it</th><th>What it does</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Snap to objects</span></td><td><span class="ui">Preferences ▸ Snap to objects</span><br>the magnet button in the Preview’s toolbar</td><td>A dragged formula sticks to the edges and centres of the other formulas and of the frame, and to the gaps between them. Hold Ctrl/⌘ after pressing to drag freely.<br>See <a href="../basics/preview.html#drag-snap">The Preview</a>.</td><td>On</td></tr>
+<tr><td><span class="ui">Guide colour</span></td><td><span class="ui">Preferences ▸ Guide colour</span></td><td>The colour of the guide lines that a snapped drag shows: yellow, orange, magenta, cyan, green or white.<br>See <a href="../basics/preview.html#drag-snap">The Preview</a>.</td><td>Yellow</td></tr>
+<tr><td><span class="ui">Guide width</span></td><td><span class="ui">Preferences ▸ Guide width</span></td><td>How thick those lines are: thin, regular or thick.<br>See <a href="../basics/preview.html#drag-snap">The Preview</a>.</td><td>Thin</td></tr>
+<tr><td><span class="ui">Glyph selection colour</span></td><td><span class="ui">Preferences ▸ Glyph selection colour</span></td><td>The colour of the glyphs picked with Alt in the Preview, and of the rectangle that picks them. The same six colours as the guides.<br>See <a href="../layout/glyph-picking.html#selection-colour">Picking glyphs</a>.</td><td>Yellow</td></tr>
+<tr><td><span class="ui">Keep the transform handles shown</span></td><td><span class="ui">Preferences ▸ Keep the transform handles shown</span><br>the handles button in the Preview’s toolbar</td><td>Keeps the handles for scaling and rotating on the selected clips. Off, they show only while you hold Shift.<br>See <a href="../basics/preview.html#handles">The Preview</a>.</td><td>Off</td></tr>
+<tr><td><span class="ui">Scale step</span></td><td><span class="ui">Preferences ▸ Scale step</span><br><span class="ui">Preferences ▸ Scale step ▸ Custom…</span></td><td>The step that a corner drag’s scale snaps to. Choose a preset, or <span class="ui">Custom…</span> for a number or a fraction such as 1/3, from 0.01 to 2.<br>See <a href="../basics/preview.html#handles">The Preview</a>.</td><td>0.05 (presets 0.05, 0.1, 0.15, 0.2)</td></tr>
+<tr><td><span class="ui">Locked formulas</span></td><td><span class="ui">Preferences ▸ Locked formulas</span></td><td>How opaque the Preview draws a formula that is locked in it, of its own opacity: 20, 30, 40, 50, 60, 80 or 100 %. Only the Preview is faded; nothing exported is.<br>See <a href="../basics/preview.html#lock">The Preview</a>.</td><td>40 %</td></tr>
+<tr><td><span class="ui">Show grid</span></td><td><span class="ui">Preferences ▸ Show grid</span><br>the # button in the bar under the Preview<br><kbd data-keys="Mod+'">Ctrl+'</kbd></td><td>Draws a grid under the formulas and makes a dragged formula snap to it (Ctrl/⌘ held frees it). The grid is never part of an export.<br>See <a href="../basics/preview.html#grid">The Preview</a>.</td><td>Off</td></tr>
+<tr><td><span class="ui">Grid spacing</span></td><td><span class="ui">Preferences ▸ Grid spacing</span><br>− and + beside the # button<br>Alt+↑ and Alt+↓ while the grid is shown</td><td>The distance between grid lines, in Manim units: 2, 1, 0.5, 0.25 or 0.1.<br>See <a href="../basics/preview.html#grid">The Preview</a>.</td><td>1 unit</td></tr>
+<tr><td><span class="ui">Grid snaps</span></td><td><span class="ui">Preferences ▸ Grid snaps</span><br>the last button of the grid controls, under the Preview</td><td>What the grid holds while you drag: the formula’s centre, or whichever of its edges is nearer to a line.<br>See <a href="../basics/preview.html#grid">The Preview</a>.</td><td>The formula’s centre</td></tr>
+<tr><td><span class="ui">Show the camera’s route</span></td><td><span class="ui">Preferences ▸ Show the camera’s route</span></td><td>In the world view of a scene with a camera, draws the line with arrowheads that joins the camera’s frames in the order its moves run.<br>See <a href="../animations/camera.html#on">The camera</a>.</td><td>On</td></tr>
+<tr><td><span class="ui">Dim what the camera leaves out</span></td><td><span class="ui">Preferences ▸ Dim what the camera leaves out</span></td><td>In the world view of a scene with a camera, dims what the camera leaves out at the playhead.<br>See <a href="../animations/camera.html#on">The camera</a>.</td><td>On</td></tr>
+<tr><td><span class="ui">Circle selector</span></td><td>the Circle selector button in the Preview’s toolbar<br><kbd data-keys="S">S</kbd></td><td>A click takes the symbol nearest to the pointer within a circle, instead of what is right under it: the formula, or with Alt the symbol itself.<br>See <a href="../layout/glyph-picking.html#circle">Picking glyphs</a>.</td><td>Off</td></tr>
+<tr><td>Reach of the circle</td><td>Shift + wheel in the Preview while the circle selector or Align by symbol is on, and over the drawing of a pair editor</td><td>How far from the pointer, in screen pixels, a symbol is still picked: the radius of the circle selector, of Align by symbol and of the circle that takes glyphs in the pair editors.<br>See <a href="../layout/glyph-picking.html#circle">Picking glyphs</a>.</td><td>14 px (from 6 to 60)</td></tr>
+</tbody>
+</table>
+<!-- reference-table:preferences:preview end -->
+      <figure>
+        <img src="../media/reference/preferences/grid-controls.dark.webp" data-themed
+             alt="The grid controls of the bar under the Preview: a # button, a minus, the spacing, a plus and a last button for what the grid holds."
+             width="188" height="55" loading="lazy">
+        <figcaption>The grid controls in the bar under the Preview: show it, then sparser, the spacing, denser, and what the grid holds.</figcaption>
+      </figure>
+      <p><span class="ui">Scale step ▸ Custom…</span> opens a small dialog. It takes a number or a fraction, such
+        as <code>1/3</code> or <code>0.3/0.2</code>, with a dot or a comma for the decimals, and shows its value
+        when you type a fraction.</p>
+      <figure>
+        <img src="../media/reference/preferences/scale-step.dark.webp" data-themed
+             alt="The Scale step dialog with a Step field."
+             width="456" height="218" loading="lazy">
+        <figcaption>The dialog behind <span class="ui">Scale step ▸ Custom…</span>.</figcaption>
+      </figure>
+
+      <h2 id="new">New objects and animations</h2>
+      <p>What the objects you create from now on start with. None of these changes what is already in the
+        project.</p>
+<!-- reference-table:preferences:new begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">New objects and animations</caption>
+<thead><tr><th>Preference</th><th>Where you change it</th><th>What it does</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Standard scale</span></td><td><span class="ui">Preferences ▸ Standard scale…</span></td><td>The size that new formulas and new LaTeX texts are born with: 1 is Manim’s font size 48, 1.5 is 72. Saving leaves the objects that exist as they are; <span class="ui">Apply to all formulas</span> and <span class="ui">Apply to all texts</span> give the scale typed to every one of the project.<br>See <a href="../objects/organizing.html#standard-scale">Organizing</a>.</td><td>1 for formulas and 1 for texts (font size 48)</td></tr>
+<tr><td><span class="ui">Split suffix</span></td><td><span class="ui">Preferences ▸ Split suffix…</span></td><td>The suffix that names the copy a split makes: cutting a clip at the playhead (S) gives its second half a copy of its formula, named after it with this suffix — f1 becomes f1_s, or f1_s1, f1_s2… when that name is taken. Letters, digits and “_”, at most 16, so that the name stays a Python variable.<br>See <a href="../basics/timeline.html#splitting">The timeline</a>.</td><td>_s</td></tr>
+<tr><td><span class="ui">Always add intro</span></td><td><span class="ui">Edit ▸ Always add intro</span></td><td>New clips get the intro chosen in <span class="ui">Default intro &amp; outro…</span>, instead of appearing at once. A formula can choose its own with <span class="ui">Appears with</span> in its editor.<br>See <a href="../basics/intro-outro.html#defaults">Intro and outro</a>.</td><td>Off</td></tr>
+<tr><td><span class="ui">Always add outro</span></td><td><span class="ui">Edit ▸ Always add outro</span></td><td>New clips get the outro chosen in <span class="ui">Default intro &amp; outro…</span>, instead of disappearing at once.<br>See <a href="../basics/intro-outro.html#defaults">Intro and outro</a>.</td><td>Off</td></tr>
+<tr><td><span class="ui">Default intro &amp; outro</span></td><td><span class="ui">Edit ▸ Default intro &amp; outro…</span></td><td>The animation, duration, easing, lag ratio and, for the fades, shift and scale of the intro and of the outro that the two switches above give. <span class="ui">Restore defaults</span> puts the standard ones back.<br>See <a href="../basics/intro-outro.html#defaults">Intro and outro</a>.</td><td>intro Write, 1 s, linear; outro FadeOut, 1 s, smooth</td></tr>
+<tr><td><span class="ui">Suggest morph pairs</span></td><td><span class="ui">Edit ▸ Suggest morph pairs</span></td><td>A new Morph block starts with the pairs that Suggest finds for it where it lands, instead of none. A copy of a block is never given pairs.<br>See <a href="../transforms/morph.html">Morph blocks</a>.</td><td>Off</td></tr>
+</tbody>
+</table>
+<!-- reference-table:preferences:new end -->
+      <figure>
+        <img src="../media/reference/preferences/standard-scale.dark.webp" data-themed
+             alt="The Standard scale dialog with a field for formulas and one for texts, each with its Apply to all button."
+             width="596" height="314" loading="lazy">
+        <figcaption><span class="ui">Standard scale</span>: one value for new formulas and one for new LaTeX texts. Each has its own
+          <span class="ui">Apply to all</span> button, which gives that scale to every such object of the project at
+          once, as one undo step.</figcaption>
+      </figure>
+      <p><span class="ui">Split suffix…</span> opens a small dialog with one field. The menu shows the suffix in use
+        between brackets, and the dialog shows the name it gives under the field, such as <code>f1 → f1_s</code>.
+        A text that is not a suffix is refused, with the reason under the field.</p>
+      <figure>
+        <img src="../media/reference/preferences/split-suffix.dark.webp" data-themed
+             alt="The Split suffix dialog with a Suffix field holding _s and, under it, f1 → f1_s."
+             width="456" height="268" loading="lazy">
+        <figcaption><span class="ui">Split suffix</span>: the suffix, and the name it gives a copy of <code>f1</code>.</figcaption>
+      </figure>
+      <figure>
+        <img src="../media/reference/preferences/default-animations.dark.webp" data-themed
+             alt="The Default intro and outro dialog with an Intro section and an Outro section, each with Animation, Duration, Easing and Lag ratio."
+             width="536" height="728" loading="lazy">
+        <figcaption><span class="ui">Default intro &amp; outro</span>: the animation, duration, easing and lag ratio of each, and
+          <span class="ui">Restore defaults</span>.</figcaption>
+      </figure>
+
+      <h2 id="output">Glyphs and export</h2>
+<!-- reference-table:preferences:output begin (made by tools/reference-tables.mjs; do not edit) -->
+<table>
+<caption class="sr-only">Glyphs and export</caption>
+<thead><tr><th>Preference</th><th>Where you change it</th><th>What it does</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td><span class="ui">Glyph source</span></td><td>the three Glyph source items of the View menu</td><td>Which renderer draws the formulas: Automatic (the companion’s exact LaTeX glyphs when it runs, MathJax otherwise), MathJax, or LaTeX (companion). This one is not remembered: after a reload it is Automatic again.<br>See <a href="../manim/companion.html#exact-glyphs">The companion</a>.</td><td>Automatic</td></tr>
+<tr><td>Python target of the Export… button</td><td><span class="ui">Export ▸ Python — ManimCE…</span><br><span class="ui">Export ▸ Python — ManimGL…</span></td><td>The <span class="ui">Export…</span> button exports Python for the target of the last Python export you opened. The browser remembers it.<br>See <a href="../basics/export.html#menu">Exporting</a>.</td><td>ManimCE</td></tr>
+</tbody>
+</table>
+<!-- reference-table:preferences:output end -->
+
+      <h2 id="palettes">Palettes</h2>
+      <p><span class="ui">Preferences ▸ Chroma Lab…</span> opens the colour studio that comes inside the editor, to
+        make a palette and send it to the editor. <span class="ui">Preferences ▸ Editor palettes…</span> is the library
+        of palettes you can use: you import, make, edit, activate and delete palettes of named colour roles there,
+        up to 24. Until you activate one, the editor uses its own standard colours (the entry
+        <em>Manim defaults</em>). Activating a palette changes the colours the editor offers and gives new
+        objects and new projects, and does not recolour the project you have open; that is what
+        <span class="ui">Edit ▸ Apply palette…</span> is for. The library is kept in the browser like the
+        preferences above. <a href="../color/palettes.html">Palettes and Chroma Lab</a> teaches all of it.</p>
+      <figure>
+        <img src="../media/reference/preferences/editor-palettes.dark.webp" data-themed
+             alt="The Editor palettes dialog: buttons to import and to make a palette, a count of 0 of 24 palettes, and the entry Manim defaults marked Active."
+             width="836" height="378" loading="lazy">
+        <figcaption><span class="ui">Editor palettes</span> before any palette is added: <span class="ui">Manim defaults</span> is the one in use.</figcaption>
+      </figure>
+
+      <h2 id="project-settings">Project settings are not preferences</h2>
+      <p><span class="ui">File ▸ Project settings…</span> holds what belongs to the project itself: its name, the size and
+        speed of its scene, its background, and the library it is exported for. They are saved in the project file, so they travel with it, and <span class="ui">Apply</span> makes
+        all your changes one undo step.</p>
+      <figure>
+        <img src="../media/reference/preferences/project-settings.dark.webp" data-themed
+             alt="The Project settings dialog: Name, Manim target, Resolution, Frame rate, Background, Duration and LaTeX preamble."
+             width="576" height="552" loading="lazy">
+        <figcaption><span class="ui">Project settings</span>.</figcaption>
+      </figure>
+      <table>
+        <caption class="sr-only">Project settings</caption>
+        <thead>
+          <tr><th>Setting</th><th>What it does</th><th>New project</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ui">Name</span></td><td>The project’s name, shown in the menu bar. You can also click it there to rename the project in place. An empty name becomes <em>Untitled</em>.</td><td>Untitled</td></tr>
+          <tr><td><span class="ui">Manim target</span></td><td>ManimCE (Community Edition) or ManimGL (3b1b): the library the formulas are measured for and the Python is written for.</td><td>ManimCE</td></tr>
+          <tr><td><span class="ui">Resolution</span></td><td>The size of the scene in pixels: 1920 × 1080 (Full HD), 1280 × 720 (HD), 3840 × 2160 (4K), or a width of 16 to 7680 and a height of 16 to 4320 of your own.</td><td>1920 × 1080</td></tr>
+          <tr><td><span class="ui">Frame rate</span></td><td>24, 25, 30 or 60 frames a second, or a whole number from 1 to 240 of your own. Every play and wait of the exported scene lasts a whole number of frames.</td><td>60</td></tr>
+          <tr><td><span class="ui">Background</span></td><td>The colour of the scene’s background.</td><td>Black, or the background of the active palette</td></tr>
+          <tr><td><span class="ui">Duration</span></td><td><span class="ui">Until the last clip ends</span>, or <span class="ui">Fixed</span> at a number of seconds above 0.</td><td>Until the last clip ends</td></tr>
+          <tr><td><span class="ui">LaTeX preamble</span></td><td>Lines added after the packages of every formula. The companion’s LaTeX compiles them; MathJax understands <code>\newcommand</code> and <code>\DeclareMathOperator</code>.</td><td>Empty</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="remembered">What else the browser remembers</h2>
+      <p>These are not preferences you set, but you will see them come back:</p>
+      <ul>
+        <li>The <strong>autosave</strong> of your work, one per tab, so a reload or a crash brings it back
+          (see <a href="troubleshooting.html#recover">Recovering your work</a>).</li>
+        <li>The <strong>folder</strong> of <span class="ui">File ▸ Sync folder…</span> (Chrome and Edge keep it), and the stars
+          you give projects in the Projects dialog.</li>
+        <li>Your <strong>templates</strong>, My templates and Favorites, in the template library.</li>
+        <li>The <strong>palette library</strong> of <span class="ui">Editor palettes…</span>.</li>
+      </ul>
+      <p>The view of the Preview (its zoom and pan) and the zoom and the track heights of the timeline are not
+        remembered: they start afresh each time you open the editor.</p>
+    </article>
+  </main>
+</body>
+</html>

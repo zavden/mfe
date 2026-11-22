@@ -1,0 +1,173 @@
+/* The Camera row of the timeline (CameraRow.tsx, D190). Its blocks are the animation blocks'
+ * (`.tl-block`, timeline.css) in the camera's colour, and its header a track header's on one
+ * line. */
+
+/* The row holds under the ruler as the tracks scroll: with it, over everything that scrolls under
+ * the two. A tint of the camera's colour sets it apart from the tracks, as far as the ruler goes. */
+.tl-camera-row {
+  position: sticky;
+  top: var(--ruler-height);
+  z-index: 8;
+  background: color-mix(in srgb, var(--block-camera) 9%, var(--well));
+  border-bottom: 1px solid var(--border);
+}
+
+/* The header: the camera's icon and name, then the row's two buttons, on one line. */
+.tl-camera-header .tl-header-body {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tl-camera-header .tl-header-top {
+  flex: 1;
+}
+
+.tl-camera-header .tl-header-buttons {
+  flex: none;
+  margin: 0 -4px 0 0;
+}
+
+/* The name is a button: it selects the camera, whose panel has its frame and its target cameras. */
+.tl-camera-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.tl-camera-name[aria-pressed='true'] {
+  color: var(--block-camera);
+}
+
+.tl-camera-name svg {
+  flex: none;
+  color: var(--block-camera);
+}
+
+/* A camera move: as tall as the lane, less the space a clip leaves above and below it. */
+.tl-block.is-camera {
+  --block-bg: var(--block-camera);
+  --block-fg: var(--block-camera-text);
+  top: var(--clip-inset);
+  bottom: var(--clip-inset);
+}
+
+.tl-camera-row.is-locked .tl-block {
+  cursor: not-allowed;
+}
+
+/* The move that is isolated in the Preview (viewStore.ts): a ring of the target cameras' pink
+ * outside it, so that it is told from the selected one, which may be another. */
+.tl-block.is-camera.is-isolated {
+  z-index: 5;
+  outline: 2px dashed var(--camera-target);
+  outline-offset: 1px;
+}
+
+/* Dragged and held short of where the pointer asks, a move is marked as a block is; its readout
+ * hangs under the row, over the tracks, the row being as low as a block is tall. */
+.tl-block-readout.tl-camera-readout {
+  top: calc(100% + 3px);
+  z-index: 6;
+}
+
+/* The locked region (CameraRegion.tsx): under each move, a band hatched in the camera's colour
+ * across every track, over the clips and their blocks and under the track headers (z 7). In the
+ * danger colour when an animation runs into it. */
+.tl-camera-regions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: var(--header-width);
+  z-index: 5;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tl-camera-region {
+  --region: var(--block-camera);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  min-width: 2px;
+  border-right: 1px solid color-mix(in srgb, var(--region) 60%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--region) 60%, transparent);
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--region) 7%, transparent) 0 5px,
+    color-mix(in srgb, var(--region) 24%, transparent) 5px 10px
+  );
+}
+
+.tl-camera-region.is-clash {
+  --region: var(--danger);
+}
+
+@media (forced-colors: active) {
+  .tl-camera-region {
+    border-color: CanvasText;
+    background: none;
+  }
+
+  .tl-camera-region.is-clash {
+    border-color: Highlight;
+    border-style: dashed;
+  }
+}
+
+/* The playhead's line across the row, which hides the one over the tracks: the same line, under
+ * the moves as that one is under the blocks. */
+.tl-playhead-in-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 0;
+  border-left: 1px solid var(--time);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--time) 45%, transparent);
+  pointer-events: none;
+}
+
+@media (forced-colors: active) {
+  .tl-playhead-in-lane {
+    border-color: Highlight;
+    box-shadow: none;
+  }
+}
+
+/* ---- The vertical timeline (Zen mode) ------------------------------------------------------- */
+/* The ruler is on the right there, beside the Preview, and the Camera row next to it, between
+ * the ruler and the tracks, as it is under the ruler when the timeline lies: the well is turned
+ * whole (timeline.css), and the row holds there as the tracks scroll. */
+/* The header is the top of a narrow column: the icon alone for the name, over the two buttons. */
+.tl.is-vertical .tl-camera-header .tl-header-body {
+  padding: 6px 3px 4px;
+}
+
+.tl.is-vertical .tl-camera-header .tl-header-top {
+  flex: none;
+}
+
+.tl.is-vertical .tl-camera-header .tl-header-buttons {
+  margin: 0;
+}
+
+.tl.is-vertical .tl-camera-name {
+  justify-content: center;
+}
+
+.tl.is-vertical .tl-camera-name-text {
+  display: none;
+}
+
+/* The readout of a dragged move stands beside the row, over the tracks: read across the screen,
+ * it ends at the row's edge, in lines short enough for the column the timeline is. */
+.tl.is-vertical .tl-block-readout.tl-camera-readout {
+  top: 100%;
+  max-width: 180px;
+  white-space: normal;
+  transform: translateX(-100%) rotate(-90deg) translate(-4px, 0);
+}

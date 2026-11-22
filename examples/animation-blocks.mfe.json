@@ -1,0 +1,578 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Animation blocks",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_k25lbxxu",
+      "kind": "math",
+      "name": "eq",
+      "source": "x^2+5x+6=0",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [
+        7,
+        8
+      ],
+      "intro": null,
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-1jq921h8okh",
+        "glyphs": [
+          {
+            "label": "x",
+            "center": [
+              -1.5697196750000009,
+              -0.09058335000000006
+            ],
+            "size": [
+              0.24806970000000028,
+              0.22565380000000002
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -1.32447515,
+              0.12350987500000002
+            ],
+            "size": [
+              0.1541220499999989,
+              0.2315317500000001
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -0.8958176750000004,
+              -0.07339780000000004
+            ],
+            "size": [
+              0.3312578000000004,
+              0.33175590000000005
+            ]
+          },
+          {
+            "label": "5",
+            "center": [
+              -0.4669274000000003,
+              -0.03753230000000003
+            ],
+            "size": [
+              0.1987546499999997,
+              0.3427148
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.2036636750000005,
+              -0.09058335000000006
+            ],
+            "size": [
+              0.24806970000000028,
+              0.22565380000000002
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.24676987500000003,
+              -0.07339780000000004
+            ],
+            "size": [
+              0.3312577999999995,
+              0.33175590000000005
+            ]
+          },
+          {
+            "label": "6",
+            "center": [
+              0.6756601749999991,
+              -0.03753230000000003
+            ],
+            "size": [
+              0.20672479999999993,
+              0.3427148
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              1.132334124999999,
+              -0.07339780000000004
+            ],
+            "size": [
+              0.33125780000000127,
+              0.11656290000000008
+            ]
+          },
+          {
+            "label": "0",
+            "center": [
+              1.58889775,
+              -0.03753230000000003
+            ],
+            "size": [
+              0.2097135500000018,
+              0.3427148
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_w02iz634",
+      "kind": "math",
+      "name": "factored",
+      "source": "(x+2)(x+3)=0",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 48,
+      "color": "#58C4DD",
+      "glyphColors": {
+        "3": "#FFFF00",
+        "8": "#FFFF00"
+      },
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "latex",
+        "key": "latex-2420j9pprjr",
+        "glyphs": [
+          {
+            "label": "(",
+            "center": [
+              -1.8942397,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.11556664999999988,
+              0.4981320000000001
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -1.6691387249999998,
+              -0.017185549999999994
+            ],
+            "size": [
+              0.24806970000000028,
+              0.22565380000000002
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              -1.2187051749999998,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.3312578000000004,
+              0.33175590000000005
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -0.7898149000000001,
+              0.04134495000000003
+            ],
+            "size": [
+              0.1987546500000006,
+              0.3317559
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              -0.57885505,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.115566649999999,
+              0.4981320000000001
+            ]
+          },
+          {
+            "label": "(",
+            "center": [
+              -0.36421480000000006,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.11556664999999988,
+              0.4981320000000001
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -0.13911377499999933,
+              -0.017185549999999994
+            ],
+            "size": [
+              0.24806970000000028,
+              0.22565380000000002
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.3113197249999997,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.33125780000000127,
+              0.33175590000000005
+            ]
+          },
+          {
+            "label": "3",
+            "center": [
+              0.7402100250000005,
+              0.035865500000000036
+            ],
+            "size": [
+              0.2067248000000017,
+              0.3427148
+            ]
+          },
+          {
+            "label": ")",
+            "center": [
+              0.9511698500000003,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.11556664999999988,
+              0.4981320000000001
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              1.3906026249999996,
+              2.7755575615628914e-17
+            ],
+            "size": [
+              0.3312577999999995,
+              0.11656290000000008
+            ]
+          },
+          {
+            "label": "0",
+            "center": [
+              1.8471662500000008,
+              0.035865500000000036
+            ],
+            "size": [
+              0.20971355000000003,
+              0.3427148
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_ft3np856",
+      "kind": "visual",
+      "name": "Equation",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_cuam41yy",
+      "kind": "visual",
+      "name": "Factored",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_amflejvb",
+      "formulaId": "f_k25lbxxu",
+      "trackId": "t_ft3np856",
+      "start": 0,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          1.2
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_yx4jiz3s",
+          "kind": "appear",
+          "start": 1.2,
+          "duration": 0.6,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            7,
+            8
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        },
+        {
+          "id": "a_asz6d4x4",
+          "kind": "transform",
+          "start": 2.2,
+          "duration": 0.6,
+          "easing": "smooth",
+          "glyphs": [
+            3,
+            4
+          ],
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1.15,
+          "rotation": 0,
+          "color": "#FFFF00",
+          "opacity": null,
+          "group": "g_lightsup"
+        },
+        {
+          "id": "a_24stdvsy",
+          "kind": "transform",
+          "start": 2.2,
+          "duration": 0.6,
+          "easing": "smooth",
+          "glyphs": [
+            6
+          ],
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1.15,
+          "rotation": 0,
+          "color": "#FFFF00",
+          "opacity": null,
+          "group": "g_lightsup"
+        },
+        {
+          "id": "a_r7kriv7c",
+          "kind": "disappear",
+          "start": 4.6,
+          "duration": 0.5,
+          "easing": "smooth",
+          "anim": "uncreate",
+          "glyphs": [
+            2,
+            3,
+            4
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        },
+        {
+          "id": "a_z47lsgo4",
+          "kind": "appear",
+          "start": 5.4,
+          "duration": 0.5,
+          "easing": "smooth",
+          "anim": "create",
+          "glyphs": [
+            2,
+            3,
+            4
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        },
+        {
+          "id": "a_c5rhch0y",
+          "kind": "tween",
+          "start": 6.2,
+          "duration": 0.6,
+          "easing": "smooth",
+          "to": {
+            "position": [
+              0,
+              2
+            ]
+          }
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_d59rg92n",
+      "formulaId": "f_w02iz634",
+      "trackId": "t_cuam41yy",
+      "start": 3,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          -0.8
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 0.6,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_c17r9zk4",
+          "kind": "transform",
+          "start": 1.2,
+          "duration": 0.5,
+          "easing": "smooth",
+          "glyphs": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "shift": [
+            -0.3,
+            0
+          ],
+          "scale": 1,
+          "rotation": 0,
+          "color": null,
+          "opacity": null,
+          "group": "g_spread01"
+        },
+        {
+          "id": "a_ehsdp5di",
+          "kind": "transform",
+          "start": 1.2,
+          "duration": 0.5,
+          "easing": "smooth",
+          "glyphs": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "shift": [
+            0.3,
+            0
+          ],
+          "scale": 1,
+          "rotation": 0,
+          "color": null,
+          "opacity": null,
+          "group": "g_spread01"
+        },
+        {
+          "id": "a_31qh7q91",
+          "kind": "tween",
+          "start": 3.2,
+          "duration": 0.6,
+          "easing": "smooth",
+          "to": {
+            "position": [
+              0,
+              -0.2
+            ]
+          }
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

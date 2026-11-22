@@ -1,0 +1,381 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Timing of clips",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#000000",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_sfbt1y7w",
+      "kind": "math",
+      "name": "energy",
+      "source": "E = mc^2",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-ocivgkerso",
+        "glyphs": [
+          {
+            "label": "E",
+            "center": [
+              -1.5008759481599996,
+              -0.09597884543999996
+            ],
+            "size": [
+              0.7346419199999998,
+              0.6815232
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -0.46526135615999975,
+              -0.18618044543999995
+            ],
+            "size": [
+              0.6674918400000001,
+              0.23452415999999998
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              0.6430156358400003,
+              -0.22042364543999995
+            ],
+            "size": [
+              0.8378726400000001,
+              0.45468287999999996
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              1.31535163584,
+              -0.22142588543999997
+            ],
+            "size": [
+              0.39655295999999973,
+              0.45535103999999993
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              1.726834464,
+              0.21314303999999998
+            ],
+            "size": [
+              0.2827248883200002,
+              0.4719167308799999
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "f_imr2ao3b",
+      "kind": "math",
+      "name": "note",
+      "source": "c \\approx 3 \\times 10^{8}\\ \\mathrm{m/s}",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 64,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-250xil1mc0h",
+        "glyphs": [
+          {
+            "label": "c",
+            "center": [
+              -2.1507847680000003,
+              -0.06821757696
+            ],
+            "size": [
+              0.2643686399999998,
+              0.30356736
+            ]
+          },
+          {
+            "label": "≈",
+            "center": [
+              -1.5711782400000003,
+              -0.032025576959999996
+            ],
+            "size": [
+              0.44566272000000007,
+              0.28597248000000003
+            ]
+          },
+          {
+            "label": "3",
+            "center": [
+              -0.9586091520000004,
+              0.0030528230399999856
+            ],
+            "size": [
+              0.27728639999999993,
+              0.45902592
+            ]
+          },
+          {
+            "label": "×",
+            "center": [
+              -0.38318976000000016,
+              -0.04472061695999999
+            ],
+            "size": [
+              0.3227212799999999,
+              0.32205312
+            ]
+          },
+          {
+            "label": "1",
+            "center": [
+              0.1959045119999998,
+              0.010736663039999997
+            ],
+            "size": [
+              0.2298470400000001,
+              0.44499456000000004
+            ]
+          },
+          {
+            "label": "0",
+            "center": [
+              0.5263096319999996,
+              0.00338690304
+            ],
+            "size": [
+              0.2812953600000001,
+              0.45969408
+            ]
+          },
+          {
+            "label": "8",
+            "center": [
+              0.8338302719999997,
+              0.21629875968
+            ],
+            "size": [
+              0.1955690956799998,
+              0.32500371456
+            ]
+          },
+          {
+            "label": "m",
+            "center": [
+              1.434405888,
+              -0.06387453695999999
+            ],
+            "size": [
+              0.5305190400000002,
+              0.29577216000000006
+            ]
+          },
+          {
+            "label": "/",
+            "center": [
+              1.876059648,
+              -0.044720616960000015
+            ],
+            "size": [
+              0.2592460799999996,
+              0.66816
+            ]
+          },
+          {
+            "label": "s",
+            "center": [
+              2.174059008,
+              -0.06576765695999999
+            ],
+            "size": [
+              0.21782016000000048,
+              0.30668544
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_gf50b61w",
+      "kind": "visual",
+      "name": "Equation",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "t_dncxlnxx",
+      "kind": "visual",
+      "name": "Notes",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_suf4l42k",
+      "formulaId": "f_sfbt1y7w",
+      "trackId": "t_gf50b61w",
+      "start": 1,
+      "end": 5,
+      "initial": {
+        "position": [
+          0,
+          1.4
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "write",
+        "duration": 1,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "fade_out",
+        "duration": 1,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_ll8u7mhf",
+      "formulaId": "f_imr2ao3b",
+      "trackId": "t_dncxlnxx",
+      "start": 2,
+      "end": 4.5,
+      "initial": {
+        "position": [
+          0,
+          -1.3
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "fade_in",
+        "duration": 0.5,
+        "easing": "smooth",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    },
+    {
+      "id": "c_g1crrvgx",
+      "formulaId": "f_imr2ao3b",
+      "trackId": "t_gf50b61w",
+      "start": 6,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          1.4
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}

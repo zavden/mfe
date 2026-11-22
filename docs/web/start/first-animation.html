@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your first animation · Manim Formula Editor</title>
+  <meta name="description" content="Step by step: two formulas, one transformation between them, and the export to Manim.">
+  <meta name="mfe:id" content="start/first-animation">
+  <meta name="mfe:level" content="basic">
+  <meta name="mfe:short" content="First animation">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../assets/player.js" defer></script>
+  <script src="../examples/first-animation-2-written-in.data.js" defer></script>
+  <script src="../examples/first-animation-3-two-clips.data.js" defer></script>
+  <script src="../examples/first-animation-4-transformed.data.js" defer></script>
+  <script src="../media/start/first-animation/playing.tour.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Your first animation</h1>
+      <p class="lead">In about fifteen minutes you make a five-second animation: the equation
+        <code>x + 3 = 5</code> writes itself onto the screen, then turns into
+        <code>x = 5 − 3</code>. You write two formulas, put them on the timeline, relate them, play
+        the result and export it for Manim.</p>
+
+      <figure class="mfe-player" data-mfe-player="first-animation-4-transformed" data-start="1.6" data-autoplay data-loop
+              data-controls="minimal"
+              data-caption="The animation you make: five seconds, two formulas, one transformation."></figure>
+
+      <p>Keep the editor open beside this page and do each step in it. Every step shows what the
+        editor looks like when it is done, and you can download the project as it stands after each
+        one, to check your work or to skip ahead.</p>
+      <aside class="callout note">
+        <p>You need no Manim until the last step: the editor plays your animation on its own. Manim comes
+          in at the end, to turn the Python you export into a video. If the editor is not running yet,
+          <a href="install.html">install it and open it</a> first.</p>
+      </aside>
+
+      <h2 id="empty">Start from an empty project</h2>
+      <p>The editor opens with an empty project. Three places matter for this animation. The
+        <span class="ui">Creator</span> (1) will hold your formulas. The <span class="ui">Preview</span>
+        (2) shows the scene at the playhead. The <span class="ui">Timeline</span> (3) has two empty
+        tracks: a <strong>clip</strong> on a track says when a formula is on screen.</p>
+      <figure>
+        <img src="../media/start/first-animation/window-empty.dark.webp" data-themed
+             alt="The editor with an empty project: the Creator with its + New button (1) and, under the words No formulas yet, its Try an example button (4), the empty Preview (2) and the Timeline with two empty tracks (3)."
+             width="1440" height="900" loading="lazy">
+        <figcaption>The empty project. Press <span class="ui">+ New</span> (1) to write a formula;
+          <span class="ui">Try an example</span> (4) opens a finished one.</figcaption>
+      </figure>
+      <p>If another project is open, choose <span class="ui">File ▸ New</span>: the editor asks first
+        when there is work to keep.</p>
+      <aside class="callout tip">
+        <p>To see a finished animation first, press <span class="ui">Try an example</span> (4). It opens
+          <em>Completing the square</em>, the quadratic formula derived step by step, to play, take apart
+          and change. <span class="ui">Help ▸ Examples</span> has it and three short scenes. An example
+          becomes a project of your own that has no file, so <span class="ui">Save</span> asks where it
+          goes (<a href="projects.html#examples">The examples</a>).</p>
+      </aside>
+
+      <h2 id="formula">Write the first formula</h2>
+      <p>You write a formula in LaTeX, in a window of its own, the <strong>formula editor</strong>.</p>
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">+ New</span> in the Creator. It makes a formula (its arrow lists the
+            other kinds of object). The formula editor opens with the cursor in its visual math field.</li>
+          <li>Type <code>x + 3 = 5</code>. The field draws the formula as you type, and the
+            <span class="ui">Raw LaTeX</span> field under it shows the LaTeX it keeps:
+            <code>x+3=5</code>, because the visual field leaves the spaces out.</li>
+          <li>In <span class="ui">Size</span>, type <code>2</code> in the first box. The formula is drawn
+            twice as large: size 1 is Manim's 48 pt, so the second box now reads 96.</li>
+          <li>Press <span class="ui">Apply</span> (or <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd>). The
+            <span class="ui">Glyphs</span> column draws the formula and counts its glyphs.</li>
+          <li>Press <span class="ui">Close</span>.</li>
+        </ol>
+      </aside>
+      <figure>
+        <img src="../media/start/first-animation/formula-editor.dark.webp" data-themed
+             alt="The formula editor with x + 3 = 5 typed in the visual field, the size set to 2, and the Apply button; the Glyphs column shows the formula drawn and its glyphs."
+             width="1052" height="706" loading="lazy">
+        <figcaption>The formula editor: the LaTeX typed (1), the size (2) and <span class="ui">Apply</span> (3).
+          The formula is called <code>f1</code> until you rename it.</figcaption>
+      </figure>
+      <aside class="callout tip">
+        <p>If the LaTeX has a mistake, the area under <span class="ui">Apply</span> says <em>Cannot render</em> and
+          shows what is wrong. Fix the source and the message goes. Closing the editor with a change you
+          did not apply asks whether to discard it.</p>
+      </aside>
+      <p>A <strong>glyph</strong> is one symbol of the formula as the editor draws it: <code>x</code>,
+        <code>+</code>, <code>3</code>, <code>=</code> and <code>5</code> are five glyphs. A
+        transformation moves glyphs, so the word comes back below. The glyph view is also where you
+        colour single glyphs (<a href="../color/coloring.html">Colouring glyphs and objects</a>), and
+        <a href="../basics/formulas.html">Writing formulas</a> covers the rest of the editor.</p>
+
+      <h2 id="timeline">Put it on the timeline</h2>
+      <p>A formula in the Creator is not in the scene yet. The scene is what the timeline holds.</p>
+      <aside class="try">
+        <ol>
+          <li>Drag the card of <code>f1</code> from the Creator onto the top track of the timeline,
+            <span class="ui">Track 2</span> (tracks are numbered from the bottom), and drop it at the left
+            end, at 0 s.</li>
+        </ol>
+      </aside>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/first-animation/drag-to-timeline.dark.webm"
+               poster="../media/start/first-animation/drag-to-timeline.dark.webp" width="462" height="650"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Dragging the card onto the top track. The clip is three seconds long, and it
+          starts where you drop it.</figcaption>
+      </figure>
+      <p>The clip is selected, and the Animations panel on the right shows its settings. Drag the
+        playhead along the ruler: the Preview shows the formula for the three seconds of the clip.</p>
+      <aside class="callout tip">
+        <p>You can do it without dragging: select the formula in the Creator and press <span class="ui">Add
+          to the timeline</span> in the Animations panel. The clip goes on the top track, at the
+          playhead.</p>
+      </aside>
+      <p>Compare with <a href="../examples/first-animation-1-first-clip.mfe.json" download>the project after
+        this step</a>. Open it with <span class="ui">File ▸ Open…</span>: press <span class="ui">Other file…</span> in the
+        dialog and pick the downloaded file (<a href="../start/projects.html#open">Projects and files</a> explains
+        the dialog).</p>
+
+      <h2 id="intro">Make it write itself in</h2>
+      <p>By default a clip's formula appears at once, at the start of the clip. An <strong>intro</strong>
+        is the animation a clip starts with instead.</p>
+      <aside class="try">
+        <ol>
+          <li>Click the clip to select it.</li>
+          <li>In the Animations panel, open the <span class="ui">Timing</span> tab (1).</li>
+          <li>In its <span class="ui">Intro</span> section, choose <span class="ui">Write</span> in the
+            <span class="ui">Animation</span> field (2).</li>
+        </ol>
+      </aside>
+      <figure>
+        <img src="../media/start/first-animation/intro-panel.dark.webp" data-themed
+             alt="The Animations panel on its Timing tab, with the Animation field of the Intro section set to Write."
+             width="310" height="583" loading="lazy">
+        <figcaption>The <span class="ui">Timing</span> tab (1) and the <span class="ui">Animation</span>
+          field of the intro (2). Its <span class="ui">Duration</span> is one second.</figcaption>
+      </figure>
+      <p>The first second of the clip turns hatched and says <span class="ui">Write</span>: that is the
+        intro. Move the playhead to the start and press <kbd data-keys="Space">Space</kbd>: the
+        formula writes itself in, stroke by stroke. Press Space again to stop.</p>
+      <figure class="mfe-player" data-mfe-player="first-animation-2-written-in" data-loop data-controls="minimal"
+              data-caption="The first clip with its Write intro, as the editor plays it."></figure>
+      <aside class="callout tip">
+        <p>The same choice is in the menu of the clip: right-click it and choose
+          <span class="ui">Intro ▸ Write</span>. To give every new clip an intro, tick
+          <span class="ui">Edit ▸ Always add intro (Write)</span>.</p>
+      </aside>
+      <figure>
+        <img src="../media/start/first-animation/intro-menu.dark.webp" data-themed
+             alt="The menu of a clip with its Intro submenu open: None (appear) is ticked, then Write, FadeIn, GrowFromCenter, DrawBorderThenFill and Create."
+             width="521" height="476" loading="lazy">
+        <figcaption>The menu of the clip, with <span class="ui">Intro</span> open.</figcaption>
+      </figure>
+      <p>Compare with <a href="../examples/first-animation-2-written-in.mfe.json" download>the project after
+        this step</a>.</p>
+
+      <h2 id="two-formulas">A second formula, a second clip</h2>
+      <p>A transformation needs two formulas.</p>
+      <aside class="try">
+        <ol>
+          <li>Write the second formula as you wrote the first: <span class="ui">+ New</span>, type
+            <code>x = 5 - 3</code>, a size of <code>2</code>, <span class="ui">Apply</span>,
+            <span class="ui">Close</span>. The Creator calls it <code>f2</code>.</li>
+          <li>Drag the card of <code>f2</code> onto the track <strong>below</strong>,
+            <span class="ui">Track 1</span>, and drop it at 2 s, one second before the first clip ends
+            (2).</li>
+        </ol>
+      </aside>
+      <figure>
+        <img src="../media/start/first-animation/two-clips.dark.webp" data-themed
+             alt="The timeline with the clip of f1 on the first track from 0 to 3 seconds, and the clip of f2 on the second track from 2 to 5 seconds."
+             width="642" height="245" loading="lazy">
+        <figcaption>The first clip (1) and the second (2). They overlap for one second, from 2 s to 3 s.</figcaption>
+      </figure>
+      <p>Why a second track, and why the overlap? A <strong>relation</strong> links two clips that
+        are on screen together for a moment: the first formula is still there when the second
+        starts. Two clips of the same track cannot overlap, so the second clip goes on another track.
+        The timeline snaps a dropped clip to its ticks, half a second apart: a drop within a quarter of
+        a second of 2 s lands exactly on 2 s.</p>
+      <p>Play it from the start: the first formula writes itself in, and the second appears at 2 s
+        while the first is still there. They do not connect yet.</p>
+      <figure class="mfe-player" data-mfe-player="first-animation-3-two-clips" data-timeline
+              data-caption="Two clips that overlap: nothing relates them yet."></figure>
+      <p>Compare with <a href="../examples/first-animation-3-two-clips.mfe.json" download>the project after
+        this step</a>.</p>
+
+      <h2 id="transformation">Make one formula turn into the other</h2>
+      <p>You relate the first clip to the second, and then say which glyph goes where.</p>
+      <aside class="try">
+        <ol>
+          <li>Hold <kbd data-keys="Shift">Shift</kbd>. A round link port appears on each clip.</li>
+          <li>Click the port of the first clip. A hint says <em>Click the target clip</em>.</li>
+          <li>Click the second clip. The relation editor opens: the source, <code>f1</code>, is on top,
+            and the target, <code>f2</code>, below it.</li>
+        </ol>
+      </aside>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/start/first-animation/link-ports.dark.webm"
+               poster="../media/start/first-animation/link-ports.dark.webp" width="642" height="246"
+               muted loop playsinline preload="none"></video>
+        <figcaption>Shift shows the ports. A click on the port of the first clip, then a click on the
+          second clip, opens the relation editor.</figcaption>
+      </figure>
+      <aside class="callout note">
+        <p>The ports are for the pointer. Without one, select the first clip, and in the
+          <span class="ui">Relations</span> tab of the Animations panel choose the other clip in
+          <span class="ui">Relate with</span> and press <span class="ui">Create relation…</span>.</p>
+      </aside>
+      <aside class="try">
+        <ol>
+          <li>Press <span class="ui">Suggest links by label</span>. The editor proposes one link for each
+            pair of glyphs that are the same symbol: <code>x</code> to <code>x</code>, <code>=</code> to
+            <code>=</code>, <code>5</code> to <code>5</code> and <code>3</code> to <code>3</code>.</li>
+          <li>Press <span class="ui">Accept all</span>. Each link gets a number, and the line above the
+            drawing says <em>4 linked pairs · 1 glyph leaves · 1 glyph arrives</em>.</li>
+        </ol>
+      </aside>
+      <p>A <strong>pair</strong> is one of these links: a glyph of the first formula that turns into a
+        glyph of the second. The <code>+</code> has no partner, so it leaves; the <code>−</code> has
+        none either, so it arrives. Before you save, switch from <span class="ui">Link</span> to
+        <span class="ui">Preview</span> over the drawing: the editor plays the transformation in a loop,
+        with the pairs as they stand.</p>
+      <figure>
+        <img src="../media/start/first-animation/links-suggested.dark.webp" data-themed
+             alt="The relation editor with the suggested links accepted: x + 3 = 5 above x = 5 − 3, four numbered lines joining the glyphs they share, and above them the line 4 linked pairs, 1 glyph leaves, 1 glyph arrives."
+             width="702" height="696" loading="lazy">
+        <figcaption>The links accepted. <span class="ui">Suggest links by label</span> (1), the line that counts
+          the pairs (2) and the <span class="ui">Link</span> and <span class="ui">Preview</span> switch (3).</figcaption>
+      </figure>
+      <p>The last thing to set is how the glyphs without a partner come and go. Open the
+        <span class="ui">Animation</span> tab of the editor. Under <span class="ui">Unpaired
+        glyphs</span> choose <span class="ui">FadeOut</span> as the <span class="ui">Outro</span> of
+        <code>f1</code> (1) and <span class="ui">FadeIn</span> as the <span class="ui">Intro</span> of
+        <code>f2</code> (2). Then press <span class="ui">Save relation</span> (3).</p>
+      <figure>
+        <img src="../media/start/first-animation/unpaired.dark.webp" data-themed
+             alt="The Animation tab of the relation editor: the outro of f1 set to FadeOut and the intro of f2 set to FadeIn, with the Save relation button."
+             width="480" height="700" loading="lazy">
+        <figcaption>The glyphs no pair takes leave with the outro of the first clip (1) and enter with
+          the intro of the second (2).</figcaption>
+      </figure>
+      <p>Without these two choices the <code>+</code> would stay until its clip ends and then disappear at
+        once, and the <code>−</code> would appear at once, with nothing to soften either. The editor says that
+        the outro and the intro belong to the clips: the timeline now shows <span class="ui">FadeOut</span> on
+        <code>f1</code> and <span class="ui">FadeIn</span> on <code>f2</code>.</p>
+      <figure>
+        <img src="../media/start/first-animation/relation-saved.dark.webp" data-themed
+             alt="The timeline after the relation is saved: an arrow from the first clip to the second, and a hatched band, the relation window, on the second clip from 2 to 3 seconds."
+             width="642" height="245" loading="lazy">
+        <figcaption>The saved relation: an arrow from the first clip to the second, and its
+          <strong>window</strong> (1), the second in which the glyphs travel.</figcaption>
+      </figure>
+      <p>The window is the stretch where the transformation runs. By default it is one second long. It
+        starts where the playhead is, the yellow line of the timeline, when a window fits there;
+        with the playhead at the start of the timeline, as here, none fits, and the window starts as
+        soon as both clips allow: at the start of the second clip. Compare with
+        <a href="../examples/first-animation-4-transformed.mfe.json" download>the finished project</a>. The page
+        <a href="../basics/first-transform.html">Transforming one formula into another</a> explains
+        relations in more detail.</p>
+
+      <h2 id="play">Play it</h2>
+      <p>Move the playhead to the start with <kbd data-keys="Home">Home</kbd> and press
+        <kbd data-keys="Space">Space</kbd>, or press the play button of the Preview. The playhead
+        crosses the timeline and the Preview draws the scene at each moment. Click the ruler to jump to a
+        time. Here are two moments of your animation.</p>
+      <div class="mfe-tour" data-mfe-tour="start/first-animation/playing" data-title="Two moments of the first animation"></div>
+      <p>The same scene, played here by the player of these pages. Press its play button, or drag its
+        time bar.</p>
+      <figure class="mfe-player" data-mfe-player="first-animation-4-transformed" data-timeline
+              data-caption="The finished animation, with its timeline."></figure>
+      <aside class="callout tip">
+        <p>Turn on <span class="ui">Loop</span> in the transport bar of the Preview to see the scene again and
+          again. To watch the transformation alone, use the <span class="ui">Preview</span> switch of the
+          relation editor.</p>
+      </aside>
+
+      <h2 id="export">Export it for Manim</h2>
+      <p>The editor can export the scene as a Python file that Manim runs. The scene and its file take the
+        name of the project, so name it first: click the name in the menu bar (it reads
+        <em>Untitled</em>), type <code>First animation</code> and press <kbd data-keys="Enter">Enter</kbd>.</p>
+      <figure>
+        <img src="../media/start/first-animation/project-name.dark.webp" data-themed
+             alt="The menu bar with the name of the project, Untitled, turned into a field with the name selected."
+             width="560" height="44" loading="lazy">
+        <figcaption>Click the name in the menu bar (1): it becomes a field, with the name selected. Type the
+          new name over it.</figcaption>
+      </figure>
+      <p>Open the arrow of the <span class="ui">Export…</span> button, beside the menus, and choose
+        <span class="ui">Python — ManimCE…</span> (1). Pressing the button itself opens the same dialog.</p>
+      <figure>
+        <img src="../media/start/first-animation/export-menu.dark.webp" data-themed
+             alt="The arrow of the Export… button open, with Python — ManimCE…, Python — ManimGL…, Video…, Image…, Audio… and HTML…."
+             width="760" height="228" loading="lazy">
+        <figcaption>The arrow of the <span class="ui">Export…</span> button lists the exports.</figcaption>
+      </figure>
+      <p>The dialog shows the Python it generates. The <span class="ui">Scene name</span> is the name of the
+        Python class and of the file. The list under the options says what the scene cannot
+        guarantee: here, that the glyphs are found by position when the scene runs, because the editor
+        typesets with MathJax and Manim with LaTeX. The scene still plays as the Preview does
+        (<a href="../manim/python.html">The generated Python</a> explains why). Press
+        <span class="ui">Download FirstAnimation.py</span>, or <span class="ui">Copy</span> to put the code on the
+        clipboard. <a href="../basics/export.html#python">Exporting</a> shows the dialog and its options.</p>
+      <p>This is the file the editor makes for your project, in the two versions. Export the one for the Manim
+        you have installed; if you have none yet, ManimCE is the usual choice.</p>
+      <div class="mfe-code" data-mfe-python="first-animation-4-transformed"></div>
+      <p>To make the video you need Manim, installed as its own documentation says (the
+        <a href="https://docs.manim.community/">Manim Community</a> edition, ManimCE, is the usual
+        choice). Put the file in a folder and run, from that folder, the command that the first lines
+        of the file give:</p>
+<pre data-excerpt="examples/first-animation-4-transformed.ce.py"><code class="language-bash">manim -r 1920,1080 --fps 60 FirstAnimation.py FirstAnimation</code></pre>
+      <p>That renders the whole animation at 1920×1080 and 60 frames a second, which takes a little while.
+        For a quick look, run <code>manim -ql -p FirstAnimation.py FirstAnimation</code> instead:
+        <code>-ql</code> renders at 854×480 and 15 frames a second, and <code>-p</code> plays the video when it
+        is done. Leave out <code>-r</code> and <code>--fps</code>: they would override <code>-ql</code> and bring the
+        size and the frame rate back to 1920×1080 at 60. This is what ManimCE makes of your scene at
+        <code>-ql</code>:</p>
+      <video class="mfe-manim" src="../examples/first-animation-4-transformed.mp4" controls preload="metadata" playsinline></video>
+      <p>The finished project, with the Python and this video, is here to download:</p>
+      <div class="mfe-example" data-mfe-example="first-animation-4-transformed"></div>
+      <p><a href="../basics/export.html">Exporting</a> covers every export, and
+        <a href="../manim/python.html">The generated Python</a> explains what is in the file.</p>
+
+      <h2 id="next">Where to go next</h2>
+      <p>You wrote two formulas, put them on the timeline, gave the first an intro, related the two clips,
+        played the result and exported it. Every part has a page of its own.</p>
+      <ul>
+        <li><a href="../basics/formulas.html">Writing formulas</a>, <a href="../basics/timeline.html">Working with the timeline</a>
+          and <a href="../basics/intro-outro.html">Appearing and disappearing</a> go deeper into the
+          steps you took.</li>
+        <li><a href="../transforms/relations.html">How relations work</a> says what a pair can be: one
+          glyph to many, many to one, and the styles of a transformation.</li>
+        <li><a href="../tutorials/linear-equation.html">Solving a linear equation</a> is a whole animation
+          of five formulas and four transformations, built step by step.</li>
+        <li><a href="interface.html">A tour of the interface</a> names every part of the window.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

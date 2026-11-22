@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slides and the HTML page · Manim Formula Editor</title>
+  <meta name="description" content="Put pauses and comments on the scene’s time, rehearse the talk, and export the scene as a web page that plays it live and stops at each pause.">
+  <meta name="mfe:id" content="basics/slides">
+  <meta name="mfe:level" content="intermediate">
+  <meta name="mfe:short" content="Slides and HTML">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../decks/player.css">
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script src="../examples/slides-talk.data.js" defer></script>
+  <!-- The page Export ▸ HTML writes for slides-talk (tools/build-deck.mjs): the engine, then the
+       scene's outlines and the scene, in this order. -->
+  <script src="../decks/mfe-runtime.js" defer></script>
+  <script src="../decks/slides-talk/glyphs.js" defer></script>
+  <script src="../decks/slides-talk/scene.js" defer></script>
+</head>
+<body>
+  <main id="content">
+    <article class="doc">
+      <h1>Slides and the HTML page</h1>
+      <p class="lead">A scene made in the editor is meant to be shown, and a talk stops where the speaker says. The <strong>Slides mode</strong> puts pauses and comments on the scene’s time; <span class="ui">Export ▸ HTML…</span> turns the scene into a web page that plays it live and stops at each pause until you go on.</p>
+      <p>Here is one, embedded in this page with its own tags: what <span class="ui">Export ▸ HTML…</span> makes of <a href="../examples/slides-talk.mfe.json" download>First transform, as a talk</a>, the scene of <a href="first-transform.html">Your first transform</a> with a pause after each of its first two steps, each with a note, and a comment where the answer arrives. The pictures of this page show the same project. Press Play: the scene stops at each pause. Then press Next, or click the scene and use <kbd data-keys="ArrowRight">→</kbd> and <kbd data-keys="ArrowLeft">←</kbd>; <kbd>S</kbd> shows the notes. The first pause <a href="#skip-wait">skips its wait</a>: after the first stop, going on starts the first transformation at once, with no rest before it.</p>
+      <figure class="slides-deck">
+        <div class="mfe-deck" data-scene="first-transform-as-a-talk"></div>
+        <figcaption>Not a video: the editor’s engine draws the scene as it plays, and stops at the pauses at 1.00 s and 3.20 s. Going on from the first, it jumps over the rest to 2.20 s.</figcaption>
+      </figure>
+      <script>
+        // The scene follows the theme of this site: its controls are dark or light as the page is
+        // (data-theme on its element, one of its options).
+        document.addEventListener('DOMContentLoaded', () => {
+          const deck = document.querySelector('.slides-deck .mfe-deck');
+          const follow = (theme) => deck && deck.setAttribute('data-theme', theme);
+          if (window.MFEDocs) {
+            follow(window.MFEDocs.theme());
+            window.MFEDocs.onTheme(follow);
+          }
+        });
+      </script>
+      <p>The mode is for the end of the work, when the animation is done and you prepare to show it. It changes nothing of the scene: the Preview, the video and the animations of the exported Python are the same with it and without it. What it adds is read by the exports that can stop or carry words.</p>
+      <ul>
+        <li>A <strong>pause</strong> is an instant where the page stops until its reader goes on. It can carry a <strong>note</strong>: words for whoever presents.</li>
+        <li>A <strong>comment</strong> is words for whoever works on the scene after the export, you or someone else, by hand or with a coding agent. The page shows it in its notes, the Python carries it as a comment, and the guide of the exported folder lists it as a task.</li>
+      </ul>
+
+      <h2 id="on">Turning the mode on</h2>
+      <p>Choose <span class="ui">View ▸ Slides</span>, or press the button with a screen after <span class="ui">Snap</span> in the timeline’s toolbar (1 in the picture below). The button is drawn on, as <span class="ui">Snap</span> is, and the ruler is tinted. The mode has no key of its own.</p>
+      <p>The mode belongs to the project: it is saved with it, and turning it on or off is one undo step. It stays on while the project has a pause or a comment. Choosing it again then changes nothing, and a notice, <em>Slides stays on</em>, says how many marks are left: delete them first to turn it off.</p>
+
+      <h2 id="ruler">The ruler by zone</h2>
+      <p>With the mode on, the ruler shows where a mark may stand.</p>
+      <figure>
+        <img src="../media/basics/slides/ruler.dark.webp" data-themed
+             alt="The timeline with the Slides mode on: the button with a screen after Snap is mint (1); the ruler is blue-green where the scene rests and hatched red-orange where it animates; a pause tag at 3.2 s (2) and a speech bubble at 5.4 s (3), each with a dashed line down the tracks. The pause at 1 s is violet, with a violet arrow along the ruler to 2.2 s."
+             width="673" height="169" loading="lazy">
+        <figcaption>The toggle (1), a pause (2) and a comment (3) on the ruler of the example. The violet pause skips its wait (<a href="#skip-wait">below</a>).</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Blue-green</strong> is where the scene rests: nothing animates there, and a pause or a comment may stand. The edges count: the instant an animation ends, or the one before the next starts, is where a pause is wanted most.</li>
+        <li><strong>Hatched red-orange</strong> is where something animates: an intro or an outro, an animation block, a relation, a camera move. Animations that overlap make one stretch.</li>
+        <li>A thin <strong>notch</strong> of blue-green is an instant of rest with no length: between two animations that touch, or at the start or the end of a scene that begins or ends with an animation.</li>
+      </ul>
+      <p>A red-orange zone takes no mark because a pause shows the scene at rest. A page stopped halfway through a transformation would show glyphs in flight, and the exported Python can only wait between two of its animations, not inside one. The zones are, in fact, the waits of the exported Python.</p>
+      <p>The zones follow every edit as it is made: drag a clip and they move before you let it go.</p>
+
+      <h2 id="add">Adding a pause or a comment</h2>
+      <p>Right-click the ruler where the scene rests. The menu offers <span class="ui">Add pause here</span>, with the time it will have, and <span class="ui">Add comment here…</span>. The time is the one clicked, put on a frame; with <span class="ui">Snap</span> on it is pulled onto the playhead or the edge of the zone when they are near. Where something animates, the two entries are greyed out and a line says what runs there. Under a line, wherever you open it, the menu holds four commands over every pause: <a href="#all-pauses">adding one after every animation</a>, <a href="#skip-all">skipping or keeping the wait at each</a>, and <a href="#delete-pauses">deleting them all</a>.</p>
+      <div class="side-by-side">
+        <figure>
+          <img src="../media/basics/slides/menu-rest.dark.webp" data-themed
+               alt="The ruler's right-click menu between the first two animations: Add pause here (1.78 s), Add comment here…, and under a line Add a pause after every animation, Skip the wait at every pause, Keep the wait at every pause and, in red, Delete every pause…"
+               width="481" height="180" loading="lazy">
+          <figcaption>Where the scene rests.</figcaption>
+        </figure>
+        <figure>
+          <img src="../media/basics/slides/menu-busy.dark.webp" data-themed
+               alt="The same menu over an animation: the two entries greyed out, the line: The outro of step1 runs here: a pause or a comment stands where nothing animates, and under it the four commands over every pause."
+               width="488" height="211" loading="lazy">
+          <figcaption>Where something animates.</figcaption>
+        </figure>
+      </div>
+      <p>From the keyboard, put the playhead where the scene rests and press <kbd data-keys="P">P</kbd> for a pause or <kbd data-keys="Shift+P">Shift+P</kbd> for a comment; <span class="ui">View ▸ Add pause at the playhead</span> and <span class="ui">View ▸ Add comment at the playhead…</span> do the same. The keys work only while the mode is on and never in a text field. Where something animates, nothing is added and a notice says what runs then.</p>
+      <p>A pause is a small tag with «‖» in the upper part of the ruler, with a thin dashed line down the tracks; a comment is a speech bubble. The new mark has the keyboard’s focus.</p>
+      <p>A comment needs words, so <span class="ui">Add comment here…</span> asks for them first, in a dialog of several lines: <kbd data-keys="Enter">Enter</kbd> starts a new line and <kbd data-keys="Mod+Enter">Ctrl+Enter</kbd> gives the text. A comment without words cannot be added; <span class="ui">Cancel</span> adds nothing.</p>
+      <figure>
+        <img src="../media/basics/slides/comment-dialog.dark.webp" data-themed
+             alt="The dialog Comment at 1.78 s: What is to be done here after the export: the exported Python and the exported web page carry it. A field with two lines of text, the hint Ctrl+Enter gives the text; Enter starts a new line, and the buttons Cancel and Add comment."
+             width="496" height="334" loading="lazy">
+        <figcaption>A comment of two lines, a task for whoever goes on with the scene.</figcaption>
+      </figure>
+      <p>The scene stops at an instant once: a second pause on a frame that has one is not added, and the pause already there takes the focus. A pause and a comment may share an instant; the comment is read first.</p>
+
+      <h3 id="all-pauses">A long scene: all the pauses at once</h3>
+      <p>In a scene of many steps, choose <span class="ui">Add a pause after every animation</span>: the first entry under the line of the ruler’s right-click menu, wherever you open it, and an entry of the <span class="ui">View</span> menu. It adds a pause where each animation ends and another follows, at the start of each rest between two animations. The start of the scene, where nothing has happened yet, and the time after its last animation get none. A rest that holds a pause already gets no other, so you can run it again after more work on the scene.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/slides/pauses-at-once.dark.webm"
+               poster="../media/basics/slides/pauses-at-once.dark.webp" width="1084" height="214"
+               muted loop playsinline preload="none"></video>
+        <figcaption>A scene of four transformations: one choice adds four pauses and says so; one undo takes them all back.</figcaption>
+      </figure>
+      <p>All of them are one undo step, and a notice says how many were added (<em>Added 4 pauses</em>), or why none was (<em>No pause to add</em>). Then delete the ones you do not want: the first pause added has the focus, <kbd data-keys="Delete">Delete</kbd> removes it and the focus goes on to the next mark, and <kbd data-keys="Tab">Tab</kbd> skips one you keep.</p>
+
+      <h3 id="delete-pauses">Deleting every pause</h3>
+      <p><span class="ui">Delete every pause…</span> is the way back: the last entry of the ruler’s right-click menu, in red, and an entry of the <span class="ui">View</span> menu, greyed out while the project has no pause. Every pause goes at once, with its note; the comments stay.</p>
+      <p>It asks first. The question says how many pauses go and how many comments stay, and its red button names them (<span class="ui">Hold to delete 4 pauses</span>): hold it down for a moment, as for every deletion that asks; <span class="ui">Cancel</span> or <kbd data-keys="Escape">Esc</kbd> leaves everything as it was. Then it is one undo step: <kbd data-keys="Mod+Z">Ctrl+Z</kbd> brings every pause back, and the notice says so (<em>Deleted 4 pauses</em>, and how many comments stay). The keyboard’s focus goes to the first comment left, or to the mode’s button in the toolbar when there is none.</p>
+
+      <h2 id="marks">Moving and editing a mark</h2>
+      <p>Point at a mark and its words show at once under the ruler: what it is, when, and its text.</p>
+      <figure>
+        <img src="../media/basics/slides/mark-tip.dark.webp" data-themed
+             alt="The pointer on the pause at 3.20 s, and under the ruler the tip: Pause at 3.20 s, Work out 5 − 3 together before going on."
+             width="484" height="97" loading="lazy">
+        <figcaption>The tip of a pause, with its note.</figcaption>
+      </figure>
+      <ul>
+        <li>A <strong>click</strong> puts the playhead on the mark.</li>
+        <li>A <strong>drag</strong> moves it, on frames, inside the zone it stands in. It snaps as a new mark does; hold <kbd data-keys="Shift">Shift</kbd> to move it freely, and press <kbd data-keys="Escape">Esc</kbd> to cancel. A drag is one undo step.</li>
+        <li>A <strong>double click</strong> writes its words, in the same dialog: a comment’s, which it cannot be without, or a pause’s note. Emptied, a note goes; a comment refuses to be emptied.</li>
+        <li>A <strong>right-click</strong> opens its menu: <span class="ui">Edit comment…</span> for a comment, <span class="ui">Add a note…</span> or <span class="ui">Edit note…</span> for a pause, for a pause <span class="ui">Skip the wait after it</span> (<a href="#skip-wait">below</a>), and <span class="ui">Delete</span>.</li>
+      </ul>
+
+      <h3 id="keys">From the keyboard</h3>
+      <table>
+        <thead>
+          <tr><th>Keys</th><th>What they do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="keys"><kbd data-keys="P">P</kbd>; <kbd data-keys="Shift+P">Shift+P</kbd></td><td>Add a pause at the playhead; add a comment there, its words asked for first.</td></tr>
+          <tr><td class="keys"><kbd data-keys="Tab">Tab</kbd></td><td>Reaches the marks of the ruler one by one, in the order of their times.</td></tr>
+          <tr><td class="keys"><kbd data-keys="ArrowLeft">←</kbd> <kbd data-keys="ArrowRight">→</kbd></td><td>Move the focused mark a frame, inside its zone (<kbd data-keys="ArrowUp">↑</kbd> <kbd data-keys="ArrowDown">↓</kbd> in <a href="../start/interface.html#zen">Zen mode</a>, where the timeline is vertical).</td></tr>
+          <tr><td class="keys"><kbd data-keys="Delete">Delete</kbd>, <kbd data-keys="Backspace">Backspace</kbd></td><td>Delete the focused mark; the focus goes on to the next one.</td></tr>
+          <tr><td class="keys"><kbd data-keys="Enter">Enter</kbd></td><td>Write the focused mark’s words.</td></tr>
+          <tr><td class="keys"><kbd data-keys="Shift+F10">Shift+F10</kbd></td><td>Open the focused mark’s menu (the Menu key does too).</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="covered">When an edit covers a mark</h2>
+      <p>A mark keeps its instant when clips move: it belongs to no clip. So an edit can put an animation over it — a clip dragged, an intro made longer — or leave it past the end of a scene made shorter. The editor asks at once, when you let go of the drag or the change is made:</p>
+      <figure>
+        <img src="../media/basics/slides/guard.dark.webp" data-themed
+             alt="The dialog This change covers 2 marks of the Slides mode. It lists Pause at 1.00 s, with its note, where the intro of step1 runs now, and Pause at 3.20 s, where the outro of step1 runs now; the buttons Take the change back and Delete them and keep the change."
+             width="496" height="252" loading="lazy">
+        <figcaption>The clip of <code>step1</code> dragged half a second later: its intro now runs over the first pause, its outro over the second.</figcaption>
+      </figure>
+      <ul>
+        <li><span class="ui">Delete them and keep the change</span> deletes the marks the change covered. The change and the deletion are one undo step: one <kbd data-keys="Mod+Z">Ctrl+Z</kbd> brings back the clip where it was and the marks with it.</li>
+        <li><span class="ui">Take the change back</span>, or <kbd data-keys="Escape">Esc</kbd>, puts the project as it was before the change, with nothing left to redo.</li>
+      </ul>
+      <p>An undo or a redo asks nothing. Nor does opening a file edited by hand with a mark under an animation or past the end: such a mark is drawn in amber, its tip says why, and you can drag it to where one may stand. Until then every export leaves it out and says so.</p>
+
+      <h2 id="rehearsal">Rehearsing the talk</h2>
+      <p>With the mode on, the transport under the Preview has <span class="ui">Stop at pauses</span>. Turn it on, and <span class="ui">Play</span> stops the Preview at each pause exactly as the exported page will; <span class="ui">Play</span> again goes on to the next.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/slides/rehearsal.dark.webm"
+               poster="../media/basics/slides/rehearsal.dark.webp" width="622" height="584"
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">Stop at pauses</span> on: Play writes x + 3 = 5 and stops at 1.00 s; Play again skips the rest that follows, plays the first transformation at once and stops at 3.20 s.</figcaption>
+      </figure>
+      <p>It is a way of playing, not part of the project: it is not saved, and the video is the whole scene whatever it says. From a pause that skips its wait, <span class="ui">Play</span> goes on where the next animation starts, as the page does (next section).</p>
+
+      <h2 id="skip-wait">A pause that skips its wait</h2>
+      <p>A scene made for a video has rests between its animations: a breath between two steps, time to read the last one. A talk that stopped at a pause has no use for the rest that follows it: you have just waited there, as long as you wanted. So a pause can <strong>skip its wait</strong>: going on from it, the exported page, and the rehearsal, jump to where the next animation starts.</p>
+      <p>Right-click the pause and tick <span class="ui">Skip the wait after it</span>. The pause turns violet, its tag reads «‖▸», and a violet line with an arrowhead runs along the ruler from the pause to where the scene will go on. Untick it to keep the wait again. Either is one undo step.</p>
+      <figure>
+        <img src="../media/basics/slides/skip-menu.dark.webp" data-themed
+             alt="The right-click menu of the pause at 1.00 s: its title Pause at 1.00 s, Edit note…, the box Skip the wait after it ticked, and Delete (Del) in red. The pause's tag on the ruler is violet, with two bars and an arrowhead."
+             width="481" height="127" loading="lazy">
+        <figcaption>The first pause of the example, set to skip its wait.</figcaption>
+      </figure>
+      <p>Where there is nothing to skip, the entry is greyed out and a line under it says why:</p>
+      <ul>
+        <li><em>An animation starts at this instant: there is no wait after it to skip.</em> The pause stands where the next animation starts: at the end of a rest, or between two animations that touch.</li>
+        <li><em>No animation follows this pause: the scene only ends after it.</em> The rest after the last animation is kept, and it may hold the end of the scene’s sound.</li>
+        <li><em>The exports leave this pause out: it is not where the scene rests.</em> The pause is under an animation or past the end (<a href="#covered">above</a>).</li>
+      </ul>
+      <p>Moving the pause, dragging it or writing its note keeps the setting. If an edit leaves it with nothing to skip, it stays violet without its line, its tip says it skips nothing there and why, and its entry is still there to untick.</p>
+
+      <h3 id="skip-ruler">What the ruler shows</h3>
+      <p>Point at a pause that skips its wait, or reach it with <kbd data-keys="Tab">Tab</kbd>, and its tip says how long the wait is and where the scene goes on. Its dashed line down the tracks is violet too.</p>
+      <figure>
+        <img src="../media/basics/slides/skip-ruler.dark.webp" data-themed
+             alt="The ruler of the example: the violet pause at 1.00 s with a violet arrow along the ruler to 2.20 s, the blue-green pause at 3.20 s and the comment at 5.40 s. The tip of the first pause: Pause at 1.00 s, Skips its wait: 1.20 s — the scene goes on at 2.20 s, and its note."
+             width="481" height="131" loading="lazy">
+        <figcaption>The first pause skips the 1.20 s rest before the first transformation; the second keeps its wait.</figcaption>
+      </figure>
+
+      <h3 id="skip-all">At every pause at once</h3>
+      <p><span class="ui">View ▸ Skip the wait at every pause</span> sets it on every pause that has a wait to skip, and leaves the others as they are: its notice counts them. <span class="ui">View ▸ Keep the wait at every pause</span> takes it off every pause. Both are in the ruler’s right-click menu too, wherever you open it, each is one undo step, and neither has a key. Both are greyed out while the project has no pause.</p>
+
+      <h3 id="skip-rehearsal">In the rehearsal and on the page</h3>
+      <p>With <span class="ui">Stop at pauses</span> on, <span class="ui">Play</span> from a pause that skips its wait jumps over the rest: the playhead and the time leap to where the next animation starts, and the Preview plays from there, its sound too. When another pause stands in the same rest before that, the playhead goes to it and stays there.</p>
+      <figure>
+        <video class="mfe-clip" data-themed src="../media/basics/slides/skip-rehearsal.dark.webm"
+               poster="../media/basics/slides/skip-rehearsal.dark.webp" width="640" height="258"
+               muted loop playsinline preload="none"></video>
+        <figcaption><span class="ui">Stop at pauses</span> on, the playhead at the first pause: <span class="ui">Play</span> jumps from 1.00 s to 2.20 s, plays the first transformation and stops at the second pause.</figcaption>
+      </figure>
+      <p>The exported page does the same where it really stopped. Standing at such a pause, every way of going on (<span class="ui">Play</span>, Next, a key, a click on the scene) first jumps over the wait, the sound with it, then plays. Try it in the scene at the <a href="#content">top of this page</a>: after its first stop, Next starts the first transformation at once. On the bar, the notch of such a pause is violet and the wait it skips is dashed:</p>
+      <figure>
+        <img src="../media/basics/slides/skip-bar.dark.webp" data-themed
+             alt="The bar of the exported page at its start: on the timeline, a violet notch at 1.00 s followed by violet dashes to 2.20 s, and the amber notch of the second pause at 3.20 s; slide 1 / 3, 0.00 / 6.60 s."
+             width="880" height="41" loading="lazy">
+        <figcaption>The notch of the first pause is violet and the wait it skips dashed; the second pause, amber, keeps its wait.</figcaption>
+      </figure>
+      <p>Played through its pauses (its <strong>Play through the pauses</strong> button, or <code>data-pauses="off"</code> when it is embedded), the page stops nowhere and skips nothing: the rest plays, as in the Preview without <span class="ui">Stop at pauses</span>. The wait is still part of the scene: a press on the timeline inside the dashes shows that instant.</p>
+      <p>Nothing else changes. The scene’s time and length are the same with the setting and without it, every video plays the rest, and the exported Python keeps its <code>self.wait</code>: only its <code>#&nbsp;PAUSE</code> line says that the page skips the wait (<a href="#python">next section</a>).</p>
+
+      <h2 id="python">The marks in the exported Python</h2>
+      <p><span class="ui">Export ▸ Python — ManimCE…</span> and <span class="ui">— ManimGL…</span> write each mark as a comment at its instant in <code>construct</code>, for whoever goes on with the scene: a pause as <code>#&nbsp;PAUSE n of N</code> with its time and its note, a comment as <code>#&nbsp;NOTE</code> with its time and its words. This is the example’s ManimCE scene:</p>
+<pre data-excerpt="examples/slides-talk.ce.py"><code class="language-python">        # 0 s – 1 s: step1 write
+        self.play(Write(VGroup(*step1_g[:])), run_time=1)
+
+        # PAUSE 1 of 2 (1.00 s), the exported page skips the 1.20 s wait after it: Ask: what takes the 3 away from the x?
+
+        # 1 s – 2.2 s
+        self.wait(1.2)
+        …
+        # PAUSE 2 of 2 (3.20 s): Work out 5 − 3 together before going on.
+        …
+        # NOTE (5.40 s): Make the 2 of the answer glow once it is in place.
+
+        # 5.4 s – 6.6 s
+        self.wait(1.2)</code></pre>
+      <ul>
+        <li>They are written with <span class="ui">Comments (formulas, timing)</span> unticked too: they are your words, not the editor’s.</li>
+        <li>Each line of a comment’s text is a line of the Python comment.</li>
+        <li>A mark in the middle of a wait splits the <code>self.wait(…)</code> in two that add up to the same frames, so the video keeps its length.</li>
+        <li>A mark under an animation or past the end of the scene is left out, and the dialog lists it.</li>
+        <li>A pause that <a href="#skip-wait">skips its wait</a>, the first one here, says so before its note, and the <code>self.wait</code> after it stays.</li>
+      </ul>
+      <p>Manim itself does not stop at them: they are comments. The page of the next section is what stops.</p>
+
+      <h2 id="export-html">Export ▸ HTML</h2>
+      <p><span class="ui">Export ▸ HTML…</span> writes the scene as a web page that <strong>is the animation</strong>: the editor’s own engine draws it as it plays, sharp at any size, rather than a video of it. It opens from disk with a double click: no server, no internet connection, nothing to install. It stops at each pause of the Slides mode until its reader goes on; a scene without the mode plays through.</p>
+      <figure>
+        <img src="../media/basics/slides/export-dialog.dark.webp" data-themed
+             alt="The Export HTML dialog: the choice of A folder or One file, each with what it is for (1); the line Slides: 2 pauses, the page stops at each until its reader goes on; 1 of them skips the wait after it. 1 comment (2); and the buttons Download first-transform-as-a-talk.zip and Choose where… (3)."
+             width="636" height="448" loading="lazy">
+        <figcaption>The dialog, with nothing to choose about size or frame rate: the page is drawn as it plays.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li><span class="ui">Export as</span>: <strong>a folder</strong>, to work on the scene and to embed it in another page, or <strong>one file</strong>, to send to someone or to present from: the same page with everything inside it, a single <code>.html</code>.</li>
+        <li><span class="ui">Slides</span>: how many pauses and comments the page carries, how many of the pauses skip their wait (<em>1 of them skips the wait after it</em>), and, in amber, each mark it leaves out because it stands under an animation or past the end.</li>
+        <li>The buttons. In Chrome and Edge, <span class="ui">Choose where…</span> asks for a folder and writes the scene inside it, as a folder of the scene’s name; <span class="ui">Download &lt;scene&gt;.zip</span> downloads the same folder as a zip, which is the way in browsers that cannot write a folder. With <span class="ui">One file</span> the button is <span class="ui">Download &lt;scene&gt;.html</span>.</li>
+      </ol>
+      <p>A project with recordings gets one more line, <span class="ui">The scene’s sound</span>: the whole sound of the scene, mixed as the Preview plays it, beside the page as <code>audio.m4a</code> (or inside it, for one file). It plays with the scene and stops at its pauses. The scene’s name is the project’s name in small letters and hyphens: <em>First transform, as a talk</em> is <code>first-transform-as-a-talk</code>.</p>
+      <aside class="callout platform" data-platform="linux">
+        <p>Chrome on Linux has no AAC encoder: the sound is written uncompressed, as <code>audio.wav</code>, and the dialog says so and how large it will be.</p>
+      </aside>
+      <p>Exported again over a folder written before, the scene keeps <code>custom.js</code>, <code>player.css</code> and <code>index.html</code> as they are: what you or an agent added to the scene is in them, and survives the scene going back to the editor. A notice names the files it left alone. The sound an earlier export wrote there is removed when the new one does not use it: the scene exported without its sound, or from a browser that writes the other kind of file. An <code>audio.m4a</code> or <code>audio.wav</code> that is not the file the app wrote may be yours: it stays, and the notice, in amber, says so.</p>
+
+      <h2 id="present">Presenting with the page</h2>
+      <p>Open <code>index.html</code> (or the single file) in a browser. The scene takes the window, with a bar under it.</p>
+      <figure>
+        <img src="../media/basics/slides/page.dark.webp" data-themed
+             alt="The exported page stopped at its first pause: x + 3 = 5 on a black stage, and the bar under it with previous, play and next (1), the timeline with a notch at each pause and, dashed in violet, the wait the first pause skips (2), the slide count 1 / 3 and the time 1.00 / 6.60 s (3), and three toggles: play through the pauses, the notes and full screen (4)."
+             width="880" height="560" loading="lazy">
+        <figcaption>The page at its first pause, the end of slide 1 of 3.</figcaption>
+      </figure>
+      <ol class="map-list">
+        <li><strong>Previous</strong>, <strong>Play</strong> and <strong>Next</strong>. Next plays to the next pause, or jumps there at once while the scene plays; Previous goes back to the pause before, or to the start. From a pause that <a href="#skip-wait">skips its wait</a>, Play and Next first jump over that wait.</li>
+        <li>The <strong>timeline</strong>, with a notch at each pause, violet for a pause that skips its wait, the wait it skips dashed: a press there goes to that time, on a notch to the pause exactly, and a drag scrubs.</li>
+        <li>The <strong>slide</strong> and the <strong>time</strong>. A scene with two pauses has three slides.</li>
+        <li><strong>Play through the pauses</strong>, the <strong>notes</strong> and <strong>full screen</strong>. A scene with sound also has a mute button.</li>
+      </ol>
+      <p>A click on the scene plays or pauses it. The keys are the ones of a presentation program, so that a presenter’s remote works:</p>
+      <table>
+        <thead>
+          <tr><th>Keys</th><th>What they do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><kbd>→</kbd> <kbd>↓</kbd> <kbd>Space</kbd> <kbd>PageDown</kbd> <kbd>N</kbd> <kbd>Enter</kbd></td><td>Go on to the next pause, over the wait of a pause that skips it</td></tr>
+          <tr><td><kbd>←</kbd> <kbd>↑</kbd> <kbd>PageUp</kbd> <kbd>P</kbd> <kbd>Backspace</kbd> <kbd data-keys="Shift+Space">Shift+Space</kbd></td><td>Back to the pause before</td></tr>
+          <tr><td><kbd>Home</kbd>, <kbd>End</kbd></td><td>The start, the end</td></tr>
+          <tr><td><kbd>K</kbd></td><td>Play or pause</td></tr>
+          <tr><td><kbd>F</kbd></td><td>Full screen, and back</td></tr>
+          <tr><td><kbd>S</kbd></td><td>Show or hide the notes</td></tr>
+          <tr><td><kbd>B</kbd> or <kbd>.</kbd></td><td>Black the stage out, and back</td></tr>
+          <tr><td><kbd>M</kbd></td><td>Sound off and on, when the scene has sound</td></tr>
+        </tbody>
+      </table>
+      <p>The <strong>notes</strong> are for whoever presents: the note of the last pause and the comments of the slide you are on, under the slide’s number. The stage grows smaller to leave them room.</p>
+      <figure>
+        <img src="../media/basics/slides/page-notes.dark.webp" data-themed
+             alt="The page at its end with the notes open under the bar: Slide 3 of 3, Pause · 3.20 s Work out 5 − 3 together before going on, and Comment · 5.40 s Make the 2 of the answer glow once it is in place."
+             width="880" height="560" loading="lazy">
+        <figcaption>The notes of the last slide: the note of the second pause and the example’s comment.</figcaption>
+      </figure>
+      <ul>
+        <li>In <strong>full screen</strong> the bar and the pointer hide after a moment of rest, and come back when the pointer moves. The notes then float over the stage.</li>
+        <li>While the stage is <strong>black</strong>, the first key or click brings the scene back where it was and does nothing else.</li>
+        <li>A <strong>presenter’s remote</strong> such as the Logitech R400, R700 or R800 sends <kbd>PageDown</kbd>, <kbd>PageUp</kbd> and <kbd>.</kbd>: next, back and black. Its start button sends <kbd>F5</kbd>, which reloads the page: press <kbd>F</kbd> for full screen instead.</li>
+        <li>A browser plays sound only after a key or a click on the page: the first key you press is enough.</li>
+      </ul>
+      <p>The address of the page takes the options of the next section: <code>index.html?controls=minimal&amp;autoplay</code> shows only Play and the timeline and starts at once, and <code>index.html?controls=none</code> gives the stage the whole window.</p>
+
+      <h2 id="embed">Embedding the scene in a page of your own</h2>
+      <p>Copy the folder next to your page and add its stylesheet, an element that names the scene and its scripts. The element takes the width of what holds it, and keeps the scene’s shape:</p>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="first-transform-as-a-talk/player.css"&gt;
+…
+&lt;div class="mfe-deck" data-scene="first-transform-as-a-talk"&gt;&lt;/div&gt;
+…
+&lt;script src="first-transform-as-a-talk/mfe-runtime.js"&gt;&lt;/script&gt;
+&lt;script src="first-transform-as-a-talk/glyphs.js"&gt;&lt;/script&gt;
+&lt;script src="first-transform-as-a-talk/scene.js"&gt;&lt;/script&gt;
+&lt;script src="first-transform-as-a-talk/custom.js"&gt;&lt;/script&gt;  &lt;!-- when the scene has code of its own --&gt;</code></pre>
+      <p>The engine first, then the outlines and the scene: the engine mounts every <code>.mfe-deck</code> once the page has loaded. A page can hold several scenes, each with its own two files and one engine for all. The scene at the top of this page is embedded so, its controls following the site’s theme through <code>data-theme</code>. A site that takes no scripts of yours can show the scene’s own page in a frame, its options in the address:</p>
+<pre><code class="language-html">&lt;iframe src="first-transform-as-a-talk/index.html?controls=minimal" title="First transform, as a talk"
+        allow="fullscreen" style="width: 100%; aspect-ratio: 16 / 9; border: 0"&gt;&lt;/iframe&gt;</code></pre>
+      <p>The folder’s <code>embed-example.html</code> is a page that does both, with what to copy marked. An embedded scene hears its keys only while the focus is inside it, so that the arrows and <kbd>Space</kbd> stay your page’s; a click on it gives it the focus. Its options are <code>data-</code> attributes of its element:</p>
+      <table>
+        <thead>
+          <tr><th>Attribute</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>data-controls</code></td><td><code>full</code> (the default), <code>minimal</code> (Play and the timeline) or <code>none</code> (no bar, and no keys)</td></tr>
+          <tr><td><code>data-notes="off"</code></td><td>No notes: neither their button nor the <kbd>S</kbd> key. The notes show the scene’s comments, which are tasks for whoever works on it, and the notes of its pauses: turn them off in a page for readers (<code>minimal</code> keeps the keys and the notes)</td></tr>
+          <tr><td><code>data-autoplay</code>, <code>data-loop</code></td><td>Plays when it comes on screen (never for a reader who asked for less motion); starts again at the end</td></tr>
+          <tr><td><code>data-start</code></td><td>The second it shows before it plays</td></tr>
+          <tr><td><code>data-pauses="off"</code></td><td>Plays through the pauses, and skips no wait</td></tr>
+          <tr><td><code>data-background="transparent"</code></td><td>No background of its own: your page shows behind the scene</td></tr>
+          <tr><td><code>data-theme</code></td><td><code>light</code> or <code>dark</code> controls; without it, the reader’s system decides</td></tr>
+          <tr><td><code>data-speed</code></td><td>How fast it plays: <code>0.5</code>, <code>2</code>…</td></tr>
+          <tr><td><code>data-keys</code></td><td><code>focus</code> (the default), <code>page</code> (keys heard anywhere on the page) or <code>none</code></td></tr>
+          <tr><td><code>data-renderer="canvas"</code></td><td>Draws on a canvas instead of SVG, for a scene too heavy for the browser’s SVG</td></tr>
+        </tbody>
+      </table>
+      <p>Its look is <code>player.css</code>, which is yours to change. Every rule of it stays under <code>.mfe-deck</code>, so nothing in it reaches the rest of your page, and a rule of yours with the same classes, written after it, wins. The simplest change is a custom property, set from your own stylesheet:</p>
+<pre><code class="language-html">&lt;style&gt;
+  .my-article .mfe-deck {
+    --mfe-accent: #ff8a3d;          /* the played part */
+    --mfe-pause-mark: #ffd166;      /* a pause's notch */
+    --mfe-bar-background: #1b1b2f;  /* the bar */
+    --mfe-radius: 0;                /* square buttons */
+  }
+&lt;/style&gt;</code></pre>
+      <p>The head of <code>player.css</code> lists every custom property and every class, which are the contract a page’s rules and scripts may rely on. The folder’s guide (<code>AGENTS.md</code>, «Changing the look») has more: how to give the controls your page’s font, what to do with a light page, and the CSS for controls that only appear under the pointer.</p>
+
+      <h2 id="agents">Handing the folder to a coding agent</h2>
+      <p>The folder is written to be extended, by you or by a coding agent that has never seen the editor: Claude Code, Codex, or any other. Give it the folder and say what you want. What it finds there:</p>
+      <ul>
+        <li><code>AGENTS.md</code>, its guide, which <strong>opens with your comments as its tasks</strong>: each with its instant, what ended before it, what starts after it and what is on screen. The notes of the pauses follow, as context. Then the files, how to look at the scene and check it, the two ways to extend it, the stage and its coordinates, embedding, restyling and the pitfalls. <code>CLAUDE.md</code> imports it for Claude Code; <code>README.md</code> is one screen for a person.</li>
+        <li><code>scene.js</code>, the animation as data you can read: its head comment names the clips (<code>step1</code>, <code>step2</code>…), the glyphs of each formula by index, and every event of the timeline with its time and where it is in the data. Edited and reloaded, the page plays the edit.</li>
+        <li><code>custom.js</code>, for code of your own: it runs after the scene is loaded, and reaches the scene through <code>window.MFE</code> (an animation of its own on the scene’s time, the place of a clip on the stage, the stage’s free layers). The stage is SVG: every clip is a group named by <code>data-clip</code>, every glyph a path.</li>
+        <li><code>node check.mjs</code>, which says what is wrong with an edited scene without a browser, by line of <code>scene.js</code>, and <code>OK</code> when it plays as written; <code>node check.mjs &lt;folder&gt;</code> checks a copy of the scene’s files in another folder.</li>
+        <li><code>types/</code>, the types of the page’s API and of the scene, made from the editor’s sources.</li>
+      </ul>
+      <p>The guide of the scene at the top of this page begins with its comment, as a task:</p>
+<pre data-excerpt="decks/slides-talk/AGENTS.md"><code>## 1. What the author wants done next
+
+The author left these comments at instants of the scene for whoever works on it next. Treat each as
+a task. Times are seconds of the scene; names are the clips’ (section 4).
+
+1. **5.40 s** (`slides.marks[2]`) — after `step2 → step3 (transform, 3 pairs)`, nothing after; on
+   screen: `step3`.
+   &gt; Make the 2 of the answer glow once it is in place.</code></pre>
+      <p>and its <code>scene.js</code> with the timeline in words, each line with where it is in the data below it:</p>
+<pre data-excerpt="decks/slides-talk/scene.js"><code class="language-js"> * The clips, by the names the page gives them (data-clip="…", deck.clip('…')):
+ *   step1  clips[0]  0.00–3.20 s  formulas[0] math “x + 3 = 5”
+ *   step2  clips[1]  2.20–5.40 s  formulas[1] math “x = 5 - 3”
+ *   step3  clips[2]  4.40–6.60 s  formulas[2] math “x = 2”
+ …
+ * What happens, in order (seconds of the scene; each line ends with where it is here):
+ *   0.00–1.00 s  step1  write  clips[0].intro
+ *   1.00 s       PAUSE 1 (skips its wait to 2.20 s) · “Ask: what takes the 3 away from the x?”  slides.marks[0]
+ *   2.20–3.20 s  step1  fade_out  clips[0].outro
+ *   2.20–3.20 s  step2  fade_in  clips[1].intro
+ *   2.20–3.20 s  step1 → step2  (transform, 4 pairs)  relations[0]
+ …
+ *   5.40 s       NOTE · “Make the 2 of the answer glow once it is in place.”  slides.marks[2]</code></pre>
+      <p>When you export the scene again from the editor, <code>custom.js</code>, <code>player.css</code> and <code>index.html</code> are kept (<a href="#export-html">above</a>): the agent’s code goes on working on the new scene.</p>
+      <aside class="callout tip">
+        <p>Write the comments as tasks while the scene is in front of you: <em>“Make the 2 of the answer glow once it is in place”</em> at the instant it arrives tells an agent what, where and when, and the guide hands it all three.</p>
+      </aside>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="export.html">Exporting</a> covers the other exports: Python, video, the frame as an image, and audio.</li>
+        <li><a href="../manim/python.html">The generated Python</a> explains the scene file the marks go into.</li>
+        <li><a href="../reference/shortcuts.html">Keyboard shortcuts</a> and <a href="../reference/menus.html">Menus</a> list every key and entry of the mode.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

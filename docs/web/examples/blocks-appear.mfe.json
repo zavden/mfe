@@ -1,0 +1,509 @@
+{
+  "format": "manim-formula-editor",
+  "version": 36,
+  "meta": {
+    "name": "Appear blocks",
+    "target": "ce",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "background": "#070B15",
+    "preamble": "",
+    "duration": null
+  },
+  "formulas": [
+    {
+      "id": "f_5z684qw3",
+      "kind": "math",
+      "name": "eq",
+      "source": "y = ax^2 + bx + c",
+      "packages": [],
+      "tag": {
+        "color": "#58C4DD",
+        "icon": null
+      },
+      "fontSize": 132,
+      "color": "#FFFFFF",
+      "glyphColors": {},
+      "hiddenGlyphs": [],
+      "intro": null,
+      "snapshot": {
+        "backend": "mathjax",
+        "key": "mathjax-221vtg875c0",
+        "glyphs": [
+          {
+            "label": "y",
+            "center": [
+              -4.6441296,
+              -0.30400123248
+            ],
+            "size": [
+              0.65550672,
+              0.8925364800000002
+            ]
+          },
+          {
+            "label": "=",
+            "center": [
+              -3.4066596959999997,
+              -0.12324307248000002
+            ],
+            "size": [
+              0.9178012799999999,
+              0.32247072000000004
+            ]
+          },
+          {
+            "label": "a",
+            "center": [
+              -2.1163633920000002,
+              -0.17078683247999998
+            ],
+            "size": [
+              0.6518318400000003,
+              0.6215140800000001
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              -1.3749563519999999,
+              -0.17078683248
+            ],
+            "size": [
+              0.6711249600000002,
+              0.62427024
+            ]
+          },
+          {
+            "label": "2",
+            "center": [
+              -0.6819247432800002,
+              0.42582672000000005
+            ],
+            "size": [
+              0.38874672143999955,
+              0.6488855049600001
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              0.47332454400000046,
+              -0.12255403247999999
+            ],
+            "size": [
+              0.9178012800000008,
+              0.9164232000000001
+            ]
+          },
+          {
+            "label": "b",
+            "center": [
+              1.634081328000001,
+              0.0028512475200000165
+            ],
+            "size": [
+              0.52642656,
+              0.9715464
+            ]
+          },
+          {
+            "label": "x",
+            "center": [
+              2.2907364480000005,
+              -0.17078683248
+            ],
+            "size": [
+              0.6711249600000002,
+              0.62427024
+            ]
+          },
+          {
+            "label": "+",
+            "center": [
+              3.5374854240000007,
+              -0.12255403247999999
+            ],
+            "size": [
+              0.917801279999999,
+              0.9164232000000001
+            ]
+          },
+          {
+            "label": "c",
+            "center": [
+              4.699252800000001,
+              -0.17170555248
+            ],
+            "size": [
+              0.5452603200000006,
+              0.62610768
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "t_gjwvc0r4",
+      "kind": "visual",
+      "name": "Appear",
+      "hidden": false,
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "c_6rohky3r",
+      "formulaId": "f_5z684qw3",
+      "trackId": "t_gjwvc0r4",
+      "start": 0,
+      "end": 4,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_o49r39vx",
+          "kind": "appear",
+          "start": 0.5,
+          "duration": 1,
+          "easing": "linear",
+          "anim": "write",
+          "glyphs": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_mohk3ifx",
+      "formulaId": "f_5z684qw3",
+      "trackId": "t_gjwvc0r4",
+      "start": 4,
+      "end": 8,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_0vg694bi",
+          "kind": "appear",
+          "start": 0.5,
+          "duration": 1,
+          "easing": "smooth",
+          "anim": "create",
+          "glyphs": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_ar6lk0w5",
+      "formulaId": "f_5z684qw3",
+      "trackId": "t_gjwvc0r4",
+      "start": 8,
+      "end": 12,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_4iy5h1fz",
+          "kind": "appear",
+          "start": 0.5,
+          "duration": 1,
+          "easing": "smooth",
+          "anim": "fade_in",
+          "glyphs": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_uus6zz55",
+      "formulaId": "f_5z684qw3",
+      "trackId": "t_gjwvc0r4",
+      "start": 12,
+      "end": 16,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_4e5ddqq8",
+          "kind": "appear",
+          "start": 0.5,
+          "duration": 1,
+          "easing": "smooth",
+          "anim": "grow_from_center",
+          "glyphs": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null
+    },
+    {
+      "id": "c_l2fjm09a",
+      "formulaId": "f_5z684qw3",
+      "trackId": "t_gjwvc0r4",
+      "start": 16,
+      "end": 20,
+      "initial": {
+        "position": [
+          0,
+          0
+        ],
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 1,
+        "color": null,
+        "glyphColors": {}
+      },
+      "intro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "outro": {
+        "kind": "none",
+        "duration": 0,
+        "easing": "linear",
+        "lagRatio": null,
+        "shift": [
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "actions": [
+        {
+          "id": "a_5e2dlxby",
+          "kind": "appear",
+          "start": 0.5,
+          "duration": 2,
+          "easing": "double_smooth",
+          "anim": "draw_border_then_fill",
+          "glyphs": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "lagRatio": null,
+          "shift": [
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      ],
+      "attach": null
+    }
+  ],
+  "audioAssets": [],
+  "audioClips": [],
+  "relations": [],
+  "colorMatches": []
+}
